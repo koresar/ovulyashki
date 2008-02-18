@@ -109,6 +109,7 @@ namespace WomenCalendar
             {
                 monthControl.Visible = false;
                 Program.CurrentWoman = Woman.ReadFrom(dialog.FileName);
+                Program.Settings.DefaultWomanPath = dialog.FileName;
                 monthControl.Visible = true;
                 return true;
             }
@@ -131,7 +132,7 @@ namespace WomenCalendar
                 sb.Append(" (сегодня)");
             }
 
-            if (Program.CurrentWoman.MenstruationDates.Contains(date))
+            if (Program.CurrentWoman.Menstruations.IsMenstruationDay(date))
             {
                 sb.AppendLine();
                 sb.Append("Менструальный день");
@@ -156,6 +157,15 @@ namespace WomenCalendar
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             e.Cancel = !AskAndSaveCurrentWoman();
+            if (!e.Cancel)
+            {
+                Program.SaveSettings();
+            }
+        }
+
+        private void MainForm_Load(object sender, EventArgs e)
+        {
+            Program.LoadSettings();
         }
     }
 }

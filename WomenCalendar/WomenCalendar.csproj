@@ -44,16 +44,13 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
-    <Reference Include="TaskPane, Version=1.2.0.0, Culture=neutral, PublicKeyToken=cef3c2b9e3e5ea41">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\TaskPane.dll</HintPath>
-    </Reference>
     <Reference Include="XPanderControl, Version=1.2.0.0, Culture=neutral">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\XPanderControl.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ApplicationSettings.cs" />
     <Compile Include="DayCellControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -66,6 +63,8 @@
     <Compile Include="MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="MenstruationPeriod.cs" />
+    <Compile Include="MenstruationsCollection.cs" />
     <Compile Include="MonthsControl.cs">
       <SubType>UserControl</SubType>
     </Compile>

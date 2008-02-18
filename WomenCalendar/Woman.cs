@@ -11,14 +11,21 @@ namespace WomenCalendar
     [XmlRoot("Woman")]
     public class Woman
     {
-        [XmlIgnore()]
-        private List<DateTime> _menstruationDates;
-        [XmlArrayItem("Date", typeof(DateTime))]
-        [XmlArray("MenstruationDates")]
-        public List<DateTime> MenstruationDates
+//        [XmlIgnore()]
+//        private List<DateTime> _menstruationDates;
+//        [XmlArrayItem("Date", typeof(DateTime))]
+//        [XmlArray("MenstruationDates")]
+//        public List<DateTime> MenstruationDates
+//        {
+//            get { return _menstruationDates; }
+//            set { _menstruationDates = value; }
+//        }
+
+        private MenstruationsCollection _menstruations;
+        public MenstruationsCollection Menstruations
         {
-            get { return _menstruationDates; }
-            set { _menstruationDates = value; }
+            get { return _menstruations; }
+            set { _menstruations = value; }
         }
 
         [XmlIgnore()]
@@ -58,9 +65,10 @@ namespace WomenCalendar
 
         public Woman()
         {
-            _menstruationDates = new List<DateTime>();
+//            _menstruationDates = new List<DateTime>();
             notes = new NotesCollection();
             periodLength = 5;
+            _menstruations = new MenstruationsCollection();
         }
 
         public static bool SaveTo(Woman w, string path)
@@ -83,18 +91,17 @@ namespace WomenCalendar
 
         public bool AddMenstruationDay(DateTime date)
         {
-            //if (MenstruationDates.Count == 0)
+            if (Menstruations.IsMenstruationDay(date))
             {
-                MenstruationDates.Add(date);
-                return true;
+                return false;
             }
-            return false;
+
+            return Menstruations.Add(date, PeriodLength);
         }
 
         public bool RemoveMenstruationDay(DateTime date)
         {
-            MenstruationDates.Remove(date);
-            return true;
+            return Menstruations.Remove(date);
         }
 
         public bool AddNote(DateTime date, string text)

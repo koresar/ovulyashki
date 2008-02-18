@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Windows.Forms;
 using System.Drawing;
 using WomenCalendar.Properties;
@@ -14,6 +15,13 @@ namespace WomenCalendar
         public static Woman CurrentWoman = new Woman();
 
         public static ComponentResourceManager IconResource;
+
+        public static ApplicationSettings Settings;
+
+        private static string SettingsFileName
+        {
+            get { return Path.Combine(Application.StartupPath, "WomenCalendar.settings"); }
+        }
 
         /// <summary>
         /// The main entry point for the application.
@@ -37,6 +45,21 @@ namespace WomenCalendar
         {
             public static Pen FocusEdgePen = new Pen(Brushes.Red, 2);
             public static Pen EdgePen = Pens.Black;
+        }
+
+        public static bool SaveSettings()
+        {
+            return Settings.Write(SettingsFileName);
+        }
+
+        public static bool LoadSettings()
+        {
+            Settings = ApplicationSettings.Read(SettingsFileName);
+            if (!string.IsNullOrEmpty(Settings.DefaultWomanPath))
+            {
+                CurrentWoman = Woman.ReadFrom(Settings.DefaultWomanPath);
+            }
+            return true;
         }
     }
 }

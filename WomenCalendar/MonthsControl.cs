@@ -119,7 +119,7 @@ namespace WomenCalendar
             FocusDate = e.NewDate;
             if (e.Button == MouseButtons.Right)
             {
-                bool isMentruationDay = Program.CurrentWoman.MenstruationDates.Contains(FocusDate);
+                bool isMentruationDay = Program.CurrentWoman.Menstruations.IsMenstruationDay(FocusDate);
                 contextMenu.Items["setAsMenstruationDay"].Visible = !isMentruationDay;
                 contextMenu.Items["removeMenstruationDay"].Visible = isMentruationDay;
 
@@ -215,14 +215,6 @@ namespace WomenCalendar
             }
         }
 
-        private void setAsMenstruationDay_Click(object sender, EventArgs e)
-        {
-            if (Program.CurrentWoman.AddMenstruationDay(FocusDate))
-            {
-                RedrawFocusDay();
-            }
-        }
-
         public OneMonthControl GetOneMonthByDate(DateTime date)
         {
             int i = oneMonthControl.Date.Month - date.Month;
@@ -243,11 +235,19 @@ namespace WomenCalendar
             return null;
         }
 
+        private void setAsMenstruationDay_Click(object sender, EventArgs e)
+        {
+            if (Program.CurrentWoman.AddMenstruationDay(FocusDate))
+            {
+                Redraw();
+            }
+        }
+
         private void removeMenstruationDay_Click(object sender, EventArgs e)
         {
             if (Program.CurrentWoman.RemoveMenstruationDay(FocusDate))
             {
-                RedrawFocusDay();
+                Redraw();
             }
         }
 
@@ -268,7 +268,13 @@ namespace WomenCalendar
             }
         }
 
-        private void RedrawFocusDay()
+        public void Redraw()
+        {
+            Visible = false;
+            Visible = true;
+        }
+
+        public void RedrawFocusDay()
         {
             ((MainForm)ParentForm).UpdateDayInformation(FocusDate);
             FocusDay.Invalidate();

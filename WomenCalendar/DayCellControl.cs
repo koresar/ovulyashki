@@ -83,7 +83,7 @@ namespace WomenCalendar
                 pe.Graphics.DrawRectangle(Program.DayCellAppearance.EdgePen, 0, 0, Size.Width - 1, Size.Height - 1);
             }
 
-            if (Program.CurrentWoman.MenstruationDates.Contains(Date))
+            if (Program.CurrentWoman.Menstruations.IsMenstruationDay(Date))
             {
                 pe.Graphics.DrawIcon((Icon) Program.IconResource.GetObject("drop.Image"), 3, 14);
             }
