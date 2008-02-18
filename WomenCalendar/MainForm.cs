@@ -49,9 +49,12 @@ namespace WomenCalendar
 
         private bool AskAndSaveCurrentWoman()
         {
-            switch (MessageBox.Show(this, "Сохранить эту женщину, прежде чем продолжить?", Text, MessageBoxButtons.YesNoCancel))
+            DialogResult res =
+                MessageBox.Show(this, "Сохранить эту женщину, прежде чем продолжить?", Text,
+                                MessageBoxButtons.YesNoCancel);
+            switch (res)
             {
-                case DialogResult.OK:
+                case DialogResult.Yes:
                     if (!SaveCurrentWoman()) // save the woman
                     {
                         return false; // saving aborted. do nothing in this case.
@@ -104,7 +107,9 @@ namespace WomenCalendar
             dialog.Filter = "Woman files (*.woman)|*.woman";
             if (dialog.ShowDialog(this) == DialogResult.OK)
             {
+                monthControl.Visible = false;
                 Program.CurrentWoman = Woman.ReadFrom(dialog.FileName);
+                monthControl.Visible = true;
                 return true;
             }
             return false;
@@ -146,6 +151,11 @@ namespace WomenCalendar
             lblDayDescription.Text = sb.ToString();
 
             xDay.Height = lblDayDescription.Height + 32;
+        }
+
+        private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            e.Cancel = !AskAndSaveCurrentWoman();
         }
     }
 }

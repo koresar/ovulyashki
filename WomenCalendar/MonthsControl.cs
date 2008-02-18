@@ -126,6 +126,7 @@ namespace WomenCalendar
                 bool haveNote = Program.CurrentWoman.Notes.ContainsKey(FocusDate);
                 contextMenu.Items["addNote"].Visible = !haveNote;
                 contextMenu.Items["removeNote"].Visible = haveNote;
+                contextMenu.Items["editNote"].Visible = haveNote;
 
                 contextMenu.Show((Control) sender, FocusMonth.PointToClient(MousePosition));
             }
@@ -272,6 +273,15 @@ namespace WomenCalendar
             ((MainForm)ParentForm).UpdateDayInformation(FocusDate);
             FocusDay.Invalidate();
             FocusDay.Update();
+        }
+
+        private void editNote_Click(object sender, EventArgs e)
+        {
+            NoteEditForm form = new NoteEditForm(Program.CurrentWoman.Notes[FocusDate]);
+            if (form.ShowDialog() == DialogResult.OK && Program.CurrentWoman.AddNote(FocusDate, form.NoteText))
+            {
+                RedrawFocusDay();
+            }
         }
     }
 

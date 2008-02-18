@@ -99,7 +99,7 @@ namespace WomenCalendar
 
         public bool AddNote(DateTime date, string text)
         {
-            Notes.Add(date, text);
+            Notes[date] = text;
             return true;
         }
 

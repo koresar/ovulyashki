@@ -15,6 +15,11 @@ namespace WomenCalendar
             InitializeComponent();
         }
 
+        public NoteEditForm(string editText) : this()
+        {
+            txtNote.Text = editText;
+        }
+
         public string NoteText
         {
             get

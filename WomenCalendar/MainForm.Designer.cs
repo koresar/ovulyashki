@@ -221,7 +221,7 @@
             this.xDay.Padding = new System.Windows.Forms.Padding(0, 25, 0, 0);
             this.xDay.Size = new System.Drawing.Size(180, 62);
             this.xDay.TabIndex = 1;
-            this.xDay.Tag = 6;
+            this.xDay.Tag = 0;
             this.xDay.TooltipText = null;
             // 
             // lblDayDescription
@@ -257,7 +257,7 @@
             this.xLegend.Padding = new System.Windows.Forms.Padding(0, 25, 0, 0);
             this.xLegend.Size = new System.Drawing.Size(180, 136);
             this.xLegend.TabIndex = 2;
-            this.xLegend.Tag = 7;
+            this.xLegend.Tag = 1;
             this.xLegend.TooltipText = null;
             // 
             // xWoman
@@ -283,7 +283,7 @@
             this.xWoman.Padding = new System.Windows.Forms.Padding(0, 25, 0, 0);
             this.xWoman.Size = new System.Drawing.Size(180, 136);
             this.xWoman.TabIndex = 0;
-            this.xWoman.Tag = 8;
+            this.xWoman.Tag = 2;
             this.xWoman.TooltipText = null;
             // 
             // monthControl
@@ -314,6 +314,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "MainForm";
             this.Text = "Женский календарь";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
             this.splitContainer1.Panel1.ResumeLayout(false);

@@ -36,6 +36,7 @@
             this.addNote = new System.Windows.Forms.ToolStripMenuItem();
             this.removeNote = new System.Windows.Forms.ToolStripMenuItem();
             this.oneMonthControl = new WomenCalendar.OneMonthControl();
+            this.editNote = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenu.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -46,9 +47,10 @@
             this.removeMenstruationDay,
             this.toolStripSeparator1,
             this.addNote,
-            this.removeNote});
+            this.removeNote,
+            this.editNote});
             this.contextMenu.Name = "contextMenu";
-            this.contextMenu.Size = new System.Drawing.Size(247, 120);
+            this.contextMenu.Size = new System.Drawing.Size(247, 142);
             // 
             // setAsMenstruationDay
             // 
@@ -95,6 +97,13 @@
             this.oneMonthControl.Size = new System.Drawing.Size(224, 224);
             this.oneMonthControl.TabIndex = 0;
             // 
+            // editNote
+            // 
+            this.editNote.Name = "editNote";
+            this.editNote.Size = new System.Drawing.Size(246, 22);
+            this.editNote.Text = "Редактировать заметку";
+            this.editNote.Click += new System.EventHandler(this.editNote_Click);
+            // 
             // MonthsControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -119,6 +128,7 @@
         private System.Windows.Forms.ToolStripMenuItem removeMenstruationDay;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripMenuItem removeNote;
+        private System.Windows.Forms.ToolStripMenuItem editNote;
 
     }
 }
