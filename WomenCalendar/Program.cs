@@ -12,7 +12,18 @@ namespace WomenCalendar
     {
         public static MainForm ApplicationForm;
 
-        public static Woman CurrentWoman = new Woman();
+        public static Woman _currentWoman;
+        public static Woman CurrentWoman
+        {
+            get { return _currentWoman ?? (_currentWoman = new Woman()); }
+            set
+            {
+                _currentWoman.AveragePeriodLengthChanged -= ApplicationForm.UpdateWomanInformation;
+                _currentWoman = value;
+                _currentWoman.AveragePeriodLengthChanged += ApplicationForm.UpdateWomanInformation;
+                ApplicationForm.UpdateWomanInformation();
+            }
+        }
 
         public static ComponentResourceManager IconResource;
 

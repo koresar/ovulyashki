@@ -93,6 +93,11 @@ namespace WomenCalendar
                 pe.Graphics.DrawIcon((Icon)Program.IconResource.GetObject("note.Image"), 23, 2);
             }
 
+            if (Program.CurrentWoman.IsPredictedAsMenstruationDay(Date))
+            {
+                pe.Graphics.DrawEllipse(Pens.Red, 3, 14, 5, 5);
+            }
+
             pe.Graphics.DrawString(Date.Day.ToString(), Font, FontBrush, 0, 0);
         }
 

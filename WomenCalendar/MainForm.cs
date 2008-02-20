@@ -123,6 +123,28 @@ namespace WomenCalendar
 
         public void UpdateDayInformation(DateTime date)
         {
+            lblDayDescription.Text = GenerateDayInfo(date);
+            xDay.Height = lblDayDescription.Height + 32;
+        }
+
+        public void UpdateWomanInformation()
+        {
+            lblWomanDescription.Text = GenerateWomanInformation();
+        }
+
+        public string GenerateWomanInformation()
+        {
+            StringBuilder sb = new StringBuilder();
+
+            sb.Append("Средний цикл: ");
+            sb.Append(Program.CurrentWoman.AveragePeriodLength == 0 ? 28 : Program.CurrentWoman.AveragePeriodLength);
+            sb.Append(" дней");
+
+            return sb.ToString();
+        }
+
+        private string GenerateDayInfo(DateTime date)
+        {
             StringBuilder sb = new StringBuilder();
 
             sb.Append("Дата: ");
@@ -138,7 +160,11 @@ namespace WomenCalendar
                 sb.Append("Менструальный день");
             }
 
-
+            if (Program.CurrentWoman.IsPredictedAsMenstruationDay(date))
+            {
+                sb.AppendLine();
+                sb.Append("Вероятны выделения");
+            }
 
             // got to be last
             string text;
@@ -149,9 +175,7 @@ namespace WomenCalendar
                 sb.Append(text);
             }
 
-            lblDayDescription.Text = sb.ToString();
-
-            xDay.Height = lblDayDescription.Height + 32;
+            return sb.ToString();
         }
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)

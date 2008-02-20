@@ -45,14 +45,34 @@ namespace WomenCalendar
             get { return associatedFile; }
             set { associatedFile = value; }
         }
+                
+        [XmlIgnore()]
+        private int averagePeriodLength;
+        [XmlAttribute("AveragePeriodLength")]
+        public int AveragePeriodLength
+        {
+            get { return averagePeriodLength; }
+            set
+            {
+                int prevLength = averagePeriodLength;
+                averagePeriodLength = value;
+                if (prevLength != averagePeriodLength && AveragePeriodLengthChanged != null)
+                {
+                    AveragePeriodLengthChanged();
+                }
+            }
+        }
+
+        public delegate void AveragePeriodLengthChangedDelegate();
+        public event AveragePeriodLengthChangedDelegate AveragePeriodLengthChanged;
 
         [XmlIgnore()]
-        private int periodLength;
-        [XmlAttribute("PeriodLength")]
-        public int PeriodLength
+        private int defaultMenstruationLength;
+        [XmlAttribute("DefaultMenstruationLength")]
+        public int DefaultMenstruationLength
         {
-            get { return periodLength; }
-            set { periodLength = value; }
+            get { return defaultMenstruationLength; }
+            set { defaultMenstruationLength = value; }
         }
 
         [XmlIgnore()]
@@ -67,7 +87,7 @@ namespace WomenCalendar
         {
 //            _menstruationDates = new List<DateTime>();
             notes = new NotesCollection();
-            periodLength = 5;
+            defaultMenstruationLength = 5;
             _menstruations = new MenstruationsCollection();
         }
 
@@ -96,7 +116,29 @@ namespace WomenCalendar
                 return false;
             }
 
-            return Menstruations.Add(date, PeriodLength);
+            if (Menstruations.Add(date, DefaultMenstruationLength))
+            {
+                AveragePeriodLength = Menstruations.CalculateAveragePeriodLength();
+                return true;
+            }
+            return false;
+        }
+
+        public bool IsPredictedAsMenstruationDay(DateTime date)
+        {
+            if (Menstruations.Count == 0)
+            {
+                return false;
+            }
+
+            MenstruationPeriod lastPeriod = Menstruations.Last;
+            if (date <= lastPeriod.LastDay)
+            {
+                return false;
+            }
+
+            int daysBetween = ((date - lastPeriod.StartDay).Days)%(AveragePeriodLength == 0 ? 28 : AveragePeriodLength);
+            return daysBetween < DefaultMenstruationLength;
         }
 
         public bool RemoveMenstruationDay(DateTime date)

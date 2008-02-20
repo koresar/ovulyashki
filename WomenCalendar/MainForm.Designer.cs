@@ -48,12 +48,14 @@
             this.xLegend = new XPanderControl.XPander();
             this.xWoman = new XPanderControl.XPander();
             this.monthControl = new WomenCalendar.MonthsControl();
+            this.lblWomanDescription = new System.Windows.Forms.Label();
             this.toolStrip1.SuspendLayout();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
             this.xPanderList1.SuspendLayout();
             this.xDay.SuspendLayout();
+            this.xWoman.SuspendLayout();
             this.SuspendLayout();
             // 
             // toolStrip1
@@ -276,6 +278,7 @@
             this.xWoman.ChevronStyle = XPanderControl.XPander.ChevronStyleEnum.Image;
             this.xWoman.CollapsedHighlightImage = ((System.Drawing.Bitmap)(resources.GetObject("xWoman.CollapsedHighlightImage")));
             this.xWoman.CollapsedImage = ((System.Drawing.Bitmap)(resources.GetObject("xWoman.CollapsedImage")));
+            this.xWoman.Controls.Add(this.lblWomanDescription);
             this.xWoman.ExpandedHighlightImage = ((System.Drawing.Bitmap)(resources.GetObject("xWoman.ExpandedHighlightImage")));
             this.xWoman.ExpandedImage = ((System.Drawing.Bitmap)(resources.GetObject("xWoman.ExpandedImage")));
             this.xWoman.Location = new System.Drawing.Point(8, 154);
@@ -303,6 +306,16 @@
             this.monthControl.TabIndex = 0;
             this.monthControl.FocusDateChanged += new WomenCalendar.MonthsControl.FocusDateChangedDelegate(this.monthControl_FocusDateChanged);
             // 
+            // lblWomanDescription
+            // 
+            this.lblWomanDescription.AutoEllipsis = true;
+            this.lblWomanDescription.AutoSize = true;
+            this.lblWomanDescription.Location = new System.Drawing.Point(5, 29);
+            this.lblWomanDescription.Name = "lblWomanDescription";
+            this.lblWomanDescription.Size = new System.Drawing.Size(42, 13);
+            this.lblWomanDescription.TabIndex = 0;
+            this.lblWomanDescription.Text = "...day...";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -324,6 +337,8 @@
             this.xPanderList1.ResumeLayout(false);
             this.xDay.ResumeLayout(false);
             this.xDay.PerformLayout();
+            this.xWoman.ResumeLayout(false);
+            this.xWoman.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -350,6 +365,7 @@
         private XPanderControl.XPander xWoman;
         private XPanderControl.XPander xDay;
         private System.Windows.Forms.Label lblDayDescription;
+        private System.Windows.Forms.Label lblWomanDescription;
 
 
     }
