@@ -5,6 +5,7 @@ using System.Windows.Forms;
 using System.Drawing;
 using WomenCalendar.Properties;
 using System.ComponentModel;
+using System.Resources;
 
 namespace WomenCalendar
 {
@@ -18,14 +19,22 @@ namespace WomenCalendar
             get { return _currentWoman ?? (_currentWoman = new Woman()); }
             set
             {
-                _currentWoman.AveragePeriodLengthChanged -= ApplicationForm.UpdateWomanInformation;
+                if (_currentWoman != null)
+                {
+                    _currentWoman.AveragePeriodLengthChanged -= ApplicationForm.UpdateWomanInformation;
+                    _currentWoman.Menstruations.CollectionChanged -= ApplicationForm.UpdateWomanInformation;
+                }
                 _currentWoman = value;
-                _currentWoman.AveragePeriodLengthChanged += ApplicationForm.UpdateWomanInformation;
+                if (_currentWoman != null)
+                {
+                    _currentWoman.AveragePeriodLengthChanged += ApplicationForm.UpdateWomanInformation;
+                    _currentWoman.Menstruations.CollectionChanged += ApplicationForm.UpdateWomanInformation;
+                }
                 ApplicationForm.UpdateWomanInformation();
             }
         }
 
-        public static ComponentResourceManager IconResource;
+        public static ResourceManager IconResource;
 
         public static ApplicationSettings Settings;
 
@@ -43,7 +52,8 @@ namespace WomenCalendar
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             ApplicationForm = new MainForm();
-            IconResource = new ComponentResourceManager(typeof(MainForm));
+            IconResource = Resources.ResourceManager;
+                //new System.Resources.ResourceManager(System.Reflection.Assembly.GetExecutingAssembly());
             Application.Run(ApplicationForm);
         }
 

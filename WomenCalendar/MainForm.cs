@@ -15,8 +15,7 @@ namespace WomenCalendar
             InitializeComponent();
 
             toolStrip1.Items.Add(new ToolStripControlHost(dateTimePicker1));
-
-            monthControl.FocusDate = DateTime.Today;
+            lblWomanDescription.Text = string.Empty;
         }
 
         private void prevStripButton_Click(object sender, EventArgs e)
@@ -39,6 +38,7 @@ namespace WomenCalendar
             if (AskAndSaveCurrentWoman())
             {
                 Program.CurrentWoman = new Woman();
+                monthControl.Redraw();
             }
         }
 
@@ -129,7 +129,14 @@ namespace WomenCalendar
 
         public void UpdateWomanInformation()
         {
+            if (rbAuto.Checked)
+            {
+                Program.CurrentWoman.ManualPeriodLength = Program.CurrentWoman.AveragePeriodLength;
+            }
+
             lblWomanDescription.Text = GenerateWomanInformation();
+
+            numMenstruationPeriod.Value = Program.CurrentWoman.ManualPeriodLength;
         }
 
         public string GenerateWomanInformation()
@@ -190,6 +197,22 @@ namespace WomenCalendar
         private void MainForm_Load(object sender, EventArgs e)
         {
             Program.LoadSettings();
+
+            monthControl.FocusDate = DateTime.Today;
+        }
+
+        private void rbAuto_CheckedChanged(object sender, EventArgs e)
+        {
+            numMenstruationPeriod.Enabled = !rbAuto.Checked;
+            if (rbAuto.Checked)
+            {
+                numMenstruationPeriod.Value = Program.CurrentWoman.AveragePeriodLength;
+            }
+        }
+
+        private void numMenstruationPeriod_ValueChanged(object sender, EventArgs e)
+        {
+            Program.CurrentWoman.ManualPeriodLength = (int)numMenstruationPeriod.Value;
         }
     }
 }

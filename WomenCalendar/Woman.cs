@@ -63,6 +63,15 @@ namespace WomenCalendar
             }
         }
 
+        [XmlIgnore()]
+        private int manualPeriodLength;
+        [XmlAttribute("ManualPeriodLength")]
+        public int ManualPeriodLength
+        {
+            get { return manualPeriodLength; }
+            set { manualPeriodLength = value; }
+        }
+
         public delegate void AveragePeriodLengthChangedDelegate();
         public event AveragePeriodLengthChangedDelegate AveragePeriodLengthChanged;
 
@@ -89,6 +98,7 @@ namespace WomenCalendar
             notes = new NotesCollection();
             defaultMenstruationLength = 5;
             _menstruations = new MenstruationsCollection();
+            manualPeriodLength = 28;
         }
 
         public static bool SaveTo(Woman w, string path)
@@ -143,7 +153,17 @@ namespace WomenCalendar
 
         public bool RemoveMenstruationDay(DateTime date)
         {
-            return Menstruations.Remove(date);
+            if (!Menstruations.IsMenstruationDay(date))
+            {
+                return false;
+            }
+
+            if (Menstruations.Remove(date))
+            {
+                AveragePeriodLength = Menstruations.CalculateAveragePeriodLength();
+                return true;
+            }
+            return false;
         }
 
         public bool AddNote(DateTime date, string text)

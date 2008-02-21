@@ -270,8 +270,10 @@ namespace WomenCalendar
 
         public void Redraw()
         {
-            Visible = false;
-            Visible = true;
+            Invalidate(true);
+            Update();
+//            Visible = false;
+//            Visible = true;
         }
 
         public void RedrawFocusDay()

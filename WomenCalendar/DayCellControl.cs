@@ -85,12 +85,12 @@ namespace WomenCalendar
 
             if (Program.CurrentWoman.Menstruations.IsMenstruationDay(Date))
             {
-                pe.Graphics.DrawIcon((Icon) Program.IconResource.GetObject("drop.Image"), 3, 14);
+                pe.Graphics.DrawImage((Image) Program.IconResource.GetObject("drop_Image"), 3, 14);
             }
 
             if (Program.CurrentWoman.Notes.ContainsKey(Date))
             {
-                pe.Graphics.DrawIcon((Icon)Program.IconResource.GetObject("note.Image"), 23, 2);
+                pe.Graphics.DrawImage((Image)Program.IconResource.GetObject("note_Image"), 23, 2);
             }
 
             if (Program.CurrentWoman.IsPredictedAsMenstruationDay(Date))

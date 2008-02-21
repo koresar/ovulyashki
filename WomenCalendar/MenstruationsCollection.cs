@@ -49,6 +49,15 @@ namespace WomenCalendar
             return true;
         }
 
+        new private void Add(MenstruationPeriod period)
+        {
+            FireCollectionChangedEvent();
+            base.Add(period);
+        }
+
+        public delegate void CollectionChangedDelegate();
+        public event CollectionChangedDelegate CollectionChanged;
+
         public MenstruationPeriod Last
         {
             get
@@ -87,9 +96,18 @@ namespace WomenCalendar
             if (period != null)
             {
                 Remove(period);
+                FireCollectionChangedEvent();
                 return true;
             }
             return false;
+        }
+
+        private void FireCollectionChangedEvent()
+        {
+            if (CollectionChanged != null)
+            {
+                CollectionChanged();
+            }
         }
 
         public MenstruationPeriod GetClosestPeriodAfterDay(DateTime date)
