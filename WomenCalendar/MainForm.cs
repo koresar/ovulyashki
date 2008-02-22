@@ -213,6 +213,7 @@ namespace WomenCalendar
         private void numMenstruationPeriod_ValueChanged(object sender, EventArgs e)
         {
             Program.CurrentWoman.ManualPeriodLength = (int)numMenstruationPeriod.Value;
+            monthControl.Redraw();
         }
     }
 }

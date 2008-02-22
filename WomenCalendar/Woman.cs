@@ -147,7 +147,7 @@ namespace WomenCalendar
                 return false;
             }
 
-            int daysBetween = ((date - lastPeriod.StartDay).Days)%(AveragePeriodLength == 0 ? 28 : AveragePeriodLength);
+            int daysBetween = ((date - lastPeriod.StartDay).Days) % (ManualPeriodLength == 0 ? 28 : ManualPeriodLength);
             return daysBetween < DefaultMenstruationLength;
         }
 

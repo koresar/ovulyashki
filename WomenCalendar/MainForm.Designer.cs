@@ -226,9 +226,9 @@
             this.xDay.Location = new System.Drawing.Point(3, 287);
             this.xDay.Name = "xDay";
             this.xDay.Padding = new System.Windows.Forms.Padding(0, 25, 0, 0);
-            this.xDay.Size = new System.Drawing.Size(180, 62);
+            this.xDay.Size = new System.Drawing.Size(181, 62);
             this.xDay.TabIndex = 1;
-            this.xDay.Tag = 60;
+            this.xDay.Tag = 0;
             this.xDay.TooltipText = null;
             // 
             // lblDayDescription
@@ -262,9 +262,9 @@
             this.xLegend.Location = new System.Drawing.Point(3, 3);
             this.xLegend.Name = "xLegend";
             this.xLegend.Padding = new System.Windows.Forms.Padding(0, 25, 0, 0);
-            this.xLegend.Size = new System.Drawing.Size(180, 136);
+            this.xLegend.Size = new System.Drawing.Size(181, 136);
             this.xLegend.TabIndex = 2;
-            this.xLegend.Tag = 61;
+            this.xLegend.Tag = 1;
             this.xLegend.TooltipText = null;
             // 
             // xWoman
@@ -293,17 +293,27 @@
             this.xWoman.Location = new System.Drawing.Point(3, 145);
             this.xWoman.Name = "xWoman";
             this.xWoman.Padding = new System.Windows.Forms.Padding(0, 25, 0, 0);
-            this.xWoman.Size = new System.Drawing.Size(180, 136);
+            this.xWoman.Size = new System.Drawing.Size(181, 136);
             this.xWoman.TabIndex = 0;
-            this.xWoman.Tag = 62;
+            this.xWoman.Tag = 2;
             this.xWoman.TooltipText = null;
             // 
             // numMenstruationPeriod
             // 
             this.numMenstruationPeriod.Location = new System.Drawing.Point(124, 44);
+            this.numMenstruationPeriod.Minimum = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
             this.numMenstruationPeriod.Name = "numMenstruationPeriod";
             this.numMenstruationPeriod.Size = new System.Drawing.Size(48, 20);
             this.numMenstruationPeriod.TabIndex = 4;
+            this.numMenstruationPeriod.Value = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
             this.numMenstruationPeriod.ValueChanged += new System.EventHandler(this.numMenstruationPeriod_ValueChanged);
             // 
             // label1
@@ -375,7 +385,7 @@
             this.Controls.Add(this.toolStrip1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "MainForm";
-            this.Text = "Женский календарь";
+            this.Text = "Овуляшки";
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
             this.toolStrip1.ResumeLayout(false);
