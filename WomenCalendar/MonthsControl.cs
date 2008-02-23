@@ -20,6 +20,13 @@ namespace WomenCalendar
             set { _focusMonth = value; }
         }
 
+        private DayCellPopupControl cellPopupControl;
+        public DayCellPopupControl CellPopupControl
+        {
+            get { return cellPopupControl; }
+            set { cellPopupControl = value; }
+        }
+
         public DayCellControl FocusDay
         {
             get
@@ -98,7 +105,9 @@ namespace WomenCalendar
         {
             InitializeComponent();
 
-            oneMonthControl.OwnerMonthControl = this;
+            cellPopupControl = new DayCellPopupControl(this);
+
+            oneMonthControl.OwnerMonthsControl = this;
             oneMonthControl.MonthDayClicked += new OneMonthControl.DayClicked(control_MonthDayClicked);
             singleMonths.Add(oneMonthControl);
             CreateAndAdjustMonthsAmount();
@@ -109,31 +118,38 @@ namespace WomenCalendar
             OneMonthControl control = new OneMonthControl();
             control.Location = oneMonthControl.Location;
             control.Size = oneMonthControl.Size;
-            control.OwnerMonthControl = this;
+            control.OwnerMonthsControl = this;
             control.MonthDayClicked += new OneMonthControl.DayClicked(control_MonthDayClicked);
             return control;
         }
 
-        void control_MonthDayClicked(object sender, DayCellClickEventArgs e)
+        private void control_MonthDayClicked(object sender, DayCellClickEventArgs e)
         {
             FocusDate = e.NewDate;
             if (e.Button == MouseButtons.Right)
             {
-                bool isMentruationDay = Program.CurrentWoman.Menstruations.IsMenstruationDay(FocusDate);
-                contextMenu.Items["setAsMenstruationDay"].Visible = !isMentruationDay;
-                contextMenu.Items["removeMenstruationDay"].Visible = isMentruationDay;
-
-                bool haveNote = Program.CurrentWoman.Notes.ContainsKey(FocusDate);
-                contextMenu.Items["addNote"].Visible = !haveNote;
-                contextMenu.Items["removeNote"].Visible = haveNote;
-                contextMenu.Items["editNote"].Visible = haveNote;
-
-                contextMenu.Show((Control) sender, FocusMonth.PointToClient(MousePosition));
+                ShowPopupMenu();
             }
+        }
+
+        public void ShowPopupMenu()
+        {
+            bool isMentruationDay = Program.CurrentWoman.Menstruations.IsMenstruationDay(FocusDate);
+            contextMenu.Items["setAsMenstruationDay"].Visible = !isMentruationDay;
+            contextMenu.Items["removeMenstruationDay"].Visible = isMentruationDay;
+
+            bool haveNote = Program.CurrentWoman.Notes.ContainsKey(FocusDate);
+            contextMenu.Items["addNote"].Visible = !haveNote;
+            contextMenu.Items["removeNote"].Visible = haveNote;
+            contextMenu.Items["editNote"].Visible = haveNote;
+
+            contextMenu.Show(FocusMonth, FocusMonth.PointToClient(MousePosition));
         }
 
         private void CreateAndAdjustMonthsAmount()
         { // adjust amount of month calendars in the control according to its size.
+            CellPopupControl.Visible = false;
+
             int monthesX = Size.Width / (oneMonthControl.Width + MonthsMarginX);
             if (monthesX == 0) monthesX = 1;
             int monthesY = Size.Height / (oneMonthControl.Height + MonthsMarginY);
@@ -288,6 +304,16 @@ namespace WomenCalendar
             {
                 RedrawFocusDay();
             }
+        }
+
+        private void MonthsControl_MouseEnter(object sender, EventArgs e)
+        {
+            CellPopupControl.Visible = false;
+        }
+
+        private void MonthsControl_MouseLeave(object sender, EventArgs e)
+        {
+            CellPopupControl.Visible = false;
         }
     }
 

@@ -387,6 +387,7 @@
             this.Name = "MainForm";
             this.Text = "Овуляшки";
             this.Load += new System.EventHandler(this.MainForm_Load);
+            this.MouseLeave += new System.EventHandler(this.MainForm_MouseLeave);
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Text;
 using System.Windows.Forms;
 
@@ -23,11 +24,11 @@ namespace WomenCalendar
         private static Font FontBold;
 
 
-        private OneMonthControl _ownerMonthControl;
-        public OneMonthControl OwnerMonthControl
+        private OneMonthControl _ownerOneMonthControl;
+        public OneMonthControl OwnerOneMonthControl
         {
-            get { return _ownerMonthControl; }
-            set { _ownerMonthControl = value; }
+            get { return _ownerOneMonthControl; }
+            set { _ownerOneMonthControl = value; }
         }
 
         private Brush _backBrush = Brushes.Aqua;
@@ -52,13 +53,14 @@ namespace WomenCalendar
             {
                 if (_date == value) return;
                 _date = value;
-                Enabled = OwnerMonthControl.Date.Month == Date.Month;
+                Enabled = OwnerOneMonthControl.Date.Month == Date.Month;
 
                 InitializeFonts();
 
                 Font = (Enabled) ? FontBold : FontNormal;
-                BackBrush = Date.DayOfWeek == DayOfWeek.Saturday || Date.DayOfWeek == DayOfWeek.Sunday ?
-                    Brushes.LightPink : Brushes.LightSkyBlue;
+                BackColor = Date.DayOfWeek == DayOfWeek.Saturday || Date.DayOfWeek == DayOfWeek.Sunday ?
+                    Color.LightPink : Color.LightSkyBlue;
+                BackBrush = new SolidBrush(BackColor);
                 FontBrush = Enabled ? (_date == DateTime.Today ? Brushes.GreenYellow : Brushes.Black) : Brushes.Gray;
                 Invalidate();
             }
@@ -66,7 +68,7 @@ namespace WomenCalendar
 
         public DayCellControl(OneMonthControl parent)
         {
-            OwnerMonthControl = parent;
+            OwnerOneMonthControl = parent;
             InitializeComponent();
             SetStyle(ControlStyles.AllPaintingInWmPaint | ControlStyles.Opaque, true);
         }
@@ -74,7 +76,7 @@ namespace WomenCalendar
         protected override void OnPaint(PaintEventArgs pe)
         {
             pe.Graphics.FillRectangle(BackBrush, 0, 0, Size.Width - 1, Size.Height - 1);
-            if (this == OwnerMonthControl.FocusDay)
+            if (this == OwnerOneMonthControl.FocusDay)
             {
                 pe.Graphics.DrawRectangle(Program.DayCellAppearance.FocusEdgePen, 1, 1, Size.Width - 2, Size.Height - 2);
             }
@@ -110,6 +112,11 @@ namespace WomenCalendar
             {
                 CellClick(this, new DayCellClickEventArgs(e, Date));
             }
+        }
+
+        private void DayCellControl_MouseEnter(object sender, EventArgs e)
+        {
+            OwnerOneMonthControl.OwnerMonthsControl.CellPopupControl.ShowAbove(this);
         }
     }
 

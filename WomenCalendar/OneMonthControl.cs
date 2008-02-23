@@ -119,16 +119,16 @@ namespace WomenCalendar
             ResumeLayout();
         }
 
-        private MonthsControl _ownerMonthControl;
-        public MonthsControl OwnerMonthControl
+        private MonthsControl _ownerMonthsControl;
+        public MonthsControl OwnerMonthsControl
         {
-            get { return _ownerMonthControl; }
-            set { _ownerMonthControl = value; }
+            get { return _ownerMonthsControl; }
+            set { _ownerMonthsControl = value; }
         }
 
         public OneMonthControl(MonthsControl parent) : this()
         {
-            _ownerMonthControl = parent;
+            _ownerMonthsControl = parent;
         }
 
         protected override void OnPaint(PaintEventArgs pe)

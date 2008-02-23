@@ -35,8 +35,8 @@
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.addNote = new System.Windows.Forms.ToolStripMenuItem();
             this.removeNote = new System.Windows.Forms.ToolStripMenuItem();
-            this.oneMonthControl = new WomenCalendar.OneMonthControl();
             this.editNote = new System.Windows.Forms.ToolStripMenuItem();
+            this.oneMonthControl = new WomenCalendar.OneMonthControl();
             this.contextMenu.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -50,7 +50,7 @@
             this.removeNote,
             this.editNote});
             this.contextMenu.Name = "contextMenu";
-            this.contextMenu.Size = new System.Drawing.Size(247, 142);
+            this.contextMenu.Size = new System.Drawing.Size(247, 120);
             // 
             // setAsMenstruationDay
             // 
@@ -85,6 +85,13 @@
             this.removeNote.Text = "Удалить заметку";
             this.removeNote.Click += new System.EventHandler(this.removeNote_Click);
             // 
+            // editNote
+            // 
+            this.editNote.Name = "editNote";
+            this.editNote.Size = new System.Drawing.Size(246, 22);
+            this.editNote.Text = "Редактировать заметку";
+            this.editNote.Click += new System.EventHandler(this.editNote_Click);
+            // 
             // oneMonthControl
             // 
             this.oneMonthControl.Date = new System.DateTime(2008, 2, 1, 0, 0, 0, 0);
@@ -93,16 +100,9 @@
             this.oneMonthControl.Location = new System.Drawing.Point(0, 0);
             this.oneMonthControl.Margin = new System.Windows.Forms.Padding(0);
             this.oneMonthControl.Name = "oneMonthControl";
-            this.oneMonthControl.OwnerMonthControl = null;
+            this.oneMonthControl.OwnerMonthsControl = null;
             this.oneMonthControl.Size = new System.Drawing.Size(224, 224);
             this.oneMonthControl.TabIndex = 0;
-            // 
-            // editNote
-            // 
-            this.editNote.Name = "editNote";
-            this.editNote.Size = new System.Drawing.Size(246, 22);
-            this.editNote.Text = "Редактировать заметку";
-            this.editNote.Click += new System.EventHandler(this.editNote_Click);
             // 
             // MonthsControl
             // 
@@ -113,7 +113,9 @@
             this.DoubleBuffered = true;
             this.Name = "MonthsControl";
             this.Size = new System.Drawing.Size(501, 440);
+            this.MouseLeave += new System.EventHandler(this.MonthsControl_MouseLeave);
             this.SizeChanged += new System.EventHandler(this.MonthControl_SizeChanged);
+            this.MouseEnter += new System.EventHandler(this.MonthsControl_MouseEnter);
             this.contextMenu.ResumeLayout(false);
             this.ResumeLayout(false);
 

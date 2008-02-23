@@ -35,6 +35,7 @@
             this.DoubleBuffered = true;
             this.Name = "DayCellControl";
             this.Size = new System.Drawing.Size(32, 32);
+            this.MouseEnter += new System.EventHandler(this.DayCellControl_MouseEnter);
             this.ResumeLayout(false);
 
         }

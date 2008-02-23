@@ -215,5 +215,10 @@ namespace WomenCalendar
             Program.CurrentWoman.ManualPeriodLength = (int)numMenstruationPeriod.Value;
             monthControl.Redraw();
         }
+
+        private void MainForm_MouseLeave(object sender, EventArgs e)
+        {
+            monthControl.CellPopupControl.Visible = false;
+        }
     }
 }
