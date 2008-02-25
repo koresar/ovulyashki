@@ -75,6 +75,7 @@ namespace WomenCalendar
 
         protected override void OnPaint(PaintEventArgs pe)
         {
+            Woman w = Program.CurrentWoman;
             pe.Graphics.FillRectangle(BackBrush, 0, 0, Size.Width - 1, Size.Height - 1);
             if (this == OwnerOneMonthControl.FocusDay)
             {
@@ -85,17 +86,18 @@ namespace WomenCalendar
                 pe.Graphics.DrawRectangle(Program.DayCellAppearance.EdgePen, 0, 0, Size.Width - 1, Size.Height - 1);
             }
 
-            if (Program.CurrentWoman.Menstruations.IsMenstruationDay(Date))
+            if (w.Menstruations.IsMenstruationDay(Date))
             {
-                pe.Graphics.DrawImage((Image) Program.IconResource.GetObject("drop_Image"), 3, 14);
+                Image image = (Image) Program.IconResource.GetObject("drop_Image");
+                pe.Graphics.DrawImage(image, 3, 14);
             }
 
-            if (Program.CurrentWoman.Notes.ContainsKey(Date))
+            if (w.Notes.ContainsKey(Date))
             {
                 pe.Graphics.DrawImage((Image)Program.IconResource.GetObject("note_Image"), 23, 2);
             }
 
-            if (Program.CurrentWoman.IsPredictedAsMenstruationDay(Date))
+            if (w.IsPredictedAsMenstruationDay(Date))
             {
                 pe.Graphics.DrawEllipse(Pens.Red, 3, 14, 5, 5);
             }

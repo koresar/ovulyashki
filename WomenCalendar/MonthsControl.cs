@@ -255,6 +255,7 @@ namespace WomenCalendar
         {
             if (Program.CurrentWoman.AddMenstruationDay(FocusDate))
             {
+                ((MainForm)ParentForm).UpdateWomanInformation();
                 Redraw();
             }
         }
@@ -263,6 +264,7 @@ namespace WomenCalendar
         {
             if (Program.CurrentWoman.RemoveMenstruationDay(FocusDate))
             {
+                ((MainForm)ParentForm).UpdateWomanInformation();
                 Redraw();
             }
         }
@@ -270,6 +272,15 @@ namespace WomenCalendar
         private void addNote_Click(object sender, EventArgs e)
         {
             NoteEditForm form = new NoteEditForm();
+            if (form.ShowDialog() == DialogResult.OK && Program.CurrentWoman.AddNote(FocusDate, form.NoteText))
+            {
+                RedrawFocusDay();
+            }
+        }
+
+        private void editNote_Click(object sender, EventArgs e)
+        {
+            NoteEditForm form = new NoteEditForm(Program.CurrentWoman.Notes[FocusDate]);
             if (form.ShowDialog() == DialogResult.OK && Program.CurrentWoman.AddNote(FocusDate, form.NoteText))
             {
                 RedrawFocusDay();
@@ -286,6 +297,7 @@ namespace WomenCalendar
 
         public void Redraw()
         {
+            CellPopupControl.Visible = false;
             Invalidate(true);
             Update();
         }
@@ -295,15 +307,6 @@ namespace WomenCalendar
             ((MainForm)ParentForm).UpdateDayInformation(FocusDate);
             FocusDay.Invalidate();
             FocusDay.Update();
-        }
-
-        private void editNote_Click(object sender, EventArgs e)
-        {
-            NoteEditForm form = new NoteEditForm(Program.CurrentWoman.Notes[FocusDate]);
-            if (form.ShowDialog() == DialogResult.OK && Program.CurrentWoman.AddNote(FocusDate, form.NoteText))
-            {
-                RedrawFocusDay();
-            }
         }
 
         private void MonthsControl_MouseEnter(object sender, EventArgs e)

@@ -136,7 +136,7 @@ namespace WomenCalendar
 
             lblWomanDescription.Text = GenerateWomanInformation();
 
-            numMenstruationPeriod.Value = Program.CurrentWoman.ManualPeriodLength;
+            SetNumMenstrulationPriod(Program.CurrentWoman.ManualPeriodLength);
         }
 
         public string GenerateWomanInformation()
@@ -206,8 +206,14 @@ namespace WomenCalendar
             numMenstruationPeriod.Enabled = !rbAuto.Checked;
             if (rbAuto.Checked)
             {
-                numMenstruationPeriod.Value = Program.CurrentWoman.AveragePeriodLength;
+                SetNumMenstrulationPriod(Program.CurrentWoman.AveragePeriodLength);
             }
+        }
+
+        private void SetNumMenstrulationPriod(int length)
+        {
+            numMenstruationPeriod.Minimum = (length == 0) ? 0 : 10;
+            numMenstruationPeriod.Value = length;
         }
 
         private void numMenstruationPeriod_ValueChanged(object sender, EventArgs e)

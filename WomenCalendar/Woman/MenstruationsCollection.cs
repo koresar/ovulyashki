@@ -78,6 +78,31 @@ namespace WomenCalendar
             return false;
         }
 
+        public int GetEgestaAmount(DateTime day)
+        {
+            foreach (MenstruationPeriod period in this)
+            {
+                if (period.IsDayInPeriod(day))
+                {
+                    return period.Egestas[day];
+                }
+            }
+            return -1;
+        }
+
+        public bool SetEgesta(DateTime day, int egesta)
+        {
+            foreach (MenstruationPeriod period in this)
+            {
+                if (period.IsDayInPeriod(day))
+                {
+                    period.Egestas[day] = egesta;
+                    return true;
+                }
+            }
+            return false;
+        }
+
         public MenstruationPeriod GetPeriodByDate(DateTime date)
         {
             foreach (MenstruationPeriod period in this)

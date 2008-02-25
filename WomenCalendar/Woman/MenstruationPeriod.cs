@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Xml.Serialization;
 
 namespace WomenCalendar
 {
@@ -8,6 +9,7 @@ namespace WomenCalendar
     {
         public DateTime StartDay;
         public int Length;
+        public EgestasCollection Egestas;
 
         public MenstruationPeriod()
         {
@@ -17,6 +19,8 @@ namespace WomenCalendar
         {
             StartDay = startDay;
             Length = length;
+
+            Egestas = new EgestasCollection(startDay, length);
         }
 
         public DateTime LastDay

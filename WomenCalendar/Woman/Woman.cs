@@ -11,16 +11,6 @@ namespace WomenCalendar
     [XmlRoot("Woman")]
     public class Woman
     {
-//        [XmlIgnore()]
-//        private List<DateTime> _menstruationDates;
-//        [XmlArrayItem("Date", typeof(DateTime))]
-//        [XmlArray("MenstruationDates")]
-//        public List<DateTime> MenstruationDates
-//        {
-//            get { return _menstruationDates; }
-//            set { _menstruationDates = value; }
-//        }
-
         private MenstruationsCollection _menstruations;
         public MenstruationsCollection Menstruations
         {
