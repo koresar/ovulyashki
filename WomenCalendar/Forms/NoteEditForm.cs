@@ -17,7 +17,7 @@ namespace WomenCalendar
 
         public NoteEditForm(string editText) : this()
         {
-            txtNote.Text = editText;
+            txtNote.Text = editText.Replace("\n", "\r\n");
         }
 
         public string NoteText

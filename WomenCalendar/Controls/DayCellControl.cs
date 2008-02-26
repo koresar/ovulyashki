@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Text;
 using System.Windows.Forms;
+using System.Drawing.Imaging;
 
 namespace WomenCalendar
 {
@@ -70,7 +71,7 @@ namespace WomenCalendar
         {
             OwnerOneMonthControl = parent;
             InitializeComponent();
-            SetStyle(ControlStyles.AllPaintingInWmPaint | ControlStyles.Opaque, true);
+            SetStyle(ControlStyles.AllPaintingInWmPaint | ControlStyles.Opaque | ControlStyles.DoubleBuffer | ControlStyles.UserPaint, true);
         }
 
         protected override void OnPaint(PaintEventArgs pe)
@@ -88,8 +89,21 @@ namespace WomenCalendar
 
             if (w.Menstruations.IsMenstruationDay(Date))
             {
-                Image image = (Image) Program.IconResource.GetObject("drop_Image");
-                pe.Graphics.DrawImage(image, 3, 14);
+                int egesta = w.Menstruations.GetEgestaAmount(Date);
+                if (egesta > 0)
+                {
+                    Image image = (Image) Program.IconResource.GetObject("drop_Image");
+                    ImageAttributes attr = new ImageAttributes();
+                    ColorMatrix cMatrix = new ColorMatrix();
+                    // alpha
+                    cMatrix.Matrix33 = ((float)egesta) / (EgestasCollection.MaximumEgestaValue);
+                    attr.SetColorMatrix(cMatrix);
+                    pe.Graphics.DrawImage(image, new Rectangle(3, 14, 14, 14), 0, 0, 14, 14, GraphicsUnit.Pixel, attr);
+                }
+                else if (egesta == 0)
+                {
+                    pe.Graphics.DrawEllipse(Pens.Red, 3, 14, 5, 5);
+                }
             }
 
             if (w.Notes.ContainsKey(Date))
@@ -99,7 +113,7 @@ namespace WomenCalendar
 
             if (w.IsPredictedAsMenstruationDay(Date))
             {
-                pe.Graphics.DrawEllipse(Pens.Red, 3, 14, 5, 5);
+                pe.Graphics.DrawString("?", Font, Brushes.Red, 3, 14);
             }
 
             pe.Graphics.DrawString(Date.Day.ToString(), Font, FontBrush, 0, 0);

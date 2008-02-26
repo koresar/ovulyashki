@@ -114,7 +114,7 @@ namespace WomenCalendar
                 Controls.Add(control);
             }
 
-            SetStyle(ControlStyles.AllPaintingInWmPaint | ControlStyles.Opaque, true);
+            SetStyle(ControlStyles.AllPaintingInWmPaint | ControlStyles.Opaque | ControlStyles.DoubleBuffer | ControlStyles.UserPaint, true);
 
             ResumeLayout();
         }

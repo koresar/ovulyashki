@@ -41,7 +41,8 @@
             // 
             this.trackEgestaAmount.AutoSize = false;
             this.trackEgestaAmount.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.trackEgestaAmount.Location = new System.Drawing.Point(41, -3);
+            this.trackEgestaAmount.LargeChange = 1;
+            this.trackEgestaAmount.Location = new System.Drawing.Point(43, -3);
             this.trackEgestaAmount.Margin = new System.Windows.Forms.Padding(0);
             this.trackEgestaAmount.Maximum = 4;
             this.trackEgestaAmount.Name = "trackEgestaAmount";

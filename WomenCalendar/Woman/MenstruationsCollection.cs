@@ -13,8 +13,8 @@ namespace WomenCalendar
             MenstruationPeriod closestPeriod = GetClosestPeriodAfterDay(date);
             if (closestPeriod != null)
             {
-                if (MessageBox.Show("У вас перед этими выделениями были другие!\nВЫ УВЕРЕНЫ В ТОМ ЧТО ДЕЛАЕТЕ?", 
-                    "Ты сума сошла?", MessageBoxButtons.YesNo) != DialogResult.Yes)
+                if (MessageBox.Show("У вас после этих менструаций были другие!\nВЫ УВЕРЕНЫ В ТОМ ЧТО ДЕЛАЕТЕ?", 
+                    "Ты с ума сошла?", MessageBoxButtons.YesNo) != DialogResult.Yes)
                 {
                     return false;
                 }

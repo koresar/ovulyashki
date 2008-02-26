@@ -34,6 +34,78 @@ namespace WomenCalendar
             }
         }
 
+        public static bool SaveCurrentWoman()
+        {
+            if (string.IsNullOrEmpty(CurrentWoman.AssociatedFile))
+            {
+                SaveFileDialog dialog = new SaveFileDialog();
+                dialog.Filter = "Woman files (*.woman)|*.woman";
+                dialog.AddExtension = true;
+                dialog.DefaultExt = ".woman";
+                if (dialog.ShowDialog() == DialogResult.OK)
+                {
+                    Woman.SaveTo(CurrentWoman, dialog.FileName);
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            else
+            {
+                Woman.SaveTo(CurrentWoman, CurrentWoman.AssociatedFile);
+            }
+            return true;
+        }
+
+        public static bool OpenWoman()
+        {
+            if (!AskAndSaveCurrentWoman())
+            {
+                return false;
+            }
+
+            OpenFileDialog dialog = new OpenFileDialog();
+            dialog.Filter = "Woman files (*.woman)|*.woman";
+            if (dialog.ShowDialog() == DialogResult.OK)
+            {
+                CurrentWoman = Woman.ReadFrom(dialog.FileName);
+                Settings.DefaultWomanPath = dialog.FileName;
+                return true;
+            }
+            return false;
+        }
+
+        public static bool NewWoman()
+        {
+            if (AskAndSaveCurrentWoman())
+            {
+                CurrentWoman = new Woman();
+                return true;
+            }
+            return false;
+        }
+        
+        public static bool AskAndSaveCurrentWoman()
+        {
+            DialogResult res = MessageBox.Show("Сохранить эту женщину, прежде чем продолжить?", ApplicationForm.Text,
+                                MessageBoxButtons.YesNoCancel);
+            switch (res)
+            {
+                case DialogResult.Yes:
+                    if (!SaveCurrentWoman()) // save the woman
+                    {
+                        return false; // saving aborted. do nothing in this case.
+                    }
+                    break;
+                case DialogResult.No: // proceed without saving
+                    break;
+                default:
+                    return false; // do nothing.
+            }
+            return true;
+        }
+
         public static ResourceManager IconResource;
 
         public static ApplicationSettings Settings;

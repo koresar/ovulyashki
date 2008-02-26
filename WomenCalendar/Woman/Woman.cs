@@ -84,7 +84,6 @@ namespace WomenCalendar
 
         public Woman()
         {
-//            _menstruationDates = new List<DateTime>();
             notes = new NotesCollection();
             defaultMenstruationLength = 5;
             _menstruations = new MenstruationsCollection();

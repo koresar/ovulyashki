@@ -109,6 +109,7 @@ namespace WomenCalendar
         {
             if (e.Button == MouseButtons.Left)
             {
+                OwnerMonthsControl.FocusDate = DayCell.Date;
                 ShowDayEditForm();
             }
             else
@@ -153,6 +154,7 @@ namespace WomenCalendar
         {
             if (e.Button == MouseButtons.Left)
             {
+                OwnerMonthsControl.FocusDate = DayCell.Date;
                 ShowNoteEditForm();
             }
             else
@@ -193,6 +195,7 @@ namespace WomenCalendar
 
         private void trackEgestaAmount_MouseDown(object sender, MouseEventArgs e)
         {
+            OwnerMonthsControl.FocusDate = DayCell.Date;
             if (e.Button == MouseButtons.Right)
             {
                 DayCellPopupControl_MouseClick(sender, e);

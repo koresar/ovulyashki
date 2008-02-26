@@ -35,85 +35,23 @@ namespace WomenCalendar
 
         private void newToolStripButton_Click(object sender, EventArgs e)
         {
-            if (AskAndSaveCurrentWoman())
+            if (Program.NewWoman())
             {
-                Program.CurrentWoman = new Woman();
                 monthControl.Redraw();
             }
         }
 
         private void saveToolStripButton_Click(object sender, EventArgs e)
         {
-            SaveCurrentWoman();
-        }
-
-        private bool AskAndSaveCurrentWoman()
-        {
-            DialogResult res =
-                MessageBox.Show(this, "Сохранить эту женщину, прежде чем продолжить?", Text,
-                                MessageBoxButtons.YesNoCancel);
-            switch (res)
-            {
-                case DialogResult.Yes:
-                    if (!SaveCurrentWoman()) // save the woman
-                    {
-                        return false; // saving aborted. do nothing in this case.
-                    }
-                    break;
-                case DialogResult.No: // proceed without saving
-                    break;
-                default:
-                    return false; // do nothing.
-                    break;
-            }
-            return true;
-        }
-
-        private bool SaveCurrentWoman()
-        {
-            if (string.IsNullOrEmpty(Program.CurrentWoman.AssociatedFile))
-            {
-                SaveFileDialog dialog = new SaveFileDialog();
-                dialog.Filter = "Woman files (*.woman)|*.woman";
-                dialog.AddExtension = true;
-                dialog.DefaultExt = ".woman";
-                if (dialog.ShowDialog() == DialogResult.OK)
-                {
-                    Woman.SaveTo(Program.CurrentWoman, dialog.FileName);
-                }
-                else
-                {
-                    return false;
-                }
-            }
-            else
-            {
-                Woman.SaveTo(Program.CurrentWoman, Program.CurrentWoman.AssociatedFile);
-            }
-            return true;
+            Program.SaveCurrentWoman();
         }
 
         private void openToolStripButton_Click(object sender, EventArgs e)
         {
-            if (AskAndSaveCurrentWoman())
+            if (Program.OpenWoman())
             {
-                OpenWoman();
+                monthControl.Redraw();
             }
-        }
-
-        private bool OpenWoman()
-        {
-            OpenFileDialog dialog = new OpenFileDialog();
-            dialog.Filter = "Woman files (*.woman)|*.woman";
-            if (dialog.ShowDialog(this) == DialogResult.OK)
-            {
-                monthControl.Visible = false;
-                Program.CurrentWoman = Woman.ReadFrom(dialog.FileName);
-                Program.Settings.DefaultWomanPath = dialog.FileName;
-                monthControl.Visible = true;
-                return true;
-            }
-            return false;
         }
 
         private void monthControl_FocusDateChanged(object sender, FocusDateChangedEventArgs e)
@@ -187,7 +125,7 @@ namespace WomenCalendar
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            e.Cancel = !AskAndSaveCurrentWoman();
+            e.Cancel = !Program.AskAndSaveCurrentWoman();
             if (!e.Cancel)
             {
                 Program.SaveSettings();
