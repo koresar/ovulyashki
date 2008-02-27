@@ -33,9 +33,10 @@
             // OneMonthControl
             // 
             this.DoubleBuffered = true;
+            this.ForeColor = System.Drawing.Color.Transparent;
             this.Margin = new System.Windows.Forms.Padding(0);
             this.Name = "OneMonthControl";
-            this.Size = new System.Drawing.Size(224, 224);
+            this.Size = new System.Drawing.Size(230, 230);
             this.ResumeLayout(false);
 
         }

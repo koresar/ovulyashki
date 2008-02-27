@@ -15,15 +15,11 @@ namespace WomenCalendar
         public static int DefaultCellWidth = 32;
         public static int DefaultCellHeight = 32;
 
-        private void InitializeFonts()
-        {
-            if (FontNormal == null) FontNormal = Font;
-            if (FontBold == null) FontBold = new Font(FontNormal, FontStyle.Bold);
-        }
-
         private static Font FontNormal;
         private static Font FontBold;
 
+        public delegate void DayCellClick(object sender, DayCellClickEventArgs e);
+        public event DayCellClick CellClick;
 
         private OneMonthControl _ownerOneMonthControl;
         public OneMonthControl OwnerOneMonthControl
@@ -56,13 +52,14 @@ namespace WomenCalendar
                 _date = value;
                 Enabled = OwnerOneMonthControl.Date.Month == Date.Month;
 
-                InitializeFonts();
+                if (FontNormal == null) FontNormal = Font;
+                if (FontBold == null) FontBold = new Font(FontNormal, FontStyle.Bold);
 
                 Font = (Enabled) ? FontBold : FontNormal;
                 BackColor = Date.DayOfWeek == DayOfWeek.Saturday || Date.DayOfWeek == DayOfWeek.Sunday ?
-                    Color.LightPink : Color.LightSkyBlue;
+                    Color.FromArgb(255, 255, 128) : Color.LightGreen;
                 BackBrush = new SolidBrush(BackColor);
-                FontBrush = Enabled ? (_date == DateTime.Today ? Brushes.GreenYellow : Brushes.Black) : Brushes.Gray;
+                FontBrush = Enabled ? (_date == DateTime.Today ? Brushes.Blue : Brushes.Black) : Brushes.Gray;
                 Invalidate();
             }
         }
@@ -119,9 +116,6 @@ namespace WomenCalendar
             pe.Graphics.DrawString(Date.Day.ToString(), Font, FontBrush, 0, 0);
         }
 
-        public delegate void DayCellClick(object sender, DayCellClickEventArgs e);
-        public event DayCellClick CellClick;
-
         protected override void OnMouseDown(MouseEventArgs e)
         {
             if (Enabled && CellClick != null)
@@ -133,16 +127,6 @@ namespace WomenCalendar
         private void DayCellControl_MouseEnter(object sender, EventArgs e)
         {
             OwnerOneMonthControl.OwnerMonthsControl.CellPopupControl.ShowAbove(this);
-        }
-    }
-
-    public class DayCellClickEventArgs : MouseEventArgs
-    {
-        public DateTime NewDate;
-
-        public DayCellClickEventArgs(MouseEventArgs e, DateTime newDate) : base(e.Button, e.Clicks, e.X, e.Y, e.Delta)
-        {
-            NewDate = newDate;
         }
     }
 }

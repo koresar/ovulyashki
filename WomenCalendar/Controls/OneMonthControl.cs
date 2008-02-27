@@ -11,8 +11,13 @@ namespace WomenCalendar
 {
     public partial class OneMonthControl : UserControl
     {
+        public const int EdgeWidth = 3;
+
         private const int CellsAmount = 42;
         private readonly List<DayCellControl> _cells = new List<DayCellControl>(CellsAmount);
+
+        public delegate void DayClicked(object sender, DayCellClickEventArgs e);
+        public event DayClicked MonthDayClicked;
 
         /// <summary>
         /// Returns integer value of week day of that month 1-st day. Values are 0-6 only. 0 - Monday, 7 - Sunday.
@@ -21,7 +26,7 @@ namespace WomenCalendar
         {
             get
             {
-                return (Date.DayOfWeek == System.DayOfWeek.Sunday ? 7 : (int)Date.DayOfWeek) - 1;
+                return (Date.DayOfWeek == DayOfWeek.Sunday ? 7 : (int)Date.DayOfWeek) - 1;
             }
         }
 
@@ -79,26 +84,17 @@ namespace WomenCalendar
             }
         }
 
-        public DayCellControl CreateNewDefaultCellControl(int number)
+        private MonthsControl _ownerMonthsControl;
+        public MonthsControl OwnerMonthsControl
         {
-            DayCellControl control = new DayCellControl(this);
-            control.Location = new Point(DayCellControl.DefaultCellWidth * (number % 7),
-                                         DayCellControl.DefaultCellHeight * (number / 7 + 1));
-            control.Size = new Size(DayCellControl.DefaultCellWidth, DayCellControl.DefaultCellHeight);
-            control.TabIndex = number + 1;
-            control.CellClick += new DayCellControl.DayCellClick(control_CellClick);
-            return control;
+            get { return _ownerMonthsControl; }
+            set { _ownerMonthsControl = value; }
         }
 
-        public delegate void DayClicked(object sender, DayCellClickEventArgs e);
-        public event DayClicked MonthDayClicked;
-
-        void control_CellClick(object sender, DayCellClickEventArgs e)
+        public OneMonthControl(MonthsControl parent)
+            : this()
         {
-            if (MonthDayClicked != null)
-            { // fire event if here were no focus before or not focused day clicked
-                MonthDayClicked(this, e);
-            }
+            _ownerMonthsControl = parent;
         }
 
         public OneMonthControl()
@@ -119,40 +115,15 @@ namespace WomenCalendar
             ResumeLayout();
         }
 
-        private MonthsControl _ownerMonthsControl;
-        public MonthsControl OwnerMonthsControl
+        public DayCellControl CreateNewDefaultCellControl(int number)
         {
-            get { return _ownerMonthsControl; }
-            set { _ownerMonthsControl = value; }
-        }
-
-        public OneMonthControl(MonthsControl parent) : this()
-        {
-            _ownerMonthsControl = parent;
-        }
-
-        protected override void OnPaint(PaintEventArgs pe)
-        {
-            if (Date != DateTime.MinValue)
-            {
-                Rectangle headerRect = new Rectangle(0, 0, Size.Width, DayCellControl.DefaultCellHeight);
-                pe.Graphics.FillRectangle(Program.MonthAppearance.HeaderBrush, headerRect);
-
-                string monthNameAndYear = Date.ToString("MMMM yyyy");
-                SizeF textSize = pe.Graphics.MeasureString(monthNameAndYear, Font, Size.Width);
-                pe.Graphics.DrawString(monthNameAndYear, Font, Brushes.Black,
-                    (Size.Width - textSize.Width) / 2, 0);
-
-                for (int i = 0; i < 7; i++)
-                {
-                    string aDay = DateTimeFormatInfo.CurrentInfo.AbbreviatedDayNames[i];
-                    textSize = pe.Graphics.MeasureString(aDay, Font, DayCellControl.DefaultCellWidth);
-                    pe.Graphics.DrawString(aDay, Font,
-                        Brushes.Black, 
-                        DayCellControl.DefaultCellWidth*i + (DayCellControl.DefaultCellWidth - textSize.Width) / 2, 
-                        DayCellControl.DefaultCellHeight - textSize.Height);
-                }
-            }
+            DayCellControl control = new DayCellControl(this);
+            control.Location = new Point(EdgeWidth + DayCellControl.DefaultCellWidth * (number % 7),
+                                         EdgeWidth + DayCellControl.DefaultCellHeight * (number / 7 + 1));
+            control.Size = new Size(DayCellControl.DefaultCellWidth, DayCellControl.DefaultCellHeight);
+            control.TabIndex = number + 1;
+            control.CellClick += new DayCellControl.DayCellClick(control_CellClick);
+            return control;
         }
 
         public DayCellControl GetCellByDate(DateTime date)
@@ -163,6 +134,41 @@ namespace WomenCalendar
                 return _cells[i];
             }
             return null;
+        }
+
+        protected override void OnPaint(PaintEventArgs pe)
+        {
+            if (Date != DateTime.MinValue)
+            {
+                Rectangle headerRect = new Rectangle(EdgeWidth, EdgeWidth, DayCellControl.DefaultCellWidth*7, DayCellControl.DefaultCellHeight);
+                pe.Graphics.FillRectangle(Program.MonthAppearance.HeaderBrush, headerRect);
+
+                string monthNameAndYear = Date.ToString("MMMM yyyy");
+                SizeF textSize = pe.Graphics.MeasureString(monthNameAndYear, Font, Size.Width);
+                pe.Graphics.DrawString(monthNameAndYear, Font, Brushes.Black,
+                    EdgeWidth + (Size.Width - textSize.Width) / 2, EdgeWidth);
+
+                for (int i = 0; i < 7; i++)
+                {
+                    string aDay = DateTimeFormatInfo.CurrentInfo.AbbreviatedDayNames[(i+1)%7];
+                    textSize = pe.Graphics.MeasureString(aDay, Font, DayCellControl.DefaultCellWidth);
+                    pe.Graphics.DrawString(aDay, Font,
+                        Brushes.Black,
+                        EdgeWidth + DayCellControl.DefaultCellWidth * i + (DayCellControl.DefaultCellWidth - textSize.Width) / 2,
+                        EdgeWidth + DayCellControl.DefaultCellHeight - textSize.Height);
+                }
+
+                pe.Graphics.DrawRectangle((DateTime.Today.Month == Date.Month) ? 
+                    Program.MonthAppearance.TodayEdgePen : Program.MonthAppearance.HeaderPen, ClientRectangle);
+            }
+        }
+
+        void control_CellClick(object sender, DayCellClickEventArgs e)
+        {
+            if (MonthDayClicked != null)
+            { // fire event if here were no focus before or not focused day clicked
+                MonthDayClicked(this, e);
+            }
         }
     }
 }

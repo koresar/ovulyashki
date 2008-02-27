@@ -7,13 +7,24 @@ namespace WomenCalendar
 {
     public class MenstruationsCollection : List<MenstruationPeriod>
     {
+        public delegate void CollectionChangedDelegate();
+        public event CollectionChangedDelegate CollectionChanged;
+
+        public MenstruationPeriod Last
+        {
+            get
+            {
+                return this[Count - 1];
+            }
+        }
+
         public bool Add(DateTime date, int length)
         {
             MenstruationPeriod newPeriod = new MenstruationPeriod(date, length);
             MenstruationPeriod closestPeriod = GetClosestPeriodAfterDay(date);
             if (closestPeriod != null)
             {
-                if (MessageBox.Show("У вас после этих менструаций были другие!\nВЫ УВЕРЕНЫ В ТОМ ЧТО ДЕЛАЕТЕ?", 
+                if (MessageBox.Show("После этих овуляшек у тебя были другие!\nТЫ УВЕРЕНА В ТОМ ЧТО ДЕЛАЕШЬ?", 
                     "Ты с ума сошла?", MessageBoxButtons.YesNo) != DialogResult.Yes)
                 {
                     return false;
@@ -29,18 +40,26 @@ namespace WomenCalendar
             }
             else
             {
+                string askMessage = string.Empty;
                 closestPeriod = GetClosestPeriodBeforeDay(date);
                 if (closestPeriod != null)
                 {
                     int distance = (date - closestPeriod.StartDay).Days;
                     if (distance < 21)
                     {
-                        if (MessageBox.Show("Между менструациями меньше 21-го дня!\nВЫ УВЕРЕНЫ В ТОМ ЧТО ДЕЛАЕТЕ?",
-                            "Ухты, какая необычная ситуация!", MessageBoxButtons.YesNo) != DialogResult.Yes)
-                        {
-                            return false;
-                        }
+                        askMessage += "Между овуляшками меньше 21-го дня!";
                     }
+                }
+
+                if (date > DateTime.Today)
+                {
+                    askMessage += "Это же день из будущего! Он еще не настал. Записалась в Нострадамусы?";
+                }
+
+                if (!string.IsNullOrEmpty(askMessage) && MessageBox.Show(askMessage + "\nТЫ УВЕРЕНА В ТОМ ЧТО ДЕЛАЕШЬ?",
+                    "Ухты, какая необычная ситуация!", MessageBoxButtons.YesNo) != DialogResult.Yes)
+                {
+                    return false;
                 }
 
                 Add(newPeriod);
@@ -53,17 +72,6 @@ namespace WomenCalendar
         {
             FireCollectionChangedEvent();
             base.Add(period);
-        }
-
-        public delegate void CollectionChangedDelegate();
-        public event CollectionChangedDelegate CollectionChanged;
-
-        public MenstruationPeriod Last
-        {
-            get
-            {
-                return this[Count - 1];
-            }
         }
 
         public bool IsMenstruationDay(DateTime day)

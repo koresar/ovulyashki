@@ -18,47 +18,6 @@ namespace WomenCalendar
             lblWomanDescription.Text = string.Empty;
         }
 
-        private void prevStripButton_Click(object sender, EventArgs e)
-        {
-            monthControl.ScrollMonthes(-1);
-        }
-
-        private void nextStripButton_Click(object sender, EventArgs e)
-        {
-            monthControl.ScrollMonthes(1);
-        }
-
-        private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
-        {
-            monthControl.FocusDate = dateTimePicker1.Value;
-        }
-
-        private void newToolStripButton_Click(object sender, EventArgs e)
-        {
-            if (Program.NewWoman())
-            {
-                monthControl.Redraw();
-            }
-        }
-
-        private void saveToolStripButton_Click(object sender, EventArgs e)
-        {
-            Program.SaveCurrentWoman();
-        }
-
-        private void openToolStripButton_Click(object sender, EventArgs e)
-        {
-            if (Program.OpenWoman())
-            {
-                monthControl.Redraw();
-            }
-        }
-
-        private void monthControl_FocusDateChanged(object sender, FocusDateChangedEventArgs e)
-        {
-            UpdateDayInformation(e.NewDate);
-        }
-
         public void UpdateDayInformation(DateTime date)
         {
             lblDayDescription.Text = GenerateDayInfo(date);
@@ -102,13 +61,13 @@ namespace WomenCalendar
             if (Program.CurrentWoman.Menstruations.IsMenstruationDay(date))
             {
                 sb.AppendLine();
-                sb.Append("Менструальный день");
+                sb.Append("Овуляшкин день");
             }
 
             if (Program.CurrentWoman.IsPredictedAsMenstruationDay(date))
             {
                 sb.AppendLine();
-                sb.Append("Вероятны выделения");
+                sb.Append("Вероятны овуляшки");
             }
 
             // got to be last
@@ -121,6 +80,53 @@ namespace WomenCalendar
             }
 
             return sb.ToString();
+        }
+
+        private void SetNumMenstrulationPriod(int length)
+        {
+            numMenstruationPeriod.Minimum = (length == 0) ? 0 : 10;
+            numMenstruationPeriod.Value = length;
+        }
+
+        private void prevStripButton_Click(object sender, EventArgs e)
+        {
+            monthControl.ScrollMonthes(-1);
+        }
+
+        private void nextStripButton_Click(object sender, EventArgs e)
+        {
+            monthControl.ScrollMonthes(1);
+        }
+
+        private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
+        {
+            monthControl.FocusDate = dateTimePicker1.Value;
+        }
+
+        private void newToolStripButton_Click(object sender, EventArgs e)
+        {
+            if (Program.NewWoman())
+            {
+                monthControl.Redraw();
+            }
+        }
+
+        private void saveToolStripButton_Click(object sender, EventArgs e)
+        {
+            Program.SaveCurrentWoman();
+        }
+
+        private void openToolStripButton_Click(object sender, EventArgs e)
+        {
+            if (Program.OpenWoman())
+            {
+                monthControl.Redraw();
+            }
+        }
+
+        private void monthControl_FocusDateChanged(object sender, FocusDateChangedEventArgs e)
+        {
+            UpdateDayInformation(e.NewDate);
         }
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
@@ -146,12 +152,6 @@ namespace WomenCalendar
             {
                 SetNumMenstrulationPriod(Program.CurrentWoman.AveragePeriodLength);
             }
-        }
-
-        private void SetNumMenstrulationPriod(int length)
-        {
-            numMenstruationPeriod.Minimum = (length == 0) ? 0 : 10;
-            numMenstruationPeriod.Value = length;
         }
 
         private void numMenstruationPeriod_ValueChanged(object sender, EventArgs e)

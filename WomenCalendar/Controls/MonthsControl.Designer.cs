@@ -50,45 +50,45 @@
             this.removeNote,
             this.editNote});
             this.contextMenu.Name = "contextMenu";
-            this.contextMenu.Size = new System.Drawing.Size(247, 120);
+            this.contextMenu.Size = new System.Drawing.Size(238, 142);
             // 
             // setAsMenstruationDay
             // 
             this.setAsMenstruationDay.Name = "setAsMenstruationDay";
-            this.setAsMenstruationDay.Size = new System.Drawing.Size(246, 22);
-            this.setAsMenstruationDay.Text = "Установить начало меструаций";
+            this.setAsMenstruationDay.Size = new System.Drawing.Size(237, 22);
+            this.setAsMenstruationDay.Text = "Установить начало овуляшек";
             this.setAsMenstruationDay.Click += new System.EventHandler(this.setAsMenstruationDay_Click);
             // 
             // removeMenstruationDay
             // 
             this.removeMenstruationDay.Name = "removeMenstruationDay";
-            this.removeMenstruationDay.Size = new System.Drawing.Size(246, 22);
-            this.removeMenstruationDay.Text = "Отменить менструации";
+            this.removeMenstruationDay.Size = new System.Drawing.Size(237, 22);
+            this.removeMenstruationDay.Text = "Отменить овуляшки";
             this.removeMenstruationDay.Click += new System.EventHandler(this.removeMenstruationDay_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(243, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(234, 6);
             // 
             // addNote
             // 
             this.addNote.Name = "addNote";
-            this.addNote.Size = new System.Drawing.Size(246, 22);
+            this.addNote.Size = new System.Drawing.Size(237, 22);
             this.addNote.Text = "Добавить заметку";
             this.addNote.Click += new System.EventHandler(this.addNote_Click);
             // 
             // removeNote
             // 
             this.removeNote.Name = "removeNote";
-            this.removeNote.Size = new System.Drawing.Size(246, 22);
+            this.removeNote.Size = new System.Drawing.Size(237, 22);
             this.removeNote.Text = "Удалить заметку";
             this.removeNote.Click += new System.EventHandler(this.removeNote_Click);
             // 
             // editNote
             // 
             this.editNote.Name = "editNote";
-            this.editNote.Size = new System.Drawing.Size(246, 22);
+            this.editNote.Size = new System.Drawing.Size(237, 22);
             this.editNote.Text = "Редактировать заметку";
             this.editNote.Click += new System.EventHandler(this.editNote_Click);
             // 
@@ -97,11 +97,12 @@
             this.oneMonthControl.Date = new System.DateTime(2008, 2, 1, 0, 0, 0, 0);
             this.oneMonthControl.FocusDate = new System.DateTime(((long)(0)));
             this.oneMonthControl.FocusDay = null;
+            this.oneMonthControl.ForeColor = System.Drawing.Color.Transparent;
             this.oneMonthControl.Location = new System.Drawing.Point(0, 0);
             this.oneMonthControl.Margin = new System.Windows.Forms.Padding(0);
             this.oneMonthControl.Name = "oneMonthControl";
             this.oneMonthControl.OwnerMonthsControl = null;
-            this.oneMonthControl.Size = new System.Drawing.Size(224, 224);
+            this.oneMonthControl.Size = new System.Drawing.Size(230, 230);
             this.oneMonthControl.TabIndex = 0;
             // 
             // MonthsControl

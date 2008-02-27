@@ -47,6 +47,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApplicationSettings.cs" />
+    <Compile Include="Controls\DayCellClickEventArgs.cs" />
     <Compile Include="Controls\DayCellControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -59,6 +60,7 @@
     <Compile Include="Controls\DayCellPopupControl.Designer.cs">
       <DependentUpon>DayCellPopupControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\FocusDateChangedEventArgs.cs" />
     <Compile Include="Forms\DayEditForm.cs">
       <SubType>Form</SubType>
     </Compile>

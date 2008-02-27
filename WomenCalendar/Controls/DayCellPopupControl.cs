@@ -10,26 +10,13 @@ namespace WomenCalendar
 {
     public partial class DayCellPopupControl : UserControl
     {
-        public DayCellPopupControl()
-        {
-            InitializeComponent();
-            Visible = false;
-            BorderStyle = BorderStyle.FixedSingle;
-        }
+        private static string[] EgestasNames = {"День без овуляшек", "Мало овуляшек", "Посредственные овуляшки", 
+            "Средняя интенсивность овуляшек", "Много овуляшек" };
 
-        public DayCellPopupControl(MonthsControl ownerMonthsControl) : this()
-        {
-            OwnerMonthsControl = ownerMonthsControl;
-            Parent = OwnerMonthsControl;
-        }
+        private bool initializing;
 
-        private void DayCellPopupControl_MouseLeave(object sender, EventArgs e)
-        {
-            if (!ClientRectangle.Contains(PointToClient(MousePosition)))
-            {
-                Visible = false;
-            }
-        }
+        private DayCellControl DayCell;
+        public MonthsControl OwnerMonthsControl;
 
         public new bool Visible
         {
@@ -44,10 +31,18 @@ namespace WomenCalendar
             }
         }
 
-        private DayCellControl DayCell;
-        public MonthsControl OwnerMonthsControl;
+        public DayCellPopupControl()
+        {
+            InitializeComponent();
+            Visible = false;
+            BorderStyle = BorderStyle.FixedSingle;
+        }
 
-        private bool initializing;
+        public DayCellPopupControl(MonthsControl ownerMonthsControl) : this()
+        {
+            OwnerMonthsControl = ownerMonthsControl;
+            Parent = OwnerMonthsControl;
+        }
 
         public void ShowAbove(DayCellControl dayCell)
         {
@@ -86,6 +81,41 @@ namespace WomenCalendar
             initializing = false;
         }
 
+        private void ShowDayEditForm()
+        {
+            new DayEditForm().Show();
+        }
+
+        private void HideTooltip()
+        {
+            toolTip.Hide(this);
+        }
+
+        private void ShowEgestaTooltip()
+        {
+            ShowTooltip("Количество выделений", EgestasNames[trackEgestaAmount.Value]);
+        }
+
+        private void ShowNoteEditForm()
+        {
+            NoteEditForm form = new NoteEditForm(Program.CurrentWoman.Notes[DayCell.Date]);
+            if (form.ShowDialog() == DialogResult.OK)
+            {
+                Program.CurrentWoman.AddNote(DayCell.Date, form.NoteText);
+            }
+        }
+
+        private void ShowNoteToolTip()
+        {
+            ShowTooltip("Заметка", Program.CurrentWoman.Notes[DayCell.Date]);
+        }
+
+        private void ShowTooltip(string caption, string text)
+        {
+            toolTip.ToolTipTitle = caption;
+            toolTip.Show(text, this, Width, Height);
+        }
+
         private void DayCellPopupControl_MouseClick(object sender, MouseEventArgs e)
         {
             OwnerMonthsControl.FocusDate = DayCell.Date;
@@ -98,11 +128,6 @@ namespace WomenCalendar
         private void DayCellPopupControl_DoubleClick(object sender, EventArgs e)
         {
             ShowDayEditForm();
-        }
-
-        private void ShowDayEditForm()
-        {
-            new DayEditForm().Show();
         }
 
         private void lblDay_MouseClick(object sender, MouseEventArgs e)
@@ -118,9 +143,6 @@ namespace WomenCalendar
             }
         }
 
-        private static string[] EgestasNames = {"День без выделений", "Мало выделений", "Посредственные выделения", 
-            "Средняя интенсивность выделений", "Много выделений" };
-
         private void trackEgestaAmount_ValueChanged(object sender, EventArgs e)
         {
             if (!initializing)
@@ -128,16 +150,6 @@ namespace WomenCalendar
                 Program.CurrentWoman.Menstruations.SetEgesta(DayCell.Date, trackEgestaAmount.Value);
                 ShowEgestaTooltip();
             }
-        }
-
-        private void HideTooltip()
-        {
-            toolTip.Hide(this);
-        }
-
-        private void ShowEgestaTooltip()
-        {
-            ShowTooltip("Количество выделений", EgestasNames[trackEgestaAmount.Value]);
         }
 
         private void trackEgestaAmount_MouseEnter(object sender, EventArgs e)
@@ -163,34 +175,14 @@ namespace WomenCalendar
             }
         }
 
-        private void ShowNoteEditForm()
-        {
-            NoteEditForm form = new NoteEditForm(Program.CurrentWoman.Notes[DayCell.Date]);
-            if (form.ShowDialog() == DialogResult.OK)
-            {
-                Program.CurrentWoman.AddNote(DayCell.Date, form.NoteText);
-            }
-        }
-
         private void pictureNote_MouseEnter(object sender, EventArgs e)
         {
             ShowNoteToolTip();
         }
 
-        private void ShowNoteToolTip()
-        {
-            ShowTooltip("Заметка", Program.CurrentWoman.Notes[DayCell.Date]);
-        }
-
         private void pictureNote_MouseLeave(object sender, EventArgs e)
         {
             HideTooltip();
-        }
-
-        private void ShowTooltip(string caption, string text)
-        {
-            toolTip.ToolTipTitle = caption;
-            toolTip.Show(text, this, Width, Height);
         }
 
         private void trackEgestaAmount_MouseDown(object sender, MouseEventArgs e)
@@ -199,6 +191,14 @@ namespace WomenCalendar
             if (e.Button == MouseButtons.Right)
             {
                 DayCellPopupControl_MouseClick(sender, e);
+            }
+        }
+
+        private void DayCellPopupControl_MouseLeave(object sender, EventArgs e)
+        {
+            if (!ClientRectangle.Contains(PointToClient(MousePosition)))
+            {
+                Visible = false;
             }
         }
     }

@@ -13,6 +13,9 @@ namespace WomenCalendar
         public List<OneMonthControl> singleMonths = new List<OneMonthControl>();
         public int VisibleMonthsCount = 1;
 
+        public delegate void FocusDateChangedDelegate(object sender, FocusDateChangedEventArgs e);
+        public event FocusDateChangedDelegate FocusDateChanged;
+
         private OneMonthControl _focusMonth;
         public OneMonthControl FocusMonth
         {
@@ -39,12 +42,6 @@ namespace WomenCalendar
             }
         }
 
-        public bool IsDateVisible(DateTime date)
-        {
-            return date.Date >= singleMonths[0].Date &&
-                   date.Date < singleMonths[VisibleMonthsCount - 1].Date.AddMonths(1);
-        }
-
         public DateTime FocusDate
         {
             get { return FocusDay == null ? DateTime.MinValue : FocusMonth.FocusDay.Date; }
@@ -52,7 +49,7 @@ namespace WomenCalendar
             {
                 DateTime _value = value.Date;
                 if (FocusDate == _value) return;
-                
+
                 if (FocusDay != null)
                 {
                     FocusDay = null; // remove focus
@@ -82,9 +79,6 @@ namespace WomenCalendar
             }
         }
 
-        public delegate void FocusDateChangedDelegate(object sender, FocusDateChangedEventArgs e);
-        public event FocusDateChangedDelegate FocusDateChanged;
-
         public DateTime StartMonth
         {
             get { return oneMonthControl.Date; }
@@ -101,6 +95,20 @@ namespace WomenCalendar
             }
         }
 
+        private int _monthsMarginX = 0;
+        public int MonthsMarginX
+        {
+            get { return _monthsMarginX; }
+            set { _monthsMarginX = value; }
+        }
+
+        private int _monthsMarginY = 0;
+        public int MonthsMarginY
+        {
+            get { return _monthsMarginY; }
+            set { _monthsMarginY = value; }
+        }
+
         public MonthsControl()
         {
             InitializeComponent();
@@ -113,6 +121,12 @@ namespace WomenCalendar
             CreateAndAdjustMonthsAmount();
         }
 
+        public bool IsDateVisible(DateTime date)
+        {
+            return date.Date >= singleMonths[0].Date &&
+                   date.Date < singleMonths[VisibleMonthsCount - 1].Date.AddMonths(1);
+        }
+
         private OneMonthControl CreateNewDefaultOneMonth()
         {
             OneMonthControl control = new OneMonthControl();
@@ -121,15 +135,6 @@ namespace WomenCalendar
             control.OwnerMonthsControl = this;
             control.MonthDayClicked += new OneMonthControl.DayClicked(control_MonthDayClicked);
             return control;
-        }
-
-        private void control_MonthDayClicked(object sender, DayCellClickEventArgs e)
-        {
-            FocusDate = e.NewDate;
-            if (e.Button == MouseButtons.Right)
-            {
-                ShowPopupMenu();
-            }
         }
 
         public void ShowPopupMenu()
@@ -186,36 +191,6 @@ namespace WomenCalendar
             }
         }
 
-        private int _monthsMarginX = 0;
-        public int MonthsMarginX
-        {
-            get { return _monthsMarginX; }
-            set { _monthsMarginX = value; }
-        }
-
-        private int _monthsMarginY = 0;
-        public int MonthsMarginY
-        {
-            get { return _monthsMarginY; }
-            set { _monthsMarginY = value; }
-        }
-
-        private void MonthControl_SizeChanged(object sender, EventArgs e)
-        {
-            SuspendLayout();
-            CreateAndAdjustMonthsAmount();
-
-            // That piece of code insures that focus date is still visible and was not hidden by resizing
-            DateTime focusDate = FocusDate;
-            if (focusDate != DateTime.MinValue && !IsDateVisible(focusDate))
-            {
-                FocusDay = null;
-                FocusDate = focusDate;
-            }
-
-            ResumeLayout();
-        }
-
         internal void ScrollMonthes(int p)
         {
             DateTime prevFocusDate = FocusDate;
@@ -249,6 +224,38 @@ namespace WomenCalendar
                 return month.GetCellByDate(date);
             }
             return null;
+        }
+
+        public void Redraw()
+        {
+            CellPopupControl.Visible = false;
+            Invalidate(true);
+            Update();
+        }
+
+        private void control_MonthDayClicked(object sender, DayCellClickEventArgs e)
+        {
+            FocusDate = e.NewDate;
+            if (e.Button == MouseButtons.Right)
+            {
+                ShowPopupMenu();
+            }
+        }
+
+        private void MonthControl_SizeChanged(object sender, EventArgs e)
+        {
+            SuspendLayout();
+            CreateAndAdjustMonthsAmount();
+
+            // That piece of code insures that focus date is still visible and was not hidden by resizing
+            DateTime focusDate = FocusDate;
+            if (focusDate != DateTime.MinValue && !IsDateVisible(focusDate))
+            {
+                FocusDay = null;
+                FocusDate = focusDate;
+            }
+
+            ResumeLayout();
         }
 
         private void setAsMenstruationDay_Click(object sender, EventArgs e)
@@ -295,13 +302,6 @@ namespace WomenCalendar
             }
         }
 
-        public void Redraw()
-        {
-            CellPopupControl.Visible = false;
-            Invalidate(true);
-            Update();
-        }
-
         public void RedrawFocusDay()
         {
             ((MainForm)ParentForm).UpdateDayInformation(FocusDate);
@@ -317,18 +317,6 @@ namespace WomenCalendar
         private void MonthsControl_MouseLeave(object sender, EventArgs e)
         {
             CellPopupControl.Visible = false;
-        }
-    }
-
-    public class FocusDateChangedEventArgs : EventArgs
-    {
-        public DateTime OldDate;
-        public DateTime NewDate;
-
-        public FocusDateChangedEventArgs(DateTime oldDate, DateTime newDate)
-        {
-            OldDate = oldDate;
-            NewDate = newDate;
         }
     }
 }

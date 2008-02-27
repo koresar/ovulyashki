@@ -9,6 +9,13 @@ namespace WomenCalendar
     [XmlRoot("WomanCalendarSettings")]
     public class ApplicationSettings
     {
+        private string defaultWomanPath;
+        public string DefaultWomanPath
+        {
+            get { return defaultWomanPath; }
+            set { defaultWomanPath = value; }
+        }
+
         public static ApplicationSettings Read(string fileName)
         {
             ApplicationSettings settings;
@@ -32,13 +39,6 @@ namespace WomenCalendar
             new XmlSerializer(GetType()).Serialize(fs, this);
             fs.Close();
             return true;
-        }
-
-        private string defaultWomanPath;
-        public string DefaultWomanPath
-        {
-            get { return defaultWomanPath; }
-            set { defaultWomanPath = value; }
         }
     }
 }

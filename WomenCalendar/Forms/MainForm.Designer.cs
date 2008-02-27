@@ -43,8 +43,6 @@
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.xPanderList1 = new XPanderControl.XPanderList();
-            this.xDay = new XPanderControl.XPander();
-            this.lblDayDescription = new System.Windows.Forms.Label();
             this.xLegend = new XPanderControl.XPander();
             this.xWoman = new XPanderControl.XPander();
             this.numMenstruationPeriod = new System.Windows.Forms.NumericUpDown();
@@ -52,15 +50,17 @@
             this.rbManual = new System.Windows.Forms.RadioButton();
             this.rbAuto = new System.Windows.Forms.RadioButton();
             this.lblWomanDescription = new System.Windows.Forms.Label();
+            this.xDay = new XPanderControl.XPander();
+            this.lblDayDescription = new System.Windows.Forms.Label();
             this.monthControl = new WomenCalendar.MonthsControl();
             this.toolStrip1.SuspendLayout();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
             this.xPanderList1.SuspendLayout();
-            this.xDay.SuspendLayout();
             this.xWoman.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numMenstruationPeriod)).BeginInit();
+            this.xDay.SuspendLayout();
             this.SuspendLayout();
             // 
             // toolStrip1
@@ -195,51 +195,14 @@
             // 
             this.xPanderList1.AutoScroll = true;
             this.xPanderList1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(99)))), ((int)(((byte)(117)))), ((int)(((byte)(222)))));
-            this.xPanderList1.Controls.Add(this.xDay);
             this.xPanderList1.Controls.Add(this.xLegend);
             this.xPanderList1.Controls.Add(this.xWoman);
+            this.xPanderList1.Controls.Add(this.xDay);
             this.xPanderList1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.xPanderList1.Location = new System.Drawing.Point(0, 0);
             this.xPanderList1.Name = "xPanderList1";
             this.xPanderList1.Size = new System.Drawing.Size(187, 507);
             this.xPanderList1.TabIndex = 0;
-            // 
-            // xDay
-            // 
-            this.xDay.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.xDay.Animated = true;
-            this.xDay.AnimationTime = 10;
-            this.xDay.BackColor = System.Drawing.Color.Transparent;
-            this.xDay.BorderStyle = System.Windows.Forms.Border3DStyle.Flat;
-            this.xDay.CaptionFont = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Bold);
-            this.xDay.CaptionFormatFlag = XPanderControl.XPander.FormatFlag.NoWrap;
-            this.xDay.CaptionStyle = XPanderControl.XPander.CaptionStyleEnum.Normal;
-            this.xDay.CaptionText = "Описание дня";
-            this.xDay.CaptionTextAlign = XPanderControl.XPander.CaptionTextAlignment.Left;
-            this.xDay.ChevronStyle = XPanderControl.XPander.ChevronStyleEnum.Image;
-            this.xDay.CollapsedHighlightImage = ((System.Drawing.Bitmap)(resources.GetObject("xDay.CollapsedHighlightImage")));
-            this.xDay.CollapsedImage = ((System.Drawing.Bitmap)(resources.GetObject("xDay.CollapsedImage")));
-            this.xDay.Controls.Add(this.lblDayDescription);
-            this.xDay.ExpandedHighlightImage = ((System.Drawing.Bitmap)(resources.GetObject("xDay.ExpandedHighlightImage")));
-            this.xDay.ExpandedImage = ((System.Drawing.Bitmap)(resources.GetObject("xDay.ExpandedImage")));
-            this.xDay.Location = new System.Drawing.Point(3, 287);
-            this.xDay.Name = "xDay";
-            this.xDay.Padding = new System.Windows.Forms.Padding(0, 25, 0, 0);
-            this.xDay.Size = new System.Drawing.Size(181, 62);
-            this.xDay.TabIndex = 1;
-            this.xDay.Tag = 0;
-            this.xDay.TooltipText = null;
-            // 
-            // lblDayDescription
-            // 
-            this.lblDayDescription.AutoEllipsis = true;
-            this.lblDayDescription.AutoSize = true;
-            this.lblDayDescription.Location = new System.Drawing.Point(5, 29);
-            this.lblDayDescription.Name = "lblDayDescription";
-            this.lblDayDescription.Size = new System.Drawing.Size(42, 13);
-            this.lblDayDescription.TabIndex = 0;
-            this.lblDayDescription.Text = "...day...";
             // 
             // xLegend
             // 
@@ -259,12 +222,12 @@
             this.xLegend.CollapsedImage = ((System.Drawing.Bitmap)(resources.GetObject("xLegend.CollapsedImage")));
             this.xLegend.ExpandedHighlightImage = ((System.Drawing.Bitmap)(resources.GetObject("xLegend.ExpandedHighlightImage")));
             this.xLegend.ExpandedImage = ((System.Drawing.Bitmap)(resources.GetObject("xLegend.ExpandedImage")));
-            this.xLegend.Location = new System.Drawing.Point(3, 3);
+            this.xLegend.Location = new System.Drawing.Point(8, 10);
             this.xLegend.Name = "xLegend";
             this.xLegend.Padding = new System.Windows.Forms.Padding(0, 25, 0, 0);
-            this.xLegend.Size = new System.Drawing.Size(181, 136);
+            this.xLegend.Size = new System.Drawing.Size(171, 136);
             this.xLegend.TabIndex = 2;
-            this.xLegend.Tag = 1;
+            this.xLegend.Tag = 7;
             this.xLegend.TooltipText = null;
             // 
             // xWoman
@@ -290,12 +253,12 @@
             this.xWoman.Controls.Add(this.lblWomanDescription);
             this.xWoman.ExpandedHighlightImage = ((System.Drawing.Bitmap)(resources.GetObject("xWoman.ExpandedHighlightImage")));
             this.xWoman.ExpandedImage = ((System.Drawing.Bitmap)(resources.GetObject("xWoman.ExpandedImage")));
-            this.xWoman.Location = new System.Drawing.Point(3, 145);
+            this.xWoman.Location = new System.Drawing.Point(8, 160);
             this.xWoman.Name = "xWoman";
             this.xWoman.Padding = new System.Windows.Forms.Padding(0, 25, 0, 0);
-            this.xWoman.Size = new System.Drawing.Size(181, 136);
+            this.xWoman.Size = new System.Drawing.Size(171, 136);
             this.xWoman.TabIndex = 0;
-            this.xWoman.Tag = 2;
+            this.xWoman.Tag = 8;
             this.xWoman.TooltipText = null;
             // 
             // numMenstruationPeriod
@@ -358,6 +321,43 @@
             this.lblWomanDescription.TabIndex = 0;
             this.lblWomanDescription.Text = "...day...";
             // 
+            // xDay
+            // 
+            this.xDay.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.xDay.Animated = true;
+            this.xDay.AnimationTime = 10;
+            this.xDay.BackColor = System.Drawing.Color.Transparent;
+            this.xDay.BorderStyle = System.Windows.Forms.Border3DStyle.Flat;
+            this.xDay.CaptionFont = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Bold);
+            this.xDay.CaptionFormatFlag = XPanderControl.XPander.FormatFlag.NoWrap;
+            this.xDay.CaptionStyle = XPanderControl.XPander.CaptionStyleEnum.Normal;
+            this.xDay.CaptionText = "Описание дня";
+            this.xDay.CaptionTextAlign = XPanderControl.XPander.CaptionTextAlignment.Left;
+            this.xDay.ChevronStyle = XPanderControl.XPander.ChevronStyleEnum.Image;
+            this.xDay.CollapsedHighlightImage = ((System.Drawing.Bitmap)(resources.GetObject("xDay.CollapsedHighlightImage")));
+            this.xDay.CollapsedImage = ((System.Drawing.Bitmap)(resources.GetObject("xDay.CollapsedImage")));
+            this.xDay.Controls.Add(this.lblDayDescription);
+            this.xDay.ExpandedHighlightImage = ((System.Drawing.Bitmap)(resources.GetObject("xDay.ExpandedHighlightImage")));
+            this.xDay.ExpandedImage = ((System.Drawing.Bitmap)(resources.GetObject("xDay.ExpandedImage")));
+            this.xDay.Location = new System.Drawing.Point(8, 310);
+            this.xDay.Name = "xDay";
+            this.xDay.Padding = new System.Windows.Forms.Padding(0, 25, 0, 0);
+            this.xDay.Size = new System.Drawing.Size(171, 62);
+            this.xDay.TabIndex = 1;
+            this.xDay.Tag = 9;
+            this.xDay.TooltipText = null;
+            // 
+            // lblDayDescription
+            // 
+            this.lblDayDescription.AutoEllipsis = true;
+            this.lblDayDescription.AutoSize = true;
+            this.lblDayDescription.Location = new System.Drawing.Point(5, 29);
+            this.lblDayDescription.Name = "lblDayDescription";
+            this.lblDayDescription.Size = new System.Drawing.Size(42, 13);
+            this.lblDayDescription.TabIndex = 0;
+            this.lblDayDescription.Text = "...day...";
+            // 
             // monthControl
             // 
             this.monthControl.BackColor = System.Drawing.Color.White;
@@ -367,8 +367,8 @@
             this.monthControl.FocusDay = null;
             this.monthControl.FocusMonth = null;
             this.monthControl.Location = new System.Drawing.Point(0, 0);
-            this.monthControl.MonthsMarginX = 10;
-            this.monthControl.MonthsMarginY = 20;
+            this.monthControl.MonthsMarginX = 5;
+            this.monthControl.MonthsMarginY = 5;
             this.monthControl.Name = "monthControl";
             this.monthControl.Size = new System.Drawing.Size(597, 507);
             this.monthControl.StartMonth = new System.DateTime(2008, 2, 1, 0, 0, 0, 0);
@@ -395,11 +395,11 @@
             this.splitContainer1.Panel2.ResumeLayout(false);
             this.splitContainer1.ResumeLayout(false);
             this.xPanderList1.ResumeLayout(false);
-            this.xDay.ResumeLayout(false);
-            this.xDay.PerformLayout();
             this.xWoman.ResumeLayout(false);
             this.xWoman.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numMenstruationPeriod)).EndInit();
+            this.xDay.ResumeLayout(false);
+            this.xDay.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 

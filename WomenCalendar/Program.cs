@@ -13,6 +13,15 @@ namespace WomenCalendar
     {
         public static MainForm ApplicationForm;
 
+        public static ResourceManager IconResource;
+
+        public static ApplicationSettings Settings;
+
+        private static string SettingsFileName
+        {
+            get { return Path.Combine(Application.StartupPath, "WomenCalendar.settings"); }
+        }
+
         public static Woman _currentWoman;
         public static Woman CurrentWoman
         {
@@ -106,13 +115,19 @@ namespace WomenCalendar
             return true;
         }
 
-        public static ResourceManager IconResource;
-
-        public static ApplicationSettings Settings;
-
-        private static string SettingsFileName
+        public static bool SaveSettings()
         {
-            get { return Path.Combine(Application.StartupPath, "WomenCalendar.settings"); }
+            return Settings.Write(SettingsFileName);
+        }
+
+        public static bool LoadSettings()
+        {
+            Settings = ApplicationSettings.Read(SettingsFileName);
+            if (!string.IsNullOrEmpty(Settings.DefaultWomanPath))
+            {
+                CurrentWoman = Woman.ReadFrom(Settings.DefaultWomanPath);
+            }
+            return true;
         }
 
         /// <summary>
@@ -132,27 +147,14 @@ namespace WomenCalendar
         public static class MonthAppearance
         {
             public static Brush HeaderBrush = Brushes.White;
+            public static Pen HeaderPen = new Pen(HeaderBrush, OneMonthControl.EdgeWidth + 1);
+            public static Pen TodayEdgePen = new Pen(Brushes.Blue, 5);
         }
 
         public static class DayCellAppearance
         {
             public static Pen FocusEdgePen = new Pen(Brushes.Red, 2);
             public static Pen EdgePen = Pens.Black;
-        }
-
-        public static bool SaveSettings()
-        {
-            return Settings.Write(SettingsFileName);
-        }
-
-        public static bool LoadSettings()
-        {
-            Settings = ApplicationSettings.Read(SettingsFileName);
-            if (!string.IsNullOrEmpty(Settings.DefaultWomanPath))
-            {
-                CurrentWoman = Woman.ReadFrom(Settings.DefaultWomanPath);
-            }
-            return true;
         }
     }
 }

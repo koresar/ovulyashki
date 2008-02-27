@@ -32,6 +32,7 @@
             // 
             // DayCellControl
             // 
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
             this.DoubleBuffered = true;
             this.Name = "DayCellControl";
             this.Size = new System.Drawing.Size(32, 32);
