@@ -28,10 +28,25 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.btnDropDown = new System.Windows.Forms.Button();
             this.SuspendLayout();
+            // 
+            // btnDropDown
+            // 
+            this.btnDropDown.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btnDropDown.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnDropDown.FlatAppearance.BorderSize = 0;
+            this.btnDropDown.Image = global::WomenCalendar.Properties.Resources.month_dropdown;
+            this.btnDropDown.Location = new System.Drawing.Point(211, 3);
+            this.btnDropDown.Name = "btnDropDown";
+            this.btnDropDown.Size = new System.Drawing.Size(16, 16);
+            this.btnDropDown.TabIndex = 0;
+            this.btnDropDown.TabStop = false;
+            this.btnDropDown.UseVisualStyleBackColor = false;
             // 
             // OneMonthControl
             // 
+            this.Controls.Add(this.btnDropDown);
             this.DoubleBuffered = true;
             this.ForeColor = System.Drawing.Color.Transparent;
             this.Margin = new System.Windows.Forms.Padding(0);
@@ -42,6 +57,8 @@
         }
 
         #endregion
+
+        private System.Windows.Forms.Button btnDropDown;
 
     }
 }

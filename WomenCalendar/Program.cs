@@ -51,7 +51,7 @@ namespace WomenCalendar
                 dialog.Filter = "Woman files (*.woman)|*.woman";
                 dialog.AddExtension = true;
                 dialog.DefaultExt = ".woman";
-                if (dialog.ShowDialog() == DialogResult.OK)
+                if (dialog.ShowDialog(ApplicationForm) == DialogResult.OK)
                 {
                     Woman.SaveTo(CurrentWoman, dialog.FileName);
                 }
@@ -76,7 +76,7 @@ namespace WomenCalendar
 
             OpenFileDialog dialog = new OpenFileDialog();
             dialog.Filter = "Woman files (*.woman)|*.woman";
-            if (dialog.ShowDialog() == DialogResult.OK)
+            if (dialog.ShowDialog(ApplicationForm) == DialogResult.OK)
             {
                 CurrentWoman = Woman.ReadFrom(dialog.FileName);
                 Settings.DefaultWomanPath = dialog.FileName;
@@ -125,7 +125,14 @@ namespace WomenCalendar
             Settings = ApplicationSettings.Read(SettingsFileName);
             if (!string.IsNullOrEmpty(Settings.DefaultWomanPath))
             {
-                CurrentWoman = Woman.ReadFrom(Settings.DefaultWomanPath);
+                if (File.Exists(Settings.DefaultWomanPath))
+                {
+                    CurrentWoman = Woman.ReadFrom(Settings.DefaultWomanPath);
+                }
+                else
+                {
+                    Settings.DefaultWomanPath = string.Empty;
+                }
             }
             return true;
         }

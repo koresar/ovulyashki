@@ -70,7 +70,7 @@
             this.Controls.Add(this.buttonOK);
             this.Controls.Add(this.txtNote);
             this.Name = "NoteEditForm";
-            this.Text = "NoteEditForm";
+            this.Text = "Редактриуем заметку";
             this.ResumeLayout(false);
             this.PerformLayout();
 

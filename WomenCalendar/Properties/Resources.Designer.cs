@@ -67,6 +67,13 @@ namespace WomenCalendar.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap month_dropdown {
+            get {
+                object obj = ResourceManager.GetObject("month_dropdown", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap note_Image {
             get {
                 object obj = ResourceManager.GetObject("note_Image", resourceCulture);

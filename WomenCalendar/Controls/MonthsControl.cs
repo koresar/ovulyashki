@@ -279,7 +279,7 @@ namespace WomenCalendar
         private void addNote_Click(object sender, EventArgs e)
         {
             NoteEditForm form = new NoteEditForm();
-            if (form.ShowDialog() == DialogResult.OK && Program.CurrentWoman.AddNote(FocusDate, form.NoteText))
+            if (form.ShowDialog(this) == DialogResult.OK && Program.CurrentWoman.AddNote(FocusDate, form.NoteText))
             {
                 RedrawFocusDay();
             }
@@ -288,7 +288,7 @@ namespace WomenCalendar
         private void editNote_Click(object sender, EventArgs e)
         {
             NoteEditForm form = new NoteEditForm(Program.CurrentWoman.Notes[FocusDate]);
-            if (form.ShowDialog() == DialogResult.OK && Program.CurrentWoman.AddNote(FocusDate, form.NoteText))
+            if (form.ShowDialog(this) == DialogResult.OK && Program.CurrentWoman.AddNote(FocusDate, form.NoteText))
             {
                 RedrawFocusDay();
             }

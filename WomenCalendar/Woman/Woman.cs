@@ -11,6 +11,7 @@ namespace WomenCalendar
     [XmlRoot("Woman")]
     public class Woman
     {
+        [XmlIgnore()]
         private MenstruationsCollection _menstruations;
         public MenstruationsCollection Menstruations
         {
@@ -35,10 +36,19 @@ namespace WomenCalendar
             get { return associatedFile; }
             set { associatedFile = value; }
         }
-                
+
+        [XmlIgnore()]
+        private bool useManualPeriodLength;
+        [XmlElement("UseManualPeriodLength")]
+        public bool UseManualPeriodLength
+        {
+            get { return useManualPeriodLength; }
+            set { useManualPeriodLength = value; }
+        }
+
         [XmlIgnore()]
         private int averagePeriodLength;
-        [XmlAttribute("AveragePeriodLength")]
+        [XmlElement("AveragePeriodLength")]
         public int AveragePeriodLength
         {
             get { return averagePeriodLength; }
@@ -55,7 +65,7 @@ namespace WomenCalendar
 
         [XmlIgnore()]
         private int manualPeriodLength;
-        [XmlAttribute("ManualPeriodLength")]
+        [XmlElement("ManualPeriodLength")]
         public int ManualPeriodLength
         {
             get { return manualPeriodLength; }
@@ -67,7 +77,7 @@ namespace WomenCalendar
 
         [XmlIgnore()]
         private int defaultMenstruationLength;
-        [XmlAttribute("DefaultMenstruationLength")]
+        [XmlElement("DefaultMenstruationLength")]
         public int DefaultMenstruationLength
         {
             get { return defaultMenstruationLength; }
@@ -85,7 +95,7 @@ namespace WomenCalendar
         public Woman()
         {
             notes = new NotesCollection();
-            defaultMenstruationLength = 5;
+            defaultMenstruationLength = 4;
             _menstruations = new MenstruationsCollection();
             manualPeriodLength = 28;
         }
@@ -131,7 +141,7 @@ namespace WomenCalendar
             }
 
             MenstruationPeriod lastPeriod = Menstruations.Last;
-            if (date <= lastPeriod.LastDay)
+            if (date <= lastPeriod.StartDay.AddDays(DefaultMenstruationLength))
             {
                 return false;
             }

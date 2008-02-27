@@ -8,7 +8,7 @@ using System.Windows.Forms;
 
 namespace WomenCalendar
 {
-    public partial class NoteEditForm : Form
+    public partial class NoteEditForm : BaseForm
     {
         public NoteEditForm()
         {

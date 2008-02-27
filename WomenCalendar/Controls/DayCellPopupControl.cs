@@ -83,7 +83,7 @@ namespace WomenCalendar
 
         private void ShowDayEditForm()
         {
-            new DayEditForm().Show();
+            new DayEditForm().ShowDialog(this);
         }
 
         private void HideTooltip()
@@ -99,7 +99,7 @@ namespace WomenCalendar
         private void ShowNoteEditForm()
         {
             NoteEditForm form = new NoteEditForm(Program.CurrentWoman.Notes[DayCell.Date]);
-            if (form.ShowDialog() == DialogResult.OK)
+            if (form.ShowDialog(this) == DialogResult.OK)
             {
                 Program.CurrentWoman.AddNote(DayCell.Date, form.NoteText);
             }

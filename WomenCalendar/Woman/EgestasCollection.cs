@@ -19,13 +19,13 @@ namespace WomenCalendar
             : this()
         {
             int i = 0;
-            for (; i > length - MaximumEgestaValue - 1; i++)
+            for (; i < length - (MaximumEgestaValue + 1); i++)
             {
                 Add(startDay.AddDays(i), MaximumEgestaValue);
             }
-            for (; i < length; i++)
+            for (int egesta = MaximumEgestaValue; i < length; i++, egesta--)
             {
-                Add(startDay.AddDays(i), MaximumEgestaValue - i);
+                Add(startDay.AddDays(i), egesta);
             }
         }
     }

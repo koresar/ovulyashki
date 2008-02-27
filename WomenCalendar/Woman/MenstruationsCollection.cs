@@ -49,11 +49,15 @@ namespace WomenCalendar
                     {
                         askMessage += "Между овуляшками меньше 21-го дня!";
                     }
+                    else if (distance > 35)
+                    {
+                        askMessage += "Между овуляшками больше 35-ти дней!";
+                    }
                 }
 
                 if (date > DateTime.Today)
                 {
-                    askMessage += "Это же день из будущего! Он еще не настал. Записалась в Нострадамусы?";
+                    askMessage += "\nЭто же день из будущего! Он еще не настал. Записалась в Нострадамусы?";
                 }
 
                 if (!string.IsNullOrEmpty(askMessage) && MessageBox.Show(askMessage + "\nТЫ УВЕРЕНА В ТОМ ЧТО ДЕЛАЕШЬ?",

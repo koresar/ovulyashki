@@ -26,6 +26,8 @@ namespace WomenCalendar
 
         public void UpdateWomanInformation()
         {
+            rbManual.Checked = Program.CurrentWoman.UseManualPeriodLength;
+            rbAuto.Checked = !rbManual.Checked;
             if (rbAuto.Checked)
             {
                 Program.CurrentWoman.ManualPeriodLength = Program.CurrentWoman.AveragePeriodLength;
@@ -34,6 +36,8 @@ namespace WomenCalendar
             lblWomanDescription.Text = GenerateWomanInformation();
 
             SetNumMenstrulationPriod(Program.CurrentWoman.ManualPeriodLength);
+
+            numMenstruationLength.Value = Program.CurrentWoman.DefaultMenstruationLength;
         }
 
         public string GenerateWomanInformation()
@@ -148,6 +152,7 @@ namespace WomenCalendar
         private void rbAuto_CheckedChanged(object sender, EventArgs e)
         {
             numMenstruationPeriod.Enabled = !rbAuto.Checked;
+            Program.CurrentWoman.UseManualPeriodLength = !rbAuto.Checked;
             if (rbAuto.Checked)
             {
                 SetNumMenstrulationPriod(Program.CurrentWoman.AveragePeriodLength);
@@ -156,13 +161,38 @@ namespace WomenCalendar
 
         private void numMenstruationPeriod_ValueChanged(object sender, EventArgs e)
         {
-            Program.CurrentWoman.ManualPeriodLength = (int)numMenstruationPeriod.Value;
+            int newValue = (int) numMenstruationPeriod.Value;
+            if (Program.CurrentWoman.ManualPeriodLength <= 35 && newValue > 35)
+            {
+                if (MessageBox.Show(this, "Ты хочешь чтобы цикл был больше 35-ти дней?", "Вот это цикл!",
+                                    MessageBoxButtons.YesNo, MessageBoxIcon.Question) != DialogResult.Yes)
+                {
+                    numMenstruationPeriod.Value = Program.CurrentWoman.ManualPeriodLength;
+                    return;
+                }
+            }
+
+            Program.CurrentWoman.ManualPeriodLength = newValue;
             monthControl.Redraw();
         }
 
         private void MainForm_MouseLeave(object sender, EventArgs e)
         {
             monthControl.CellPopupControl.Visible = false;
+        }
+
+        private void numEmnstruationLength_ValueChanged(object sender, EventArgs e)
+        {
+            if (numMenstruationLength.Value == 1)
+                lblMenstruationLength2.Text = "день";
+            else if (numMenstruationLength.Value < 5)
+                lblMenstruationLength2.Text = "дня";
+            else
+                lblMenstruationLength2.Text = "дней";
+
+            Program.CurrentWoman.DefaultMenstruationLength = (int)numMenstruationLength.Value;
+
+            monthControl.Redraw();
         }
     }
 }

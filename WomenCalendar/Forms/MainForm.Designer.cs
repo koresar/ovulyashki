@@ -45,6 +45,9 @@
             this.xPanderList1 = new XPanderControl.XPanderList();
             this.xLegend = new XPanderControl.XPander();
             this.xWoman = new XPanderControl.XPander();
+            this.numMenstruationLength = new System.Windows.Forms.NumericUpDown();
+            this.lblMenstruationLength2 = new System.Windows.Forms.Label();
+            this.lblMenstruationLength1 = new System.Windows.Forms.Label();
             this.numMenstruationPeriod = new System.Windows.Forms.NumericUpDown();
             this.label1 = new System.Windows.Forms.Label();
             this.rbManual = new System.Windows.Forms.RadioButton();
@@ -59,6 +62,7 @@
             this.splitContainer1.SuspendLayout();
             this.xPanderList1.SuspendLayout();
             this.xWoman.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numMenstruationLength)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numMenstruationPeriod)).BeginInit();
             this.xDay.SuspendLayout();
             this.SuspendLayout();
@@ -222,12 +226,12 @@
             this.xLegend.CollapsedImage = ((System.Drawing.Bitmap)(resources.GetObject("xLegend.CollapsedImage")));
             this.xLegend.ExpandedHighlightImage = ((System.Drawing.Bitmap)(resources.GetObject("xLegend.ExpandedHighlightImage")));
             this.xLegend.ExpandedImage = ((System.Drawing.Bitmap)(resources.GetObject("xLegend.ExpandedImage")));
-            this.xLegend.Location = new System.Drawing.Point(8, 10);
+            this.xLegend.Location = new System.Drawing.Point(3, 3);
             this.xLegend.Name = "xLegend";
             this.xLegend.Padding = new System.Windows.Forms.Padding(0, 25, 0, 0);
-            this.xLegend.Size = new System.Drawing.Size(171, 136);
+            this.xLegend.Size = new System.Drawing.Size(182, 136);
             this.xLegend.TabIndex = 2;
-            this.xLegend.Tag = 7;
+            this.xLegend.Tag = 0;
             this.xLegend.TooltipText = null;
             // 
             // xWoman
@@ -246,6 +250,9 @@
             this.xWoman.ChevronStyle = XPanderControl.XPander.ChevronStyleEnum.Image;
             this.xWoman.CollapsedHighlightImage = ((System.Drawing.Bitmap)(resources.GetObject("xWoman.CollapsedHighlightImage")));
             this.xWoman.CollapsedImage = ((System.Drawing.Bitmap)(resources.GetObject("xWoman.CollapsedImage")));
+            this.xWoman.Controls.Add(this.numMenstruationLength);
+            this.xWoman.Controls.Add(this.lblMenstruationLength2);
+            this.xWoman.Controls.Add(this.lblMenstruationLength1);
             this.xWoman.Controls.Add(this.numMenstruationPeriod);
             this.xWoman.Controls.Add(this.label1);
             this.xWoman.Controls.Add(this.rbManual);
@@ -253,13 +260,54 @@
             this.xWoman.Controls.Add(this.lblWomanDescription);
             this.xWoman.ExpandedHighlightImage = ((System.Drawing.Bitmap)(resources.GetObject("xWoman.ExpandedHighlightImage")));
             this.xWoman.ExpandedImage = ((System.Drawing.Bitmap)(resources.GetObject("xWoman.ExpandedImage")));
-            this.xWoman.Location = new System.Drawing.Point(8, 160);
+            this.xWoman.Location = new System.Drawing.Point(3, 145);
             this.xWoman.Name = "xWoman";
             this.xWoman.Padding = new System.Windows.Forms.Padding(0, 25, 0, 0);
-            this.xWoman.Size = new System.Drawing.Size(171, 136);
+            this.xWoman.Size = new System.Drawing.Size(182, 136);
             this.xWoman.TabIndex = 0;
-            this.xWoman.Tag = 8;
+            this.xWoman.Tag = 1;
             this.xWoman.TooltipText = null;
+            // 
+            // numMenstruationLength
+            // 
+            this.numMenstruationLength.Location = new System.Drawing.Point(122, 86);
+            this.numMenstruationLength.Maximum = new decimal(new int[] {
+            9,
+            0,
+            0,
+            0});
+            this.numMenstruationLength.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numMenstruationLength.Name = "numMenstruationLength";
+            this.numMenstruationLength.Size = new System.Drawing.Size(27, 20);
+            this.numMenstruationLength.TabIndex = 4;
+            this.numMenstruationLength.Value = new decimal(new int[] {
+            4,
+            0,
+            0,
+            0});
+            this.numMenstruationLength.ValueChanged += new System.EventHandler(this.numEmnstruationLength_ValueChanged);
+            // 
+            // lblMenstruationLength2
+            // 
+            this.lblMenstruationLength2.AutoSize = true;
+            this.lblMenstruationLength2.Location = new System.Drawing.Point(149, 88);
+            this.lblMenstruationLength2.Name = "lblMenstruationLength2";
+            this.lblMenstruationLength2.Size = new System.Drawing.Size(25, 13);
+            this.lblMenstruationLength2.TabIndex = 6;
+            this.lblMenstruationLength2.Text = "дня";
+            // 
+            // lblMenstruationLength1
+            // 
+            this.lblMenstruationLength1.AutoSize = true;
+            this.lblMenstruationLength1.Location = new System.Drawing.Point(0, 88);
+            this.lblMenstruationLength1.Name = "lblMenstruationLength1";
+            this.lblMenstruationLength1.Size = new System.Drawing.Size(123, 13);
+            this.lblMenstruationLength1.TabIndex = 5;
+            this.lblMenstruationLength1.Text = "Обычно овуляшки идут";
             // 
             // numMenstruationPeriod
             // 
@@ -282,7 +330,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(5, 46);
+            this.label1.Location = new System.Drawing.Point(1, 46);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(113, 13);
             this.label1.TabIndex = 3;
@@ -340,12 +388,12 @@
             this.xDay.Controls.Add(this.lblDayDescription);
             this.xDay.ExpandedHighlightImage = ((System.Drawing.Bitmap)(resources.GetObject("xDay.ExpandedHighlightImage")));
             this.xDay.ExpandedImage = ((System.Drawing.Bitmap)(resources.GetObject("xDay.ExpandedImage")));
-            this.xDay.Location = new System.Drawing.Point(8, 310);
+            this.xDay.Location = new System.Drawing.Point(3, 287);
             this.xDay.Name = "xDay";
             this.xDay.Padding = new System.Windows.Forms.Padding(0, 25, 0, 0);
-            this.xDay.Size = new System.Drawing.Size(171, 62);
+            this.xDay.Size = new System.Drawing.Size(182, 62);
             this.xDay.TabIndex = 1;
-            this.xDay.Tag = 9;
+            this.xDay.Tag = 2;
             this.xDay.TooltipText = null;
             // 
             // lblDayDescription
@@ -397,6 +445,7 @@
             this.xPanderList1.ResumeLayout(false);
             this.xWoman.ResumeLayout(false);
             this.xWoman.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numMenstruationLength)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numMenstruationPeriod)).EndInit();
             this.xDay.ResumeLayout(false);
             this.xDay.PerformLayout();
@@ -431,6 +480,9 @@
         private System.Windows.Forms.RadioButton rbManual;
         private System.Windows.Forms.RadioButton rbAuto;
         private System.Windows.Forms.NumericUpDown numMenstruationPeriod;
+        private System.Windows.Forms.NumericUpDown numMenstruationLength;
+        private System.Windows.Forms.Label lblMenstruationLength2;
+        private System.Windows.Forms.Label lblMenstruationLength1;
 
 
     }

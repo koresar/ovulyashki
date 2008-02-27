@@ -30,7 +30,7 @@ namespace WomenCalendar
             }
         }
 
-        private DateTime _dateTime = DateTime.MinValue;
+        private DateTime _dateTime = DateTime.Today;
         /// <summary>
         /// The month which control represents.
         /// </summary>
