@@ -55,7 +55,9 @@
             this.lblWomanDescription = new System.Windows.Forms.Label();
             this.xDay = new XPanderControl.XPander();
             this.lblDayDescription = new System.Windows.Forms.Label();
+            this.chbDefaultWoman = new System.Windows.Forms.CheckBox();
             this.monthControl = new WomenCalendar.MonthsControl();
+            this.chbAskPassword = new System.Windows.Forms.CheckBox();
             this.toolStrip1.SuspendLayout();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -231,7 +233,7 @@
             this.xLegend.Padding = new System.Windows.Forms.Padding(0, 25, 0, 0);
             this.xLegend.Size = new System.Drawing.Size(182, 136);
             this.xLegend.TabIndex = 2;
-            this.xLegend.Tag = 0;
+            this.xLegend.Tag = 36;
             this.xLegend.TooltipText = null;
             // 
             // xWoman
@@ -250,6 +252,8 @@
             this.xWoman.ChevronStyle = XPanderControl.XPander.ChevronStyleEnum.Image;
             this.xWoman.CollapsedHighlightImage = ((System.Drawing.Bitmap)(resources.GetObject("xWoman.CollapsedHighlightImage")));
             this.xWoman.CollapsedImage = ((System.Drawing.Bitmap)(resources.GetObject("xWoman.CollapsedImage")));
+            this.xWoman.Controls.Add(this.chbAskPassword);
+            this.xWoman.Controls.Add(this.chbDefaultWoman);
             this.xWoman.Controls.Add(this.numMenstruationLength);
             this.xWoman.Controls.Add(this.lblMenstruationLength2);
             this.xWoman.Controls.Add(this.lblMenstruationLength1);
@@ -263,9 +267,9 @@
             this.xWoman.Location = new System.Drawing.Point(3, 145);
             this.xWoman.Name = "xWoman";
             this.xWoman.Padding = new System.Windows.Forms.Padding(0, 25, 0, 0);
-            this.xWoman.Size = new System.Drawing.Size(182, 136);
+            this.xWoman.Size = new System.Drawing.Size(182, 164);
             this.xWoman.TabIndex = 0;
-            this.xWoman.Tag = 1;
+            this.xWoman.Tag = 37;
             this.xWoman.TooltipText = null;
             // 
             // numMenstruationLength
@@ -388,12 +392,12 @@
             this.xDay.Controls.Add(this.lblDayDescription);
             this.xDay.ExpandedHighlightImage = ((System.Drawing.Bitmap)(resources.GetObject("xDay.ExpandedHighlightImage")));
             this.xDay.ExpandedImage = ((System.Drawing.Bitmap)(resources.GetObject("xDay.ExpandedImage")));
-            this.xDay.Location = new System.Drawing.Point(3, 287);
+            this.xDay.Location = new System.Drawing.Point(3, 315);
             this.xDay.Name = "xDay";
             this.xDay.Padding = new System.Windows.Forms.Padding(0, 25, 0, 0);
-            this.xDay.Size = new System.Drawing.Size(182, 62);
+            this.xDay.Size = new System.Drawing.Size(182, 76);
             this.xDay.TabIndex = 1;
-            this.xDay.Tag = 2;
+            this.xDay.Tag = 39;
             this.xDay.TooltipText = null;
             // 
             // lblDayDescription
@@ -405,6 +409,17 @@
             this.lblDayDescription.Size = new System.Drawing.Size(42, 13);
             this.lblDayDescription.TabIndex = 0;
             this.lblDayDescription.Text = "...day...";
+            // 
+            // chbDefaultWoman
+            // 
+            this.chbDefaultWoman.AutoSize = true;
+            this.chbDefaultWoman.Location = new System.Drawing.Point(4, 109);
+            this.chbDefaultWoman.Name = "chbDefaultWoman";
+            this.chbDefaultWoman.Size = new System.Drawing.Size(176, 17);
+            this.chbDefaultWoman.TabIndex = 7;
+            this.chbDefaultWoman.Text = "Открывать меня при запуске";
+            this.chbDefaultWoman.UseVisualStyleBackColor = true;
+            this.chbDefaultWoman.CheckedChanged += new System.EventHandler(this.chbDefaultWoman_CheckedChanged);
             // 
             // monthControl
             // 
@@ -422,6 +437,17 @@
             this.monthControl.StartMonth = new System.DateTime(2008, 2, 1, 0, 0, 0, 0);
             this.monthControl.TabIndex = 0;
             this.monthControl.FocusDateChanged += new WomenCalendar.MonthsControl.FocusDateChangedDelegate(this.monthControl_FocusDateChanged);
+            // 
+            // chbAskPassword
+            // 
+            this.chbAskPassword.AutoSize = true;
+            this.chbAskPassword.Location = new System.Drawing.Point(4, 132);
+            this.chbAskPassword.Name = "chbAskPassword";
+            this.chbAskPassword.Size = new System.Drawing.Size(165, 17);
+            this.chbAskPassword.TabIndex = 8;
+            this.chbAskPassword.Text = "Всегда спрашивать пароль";
+            this.chbAskPassword.UseVisualStyleBackColor = true;
+            this.chbAskPassword.CheckedChanged += new System.EventHandler(this.chbAskPassword_CheckedChanged);
             // 
             // MainForm
             // 
@@ -483,6 +509,8 @@
         private System.Windows.Forms.NumericUpDown numMenstruationLength;
         private System.Windows.Forms.Label lblMenstruationLength2;
         private System.Windows.Forms.Label lblMenstruationLength1;
+        private System.Windows.Forms.CheckBox chbDefaultWoman;
+        private System.Windows.Forms.CheckBox chbAskPassword;
 
 
     }

@@ -47,6 +47,15 @@ namespace WomenCalendar
         }
 
         [XmlIgnore()]
+        private bool allwaysAskPassword;
+        [XmlElement("AllwaysAskPassword")]
+        public bool AllwaysAskPassword
+        {
+            get { return allwaysAskPassword; }
+            set { allwaysAskPassword = value; }
+        }
+
+        [XmlIgnore()]
         private int averagePeriodLength;
         [XmlElement("AveragePeriodLength")]
         public int AveragePeriodLength

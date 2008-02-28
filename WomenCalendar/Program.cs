@@ -79,7 +79,7 @@ namespace WomenCalendar
             if (dialog.ShowDialog(ApplicationForm) == DialogResult.OK)
             {
                 CurrentWoman = Woman.ReadFrom(dialog.FileName);
-                Settings.DefaultWomanPath = dialog.FileName;
+                //Settings.DefaultWomanPath = dialog.FileName;
                 return true;
             }
             return false;

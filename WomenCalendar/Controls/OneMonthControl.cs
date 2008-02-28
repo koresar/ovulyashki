@@ -16,6 +16,11 @@ namespace WomenCalendar
         private const int CellsAmount = 42;
         private readonly List<DayCellControl> _cells = new List<DayCellControl>(CellsAmount);
 
+        private static string[] MonthNames = {
+            "Январь", "Февраль", "Март", "Апрель", "Май", "Июнь", "Июль", "Август", "Сентябрь", "Октябрь", "Ноябрь", "Декабрь" };
+
+        private static string[] WeekDayNames = {"Пн", "Вт", "Ср", "Чт", "Пт", "Сб", "Вс"};
+
         public delegate void DayClicked(object sender, DayCellClickEventArgs e);
         public event DayClicked MonthDayClicked;
 
@@ -143,14 +148,14 @@ namespace WomenCalendar
                 Rectangle headerRect = new Rectangle(EdgeWidth, EdgeWidth, DayCellControl.DefaultCellWidth*7, DayCellControl.DefaultCellHeight);
                 pe.Graphics.FillRectangle(Program.MonthAppearance.HeaderBrush, headerRect);
 
-                string monthNameAndYear = Date.ToString("MMMM yyyy");
+                string monthNameAndYear = MonthNames[Date.Month - 1] + " " + Date.Year;
                 SizeF textSize = pe.Graphics.MeasureString(monthNameAndYear, Font, Size.Width);
                 pe.Graphics.DrawString(monthNameAndYear, Font, Brushes.Black,
                     EdgeWidth + (Size.Width - textSize.Width) / 2, EdgeWidth);
 
                 for (int i = 0; i < 7; i++)
                 {
-                    string aDay = DateTimeFormatInfo.CurrentInfo.AbbreviatedDayNames[(i+1)%7];
+                    string aDay = WeekDayNames[i];
                     textSize = pe.Graphics.MeasureString(aDay, Font, DayCellControl.DefaultCellWidth);
                     pe.Graphics.DrawString(aDay, Font,
                         Brushes.Black,
@@ -158,7 +163,7 @@ namespace WomenCalendar
                         EdgeWidth + DayCellControl.DefaultCellHeight - textSize.Height);
                 }
 
-                pe.Graphics.DrawRectangle((DateTime.Today.Month == Date.Month) ? 
+                pe.Graphics.DrawRectangle((DateTime.Today.Month == Date.Month && DateTime.Today.Year == Date.Year) ? 
                     Program.MonthAppearance.TodayEdgePen : Program.MonthAppearance.HeaderPen, ClientRectangle);
             }
         }

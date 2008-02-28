@@ -24,6 +24,9 @@ namespace WomenCalendar
             xDay.Height = lblDayDescription.Height + 32;
         }
 
+        /// <summary>
+        /// Fill all woman controls with CurrentWoman data.
+        /// </summary>
         public void UpdateWomanInformation()
         {
             rbManual.Checked = Program.CurrentWoman.UseManualPeriodLength;
@@ -34,10 +37,9 @@ namespace WomenCalendar
             }
 
             lblWomanDescription.Text = GenerateWomanInformation();
-
             SetNumMenstrulationPriod(Program.CurrentWoman.ManualPeriodLength);
-
             numMenstruationLength.Value = Program.CurrentWoman.DefaultMenstruationLength;
+            chbAskPassword.Checked = Program.CurrentWoman.AllwaysAskPassword;
         }
 
         public string GenerateWomanInformation()
@@ -138,6 +140,11 @@ namespace WomenCalendar
             e.Cancel = !Program.AskAndSaveCurrentWoman();
             if (!e.Cancel)
             {
+
+                // Beginning the part where we collect all application settings
+                Program.Settings.DefaultWomanPath = chbDefaultWoman.Checked ? Program.CurrentWoman.AssociatedFile : string.Empty;
+                // And of the settings collectioning part.
+
                 Program.SaveSettings();
             }
         }
@@ -147,6 +154,7 @@ namespace WomenCalendar
             Program.LoadSettings();
 
             monthControl.FocusDate = DateTime.Today;
+            chbDefaultWoman.Checked = !string.IsNullOrEmpty(Program.Settings.DefaultWomanPath);
         }
 
         private void rbAuto_CheckedChanged(object sender, EventArgs e)
@@ -193,6 +201,16 @@ namespace WomenCalendar
             Program.CurrentWoman.DefaultMenstruationLength = (int)numMenstruationLength.Value;
 
             monthControl.Redraw();
+        }
+
+        private void chbDefaultWoman_CheckedChanged(object sender, EventArgs e)
+        {
+            Program.Settings.DefaultWomanPath = chbDefaultWoman.Checked ? Program.CurrentWoman.AssociatedFile : string.Empty;
+        }
+
+        private void chbAskPassword_CheckedChanged(object sender, EventArgs e)
+        {
+            Program.CurrentWoman.AllwaysAskPassword = chbAskPassword.Checked;
         }
     }
 }

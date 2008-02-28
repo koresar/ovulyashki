@@ -110,7 +110,7 @@ namespace WomenCalendar
 
             if (w.IsPredictedAsMenstruationDay(Date))
             {
-                pe.Graphics.DrawString("?", Font, Brushes.Red, 3, 14);
+                pe.Graphics.DrawString("?", Font, OwnerOneMonthControl.Date.Month == Date.Month ? Brushes.Red : Brushes.Brown, 3, 14);
             }
 
             pe.Graphics.DrawString(Date.Day.ToString(), Font, FontBrush, 0, 0);
