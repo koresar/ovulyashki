@@ -15,7 +15,7 @@ namespace WomenCalendar
             InitializeComponent();
 
             toolStrip1.Items.Add(new ToolStripControlHost(dateTimePicker1));
-            lblWomanDescription.Text = string.Empty;
+            lblAverageCycle.Text = string.Empty;
         }
 
         public void UpdateDayInformation(DateTime date)
@@ -36,7 +36,7 @@ namespace WomenCalendar
                 Program.CurrentWoman.ManualPeriodLength = Program.CurrentWoman.AveragePeriodLength;
             }
 
-            lblWomanDescription.Text = GenerateWomanInformation();
+            lblAverageCycle.Text = GenerateWomanInformation();
             SetNumMenstrulationPriod(Program.CurrentWoman.ManualPeriodLength);
             numMenstruationLength.Value = Program.CurrentWoman.DefaultMenstruationLength;
             chbAskPassword.Checked = Program.CurrentWoman.AllwaysAskPassword;
@@ -94,6 +94,15 @@ namespace WomenCalendar
             numMenstruationPeriod.Value = length;
         }
 
+        public static string GetDaysString(int days)
+        {
+            if (days > 4 && days < 21) return "дней";
+            int tmpDays = days % 10;
+            if (tmpDays == 1) return "день";
+            if (tmpDays < 5 && tmpDays > 1) return "дня";
+            return "дней";
+        }
+
         private void prevStripButton_Click(object sender, EventArgs e)
         {
             monthControl.ScrollMonthes(-1);
@@ -113,6 +122,7 @@ namespace WomenCalendar
         {
             if (Program.NewWoman())
             {
+                chbDefaultWoman.Checked = false;
                 monthControl.Redraw();
             }
         }
@@ -176,11 +186,13 @@ namespace WomenCalendar
                                     MessageBoxButtons.YesNo, MessageBoxIcon.Question) != DialogResult.Yes)
                 {
                     numMenstruationPeriod.Value = Program.CurrentWoman.ManualPeriodLength;
+                    lblMyCycle2.Text = GetDaysString(Program.CurrentWoman.ManualPeriodLength);
                     return;
                 }
             }
 
             Program.CurrentWoman.ManualPeriodLength = newValue;
+            lblMyCycle2.Text = GetDaysString(newValue);
             monthControl.Redraw();
         }
 
@@ -189,14 +201,9 @@ namespace WomenCalendar
             monthControl.CellPopupControl.Visible = false;
         }
 
-        private void numEmnstruationLength_ValueChanged(object sender, EventArgs e)
+        private void numMenstruationLength_ValueChanged(object sender, EventArgs e)
         {
-            if (numMenstruationLength.Value == 1)
-                lblMenstruationLength2.Text = "день";
-            else if (numMenstruationLength.Value < 5)
-                lblMenstruationLength2.Text = "дня";
-            else
-                lblMenstruationLength2.Text = "дней";
+            lblMenstruationLength2.Text = GetDaysString((int)numMenstruationLength.Value);
 
             Program.CurrentWoman.DefaultMenstruationLength = (int)numMenstruationLength.Value;
 
@@ -205,7 +212,11 @@ namespace WomenCalendar
 
         private void chbDefaultWoman_CheckedChanged(object sender, EventArgs e)
         {
-            Program.Settings.DefaultWomanPath = chbDefaultWoman.Checked ? Program.CurrentWoman.AssociatedFile : string.Empty;
+            if (!string.IsNullOrEmpty(Program.CurrentWoman.AssociatedFile))
+            {
+                Program.Settings.DefaultWomanPath = chbDefaultWoman.Checked ? Program.CurrentWoman.AssociatedFile : string.Empty;
+                Program.SaveSettings();
+            }
         }
 
         private void chbAskPassword_CheckedChanged(object sender, EventArgs e)

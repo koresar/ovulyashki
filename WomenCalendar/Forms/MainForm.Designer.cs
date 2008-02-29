@@ -45,19 +45,20 @@
             this.xPanderList1 = new XPanderControl.XPanderList();
             this.xLegend = new XPanderControl.XPander();
             this.xWoman = new XPanderControl.XPander();
+            this.chbAskPassword = new System.Windows.Forms.CheckBox();
+            this.chbDefaultWoman = new System.Windows.Forms.CheckBox();
             this.numMenstruationLength = new System.Windows.Forms.NumericUpDown();
+            this.lblMyCycle2 = new System.Windows.Forms.Label();
             this.lblMenstruationLength2 = new System.Windows.Forms.Label();
             this.lblMenstruationLength1 = new System.Windows.Forms.Label();
             this.numMenstruationPeriod = new System.Windows.Forms.NumericUpDown();
-            this.label1 = new System.Windows.Forms.Label();
+            this.lblMyCycle = new System.Windows.Forms.Label();
             this.rbManual = new System.Windows.Forms.RadioButton();
             this.rbAuto = new System.Windows.Forms.RadioButton();
-            this.lblWomanDescription = new System.Windows.Forms.Label();
+            this.lblAverageCycle = new System.Windows.Forms.Label();
             this.xDay = new XPanderControl.XPander();
             this.lblDayDescription = new System.Windows.Forms.Label();
-            this.chbDefaultWoman = new System.Windows.Forms.CheckBox();
             this.monthControl = new WomenCalendar.MonthsControl();
-            this.chbAskPassword = new System.Windows.Forms.CheckBox();
             this.toolStrip1.SuspendLayout();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -194,7 +195,7 @@
             // 
             this.splitContainer1.Panel2.Controls.Add(this.monthControl);
             this.splitContainer1.Size = new System.Drawing.Size(788, 507);
-            this.splitContainer1.SplitterDistance = 187;
+            this.splitContainer1.SplitterDistance = 206;
             this.splitContainer1.TabIndex = 5;
             // 
             // xPanderList1
@@ -207,7 +208,7 @@
             this.xPanderList1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.xPanderList1.Location = new System.Drawing.Point(0, 0);
             this.xPanderList1.Name = "xPanderList1";
-            this.xPanderList1.Size = new System.Drawing.Size(187, 507);
+            this.xPanderList1.Size = new System.Drawing.Size(206, 507);
             this.xPanderList1.TabIndex = 0;
             // 
             // xLegend
@@ -231,9 +232,9 @@
             this.xLegend.Location = new System.Drawing.Point(3, 3);
             this.xLegend.Name = "xLegend";
             this.xLegend.Padding = new System.Windows.Forms.Padding(0, 25, 0, 0);
-            this.xLegend.Size = new System.Drawing.Size(182, 136);
+            this.xLegend.Size = new System.Drawing.Size(199, 136);
             this.xLegend.TabIndex = 2;
-            this.xLegend.Tag = 36;
+            this.xLegend.Tag = 3;
             this.xLegend.TooltipText = null;
             // 
             // xWoman
@@ -255,26 +256,49 @@
             this.xWoman.Controls.Add(this.chbAskPassword);
             this.xWoman.Controls.Add(this.chbDefaultWoman);
             this.xWoman.Controls.Add(this.numMenstruationLength);
+            this.xWoman.Controls.Add(this.lblMyCycle2);
             this.xWoman.Controls.Add(this.lblMenstruationLength2);
             this.xWoman.Controls.Add(this.lblMenstruationLength1);
             this.xWoman.Controls.Add(this.numMenstruationPeriod);
-            this.xWoman.Controls.Add(this.label1);
+            this.xWoman.Controls.Add(this.lblMyCycle);
             this.xWoman.Controls.Add(this.rbManual);
             this.xWoman.Controls.Add(this.rbAuto);
-            this.xWoman.Controls.Add(this.lblWomanDescription);
+            this.xWoman.Controls.Add(this.lblAverageCycle);
             this.xWoman.ExpandedHighlightImage = ((System.Drawing.Bitmap)(resources.GetObject("xWoman.ExpandedHighlightImage")));
             this.xWoman.ExpandedImage = ((System.Drawing.Bitmap)(resources.GetObject("xWoman.ExpandedImage")));
             this.xWoman.Location = new System.Drawing.Point(3, 145);
             this.xWoman.Name = "xWoman";
             this.xWoman.Padding = new System.Windows.Forms.Padding(0, 25, 0, 0);
-            this.xWoman.Size = new System.Drawing.Size(182, 164);
+            this.xWoman.Size = new System.Drawing.Size(199, 164);
             this.xWoman.TabIndex = 0;
-            this.xWoman.Tag = 37;
+            this.xWoman.Tag = 4;
             this.xWoman.TooltipText = null;
+            // 
+            // chbAskPassword
+            // 
+            this.chbAskPassword.AutoSize = true;
+            this.chbAskPassword.Location = new System.Drawing.Point(12, 132);
+            this.chbAskPassword.Name = "chbAskPassword";
+            this.chbAskPassword.Size = new System.Drawing.Size(188, 17);
+            this.chbAskPassword.TabIndex = 8;
+            this.chbAskPassword.Text = "Всегда спрашивать мой пароль";
+            this.chbAskPassword.UseVisualStyleBackColor = true;
+            this.chbAskPassword.CheckedChanged += new System.EventHandler(this.chbAskPassword_CheckedChanged);
+            // 
+            // chbDefaultWoman
+            // 
+            this.chbDefaultWoman.AutoSize = true;
+            this.chbDefaultWoman.Location = new System.Drawing.Point(12, 109);
+            this.chbDefaultWoman.Name = "chbDefaultWoman";
+            this.chbDefaultWoman.Size = new System.Drawing.Size(176, 17);
+            this.chbDefaultWoman.TabIndex = 7;
+            this.chbDefaultWoman.Text = "Открывать меня при запуске";
+            this.chbDefaultWoman.UseVisualStyleBackColor = true;
+            this.chbDefaultWoman.CheckedChanged += new System.EventHandler(this.chbDefaultWoman_CheckedChanged);
             // 
             // numMenstruationLength
             // 
-            this.numMenstruationLength.Location = new System.Drawing.Point(122, 86);
+            this.numMenstruationLength.Location = new System.Drawing.Point(136, 86);
             this.numMenstruationLength.Maximum = new decimal(new int[] {
             9,
             0,
@@ -293,12 +317,21 @@
             0,
             0,
             0});
-            this.numMenstruationLength.ValueChanged += new System.EventHandler(this.numEmnstruationLength_ValueChanged);
+            this.numMenstruationLength.ValueChanged += new System.EventHandler(this.numMenstruationLength_ValueChanged);
+            // 
+            // lblMyCycle2
+            // 
+            this.lblMyCycle2.AutoSize = true;
+            this.lblMyCycle2.Location = new System.Drawing.Point(124, 46);
+            this.lblMyCycle2.Name = "lblMyCycle2";
+            this.lblMyCycle2.Size = new System.Drawing.Size(25, 13);
+            this.lblMyCycle2.TabIndex = 6;
+            this.lblMyCycle2.Text = "дня";
             // 
             // lblMenstruationLength2
             // 
             this.lblMenstruationLength2.AutoSize = true;
-            this.lblMenstruationLength2.Location = new System.Drawing.Point(149, 88);
+            this.lblMenstruationLength2.Location = new System.Drawing.Point(163, 88);
             this.lblMenstruationLength2.Name = "lblMenstruationLength2";
             this.lblMenstruationLength2.Size = new System.Drawing.Size(25, 13);
             this.lblMenstruationLength2.TabIndex = 6;
@@ -307,7 +340,7 @@
             // lblMenstruationLength1
             // 
             this.lblMenstruationLength1.AutoSize = true;
-            this.lblMenstruationLength1.Location = new System.Drawing.Point(0, 88);
+            this.lblMenstruationLength1.Location = new System.Drawing.Point(12, 88);
             this.lblMenstruationLength1.Name = "lblMenstruationLength1";
             this.lblMenstruationLength1.Size = new System.Drawing.Size(123, 13);
             this.lblMenstruationLength1.TabIndex = 5;
@@ -315,7 +348,7 @@
             // 
             // numMenstruationPeriod
             // 
-            this.numMenstruationPeriod.Location = new System.Drawing.Point(124, 44);
+            this.numMenstruationPeriod.Location = new System.Drawing.Point(70, 44);
             this.numMenstruationPeriod.Minimum = new decimal(new int[] {
             10,
             0,
@@ -331,47 +364,47 @@
             0});
             this.numMenstruationPeriod.ValueChanged += new System.EventHandler(this.numMenstruationPeriod_ValueChanged);
             // 
-            // label1
+            // lblMyCycle
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(1, 46);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(113, 13);
-            this.label1.TabIndex = 3;
-            this.label1.Text = "Длительность цикла";
+            this.lblMyCycle.AutoSize = true;
+            this.lblMyCycle.Location = new System.Drawing.Point(12, 46);
+            this.lblMyCycle.Name = "lblMyCycle";
+            this.lblMyCycle.Size = new System.Drawing.Size(55, 13);
+            this.lblMyCycle.TabIndex = 3;
+            this.lblMyCycle.Text = "Мой цикл";
             // 
             // rbManual
             // 
             this.rbManual.AutoSize = true;
-            this.rbManual.Location = new System.Drawing.Point(90, 64);
+            this.rbManual.Location = new System.Drawing.Point(98, 64);
             this.rbManual.Name = "rbManual";
-            this.rbManual.Size = new System.Drawing.Size(82, 17);
+            this.rbManual.Size = new System.Drawing.Size(84, 17);
             this.rbManual.TabIndex = 2;
             this.rbManual.TabStop = true;
-            this.rbManual.Text = "Выбранная";
+            this.rbManual.Text = "Выбранный";
             this.rbManual.UseVisualStyleBackColor = true;
             // 
             // rbAuto
             // 
             this.rbAuto.AutoSize = true;
-            this.rbAuto.Location = new System.Drawing.Point(4, 64);
+            this.rbAuto.Location = new System.Drawing.Point(12, 64);
             this.rbAuto.Name = "rbAuto";
             this.rbAuto.Size = new System.Drawing.Size(68, 17);
             this.rbAuto.TabIndex = 1;
             this.rbAuto.TabStop = true;
-            this.rbAuto.Text = "Средняя";
+            this.rbAuto.Text = "Средний";
             this.rbAuto.UseVisualStyleBackColor = true;
             this.rbAuto.CheckedChanged += new System.EventHandler(this.rbAuto_CheckedChanged);
             // 
-            // lblWomanDescription
+            // lblAverageCycle
             // 
-            this.lblWomanDescription.AutoEllipsis = true;
-            this.lblWomanDescription.AutoSize = true;
-            this.lblWomanDescription.Location = new System.Drawing.Point(5, 29);
-            this.lblWomanDescription.Name = "lblWomanDescription";
-            this.lblWomanDescription.Size = new System.Drawing.Size(42, 13);
-            this.lblWomanDescription.TabIndex = 0;
-            this.lblWomanDescription.Text = "...day...";
+            this.lblAverageCycle.AutoEllipsis = true;
+            this.lblAverageCycle.AutoSize = true;
+            this.lblAverageCycle.Location = new System.Drawing.Point(12, 29);
+            this.lblAverageCycle.Name = "lblAverageCycle";
+            this.lblAverageCycle.Size = new System.Drawing.Size(80, 13);
+            this.lblAverageCycle.TabIndex = 0;
+            this.lblAverageCycle.Text = "Средний цикл:";
             // 
             // xDay
             // 
@@ -395,9 +428,9 @@
             this.xDay.Location = new System.Drawing.Point(3, 315);
             this.xDay.Name = "xDay";
             this.xDay.Padding = new System.Windows.Forms.Padding(0, 25, 0, 0);
-            this.xDay.Size = new System.Drawing.Size(182, 76);
+            this.xDay.Size = new System.Drawing.Size(199, 76);
             this.xDay.TabIndex = 1;
-            this.xDay.Tag = 39;
+            this.xDay.Tag = 5;
             this.xDay.TooltipText = null;
             // 
             // lblDayDescription
@@ -409,17 +442,6 @@
             this.lblDayDescription.Size = new System.Drawing.Size(42, 13);
             this.lblDayDescription.TabIndex = 0;
             this.lblDayDescription.Text = "...day...";
-            // 
-            // chbDefaultWoman
-            // 
-            this.chbDefaultWoman.AutoSize = true;
-            this.chbDefaultWoman.Location = new System.Drawing.Point(4, 109);
-            this.chbDefaultWoman.Name = "chbDefaultWoman";
-            this.chbDefaultWoman.Size = new System.Drawing.Size(176, 17);
-            this.chbDefaultWoman.TabIndex = 7;
-            this.chbDefaultWoman.Text = "Открывать меня при запуске";
-            this.chbDefaultWoman.UseVisualStyleBackColor = true;
-            this.chbDefaultWoman.CheckedChanged += new System.EventHandler(this.chbDefaultWoman_CheckedChanged);
             // 
             // monthControl
             // 
@@ -433,21 +455,10 @@
             this.monthControl.MonthsMarginX = 5;
             this.monthControl.MonthsMarginY = 5;
             this.monthControl.Name = "monthControl";
-            this.monthControl.Size = new System.Drawing.Size(597, 507);
+            this.monthControl.Size = new System.Drawing.Size(578, 507);
             this.monthControl.StartMonth = new System.DateTime(2008, 2, 1, 0, 0, 0, 0);
             this.monthControl.TabIndex = 0;
             this.monthControl.FocusDateChanged += new WomenCalendar.MonthsControl.FocusDateChangedDelegate(this.monthControl_FocusDateChanged);
-            // 
-            // chbAskPassword
-            // 
-            this.chbAskPassword.AutoSize = true;
-            this.chbAskPassword.Location = new System.Drawing.Point(4, 132);
-            this.chbAskPassword.Name = "chbAskPassword";
-            this.chbAskPassword.Size = new System.Drawing.Size(165, 17);
-            this.chbAskPassword.TabIndex = 8;
-            this.chbAskPassword.Text = "Всегда спрашивать пароль";
-            this.chbAskPassword.UseVisualStyleBackColor = true;
-            this.chbAskPassword.CheckedChanged += new System.EventHandler(this.chbAskPassword_CheckedChanged);
             // 
             // MainForm
             // 
@@ -501,8 +512,8 @@
         private XPanderControl.XPander xWoman;
         private XPanderControl.XPander xDay;
         private System.Windows.Forms.Label lblDayDescription;
-        private System.Windows.Forms.Label lblWomanDescription;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label lblAverageCycle;
+        private System.Windows.Forms.Label lblMyCycle;
         private System.Windows.Forms.RadioButton rbManual;
         private System.Windows.Forms.RadioButton rbAuto;
         private System.Windows.Forms.NumericUpDown numMenstruationPeriod;
@@ -511,6 +522,7 @@
         private System.Windows.Forms.Label lblMenstruationLength1;
         private System.Windows.Forms.CheckBox chbDefaultWoman;
         private System.Windows.Forms.CheckBox chbAskPassword;
+        private System.Windows.Forms.Label lblMyCycle2;
 
 
     }
