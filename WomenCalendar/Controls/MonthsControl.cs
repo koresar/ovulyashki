@@ -63,8 +63,9 @@ namespace WomenCalendar
                 }
                 else
                 {
-                    StartMonth = _value.Date;
-                    oneMonth = singleMonths[0];
+                    StartMonth = _value.AddMonths(-1 * (VisibleMonthsCount - 1) / 2);
+                    oneMonth = singleMonths[
+                        (_value.Year - singleMonths[0].Date.Year) * 12 + _value.Month - singleMonths[0].Date.Month];
                 }
 
                 FocusDateChangedEventArgs ea = new FocusDateChangedEventArgs(oneMonth.FocusDate, _value.Date);
@@ -129,8 +130,8 @@ namespace WomenCalendar
 
         public bool IsDateVisible(DateTime date)
         {
-            return date.Date >= singleMonths[0].Date &&
-                   date.Date < singleMonths[VisibleMonthsCount - 1].Date.AddMonths(1);
+            return singleMonths[0].Date < date.Date &&
+                   date.Date < singleMonths[0].Date.AddMonths(VisibleMonthsCount); //singleMonths[VisibleMonthsCount - 1].Date.AddMonths(1);
         }
 
         private OneMonthControl CreateNewDefaultOneMonth()
@@ -157,7 +158,12 @@ namespace WomenCalendar
             dayContextMenu.Show(FocusMonth, FocusMonth.PointToClient(MousePosition));
         }
 
-        private void CreateAndAdjustMonthsAmount()
+        public void CreateAndAdjustMonthsAmount()
+        {
+            CreateAndAdjustMonthsAmount(false);
+        }
+        
+        public void CreateAndAdjustMonthsAmount(bool force)
         { // adjust amount of month calendars in the control according to its size.
             CellPopupControl.Visible = false;
 
@@ -167,7 +173,7 @@ namespace WomenCalendar
             if (monthesY == 0) monthesY = 1;
             int monthsAmount = monthesX*monthesY; // new amount of visible monthes
 
-            if (VisibleMonthsCount == monthsAmount)
+            if (!force && VisibleMonthsCount == monthsAmount)
             { // amount of visible months not changed. Do nothing.
                 return;
             }

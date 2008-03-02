@@ -34,12 +34,15 @@ namespace WomenCalendar
                     _currentWoman.Menstruations.CollectionChanged -= ApplicationForm.UpdateWomanInformation;
                 }
                 _currentWoman = value;
-                if (_currentWoman != null)
+                if (ApplicationForm != null)
                 {
-                    _currentWoman.AveragePeriodLengthChanged += ApplicationForm.UpdateWomanInformation;
-                    _currentWoman.Menstruations.CollectionChanged += ApplicationForm.UpdateWomanInformation;
+                    if (_currentWoman != null)
+                    {
+                        _currentWoman.AveragePeriodLengthChanged += ApplicationForm.UpdateWomanInformation;
+                        _currentWoman.Menstruations.CollectionChanged += ApplicationForm.UpdateWomanInformation;
+                    }
+                    ApplicationForm.UpdateWomanInformation();
                 }
-                ApplicationForm.UpdateWomanInformation();
             }
         }
 
@@ -143,9 +146,20 @@ namespace WomenCalendar
         [STAThread]
         static void Main()
         {
+            LoadSettings();
+
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+
             ApplicationForm = new MainForm();
+            bool isMaximazed = Settings.DefaultWindowIsMaximized;
+            ApplicationForm.Location = Settings.DefaultWindowPosition;
+            ApplicationForm.Size = Settings.DefaultWindowSize;
+            if (isMaximazed)
+            {
+                ApplicationForm.WindowState = FormWindowState.Maximized;
+            }
+
             IconResource = Resources.ResourceManager;
                 //new System.Resources.ResourceManager(System.Reflection.Assembly.GetExecutingAssembly());
             Application.Run(ApplicationForm);

@@ -230,12 +230,13 @@
             this.xLegend.CollapsedImage = ((System.Drawing.Bitmap)(resources.GetObject("xLegend.CollapsedImage")));
             this.xLegend.ExpandedHighlightImage = ((System.Drawing.Bitmap)(resources.GetObject("xLegend.ExpandedHighlightImage")));
             this.xLegend.ExpandedImage = ((System.Drawing.Bitmap)(resources.GetObject("xLegend.ExpandedImage")));
-            this.xLegend.Location = new System.Drawing.Point(8, 10);
+            this.xLegend.Location = new System.Drawing.Point(0, 0);
+            this.xLegend.Margin = new System.Windows.Forms.Padding(0);
             this.xLegend.Name = "xLegend";
             this.xLegend.Padding = new System.Windows.Forms.Padding(0, 25, 0, 0);
-            this.xLegend.Size = new System.Drawing.Size(216, 136);
+            this.xLegend.Size = new System.Drawing.Size(232, 136);
             this.xLegend.TabIndex = 2;
-            this.xLegend.Tag = 18;
+            this.xLegend.Tag = 0;
             this.xLegend.TooltipText = null;
             // 
             // xWoman
@@ -267,12 +268,13 @@
             this.xWoman.Controls.Add(this.lblAverageCycle);
             this.xWoman.ExpandedHighlightImage = ((System.Drawing.Bitmap)(resources.GetObject("xWoman.ExpandedHighlightImage")));
             this.xWoman.ExpandedImage = ((System.Drawing.Bitmap)(resources.GetObject("xWoman.ExpandedImage")));
-            this.xWoman.Location = new System.Drawing.Point(8, 160);
+            this.xWoman.Location = new System.Drawing.Point(0, 136);
+            this.xWoman.Margin = new System.Windows.Forms.Padding(0);
             this.xWoman.Name = "xWoman";
             this.xWoman.Padding = new System.Windows.Forms.Padding(0, 25, 0, 0);
-            this.xWoman.Size = new System.Drawing.Size(216, 164);
+            this.xWoman.Size = new System.Drawing.Size(232, 164);
             this.xWoman.TabIndex = 0;
-            this.xWoman.Tag = 19;
+            this.xWoman.Tag = 1;
             this.xWoman.TooltipText = null;
             // 
             // chbAskPassword
@@ -428,12 +430,13 @@
             this.xDay.Controls.Add(this.lblDayDescription);
             this.xDay.ExpandedHighlightImage = ((System.Drawing.Bitmap)(resources.GetObject("xDay.ExpandedHighlightImage")));
             this.xDay.ExpandedImage = ((System.Drawing.Bitmap)(resources.GetObject("xDay.ExpandedImage")));
-            this.xDay.Location = new System.Drawing.Point(8, 338);
+            this.xDay.Location = new System.Drawing.Point(0, 300);
+            this.xDay.Margin = new System.Windows.Forms.Padding(0);
             this.xDay.Name = "xDay";
             this.xDay.Padding = new System.Windows.Forms.Padding(0, 25, 0, 0);
-            this.xDay.Size = new System.Drawing.Size(216, 76);
+            this.xDay.Size = new System.Drawing.Size(232, 76);
             this.xDay.TabIndex = 1;
-            this.xDay.Tag = 20;
+            this.xDay.Tag = 2;
             this.xDay.TooltipText = null;
             // 
             // lblDayDescription
@@ -459,7 +462,7 @@
             this.monthControl.MonthsMarginY = 10;
             this.monthControl.Name = "monthControl";
             this.monthControl.Size = new System.Drawing.Size(552, 507);
-            this.monthControl.StartMonth = new System.DateTime(2008, 2, 1, 0, 0, 0, 0);
+            this.monthControl.StartMonth = new System.DateTime(2007, 2, 1, 0, 0, 0, 0);
             this.monthControl.TabIndex = 0;
             this.monthControl.FocusDateChanged += new WomenCalendar.MonthsControl.FocusDateChangedDelegate(this.monthControl_FocusDateChanged);
             // 
@@ -473,8 +476,10 @@
             this.Controls.Add(this.toolStrip1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "MainForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "Овуляшки";
             this.Load += new System.EventHandler(this.MainForm_Load);
+            this.SizeChanged += new System.EventHandler(this.MainForm_SizeChanged);
             this.MouseLeave += new System.EventHandler(this.MainForm_MouseLeave);
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
             this.toolStrip1.ResumeLayout(false);

@@ -104,7 +104,7 @@ namespace WomenCalendar
         public Woman()
         {
             notes = new NotesCollection();
-            defaultMenstruationLength = 4;
+            defaultMenstruationLength = 5;
             _menstruations = new MenstruationsCollection();
             manualPeriodLength = 28;
         }

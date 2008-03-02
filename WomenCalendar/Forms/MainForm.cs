@@ -15,7 +15,6 @@ namespace WomenCalendar
             InitializeComponent();
 
             toolStrip1.Items.Add(new ToolStripControlHost(dateTimePicker1));
-            lblAverageCycle.Text = string.Empty;
         }
 
         public void UpdateDayInformation(DateTime date)
@@ -138,6 +137,7 @@ namespace WomenCalendar
         {
             if (Program.OpenWoman())
             {
+                chbDefaultWoman.Checked = (Program.Settings.DefaultWomanPath == Program.CurrentWoman.AssociatedFile);
                 monthControl.Redraw();
             }
         }
@@ -155,18 +155,27 @@ namespace WomenCalendar
 
                 // Beginning the part where we collect all application settings
                 Program.Settings.DefaultWomanPath = chbDefaultWoman.Checked ? Program.CurrentWoman.AssociatedFile : string.Empty;
-                // And of the settings collectioning part.
+                // End of the settings collectioning part.
 
+                /*Program.Settings.DefaultWindowIsMaximized = (WindowState == FormWindowState.Maximized);
+                if (!Program.Settings.DefaultWindowIsMaximized)
+                {
+                    Program.Settings.DefaultWindowPosition = Location;
+                    Program.Settings.DefaultWindowSize = Size;
+                }*/
                 Program.SaveSettings();
             }
         }
 
         private void MainForm_Load(object sender, EventArgs e)
         {
-            Program.LoadSettings();
+            monthControl.CreateAndAdjustMonthsAmount(true);
+            //monthControl.Redraw();
 
             monthControl.FocusDate = DateTime.Today;
             chbDefaultWoman.Checked = !string.IsNullOrEmpty(Program.Settings.DefaultWomanPath);
+
+            UpdateWomanInformation();
         }
 
         private void rbAuto_CheckedChanged(object sender, EventArgs e)
@@ -225,6 +234,16 @@ namespace WomenCalendar
         private void chbAskPassword_CheckedChanged(object sender, EventArgs e)
         {
             Program.CurrentWoman.AllwaysAskPassword = chbAskPassword.Checked;
+        }
+
+        private void MainForm_SizeChanged(object sender, EventArgs e)
+        {
+            Program.Settings.DefaultWindowIsMaximized = (WindowState == FormWindowState.Maximized);
+            if (!Program.Settings.DefaultWindowIsMaximized)
+            {
+                Program.Settings.DefaultWindowPosition = Location;
+                Program.Settings.DefaultWindowSize = Size;
+            }
         }
     }
 }
