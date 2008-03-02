@@ -109,6 +109,12 @@ namespace WomenCalendar
             set { _monthsMarginY = value; }
         }
 
+
+        public ContextMenuStrip MonthMenu
+        {
+            get { return monthMenu; }
+        }
+
         public MonthsControl()
         {
             InitializeComponent();
@@ -137,18 +143,18 @@ namespace WomenCalendar
             return control;
         }
 
-        public void ShowPopupMenu()
+        public void ShowDayContextMenu()
         {
             bool isMentruationDay = Program.CurrentWoman.Menstruations.IsMenstruationDay(FocusDate);
-            contextMenu.Items["setAsMenstruationDay"].Visible = !isMentruationDay;
-            contextMenu.Items["removeMenstruationDay"].Visible = isMentruationDay;
+            dayContextMenu.Items["setAsMenstruationDay"].Visible = !isMentruationDay;
+            dayContextMenu.Items["removeMenstruationDay"].Visible = isMentruationDay;
 
             bool haveNote = Program.CurrentWoman.Notes.ContainsKey(FocusDate);
-            contextMenu.Items["addNote"].Visible = !haveNote;
-            contextMenu.Items["removeNote"].Visible = haveNote;
-            contextMenu.Items["editNote"].Visible = haveNote;
+            dayContextMenu.Items["addNote"].Visible = !haveNote;
+            dayContextMenu.Items["removeNote"].Visible = haveNote;
+            dayContextMenu.Items["editNote"].Visible = haveNote;
 
-            contextMenu.Show(FocusMonth, FocusMonth.PointToClient(MousePosition));
+            dayContextMenu.Show(FocusMonth, FocusMonth.PointToClient(MousePosition));
         }
 
         private void CreateAndAdjustMonthsAmount()
@@ -233,12 +239,25 @@ namespace WomenCalendar
             Update();
         }
 
+        public void DropMonthMenu(Point screenLocation)
+        {
+            CellPopupControl.Visible = false;
+            MonthMenu.Show(screenLocation);
+        }
+
+        public void RedrawFocusDay()
+        {
+            ((MainForm)ParentForm).UpdateDayInformation(FocusDate);
+            FocusDay.Invalidate();
+            FocusDay.Update();
+        }
+
         private void control_MonthDayClicked(object sender, DayCellClickEventArgs e)
         {
             FocusDate = e.NewDate;
             if (e.Button == MouseButtons.Right)
             {
-                ShowPopupMenu();
+                ShowDayContextMenu();
             }
         }
 
@@ -302,13 +321,6 @@ namespace WomenCalendar
             }
         }
 
-        public void RedrawFocusDay()
-        {
-            ((MainForm)ParentForm).UpdateDayInformation(FocusDate);
-            FocusDay.Invalidate();
-            FocusDay.Update();
-        }
-
         private void MonthsControl_MouseEnter(object sender, EventArgs e)
         {
             CellPopupControl.Visible = false;
@@ -317,6 +329,11 @@ namespace WomenCalendar
         private void MonthsControl_MouseLeave(object sender, EventArgs e)
         {
             CellPopupControl.Visible = false;
+        }
+
+        private void ToolStripBBTGraph_Click(object sender, EventArgs e)
+        {
+            new BBTForm().Show();
         }
     }
 }

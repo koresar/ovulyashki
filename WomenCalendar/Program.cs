@@ -155,7 +155,7 @@ namespace WomenCalendar
         {
             public static Brush HeaderBrush = Brushes.White;
             public static Pen HeaderPen = new Pen(HeaderBrush, OneMonthControl.EdgeWidth + 1);
-            public static Pen TodayEdgePen = new Pen(Brushes.Blue, 5);
+            public static Pen TodayEdgePen = new Pen(Brushes.Blue, 10);
         }
 
         public static class DayCellAppearance

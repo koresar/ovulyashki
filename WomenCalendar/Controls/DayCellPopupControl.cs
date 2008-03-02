@@ -121,7 +121,7 @@ namespace WomenCalendar
             OwnerMonthsControl.FocusDate = DayCell.Date;
             if (e.Button == MouseButtons.Right)
             {
-                OwnerMonthsControl.ShowPopupMenu();
+                OwnerMonthsControl.ShowDayContextMenu();
             }
         }
 

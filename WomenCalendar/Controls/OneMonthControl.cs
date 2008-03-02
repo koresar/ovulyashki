@@ -175,5 +175,10 @@ namespace WomenCalendar
                 MonthDayClicked(this, e);
             }
         }
+
+        private void btnDropDown_Click(object sender, EventArgs e)
+        {
+            OwnerMonthsControl.DropMonthMenu(PointToScreen(btnDropDown.Location + btnDropDown.Size));
+        }
     }
 }

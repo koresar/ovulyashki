@@ -45,13 +45,13 @@ namespace WomenCalendar
                 if (closestPeriod != null)
                 {
                     int distance = (date - closestPeriod.StartDay).Days;
-                    if (distance < 21)
+                    if (distance < MenstruationPeriod.NormalMinimalPeriod)
                     {
-                        askMessage += "Между овуляшками меньше 21-го дня!";
+                        askMessage += "Между овуляшками меньше 21-го дня! Такой маленький цикл мы не будем учитывать при прогнозировании.";
                     }
-                    else if (distance > 35)
+                    else if (distance > MenstruationPeriod.NormalMaximalPeriod)
                     {
-                        askMessage += "Между овуляшками больше 35-ти дней!";
+                        askMessage += "Между овуляшками больше 35-ти дней! Такой большой цикл мы не будем учитывать при прогнозировании.";
                     }
                 }
 

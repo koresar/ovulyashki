@@ -34,6 +34,7 @@
             // btnDropDown
             // 
             this.btnDropDown.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btnDropDown.BackColor = System.Drawing.Color.Transparent;
             this.btnDropDown.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnDropDown.FlatAppearance.BorderSize = 0;
             this.btnDropDown.Image = global::WomenCalendar.Properties.Resources.month_dropdown;
@@ -43,6 +44,7 @@
             this.btnDropDown.TabIndex = 0;
             this.btnDropDown.TabStop = false;
             this.btnDropDown.UseVisualStyleBackColor = false;
+            this.btnDropDown.Click += new System.EventHandler(this.btnDropDown_Click);
             // 
             // OneMonthControl
             // 

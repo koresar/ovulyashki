@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.contextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.dayContextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.setAsMenstruationDay = new System.Windows.Forms.ToolStripMenuItem();
             this.removeMenstruationDay = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
@@ -37,20 +37,23 @@
             this.removeNote = new System.Windows.Forms.ToolStripMenuItem();
             this.editNote = new System.Windows.Forms.ToolStripMenuItem();
             this.oneMonthControl = new WomenCalendar.OneMonthControl();
-            this.contextMenu.SuspendLayout();
+            this.monthMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.ToolStripBBTGraph = new System.Windows.Forms.ToolStripMenuItem();
+            this.dayContextMenu.SuspendLayout();
+            this.monthMenu.SuspendLayout();
             this.SuspendLayout();
             // 
-            // contextMenu
+            // dayContextMenu
             // 
-            this.contextMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.dayContextMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.setAsMenstruationDay,
             this.removeMenstruationDay,
             this.toolStripSeparator1,
             this.addNote,
             this.removeNote,
             this.editNote});
-            this.contextMenu.Name = "contextMenu";
-            this.contextMenu.Size = new System.Drawing.Size(238, 142);
+            this.dayContextMenu.Name = "contextMenu";
+            this.dayContextMenu.Size = new System.Drawing.Size(238, 120);
             // 
             // setAsMenstruationDay
             // 
@@ -105,6 +108,20 @@
             this.oneMonthControl.Size = new System.Drawing.Size(230, 230);
             this.oneMonthControl.TabIndex = 0;
             // 
+            // monthMenu
+            // 
+            this.monthMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.ToolStripBBTGraph});
+            this.monthMenu.Name = "monthMenu";
+            this.monthMenu.Size = new System.Drawing.Size(334, 48);
+            // 
+            // ToolStripBBTGraph
+            // 
+            this.ToolStripBBTGraph.Name = "ToolStripBBTGraph";
+            this.ToolStripBBTGraph.Size = new System.Drawing.Size(333, 22);
+            this.ToolStripBBTGraph.Text = "Построить график Базальной Температуры Тела";
+            this.ToolStripBBTGraph.Click += new System.EventHandler(this.ToolStripBBTGraph_Click);
+            // 
             // MonthsControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -117,7 +134,8 @@
             this.MouseLeave += new System.EventHandler(this.MonthsControl_MouseLeave);
             this.SizeChanged += new System.EventHandler(this.MonthControl_SizeChanged);
             this.MouseEnter += new System.EventHandler(this.MonthsControl_MouseEnter);
-            this.contextMenu.ResumeLayout(false);
+            this.dayContextMenu.ResumeLayout(false);
+            this.monthMenu.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -125,13 +143,15 @@
         #endregion
 
         private OneMonthControl oneMonthControl;
-        private System.Windows.Forms.ContextMenuStrip contextMenu;
+        private System.Windows.Forms.ContextMenuStrip dayContextMenu;
         private System.Windows.Forms.ToolStripMenuItem setAsMenstruationDay;
         private System.Windows.Forms.ToolStripMenuItem addNote;
         private System.Windows.Forms.ToolStripMenuItem removeMenstruationDay;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripMenuItem removeNote;
         private System.Windows.Forms.ToolStripMenuItem editNote;
+        private System.Windows.Forms.ContextMenuStrip monthMenu;
+        private System.Windows.Forms.ToolStripMenuItem ToolStripBBTGraph;
 
     }
 }

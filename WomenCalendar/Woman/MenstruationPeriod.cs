@@ -7,6 +7,9 @@ namespace WomenCalendar
 {
     public class MenstruationPeriod
     {
+        public const int NormalMinimalPeriod = 21;
+        public const int NormalMaximalPeriod = 35;
+
         public DateTime StartDay;
         public int Length;
         public EgestasCollection Egestas;

@@ -46,9 +46,11 @@ namespace WomenCalendar
         {
             StringBuilder sb = new StringBuilder();
 
+            int usedDays = Program.CurrentWoman.AveragePeriodLength == 0 ? 28 : Program.CurrentWoman.AveragePeriodLength;
             sb.Append("Средний цикл: ");
-            sb.Append(Program.CurrentWoman.AveragePeriodLength == 0 ? 28 : Program.CurrentWoman.AveragePeriodLength);
-            sb.Append(" дней");
+            sb.Append(usedDays);
+            sb.Append(' ');
+            sb.Append(GetDaysString(usedDays));
 
             return sb.ToString();
         }
@@ -180,7 +182,8 @@ namespace WomenCalendar
         private void numMenstruationPeriod_ValueChanged(object sender, EventArgs e)
         {
             int newValue = (int) numMenstruationPeriod.Value;
-            if (Program.CurrentWoman.ManualPeriodLength <= 35 && newValue > 35)
+            if (Program.CurrentWoman.ManualPeriodLength <= MenstruationPeriod.NormalMaximalPeriod && 
+                newValue > MenstruationPeriod.NormalMaximalPeriod)
             {
                 if (MessageBox.Show(this, "Ты хочешь чтобы цикл был больше 35-ти дней?", "Вот это цикл!",
                                     MessageBoxButtons.YesNo, MessageBoxIcon.Question) != DialogResult.Yes)
