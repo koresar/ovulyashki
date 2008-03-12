@@ -81,11 +81,29 @@
     <Compile Include="Forms\DayEditForm.Designer.cs">
       <DependentUpon>DayEditForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\LoginForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\LoginForm.Designer.cs">
+      <DependentUpon>LoginForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\ModalBaseForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ModalBaseForm.Designer.cs">
+      <DependentUpon>ModalBaseForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\NewEditWomanForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\NewEditWomanForm.Designer.cs">
+      <DependentUpon>NewEditWomanForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Woman\EgestasCollection.cs" />
     <Compile Include="Woman\MenstruationPeriod.cs" />
@@ -178,6 +196,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\DayEditForm.resx">
       <DependentUpon>DayEditForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\LoginForm.resx">
+      <DependentUpon>LoginForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ModalBaseForm.resx">
+      <DependentUpon>ModalBaseForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\NewEditWomanForm.resx">
+      <DependentUpon>NewEditWomanForm.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\drop.Image.bmp" />

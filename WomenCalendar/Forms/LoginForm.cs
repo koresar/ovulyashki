@@ -8,24 +8,18 @@ using System.Windows.Forms;
 
 namespace WomenCalendar
 {
-    public partial class NoteEditForm : ModalBaseForm
+    public partial class LoginForm : ModalBaseForm
     {
-        public NoteEditForm()
+        public LoginForm()
         {
             InitializeComponent();
         }
 
-        public NoteEditForm(string editText)
-            : this()
-        {
-            txtNote.Text = (!editText.Contains("\r\n")) ? editText.Replace("\n", "\r\n") : editText;
-        }
-
-        public string NoteText
+        public string Password
         {
             get
             {
-                return txtNote.Text;
+                return txtPassword.Text;
             }
         }
     }

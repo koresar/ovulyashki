@@ -245,5 +245,13 @@ namespace WomenCalendar
                 Program.Settings.DefaultWindowSize = Size;
             }
         }
+
+        private void btnChangeWoman_Click(object sender, EventArgs e)
+        {
+            if (Program.EditWoman())
+            {
+                monthControl.Redraw();
+            }
+        }
     }
 }

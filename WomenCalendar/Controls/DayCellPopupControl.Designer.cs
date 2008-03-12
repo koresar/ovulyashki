@@ -30,7 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             this.trackEgestaAmount = new System.Windows.Forms.TrackBar();
-            this.lblDay = new System.Windows.Forms.LinkLabel();
+            this.lblDay = new System.Windows.Forms.Label();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
             this.pictureNote = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.trackEgestaAmount)).BeginInit();
@@ -61,16 +61,14 @@
             this.lblDay.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lblDay.Cursor = System.Windows.Forms.Cursors.Hand;
             this.lblDay.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.lblDay.LinkColor = System.Drawing.Color.Blue;
             this.lblDay.Location = new System.Drawing.Point(0, 0);
             this.lblDay.Margin = new System.Windows.Forms.Padding(0);
             this.lblDay.Name = "lblDay";
             this.lblDay.Size = new System.Drawing.Size(29, 20);
             this.lblDay.TabIndex = 1;
-            this.lblDay.TabStop = true;
+            this.lblDay.TabStop = false;
             this.lblDay.Text = "32";
             this.lblDay.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.lblDay.VisitedLinkColor = System.Drawing.Color.Blue;
             this.lblDay.MouseClick += new System.Windows.Forms.MouseEventHandler(this.lblDay_MouseClick);
             // 
             // toolTip
@@ -118,7 +116,7 @@
         #endregion
 
         private System.Windows.Forms.TrackBar trackEgestaAmount;
-        private System.Windows.Forms.LinkLabel lblDay;
+        private System.Windows.Forms.Label lblDay;
         private System.Windows.Forms.ToolTip toolTip;
         private System.Windows.Forms.PictureBox pictureNote;
     }

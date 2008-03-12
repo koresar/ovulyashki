@@ -12,6 +12,22 @@ namespace WomenCalendar
     public class Woman
     {
         [XmlIgnore()]
+        private string name = string.Empty;
+        public string Name
+        {
+            get { return name; }
+            set { name = value; }
+        }
+
+        [XmlIgnore()]
+        private string password = string.Empty;
+        public string Password
+        {
+            get { return password; }
+            set { password = value; }
+        }
+
+        [XmlIgnore()]
         private MenstruationsCollection _menstruations;
         public MenstruationsCollection Menstruations
         {

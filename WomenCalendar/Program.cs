@@ -81,9 +81,7 @@ namespace WomenCalendar
             dialog.Filter = "Woman files (*.woman)|*.woman";
             if (dialog.ShowDialog(ApplicationForm) == DialogResult.OK)
             {
-                CurrentWoman = Woman.ReadFrom(dialog.FileName);
-                //Settings.DefaultWomanPath = dialog.FileName;
-                return true;
+                return LoadWoman(dialog.FileName);
             }
             return false;
         }
@@ -92,8 +90,19 @@ namespace WomenCalendar
         {
             if (AskAndSaveCurrentWoman())
             {
-                CurrentWoman = new Woman();
-                return true;
+                NewEditWomanForm form = new NewEditWomanForm();
+                if (form.ShowDialog() == DialogResult.OK)
+                {
+                    Woman w = new Woman();
+                    w.Name = form.WomanName;
+                    w.Password = form.WomanPassword;
+                    if (!string.IsNullOrEmpty(w.Password))
+                    {
+                        w.AllwaysAskPassword = true;
+                    }
+                    CurrentWoman = w;
+                    return true;
+                }
             }
             return false;
         }
@@ -126,18 +135,47 @@ namespace WomenCalendar
         public static bool LoadSettings()
         {
             Settings = ApplicationSettings.Read(SettingsFileName);
-            if (!string.IsNullOrEmpty(Settings.DefaultWomanPath))
+            if (string.IsNullOrEmpty(Settings.DefaultWomanPath) ||
+                !File.Exists(Settings.DefaultWomanPath) || !LoadWoman(Settings.DefaultWomanPath))
             {
-                if (File.Exists(Settings.DefaultWomanPath))
-                {
-                    CurrentWoman = Woman.ReadFrom(Settings.DefaultWomanPath);
-                }
-                else
-                {
-                    Settings.DefaultWomanPath = string.Empty;
-                }
+                Settings.DefaultWomanPath = string.Empty;
             }
             return true;
+        }
+
+        public static bool LoadWoman(string path)
+        {
+            Woman w = Woman.ReadFrom(path);
+            if (w.AllwaysAskPassword && !AskPassword(w)) return false;
+
+            CurrentWoman = w;
+            return true;
+        }
+
+        public static bool AskPassword(Woman woman)
+        {
+            LoginForm form = new LoginForm();
+            form.Text = woman.Name + ", " + form.Text;
+            return form.ShowDialog() == DialogResult.OK && form.Password == woman.Password;
+        }
+        
+        public static bool EditWoman()
+        {
+            NewEditWomanForm form = new NewEditWomanForm();
+            form.WomanName = CurrentWoman.Name;
+            form.WomanPassword = CurrentWoman.Password;
+            form.Text = "Изменяем женщину";
+            if (form.ShowDialog() == DialogResult.OK)
+            {
+                CurrentWoman.Name = form.WomanName;
+                CurrentWoman.Password = form.WomanPassword;
+                if (!string.IsNullOrEmpty(CurrentWoman.Password))
+                {
+                    CurrentWoman.AllwaysAskPassword = true;
+                }
+                return true;
+            }
+            return false;            
         }
 
         /// <summary>
@@ -146,12 +184,12 @@ namespace WomenCalendar
         [STAThread]
         static void Main()
         {
-            LoadSettings();
-
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
             ApplicationForm = new MainForm();
+            LoadSettings();
+
             bool isMaximazed = Settings.DefaultWindowIsMaximized;
             ApplicationForm.Location = Settings.DefaultWindowPosition;
             ApplicationForm.Size = Settings.DefaultWindowSize;
