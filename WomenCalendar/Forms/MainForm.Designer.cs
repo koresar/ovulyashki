@@ -45,6 +45,7 @@
             this.xPanderList1 = new XPanderControl.XPanderList();
             this.xLegend = new XPanderControl.XPander();
             this.xWoman = new XPanderControl.XPander();
+            this.btnChangeWoman = new System.Windows.Forms.Button();
             this.chbAskPassword = new System.Windows.Forms.CheckBox();
             this.chbDefaultWoman = new System.Windows.Forms.CheckBox();
             this.numMenstruationLength = new System.Windows.Forms.NumericUpDown();
@@ -59,7 +60,6 @@
             this.xDay = new XPanderControl.XPander();
             this.lblDayDescription = new System.Windows.Forms.Label();
             this.monthControl = new WomenCalendar.MonthsControl();
-            this.btnChangeWoman = new System.Windows.Forms.Button();
             this.toolStrip1.SuspendLayout();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -159,6 +159,7 @@
             this.helpToolStripButton.Name = "helpToolStripButton";
             this.helpToolStripButton.Size = new System.Drawing.Size(23, 22);
             this.helpToolStripButton.Text = "Помощь";
+            this.helpToolStripButton.Click += new System.EventHandler(this.helpToolStripButton_Click);
             // 
             // toolStripSeparator2
             // 
@@ -237,7 +238,7 @@
             this.xLegend.Padding = new System.Windows.Forms.Padding(0, 25, 0, 0);
             this.xLegend.Size = new System.Drawing.Size(216, 136);
             this.xLegend.TabIndex = 2;
-            this.xLegend.Tag = 3;
+            this.xLegend.Tag = 0;
             this.xLegend.TooltipText = null;
             // 
             // xWoman
@@ -276,8 +277,18 @@
             this.xWoman.Padding = new System.Windows.Forms.Padding(0, 25, 0, 0);
             this.xWoman.Size = new System.Drawing.Size(216, 176);
             this.xWoman.TabIndex = 0;
-            this.xWoman.Tag = 4;
+            this.xWoman.Tag = 1;
             this.xWoman.TooltipText = null;
+            // 
+            // btnChangeWoman
+            // 
+            this.btnChangeWoman.Location = new System.Drawing.Point(12, 147);
+            this.btnChangeWoman.Name = "btnChangeWoman";
+            this.btnChangeWoman.Size = new System.Drawing.Size(185, 23);
+            this.btnChangeWoman.TabIndex = 9;
+            this.btnChangeWoman.Text = "Изменить имя и пароль";
+            this.btnChangeWoman.UseVisualStyleBackColor = true;
+            this.btnChangeWoman.Click += new System.EventHandler(this.btnChangeWoman_Click);
             // 
             // chbAskPassword
             // 
@@ -438,7 +449,7 @@
             this.xDay.Padding = new System.Windows.Forms.Padding(0, 25, 0, 0);
             this.xDay.Size = new System.Drawing.Size(216, 76);
             this.xDay.TabIndex = 1;
-            this.xDay.Tag = 5;
+            this.xDay.Tag = 2;
             this.xDay.TooltipText = null;
             // 
             // lblDayDescription
@@ -467,16 +478,6 @@
             this.monthControl.StartMonth = new System.DateTime(2007, 2, 1, 0, 0, 0, 0);
             this.monthControl.TabIndex = 0;
             this.monthControl.FocusDateChanged += new WomenCalendar.MonthsControl.FocusDateChangedDelegate(this.monthControl_FocusDateChanged);
-            // 
-            // btnChangeWoman
-            // 
-            this.btnChangeWoman.Location = new System.Drawing.Point(12, 147);
-            this.btnChangeWoman.Name = "btnChangeWoman";
-            this.btnChangeWoman.Size = new System.Drawing.Size(185, 23);
-            this.btnChangeWoman.TabIndex = 9;
-            this.btnChangeWoman.Text = "Изменить имя и пароль";
-            this.btnChangeWoman.UseVisualStyleBackColor = true;
-            this.btnChangeWoman.Click += new System.EventHandler(this.btnChangeWoman_Click);
             // 
             // MainForm
             // 

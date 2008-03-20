@@ -28,40 +28,48 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.colorSlider1 = new MB.Controls.ColorSlider();
+            this.sliderEgestaAmount = new MB.Controls.ColorSlider();
             this.SuspendLayout();
             // 
-            // colorSlider1
+            // sliderEgestaAmount
             // 
-            this.colorSlider1.BackColor = System.Drawing.Color.Transparent;
-            this.colorSlider1.BorderRoundRectSize = new System.Drawing.Size(8, 8);
-            this.colorSlider1.LargeChange = ((uint)(5u));
-            this.colorSlider1.Location = new System.Drawing.Point(13, 12);
-            this.colorSlider1.Maximum = 4;
-            this.colorSlider1.Name = "colorSlider1";
-            this.colorSlider1.Size = new System.Drawing.Size(200, 30);
-            this.colorSlider1.SmallChange = ((uint)(1u));
-            this.colorSlider1.TabIndex = 10000;
-            this.colorSlider1.Text = "colorSlider1";
-            this.colorSlider1.ThumbRoundRectSize = new System.Drawing.Size(8, 8);
-            this.colorSlider1.Value = 4;
+            this.sliderEgestaAmount.BackColor = System.Drawing.Color.Transparent;
+            this.sliderEgestaAmount.BarInnerColor = System.Drawing.Color.Pink;
+            this.sliderEgestaAmount.BarOuterColor = System.Drawing.Color.DeepPink;
+            this.sliderEgestaAmount.BorderRoundRectSize = new System.Drawing.Size(8, 8);
+            this.sliderEgestaAmount.ElapsedInnerColor = System.Drawing.Color.Pink;
+            this.sliderEgestaAmount.ElapsedOuterColor = System.Drawing.Color.DeepPink;
+            this.sliderEgestaAmount.LargeChange = ((uint)(5u));
+            this.sliderEgestaAmount.Location = new System.Drawing.Point(250, 12);
+            this.sliderEgestaAmount.Maximum = 4;
+            this.sliderEgestaAmount.Name = "sliderEgestaAmount";
+            this.sliderEgestaAmount.Orientation = System.Windows.Forms.Orientation.Vertical;
+            this.sliderEgestaAmount.Size = new System.Drawing.Size(30, 200);
+            this.sliderEgestaAmount.SmallChange = ((uint)(1u));
+            this.sliderEgestaAmount.TabIndex = 0;
+            this.sliderEgestaAmount.Text = "colorSlider1";
+            this.sliderEgestaAmount.ThumbInnerColor = System.Drawing.Color.White;
+            this.sliderEgestaAmount.ThumbOuterColor = System.Drawing.Color.Pink;
+            this.sliderEgestaAmount.ThumbRoundRectSize = new System.Drawing.Size(8, 8);
+            this.sliderEgestaAmount.Value = 4;
             // 
             // DayEditForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(292, 266);
-            this.Controls.Add(this.colorSlider1);
+            this.Controls.Add(this.sliderEgestaAmount);
             this.Name = "DayEditForm";
             this.Text = "Изменить день";
-            this.Controls.SetChildIndex(this.colorSlider1, 0);
+            this.Load += new System.EventHandler(this.DayEditForm_Load);
+            this.Controls.SetChildIndex(this.sliderEgestaAmount, 0);
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private MB.Controls.ColorSlider colorSlider1;
+        private MB.Controls.ColorSlider sliderEgestaAmount;
 
     }
 }

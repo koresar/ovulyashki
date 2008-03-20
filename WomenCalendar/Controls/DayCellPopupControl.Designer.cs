@@ -29,32 +29,12 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.trackEgestaAmount = new System.Windows.Forms.TrackBar();
             this.lblDay = new System.Windows.Forms.Label();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
             this.pictureNote = new System.Windows.Forms.PictureBox();
-            ((System.ComponentModel.ISupportInitialize)(this.trackEgestaAmount)).BeginInit();
+            this.sliderEgestaAmount = new MB.Controls.ColorSlider();
             ((System.ComponentModel.ISupportInitialize)(this.pictureNote)).BeginInit();
             this.SuspendLayout();
-            // 
-            // trackEgestaAmount
-            // 
-            this.trackEgestaAmount.AutoSize = false;
-            this.trackEgestaAmount.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.trackEgestaAmount.LargeChange = 1;
-            this.trackEgestaAmount.Location = new System.Drawing.Point(43, -3);
-            this.trackEgestaAmount.Margin = new System.Windows.Forms.Padding(0);
-            this.trackEgestaAmount.Maximum = 4;
-            this.trackEgestaAmount.Name = "trackEgestaAmount";
-            this.trackEgestaAmount.Orientation = System.Windows.Forms.Orientation.Vertical;
-            this.trackEgestaAmount.Size = new System.Drawing.Size(20, 70);
-            this.trackEgestaAmount.TabIndex = 0;
-            this.trackEgestaAmount.TabStop = false;
-            this.trackEgestaAmount.Value = 2;
-            this.trackEgestaAmount.MouseLeave += new System.EventHandler(this.trackEgestaAmount_MouseLeave);
-            this.trackEgestaAmount.ValueChanged += new System.EventHandler(this.trackEgestaAmount_ValueChanged);
-            this.trackEgestaAmount.MouseDown += new System.Windows.Forms.MouseEventHandler(this.trackEgestaAmount_MouseDown);
-            this.trackEgestaAmount.MouseEnter += new System.EventHandler(this.trackEgestaAmount_MouseEnter);
             // 
             // lblDay
             // 
@@ -66,7 +46,6 @@
             this.lblDay.Name = "lblDay";
             this.lblDay.Size = new System.Drawing.Size(29, 20);
             this.lblDay.TabIndex = 1;
-            this.lblDay.TabStop = false;
             this.lblDay.Text = "32";
             this.lblDay.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.lblDay.MouseClick += new System.Windows.Forms.MouseEventHandler(this.lblDay_MouseClick);
@@ -94,20 +73,48 @@
             this.pictureNote.MouseClick += new System.Windows.Forms.MouseEventHandler(this.pictureNote_MouseClick);
             this.pictureNote.MouseEnter += new System.EventHandler(this.pictureNote_MouseEnter);
             // 
+            // sliderEgestaAmount
+            // 
+            this.sliderEgestaAmount.BackColor = System.Drawing.Color.Transparent;
+            this.sliderEgestaAmount.BarInnerColor = System.Drawing.Color.Pink;
+            this.sliderEgestaAmount.BarOuterColor = System.Drawing.Color.DeepPink;
+            this.sliderEgestaAmount.BorderRoundRectSize = new System.Drawing.Size(8, 8);
+            this.sliderEgestaAmount.DrawFocusRectangle = false;
+            this.sliderEgestaAmount.ElapsedInnerColor = System.Drawing.Color.Pink;
+            this.sliderEgestaAmount.ElapsedOuterColor = System.Drawing.Color.DeepPink;
+            this.sliderEgestaAmount.LargeChange = ((uint)(1u));
+            this.sliderEgestaAmount.Location = new System.Drawing.Point(42, 1);
+            this.sliderEgestaAmount.Margin = new System.Windows.Forms.Padding(0);
+            this.sliderEgestaAmount.Maximum = 4;
+            this.sliderEgestaAmount.Name = "sliderEgestaAmount";
+            this.sliderEgestaAmount.Orientation = System.Windows.Forms.Orientation.Vertical;
+            this.sliderEgestaAmount.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.sliderEgestaAmount.Size = new System.Drawing.Size(20, 60);
+            this.sliderEgestaAmount.SmallChange = ((uint)(1u));
+            this.sliderEgestaAmount.TabIndex = 3;
+            this.sliderEgestaAmount.Text = "colorSlider1";
+            this.sliderEgestaAmount.ThumbInnerColor = System.Drawing.Color.WhiteSmoke;
+            this.sliderEgestaAmount.ThumbOuterColor = System.Drawing.Color.Pink;
+            this.sliderEgestaAmount.ThumbRoundRectSize = new System.Drawing.Size(8, 8);
+            this.sliderEgestaAmount.Value = 0;
+            this.sliderEgestaAmount.MouseLeave += new System.EventHandler(this.sliderEgestaAmount_MouseLeave);
+            this.sliderEgestaAmount.Scroll += new System.Windows.Forms.ScrollEventHandler(this.sliderEgestaAmount_Scroll);
+            this.sliderEgestaAmount.MouseDown += new System.Windows.Forms.MouseEventHandler(this.sliderEgestaAmount_MouseDown);
+            this.sliderEgestaAmount.MouseEnter += new System.EventHandler(this.sliderEgestaAmount_MouseEnter);
+            // 
             // DayCellPopupControl
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.Controls.Add(this.sliderEgestaAmount);
             this.Controls.Add(this.pictureNote);
             this.Controls.Add(this.lblDay);
-            this.Controls.Add(this.trackEgestaAmount);
             this.DoubleBuffered = true;
             this.Name = "DayCellPopupControl";
             this.Size = new System.Drawing.Size(64, 64);
             this.DoubleClick += new System.EventHandler(this.DayCellPopupControl_DoubleClick);
             this.MouseLeave += new System.EventHandler(this.DayCellPopupControl_MouseLeave);
             this.MouseClick += new System.Windows.Forms.MouseEventHandler(this.DayCellPopupControl_MouseClick);
-            ((System.ComponentModel.ISupportInitialize)(this.trackEgestaAmount)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureNote)).EndInit();
             this.ResumeLayout(false);
 
@@ -115,9 +122,9 @@
 
         #endregion
 
-        private System.Windows.Forms.TrackBar trackEgestaAmount;
         private System.Windows.Forms.Label lblDay;
         private System.Windows.Forms.ToolTip toolTip;
         private System.Windows.Forms.PictureBox pictureNote;
+        private MB.Controls.ColorSlider sliderEgestaAmount;
     }
 }

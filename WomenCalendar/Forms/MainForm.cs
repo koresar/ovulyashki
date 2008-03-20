@@ -68,7 +68,8 @@ namespace WomenCalendar
             if (Program.CurrentWoman.Menstruations.IsMenstruationDay(date))
             {
                 sb.AppendLine();
-                sb.Append("Овуляшкин день");
+                sb.AppendLine("Овуляшкин день");
+                sb.Append(DayCellPopupControl.EgestasNames[Program.CurrentWoman.Menstruations.GetEgestaAmount(date)]);
             }
 
             if (Program.CurrentWoman.IsPredictedAsMenstruationDay(date))
@@ -255,6 +256,11 @@ namespace WomenCalendar
             {
                 monthControl.Redraw();
             }
+        }
+
+        private void helpToolStripButton_Click(object sender, EventArgs e)
+        {
+            new AboutForm().Show();
         }
     }
 }

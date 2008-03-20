@@ -11,7 +11,7 @@ namespace WomenCalendar
 {
     public class BBTForm : Form
     {
-        private ZedGraph.ZedGraphControl graph;
+        private ZedGraph.ZedGraphControl zgc;
         private IContainer components;
 
 
@@ -44,30 +44,30 @@ namespace WomenCalendar
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.graph = new ZedGraph.ZedGraphControl();
+            this.zgc = new ZedGraph.ZedGraphControl();
             this.SuspendLayout();
             // 
             // graph
             // 
-            this.graph.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.graph.EditModifierKeys = System.Windows.Forms.Keys.None;
-            this.graph.Location = new System.Drawing.Point(0, 0);
-            this.graph.Name = "graph";
-            this.graph.ScrollGrace = 0;
-            this.graph.ScrollMaxX = 0;
-            this.graph.ScrollMaxY = 0;
-            this.graph.ScrollMaxY2 = 0;
-            this.graph.ScrollMinX = 0;
-            this.graph.ScrollMinY = 0;
-            this.graph.ScrollMinY2 = 0;
-            this.graph.Size = new System.Drawing.Size(625, 492);
-            this.graph.TabIndex = 0;
-            this.graph.ContextMenuBuilder += new ZedGraph.ZedGraphControl.ContextMenuBuilderEventHandler(this.graph_ContextMenuBuilder);
+            this.zgc.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.zgc.EditModifierKeys = System.Windows.Forms.Keys.None;
+            this.zgc.Location = new System.Drawing.Point(0, 0);
+            this.zgc.Name = "graph";
+            this.zgc.ScrollGrace = 0;
+            this.zgc.ScrollMaxX = 0;
+            this.zgc.ScrollMaxY = 0;
+            this.zgc.ScrollMaxY2 = 0;
+            this.zgc.ScrollMinX = 0;
+            this.zgc.ScrollMinY = 0;
+            this.zgc.ScrollMinY2 = 0;
+            this.zgc.Size = new System.Drawing.Size(625, 492);
+            this.zgc.TabIndex = 0;
+            this.zgc.ContextMenuBuilder += new ZedGraph.ZedGraphControl.ContextMenuBuilderEventHandler(this.graph_ContextMenuBuilder);
             // 
             // BBTForm
             // 
             this.ClientSize = new System.Drawing.Size(625, 492);
-            this.Controls.Add(this.graph);
+            this.Controls.Add(this.zgc);
             this.Name = "BBTForm";
             this.ShowIcon = false;
             this.Text = "График Базальной Tемпературы Tела";
@@ -85,52 +85,62 @@ namespace WomenCalendar
 
         public void CreateChart()
         {
-            GraphPane myPane = graph.GraphPane;
+            GraphPane myPane = zgc.GraphPane;
 
             // Set the titles and axis labels
-            myPane.Title.Text = "SampleMultiPointList (IPointList) Demo";
-            myPane.XAxis.Title.Text = "Time, seconds";
-            myPane.YAxis.Title.Text = "Distance (m), or Velocity (m/s)";
+            myPane.Title.Text = "График базальной температуры тела";
+            myPane.XAxis.Title.IsVisible = false;//.Text = "Time, Days\n(Since Plant Construction Startup)";
+            myPane.YAxis.Title.IsVisible = false;// Text = "Widget Production\n(units/hour)";
+            myPane.Legend.IsVisible = false;
+            myPane.XAxis.Type = AxisType.Date;
 
-            // Create a new SampleMultiPointList (see SampleMultiPointList.cs for details)
-            SampleMultiPointList myList = new SampleMultiPointList();
-            // For the first list, specify that the Y data to be plotted will be the distance
-            myList.YData = PerfDataType.Distance;
+            LineItem curve;
 
-            // note how it does not matter that we created the second list before actually
-            // adding the data -- this is because the cloned list shares data with the
-            // original
-            SampleMultiPointList myList2 = new SampleMultiPointList(myList);
-            // For the second list, specify that the Y data to be plotted will be the velocity
-            myList2.YData = PerfDataType.Velocity;
-
-            // Populate the dataset using some calculated values
-            for (int i = 0; i < 20; i++)
+            // Set up curve "Larry"
+            double[] y = { 36.6, 36.4, 36.2, 36.9, 36.8, 36.4, 36.8, 36.6, 36.8, 36.5 };
+            //double[] x = new double[10];
+            PointPairList list = new PointPairList();
+            for (int i = 0; i < 10; i++)
             {
-                double time = (double)i;
-                double acceleration = 1.0;
-                double velocity = acceleration * time;
-                double distance = acceleration * time * time / 2.0;
-                PerformanceData perfData = new PerformanceData(time, distance, velocity, acceleration);
-                myList.Add(perfData);
+                DateTime d = DateTime.Today.AddDays(i);
+                list.Add((double) new XDate(d.Year, d.Month, d.Day), y[i]);
             }
 
-            // Add two curves to the graph
-            myPane.AddCurve("Distance", myList, Color.Blue);
-            myPane.AddCurve("Velocity", myList2, Color.Red);
+            // Use green, with circle symbols
+            curve = myPane.AddCurve("БТТ", list, Color.Green, SymbolType.Circle);
+            curve.Line.Width = 2.0F;
+            
+            // Fill the symbols with white
+            curve.Symbol.Fill = new Fill(Color.White);
+            curve.Symbol.Size = 10;
 
-            // Fill the axis background with a color gradient
-            myPane.Chart.Fill = new Fill(Color.White,
-               Color.LightGoldenrodYellow, 45.0F);
+            // Enable the X and Y axis grids
+            myPane.XAxis.MajorGrid.IsVisible = true;
+            myPane.YAxis.MajorGrid.IsVisible = true;
+            myPane.XAxis.MajorGrid.DashOff = 0;
+            myPane.XAxis.MajorGrid.DashOn = 0;
+            myPane.YAxis.MajorGrid.DashOff = 0;
+            myPane.YAxis.MajorGrid.DashOn = 0;
 
-            graph.AxisChange();
+            myPane.XAxis.Scale.MajorStep = 1;
+            myPane.YAxis.Scale.MajorStep = 0.1;
+            myPane.XAxis.Scale.MinorStep = 1;
+            myPane.YAxis.Scale.MinorStep = 0.1;
+
+            myPane.XAxis.MinorGrid.IsVisible = false;
+            myPane.YAxis.MinorGrid.IsVisible = false;
+
+            myPane.XAxis.Scale.FontSpec.Angle = 90;
+
+            // Calculate the Axis Scale Ranges
+            zgc.AxisChange();
         }
 
         private void SetGraphSize()
         {
-            graph.Location = new Point(0, 0);
+            zgc.Location = new Point(0, 0);
             // Leave a small margin around the outside of the control
-            graph.Size = new Size(this.ClientRectangle.Width - 20, this.ClientRectangle.Height - 20);
+            zgc.Size = ClientRectangle.Size; //new Size(this.ClientRectangle.Width - 20, this.ClientRectangle.Height - 20);
         }
 
         private void BBTForm_Resize(object sender, EventArgs e)

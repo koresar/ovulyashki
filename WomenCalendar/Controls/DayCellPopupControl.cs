@@ -10,7 +10,7 @@ namespace WomenCalendar
 {
     public partial class DayCellPopupControl : UserControl
     {
-        private static string[] EgestasNames = {"День без овуляшек", "Мало овуляшек", "Посредственные овуляшки", 
+        public static string[] EgestasNames = {"День без овуляшек", "Мало овуляшек", "Посредственные овуляшки", 
             "Средняя интенсивность овуляшек", "Много овуляшек" };
 
         private bool initializing;
@@ -28,6 +28,18 @@ namespace WomenCalendar
             get
             {
                 return base.Visible;
+            }
+        }
+
+        private int EgestaSliderValue
+        {
+            get
+            {
+                return 4 - sliderEgestaAmount.Value;
+            }
+            set
+            {
+                sliderEgestaAmount.Value = 4 - value;
             }
         }
 
@@ -56,19 +68,18 @@ namespace WomenCalendar
             int egesta = w.Menstruations.GetEgestaAmount(dayCell.Date);
             if (egesta >= 0)
             {
-                trackEgestaAmount.Value = egesta;
-                trackEgestaAmount.Visible = true;
+                EgestaSliderValue = egesta;
+                sliderEgestaAmount.Visible = true;
             }
             else
             {
-                trackEgestaAmount.Visible = false;
+                sliderEgestaAmount.Visible = false;
             }
 
             pictureNote.Visible = w.Notes.ContainsKey(dayCell.Date);
 
             lblDay.Text = dayCell.Date.Day.ToString();
             BackColor = dayCell.BackColor;
-            trackEgestaAmount.BackColor = dayCell.BackColor;
             Point newLocation = dayCell.Location;
             newLocation.Offset(-dayCell.Size.Width/2, -dayCell.Size.Height/2);
             Location = OwnerMonthsControl.PointToClient(dayCell.OwnerOneMonthControl.PointToScreen(newLocation));
@@ -83,7 +94,7 @@ namespace WomenCalendar
 
         private void ShowDayEditForm()
         {
-            new DayEditForm().ShowDialog(this);
+            new DayEditForm(DayCell.Date).ShowDialog(this);
         }
 
         private void HideTooltip()
@@ -93,7 +104,7 @@ namespace WomenCalendar
 
         private void ShowEgestaTooltip()
         {
-            ShowTooltip("Количество выделений", EgestasNames[trackEgestaAmount.Value]);
+            ShowTooltip("Количество выделений", EgestasNames[EgestaSliderValue]);
         }
 
         private void ShowNoteEditForm()
@@ -143,25 +154,6 @@ namespace WomenCalendar
             }
         }
 
-        private void trackEgestaAmount_ValueChanged(object sender, EventArgs e)
-        {
-            if (!initializing)
-            {
-                Program.CurrentWoman.Menstruations.SetEgesta(DayCell.Date, trackEgestaAmount.Value);
-                ShowEgestaTooltip();
-            }
-        }
-
-        private void trackEgestaAmount_MouseEnter(object sender, EventArgs e)
-        {
-            ShowEgestaTooltip();
-        }
-
-        private void trackEgestaAmount_MouseLeave(object sender, EventArgs e)
-        {
-            HideTooltip();
-        }
-
         private void pictureNote_MouseClick(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Left)
@@ -185,20 +177,39 @@ namespace WomenCalendar
             HideTooltip();
         }
 
-        private void trackEgestaAmount_MouseDown(object sender, MouseEventArgs e)
-        {
-            OwnerMonthsControl.FocusDate = DayCell.Date;
-            if (e.Button == MouseButtons.Right)
-            {
-                DayCellPopupControl_MouseClick(sender, e);
-            }
-        }
-
         private void DayCellPopupControl_MouseLeave(object sender, EventArgs e)
         {
             if (!ClientRectangle.Contains(PointToClient(MousePosition)))
             {
                 Visible = false;
+            }
+        }
+
+        private void sliderEgestaAmount_Scroll(object sender, ScrollEventArgs e)
+        {
+            if (!initializing)
+            {
+                Program.CurrentWoman.Menstruations.SetEgesta(DayCell.Date, EgestaSliderValue);
+                ShowEgestaTooltip();
+            }
+        }
+
+        private void sliderEgestaAmount_MouseEnter(object sender, EventArgs e)
+        {
+            ShowEgestaTooltip();
+        }
+
+        private void sliderEgestaAmount_MouseLeave(object sender, EventArgs e)
+        {
+            HideTooltip();
+        }
+
+        private void sliderEgestaAmount_MouseDown(object sender, MouseEventArgs e)
+        {
+            OwnerMonthsControl.FocusDate = DayCell.Date;
+            if (e.Button == MouseButtons.Right)
+            {
+                DayCellPopupControl_MouseClick(sender, e);
             }
         }
     }
