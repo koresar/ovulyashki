@@ -55,6 +55,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApplicationSettings.cs" />
+    <Compile Include="Controls\ColorSlider.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\ColorSlider.designer.cs">
+      <DependentUpon>ColorSlider.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\DayCellClickEventArgs.cs" />
     <Compile Include="Controls\DayCellControl.cs">
       <SubType>UserControl</SubType>
@@ -182,6 +188,10 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\drop.bmp" />
+    <EmbeddedResource Include="Controls\ColorSlider.resx">
+      <DependentUpon>ColorSlider.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="Controls\DayCellPopupControl.resx">
       <DependentUpon>DayCellPopupControl.cs</DependentUpon>
       <SubType>Designer</SubType>

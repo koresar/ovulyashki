@@ -154,7 +154,10 @@ namespace WomenCalendar
             {
 
                 // Beginning the part where we collect all application settings
-                Program.Settings.DefaultWomanPath = chbDefaultWoman.Checked ? Program.CurrentWoman.AssociatedFile : string.Empty;
+                if (chbDefaultWoman.Checked)
+                {
+                    Program.Settings.DefaultWomanPath = Program.CurrentWoman.AssociatedFile;
+                }
                 // End of the settings collectioning part.
 
                 /*Program.Settings.DefaultWindowIsMaximized = (WindowState == FormWindowState.Maximized);
