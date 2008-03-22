@@ -29,6 +29,10 @@
         private void InitializeComponent()
         {
             this.sliderEgestaAmount = new MB.Controls.ColorSlider();
+            this.txtBBT = new System.Windows.Forms.TextBox();
+            this.lblBBT = new System.Windows.Forms.Label();
+            this.txtNote = new System.Windows.Forms.TextBox();
+            this.lblNote = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // sliderEgestaAmount
@@ -46,30 +50,76 @@
             this.sliderEgestaAmount.Orientation = System.Windows.Forms.Orientation.Vertical;
             this.sliderEgestaAmount.Size = new System.Drawing.Size(30, 200);
             this.sliderEgestaAmount.SmallChange = ((uint)(1u));
-            this.sliderEgestaAmount.TabIndex = 0;
+            this.sliderEgestaAmount.TabIndex = 2;
             this.sliderEgestaAmount.Text = "colorSlider1";
             this.sliderEgestaAmount.ThumbInnerColor = System.Drawing.Color.White;
             this.sliderEgestaAmount.ThumbOuterColor = System.Drawing.Color.Pink;
             this.sliderEgestaAmount.ThumbRoundRectSize = new System.Drawing.Size(8, 8);
             this.sliderEgestaAmount.Value = 4;
             // 
+            // txtBBT
+            // 
+            this.txtBBT.Location = new System.Drawing.Point(172, 12);
+            this.txtBBT.Name = "txtBBT";
+            this.txtBBT.Size = new System.Drawing.Size(48, 20);
+            this.txtBBT.TabIndex = 1;
+            // 
+            // lblBBT
+            // 
+            this.lblBBT.AutoSize = true;
+            this.lblBBT.Location = new System.Drawing.Point(10, 15);
+            this.lblBBT.Name = "lblBBT";
+            this.lblBBT.Size = new System.Drawing.Size(159, 13);
+            this.lblBBT.TabIndex = 0;
+            this.lblBBT.Text = "Базальная температура тела:";
+            // 
+            // txtNote
+            // 
+            this.txtNote.Location = new System.Drawing.Point(13, 62);
+            this.txtNote.Multiline = true;
+            this.txtNote.Name = "txtNote";
+            this.txtNote.Size = new System.Drawing.Size(207, 150);
+            this.txtNote.TabIndex = 10000;
+            // 
+            // lblNote
+            // 
+            this.lblNote.AutoSize = true;
+            this.lblNote.Location = new System.Drawing.Point(13, 43);
+            this.lblNote.Name = "lblNote";
+            this.lblNote.Size = new System.Drawing.Size(137, 13);
+            this.lblNote.TabIndex = 10001;
+            this.lblNote.Text = "Коментарий к этому дню:";
+            // 
             // DayEditForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(292, 266);
+            this.Controls.Add(this.lblNote);
+            this.Controls.Add(this.txtNote);
+            this.Controls.Add(this.lblBBT);
+            this.Controls.Add(this.txtBBT);
             this.Controls.Add(this.sliderEgestaAmount);
             this.Name = "DayEditForm";
             this.Text = "Изменить день";
             this.Load += new System.EventHandler(this.DayEditForm_Load);
             this.Controls.SetChildIndex(this.sliderEgestaAmount, 0);
+            this.Controls.SetChildIndex(this.txtBBT, 0);
+            this.Controls.SetChildIndex(this.lblBBT, 0);
+            this.Controls.SetChildIndex(this.txtNote, 0);
+            this.Controls.SetChildIndex(this.lblNote, 0);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
 
         private MB.Controls.ColorSlider sliderEgestaAmount;
+        private System.Windows.Forms.TextBox txtBBT;
+        private System.Windows.Forms.Label lblBBT;
+        private System.Windows.Forms.TextBox txtNote;
+        private System.Windows.Forms.Label lblNote;
 
     }
 }

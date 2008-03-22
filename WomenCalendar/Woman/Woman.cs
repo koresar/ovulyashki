@@ -117,9 +117,18 @@ namespace WomenCalendar
             set { notes = value; }
         }
 
+        [XmlIgnore()]
+        private BBTCollection bbt;
+        public BBTCollection BBT
+        {
+            get { return bbt; }
+            set { bbt = value; }
+        }
+
         public Woman()
         {
             notes = new NotesCollection();
+            bbt = new BBTCollection();
             defaultMenstruationLength = 5;
             _menstruations = new MenstruationsCollection();
             manualPeriodLength = 28;

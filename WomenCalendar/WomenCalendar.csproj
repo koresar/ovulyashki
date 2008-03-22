@@ -44,14 +44,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\XPanderControl.dll</HintPath>
     </Reference>
-    <Reference Include="ZedGraph, Version=5.1.4.31904, Culture=neutral, PublicKeyToken=02a83cbd123fcd60, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\ZedGraph.dll</HintPath>
-    </Reference>
-    <Reference Include="ZedGraph.resources, Version=5.1.4.31904, Culture=ru, PublicKeyToken=02a83cbd123fcd60, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\ZedGraph.resources.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApplicationSettings.cs" />
@@ -117,6 +109,7 @@
     <Compile Include="Forms\NewEditWomanForm.Designer.cs">
       <DependentUpon>NewEditWomanForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Woman\BBTCollection.cs" />
     <Compile Include="Woman\EgestasCollection.cs" />
     <Compile Include="Woman\MenstruationPeriod.cs" />
     <Compile Include="Woman\MenstruationsCollection.cs" />
@@ -241,6 +234,12 @@
     <None Include="Resources\drop_Image.bmp" />
     <EmbeddedResource Include="Resources\note.Image.bmp" />
     <None Include="Resources\note.Image.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ZedGraph\ZedGraph.csproj">
+      <Project>{2541686B-1673-43BF-AF89-3163945DB009}</Project>
+      <Name>ZedGraph</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

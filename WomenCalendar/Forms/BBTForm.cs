@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Text;
 using System.Windows.Forms;
 using ZedGraph;
@@ -100,19 +101,32 @@ namespace WomenCalendar
             double[] y = { 36.6, 36.4, 36.2, 36.9, 36.8, 36.4, 36.8, 36.6, 36.8, 36.5 };
             //double[] x = new double[10];
             PointPairList list = new PointPairList();
+            Symbol emptyCircle = new Symbol(SymbolType.Circle, Color.Blue);
+            emptyCircle.Size = 10;
+            emptyCircle.Fill = new Fill(Color.White);
+            Symbol filledCircle = new Symbol(SymbolType.Circle, Color.Blue);
+            filledCircle.Size = 10;
+            filledCircle.Fill = new Fill(Color.Blue);
             for (int i = 0; i < 10; i++)
             {
                 DateTime d = DateTime.Today.AddDays(i);
-                list.Add((double) new XDate(d.Year, d.Month, d.Day), y[i]);
+                PointPair point = new PointPair((double) new XDate(d.Year, d.Month, d.Day), y[i]);
+                point.Symbol = i%2 == 0 ? emptyCircle : filledCircle;
+                point.DashStyle = i % 2 == 0 ? DashStyle.Solid : DashStyle.Dash;
+                list.Add(point);
             }
 
             // Use green, with circle symbols
-            curve = myPane.AddCurve("ÁÒÒ", list, Color.Green, SymbolType.Circle);
+            curve = myPane.AddCurve("ÁÒÒ", list, Color.Blue, SymbolType.Circle);
             curve.Line.Width = 2.0F;
-            
-            // Fill the symbols with white
-            curve.Symbol.Fill = new Fill(Color.White);
-            curve.Symbol.Size = 10;
+
+            // Fill the symbols
+            //Fill fill = new Fill(Color.White);//Color.Red, Color.Blue);
+/*            fill.Type = FillType.GradientByZ;
+            fill.RangeMin = 1;
+            fill.RangeMax = 2;*/
+            //curve.Symbol.Fill.SecondaryValueGradientColor = Color.Red;
+            //curve.Symbol.Fill = fill;
 
             // Enable the X and Y axis grids
             myPane.XAxis.MajorGrid.IsVisible = true;
