@@ -28,11 +28,13 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.sliderEgestaAmount = new MB.Controls.ColorSlider();
             this.txtBBT = new System.Windows.Forms.TextBox();
             this.lblBBT = new System.Windows.Forms.Label();
             this.txtNote = new System.Windows.Forms.TextBox();
             this.lblNote = new System.Windows.Forms.Label();
+            this.toolTip = new System.Windows.Forms.ToolTip(this.components);
             this.SuspendLayout();
             // 
             // sliderEgestaAmount
@@ -56,13 +58,19 @@
             this.sliderEgestaAmount.ThumbOuterColor = System.Drawing.Color.Pink;
             this.sliderEgestaAmount.ThumbRoundRectSize = new System.Drawing.Size(8, 8);
             this.sliderEgestaAmount.Value = 4;
+            this.sliderEgestaAmount.MouseLeave += new System.EventHandler(this.sliderEgestaAmount_MouseLeave);
+            this.sliderEgestaAmount.Scroll += new System.Windows.Forms.ScrollEventHandler(this.sliderEgestaAmount_Scroll);
+            this.sliderEgestaAmount.MouseEnter += new System.EventHandler(this.sliderEgestaAmount_MouseEnter);
             // 
             // txtBBT
             // 
+            this.txtBBT.CausesValidation = false;
             this.txtBBT.Location = new System.Drawing.Point(172, 12);
+            this.txtBBT.MaxLength = 5;
             this.txtBBT.Name = "txtBBT";
             this.txtBBT.Size = new System.Drawing.Size(48, 20);
             this.txtBBT.TabIndex = 1;
+            this.txtBBT.Leave += new System.EventHandler(this.txtBBT_Leave);
             // 
             // lblBBT
             // 
@@ -86,9 +94,16 @@
             this.lblNote.AutoSize = true;
             this.lblNote.Location = new System.Drawing.Point(13, 43);
             this.lblNote.Name = "lblNote";
-            this.lblNote.Size = new System.Drawing.Size(137, 13);
+            this.lblNote.Size = new System.Drawing.Size(119, 13);
             this.lblNote.TabIndex = 10001;
-            this.lblNote.Text = "Коментарий к этому дню:";
+            this.lblNote.Text = "Заметка к этому дню:";
+            // 
+            // toolTip
+            // 
+            this.toolTip.AutomaticDelay = 0;
+            this.toolTip.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Info;
+            this.toolTip.UseAnimation = false;
+            this.toolTip.UseFading = false;
             // 
             // DayEditForm
             // 
@@ -120,6 +135,7 @@
         private System.Windows.Forms.Label lblBBT;
         private System.Windows.Forms.TextBox txtNote;
         private System.Windows.Forms.Label lblNote;
+        private System.Windows.Forms.ToolTip toolTip;
 
     }
 }
