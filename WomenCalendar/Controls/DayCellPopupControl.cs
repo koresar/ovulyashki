@@ -84,6 +84,13 @@ namespace WomenCalendar
             newLocation.Offset(-dayCell.Size.Width/2, -dayCell.Size.Height/2);
             Location = OwnerMonthsControl.PointToClient(dayCell.OwnerOneMonthControl.PointToScreen(newLocation));
 
+            double bbt = w.BBT.GetBBT(dayCell.Date);
+            lblBBT.Visible = bbt != 0;
+            if (bbt != 0)
+            {
+                lblBBT.Text = "t°" + bbt.ToString("##.##");
+            }
+
             if (Visible == false)
             {
                 Visible = true;

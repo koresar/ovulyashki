@@ -10,6 +10,8 @@ namespace WomenCalendar
 {
     public partial class MonthsControl : UserControl
     {
+        private OneMonthControl lastDroppedMenuMonth;
+
         public List<OneMonthControl> singleMonths = new List<OneMonthControl>();
         public int VisibleMonthsCount = 1;
 
@@ -245,8 +247,9 @@ namespace WomenCalendar
             Update();
         }
 
-        public void DropMonthMenu(Point screenLocation)
+        public void DropMonthMenu(Point screenLocation, OneMonthControl control)
         {
+            lastDroppedMenuMonth = control;
             CellPopupControl.Visible = false;
             MonthMenu.Show(screenLocation);
         }
@@ -339,7 +342,7 @@ namespace WomenCalendar
 
         private void ToolStripBBTGraph_Click(object sender, EventArgs e)
         {
-            new BBTForm().Show();
+            new BBTForm(lastDroppedMenuMonth.Date).Show();
         }
     }
 }

@@ -71,7 +71,7 @@ namespace WomenCalendar
             toolTip.Show(text, control, control.Width, control.Height);
         }
 
-        private void DayEditForm_Load(object sender, EventArgs e)
+        private void LoadForm()
         {
             Text = date.ToLongDateString();
 
@@ -93,6 +93,10 @@ namespace WomenCalendar
             {
                 string note = w.Notes[date];
                 txtNote.Text = (!note.Contains("\r\n")) ? note.Replace("\n", "\r\n") : note;
+            }
+            else
+            {
+                txtNote.Text = string.Empty;
             }
         }
 
@@ -136,6 +140,11 @@ namespace WomenCalendar
             return false;
         }
 
+        private void DayEditForm_Load(object sender, EventArgs e)
+        {
+            LoadForm();
+        }
+
         private void sliderEgestaAmount_MouseEnter(object sender, EventArgs e)
         {
             ShowEgestaTooltip();
@@ -154,6 +163,18 @@ namespace WomenCalendar
         private void txtBBT_Leave(object sender, EventArgs e)
         {
             HideTooltip(txtBBT);
+        }
+
+        private void btnPrevDay_Click(object sender, EventArgs e)
+        {
+            date = date.AddDays(-1);
+            LoadForm();
+        }
+
+        private void btnNextDay_Click(object sender, EventArgs e)
+        {
+            date = date.AddDays(1);
+            LoadForm();
         }
     }
 }

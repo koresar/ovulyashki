@@ -14,7 +14,7 @@ namespace WomenCalendar
     {
         private ZedGraph.ZedGraphControl zgc;
         private IContainer components;
-
+        private DateTime initialMonth;
 
         private static Dictionary<string, string> _labels;
         private static Dictionary<string, string> Labels
@@ -37,9 +37,10 @@ namespace WomenCalendar
             }
         }
 
-        public BBTForm()
+        public BBTForm(DateTime month)
         {
             InitializeComponent();
+            initialMonth = new DateTime(month.Year, month.Month, 1);
         }
 
         private void InitializeComponent()
@@ -98,7 +99,8 @@ namespace WomenCalendar
             LineItem curve;
 
             // Set up curve "Larry"
-            double[] y = { 36.6, 36.4, 36.2, 36.9, 36.8, 36.4, 36.8, 36.6, 36.8, 36.5 };
+            double[] y = Program.CurrentWoman.BBT.GetTemperaturesSince(initialMonth, DateTime.DaysInMonth(initialMonth.Year, initialMonth.Month));
+                //{ 36.6, 36.4, 36.2, 36.9, 36.8, 36.4, 36.8, 36.6, 36.8, 36.5 };
             //double[] x = new double[10];
             PointPairList list = new PointPairList();
             Symbol emptyCircle = new Symbol(SymbolType.Circle, Color.Blue);
@@ -107,16 +109,21 @@ namespace WomenCalendar
             Symbol filledCircle = new Symbol(SymbolType.Circle, Color.Blue);
             filledCircle.Size = 10;
             filledCircle.Fill = new Fill(Color.Blue);
-            for (int i = 0; i < 10; i++)
+
+            double maxBBT = double.MinValue;
+            double minBBT = double.MaxValue;
+            for (int i = 0; i < y.Length; i++)
             {
-                DateTime d = DateTime.Today.AddDays(i);
-                PointPair point = new PointPair((double) new XDate(d.Year, d.Month, d.Day), y[i]);
-                point.Symbol = i%2 == 0 ? emptyCircle : filledCircle;
-                point.DashStyle = i % 2 == 0 ? DashStyle.Solid : DashStyle.Dash;
+                if (y[i] == 0) continue;
+                DateTime d = initialMonth.AddDays(i);
+                PointPair point = new PointPair((double)new XDate(d.Year, d.Month, d.Day), y[i]);
+                point.Symbol = filledCircle;
+                point.DashStyle = (i+1 < y.Length && y[i + 1] == 0) ? DashStyle.Dash : DashStyle.Solid;
                 list.Add(point);
+                if (y[i] > maxBBT) maxBBT = y[i];
+                if (y[i] < minBBT) minBBT = y[i];
             }
 
-            // Use green, with circle symbols
             curve = myPane.AddCurve("ÁÒÒ", list, Color.Blue, SymbolType.Circle);
             curve.Line.Width = 2.0F;
 
@@ -137,14 +144,26 @@ namespace WomenCalendar
             myPane.YAxis.MajorGrid.DashOn = 0;
 
             myPane.XAxis.Scale.MajorStep = 1;
-            myPane.YAxis.Scale.MajorStep = 0.1;
             myPane.XAxis.Scale.MinorStep = 1;
+            myPane.XAxis.Scale.MaxAuto = false;
+            DateTime d1 = initialMonth;
+            myPane.XAxis.Scale.Min = (double)new XDate(d1.Year, d1.Month, d1.Day);
+            d1 = d1.AddDays(y.Length - 1);
+            myPane.XAxis.Scale.Max = (double)new XDate(d1.Year, d1.Month, d1.Day);
+
+            myPane.YAxis.Scale.MajorStep = 0.1;
             myPane.YAxis.Scale.MinorStep = 0.1;
+            myPane.YAxis.Scale.MaxAuto = false;
+            myPane.YAxis.Scale.Max = ((int)(maxBBT*10 + 0.5) + 2) / 10.0;
+            myPane.YAxis.Scale.Min = ((int)(minBBT*10 - 0.5) - 2) / 10.0;
 
             myPane.XAxis.MinorGrid.IsVisible = false;
             myPane.YAxis.MinorGrid.IsVisible = false;
 
             myPane.XAxis.Scale.FontSpec.Angle = 90;
+
+            myPane.XAxis.MajorTic.IsAllTics = false;
+            myPane.YAxis.MajorTic.IsAllTics = false;
 
             // Calculate the Axis Scale Ranges
             zgc.AxisChange();

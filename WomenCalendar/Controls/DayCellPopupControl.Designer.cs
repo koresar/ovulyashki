@@ -32,6 +32,7 @@
             this.lblDay = new System.Windows.Forms.Label();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
             this.pictureNote = new System.Windows.Forms.PictureBox();
+            this.lblBBT = new System.Windows.Forms.Label();
             this.sliderEgestaAmount = new MB.Controls.ColorSlider();
             ((System.ComponentModel.ISupportInitialize)(this.pictureNote)).BeginInit();
             this.SuspendLayout();
@@ -63,7 +64,7 @@
             this.pictureNote.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.pictureNote.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pictureNote.Image = global::WomenCalendar.Properties.Resources.note_Image;
-            this.pictureNote.Location = new System.Drawing.Point(30, 3);
+            this.pictureNote.Location = new System.Drawing.Point(3, 28);
             this.pictureNote.Name = "pictureNote";
             this.pictureNote.Size = new System.Drawing.Size(14, 14);
             this.pictureNote.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -72,6 +73,13 @@
             this.pictureNote.MouseLeave += new System.EventHandler(this.pictureNote_MouseLeave);
             this.pictureNote.MouseClick += new System.Windows.Forms.MouseEventHandler(this.pictureNote_MouseClick);
             this.pictureNote.MouseEnter += new System.EventHandler(this.pictureNote_MouseEnter);
+            // 
+            // lblBBT
+            // 
+            this.lblBBT.Location = new System.Drawing.Point(0, 49);
+            this.lblBBT.Name = "lblBBT";
+            this.lblBBT.Size = new System.Drawing.Size(45, 14);
+            this.lblBBT.TabIndex = 4;
             // 
             // sliderEgestaAmount
             // 
@@ -106,6 +114,7 @@
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.Controls.Add(this.lblBBT);
             this.Controls.Add(this.sliderEgestaAmount);
             this.Controls.Add(this.pictureNote);
             this.Controls.Add(this.lblDay);
@@ -126,5 +135,6 @@
         private System.Windows.Forms.ToolTip toolTip;
         private System.Windows.Forms.PictureBox pictureNote;
         private MB.Controls.ColorSlider sliderEgestaAmount;
+        private System.Windows.Forms.Label lblBBT;
     }
 }
