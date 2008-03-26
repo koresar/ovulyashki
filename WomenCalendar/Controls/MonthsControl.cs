@@ -342,7 +342,8 @@ namespace WomenCalendar
 
         private void ToolStripBBTGraph_Click(object sender, EventArgs e)
         {
-            new BBTForm(lastDroppedMenuMonth.Date).Show();
+            DateTime d = lastDroppedMenuMonth.Date;
+            new BBTForm(d, DateTime.DaysInMonth(d.Year, d.Month)).Show();
         }
     }
 }

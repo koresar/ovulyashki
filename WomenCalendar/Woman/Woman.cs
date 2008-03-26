@@ -125,13 +125,23 @@ namespace WomenCalendar
             set { bbt = value; }
         }
 
+        [XmlIgnore()]
+        private HadSexCollection hadSex;
+        public HadSexCollection HadSex
+        {
+            get { return hadSex; }
+            set { hadSex = value; }
+        }
+
         public Woman()
         {
             notes = new NotesCollection();
             bbt = new BBTCollection();
-            defaultMenstruationLength = 5;
+            hadSex = new HadSexCollection();
+            defaultMenstruationLength = 4;
             _menstruations = new MenstruationsCollection();
             manualPeriodLength = 28;
+            averagePeriodLength = 28;
         }
 
         public static bool SaveTo(Woman w, string path)

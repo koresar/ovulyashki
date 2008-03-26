@@ -33,6 +33,7 @@
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
             this.pictureNote = new System.Windows.Forms.PictureBox();
             this.lblBBT = new System.Windows.Forms.Label();
+            this.lblHadSex = new System.Windows.Forms.Label();
             this.sliderEgestaAmount = new MB.Controls.ColorSlider();
             ((System.ComponentModel.ISupportInitialize)(this.pictureNote)).BeginInit();
             this.SuspendLayout();
@@ -64,7 +65,7 @@
             this.pictureNote.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.pictureNote.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pictureNote.Image = global::WomenCalendar.Properties.Resources.note_Image;
-            this.pictureNote.Location = new System.Drawing.Point(3, 28);
+            this.pictureNote.Location = new System.Drawing.Point(31, 1);
             this.pictureNote.Name = "pictureNote";
             this.pictureNote.Size = new System.Drawing.Size(14, 14);
             this.pictureNote.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -81,6 +82,19 @@
             this.lblBBT.Size = new System.Drawing.Size(45, 14);
             this.lblBBT.TabIndex = 4;
             // 
+            // lblHadSex
+            // 
+            this.lblHadSex.Cursor = System.Windows.Forms.Cursors.Default;
+            this.lblHadSex.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lblHadSex.ForeColor = System.Drawing.Color.Red;
+            this.lblHadSex.Location = new System.Drawing.Point(30, 18);
+            this.lblHadSex.Name = "lblHadSex";
+            this.lblHadSex.Size = new System.Drawing.Size(13, 11);
+            this.lblHadSex.TabIndex = 5;
+            this.lblHadSex.Text = "S";
+            this.lblHadSex.MouseLeave += new System.EventHandler(this.lblHadSex_MouseLeave);
+            this.lblHadSex.MouseEnter += new System.EventHandler(this.lblHadSex_MouseEnter);
+            // 
             // sliderEgestaAmount
             // 
             this.sliderEgestaAmount.BackColor = System.Drawing.Color.Transparent;
@@ -91,7 +105,7 @@
             this.sliderEgestaAmount.ElapsedInnerColor = System.Drawing.Color.Pink;
             this.sliderEgestaAmount.ElapsedOuterColor = System.Drawing.Color.DeepPink;
             this.sliderEgestaAmount.LargeChange = ((uint)(1u));
-            this.sliderEgestaAmount.Location = new System.Drawing.Point(42, 1);
+            this.sliderEgestaAmount.Location = new System.Drawing.Point(43, 1);
             this.sliderEgestaAmount.Margin = new System.Windows.Forms.Padding(0);
             this.sliderEgestaAmount.Maximum = 4;
             this.sliderEgestaAmount.Name = "sliderEgestaAmount";
@@ -114,6 +128,7 @@
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.Controls.Add(this.lblHadSex);
             this.Controls.Add(this.lblBBT);
             this.Controls.Add(this.sliderEgestaAmount);
             this.Controls.Add(this.pictureNote);
@@ -136,5 +151,6 @@
         private System.Windows.Forms.PictureBox pictureNote;
         private MB.Controls.ColorSlider sliderEgestaAmount;
         private System.Windows.Forms.Label lblBBT;
+        private System.Windows.Forms.Label lblHadSex;
     }
 }

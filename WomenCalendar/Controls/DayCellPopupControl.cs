@@ -91,6 +91,8 @@ namespace WomenCalendar
                 lblBBT.Text = "t°" + bbt.ToString("##.##");
             }
 
+            lblHadSex.Visible = w.HadSex.ContainsKey(dayCell.Date);
+
             if (Visible == false)
             {
                 Visible = true;
@@ -101,6 +103,7 @@ namespace WomenCalendar
 
         private void ShowDayEditForm()
         {
+            Visible = false;
             new DayEditForm(DayCell.Date).ShowDialog(this);
         }
 
@@ -111,7 +114,7 @@ namespace WomenCalendar
 
         private void ShowEgestaTooltip()
         {
-            ShowTooltip("Количество выделений", EgestasNames[EgestaSliderValue]);
+            ShowTooltip("Количество овуляшек", EgestasNames[EgestaSliderValue]);
         }
 
         private void ShowNoteEditForm()
@@ -121,6 +124,11 @@ namespace WomenCalendar
             {
                 Program.CurrentWoman.AddNote(DayCell.Date, form.NoteText);
             }
+        }
+
+        private void ShowHasSexToolTip()
+        {
+            ShowTooltip("Секс", "А в этот день у меня был секс.");
         }
 
         private void ShowNoteToolTip()
@@ -218,6 +226,16 @@ namespace WomenCalendar
             {
                 DayCellPopupControl_MouseClick(sender, e);
             }
+        }
+
+        private void lblHadSex_MouseEnter(object sender, EventArgs e)
+        {
+            ShowHasSexToolTip();
+        }
+
+        private void lblHadSex_MouseLeave(object sender, EventArgs e)
+        {
+            HideTooltip();
         }
     }
 }

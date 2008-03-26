@@ -111,6 +111,7 @@
     </Compile>
     <Compile Include="Woman\BBTCollection.cs" />
     <Compile Include="Woman\EgestasCollection.cs" />
+    <Compile Include="Woman\HadSexCollection.cs" />
     <Compile Include="Woman\MenstruationPeriod.cs" />
     <Compile Include="Woman\MenstruationsCollection.cs" />
     <Compile Include="Controls\MonthsControl.cs">

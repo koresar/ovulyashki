@@ -87,7 +87,7 @@
             this.toolStripLabel1});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(788, 25);
+            this.toolStrip1.Size = new System.Drawing.Size(747, 25);
             this.toolStrip1.TabIndex = 1;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -196,8 +196,8 @@
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.monthControl);
-            this.splitContainer1.Size = new System.Drawing.Size(788, 507);
-            this.splitContainer1.SplitterDistance = 232;
+            this.splitContainer1.Size = new System.Drawing.Size(747, 500);
+            this.splitContainer1.SplitterDistance = 238;
             this.splitContainer1.TabIndex = 5;
             // 
             // xPanderList1
@@ -211,7 +211,7 @@
             this.xPanderList1.Location = new System.Drawing.Point(0, 0);
             this.xPanderList1.Margin = new System.Windows.Forms.Padding(0);
             this.xPanderList1.Name = "xPanderList1";
-            this.xPanderList1.Size = new System.Drawing.Size(232, 507);
+            this.xPanderList1.Size = new System.Drawing.Size(238, 500);
             this.xPanderList1.TabIndex = 0;
             // 
             // xLegend
@@ -236,9 +236,9 @@
             this.xLegend.Margin = new System.Windows.Forms.Padding(0);
             this.xLegend.Name = "xLegend";
             this.xLegend.Padding = new System.Windows.Forms.Padding(0, 25, 0, 0);
-            this.xLegend.Size = new System.Drawing.Size(216, 136);
+            this.xLegend.Size = new System.Drawing.Size(221, 136);
             this.xLegend.TabIndex = 2;
-            this.xLegend.Tag = 0;
+            this.xLegend.Tag = 6;
             this.xLegend.TooltipText = null;
             // 
             // xWoman
@@ -275,9 +275,9 @@
             this.xWoman.Margin = new System.Windows.Forms.Padding(0);
             this.xWoman.Name = "xWoman";
             this.xWoman.Padding = new System.Windows.Forms.Padding(0, 25, 0, 0);
-            this.xWoman.Size = new System.Drawing.Size(216, 176);
+            this.xWoman.Size = new System.Drawing.Size(221, 176);
             this.xWoman.TabIndex = 0;
-            this.xWoman.Tag = 1;
+            this.xWoman.Tag = 7;
             this.xWoman.TooltipText = null;
             // 
             // btnChangeWoman
@@ -406,6 +406,7 @@
             // rbAuto
             // 
             this.rbAuto.AutoSize = true;
+            this.rbAuto.Checked = true;
             this.rbAuto.Location = new System.Drawing.Point(12, 28);
             this.rbAuto.Name = "rbAuto";
             this.rbAuto.Size = new System.Drawing.Size(14, 13);
@@ -447,9 +448,9 @@
             this.xDay.Margin = new System.Windows.Forms.Padding(0);
             this.xDay.Name = "xDay";
             this.xDay.Padding = new System.Windows.Forms.Padding(0, 25, 0, 0);
-            this.xDay.Size = new System.Drawing.Size(216, 76);
+            this.xDay.Size = new System.Drawing.Size(221, 76);
             this.xDay.TabIndex = 1;
-            this.xDay.Tag = 2;
+            this.xDay.Tag = 8;
             this.xDay.TooltipText = null;
             // 
             // lblDayDescription
@@ -474,7 +475,7 @@
             this.monthControl.MonthsMarginX = 10;
             this.monthControl.MonthsMarginY = 10;
             this.monthControl.Name = "monthControl";
-            this.monthControl.Size = new System.Drawing.Size(552, 507);
+            this.monthControl.Size = new System.Drawing.Size(505, 500);
             this.monthControl.StartMonth = new System.DateTime(2007, 2, 1, 0, 0, 0, 0);
             this.monthControl.TabIndex = 0;
             this.monthControl.FocusDateChanged += new WomenCalendar.MonthsControl.FocusDateChangedDelegate(this.monthControl_FocusDateChanged);
@@ -483,11 +484,12 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(788, 532);
+            this.ClientSize = new System.Drawing.Size(747, 525);
             this.Controls.Add(this.splitContainer1);
             this.Controls.Add(this.dateTimePicker1);
             this.Controls.Add(this.toolStrip1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MinimumSize = new System.Drawing.Size(492, 308);
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "Овуляшки";

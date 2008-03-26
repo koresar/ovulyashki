@@ -47,7 +47,7 @@
             // btnCancel
             // 
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.Location = new System.Drawing.Point(205, -1);
+            this.btnCancel.Location = new System.Drawing.Point(205, 6);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
             this.btnCancel.TabIndex = 1;
@@ -57,7 +57,7 @@
             // 
             // btnOK
             // 
-            this.btnOK.Location = new System.Drawing.Point(13, -1);
+            this.btnOK.Location = new System.Drawing.Point(13, 6);
             this.btnOK.Name = "btnOK";
             this.btnOK.Size = new System.Drawing.Size(75, 23);
             this.btnOK.TabIndex = 0;
@@ -73,8 +73,6 @@
             this.CancelButton = this.btnCancel;
             this.ClientSize = new System.Drawing.Size(292, 266);
             this.Controls.Add(this.panel1);
-            this.MaximizeBox = false;
-            this.MinimizeBox = false;
             this.Name = "ModalBaseForm";
             this.Text = "ModalBaseForm";
             this.panel1.ResumeLayout(false);

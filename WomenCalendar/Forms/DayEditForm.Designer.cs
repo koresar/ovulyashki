@@ -37,6 +37,7 @@
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
             this.btnPrevDay = new System.Windows.Forms.Button();
             this.btnNextDay = new System.Windows.Forms.Button();
+            this.chkHadSex = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // sliderEgestaAmount
@@ -127,11 +128,22 @@
             this.btnNextDay.UseVisualStyleBackColor = true;
             this.btnNextDay.Click += new System.EventHandler(this.btnNextDay_Click);
             // 
+            // chkHadSex
+            // 
+            this.chkHadSex.AutoSize = true;
+            this.chkHadSex.Location = new System.Drawing.Point(13, 245);
+            this.chkHadSex.Name = "chkHadSex";
+            this.chkHadSex.Size = new System.Drawing.Size(184, 17);
+            this.chkHadSex.TabIndex = 10004;
+            this.chkHadSex.Text = "А в этот день у меня был секс!";
+            this.chkHadSex.UseVisualStyleBackColor = true;
+            // 
             // DayEditForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(292, 284);
+            this.ClientSize = new System.Drawing.Size(292, 302);
+            this.Controls.Add(this.chkHadSex);
             this.Controls.Add(this.btnNextDay);
             this.Controls.Add(this.btnPrevDay);
             this.Controls.Add(this.lblNote);
@@ -149,6 +161,7 @@
             this.Controls.SetChildIndex(this.lblNote, 0);
             this.Controls.SetChildIndex(this.btnPrevDay, 0);
             this.Controls.SetChildIndex(this.btnNextDay, 0);
+            this.Controls.SetChildIndex(this.chkHadSex, 0);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -164,6 +177,7 @@
         private System.Windows.Forms.ToolTip toolTip;
         private System.Windows.Forms.Button btnPrevDay;
         private System.Windows.Forms.Button btnNextDay;
+        private System.Windows.Forms.CheckBox chkHadSex;
 
     }
 }

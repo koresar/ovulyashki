@@ -38,7 +38,7 @@
             this.btnDropDown.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnDropDown.FlatAppearance.BorderSize = 0;
             this.btnDropDown.Image = global::WomenCalendar.Properties.Resources.month_dropdown;
-            this.btnDropDown.Location = new System.Drawing.Point(211, 3);
+            this.btnDropDown.Location = new System.Drawing.Point(209, 5);
             this.btnDropDown.Name = "btnDropDown";
             this.btnDropDown.Size = new System.Drawing.Size(16, 16);
             this.btnDropDown.TabIndex = 0;

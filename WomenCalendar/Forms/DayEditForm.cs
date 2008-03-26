@@ -34,7 +34,12 @@ namespace WomenCalendar
         public override void AcceptAction()
         {
             if (!ValidateData()) return;
+            SaveData();
+            DialogResult = DialogResult.OK;
+        }
 
+        private void SaveData()
+        {
             Woman w = Program.CurrentWoman;
             if (!string.IsNullOrEmpty(txtBBT.Text))
             {
@@ -43,7 +48,7 @@ namespace WomenCalendar
 
             if (sliderEgestaAmount.Visible)
             {
-                w.Menstruations.SetEgesta(date, EgestaSliderValue);                
+                w.Menstruations.SetEgesta(date, EgestaSliderValue);
             }
 
             if (!string.IsNullOrEmpty(txtNote.Text))
@@ -51,7 +56,14 @@ namespace WomenCalendar
                 w.Notes[date] = txtNote.Text;
             }
 
-            DialogResult = DialogResult.OK;
+            if (!chkHadSex.Checked)
+            {
+                w.HadSex.Remove(date);
+            }
+            else
+            {
+                w.HadSex[date] = true;
+            }
         }
 
         private void ShowEgestaTooltip()
@@ -98,6 +110,8 @@ namespace WomenCalendar
             {
                 txtNote.Text = string.Empty;
             }
+
+            chkHadSex.Checked = w.HadSex.ContainsKey(date);
         }
 
         private bool ValidateData()
@@ -140,6 +154,15 @@ namespace WomenCalendar
             return false;
         }
 
+        private void Rotate(int days)
+        {
+            if (!ValidateData()) return;
+            SaveData();
+
+            date = date.AddDays(days);
+            LoadForm();
+        }
+
         private void DayEditForm_Load(object sender, EventArgs e)
         {
             LoadForm();
@@ -167,14 +190,12 @@ namespace WomenCalendar
 
         private void btnPrevDay_Click(object sender, EventArgs e)
         {
-            date = date.AddDays(-1);
-            LoadForm();
+            Rotate(-1);
         }
 
         private void btnNextDay_Click(object sender, EventArgs e)
         {
-            date = date.AddDays(1);
-            LoadForm();
+            Rotate(1);
         }
     }
 }
