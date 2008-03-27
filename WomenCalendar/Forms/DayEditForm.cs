@@ -27,6 +27,7 @@ namespace WomenCalendar
             }
             set
             {
+                if (value < sliderEgestaAmount.Minimum || value > sliderEgestaAmount.Maximum) return;
                 sliderEgestaAmount.Value = 4 - value;
             }
         }
@@ -41,29 +42,18 @@ namespace WomenCalendar
         private void SaveData()
         {
             Woman w = Program.CurrentWoman;
-            if (!string.IsNullOrEmpty(txtBBT.Text))
-            {
-                w.BBT[date] = Convert.ToDouble(txtBBT.Text);
-            }
+            w.BBT.SetBBT(date, txtBBT.Text);
 
             if (sliderEgestaAmount.Visible)
             {
                 w.Menstruations.SetEgesta(date, EgestaSliderValue);
             }
 
-            if (!string.IsNullOrEmpty(txtNote.Text))
-            {
-                w.Notes[date] = txtNote.Text;
-            }
+            w.Notes[date] = txtNote.Text;
 
-            if (!chkHadSex.Checked)
-            {
-                w.HadSex.Remove(date);
-            }
-            else
-            {
-                w.HadSex[date] = true;
-            }
+            w.HadSex[date] = chkHadSex.Checked;
+
+            w.Health[date] = sliderHealth.Value;
         }
 
         private void ShowEgestaTooltip()
@@ -88,30 +78,19 @@ namespace WomenCalendar
             Text = date.ToLongDateString();
 
             Woman w = Program.CurrentWoman;
+
             int egesta = w.Menstruations.GetEgestaAmount(date);
-            if (egesta >= 0)
-            {
-                EgestaSliderValue = egesta;
-                sliderEgestaAmount.Visible = true;
-            }
-            else
-            {
-                sliderEgestaAmount.Visible = false;
-            }
+            EgestaSliderValue = egesta;
+            sliderEgestaAmount.Visible = egesta >= 0;
 
-            txtBBT.Text = w.BBT.ContainsKey(date) ? w.BBT[date].ToString() : string.Empty;
+            txtBBT.Text = w.BBT.GetBBTString(date);
 
-            if (w.Notes.ContainsKey(date))
-            {
-                string note = w.Notes[date];
-                txtNote.Text = (!note.Contains("\r\n")) ? note.Replace("\n", "\r\n") : note;
-            }
-            else
-            {
-                txtNote.Text = string.Empty;
-            }
+            string note = w.Notes[date];
+            txtNote.Text = (!note.Contains("\r\n")) ? note.Replace("\n", "\r\n") : note;
 
-            chkHadSex.Checked = w.HadSex.ContainsKey(date);
+            chkHadSex.Checked = w.HadSex[date];
+
+            sliderHealth.Value = w.Health[date];
         }
 
         private bool ValidateData()

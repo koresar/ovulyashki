@@ -38,6 +38,10 @@
             this.btnPrevDay = new System.Windows.Forms.Button();
             this.btnNextDay = new System.Windows.Forms.Button();
             this.chkHadSex = new System.Windows.Forms.CheckBox();
+            this.sliderHealth = new MB.Controls.ColorSlider();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // sliderEgestaAmount
@@ -138,11 +142,54 @@
             this.chkHadSex.Text = "А в этот день у меня был секс!";
             this.chkHadSex.UseVisualStyleBackColor = true;
             // 
+            // sliderHealth
+            // 
+            this.sliderHealth.BackColor = System.Drawing.Color.Transparent;
+            this.sliderHealth.BorderRoundRectSize = new System.Drawing.Size(8, 8);
+            this.sliderHealth.LargeChange = ((uint)(5u));
+            this.sliderHealth.Location = new System.Drawing.Point(68, 296);
+            this.sliderHealth.Maximum = 10;
+            this.sliderHealth.Name = "sliderHealth";
+            this.sliderHealth.Size = new System.Drawing.Size(152, 30);
+            this.sliderHealth.SmallChange = ((uint)(1u));
+            this.sliderHealth.TabIndex = 10005;
+            this.sliderHealth.Text = "colorSlider1";
+            this.sliderHealth.ThumbRoundRectSize = new System.Drawing.Size(8, 8);
+            this.sliderHealth.Value = 5;
+            // 
+            // label1
+            // 
+            this.label1.Location = new System.Drawing.Point(100, 278);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(88, 24);
+            this.label1.TabIndex = 10006;
+            this.label1.Text = "Самочувствие";
+            // 
+            // label2
+            // 
+            this.label2.Location = new System.Drawing.Point(10, 303);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(52, 23);
+            this.label2.TabIndex = 10007;
+            this.label2.Text = "Плохое";
+            this.label2.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            // 
+            // label3
+            // 
+            this.label3.Location = new System.Drawing.Point(226, 303);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(52, 23);
+            this.label3.TabIndex = 10007;
+            this.label3.Text = "Хорошее";
+            // 
             // DayEditForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(292, 302);
+            this.ClientSize = new System.Drawing.Size(292, 380);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.sliderHealth);
             this.Controls.Add(this.chkHadSex);
             this.Controls.Add(this.btnNextDay);
             this.Controls.Add(this.btnPrevDay);
@@ -151,9 +198,11 @@
             this.Controls.Add(this.lblBBT);
             this.Controls.Add(this.txtBBT);
             this.Controls.Add(this.sliderEgestaAmount);
+            this.Controls.Add(this.label1);
             this.Name = "DayEditForm";
             this.Text = "Изменить день";
             this.Load += new System.EventHandler(this.DayEditForm_Load);
+            this.Controls.SetChildIndex(this.label1, 0);
             this.Controls.SetChildIndex(this.sliderEgestaAmount, 0);
             this.Controls.SetChildIndex(this.txtBBT, 0);
             this.Controls.SetChildIndex(this.lblBBT, 0);
@@ -162,6 +211,9 @@
             this.Controls.SetChildIndex(this.btnPrevDay, 0);
             this.Controls.SetChildIndex(this.btnNextDay, 0);
             this.Controls.SetChildIndex(this.chkHadSex, 0);
+            this.Controls.SetChildIndex(this.sliderHealth, 0);
+            this.Controls.SetChildIndex(this.label2, 0);
+            this.Controls.SetChildIndex(this.label3, 0);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -178,6 +230,10 @@
         private System.Windows.Forms.Button btnPrevDay;
         private System.Windows.Forms.Button btnNextDay;
         private System.Windows.Forms.CheckBox chkHadSex;
+        private MB.Controls.ColorSlider sliderHealth;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label3;
 
     }
 }

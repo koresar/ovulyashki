@@ -78,6 +78,12 @@ namespace WomenCalendar
                 sb.Append("Вероятны овуляшки");
             }
 
+            if (Program.CurrentWoman.HadSex.ContainsKey(date))
+            {
+                sb.AppendLine();
+                sb.Append("Если ты в этот день зачала ребёнка,\nто он родится примерно " + date.AddDays(40*7).ToLongDateString());
+            }
+
             // got to be last
             string text;
             if (Program.CurrentWoman.Notes.TryGetValue(date, out text))

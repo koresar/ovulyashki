@@ -133,11 +133,20 @@ namespace WomenCalendar
             set { hadSex = value; }
         }
 
+        [XmlIgnore()]
+        private HealthCollection health;
+        public HealthCollection Health
+        {
+            get { return health; }
+            set { health = value; }
+        }
+
         public Woman()
         {
             notes = new NotesCollection();
             bbt = new BBTCollection();
             hadSex = new HadSexCollection();
+            health = new HealthCollection();
             defaultMenstruationLength = 4;
             _menstruations = new MenstruationsCollection();
             manualPeriodLength = 28;

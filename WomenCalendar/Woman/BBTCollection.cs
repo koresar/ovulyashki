@@ -24,13 +24,24 @@ namespace WomenCalendar
             return ContainsKey(date) ? this[date] : 0;
         }
 
+        public string GetBBTString(DateTime date)
+        {
+            return ContainsKey(date) ? this[date].ToString() : string.Empty;
+        }
+
+        public void SetBBT(DateTime date, string value)
+        {
+            if (string.IsNullOrEmpty(value)) Remove(date);
+            else base[date] = Convert.ToDouble(value);
+        }
+
         public double[] GetTemperaturesSince(DateTime date, int count)
         {
             double[] ret = new double[count];
             DateTime d = date.Date;
             for (int i = 0; i < count; i++, d = d.AddDays(1))
             {
-                ret[i] = ContainsKey(d) ? this[d] : 0;
+                ret[i] = GetBBT(d);
             }
             return ret;
         }

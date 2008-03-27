@@ -5,29 +5,29 @@ using ZedGraph;
 
 namespace WomenCalendar
 {
-    public class BBTForm : GraphForm
+    public class HealthForm : GraphForm
     {
-        public BBTForm(DateTime month, int valuesCount)
+        public HealthForm(DateTime month, int valuesCount)
             : base(month, valuesCount)
         {
             InitializeComponent();
         }
 
-        public BBTForm()
+        public HealthForm()
         {
             InitializeComponent();
         }
 
         protected override double[] GetYValues()
         {
-            return Program.CurrentWoman.BBT.GetTemperaturesSince(initialMonth, valuesCount);
+            return Program.CurrentWoman.Health.GetHealthesSince(initialMonth, valuesCount);
         }
 
         protected override void SetupGraph()
         {
             GraphPane myPane = zgc.GraphPane;
 
-            myPane.Title.Text = "График Базальной Tемпературы Tела";
+            myPane.Title.Text = "График Самочувствия";
 
             myPane.XAxis.MajorGrid.IsVisible = true;
             myPane.YAxis.MajorGrid.IsVisible = true;
@@ -44,11 +44,11 @@ namespace WomenCalendar
             d1 = d1.AddDays(valuesCount - 1);
             myPane.XAxis.Scale.Max = (double)new XDate(d1.Year, d1.Month, d1.Day);
 
-            myPane.YAxis.Scale.MajorStep = 0.1;
-            myPane.YAxis.Scale.MinorStep = 0.1;
+            myPane.YAxis.Scale.MajorStep = 1;
+            myPane.YAxis.Scale.MinorStep = 1;
             myPane.YAxis.Scale.MaxAuto = false;
-            myPane.YAxis.Scale.Max = ((int)(MaxYValue * 10 + 0.5) + 2) / 10.0;
-            myPane.YAxis.Scale.Min = ((int)(MinYValue * 10 - 0.5) - 2) / 10.0;
+            myPane.YAxis.Scale.Max = 10.0;
+            myPane.YAxis.Scale.Min = 0.0;
 
             myPane.XAxis.MinorGrid.IsVisible = false;
             myPane.YAxis.MinorGrid.IsVisible = false;
@@ -63,12 +63,11 @@ namespace WomenCalendar
         {
             this.SuspendLayout();
             // 
-            // BBTForm
+            // HealthForm
             // 
             this.ClientSize = new System.Drawing.Size(638, 448);
-            this.Name = "BBTForm";
+            this.Name = "HealthForm";
             this.ResumeLayout(false);
-
         }
     }
 }

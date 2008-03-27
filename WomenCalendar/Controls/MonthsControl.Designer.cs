@@ -36,9 +36,10 @@
             this.addNote = new System.Windows.Forms.ToolStripMenuItem();
             this.removeNote = new System.Windows.Forms.ToolStripMenuItem();
             this.editNote = new System.Windows.Forms.ToolStripMenuItem();
-            this.oneMonthControl = new WomenCalendar.OneMonthControl();
             this.monthMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.ToolStripBBTGraph = new System.Windows.Forms.ToolStripMenuItem();
+            this.построитьГрафикСамочувствияToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.oneMonthControl = new WomenCalendar.OneMonthControl();
             this.dayContextMenu.SuspendLayout();
             this.monthMenu.SuspendLayout();
             this.SuspendLayout();
@@ -95,6 +96,28 @@
             this.editNote.Text = "Редактировать заметку";
             this.editNote.Click += new System.EventHandler(this.editNote_Click);
             // 
+            // monthMenu
+            // 
+            this.monthMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.ToolStripBBTGraph,
+            this.построитьГрафикСамочувствияToolStripMenuItem});
+            this.monthMenu.Name = "monthMenu";
+            this.monthMenu.Size = new System.Drawing.Size(334, 70);
+            // 
+            // ToolStripBBTGraph
+            // 
+            this.ToolStripBBTGraph.Name = "ToolStripBBTGraph";
+            this.ToolStripBBTGraph.Size = new System.Drawing.Size(333, 22);
+            this.ToolStripBBTGraph.Text = "Построить график Базальной Температуры Тела";
+            this.ToolStripBBTGraph.Click += new System.EventHandler(this.ToolStripBBTGraph_Click);
+            // 
+            // построитьГрафикСамочувствияToolStripMenuItem
+            // 
+            this.построитьГрафикСамочувствияToolStripMenuItem.Name = "построитьГрафикСамочувствияToolStripMenuItem";
+            this.построитьГрафикСамочувствияToolStripMenuItem.Size = new System.Drawing.Size(333, 22);
+            this.построитьГрафикСамочувствияToolStripMenuItem.Text = "Построить график Самочувствия";
+            this.построитьГрафикСамочувствияToolStripMenuItem.Click += new System.EventHandler(this.ToolStripHealthesGraph_Click);
+            // 
             // oneMonthControl
             // 
             this.oneMonthControl.Date = new System.DateTime(2008, 2, 1, 0, 0, 0, 0);
@@ -107,20 +130,6 @@
             this.oneMonthControl.OwnerMonthsControl = null;
             this.oneMonthControl.Size = new System.Drawing.Size(230, 230);
             this.oneMonthControl.TabIndex = 0;
-            // 
-            // monthMenu
-            // 
-            this.monthMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.ToolStripBBTGraph});
-            this.monthMenu.Name = "monthMenu";
-            this.monthMenu.Size = new System.Drawing.Size(334, 48);
-            // 
-            // ToolStripBBTGraph
-            // 
-            this.ToolStripBBTGraph.Name = "ToolStripBBTGraph";
-            this.ToolStripBBTGraph.Size = new System.Drawing.Size(333, 22);
-            this.ToolStripBBTGraph.Text = "Построить график Базальной Температуры Тела";
-            this.ToolStripBBTGraph.Click += new System.EventHandler(this.ToolStripBBTGraph_Click);
             // 
             // MonthsControl
             // 
@@ -152,6 +161,7 @@
         private System.Windows.Forms.ToolStripMenuItem editNote;
         private System.Windows.Forms.ContextMenuStrip monthMenu;
         private System.Windows.Forms.ToolStripMenuItem ToolStripBBTGraph;
+        private System.Windows.Forms.ToolStripMenuItem построитьГрафикСамочувствияToolStripMenuItem;
 
     }
 }

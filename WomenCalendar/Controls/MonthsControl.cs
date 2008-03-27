@@ -345,5 +345,11 @@ namespace WomenCalendar
             DateTime d = lastDroppedMenuMonth.Date;
             new BBTForm(d, DateTime.DaysInMonth(d.Year, d.Month)).Show();
         }
+
+        private void ToolStripHealthesGraph_Click(object sender, EventArgs e)
+        {
+            DateTime d = lastDroppedMenuMonth.Date;
+            new HealthForm(d, DateTime.DaysInMonth(d.Year, d.Month)).Show();
+        }
     }
 }
