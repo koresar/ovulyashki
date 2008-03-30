@@ -84,43 +84,51 @@ namespace WomenCalendar
                 pe.Graphics.DrawRectangle(Program.DayCellAppearance.EdgePen, 0, 0, Size.Width - 1, Size.Height - 1);
             }
 
-            if (w.Menstruations.IsMenstruationDay(Date))
+            if (OwnerOneMonthControl.Date.Month == Date.Month)
             {
-                int egesta = w.Menstruations.GetEgestaAmount(Date);
-                if (egesta > 0)
+                if (w.Menstruations.IsMenstruationDay(Date))
                 {
-                    Image image = (Image) Program.IconResource.GetObject("drop_Image");
-                    ImageAttributes attr = new ImageAttributes();
-                    ColorMatrix cMatrix = new ColorMatrix();
-                    // alpha
-                    cMatrix.Matrix33 = ((float)egesta) / (EgestasCollection.MaximumEgestaValue);
-                    attr.SetColorMatrix(cMatrix);
-                    pe.Graphics.DrawImage(image, new Rectangle(3, 14, 14, 14), 0, 0, 14, 14, GraphicsUnit.Pixel, attr);
+                    int egesta = w.Menstruations.GetEgestaAmount(Date);
+                    if (egesta > 0)
+                    {
+                        Image image = (Image) Program.IconResource.GetObject("drop_Image");
+                        ImageAttributes attr = new ImageAttributes();
+                        ColorMatrix cMatrix = new ColorMatrix();
+                        // alpha
+                        cMatrix.Matrix33 = ((float) egesta)/(EgestasCollection.MaximumEgestaValue);
+                        attr.SetColorMatrix(cMatrix);
+                        pe.Graphics.DrawImage(image, new Rectangle(3, 14, 14, 14), 0, 0, 14, 14, GraphicsUnit.Pixel,
+                                              attr);
+                    }
+                    else if (egesta == 0)
+                    {
+                        pe.Graphics.DrawEllipse(Pens.Red, 3, 14, 5, 5);
+                    }
                 }
-                else if (egesta == 0)
+
+                if (w.Notes.ContainsKey(Date))
                 {
-                    pe.Graphics.DrawEllipse(Pens.Red, 3, 14, 5, 5);
+                    pe.Graphics.DrawImage((Image) Program.IconResource.GetObject("note_Image"), 23, 2);
                 }
-            }
 
-            if (w.Notes.ContainsKey(Date))
-            {
-                pe.Graphics.DrawImage((Image)Program.IconResource.GetObject("note_Image"), 23, 2);
-            }
+                if (w.IsPredictedAsMenstruationDay(Date))
+                {
+                    pe.Graphics.DrawString("?", Font, Brushes.Red, 3, 14);
+                }
 
-            if (w.IsPredictedAsMenstruationDay(Date))
-            {
-                pe.Graphics.DrawString("?", Font,
-                                       OwnerOneMonthControl.Date.Month == Date.Month ? Brushes.Red : Brushes.Brown, 3, 14);
-            }
-
-            if (w.HadSex.ContainsKey(Date))
-            {
-                pe.Graphics.DrawString("S", Font,
-                                       OwnerOneMonthControl.Date.Month == Date.Month ? Brushes.Red : Brushes.Brown, 22, 19);
+                if (w.HadSexList.ContainsKey(Date))
+                {
+                    pe.Graphics.DrawString("S", Font, Brushes.Red, 22, 19);
+                }
             }
 
             pe.Graphics.DrawString(Date.Day.ToString(), Font, FontBrush, 0, 0);
+        }
+
+        public void Redraw()
+        {
+            Invalidate(true);
+            Update();
         }
 
         protected override void OnMouseDown(MouseEventArgs e)

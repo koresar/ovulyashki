@@ -44,8 +44,7 @@ namespace WomenCalendar
             if (File.Exists(fileName))
             {
                 FileStream fs = new FileStream(fileName, FileMode.Open);
-                settings =
-                    (ApplicationSettings) (new XmlSerializer(typeof (ApplicationSettings)).Deserialize(fs));
+                settings = (ApplicationSettings) (new XmlSerializer(typeof (ApplicationSettings)).Deserialize(fs));
                 fs.Close();
             }
             else

@@ -32,6 +32,7 @@ namespace WomenCalendar
                 {
                     _currentWoman.AveragePeriodLengthChanged -= ApplicationForm.UpdateWomanInformation;
                     _currentWoman.Menstruations.CollectionChanged -= ApplicationForm.UpdateWomanInformation;
+                    _currentWoman.Menstruations.CollectionChanged -= ApplicationForm.RedrawCalendar;
                 }
                 _currentWoman = value;
                 if (ApplicationForm != null)
@@ -40,6 +41,7 @@ namespace WomenCalendar
                     {
                         _currentWoman.AveragePeriodLengthChanged += ApplicationForm.UpdateWomanInformation;
                         _currentWoman.Menstruations.CollectionChanged += ApplicationForm.UpdateWomanInformation;
+                        _currentWoman.Menstruations.CollectionChanged += ApplicationForm.RedrawCalendar;
                     }
                     ApplicationForm.UpdateWomanInformation();
                 }
@@ -132,17 +134,6 @@ namespace WomenCalendar
             return Settings.Write(SettingsFileName);
         }
 
-        public static bool LoadSettings()
-        {
-            Settings = ApplicationSettings.Read(SettingsFileName);
-            if (string.IsNullOrEmpty(Settings.DefaultWomanPath) ||
-                !File.Exists(Settings.DefaultWomanPath) || !LoadWoman(Settings.DefaultWomanPath))
-            {
-                Settings.DefaultWomanPath = string.Empty;
-            }
-            return true;
-        }
-
         public static bool LoadWoman(string path)
         {
             Woman w = Woman.ReadFrom(path);
@@ -182,13 +173,23 @@ namespace WomenCalendar
         /// The main entry point for the application.
         /// </summary>
         [STAThread]
-        static void Main()
+        static void Main(String[] args)
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
             ApplicationForm = new MainForm();
-            LoadSettings();
+
+            Settings = ApplicationSettings.Read(SettingsFileName);
+
+            if (args.Length == 0 || !File.Exists(args[0]) || !LoadWoman(args[0])) // command line
+            {
+                if (string.IsNullOrEmpty(Settings.DefaultWomanPath) ||
+                    !File.Exists(Settings.DefaultWomanPath) || !LoadWoman(Settings.DefaultWomanPath))
+                {
+                    Settings.DefaultWomanPath = string.Empty;
+                }
+            }
 
             bool isMaximazed = Settings.DefaultWindowIsMaximized;
             ApplicationForm.Location = Settings.DefaultWindowPosition;

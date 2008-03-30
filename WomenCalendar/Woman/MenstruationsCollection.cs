@@ -74,45 +74,46 @@ namespace WomenCalendar
 
         new private void Add(MenstruationPeriod period)
         {
-            FireCollectionChangedEvent();
             base.Add(period);
+            FireCollectionChangedEvent();
         }
 
         public bool IsMenstruationDay(DateTime day)
         {
-            foreach (MenstruationPeriod period in this)
-            {
-                if (period.IsDayInPeriod(day))
-                {
-                    return true;
-                }
-            }
-            return false;
+            return GetPeriodByDate(day) != null;
         }
 
         public int GetEgestaAmount(DateTime day)
         {
-            foreach (MenstruationPeriod period in this)
+            MenstruationPeriod period = GetPeriodByDate(day);
+            if (period != null)
             {
-                if (period.IsDayInPeriod(day))
-                {
-                    return period.Egestas[day];
-                }
+                return period.Egestas[day];
             }
             return -1;
         }
 
         public bool SetEgesta(DateTime day, int egesta)
         {
-            foreach (MenstruationPeriod period in this)
+            MenstruationPeriod period = GetPeriodByDate(day);
+            if (period != null)
             {
-                if (period.IsDayInPeriod(day))
-                {
-                    period.Egestas[day] = egesta;
-                    return true;
-                }
+                period.Egestas[day] = egesta;
+                return true;
             }
             return false;
+        }
+
+        public MenstruationPeriod SetPeriodLength(DateTime date, int length)
+        {
+            MenstruationPeriod period = GetPeriodByDate(date);
+            if (period != null && period.Length != length)
+            {
+                period.Length = length;
+                FireCollectionChangedEvent();
+                return period;
+            }
+            return period;
         }
 
         public MenstruationPeriod GetPeriodByDate(DateTime date)

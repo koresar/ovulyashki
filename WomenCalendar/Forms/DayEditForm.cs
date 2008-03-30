@@ -11,12 +11,14 @@ namespace WomenCalendar
 {
     public partial class DayEditForm : ModalBaseForm
     {
+        private DayCellControl DayCell;
         private DateTime date;
 
-        public DayEditForm(DateTime date)
+        public DayEditForm(DayCellControl dayCell)
         {
             InitializeComponent();
-            this.date = date;
+            this.date = dayCell.Date;
+            DayCell = dayCell;
         }
 
         private int EgestaSliderValue
@@ -44,22 +46,25 @@ namespace WomenCalendar
             Woman w = Program.CurrentWoman;
             w.BBT.SetBBT(date, txtBBT.Text);
 
-            if (sliderEgestaAmount.Visible)
+            if (grpOv.Visible)
             {
-                w.Menstruations.SetEgesta(date, EgestaSliderValue);
+                MenstruationPeriod period = w.Menstruations.SetPeriodLength(date, (int) numMenstruationLength.Value);
+                period.Egestas[date] = EgestaSliderValue;
+                //w.Menstruations.SetEgesta(date, EgestaSliderValue);
             }
 
             w.Notes[date] = txtNote.Text;
 
-            w.HadSex[date] = chkHadSex.Checked;
+            w.HadSexList[date] = chkHadSex.Checked;
 
             w.Health[date] = sliderHealth.Value;
+
+            DayCell.Redraw();
         }
 
         private void ShowEgestaTooltip()
         {
-            ShowTooltip("Количество выделений", 
-                DayCellPopupControl.EgestasNames[EgestaSliderValue], sliderEgestaAmount);
+            ShowTooltip("Количество выделений", DayCellPopupControl.EgestasNames[EgestaSliderValue], sliderEgestaAmount);
         }
 
         private void HideTooltip(IWin32Window control)
@@ -79,16 +84,21 @@ namespace WomenCalendar
 
             Woman w = Program.CurrentWoman;
 
-            int egesta = w.Menstruations.GetEgestaAmount(date);
-            EgestaSliderValue = egesta;
-            sliderEgestaAmount.Visible = egesta >= 0;
+            MenstruationPeriod period = w.Menstruations.GetPeriodByDate(date);
+            if (period != null)
+            {
+                numMenstruationLength.Value = period.Length;
+                int egesta = period.Egestas[date];
+                EgestaSliderValue = egesta;
+            }
+            grpOv.Visible = period != null;
 
             txtBBT.Text = w.BBT.GetBBTString(date);
 
             string note = w.Notes[date];
             txtNote.Text = (!note.Contains("\r\n")) ? note.Replace("\n", "\r\n") : note;
 
-            chkHadSex.Checked = w.HadSex[date];
+            chkHadSex.Checked = w.HadSexList[date];
 
             sliderHealth.Value = w.Health[date];
         }
@@ -99,14 +109,14 @@ namespace WomenCalendar
             if (string.IsNullOrEmpty(txtBBT.Text)) return true;
 
             double res;
-            string bbt = txtBBT.Text.Trim().Replace('.', ',');
+            string bbt = txtBBT.Text.Trim().Replace(',', '.');
             if (double.TryParse(bbt, out res))
             {
                 txtBBT.Text = bbt;
             }
             else
             {
-                bbt = txtBBT.Text.Trim().Replace(',', '.');
+                bbt = txtBBT.Text.Trim().Replace('.', ',');
                 if (double.TryParse(bbt, out res))
                 {
                     txtBBT.Text = bbt;
@@ -133,6 +143,10 @@ namespace WomenCalendar
             return false;
         }
 
+        /// <summary>
+        /// Shift active day.
+        /// </summary>
+        /// <param name="days">Amount of days from current to shift. Can be either negative or positive.</param>
         private void Rotate(int days)
         {
             if (!ValidateData()) return;
@@ -175,6 +189,11 @@ namespace WomenCalendar
         private void btnNextDay_Click(object sender, EventArgs e)
         {
             Rotate(1);
+        }
+
+        private void numMenstruationLength_ValueChanged(object sender, EventArgs e)
+        {
+            lblMenstruationLength.Text = MainForm.GetDaysString((int)numMenstruationLength.Value);
         }
     }
 }

@@ -65,11 +65,13 @@ namespace WomenCalendar
                 sb.Append(" (сегодня)");
             }
 
-            if (Program.CurrentWoman.Menstruations.IsMenstruationDay(date))
+            MenstruationPeriod period = Program.CurrentWoman.Menstruations.GetPeriodByDate(date);
+            if (period != null)
             {
                 sb.AppendLine();
-                sb.AppendLine("Овуляшкин день");
-                sb.Append(DayCellPopupControl.EgestasNames[Program.CurrentWoman.Menstruations.GetEgestaAmount(date)]);
+                sb.Append((date - period.StartDay).Days + 1);
+                sb.AppendLine("-й день овуляшек");
+                sb.Append(DayCellPopupControl.EgestasNames[period.Egestas[date]]);
             }
 
             if (Program.CurrentWoman.IsPredictedAsMenstruationDay(date))
@@ -78,10 +80,14 @@ namespace WomenCalendar
                 sb.Append("Вероятны овуляшки");
             }
 
-            if (Program.CurrentWoman.HadSex.ContainsKey(date))
+            if (Program.CurrentWoman.HadSexList.ContainsKey(date))
             {
+                DateTime dateOfBirth = date.AddDays(40*7);
                 sb.AppendLine();
-                sb.Append("Если ты в этот день зачала ребёнка,\nто он родится примерно " + date.AddDays(40*7).ToLongDateString());
+                sb.Append("Если ты в этот день зачала ребёнка,\nто он родится примерно ");
+                sb.AppendLine(dateOfBirth.ToLongDateString());
+                sb.Append("Знак зодиака будет ");
+                sb.Append(HoroscopDatePair.GetZodiacSignName(dateOfBirth));
             }
 
             // got to be last
@@ -109,6 +115,11 @@ namespace WomenCalendar
             if (tmpDays == 1) return "день";
             if (tmpDays < 5 && tmpDays > 1) return "дня";
             return "дней";
+        }
+
+        public void RedrawCalendar()
+        {
+            monthControl.Redraw();
         }
 
         private void prevStripButton_Click(object sender, EventArgs e)

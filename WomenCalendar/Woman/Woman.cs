@@ -127,7 +127,7 @@ namespace WomenCalendar
 
         [XmlIgnore()]
         private HadSexCollection hadSex;
-        public HadSexCollection HadSex
+        public HadSexCollection HadSexList
         {
             get { return hadSex; }
             set { hadSex = value; }

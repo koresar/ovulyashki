@@ -91,7 +91,7 @@ namespace WomenCalendar
                 lblBBT.Text = "t°" + bbt.ToString("##.##");
             }
 
-            lblHadSex.Visible = w.HadSex.ContainsKey(dayCell.Date);
+            lblHadSex.Visible = w.HadSexList.ContainsKey(dayCell.Date);
 
             if (Visible == false)
             {
@@ -104,7 +104,7 @@ namespace WomenCalendar
         private void ShowDayEditForm()
         {
             Visible = false;
-            new DayEditForm(DayCell.Date).ShowDialog(this);
+            new DayEditForm(DayCell).ShowDialog(this);
         }
 
         private void HideTooltip()
@@ -236,6 +236,24 @@ namespace WomenCalendar
         private void lblHadSex_MouseLeave(object sender, EventArgs e)
         {
             HideTooltip();
+        }
+
+        private void lblHadSex_MouseClick(object sender, MouseEventArgs e)
+        {
+            OwnerMonthsControl.FocusDate = DayCell.Date;
+            if (e.Button == MouseButtons.Right)
+            {
+                OwnerMonthsControl.ShowDayContextMenu();
+            }
+        }
+
+        private void lblBBT_MouseClick(object sender, MouseEventArgs e)
+        {
+            OwnerMonthsControl.FocusDate = DayCell.Date;
+            if (e.Button == MouseButtons.Right)
+            {
+                OwnerMonthsControl.ShowDayContextMenu();
+            }
         }
     }
 }

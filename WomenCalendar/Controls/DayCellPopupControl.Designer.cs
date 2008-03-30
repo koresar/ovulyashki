@@ -81,6 +81,7 @@
             this.lblBBT.Name = "lblBBT";
             this.lblBBT.Size = new System.Drawing.Size(45, 14);
             this.lblBBT.TabIndex = 4;
+            this.lblBBT.MouseClick += new System.Windows.Forms.MouseEventHandler(this.lblBBT_MouseClick);
             // 
             // lblHadSex
             // 
@@ -93,6 +94,7 @@
             this.lblHadSex.TabIndex = 5;
             this.lblHadSex.Text = "S";
             this.lblHadSex.MouseLeave += new System.EventHandler(this.lblHadSex_MouseLeave);
+            this.lblHadSex.MouseClick += new System.Windows.Forms.MouseEventHandler(this.lblHadSex_MouseClick);
             this.lblHadSex.MouseEnter += new System.EventHandler(this.lblHadSex_MouseEnter);
             // 
             // sliderEgestaAmount

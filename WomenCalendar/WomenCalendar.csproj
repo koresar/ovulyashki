@@ -47,6 +47,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApplicationSettings.cs" />
+    <Compile Include="BusinessLogic\HoroscopeDatePair.cs" />
     <Compile Include="Controls\ColorSlider.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -67,6 +68,9 @@
       <DependentUpon>DayCellPopupControl.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\FocusDateChangedEventArgs.cs" />
+    <Compile Include="Controls\VerticalLabel.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Forms\AboutForm.cs">
       <SubType>Form</SubType>
     </Compile>

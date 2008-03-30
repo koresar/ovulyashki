@@ -1,0 +1,5 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <StartArguments>"C:\Documents and Settings\ks.HARDCORE.000\My Documents\1.woman"</StartArguments>
+  </PropertyGroup>
+</Project>

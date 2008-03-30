@@ -11,11 +11,12 @@ namespace WomenCalendar
         public const int NormalMaximalPeriod = 35;
 
         public DateTime StartDay;
-        public int Length;
+        public int length;
         public EgestasCollection Egestas;
 
         public MenstruationPeriod()
         {
+            Egestas = new EgestasCollection();
         }
 
         public MenstruationPeriod(DateTime startDay, int length)
@@ -24,6 +25,26 @@ namespace WomenCalendar
             Length = length;
 
             Egestas = new EgestasCollection(startDay, length);
+        }
+
+        public int Length
+        {
+            get
+            {
+                return length;
+            }
+            set
+            {
+                if (length == value) return;
+                if (value > length)
+                {
+                    for (int i = length; i < value; i++)
+                    {
+                        Egestas[StartDay.AddDays(i)] = EgestasCollection.MaximumEgestaValue/2;
+                    }
+                }
+                length = value;
+            }
         }
 
         public DateTime LastDay
