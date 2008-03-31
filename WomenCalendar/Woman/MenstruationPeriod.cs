@@ -12,11 +12,10 @@ namespace WomenCalendar
 
         public DateTime StartDay;
         public int length;
-        public EgestasCollection Egestas;
+        public EgestasCollection Egestas = new EgestasCollection();
 
         public MenstruationPeriod()
         {
-            Egestas = new EgestasCollection();
         }
 
         public MenstruationPeriod(DateTime startDay, int length)
