@@ -18,6 +18,14 @@ namespace WomenCalendar
             }
         }
 
+        public MenstruationPeriod First
+        {
+            get
+            {
+                return this[0];
+            }
+        }
+
         public bool Add(DateTime date, int length)
         {
             MenstruationPeriod newPeriod = new MenstruationPeriod(date, length);
@@ -150,6 +158,7 @@ namespace WomenCalendar
 
         public MenstruationPeriod GetClosestPeriodAfterDay(DateTime date)
         {
+            if (date > Last.StartDay) return null;
             MenstruationPeriod resultPeriod = null;
             foreach (MenstruationPeriod period in this)
             {
@@ -163,6 +172,7 @@ namespace WomenCalendar
 
         public MenstruationPeriod GetClosestPeriodBeforeDay(DateTime date)
         {
+            if (date < First.StartDay) return null;
             MenstruationPeriod resultPeriod = null;
             foreach (MenstruationPeriod period in this)
             {
@@ -172,6 +182,27 @@ namespace WomenCalendar
                 }
             }
             return resultPeriod;
+        }
+
+        public DateTime GetClosestOvulationDay(DateTime date)
+        {
+            if (Count < 2) throw new Exception("No menstruations. The method call prohibited.");
+            MenstruationPeriod resultPeriodBefore = null;
+            MenstruationPeriod resultPeriodAfter = null;
+            foreach (MenstruationPeriod period in this)
+            {
+                if (period.StartDay < date && (resultPeriodBefore == null || period.StartDay > resultPeriodBefore.StartDay))
+                {
+                    resultPeriodBefore = period;
+                }
+
+                if (period.StartDay > date && (resultPeriodAfter == null || period.StartDay < resultPeriodAfter.StartDay))
+                {
+                    resultPeriodAfter = period;
+                }
+            }
+
+            return resultPeriodBefore.StartDay.AddDays(((resultPeriodAfter.StartDay - resultPeriodBefore.StartDay).Days / 2));
         }
 
         public int CalculateAveragePeriodLength()

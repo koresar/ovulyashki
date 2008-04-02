@@ -214,6 +214,7 @@ namespace WomenCalendar
         public static class DayCellAppearance
         {
             public static Pen FocusEdgePen = new Pen(Brushes.Red, 2);
+            public static Pen TodayEdgePen = new Pen(Brushes.Blue, 2);
             public static Pen EdgePen = Pens.Black;
         }
     }

@@ -247,7 +247,10 @@
     <None Include="Resources\drop.Image.ico" />
     <None Include="Resources\drop.Image1.ico" />
     <None Include="Resources\drop.Image11.ico" />
+    <None Include="Resources\BOY_iMAGE.bmp" />
     <Content Include="Resources\drop16.bmp" />
+    <None Include="Resources\girl_Image.bmp" />
+    <None Include="Resources\girl.bmp" />
     <None Include="Resources\month_dropdown.bmp" />
     <None Include="Resources\month_dropdown.png" />
     <None Include="Resources\note_Image.bmp" />

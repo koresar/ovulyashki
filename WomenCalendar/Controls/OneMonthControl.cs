@@ -158,7 +158,7 @@ namespace WomenCalendar
                     string aDay = WeekDayNames[i];
                     textSize = pe.Graphics.MeasureString(aDay, Font, DayCellControl.DefaultCellWidth);
                     pe.Graphics.DrawString(aDay, Font,
-                        Brushes.Black,
+                        i < 5 ? Brushes.Black : Brushes.Red,
                         EdgeWidth + DayCellControl.DefaultCellWidth * i + (DayCellControl.DefaultCellWidth - textSize.Width) / 2,
                         EdgeWidth + DayCellControl.DefaultCellHeight - textSize.Height);
                 }

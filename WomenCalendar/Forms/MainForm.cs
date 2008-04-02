@@ -260,7 +260,7 @@ namespace WomenCalendar
         private void MainForm_SizeChanged(object sender, EventArgs e)
         {
             Program.Settings.DefaultWindowIsMaximized = (WindowState == FormWindowState.Maximized);
-            if (!Program.Settings.DefaultWindowIsMaximized)
+            if (WindowState == FormWindowState.Normal)
             {
                 Program.Settings.DefaultWindowPosition = Location;
                 Program.Settings.DefaultWindowSize = Size;

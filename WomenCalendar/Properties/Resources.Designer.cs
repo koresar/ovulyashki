@@ -60,9 +60,23 @@ namespace WomenCalendar.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap boy_Image {
+            get {
+                object obj = ResourceManager.GetObject("boy_Image", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap drop_Image {
             get {
                 object obj = ResourceManager.GetObject("drop_Image", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap girl_Image {
+            get {
+                object obj = ResourceManager.GetObject("girl_Image", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

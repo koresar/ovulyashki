@@ -73,6 +73,9 @@ namespace WomenCalendar
 
         [XmlIgnore()]
         private int averagePeriodLength;
+        /// <summary>
+        /// This is what we calculate. This is average amount of days between menstruations. Usual from 21 to 35 days.
+        /// </summary>
         [XmlElement("AveragePeriodLength")]
         public int AveragePeriodLength
         {
@@ -90,6 +93,9 @@ namespace WomenCalendar
 
         [XmlIgnore()]
         private int manualPeriodLength;
+        /// <summary>
+        /// This is what user choose to use as period for egesting between menstruation. Usual 21 - 35 days.
+        /// </summary>
         [XmlElement("ManualPeriodLength")]
         public int ManualPeriodLength
         {
@@ -102,6 +108,10 @@ namespace WomenCalendar
 
         [XmlIgnore()]
         private int defaultMenstruationLength;
+        /// <summary>
+        /// This is the default length of woman egesting. Usual 3-5 days. It is set on the left side of the window
+        /// by the user.
+        /// </summary>
         [XmlElement("DefaultMenstruationLength")]
         public int DefaultMenstruationLength
         {
@@ -199,8 +209,107 @@ namespace WomenCalendar
                 return false;
             }
 
-            int daysBetween = ((date - lastPeriod.StartDay).Days) % (ManualPeriodLength == 0 ? 28 : ManualPeriodLength);
+            int usePeriod = ManualPeriodLength == 0 ? 28 : ManualPeriodLength;
+            int daysBetween = ((date - lastPeriod.StartDay).Days) % usePeriod;
             return daysBetween < DefaultMenstruationLength;
+        }
+
+        public bool IsPredictedAsSafeSexDay(DateTime date)
+        {
+            if (Menstruations.Count == 0)
+            {
+                return false;
+            }
+
+            MenstruationPeriod lastPeriod = Menstruations.Last;
+            if (date <= lastPeriod.StartDay.AddDays(DefaultMenstruationLength))
+            {
+                return false;
+            }
+
+            int usePeriod = ManualPeriodLength == 0 ? 28 : ManualPeriodLength;
+            int daysBetween = ((date - lastPeriod.StartDay).Days) % usePeriod;
+            return (daysBetween >= (usePeriod - 5) && daysBetween <= (usePeriod + 4)) || (daysBetween <= 4);
+        }
+
+        public bool IsPredictedAsOvulationDay(DateTime date)
+        {
+            if (Menstruations.Count == 0)
+            {
+                return false;
+            }
+
+            MenstruationPeriod lastPeriod = Menstruations.Last;
+            MenstruationPeriod firstPeriod = Menstruations.First;
+            if (Menstruations.Count != 1 && date < lastPeriod.StartDay && date > firstPeriod.StartDay)
+            {
+                DateTime ovDay = Menstruations.GetClosestOvulationDay(date);
+                return ovDay == date;
+            }
+
+            int usePeriod = (ManualPeriodLength == 0 ? 28 : ManualPeriodLength);
+            int daysBetween = ((date - lastPeriod.StartDay).Days) % usePeriod;
+            return daysBetween == usePeriod / 2;
+        }
+
+        public bool IsPredictedAsBoyDay(DateTime date)
+        {
+            if (Menstruations.Count == 0)
+            {
+                return false;
+            }
+
+            MenstruationPeriod lastPeriod = Menstruations.Last;
+            MenstruationPeriod firstPeriod = Menstruations.First;
+            int usePeriod = (ManualPeriodLength == 0 ? 28 : ManualPeriodLength);
+            if (date > lastPeriod.StartDay)
+            {
+                int daysBetween = ((date - lastPeriod.StartDay).Days) % usePeriod;
+                if (daysBetween > usePeriod / 2 && daysBetween < usePeriod / 2 + 5)
+                {
+                    return true;
+                }
+            }
+            else if (date > firstPeriod.StartDay && date < lastPeriod.StartDay)
+            {
+                DateTime ovDate = Menstruations.GetClosestOvulationDay(date);
+                if (date > ovDate && (date - ovDate).Days < 5)
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        public bool IsPredictedAsGirlDay(DateTime date)
+        {
+            if (Menstruations.Count == 0)
+            {
+                return false;
+            }
+
+            MenstruationPeriod lastPeriod = Menstruations.Last;
+            MenstruationPeriod firstPeriod = Menstruations.First;
+            int usePeriod = (ManualPeriodLength == 0 ? 28 : ManualPeriodLength);
+            if (date > lastPeriod.StartDay)
+            {
+                int daysBetween = ((date - lastPeriod.StartDay).Days) % usePeriod;
+                if ((daysBetween < usePeriod / 2) && (daysBetween > usePeriod / 2 - 5))
+                {
+                    return true;
+                }
+            }
+            else if (date > firstPeriod.StartDay && date < lastPeriod.StartDay)
+            {
+                DateTime ovDate = Menstruations.GetClosestOvulationDay(date);
+                if (date < ovDate && (ovDate - date).Days < 5)
+                {
+                    return true;
+                }
+            }
+
+            return false;
         }
 
         public bool RemoveMenstruationDay(DateTime date)
