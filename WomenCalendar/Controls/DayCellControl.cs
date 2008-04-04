@@ -121,13 +121,13 @@ namespace WomenCalendar
             if (predictedAsGirlDay)
             {
                 Image image = (Image)Program.IconResource.GetObject("girl_Image");
-                pe.Graphics.DrawImage(image, new Rectangle(13, 20, 10, 10), 0, 0, 48, 48, GraphicsUnit.Pixel);
+                pe.Graphics.DrawImage(image, new Rectangle(2, 20, 10, 10), 0, 0, 48, 48, GraphicsUnit.Pixel);
             }
 
             if (predictedAsBoyDay)
             {
                 Image image = (Image)Program.IconResource.GetObject("boy_Image");
-                pe.Graphics.DrawImage(image, new Rectangle(13, 20, 10, 10), 0, 0, 48, 48, GraphicsUnit.Pixel);
+                pe.Graphics.DrawImage(image, new Rectangle(2, 20, 10, 10), 0, 0, 48, 48, GraphicsUnit.Pixel);
             }
 
             if (w.Notes.ContainsKey(Date))

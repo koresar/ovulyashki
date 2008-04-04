@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Windows.Forms;
+using System.Linq;
 
 namespace WomenCalendar
 {
@@ -126,14 +127,8 @@ namespace WomenCalendar
 
         public MenstruationPeriod GetPeriodByDate(DateTime date)
         {
-            foreach (MenstruationPeriod period in this)
-            {
-                if (period.IsDayInPeriod(date))
-                {
-                    return period;
-                }
-            }
-            return null;
+            if (date < First.StartDay || date > Last.LastDay) return null;
+            return (from p in this where p.IsDayInPeriod(date) select p).FirstOrDefault();
         }
 
         public bool Remove(DateTime day)
@@ -159,66 +154,36 @@ namespace WomenCalendar
         public MenstruationPeriod GetClosestPeriodAfterDay(DateTime date)
         {
             if (date > Last.StartDay) return null;
-            MenstruationPeriod resultPeriod = null;
-            foreach (MenstruationPeriod period in this)
-            {
-                if (period.StartDay > date && (resultPeriod == null || period.StartDay < resultPeriod.StartDay))
-                {
-                    resultPeriod = period;
-                }
-            }
-            return resultPeriod;
+            return (from p in this where p.StartDay > date select p).FirstOrDefault();
         }
 
         public MenstruationPeriod GetClosestPeriodBeforeDay(DateTime date)
         {
             if (date < First.StartDay) return null;
-            MenstruationPeriod resultPeriod = null;
-            foreach (MenstruationPeriod period in this)
-            {
-                if (period.StartDay < date && (resultPeriod == null || period.StartDay > resultPeriod.StartDay))
-                {
-                    resultPeriod = period;
-                }
-            }
-            return resultPeriod;
+            return (from p in this where p.StartDay < date orderby p.StartDay descending select p).FirstOrDefault();
         }
 
         public DateTime GetClosestOvulationDay(DateTime date)
         {
             if (Count < 2) throw new Exception("No menstruations. The method call prohibited.");
-            MenstruationPeriod resultPeriodBefore = null;
-            MenstruationPeriod resultPeriodAfter = null;
-            foreach (MenstruationPeriod period in this)
-            {
-                if (period.StartDay < date && (resultPeriodBefore == null || period.StartDay > resultPeriodBefore.StartDay))
-                {
-                    resultPeriodBefore = period;
-                }
 
-                if (period.StartDay > date && (resultPeriodAfter == null || period.StartDay < resultPeriodAfter.StartDay))
-                {
-                    resultPeriodAfter = period;
-                }
-            }
-
-            return resultPeriodBefore.StartDay.AddDays(((resultPeriodAfter.StartDay - resultPeriodBefore.StartDay).Days / 2));
+            return (from p1 in this
+                    where p1.StartDay > date
+                    from p2 in this
+                    where p2.StartDay < date
+                    orderby p2.StartDay descending
+                    select p1.StartDay.AddDays((p2.StartDay - p1.StartDay).Days / 2)).First();
         }
 
         public int CalculateAveragePeriodLength()
         {
             if (Count < 2)
             {
-                return 0;
+                return 28;
             }
 
-            double result = 0;
-            for (int i = 1; i < Count; i++)
-            {
-                result += (this[i].StartDay - this[i - 1].StartDay).Days;
-            }
-
-            return (int) ((result/(Count - 1)) + 0.5);
+            DateTime firstDay = First.StartDay;
+            return (int)(this.Sum(p => (p.StartDay - firstDay).Days) / (Count - 1) + 0.5);
         }
     }
 }

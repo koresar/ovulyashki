@@ -209,8 +209,7 @@ namespace WomenCalendar
                 return false;
             }
 
-            int usePeriod = ManualPeriodLength == 0 ? 28 : ManualPeriodLength;
-            int daysBetween = ((date - lastPeriod.StartDay).Days) % usePeriod;
+            int daysBetween = ((date - lastPeriod.StartDay).Days) % ManualPeriodLength;
             return daysBetween < DefaultMenstruationLength;
         }
 
@@ -227,9 +226,8 @@ namespace WomenCalendar
                 return false;
             }
 
-            int usePeriod = ManualPeriodLength == 0 ? 28 : ManualPeriodLength;
-            int daysBetween = ((date - lastPeriod.StartDay).Days) % usePeriod;
-            return (daysBetween >= (usePeriod - 5) && daysBetween <= (usePeriod + 4)) || (daysBetween <= 4);
+            int daysBetween = ((date - lastPeriod.StartDay).Days) % ManualPeriodLength;
+            return (daysBetween >= (ManualPeriodLength - 5) && daysBetween <= (ManualPeriodLength + 4)) || (daysBetween <= 4);
         }
 
         public bool IsPredictedAsOvulationDay(DateTime date)
@@ -247,9 +245,8 @@ namespace WomenCalendar
                 return ovDay == date;
             }
 
-            int usePeriod = (ManualPeriodLength == 0 ? 28 : ManualPeriodLength);
-            int daysBetween = ((date - lastPeriod.StartDay).Days) % usePeriod;
-            return daysBetween == usePeriod / 2;
+            int daysBetween = ((date - lastPeriod.StartDay).Days) % ManualPeriodLength;
+            return daysBetween == ManualPeriodLength / 2;
         }
 
         public bool IsPredictedAsBoyDay(DateTime date)
@@ -261,11 +258,10 @@ namespace WomenCalendar
 
             MenstruationPeriod lastPeriod = Menstruations.Last;
             MenstruationPeriod firstPeriod = Menstruations.First;
-            int usePeriod = (ManualPeriodLength == 0 ? 28 : ManualPeriodLength);
             if (date > lastPeriod.StartDay)
             {
-                int daysBetween = ((date - lastPeriod.StartDay).Days) % usePeriod;
-                if (daysBetween > usePeriod / 2 && daysBetween < usePeriod / 2 + 5)
+                int daysBetween = ((date - lastPeriod.StartDay).Days) % ManualPeriodLength;
+                if (daysBetween > ManualPeriodLength / 2 && daysBetween < ManualPeriodLength / 2 + 5)
                 {
                     return true;
                 }
@@ -284,18 +280,17 @@ namespace WomenCalendar
 
         public bool IsPredictedAsGirlDay(DateTime date)
         {
-            if (Menstruations.Count == 0)
+            if (Menstruations.Count == 0 || Menstruations.IsMenstruationDay(date))
             {
                 return false;
             }
 
             MenstruationPeriod lastPeriod = Menstruations.Last;
             MenstruationPeriod firstPeriod = Menstruations.First;
-            int usePeriod = (ManualPeriodLength == 0 ? 28 : ManualPeriodLength);
             if (date > lastPeriod.StartDay)
             {
-                int daysBetween = ((date - lastPeriod.StartDay).Days) % usePeriod;
-                if ((daysBetween < usePeriod / 2) && (daysBetween > usePeriod / 2 - 5))
+                int daysBetween = ((date - lastPeriod.StartDay).Days) % ManualPeriodLength;
+                if ((daysBetween < ManualPeriodLength / 2) && (daysBetween > ManualPeriodLength / 2 - 5))
                 {
                     return true;
                 }
