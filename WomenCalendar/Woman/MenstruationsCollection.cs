@@ -89,7 +89,8 @@ namespace WomenCalendar
 
         public bool IsMenstruationDay(DateTime day)
         {
-            return GetPeriodByDate(day) != null;
+            MenstruationPeriod period = GetPeriodByDate(day);
+            return period != null;
         }
 
         public int GetEgestaAmount(DateTime day)
@@ -127,7 +128,7 @@ namespace WomenCalendar
 
         public MenstruationPeriod GetPeriodByDate(DateTime date)
         {
-            if (date < First.StartDay || date > Last.LastDay) return null;
+            if (Count == 0 || date < First.StartDay || date > Last.LastDay) return null;
             return (from p in this where p.IsDayInPeriod(date) select p).FirstOrDefault();
         }
 
@@ -159,7 +160,7 @@ namespace WomenCalendar
 
         public MenstruationPeriod GetClosestPeriodBeforeDay(DateTime date)
         {
-            if (date < First.StartDay) return null;
+            if (Count == 0 || date < First.StartDay) return null;
             return (from p in this where p.StartDay < date orderby p.StartDay descending select p).FirstOrDefault();
         }
 

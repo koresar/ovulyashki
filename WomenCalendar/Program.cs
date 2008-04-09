@@ -28,11 +28,13 @@ namespace WomenCalendar
             get { return _currentWoman ?? (_currentWoman = new Woman()); }
             set
             {
+                ApplicationForm.SuspendLayout();
                 if (_currentWoman != null)
                 {
                     _currentWoman.AveragePeriodLengthChanged -= ApplicationForm.UpdateWomanInformation;
                     _currentWoman.Menstruations.CollectionChanged -= ApplicationForm.UpdateWomanInformation;
                     _currentWoman.Menstruations.CollectionChanged -= ApplicationForm.RedrawCalendar;
+                    _currentWoman.Conceptions.CollectionChanged -= ApplicationForm.RedrawCalendar;
                 }
                 _currentWoman = value;
                 if (ApplicationForm != null)
@@ -42,9 +44,11 @@ namespace WomenCalendar
                         _currentWoman.AveragePeriodLengthChanged += ApplicationForm.UpdateWomanInformation;
                         _currentWoman.Menstruations.CollectionChanged += ApplicationForm.UpdateWomanInformation;
                         _currentWoman.Menstruations.CollectionChanged += ApplicationForm.RedrawCalendar;
+                        _currentWoman.Conceptions.CollectionChanged += ApplicationForm.RedrawCalendar;
                     }
                     ApplicationForm.UpdateWomanInformation();
                 }
+                ApplicationForm.ResumeLayout();
             }
         }
 

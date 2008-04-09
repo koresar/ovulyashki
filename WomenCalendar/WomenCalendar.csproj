@@ -123,6 +123,8 @@
       <DependentUpon>NewEditWomanForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Woman\BBTCollection.cs" />
+    <Compile Include="Woman\ConceptionPeriod.cs" />
+    <Compile Include="Woman\ConceptionsCollection.cs" />
     <Compile Include="Woman\EgestasCollection.cs" />
     <Compile Include="Woman\HadSexCollection.cs" />
     <Compile Include="Woman\HealthCollection.cs" />

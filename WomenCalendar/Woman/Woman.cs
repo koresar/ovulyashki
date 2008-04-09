@@ -11,65 +11,23 @@ namespace WomenCalendar
     [XmlRoot("Woman")]
     public class Woman
     {
-        [XmlIgnore()]
-        private string name = string.Empty;
-        public string Name
-        {
-            get { return name; }
-            set { name = value; }
-        }
+        public string Name { get; set; }
+
+        public string Password { get; set; }
+
+        public MenstruationsCollection Menstruations { get; set; }
+
+        public ConceptionsCollection Conceptions { get; set; }
 
         [XmlIgnore()]
-        private string password = string.Empty;
-        public string Password
-        {
-            get { return password; }
-            set { password = value; }
-        }
+        public bool IsNew { get; set; }
 
         [XmlIgnore()]
-        private MenstruationsCollection _menstruations;
-        public MenstruationsCollection Menstruations
-        {
-            get { return _menstruations; }
-            set { _menstruations = value; }
-        }
+        public string AssociatedFile { get; set; }
 
-        [XmlIgnore()]
-        private bool isNew = true;
-        [XmlIgnore()]
-        public bool IsNew
-        {
-            get { return isNew; }
-            set { isNew = value; }
-        }
+        public bool UseManualPeriodLength { get; set; }
 
-        [XmlIgnore()]
-        private string associatedFile;
-        [XmlIgnore()]
-        public string AssociatedFile
-        {
-            get { return associatedFile; }
-            set { associatedFile = value; }
-        }
-
-        [XmlIgnore()]
-        private bool useManualPeriodLength;
-        [XmlElement("UseManualPeriodLength")]
-        public bool UseManualPeriodLength
-        {
-            get { return useManualPeriodLength; }
-            set { useManualPeriodLength = value; }
-        }
-
-        [XmlIgnore()]
-        private bool allwaysAskPassword;
-        [XmlElement("AllwaysAskPassword")]
-        public bool AllwaysAskPassword
-        {
-            get { return allwaysAskPassword; }
-            set { allwaysAskPassword = value; }
-        }
+        public bool AllwaysAskPassword { get; set; }
 
         [XmlIgnore()]
         private int averagePeriodLength;
@@ -91,75 +49,38 @@ namespace WomenCalendar
             }
         }
 
-        [XmlIgnore()]
-        private int manualPeriodLength;
         /// <summary>
         /// This is what user choose to use as period for egesting between menstruation. Usual 21 - 35 days.
         /// </summary>
-        [XmlElement("ManualPeriodLength")]
-        public int ManualPeriodLength
-        {
-            get { return manualPeriodLength; }
-            set { manualPeriodLength = value; }
-        }
+        public int ManualPeriodLength { get; set; }
 
         public delegate void AveragePeriodLengthChangedDelegate();
         public event AveragePeriodLengthChangedDelegate AveragePeriodLengthChanged;
 
-        [XmlIgnore()]
-        private int defaultMenstruationLength;
         /// <summary>
         /// This is the default length of woman egesting. Usual 3-5 days. It is set on the left side of the window
         /// by the user.
         /// </summary>
-        [XmlElement("DefaultMenstruationLength")]
-        public int DefaultMenstruationLength
-        {
-            get { return defaultMenstruationLength; }
-            set { defaultMenstruationLength = value; }
-        }
+        public int DefaultMenstruationLength { get; set; }
 
-        [XmlIgnore()]
-        private NotesCollection notes;
-        public NotesCollection Notes
-        {
-            get { return notes; }
-            set { notes = value; }
-        }
+        public NotesCollection Notes { get; set; }
 
-        [XmlIgnore()]
-        private BBTCollection bbt;
-        public BBTCollection BBT
-        {
-            get { return bbt; }
-            set { bbt = value; }
-        }
+        public BBTCollection BBT { get; set; }
 
-        [XmlIgnore()]
-        private HadSexCollection hadSex;
-        public HadSexCollection HadSexList
-        {
-            get { return hadSex; }
-            set { hadSex = value; }
-        }
+        public HadSexCollection HadSexList { get; set; }
 
-        [XmlIgnore()]
-        private HealthCollection health;
-        public HealthCollection Health
-        {
-            get { return health; }
-            set { health = value; }
-        }
+        public HealthCollection Health { get; set; }
 
         public Woman()
         {
-            notes = new NotesCollection();
-            bbt = new BBTCollection();
-            hadSex = new HadSexCollection();
-            health = new HealthCollection();
-            defaultMenstruationLength = 4;
-            _menstruations = new MenstruationsCollection();
-            manualPeriodLength = 28;
+            Notes = new NotesCollection();
+            BBT = new BBTCollection();
+            HadSexList = new HadSexCollection();
+            Health = new HealthCollection();
+            DefaultMenstruationLength = 4;
+            Menstruations = new MenstruationsCollection();
+            Conceptions = new ConceptionsCollection();
+            ManualPeriodLength = 28;
             averagePeriodLength = 28;
         }
 
@@ -168,7 +89,7 @@ namespace WomenCalendar
             FileStream fs = new FileStream(path, FileMode.Create);
             new XmlSerializer(w.GetType()).Serialize(fs, w);
             fs.Close();
-            w.associatedFile = path;
+            w.AssociatedFile = path;
             return true;
         }
 
@@ -322,6 +243,20 @@ namespace WomenCalendar
             return false;
         }
 
+        public bool AddConceptionDay(DateTime date)
+        {
+            if (!Conceptions.IsPregnancyDay(date))
+            {
+                return Conceptions.Add(date);
+            }
+            return false;
+        }
+        
+        public bool RemoveConceptionDay(DateTime date)
+        {
+            return Conceptions.Remove(date);
+        }
+
         public bool AddNote(DateTime date, string text)
         {
             Notes[date] = text;
@@ -330,7 +265,7 @@ namespace WomenCalendar
 
         public bool RemoveNote(DateTime date)
         {
-            return notes.Remove(date);
+            return Notes.Remove(date);
         }
     }
 }

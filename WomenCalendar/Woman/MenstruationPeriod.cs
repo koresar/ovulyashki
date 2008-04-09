@@ -10,7 +10,7 @@ namespace WomenCalendar
         public const int NormalMinimalPeriod = 21;
         public const int NormalMaximalPeriod = 35;
 
-        public DateTime StartDay;
+        public DateTime StartDay { get; set; }
         public int length;
         public EgestasCollection Egestas = new EgestasCollection();
 

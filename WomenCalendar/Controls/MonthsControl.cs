@@ -157,6 +157,10 @@ namespace WomenCalendar
             dayContextMenu.Items["removeNote"].Visible = haveNote;
             dayContextMenu.Items["editNote"].Visible = haveNote;
 
+            bool isPregnancyDay = Program.CurrentWoman.Conceptions.IsPregnancyDay(FocusDate);
+            dayContextMenu.Items["setAsConceptionDay"].Visible = !isPregnancyDay;
+            dayContextMenu.Items["removeConceptionDay"].Visible = isPregnancyDay;
+
             dayContextMenu.Show(FocusMonth, FocusMonth.PointToClient(MousePosition));
         }
 
@@ -350,6 +354,24 @@ namespace WomenCalendar
         {
             DateTime d = lastDroppedMenuMonth.Date;
             new HealthForm(d, DateTime.DaysInMonth(d.Year, d.Month)).Show();
+        }
+
+        private void setAsConceptionDay_Click(object sender, EventArgs e)
+        {
+            if (Program.CurrentWoman.AddConceptionDay(FocusDate))
+            {
+                ((MainForm)ParentForm).UpdateWomanInformation();
+                Redraw();
+            }
+        }
+
+        private void removeConceptionDay_Click(object sender, EventArgs e)
+        {
+            if (Program.CurrentWoman.RemoveConceptionDay(FocusDate))
+            {
+                ((MainForm)ParentForm).UpdateWomanInformation();
+                Redraw();
+            }
         }
     }
 }
