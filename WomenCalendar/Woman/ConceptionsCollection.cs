@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 
 namespace WomenCalendar
@@ -29,13 +28,21 @@ namespace WomenCalendar
         public ConceptionPeriod GetConceptionByDate(DateTime date)
         {
             if (Count == 0 || date < First.StartDay || date > Last.LastDay) return null;
-            return (from p in this where p.IsDayInPeriod(date) select p).FirstOrDefault();
+            foreach (var p in this)
+                if (p.IsDayInPeriod(date))
+                    return p;
+            return null;
+            //return (from p in this where p.IsDayInPeriod(date) select p).FirstOrDefault();
         }
 
         public bool IsConceptionDay(DateTime date)
         {
             if (Count == 0) return false;
-            return this.Where(p => p.StartDay == date).FirstOrDefault() != null;
+            foreach (var p in this)
+                if (p.StartDay == date)
+                    return true;
+            return false;
+            //return this.Where(p => p.StartDay == date).FirstOrDefault() != null;
         }
 
         public bool IsPregnancyDay(DateTime date)
