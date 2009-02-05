@@ -33,7 +33,7 @@ namespace WomenCalendar
             MenstruationPeriod closestPeriod = GetClosestPeriodAfterDay(date);
             if (closestPeriod != null)
             {
-                if (MessageBox.Show("После этих овуляшек у тебя были другие!\nТЫ УВЕРЕНА В ТОМ ЧТО ДЕЛАЕШЬ?", 
+                if (MessageBox.Show("После этих менструашек у тебя были другие!\nТЫ УВЕРЕНА В ТОМ ЧТО ДЕЛАЕШЬ?", 
                     "Ты с ума сошла?", MessageBoxButtons.YesNo) != DialogResult.Yes)
                 {
                     return false;
@@ -56,11 +56,11 @@ namespace WomenCalendar
                     int distance = (date - closestPeriod.StartDay).Days;
                     if (distance < MenstruationPeriod.NormalMinimalPeriod)
                     {
-                        askMessage += "Между овуляшками меньше 21-го дня! Такой маленький цикл мы не будем учитывать при прогнозировании.";
+                        askMessage += "Между менструашками меньше 21-го дня! Такой маленький цикл мы не будем учитывать при прогнозировании.";
                     }
                     else if (distance > MenstruationPeriod.NormalMaximalPeriod)
                     {
-                        askMessage += "Между овуляшками больше 35-ти дней! Такой большой цикл мы не будем учитывать при прогнозировании.";
+                        askMessage += "Между менструашками больше 35-ти дней! Такой большой цикл мы не будем учитывать при прогнозировании.";
                     }
                 }
 
@@ -154,7 +154,7 @@ namespace WomenCalendar
 
         public MenstruationPeriod GetClosestPeriodAfterDay(DateTime date)
         {
-            if (date > Last.StartDay) return null;
+            if (Count == 0 || date > Last.StartDay) return null;
             return (from p in this where p.StartDay > date select p).FirstOrDefault();
         }
 
@@ -183,8 +183,9 @@ namespace WomenCalendar
                 return 28;
             }
 
-            DateTime firstDay = First.StartDay;
-            return (int)(this.Sum(p => (p.StartDay - firstDay).Days) / (Count - 1) + 0.5);
+            return (int)((double)((Last.StartDay - First.StartDay).Days) / (Count - 1) + 0.5);
+            //DateTime firstDay = First.StartDay;
+            //return (int)(this.Sum(p => (p.StartDay - firstDay).Days) / (Count - 1) + 0.5);
         }
     }
 }

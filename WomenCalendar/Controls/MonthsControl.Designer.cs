@@ -66,14 +66,14 @@
             // 
             this.setAsMenstruationDay.Name = "setAsMenstruationDay";
             this.setAsMenstruationDay.Size = new System.Drawing.Size(237, 22);
-            this.setAsMenstruationDay.Text = "Установить начало овуляшек";
+            this.setAsMenstruationDay.Text = "Установить начало менструашек";
             this.setAsMenstruationDay.Click += new System.EventHandler(this.setAsMenstruationDay_Click);
             // 
             // removeMenstruationDay
             // 
             this.removeMenstruationDay.Name = "removeMenstruationDay";
             this.removeMenstruationDay.Size = new System.Drawing.Size(237, 22);
-            this.removeMenstruationDay.Text = "Отменить овуляшки";
+            this.removeMenstruationDay.Text = "Отменить менструашки";
             this.removeMenstruationDay.Click += new System.EventHandler(this.removeMenstruationDay_Click);
             // 
             // toolStripSeparator1

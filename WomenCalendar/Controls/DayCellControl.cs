@@ -78,13 +78,13 @@ namespace WomenCalendar
             bool predictedAsBoyDay = w.IsPredictedAsBoyDay(Date);
             bool predictedAsGirlDay = w.IsPredictedAsGirlDay(Date);
 
-            pe.Graphics.FillRectangle(
-                (menstruationDay && Date < DateTime.Today) ? Brushes.LightPink :
-                (menstruationDay && Date >= DateTime.Today) ? Brushes.LightGreen :
-                predictedAsOvulationDay ? Brushes.Yellow :
-                predictedAsSafeSexDay ? Brushes.LightGreen :
-                Brushes.White, 
-                0, 0, Size.Width - 1, Size.Height - 1);
+            BackColor = (menstruationDay && Date < DateTime.Today) ? Color.LightPink :
+                (menstruationDay && Date >= DateTime.Today) ? Color.LightGreen :
+                predictedAsOvulationDay ? Color.Yellow :
+                predictedAsSafeSexDay ? Color.LightGreen :
+                Color.White;
+
+            pe.Graphics.FillRectangle(new SolidBrush(BackColor), 0, 0, Size.Width - 1, Size.Height - 1);
 
             if (this == OwnerOneMonthControl.FocusDay)
             {

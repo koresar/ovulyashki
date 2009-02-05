@@ -70,14 +70,14 @@ namespace WomenCalendar
             {
                 sb.AppendLine();
                 sb.Append((date - period.StartDay).Days + 1);
-                sb.AppendLine("-й день овуляшек");
+                sb.AppendLine("-й день менструашек");
                 sb.Append(DayCellPopupControl.EgestasNames[period.Egestas[date]]);
             }
 
             if (Program.CurrentWoman.IsPredictedAsMenstruationDay(date))
             {
                 sb.AppendLine();
-                sb.Append("Вероятны овуляшки");
+                sb.Append("Вероятны менструашки");
             }
 
             if (Program.CurrentWoman.HadSexList.ContainsKey(date))

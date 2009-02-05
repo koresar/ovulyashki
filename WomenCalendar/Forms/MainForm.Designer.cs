@@ -238,7 +238,7 @@
             this.xLegend.Padding = new System.Windows.Forms.Padding(0, 25, 0, 0);
             this.xLegend.Size = new System.Drawing.Size(221, 136);
             this.xLegend.TabIndex = 2;
-            this.xLegend.Tag = 6;
+            this.xLegend.Tag = 0;
             this.xLegend.TooltipText = null;
             // 
             // xWoman
@@ -277,7 +277,7 @@
             this.xWoman.Padding = new System.Windows.Forms.Padding(0, 25, 0, 0);
             this.xWoman.Size = new System.Drawing.Size(221, 176);
             this.xWoman.TabIndex = 0;
-            this.xWoman.Tag = 7;
+            this.xWoman.Tag = 1;
             this.xWoman.TooltipText = null;
             // 
             // btnChangeWoman
@@ -313,7 +313,7 @@
             // 
             // numMenstruationLength
             // 
-            this.numMenstruationLength.Location = new System.Drawing.Point(134, 69);
+            this.numMenstruationLength.Location = new System.Drawing.Point(150, 69);
             this.numMenstruationLength.Maximum = new decimal(new int[] {
             9,
             0,
@@ -346,7 +346,7 @@
             // lblMenstruationLength2
             // 
             this.lblMenstruationLength2.AutoSize = true;
-            this.lblMenstruationLength2.Location = new System.Drawing.Point(169, 71);
+            this.lblMenstruationLength2.Location = new System.Drawing.Point(185, 71);
             this.lblMenstruationLength2.Name = "lblMenstruationLength2";
             this.lblMenstruationLength2.Size = new System.Drawing.Size(31, 13);
             this.lblMenstruationLength2.TabIndex = 6;
@@ -357,9 +357,9 @@
             this.lblMenstruationLength1.AutoSize = true;
             this.lblMenstruationLength1.Location = new System.Drawing.Point(9, 71);
             this.lblMenstruationLength1.Name = "lblMenstruationLength1";
-            this.lblMenstruationLength1.Size = new System.Drawing.Size(123, 13);
+            this.lblMenstruationLength1.Size = new System.Drawing.Size(142, 13);
             this.lblMenstruationLength1.TabIndex = 5;
-            this.lblMenstruationLength1.Text = "Обычно овуляшки идут";
+            this.lblMenstruationLength1.Text = "Обычно менструашки идут";
             // 
             // numMenstruationPeriod
             // 
@@ -450,7 +450,7 @@
             this.xDay.Padding = new System.Windows.Forms.Padding(0, 25, 0, 0);
             this.xDay.Size = new System.Drawing.Size(221, 76);
             this.xDay.TabIndex = 1;
-            this.xDay.Tag = 8;
+            this.xDay.Tag = 2;
             this.xDay.TooltipText = null;
             // 
             // lblDayDescription

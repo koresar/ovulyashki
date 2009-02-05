@@ -187,7 +187,7 @@
             this.grpOv.Size = new System.Drawing.Size(72, 261);
             this.grpOv.TabIndex = 10008;
             this.grpOv.TabStop = false;
-            this.grpOv.Text = "Овуляшки";
+            this.grpOv.Text = "Менструашки";
             // 
             // numMenstruationLength
             // 

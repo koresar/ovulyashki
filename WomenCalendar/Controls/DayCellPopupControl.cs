@@ -10,8 +10,8 @@ namespace WomenCalendar
 {
     public partial class DayCellPopupControl : UserControl
     {
-        public static string[] EgestasNames = {"День без овуляшек", "Мало овуляшек", "Посредственные овуляшки", 
-            "Средняя интенсивность овуляшек", "Много овуляшек" };
+        public static string[] EgestasNames = {"День без менструашек", "Мало менструашек", "Посредственные менструашки", 
+            "Средняя интенсивность менструашек", "Много менструашек" };
 
         private bool initializing;
 
@@ -114,7 +114,7 @@ namespace WomenCalendar
 
         private void ShowEgestaTooltip()
         {
-            ShowTooltip("Количество овуляшек", EgestasNames[EgestaSliderValue]);
+            ShowTooltip("Количество менструашек", EgestasNames[EgestaSliderValue]);
         }
 
         private void ShowNoteEditForm()
