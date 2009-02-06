@@ -76,6 +76,8 @@ namespace WomenCalendar
                 sliderEgestaAmount.Visible = false;
             }
 
+            sliderHealth.Value = Program.CurrentWoman.Health[DayCell.Date];
+
             pictureNote.Visible = w.Notes.ContainsKey(dayCell.Date);
 
             lblDay.Text = dayCell.Date.Day.ToString();
@@ -85,13 +87,20 @@ namespace WomenCalendar
             Location = OwnerMonthsControl.PointToClient(dayCell.OwnerOneMonthControl.PointToScreen(newLocation));
 
             double bbt = w.BBT.GetBBT(dayCell.Date);
-            lblBBT.Visible = bbt != 0;
+            lblBBT.Visible = true;
             if (bbt != 0)
             {
+                lblBBT.ForeColor = SystemColors.ControlText;
                 lblBBT.Text = "t°" + bbt.ToString("##.##");
             }
+            else
+            {
+                Color c = Color.FromArgb((int)(BackColor.R * 0.9), (int)(BackColor.G * 0.9), (int)(BackColor.B * 0.9));
+                lblBBT.ForeColor = c;
+                lblBBT.Text = "t°36.6";
+            }
 
-            lblHadSex.Visible = w.HadSexList.ContainsKey(dayCell.Date);
+            PaintHadSex();
 
             if (Visible == false)
             {
@@ -101,10 +110,23 @@ namespace WomenCalendar
             initializing = false;
         }
 
-        private void ShowDayEditForm()
+        private void PaintHadSex()
+        {
+            if (Program.CurrentWoman.HadSexList[DayCell.Date])
+            {
+                lblHadSex.ForeColor = Color.Red;
+            }
+            else
+            {
+                Color c = Color.FromArgb((int)(BackColor.R * 0.9), (int)(BackColor.G * 0.9), (int)(BackColor.B * 0.9));
+                lblHadSex.ForeColor = c;
+            }
+        }
+
+        private void ShowDayEditForm(DayEditFocus focus)
         {
             Visible = false;
-            new DayEditForm(DayCell).ShowDialog(this);
+            new DayEditForm(DayCell, focus).ShowDialog(this);
         }
 
         private void HideTooltip()
@@ -117,15 +139,6 @@ namespace WomenCalendar
             ShowTooltip("Количество менструашек", EgestasNames[EgestaSliderValue]);
         }
 
-        private void ShowNoteEditForm()
-        {
-            NoteEditForm form = new NoteEditForm(Program.CurrentWoman.Notes[DayCell.Date]);
-            if (form.ShowDialog(this) == DialogResult.OK)
-            {
-                Program.CurrentWoman.AddNote(DayCell.Date, form.NoteText);
-            }
-        }
-
         private void ShowHasSexToolTip()
         {
             ShowTooltip("Секс", "А в этот день у меня был секс.");
@@ -134,6 +147,11 @@ namespace WomenCalendar
         private void ShowNoteToolTip()
         {
             ShowTooltip("Заметка", Program.CurrentWoman.Notes[DayCell.Date]);
+        }
+
+        private void ShowHealthTooltip()
+        {
+            ShowTooltip("Самочувствие", sliderHealth.Value.ToString());
         }
 
         private void ShowTooltip(string caption, string text)
@@ -153,7 +171,7 @@ namespace WomenCalendar
 
         private void DayCellPopupControl_DoubleClick(object sender, EventArgs e)
         {
-            ShowDayEditForm();
+            ShowDayEditForm(DayEditFocus.Note);
         }
 
         private void lblDay_MouseClick(object sender, MouseEventArgs e)
@@ -161,7 +179,7 @@ namespace WomenCalendar
             if (e.Button == MouseButtons.Left)
             {
                 OwnerMonthsControl.FocusDate = DayCell.Date;
-                ShowDayEditForm();
+                ShowDayEditForm(DayEditFocus.Note);
             }
             else
             {
@@ -174,7 +192,7 @@ namespace WomenCalendar
             if (e.Button == MouseButtons.Left)
             {
                 OwnerMonthsControl.FocusDate = DayCell.Date;
-                ShowNoteEditForm();
+                ShowDayEditForm(DayEditFocus.Note);
             }
             else
             {
@@ -219,6 +237,11 @@ namespace WomenCalendar
             HideTooltip();
         }
 
+        private void sliderHealth_MouseLeave(object sender, EventArgs e)
+        {
+            HideTooltip();
+        }
+
         private void sliderEgestaAmount_MouseDown(object sender, MouseEventArgs e)
         {
             OwnerMonthsControl.FocusDate = DayCell.Date;
@@ -245,9 +268,43 @@ namespace WomenCalendar
             {
                 OwnerMonthsControl.ShowDayContextMenu();
             }
+            else if (e.Button == MouseButtons.Left)
+            {
+                bool hadSex = Program.CurrentWoman.HadSexList[DayCell.Date];
+                Program.CurrentWoman.HadSexList[DayCell.Date] = !hadSex;
+                PaintHadSex();
+            }
         }
 
         private void lblBBT_MouseClick(object sender, MouseEventArgs e)
+        {
+            OwnerMonthsControl.FocusDate = DayCell.Date;
+            if (e.Button == MouseButtons.Right)
+            {
+                OwnerMonthsControl.ShowDayContextMenu();
+            }
+            else if (e.Button == MouseButtons.Left)
+            {
+                ShowDayEditForm(DayEditFocus.BBT);
+            }
+        }
+
+        public void Redraw()
+        {
+            Invalidate(true);
+            Update();
+        }
+
+        private void sliderHealth_Scroll(object sender, ScrollEventArgs e)
+        {
+            if (!initializing)
+            {
+                Program.CurrentWoman.Health[DayCell.Date] = sliderHealth.Value;
+                ShowHealthTooltip();
+            }
+        }
+
+        private void sliderHealth_MouseClick(object sender, MouseEventArgs e)
         {
             OwnerMonthsControl.FocusDate = DayCell.Date;
             if (e.Button == MouseButtons.Right)

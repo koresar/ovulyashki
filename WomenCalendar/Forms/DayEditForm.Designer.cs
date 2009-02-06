@@ -70,7 +70,7 @@
             this.sliderEgestaAmount.Orientation = System.Windows.Forms.Orientation.Vertical;
             this.sliderEgestaAmount.Size = new System.Drawing.Size(30, 167);
             this.sliderEgestaAmount.SmallChange = ((uint)(1u));
-            this.sliderEgestaAmount.TabIndex = 2;
+            this.sliderEgestaAmount.TabIndex = 0;
             this.sliderEgestaAmount.Text = "colorSlider1";
             this.sliderEgestaAmount.ThumbInnerColor = System.Drawing.Color.White;
             this.sliderEgestaAmount.ThumbOuterColor = System.Drawing.Color.Pink;
@@ -87,7 +87,7 @@
             this.txtBBT.MaxLength = 5;
             this.txtBBT.Name = "txtBBT";
             this.txtBBT.Size = new System.Drawing.Size(48, 20);
-            this.txtBBT.TabIndex = 1;
+            this.txtBBT.TabIndex = 0;
             this.txtBBT.Leave += new System.EventHandler(this.txtBBT_Leave);
             // 
             // lblBBT
@@ -104,7 +104,7 @@
             this.txtNote.Multiline = true;
             this.txtNote.Name = "txtNote";
             this.txtNote.Size = new System.Drawing.Size(207, 150);
-            this.txtNote.TabIndex = 10000;
+            this.txtNote.TabIndex = 0;
             // 
             // toolTip
             // 
@@ -118,7 +118,7 @@
             this.btnPrevDay.Location = new System.Drawing.Point(16, 13);
             this.btnPrevDay.Name = "btnPrevDay";
             this.btnPrevDay.Size = new System.Drawing.Size(124, 23);
-            this.btnPrevDay.TabIndex = 10002;
+            this.btnPrevDay.TabIndex = 0;
             this.btnPrevDay.Text = "<< Предыдущий день";
             this.btnPrevDay.UseVisualStyleBackColor = true;
             this.btnPrevDay.Click += new System.EventHandler(this.btnPrevDay_Click);
@@ -128,7 +128,7 @@
             this.btnNextDay.Location = new System.Drawing.Point(169, 13);
             this.btnNextDay.Name = "btnNextDay";
             this.btnNextDay.Size = new System.Drawing.Size(124, 23);
-            this.btnNextDay.TabIndex = 10003;
+            this.btnNextDay.TabIndex = 1;
             this.btnNextDay.Text = "Следующий день >>";
             this.btnNextDay.UseVisualStyleBackColor = true;
             this.btnNextDay.Click += new System.EventHandler(this.btnNextDay_Click);
@@ -139,7 +139,7 @@
             this.chkHadSex.Location = new System.Drawing.Point(12, 237);
             this.chkHadSex.Name = "chkHadSex";
             this.chkHadSex.Size = new System.Drawing.Size(184, 17);
-            this.chkHadSex.TabIndex = 10004;
+            this.chkHadSex.TabIndex = 0;
             this.chkHadSex.Text = "А в этот день у меня был секс!";
             this.chkHadSex.UseVisualStyleBackColor = true;
             // 
@@ -153,7 +153,7 @@
             this.sliderHealth.Name = "sliderHealth";
             this.sliderHealth.Size = new System.Drawing.Size(152, 30);
             this.sliderHealth.SmallChange = ((uint)(1u));
-            this.sliderHealth.TabIndex = 10005;
+            this.sliderHealth.TabIndex = 0;
             this.sliderHealth.Text = "colorSlider1";
             this.sliderHealth.ThumbRoundRectSize = new System.Drawing.Size(8, 8);
             this.sliderHealth.Value = 5;
@@ -204,7 +204,7 @@
             0});
             this.numMenstruationLength.Name = "numMenstruationLength";
             this.numMenstruationLength.Size = new System.Drawing.Size(32, 20);
-            this.numMenstruationLength.TabIndex = 10010;
+            this.numMenstruationLength.TabIndex = 1;
             this.numMenstruationLength.Value = new decimal(new int[] {
             5,
             0,
@@ -287,6 +287,7 @@
             this.Name = "DayEditForm";
             this.Text = "Изменить день";
             this.Load += new System.EventHandler(this.DayEditForm_Load);
+            this.Shown += new System.EventHandler(this.DayEditForm_Shown);
             this.Controls.SetChildIndex(this.groupBox4, 0);
             this.Controls.SetChildIndex(this.groupBox3, 0);
             this.Controls.SetChildIndex(this.groupBox2, 0);

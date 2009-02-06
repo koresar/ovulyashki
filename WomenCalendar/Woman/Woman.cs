@@ -228,6 +228,17 @@ namespace WomenCalendar
             return false;
         }
 
+        public bool IsConceptionDay(DateTime date)
+        {
+            return Conceptions.IsConceptionDay(date);
+        }
+
+        public bool IsPregnancyDay(DateTime date)
+        {
+            ConceptionPeriod period = Conceptions.GetConceptionByDate(date);
+            return period != null;
+        }
+
         public bool RemoveMenstruationDay(DateTime date)
         {
             if (!Menstruations.IsMenstruationDay(date))
@@ -235,8 +246,17 @@ namespace WomenCalendar
                 return false;
             }
 
+            MenstruationPeriod removedPeriod = Menstruations.GetPeriodByDate(date);
             if (Menstruations.Remove(date))
             {
+                if (removedPeriod.HasPregnancy)
+                {
+                    MenstruationPeriod period = Menstruations.GetClosestPeriodBeforeDay(date);
+                    if (period != null)
+                    {
+                        period.HasPregnancy = true;
+                    }
+                }
                 AveragePeriodLength = Menstruations.CalculateAveragePeriodLength();
                 return true;
             }
@@ -247,6 +267,11 @@ namespace WomenCalendar
         {
             if (!Conceptions.IsPregnancyDay(date))
             {
+                MenstruationPeriod period = Menstruations.GetClosestPeriodBeforeDay(date);
+                if (period != null)
+                {
+                    period.HasPregnancy = true;
+                }
                 return Conceptions.Add(date);
             }
             return false;
@@ -254,7 +279,22 @@ namespace WomenCalendar
         
         public bool RemoveConceptionDay(DateTime date)
         {
+            MenstruationPeriod period = Menstruations.GetClosestPeriodBeforeDay(date);
+            if (period != null)
+            {
+                period.HasPregnancy = false;
+            }
             return Conceptions.Remove(date);
+        }
+
+        public bool RemovePregnancy(DateTime date)
+        {
+            MenstruationPeriod period = Menstruations.GetClosestPeriodBeforeDay(date);
+            if (period != null)
+            {
+                period.HasPregnancy = false;
+            }
+            return Conceptions.RemoveByDate(date);
         }
 
         public bool AddNote(DateTime date, string text)

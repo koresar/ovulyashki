@@ -148,18 +148,17 @@ namespace WomenCalendar
 
         public void ShowDayContextMenu()
         {
-            bool isMentruationDay = Program.CurrentWoman.Menstruations.IsMenstruationDay(FocusDate);
-            dayContextMenu.Items["setAsMenstruationDay"].Visible = !isMentruationDay;
-            dayContextMenu.Items["removeMenstruationDay"].Visible = isMentruationDay;
-
-            bool haveNote = Program.CurrentWoman.Notes.ContainsKey(FocusDate);
-            dayContextMenu.Items["addNote"].Visible = !haveNote;
-            dayContextMenu.Items["removeNote"].Visible = haveNote;
-            dayContextMenu.Items["editNote"].Visible = haveNote;
-
             bool isPregnancyDay = Program.CurrentWoman.Conceptions.IsPregnancyDay(FocusDate);
             dayContextMenu.Items["setAsConceptionDay"].Visible = !isPregnancyDay;
             dayContextMenu.Items["removeConceptionDay"].Visible = isPregnancyDay;
+
+            bool isMentruationDay = Program.CurrentWoman.Menstruations.IsMenstruationDay(FocusDate);
+            dayContextMenu.Items["setAsMenstruationDay"].Visible = !isMentruationDay && !isPregnancyDay;
+            dayContextMenu.Items["removeMenstruationDay"].Visible = isMentruationDay && !isPregnancyDay;
+
+            bool haveNote = Program.CurrentWoman.Notes.ContainsKey(FocusDate);
+            dayContextMenu.Items["removeNote"].Visible = haveNote;
+            dayContextMenu.Items["editNote"].Visible = true;
 
             dayContextMenu.Show(FocusMonth, FocusMonth.PointToClient(MousePosition));
         }
@@ -308,19 +307,10 @@ namespace WomenCalendar
             }
         }
 
-        private void addNote_Click(object sender, EventArgs e)
-        {
-            NoteEditForm form = new NoteEditForm();
-            if (form.ShowDialog(this) == DialogResult.OK && Program.CurrentWoman.AddNote(FocusDate, form.NoteText))
-            {
-                RedrawFocusDay();
-            }
-        }
-
         private void editNote_Click(object sender, EventArgs e)
         {
-            NoteEditForm form = new NoteEditForm(Program.CurrentWoman.Notes[FocusDate]);
-            if (form.ShowDialog(this) == DialogResult.OK && Program.CurrentWoman.AddNote(FocusDate, form.NoteText))
+            DayEditForm form = new DayEditForm(FocusDay, DayEditFocus.Note);
+            if (form.ShowDialog(this) == DialogResult.OK)
             {
                 RedrawFocusDay();
             }
@@ -367,11 +357,18 @@ namespace WomenCalendar
 
         private void removeConceptionDay_Click(object sender, EventArgs e)
         {
-            if (Program.CurrentWoman.RemoveConceptionDay(FocusDate))
+            if (Program.CurrentWoman.RemovePregnancy(FocusDate))
             {
                 ((MainForm)ParentForm).UpdateWomanInformation();
                 Redraw();
             }
+        }
+
+        private void editDay_Click(object sender, EventArgs e)
+        {
+            CellPopupControl.Visible = false;
+            new DayEditForm(FocusDay).ShowDialog(this);
+            RedrawFocusDay();
         }
     }
 }

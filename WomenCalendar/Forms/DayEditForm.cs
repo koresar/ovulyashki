@@ -9,16 +9,25 @@ using System.Windows.Forms;
 
 namespace WomenCalendar
 {
+    public enum DayEditFocus { Note, BBT };
+
     public partial class DayEditForm : ModalBaseForm
     {
         private DayCellControl DayCell;
         private DateTime date;
+        private DayEditFocus defaultFocus;
 
         public DayEditForm(DayCellControl dayCell)
+            : this(dayCell, DayEditFocus.Note)
+        {
+        }
+
+        public DayEditForm(DayCellControl dayCell, DayEditFocus focus)
         {
             InitializeComponent();
             this.date = dayCell.Date;
             DayCell = dayCell;
+            defaultFocus = focus;
         }
 
         private int EgestaSliderValue
@@ -50,6 +59,7 @@ namespace WomenCalendar
             {
                 MenstruationPeriod period = w.Menstruations.SetPeriodLength(date, (int) numMenstruationLength.Value);
                 period.Egestas[date] = EgestaSliderValue;
+                DayCell.Parent.Parent.Refresh(); // redraw whole calendar
                 //w.Menstruations.SetEgesta(date, EgestaSliderValue);
             }
 
@@ -194,6 +204,15 @@ namespace WomenCalendar
         private void numMenstruationLength_ValueChanged(object sender, EventArgs e)
         {
             lblMenstruationLength.Text = MainForm.GetDaysString((int)numMenstruationLength.Value);
+        }
+
+        private void DayEditForm_Shown(object sender, EventArgs e)
+        {
+            switch (defaultFocus)
+            {
+                case DayEditFocus.Note: txtNote.Focus(); break;
+                case DayEditFocus.BBT: txtBBT.Focus(); break;
+            }
         }
     }
 }

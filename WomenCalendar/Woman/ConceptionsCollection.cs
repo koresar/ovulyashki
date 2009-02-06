@@ -38,6 +38,7 @@ namespace WomenCalendar
         public bool IsConceptionDay(DateTime date)
         {
             if (Count == 0) return false;
+            if (Count == 1) return this[0].StartDay == date;
             foreach (var p in this)
                 if (p.StartDay == date)
                     return true;
@@ -64,6 +65,17 @@ namespace WomenCalendar
             if (IsConceptionDay(date))
             {
                 ConceptionPeriod period = GetConceptionByDate(date);
+                Remove(period);
+                return true;
+            }
+            return false;
+        }
+
+        public bool RemoveByDate(DateTime date)
+        {
+            ConceptionPeriod period = GetConceptionByDate(date);
+            if (period != null)
+            {
                 Remove(period);
                 return true;
             }

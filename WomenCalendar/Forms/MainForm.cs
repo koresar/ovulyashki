@@ -74,20 +74,33 @@ namespace WomenCalendar
                 sb.Append(DayCellPopupControl.EgestasNames[period.Egestas[date]]);
             }
 
-            if (Program.CurrentWoman.IsPredictedAsMenstruationDay(date))
+            if (Program.CurrentWoman.IsPregnancyDay(date))
             {
+                DateTime conceptionDate = Program.CurrentWoman.Conceptions.GetConceptionByDate(date).StartDay;
+                DateTime dateOfBirth = conceptionDate.AddDays(40 * 7);
                 sb.AppendLine();
-                sb.Append("Вероятны менструашки");
-            }
-
-            if (Program.CurrentWoman.HadSexList.ContainsKey(date))
-            {
-                DateTime dateOfBirth = date.AddDays(40*7);
-                sb.AppendLine();
-                sb.Append("Если ты в этот день зачала ребёнка,\nто он родится примерно ");
+                sb.AppendLine("Ребёнок родится примерно ");
                 sb.AppendLine(dateOfBirth.ToLongDateString());
                 sb.Append("Знак зодиака будет ");
                 sb.Append(HoroscopDatePair.GetZodiacSignName(dateOfBirth));
+            }
+            else
+            {
+                if (Program.CurrentWoman.IsPredictedAsMenstruationDay(date))
+                {
+                    sb.AppendLine();
+                    sb.Append("Вероятны менструашки");
+                }
+
+                if (Program.CurrentWoman.HadSexList.ContainsKey(date))
+                {
+                    DateTime dateOfBirth = date.AddDays(40 * 7);
+                    sb.AppendLine();
+                    sb.Append("Если ты в этот день зачала ребёнка,\nто он родится примерно ");
+                    sb.AppendLine(dateOfBirth.ToLongDateString());
+                    sb.Append("Знак зодиака будет ");
+                    sb.Append(HoroscopDatePair.GetZodiacSignName(dateOfBirth));
+                }
             }
 
             // got to be last

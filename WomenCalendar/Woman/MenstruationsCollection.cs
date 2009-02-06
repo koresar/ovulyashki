@@ -204,14 +204,6 @@ namespace WomenCalendar
             }
 
             return resultPeriodBefore.StartDay.AddDays(((resultPeriodAfter.StartDay - resultPeriodBefore.StartDay).Days / 2));
-
-            //return resultPeriodBefore.StartDay.AddDays(((resultPeriodAfter.StartDay - resultPeriodBefore.StartDay).Days / 2));
-            //return (from p1 in this
-            //        where p1.StartDay > date
-            //        from p2 in this
-            //        where p2.StartDay < date
-            //        orderby p2.StartDay descending
-            //        select p1.StartDay.AddDays((p2.StartDay - p1.StartDay).Days / 2)).First();
         }
 
         public int CalculateAveragePeriodLength()
@@ -221,7 +213,23 @@ namespace WomenCalendar
                 return 28;
             }
 
-            return (int)((double)((Last.StartDay - First.StartDay).Days) / (Count - 1) + 0.5);
+            double sum = 0;
+            int count = 0;
+            for (int i = 1; i < this.Count; i++)
+            {
+                if (!this[i - 1].HasPregnancy)
+                {
+                    int periodLength = (this[i].StartDay - this[i - 1].StartDay).Days;
+                    if (periodLength < MenstruationPeriod.NormalMinimalPeriod ||
+                        periodLength > MenstruationPeriod.NormalMaximalPeriod)
+                    {
+                        continue;
+                    }
+                    sum += periodLength;
+                    count++;
+                }
+            }
+            return sum == 0 ? 28 : (int)(sum / count + 0.5);
         }
     }
 }

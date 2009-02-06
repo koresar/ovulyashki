@@ -13,6 +13,7 @@ namespace WomenCalendar
         public DateTime StartDay { get; set; }
         public int length;
         public EgestasCollection Egestas = new EgestasCollection();
+        public bool HasPregnancy { get; set; }
 
         public MenstruationPeriod()
         {

@@ -34,6 +34,7 @@
             this.pictureNote = new System.Windows.Forms.PictureBox();
             this.lblBBT = new System.Windows.Forms.Label();
             this.lblHadSex = new System.Windows.Forms.Label();
+            this.sliderHealth = new MB.Controls.ColorSlider();
             this.sliderEgestaAmount = new MB.Controls.ColorSlider();
             ((System.ComponentModel.ISupportInitialize)(this.pictureNote)).BeginInit();
             this.SuspendLayout();
@@ -77,7 +78,7 @@
             // 
             // lblBBT
             // 
-            this.lblBBT.Location = new System.Drawing.Point(0, 49);
+            this.lblBBT.Location = new System.Drawing.Point(0, 31);
             this.lblBBT.Name = "lblBBT";
             this.lblBBT.Size = new System.Drawing.Size(45, 14);
             this.lblBBT.TabIndex = 4;
@@ -96,6 +97,24 @@
             this.lblHadSex.MouseLeave += new System.EventHandler(this.lblHadSex_MouseLeave);
             this.lblHadSex.MouseClick += new System.Windows.Forms.MouseEventHandler(this.lblHadSex_MouseClick);
             this.lblHadSex.MouseEnter += new System.EventHandler(this.lblHadSex_MouseEnter);
+            // 
+            // sliderHealth
+            // 
+            this.sliderHealth.BackColor = System.Drawing.Color.Transparent;
+            this.sliderHealth.BorderRoundRectSize = new System.Drawing.Size(8, 8);
+            this.sliderHealth.LargeChange = ((uint)(5u));
+            this.sliderHealth.Location = new System.Drawing.Point(-1, 47);
+            this.sliderHealth.Maximum = 10;
+            this.sliderHealth.Name = "sliderHealth";
+            this.sliderHealth.Size = new System.Drawing.Size(45, 16);
+            this.sliderHealth.SmallChange = ((uint)(1u));
+            this.sliderHealth.TabIndex = 6;
+            this.sliderHealth.Text = "colorSlider1";
+            this.sliderHealth.ThumbRoundRectSize = new System.Drawing.Size(8, 8);
+            this.sliderHealth.Value = 5;
+            this.sliderHealth.MouseLeave += new System.EventHandler(this.sliderHealth_MouseLeave);
+            this.sliderHealth.Scroll += new System.Windows.Forms.ScrollEventHandler(this.sliderHealth_Scroll);
+            this.sliderHealth.MouseClick += new System.Windows.Forms.MouseEventHandler(this.sliderHealth_MouseClick);
             // 
             // sliderEgestaAmount
             // 
@@ -130,6 +149,7 @@
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.Controls.Add(this.sliderHealth);
             this.Controls.Add(this.lblHadSex);
             this.Controls.Add(this.lblBBT);
             this.Controls.Add(this.sliderEgestaAmount);
@@ -154,5 +174,6 @@
         private MB.Controls.ColorSlider sliderEgestaAmount;
         private System.Windows.Forms.Label lblBBT;
         private System.Windows.Forms.Label lblHadSex;
+        private MB.Controls.ColorSlider sliderHealth;
     }
 }
