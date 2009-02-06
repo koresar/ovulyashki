@@ -127,6 +127,7 @@ namespace WomenCalendar
         {
             Visible = false;
             new DayEditForm(DayCell, focus).ShowDialog(this);
+            OwnerMonthsControl.Redraw();
         }
 
         private void HideTooltip()

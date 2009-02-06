@@ -7,6 +7,7 @@ using System.Drawing.Drawing2D;
 using System.Text;
 using System.Windows.Forms;
 using System.Drawing.Imaging;
+using WomenCalendar.Properties;
 
 namespace WomenCalendar
 {
@@ -54,6 +55,30 @@ namespace WomenCalendar
             }
         }
 
+        /// <summary>
+        /// When true indicates that we should not automaticaly 
+        /// calculate pregnancy, menstruation, etc. parameters.
+        /// </summary>
+        public bool ManualDrawOptions { get; set; }
+
+        public int Egesta { get; set; }
+        public bool IsFocusDay { get; set; }
+        public bool IsTodayDay { get; set; }
+        public bool IsPregnancyDay { get; set; }
+        public bool IsMenstruationDay { get; set; }
+        public bool IsPredictedAsOvulationDay { get; set; }
+        public bool IsPredictedAsSafeSexDay { get; set; }
+        public bool IsHaveNote { get; set; }
+        public bool IsPredictedAsBoyDay { get; set; }
+        public bool IsPredictedAsGirlDay { get; set; }
+        public bool IsPredictedAsMenstruationDay { get; set; }
+        public bool IsConceptionDay { get; set; }
+        public bool IsHadSex { get; set; }
+
+        public DayCellControl()
+        {
+        }
+
         public DayCellControl(OneMonthControl parent)
         {
             OwnerOneMonthControl = parent;
@@ -70,31 +95,20 @@ namespace WomenCalendar
 
         private void DrawEnabled(PaintEventArgs pe)
         {
-            Woman w = Program.CurrentWoman;
-
-            bool pregnancyDay = w.IsPregnancyDay(Date);
-            bool menstruationDay = !pregnancyDay && w.Menstruations.IsMenstruationDay(Date);
-            bool predictedAsOvulationDay = !pregnancyDay && w.IsPredictedAsOvulationDay(Date);
-            bool predictedAsSafeSexDay = !pregnancyDay && w.IsPredictedAsSafeSexDay(Date);
-            bool predictedAsBoyDay = !pregnancyDay && w.IsPredictedAsBoyDay(Date);
-            bool predictedAsGirlDay = !pregnancyDay && w.IsPredictedAsGirlDay(Date);
-            bool predictedAsMenstruationDay = !pregnancyDay && w.IsPredictedAsMenstruationDay(Date);
-            bool conceptionDay = w.IsConceptionDay(Date);
-
-            BackColor = pregnancyDay ? Color.LightBlue :
-                (menstruationDay && Date <= DateTime.Today) ? Color.LightPink :
-                (menstruationDay && Date > DateTime.Today) ? Color.LightGreen :
-                predictedAsOvulationDay ? Color.Yellow :
-                predictedAsSafeSexDay ? Color.LightGreen :
+            BackColor = IsPregnancyDay ? Color.LightBlue :
+                (IsMenstruationDay && Date <= DateTime.Today) ? Color.LightPink :
+                (IsMenstruationDay && Date > DateTime.Today) ? Color.LightGreen :
+                IsPredictedAsOvulationDay ? Color.Yellow :
+                IsPredictedAsSafeSexDay ? Color.LightGreen :
                 Color.White;
 
             pe.Graphics.FillRectangle(new SolidBrush(BackColor), 0, 0, Size.Width - 1, Size.Height - 1);
 
-            if (this == OwnerOneMonthControl.FocusDay)
+            if (IsFocusDay)
             {
                 pe.Graphics.DrawRectangle(Program.DayCellAppearance.FocusEdgePen, 1, 1, Size.Width - 2, Size.Height - 2);
             }
-            else if (Date == DateTime.Today)
+            else if (IsTodayDay)
             {
                 pe.Graphics.DrawRectangle(Program.DayCellAppearance.TodayEdgePen, 1, 1, Size.Width - 2, Size.Height - 2);
             }
@@ -103,48 +117,47 @@ namespace WomenCalendar
                 pe.Graphics.DrawRectangle(Program.DayCellAppearance.EdgePen, 0, 0, Size.Width - 1, Size.Height - 1);
             }
 
-            if (menstruationDay)
+            if (IsMenstruationDay)
             {
-                int egesta = w.Menstruations.GetEgestaAmount(Date);
-                if (egesta > 0)
+                if (Egesta > 0)
                 {
-                    Image image = (Image)Program.IconResource.GetObject("drop_Image");
+                    Image image = (Image)Resources.ResourceManager.GetObject("drop_Image");
                     ImageAttributes attr = new ImageAttributes();
                     ColorMatrix cMatrix = new ColorMatrix();
                     // alpha
-                    cMatrix.Matrix33 = ((float)egesta) / (EgestasCollection.MaximumEgestaValue);
+                    cMatrix.Matrix33 = ((float)Egesta) / (EgestasCollection.MaximumEgestaValue);
                     attr.SetColorMatrix(cMatrix);
                     pe.Graphics.DrawImage(image, new Rectangle(2, 20, 10, 10), 0, 0, 14, 14, GraphicsUnit.Pixel, attr);
                 }
-                else if (egesta == 0)
+                else if (Egesta == 0)
                 {
                     pe.Graphics.DrawEllipse(Pens.Red, 3, 14, 5, 5);
                 }
             }
 
-            if (conceptionDay)
+            if (IsConceptionDay)
             {
-                Image image = (Image)Program.IconResource.GetObject("baby_Image");
+                Image image = (Image)Resources.ResourceManager.GetObject("baby_Image");
                 pe.Graphics.DrawImage(image, new Rectangle(2, 20, 10, 10), 0, 0, 48, 48, GraphicsUnit.Pixel);
             }
-            else if (predictedAsGirlDay)
+            else if (IsPredictedAsGirlDay)
             {
-                Image image = (Image)Program.IconResource.GetObject("girl_Image");
+                Image image = (Image)Resources.ResourceManager.GetObject("girl_Image");
                 pe.Graphics.DrawImage(image, new Rectangle(2, 20, 10, 10), 0, 0, 48, 48, GraphicsUnit.Pixel);
             }
-            else if (predictedAsBoyDay)
+            else if (IsPredictedAsBoyDay)
             {
-                Image image = (Image)Program.IconResource.GetObject("boy_Image");
+                Image image = (Image)Resources.ResourceManager.GetObject("boy_Image");
                 pe.Graphics.DrawImage(image, new Rectangle(2, 20, 10, 10), 0, 0, 48, 48, GraphicsUnit.Pixel);
             }
 
-            if (w.Notes.ContainsKey(Date))
+            if (IsHaveNote)
             {
-                pe.Graphics.DrawImage((Image)Program.IconResource.GetObject("note_Image"), 23, 2);
+                pe.Graphics.DrawImage((Image)Resources.ResourceManager.GetObject("note_Image"), 23, 2);
             }
             else
             {
-                Image image = (Image)Program.IconResource.GetObject("note_Image");
+                Image image = (Image)Resources.ResourceManager.GetObject("note_Image");
                 ImageAttributes attr = new ImageAttributes();
                 ColorMatrix cMatrix = new ColorMatrix();
                 // alpha
@@ -153,12 +166,12 @@ namespace WomenCalendar
                 pe.Graphics.DrawImage(image, new Rectangle(23, 2, 7, 7), 0, 0, 7, 7, GraphicsUnit.Pixel, attr);
             }
 
-            if (predictedAsMenstruationDay)
+            if (IsPredictedAsMenstruationDay)
             {
                 pe.Graphics.DrawString("?", Font, Brushes.Red, 0, 18);
             }
 
-            if (w.HadSexList.ContainsKey(Date))
+            if (IsHadSex)
             {
                 pe.Graphics.DrawString("S", Font, Brushes.Red, 22, 19);
             }
@@ -174,6 +187,24 @@ namespace WomenCalendar
             }
             else
             {
+                if (!ManualDrawOptions)
+                {
+                    Woman w = Program.CurrentWoman;
+                    Egesta = w.Menstruations.GetEgestaAmount(Date);
+                    IsFocusDay = OwnerOneMonthControl != null && this == OwnerOneMonthControl.FocusDay;
+                    IsTodayDay = Date == DateTime.Today;
+                    IsPregnancyDay = w.IsPregnancyDay(Date);
+                    IsMenstruationDay = !IsPregnancyDay && w.Menstruations.IsMenstruationDay(Date);
+                    IsPredictedAsOvulationDay = !IsPregnancyDay && w.IsPredictedAsOvulationDay(Date);
+                    IsPredictedAsSafeSexDay = !IsPregnancyDay && w.IsPredictedAsSafeSexDay(Date);
+                    IsHaveNote = w.Notes.ContainsKey(Date);
+                    IsPredictedAsBoyDay = !IsPregnancyDay && w.IsPredictedAsBoyDay(Date);
+                    IsPredictedAsGirlDay = !IsPregnancyDay && w.IsPredictedAsGirlDay(Date);
+                    IsPredictedAsMenstruationDay = !IsPregnancyDay && w.IsPredictedAsMenstruationDay(Date);
+                    IsConceptionDay = w.IsConceptionDay(Date);
+                    IsHadSex = w.HadSexList.ContainsKey(Date);
+                }
+
                 DrawEnabled(pe);
             }
         }

@@ -59,8 +59,6 @@ namespace WomenCalendar
             {
                 MenstruationPeriod period = w.Menstruations.SetPeriodLength(date, (int) numMenstruationLength.Value);
                 period.Egestas[date] = EgestaSliderValue;
-                DayCell.Parent.Parent.Refresh(); // redraw whole calendar
-                //w.Menstruations.SetEgesta(date, EgestaSliderValue);
             }
 
             w.Notes[date] = txtNote.Text;
@@ -69,7 +67,7 @@ namespace WomenCalendar
 
             w.Health[date] = sliderHealth.Value;
 
-            DayCell.Redraw();
+            DayCell.OwnerOneMonthControl.OwnerMonthsControl.Redraw(); // redraw whole calendar
         }
 
         private void ShowEgestaTooltip()
@@ -149,7 +147,6 @@ namespace WomenCalendar
                 ShowTooltip("Базальная температура тела", "Что это за фигню ты сюда ввела? Это не температура!", txtBBT);
             }
 
-            txtBBT.Focus();
             return false;
         }
 
@@ -160,10 +157,13 @@ namespace WomenCalendar
         private void Rotate(int days)
         {
             if (!ValidateData()) return;
-            SaveData();
 
+            DayEditFocus focus = txtBBT.Focused ? DayEditFocus.BBT : DayEditFocus.Note;
+
+            SaveData();
             date = date.AddDays(days);
             LoadForm();
+            SetFocusTo(focus);
         }
 
         private void DayEditForm_Load(object sender, EventArgs e)
@@ -208,7 +208,12 @@ namespace WomenCalendar
 
         private void DayEditForm_Shown(object sender, EventArgs e)
         {
-            switch (defaultFocus)
+            SetFocusTo(defaultFocus);
+        }
+
+        private void SetFocusTo(DayEditFocus focusTo)
+        {
+            switch (focusTo)
             {
                 case DayEditFocus.Note: txtNote.Focus(); break;
                 case DayEditFocus.BBT: txtBBT.Focus(); break;

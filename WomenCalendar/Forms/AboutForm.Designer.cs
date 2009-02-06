@@ -43,6 +43,7 @@
             this.btnSite.TabIndex = 0;
             this.btnSite.Text = "Посетить сайт Овуляшек";
             this.btnSite.UseVisualStyleBackColor = true;
+            this.btnSite.Click += new System.EventHandler(this.btnSite_Click);
             // 
             // btnFeedback
             // 
@@ -52,6 +53,7 @@
             this.btnFeedback.TabIndex = 1;
             this.btnFeedback.Text = "Написать слова благодарности автору";
             this.btnFeedback.UseVisualStyleBackColor = true;
+            this.btnFeedback.Click += new System.EventHandler(this.btnFeedback_Click);
             // 
             // btnBug
             // 
@@ -61,6 +63,7 @@
             this.btnBug.TabIndex = 2;
             this.btnBug.Text = "Рассказать об ошибке в программе";
             this.btnBug.UseVisualStyleBackColor = true;
+            this.btnBug.Click += new System.EventHandler(this.btnBug_Click);
             // 
             // btnNewFeature
             // 
@@ -70,6 +73,7 @@
             this.btnNewFeature.TabIndex = 3;
             this.btnNewFeature.Text = "Попросить автора добавить новую фишку";
             this.btnNewFeature.UseVisualStyleBackColor = true;
+            this.btnNewFeature.Click += new System.EventHandler(this.btnNewFeature_Click);
             // 
             // btnAskQuestion
             // 
@@ -79,6 +83,7 @@
             this.btnAskQuestion.TabIndex = 4;
             this.btnAskQuestion.Text = "Задать вопрос";
             this.btnAskQuestion.UseVisualStyleBackColor = true;
+            this.btnAskQuestion.Click += new System.EventHandler(this.btnAskQuestion_Click);
             // 
             // AboutForm
             // 
