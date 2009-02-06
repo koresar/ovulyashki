@@ -35,6 +35,18 @@ namespace WomenCalendar
             //return (from p in this where p.IsDayInPeriod(date) select p).FirstOrDefault();
         }
 
+        public ConceptionPeriod GetConceptionAfterDate(DateTime date)
+        {
+            if (Count == 0 || date > Last.LastDay) return null;
+            if (Count == 1) return this[0];
+            ConceptionPeriod period = null;
+            foreach (var p in this)
+                if (date < p.StartDay && (period == null || period.StartDay < p.StartDay))
+                    period = p;
+            return period;
+            //return (from p in this where p.IsDayInPeriod(date) select p).FirstOrDefault();
+        }
+
         public bool IsConceptionDay(DateTime date)
         {
             if (Count == 0) return false;

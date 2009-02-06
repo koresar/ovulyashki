@@ -5,6 +5,7 @@ using System.Xml;
 using System.Reflection;
 using System.Xml.Serialization;
 using System.IO;
+using System.Windows.Forms;
 
 namespace WomenCalendar
 {
@@ -267,10 +268,27 @@ namespace WomenCalendar
         {
             if (!Conceptions.IsPregnancyDay(date))
             {
-                MenstruationPeriod period = Menstruations.GetClosestPeriodBeforeDay(date);
-                if (period != null)
+                if (date > DateTime.Today)
                 {
-                    period.HasPregnancy = true;
+                    if (MessageBox.Show("Этот день еще не наступил! Врядли ты забеременеешь именно в этот день.\nТЫ УВЕРЕНА В ТОМ ЧТО ДЕЛАЕШЬ?",
+                        "Ухты, какая необычная ситуация!", MessageBoxButtons.YesNo) != DialogResult.Yes)
+                    {
+                        return false;
+                    }
+                }
+
+                ConceptionPeriod concPeriod = Conceptions.GetConceptionAfterDate(date);
+                if (concPeriod != null && (concPeriod.StartDay - date).Days <= ConceptionPeriod.StandardLength)
+                {
+                    MessageBox.Show("У вас уже есть беременность через " +
+                        (concPeriod.StartDay - date).Days.ToString() + " дней после этого.", "Не-не-не!");
+                    return false;
+                }
+
+                MenstruationPeriod mensPeriod = Menstruations.GetClosestPeriodBeforeDay(date);
+                if (mensPeriod != null)
+                {
+                    mensPeriod.HasPregnancy = true;
                 }
                 return Conceptions.Add(date);
             }

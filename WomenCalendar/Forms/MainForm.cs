@@ -77,7 +77,7 @@ namespace WomenCalendar
             if (Program.CurrentWoman.IsPregnancyDay(date))
             {
                 DateTime conceptionDate = Program.CurrentWoman.Conceptions.GetConceptionByDate(date).StartDay;
-                DateTime dateOfBirth = conceptionDate.AddDays(40 * 7);
+                DateTime dateOfBirth = conceptionDate.AddDays(ConceptionPeriod.StandardLength);
                 sb.AppendLine();
                 sb.AppendLine("Ребёнок родится примерно ");
                 sb.AppendLine(dateOfBirth.ToLongDateString());
@@ -94,7 +94,7 @@ namespace WomenCalendar
 
                 if (Program.CurrentWoman.HadSexList.ContainsKey(date))
                 {
-                    DateTime dateOfBirth = date.AddDays(40 * 7);
+                    DateTime dateOfBirth = date.AddDays(ConceptionPeriod.StandardLength);
                     sb.AppendLine();
                     sb.Append("Если ты в этот день зачала ребёнка,\nто он родится примерно ");
                     sb.AppendLine(dateOfBirth.ToLongDateString());
@@ -291,6 +291,11 @@ namespace WomenCalendar
         private void helpToolStripButton_Click(object sender, EventArgs e)
         {
             new AboutForm().Show();
+        }
+
+        private void exportToExcel_Click(object sender, EventArgs e)
+        {
+            Program.ExportWoman();
         }
     }
 }

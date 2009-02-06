@@ -57,8 +57,21 @@
             this.rbAuto = new System.Windows.Forms.RadioButton();
             this.lblAverageCycle = new System.Windows.Forms.Label();
             this.xLegend = new XPanderControl.XPander();
+            this.label12 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
             this.xDay = new XPanderControl.XPander();
             this.lblDayDescription = new System.Windows.Forms.Label();
+            this.exportToExcel = new System.Windows.Forms.ToolStripButton();
             this.dayCellControl4 = new WomenCalendar.DayCellControl();
             this.dayCellControl6 = new WomenCalendar.DayCellControl();
             this.dayCellControl8 = new WomenCalendar.DayCellControl();
@@ -72,18 +85,6 @@
             this.dayCellControl1 = new WomenCalendar.DayCellControl();
             this.dayLegendMenstruations = new WomenCalendar.DayCellControl();
             this.monthControl = new WomenCalendar.MonthsControl();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
-            this.label10 = new System.Windows.Forms.Label();
-            this.label11 = new System.Windows.Forms.Label();
-            this.label12 = new System.Windows.Forms.Label();
             this.toolStrip1.SuspendLayout();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -103,6 +104,7 @@
             this.newToolStripButton,
             this.openToolStripButton,
             this.saveToolStripButton,
+            this.exportToExcel,
             this.toolStripSeparator,
             this.prevStripButton,
             this.nextStripButton,
@@ -194,7 +196,7 @@
             // toolStripLabel1
             // 
             this.toolStripLabel1.Name = "toolStripLabel1";
-            this.toolStripLabel1.Size = new System.Drawing.Size(64, 22);
+            this.toolStripLabel1.Size = new System.Drawing.Size(61, 22);
             this.toolStripLabel1.Text = "Прыгнуть:";
             // 
             // dateTimePicker1
@@ -221,7 +223,7 @@
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.monthControl);
-            this.splitContainer1.Size = new System.Drawing.Size(747, 839);
+            this.splitContainer1.Size = new System.Drawing.Size(747, 817);
             this.splitContainer1.SplitterDistance = 250;
             this.splitContainer1.TabIndex = 5;
             // 
@@ -236,7 +238,7 @@
             this.xPanderList1.Location = new System.Drawing.Point(0, 0);
             this.xPanderList1.Margin = new System.Windows.Forms.Padding(0);
             this.xPanderList1.Name = "xPanderList1";
-            this.xPanderList1.Size = new System.Drawing.Size(250, 839);
+            this.xPanderList1.Size = new System.Drawing.Size(250, 817);
             this.xPanderList1.TabIndex = 0;
             // 
             // xWoman
@@ -275,7 +277,7 @@
             this.xWoman.Padding = new System.Windows.Forms.Padding(0, 25, 0, 0);
             this.xWoman.Size = new System.Drawing.Size(234, 176);
             this.xWoman.TabIndex = 0;
-            this.xWoman.Tag = 12;
+            this.xWoman.Tag = 9;
             this.xWoman.TooltipText = null;
             // 
             // btnChangeWoman
@@ -471,8 +473,116 @@
             this.xLegend.Padding = new System.Windows.Forms.Padding(0, 25, 0, 0);
             this.xLegend.Size = new System.Drawing.Size(234, 488);
             this.xLegend.TabIndex = 2;
-            this.xLegend.Tag = 13;
+            this.xLegend.Tag = 10;
             this.xLegend.TooltipText = null;
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(45, 466);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(77, 13);
+            this.label12.TabIndex = 2;
+            this.label12.Text = "День зачатия";
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(46, 428);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(81, 13);
+            this.label11.TabIndex = 2;
+            this.label11.Text = "Беременность";
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(45, 390);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(84, 13);
+            this.label10.TabIndex = 2;
+            this.label10.Text = "День овуляции";
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(46, 351);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(148, 13);
+            this.label9.TabIndex = 2;
+            this.label9.Text = "День будущих менструаций";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(46, 314);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(147, 13);
+            this.label8.TabIndex = 2;
+            this.label8.Text = "Безопасный секс (условно)";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(46, 276);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(74, 13);
+            this.label7.TabIndex = 2;
+            this.label7.Text = "Менструации";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(46, 238);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(142, 13);
+            this.label6.TabIndex = 2;
+            this.label6.Text = "Вероятно зачатие девочки";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(46, 200);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(150, 13);
+            this.label5.TabIndex = 2;
+            this.label5.Text = "Вероятно зачатие мальчика";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(46, 162);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(67, 13);
+            this.label4.TabIndex = 2;
+            this.label4.Text = "День секса";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(46, 124);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(51, 13);
+            this.label3.TabIndex = 2;
+            this.label3.Text = "Заметка";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(46, 86);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(142, 13);
+            this.label2.TabIndex = 2;
+            this.label2.Text = "Выбраный день (в фокусе)";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(46, 48);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(102, 13);
+            this.label1.TabIndex = 2;
+            this.label1.Text = "Сегодняшний день";
             // 
             // xDay
             // 
@@ -499,7 +609,7 @@
             this.xDay.Padding = new System.Windows.Forms.Padding(0, 25, 0, 0);
             this.xDay.Size = new System.Drawing.Size(234, 76);
             this.xDay.TabIndex = 1;
-            this.xDay.Tag = 14;
+            this.xDay.Tag = 11;
             this.xDay.TooltipText = null;
             // 
             // lblDayDescription
@@ -511,6 +621,16 @@
             this.lblDayDescription.Size = new System.Drawing.Size(42, 13);
             this.lblDayDescription.TabIndex = 0;
             this.lblDayDescription.Text = "...day...";
+            // 
+            // exportToExcel
+            // 
+            this.exportToExcel.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.exportToExcel.Image = ((System.Drawing.Image)(resources.GetObject("exportToExcel.Image")));
+            this.exportToExcel.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.exportToExcel.Name = "exportToExcel";
+            this.exportToExcel.Size = new System.Drawing.Size(23, 22);
+            this.exportToExcel.Text = "Экспортировать женщину в Excel";
+            this.exportToExcel.Click += new System.EventHandler(this.exportToExcel_Click);
             // 
             // dayCellControl4
             // 
@@ -812,124 +932,16 @@
             this.monthControl.MonthsMarginX = 10;
             this.monthControl.MonthsMarginY = 10;
             this.monthControl.Name = "monthControl";
-            this.monthControl.Size = new System.Drawing.Size(493, 839);
+            this.monthControl.Size = new System.Drawing.Size(493, 817);
             this.monthControl.StartMonth = new System.DateTime(2007, 2, 1, 0, 0, 0, 0);
             this.monthControl.TabIndex = 0;
             this.monthControl.FocusDateChanged += new WomenCalendar.MonthsControl.FocusDateChangedDelegate(this.monthControl_FocusDateChanged);
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(46, 48);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(102, 13);
-            this.label1.TabIndex = 2;
-            this.label1.Text = "Сегодняшний день";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(46, 86);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(142, 13);
-            this.label2.TabIndex = 2;
-            this.label2.Text = "Выбраный день (в фокусе)";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(46, 124);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(51, 13);
-            this.label3.TabIndex = 2;
-            this.label3.Text = "Заметка";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(46, 162);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(67, 13);
-            this.label4.TabIndex = 2;
-            this.label4.Text = "День секса";
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(46, 200);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(150, 13);
-            this.label5.TabIndex = 2;
-            this.label5.Text = "Вероятно зачатие мальчика";
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(46, 238);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(142, 13);
-            this.label6.TabIndex = 2;
-            this.label6.Text = "Вероятно зачатие девочки";
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(46, 276);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(74, 13);
-            this.label7.TabIndex = 2;
-            this.label7.Text = "Менструации";
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(46, 314);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(147, 13);
-            this.label8.TabIndex = 2;
-            this.label8.Text = "Безопасный секс (условно)";
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(46, 351);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(148, 13);
-            this.label9.TabIndex = 2;
-            this.label9.Text = "День будущих менструаций";
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(45, 390);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(84, 13);
-            this.label10.TabIndex = 2;
-            this.label10.Text = "День овуляции";
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(46, 428);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(81, 13);
-            this.label11.TabIndex = 2;
-            this.label11.Text = "Беременность";
-            // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(45, 466);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(77, 13);
-            this.label12.TabIndex = 2;
-            this.label12.Text = "День зачатия";
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(747, 864);
+            this.ClientSize = new System.Drawing.Size(747, 842);
             this.Controls.Add(this.splitContainer1);
             this.Controls.Add(this.dateTimePicker1);
             this.Controls.Add(this.toolStrip1);
@@ -1018,6 +1030,7 @@
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.ToolStripButton exportToExcel;
 
 
     }

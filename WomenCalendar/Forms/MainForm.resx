@@ -165,6 +165,15 @@
         Cv71r/4OTrQ4xWMwWlcAAAAASUVORK5CYII=
 </value>
   </data>
+  <data name="exportToExcel.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAAAJJJREFUOE+tU8EN
+        gCAMlH3tNPj0K4sYX7qA01TPiClYxCY0aSCFHndtcd1p3nvGajUiclcOAIZlN3nyaBOAbZ3Z4i8GfBtA
+        anuctwew0Mfddgz6ceIQQlW3rE1SAwCATi4B8dzlnV8ScoCHpqULEuQTQOsCkhGPIKqEWAM5PDIhxhFT
+        GaADJa2lqVQnEVW1On7yAdG0yqna7GvVAAAAAElFTkSuQmCC
+</value>
+  </data>
   <data name="prevStripButton.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8

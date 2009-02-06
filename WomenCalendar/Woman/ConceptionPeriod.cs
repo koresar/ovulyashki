@@ -6,6 +6,8 @@ namespace WomenCalendar
 {
     public class ConceptionPeriod
     {
+        public const int StandardLength = 40 * 7;
+
         public DateTime StartDay { get; set; }
         public DateTime LastDay { get; set; }
 

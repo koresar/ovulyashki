@@ -10,12 +10,13 @@ namespace WomenCalendar
         public HoroscopDatePair(int fromMonth, int fromDay, int toMonth, int toDay)
         {
             From = new DateTime(DateTime.MinValue.Year, fromMonth, fromDay);
-            To = new DateTime(DateTime.MinValue.Year, toMonth, toDay);
+            To = new DateTime(DateTime.MinValue.Year + (toMonth - 1) / 12, (toMonth - 1) % 12 + 1, toDay);
         }
 
         public bool IsInRange(DateTime date)
         {
             DateTime d = new DateTime(DateTime.MinValue.Year, date.Month, date.Day);
+            if (d.Month == 1) d = d.AddYears(1);
             return d >= From && d <= To;
         }
 
@@ -36,7 +37,7 @@ namespace WomenCalendar
                 new HoroscopDatePair(9, 23, 10, 22),
                 new HoroscopDatePair(10, 23, 11, 21),
                 new HoroscopDatePair(11, 22, 12, 21),
-                new HoroscopDatePair(12, 22, 1, 19),
+                new HoroscopDatePair(12, 22, 13, 19),
                 new HoroscopDatePair(1, 20, 2, 18),
                 new HoroscopDatePair(2, 19, 3, 20)
             };

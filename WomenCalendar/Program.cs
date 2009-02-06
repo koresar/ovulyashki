@@ -6,6 +6,7 @@ using System.Drawing;
 using WomenCalendar.Properties;
 using System.ComponentModel;
 using System.Resources;
+using CarlosAg.ExcelXmlWriter;
 
 namespace WomenCalendar
 {
@@ -171,6 +172,64 @@ namespace WomenCalendar
                 return true;
             }
             return false;            
+        }
+
+        public static bool ExportWoman()
+        {
+            SaveFileDialog dialog = new SaveFileDialog();
+            dialog.Filter = "Excel files (*.xls)|*.xls|Comma Separated Values files (*.csv)|*.csv";
+            dialog.RestoreDirectory = true;
+            dialog.CheckPathExists = true;
+            dialog.Title = "Укажите файл";
+            if (dialog.ShowDialog() != DialogResult.OK)
+            {
+                return false;
+            }
+
+            try
+            {
+                if (dialog.FileName.EndsWith(".csv"))
+                {
+                    using (CsvWriter csv = new CsvWriter(dialog.FileName))
+                    {
+                        csv.WriteLine("Дата менструаций", "Продолжительность");
+                        foreach (var mens in CurrentWoman.Menstruations)
+                        {
+                            csv.WriteLine(mens.StartDay.ToShortDateString(), mens.Length);
+                        }
+                    }
+                }
+                else if (dialog.FileName.EndsWith(".xls"))
+                {
+                    Workbook wb = new Workbook();
+                    WorksheetStyle dateStyle = wb.Styles.Add("dateStyle");
+                    dateStyle.NumberFormat = "Short Date";
+                    Worksheet ws = wb.Worksheets.Add("Менструации");
+                    ws.Table.Columns.Add(new WorksheetColumn(100) { AutoFitWidth = true });
+                    ws.Table.Columns.Add(new WorksheetColumn(100) { AutoFitWidth = true });
+                    WorksheetRow wr = ws.Table.Rows.Add();
+                    wr.Cells.Add("Дата менструаций");
+                    wr.Cells.Add("Продолжительность");
+                    foreach (var mens in CurrentWoman.Menstruations)
+                    {
+                        wr = ws.Table.Rows.Add();
+                        wr.Cells.Add(mens.StartDay.ToShortDateString(), DataType.String, "dateStyle");
+                        wr.Cells.Add(new WorksheetCell(mens.Length.ToString(), DataType.Number));
+                    }
+                    wb.Save(dialog.FileName);
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Не могу экспортировать в файл. Сообщение об ошибке:\n" + 
+                    ex.Message, "Ошибка!");
+                return false;
+            }
+            return true;
         }
 
         /// <summary>

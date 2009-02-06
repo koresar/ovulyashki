@@ -31,7 +31,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Microsoft.VisualBasic" />
+    <Reference Include="CarlosAg.ExcelXmlWriter, Version=1.0.0.6, Culture=neutral">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\libs\CarlosAg.ExcelXmlWriter.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Design" />
     <Reference Include="System.Data" />
@@ -41,11 +44,12 @@
     <Reference Include="System.Xml" />
     <Reference Include="XPanderControl, Version=1.2.0.0, Culture=neutral">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\XPanderControl.dll</HintPath>
+      <HintPath>..\libs\XPanderControl.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ApplicationSettings.cs" />
+    <Compile Include="BusinessLogic\ApplicationSettings.cs" />
+    <Compile Include="BusinessLogic\CsvWriter.cs" />
     <Compile Include="BusinessLogic\HoroscopeDatePair.cs" />
     <Compile Include="Controls\ColorSlider.cs">
       <SubType>Component</SubType>
