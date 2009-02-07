@@ -76,9 +76,22 @@ namespace WomenCalendar
 
             if (Program.CurrentWoman.IsPregnancyDay(date))
             {
+                sb.AppendLine();
+
+                int week = Program.CurrentWoman.Conceptions.GetPregnancyWeekNumber(date);
+                if (week > 0)
+                {
+                    sb.Append(week);
+                    sb.AppendLine("-я неделя беременности");
+                }
+
+                if (Program.CurrentWoman.IsConceptionDay(date))
+                {
+                    sb.AppendLine("Это день зачатия! Ура!");
+                }
+
                 DateTime conceptionDate = Program.CurrentWoman.Conceptions.GetConceptionByDate(date).StartDay;
                 DateTime dateOfBirth = conceptionDate.AddDays(ConceptionPeriod.StandardLength);
-                sb.AppendLine();
                 sb.AppendLine("Ребёнок родится примерно ");
                 sb.AppendLine(dateOfBirth.ToLongDateString());
                 sb.Append("Знак зодиака будет ");

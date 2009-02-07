@@ -64,6 +64,24 @@ namespace WomenCalendar
             return period != null;
         }
 
+        public int GetPregnancyWeekNumberWhenFirstWeekDay(DateTime date)
+        {
+            ConceptionPeriod period = GetConceptionByDate(date);
+            if (period == null) return 0;
+            int daysFromConc = (date - period.StartDay).Days;
+            if (daysFromConc <= 0 || daysFromConc % 7 != 0) return 0;
+            return daysFromConc / 7 + 1;
+        }
+
+        public int GetPregnancyWeekNumber(DateTime date)
+        {
+            ConceptionPeriod period = GetConceptionByDate(date);
+            if (period == null) return 0;
+            int daysFromConc = (date - period.StartDay).Days;
+            if (daysFromConc <= 0) return 0;
+            return daysFromConc / 7 + 1;
+        }
+
         public bool Add(DateTime date)
         {
             ConceptionPeriod period = new ConceptionPeriod() { StartDay = date, LastDay = date.AddDays(40 * 7) };

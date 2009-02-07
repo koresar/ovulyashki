@@ -62,6 +62,7 @@ namespace WomenCalendar
         public bool ManualDrawOptions { get; set; }
 
         public int Egesta { get; set; }
+        public int PregnancyWeek { get; set; }
         public bool IsFocusDay { get; set; }
         public bool IsTodayDay { get; set; }
         public bool IsPregnancyDay { get; set; }
@@ -140,6 +141,13 @@ namespace WomenCalendar
                 Image image = (Image)Resources.ResourceManager.GetObject("baby_Image");
                 pe.Graphics.DrawImage(image, new Rectangle(2, 20, 10, 10), 0, 0, 48, 48, GraphicsUnit.Pixel);
             }
+            else if (IsPregnancyDay)
+            {
+                if (PregnancyWeek > 0)
+                {
+                    pe.Graphics.DrawString(PregnancyWeek.ToString(), Font, Brushes.Green, 0, 19);
+                }
+            }
             else if (IsPredictedAsGirlDay)
             {
                 Image image = (Image)Resources.ResourceManager.GetObject("girl_Image");
@@ -194,6 +202,7 @@ namespace WomenCalendar
                     IsFocusDay = OwnerOneMonthControl != null && this == OwnerOneMonthControl.FocusDay;
                     IsTodayDay = Date == DateTime.Today;
                     IsPregnancyDay = w.IsPregnancyDay(Date);
+                    PregnancyWeek = w.Conceptions.GetPregnancyWeekNumberWhenFirstWeekDay(Date);
                     IsMenstruationDay = !IsPregnancyDay && w.Menstruations.IsMenstruationDay(Date);
                     IsPredictedAsOvulationDay = !IsPregnancyDay && w.IsPredictedAsOvulationDay(Date);
                     IsPredictedAsSafeSexDay = !IsPregnancyDay && w.IsPredictedAsSafeSexDay(Date);

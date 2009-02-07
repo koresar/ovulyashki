@@ -64,7 +64,7 @@
             // 
             this.pictureNote.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.pictureNote.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.pictureNote.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pictureNote.Cursor = System.Windows.Forms.Cursors.Default;
             this.pictureNote.Image = global::WomenCalendar.Properties.Resources.note_Image;
             this.pictureNote.Location = new System.Drawing.Point(31, 1);
             this.pictureNote.Name = "pictureNote";
@@ -80,7 +80,7 @@
             // 
             this.lblBBT.Location = new System.Drawing.Point(0, 31);
             this.lblBBT.Name = "lblBBT";
-            this.lblBBT.Size = new System.Drawing.Size(45, 14);
+            this.lblBBT.Size = new System.Drawing.Size(44, 14);
             this.lblBBT.TabIndex = 4;
             this.lblBBT.MouseClick += new System.Windows.Forms.MouseEventHandler(this.lblBBT_MouseClick);
             // 

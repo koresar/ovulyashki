@@ -190,15 +190,7 @@ namespace WomenCalendar
 
         private void pictureNote_MouseClick(object sender, MouseEventArgs e)
         {
-            if (e.Button == MouseButtons.Left)
-            {
-                OwnerMonthsControl.FocusDate = DayCell.Date;
-                ShowDayEditForm(DayEditFocus.Note);
-            }
-            else
-            {
-                DayCellPopupControl_MouseClick(sender, e);
-            }
+            DayCellPopupControl_MouseClick(sender, e);
         }
 
         private void pictureNote_MouseEnter(object sender, EventArgs e)
@@ -283,10 +275,6 @@ namespace WomenCalendar
             if (e.Button == MouseButtons.Right)
             {
                 OwnerMonthsControl.ShowDayContextMenu();
-            }
-            else if (e.Button == MouseButtons.Left)
-            {
-                ShowDayEditForm(DayEditFocus.BBT);
             }
         }
 
