@@ -257,7 +257,11 @@ namespace WomenCalendar
         private void lblHadSex_MouseClick(object sender, MouseEventArgs e)
         {
             OwnerMonthsControl.FocusDate = DayCell.Date;
-            if (e.Button == MouseButtons.Right)
+            if (e.Clicks > 1 && e.Button == MouseButtons.Left)
+            {
+                ShowDayEditForm(DayEditFocus.Note);
+            }
+            else if (e.Button == MouseButtons.Right)
             {
                 OwnerMonthsControl.ShowDayContextMenu();
             }
@@ -272,7 +276,11 @@ namespace WomenCalendar
         private void lblBBT_MouseClick(object sender, MouseEventArgs e)
         {
             OwnerMonthsControl.FocusDate = DayCell.Date;
-            if (e.Button == MouseButtons.Right)
+            if (e.Clicks > 1 && e.Button == MouseButtons.Right)
+            {
+                ShowDayEditForm(DayEditFocus.BBT);
+            }
+            else if (e.Button == MouseButtons.Right)
             {
                 OwnerMonthsControl.ShowDayContextMenu();
             }

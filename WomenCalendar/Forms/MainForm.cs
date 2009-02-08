@@ -14,6 +14,7 @@ namespace WomenCalendar
         {
             InitializeComponent();
 
+            xLegend.Collapse();
             toolStrip1.Items.Add(new ToolStripControlHost(dateTimePicker1));
         }
 

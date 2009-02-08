@@ -176,51 +176,39 @@ namespace WomenCalendar
 
         public static bool ExportWoman()
         {
+            DateRangeForm form = new DateRangeForm();
+            if (form.ShowDialog() != DialogResult.OK)
+            {
+                return false;
+            }
+
             SaveFileDialog dialog = new SaveFileDialog();
             dialog.Filter = "Excel files (*.xls)|*.xls|Comma Separated Values files (*.csv)|*.csv";
             dialog.RestoreDirectory = true;
             dialog.CheckPathExists = true;
             dialog.Title = "Укажите файл";
+            dialog.SupportMultiDottedExtensions = true;
             if (dialog.ShowDialog() != DialogResult.OK)
             {
                 return false;
             }
+            string fileName = dialog.FileName;
+            if (!fileName.EndsWith(".csv") && !fileName.EndsWith(".xls"))
+            {
+                MessageBox.Show("Расширение файла должно быть .xls или .csv!", "Ошибка!");
+                    return false;
+            }
 
             try
             {
-                if (dialog.FileName.EndsWith(".csv"))
+                using (ReportWriter report = fileName.EndsWith(".csv") ?
+                    (ReportWriter)(new CsvWriter(fileName)) : (ReportWriter)(new XlsWriter(fileName)))
                 {
-                    using (CsvWriter csv = new CsvWriter(dialog.FileName))
+                    report.WriteHeader();
+                    for (DateTime day = form.From; day <= form.To; day = day.AddDays(1))
                     {
-                        csv.WriteLine("Дата менструаций", "Продолжительность");
-                        foreach (var mens in CurrentWoman.Menstruations)
-                        {
-                            csv.WriteLine(mens.StartDay.ToShortDateString(), mens.Length);
-                        }
+                        report.WriteDay(CurrentWoman.GetOneDayInfo(day));
                     }
-                }
-                else if (dialog.FileName.EndsWith(".xls"))
-                {
-                    Workbook wb = new Workbook();
-                    WorksheetStyle dateStyle = wb.Styles.Add("dateStyle");
-                    dateStyle.NumberFormat = "Short Date";
-                    Worksheet ws = wb.Worksheets.Add("Менструации");
-                    ws.Table.Columns.Add(new WorksheetColumn(100) { AutoFitWidth = true });
-                    ws.Table.Columns.Add(new WorksheetColumn(100) { AutoFitWidth = true });
-                    WorksheetRow wr = ws.Table.Rows.Add();
-                    wr.Cells.Add("Дата менструаций");
-                    wr.Cells.Add("Продолжительность");
-                    foreach (var mens in CurrentWoman.Menstruations)
-                    {
-                        wr = ws.Table.Rows.Add();
-                        wr.Cells.Add(mens.StartDay.ToShortDateString(), DataType.String, "dateStyle");
-                        wr.Cells.Add(new WorksheetCell(mens.Length.ToString(), DataType.Number));
-                    }
-                    wb.Save(dialog.FileName);
-                }
-                else
-                {
-                    return false;
                 }
             }
             catch (Exception ex)

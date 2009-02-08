@@ -105,7 +105,7 @@ namespace WomenCalendar
             // lbl2
             // 
             this.lbl2.AutoSize = true;
-            this.lbl2.Location = new System.Drawing.Point(225, 13);
+            this.lbl2.Location = new System.Drawing.Point(301, 13);
             this.lbl2.Name = "lbl2";
             this.lbl2.Size = new System.Drawing.Size(19, 13);
             this.lbl2.TabIndex = 2;
@@ -122,16 +122,16 @@ namespace WomenCalendar
             // 
             // dateTo
             // 
-            this.dateTo.Location = new System.Drawing.Point(267, 9);
+            this.dateTo.Location = new System.Drawing.Point(343, 9);
             this.dateTo.Name = "dateTo";
-            this.dateTo.Size = new System.Drawing.Size(142, 20);
+            this.dateTo.Size = new System.Drawing.Size(206, 20);
             this.dateTo.TabIndex = 0;
             // 
             // dateFrom
             // 
             this.dateFrom.Location = new System.Drawing.Point(77, 9);
             this.dateFrom.Name = "dateFrom";
-            this.dateFrom.Size = new System.Drawing.Size(142, 20);
+            this.dateFrom.Size = new System.Drawing.Size(206, 20);
             this.dateFrom.TabIndex = 0;
             // 
             // zgc

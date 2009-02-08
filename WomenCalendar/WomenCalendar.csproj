@@ -49,8 +49,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BusinessLogic\ApplicationSettings.cs" />
-    <Compile Include="BusinessLogic\CsvWriter.cs" />
+    <Compile Include="BusinessLogic\Report\CsvWriter.cs" />
     <Compile Include="BusinessLogic\HoroscopeDatePair.cs" />
+    <Compile Include="BusinessLogic\Report\ReportWriter.cs" />
+    <Compile Include="BusinessLogic\Report\XlsWriter.cs" />
+    <Compile Include="BusinessLogic\Woman\OneDayInfo.cs" />
     <Compile Include="Controls\ColorSlider.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -85,6 +88,12 @@
     </Compile>
     <Compile Include="Forms\BBTForm.cs">
       <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\DateRangeForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\DateRangeForm.Designer.cs">
+      <DependentUpon>DateRangeForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\HealthForm.cs">
       <SubType>Form</SubType>
@@ -122,14 +131,14 @@
     <Compile Include="Forms\NewEditWomanForm.Designer.cs">
       <DependentUpon>NewEditWomanForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Woman\BBTCollection.cs" />
-    <Compile Include="Woman\ConceptionPeriod.cs" />
-    <Compile Include="Woman\ConceptionsCollection.cs" />
-    <Compile Include="Woman\EgestasCollection.cs" />
-    <Compile Include="Woman\HadSexCollection.cs" />
-    <Compile Include="Woman\HealthCollection.cs" />
-    <Compile Include="Woman\MenstruationPeriod.cs" />
-    <Compile Include="Woman\MenstruationsCollection.cs" />
+    <Compile Include="BusinessLogic\Woman\BBTCollection.cs" />
+    <Compile Include="BusinessLogic\Woman\ConceptionPeriod.cs" />
+    <Compile Include="BusinessLogic\Woman\ConceptionsCollection.cs" />
+    <Compile Include="BusinessLogic\Woman\EgestasCollection.cs" />
+    <Compile Include="BusinessLogic\Woman\HadSexCollection.cs" />
+    <Compile Include="BusinessLogic\Woman\HealthCollection.cs" />
+    <Compile Include="BusinessLogic\Woman\MenstruationPeriod.cs" />
+    <Compile Include="BusinessLogic\Woman\MenstruationsCollection.cs" />
     <Compile Include="Controls\MonthsControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -179,9 +188,9 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="Woman\NotesCollection.cs" />
-    <Compile Include="Woman\SerializableEventsCollection.cs" />
-    <Compile Include="Woman\Woman.cs" />
+    <Compile Include="BusinessLogic\Woman\NotesCollection.cs" />
+    <Compile Include="BusinessLogic\Woman\SerializableEventsCollection.cs" />
+    <Compile Include="BusinessLogic\Woman\Woman.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\ApplicationIcon.ico" />
@@ -212,6 +221,10 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\BBTForm.resx">
       <DependentUpon>BBTForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\DateRangeForm.resx">
+      <DependentUpon>DateRangeForm.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\HealthForm.resx">
@@ -245,10 +258,9 @@
     <None Include="Resources\BOY_iMAGE.bmp" />
     <None Include="Resources\baby_Image.bmp" />
     <Content Include="Resources\drop16.bmp" />
+    <None Include="Resources\ovulashki_logo.ico" />
     <None Include="Resources\girl_Image.bmp" />
-    <None Include="Resources\girl.bmp" />
     <None Include="Resources\month_dropdown.bmp" />
-    <None Include="Resources\month_dropdown.png" />
     <None Include="Resources\note_Image.bmp" />
     <None Include="Resources\drop_Image.bmp" />
     <EmbeddedResource Include="Resources\note.Image.bmp" />

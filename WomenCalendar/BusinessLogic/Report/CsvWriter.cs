@@ -5,12 +5,12 @@ using System.IO;
 
 namespace WomenCalendar
 {
-    public class CsvWriter : IDisposable
+    public class CsvWriter : ReportWriter
     {
         public char Separator { get; set; }
 
         private StreamWriter fileStream;
-        public CsvWriter(string fileName)
+        public CsvWriter(string fileName) : base(fileName)
         {
             Separator = ';';
             fileStream = new StreamWriter(fileName, false, Encoding.Default);
@@ -34,12 +34,31 @@ namespace WomenCalendar
 
         #region IDisposable Members
 
-        public void Dispose()
+        public override void Dispose()
         {
             fileStream.Close();
             fileStream.Dispose();
         }
 
         #endregion
+
+        public override void WriteHeader()
+        {
+            WriteLine(OneDayInfo.Header);
+        }
+
+        public override void WriteDay(OneDayInfo day)
+        {
+            WriteLine(
+                D(day.Date), 
+                B(day.IsMentruation), 
+                I(day.Egesta, day.IsMentruation), 
+                B(day.HadSex), 
+                D(day.BBT),
+                I(day.Health),
+                day.Note.Replace('\n', ' ')
+                );
+        }
+
     }
 }
