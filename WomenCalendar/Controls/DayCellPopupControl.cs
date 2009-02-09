@@ -152,7 +152,13 @@ namespace WomenCalendar
 
         private void ShowHealthTooltip()
         {
-            ShowTooltip("Самочувствие", sliderHealth.Value.ToString());
+            ShowTooltip("Самочувствие", sliderHealth.Value.ToString() + " из 10");
+        }
+
+        private void ShowBBTTooltip()
+        {
+            var bbt = Program.CurrentWoman.BBT.GetBBT(DayCell.Date);
+            ShowTooltip("Базальная температура тела", bbt == 0 ? "Не установлена" : bbt.ToString());
         }
 
         private void ShowTooltip(string caption, string text)
@@ -230,6 +236,11 @@ namespace WomenCalendar
             HideTooltip();
         }
 
+        private void sliderHealth_MouseEnter(object sender, EventArgs e)
+        {
+            ShowHealthTooltip();
+        }
+
         private void sliderHealth_MouseLeave(object sender, EventArgs e)
         {
             HideTooltip();
@@ -257,11 +268,7 @@ namespace WomenCalendar
         private void lblHadSex_MouseClick(object sender, MouseEventArgs e)
         {
             OwnerMonthsControl.FocusDate = DayCell.Date;
-            if (e.Clicks > 1 && e.Button == MouseButtons.Left)
-            {
-                ShowDayEditForm(DayEditFocus.Note);
-            }
-            else if (e.Button == MouseButtons.Right)
+            if (e.Button == MouseButtons.Right)
             {
                 OwnerMonthsControl.ShowDayContextMenu();
             }
@@ -276,11 +283,7 @@ namespace WomenCalendar
         private void lblBBT_MouseClick(object sender, MouseEventArgs e)
         {
             OwnerMonthsControl.FocusDate = DayCell.Date;
-            if (e.Clicks > 1 && e.Button == MouseButtons.Right)
-            {
-                ShowDayEditForm(DayEditFocus.BBT);
-            }
-            else if (e.Button == MouseButtons.Right)
+            if (e.Button == MouseButtons.Right)
             {
                 OwnerMonthsControl.ShowDayContextMenu();
             }
@@ -308,6 +311,31 @@ namespace WomenCalendar
             {
                 OwnerMonthsControl.ShowDayContextMenu();
             }
+        }
+
+        private void lblBBT_DoubleClick(object sender, EventArgs e)
+        {
+            ShowDayEditForm(DayEditFocus.BBT);
+        }
+
+        private void lblHadSex_DoubleClick(object sender, EventArgs e)
+        {
+            ShowDayEditForm(DayEditFocus.Note);
+        }
+
+        private void lblBBT_MouseEnter(object sender, EventArgs e)
+        {
+            ShowBBTTooltip();
+        }
+
+        private void lblBBT_MouseLeave(object sender, EventArgs e)
+        {
+            HideTooltip();
+        }
+
+        private void pictureNote_DoubleClick(object sender, EventArgs e)
+        {
+            ShowDayEditForm(DayEditFocus.Note);
         }
     }
 }

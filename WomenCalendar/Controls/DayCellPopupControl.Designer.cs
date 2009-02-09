@@ -72,6 +72,7 @@
             this.pictureNote.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureNote.TabIndex = 2;
             this.pictureNote.TabStop = false;
+            this.pictureNote.DoubleClick += new System.EventHandler(this.pictureNote_DoubleClick);
             this.pictureNote.MouseLeave += new System.EventHandler(this.pictureNote_MouseLeave);
             this.pictureNote.MouseClick += new System.Windows.Forms.MouseEventHandler(this.pictureNote_MouseClick);
             this.pictureNote.MouseEnter += new System.EventHandler(this.pictureNote_MouseEnter);
@@ -82,7 +83,10 @@
             this.lblBBT.Name = "lblBBT";
             this.lblBBT.Size = new System.Drawing.Size(44, 14);
             this.lblBBT.TabIndex = 4;
+            this.lblBBT.MouseLeave += new System.EventHandler(this.lblBBT_MouseLeave);
+            this.lblBBT.DoubleClick += new System.EventHandler(this.lblBBT_DoubleClick);
             this.lblBBT.MouseClick += new System.Windows.Forms.MouseEventHandler(this.lblBBT_MouseClick);
+            this.lblBBT.MouseEnter += new System.EventHandler(this.lblBBT_MouseEnter);
             // 
             // lblHadSex
             // 
@@ -95,6 +99,7 @@
             this.lblHadSex.TabIndex = 5;
             this.lblHadSex.Text = "S";
             this.lblHadSex.MouseLeave += new System.EventHandler(this.lblHadSex_MouseLeave);
+            this.lblHadSex.DoubleClick += new System.EventHandler(this.lblHadSex_DoubleClick);
             this.lblHadSex.MouseClick += new System.Windows.Forms.MouseEventHandler(this.lblHadSex_MouseClick);
             this.lblHadSex.MouseEnter += new System.EventHandler(this.lblHadSex_MouseEnter);
             // 
@@ -115,6 +120,7 @@
             this.sliderHealth.MouseLeave += new System.EventHandler(this.sliderHealth_MouseLeave);
             this.sliderHealth.Scroll += new System.Windows.Forms.ScrollEventHandler(this.sliderHealth_Scroll);
             this.sliderHealth.MouseClick += new System.Windows.Forms.MouseEventHandler(this.sliderHealth_MouseClick);
+            this.sliderHealth.MouseEnter += new System.EventHandler(this.sliderHealth_MouseEnter);
             // 
             // sliderEgestaAmount
             // 

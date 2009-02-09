@@ -74,6 +74,25 @@ namespace WomenCalendar.Properties {
             }
         }
         
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;calendars&gt;
+        ///	&lt;calendar Name=&quot;mama.ru&quot; Site=&quot;http://www.mama.ru/&quot;&gt;
+        ///		&lt;week Number=&quot;1&quot;&gt;http://www.mama.ru/pregn/1/&lt;/week&gt;
+        ///		&lt;week Number=&quot;2&quot;&gt;http://www.mama.ru/pregn/2/&lt;/week&gt;
+        ///		&lt;week Number=&quot;3&quot;&gt;http://www.mama.ru/pregn/3/&lt;/week&gt;
+        ///		&lt;week Number=&quot;4&quot;&gt;http://www.mama.ru/pregn/4/&lt;/week&gt;
+        ///		&lt;week Number=&quot;5&quot;&gt;http://www.mama.ru/pregn/5/&lt;/week&gt;
+        ///		&lt;week Number=&quot;6&quot;&gt;http://www.mama.ru/pregn/6/&lt;/week&gt;
+        ///		&lt;week Number=&quot;7&quot;&gt;http://www.mama.ru/pregn/7/&lt;/week&gt;
+        ///		&lt;week Number=&quot;8&quot;&gt;http://www.mama.ru/pregn/8/&lt;/week&gt;
+        ///		&lt;w [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string calendar {
+            get {
+                return ResourceManager.GetString("calendar", resourceCulture);
+            }
+        }
+        
         internal static System.Drawing.Bitmap drop_Image {
             get {
                 object obj = ResourceManager.GetObject("drop_Image", resourceCulture);

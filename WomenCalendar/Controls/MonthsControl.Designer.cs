@@ -38,6 +38,7 @@
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.setAsConceptionDay = new System.Windows.Forms.ToolStripMenuItem();
             this.removeConceptionDay = new System.Windows.Forms.ToolStripMenuItem();
+            this.calendarMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.редактироватьДеньToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.monthMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
@@ -59,72 +60,79 @@
             this.toolStripSeparator2,
             this.setAsConceptionDay,
             this.removeConceptionDay,
+            this.calendarMenu,
             this.toolStripSeparator3,
             this.редактироватьДеньToolStripMenuItem});
             this.dayContextMenu.Name = "contextMenu";
-            this.dayContextMenu.Size = new System.Drawing.Size(255, 198);
+            this.dayContextMenu.Size = new System.Drawing.Size(321, 220);
             // 
             // setAsMenstruationDay
             // 
             this.setAsMenstruationDay.Name = "setAsMenstruationDay";
-            this.setAsMenstruationDay.Size = new System.Drawing.Size(254, 22);
+            this.setAsMenstruationDay.Size = new System.Drawing.Size(320, 22);
             this.setAsMenstruationDay.Text = "Установить начало менструашек";
             this.setAsMenstruationDay.Click += new System.EventHandler(this.setAsMenstruationDay_Click);
             // 
             // removeMenstruationDay
             // 
             this.removeMenstruationDay.Name = "removeMenstruationDay";
-            this.removeMenstruationDay.Size = new System.Drawing.Size(254, 22);
+            this.removeMenstruationDay.Size = new System.Drawing.Size(320, 22);
             this.removeMenstruationDay.Text = "Отменить менструашки";
             this.removeMenstruationDay.Click += new System.EventHandler(this.removeMenstruationDay_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(251, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(317, 6);
             // 
             // removeNote
             // 
             this.removeNote.Name = "removeNote";
-            this.removeNote.Size = new System.Drawing.Size(254, 22);
+            this.removeNote.Size = new System.Drawing.Size(320, 22);
             this.removeNote.Text = "Удалить заметку";
             this.removeNote.Click += new System.EventHandler(this.removeNote_Click);
             // 
             // editNote
             // 
             this.editNote.Name = "editNote";
-            this.editNote.Size = new System.Drawing.Size(254, 22);
+            this.editNote.Size = new System.Drawing.Size(320, 22);
             this.editNote.Text = "Редактировать заметку";
             this.editNote.Click += new System.EventHandler(this.editNote_Click);
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(251, 6);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(317, 6);
             // 
             // setAsConceptionDay
             // 
             this.setAsConceptionDay.Name = "setAsConceptionDay";
-            this.setAsConceptionDay.Size = new System.Drawing.Size(254, 22);
+            this.setAsConceptionDay.Size = new System.Drawing.Size(320, 22);
             this.setAsConceptionDay.Text = "Установить беременность";
             this.setAsConceptionDay.Click += new System.EventHandler(this.setAsConceptionDay_Click);
             // 
             // removeConceptionDay
             // 
             this.removeConceptionDay.Name = "removeConceptionDay";
-            this.removeConceptionDay.Size = new System.Drawing.Size(254, 22);
+            this.removeConceptionDay.Size = new System.Drawing.Size(320, 22);
             this.removeConceptionDay.Text = "Отменить беременность";
             this.removeConceptionDay.Click += new System.EventHandler(this.removeConceptionDay_Click);
+            // 
+            // calendarMenu
+            // 
+            this.calendarMenu.Name = "calendarMenu";
+            this.calendarMenu.Size = new System.Drawing.Size(320, 22);
+            this.calendarMenu.Text = "Подсказка беременным на $ неделе с сайта...";
             // 
             // toolStripSeparator3
             // 
             this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(251, 6);
+            this.toolStripSeparator3.Size = new System.Drawing.Size(317, 6);
             // 
             // редактироватьДеньToolStripMenuItem
             // 
             this.редактироватьДеньToolStripMenuItem.Name = "редактироватьДеньToolStripMenuItem";
-            this.редактироватьДеньToolStripMenuItem.Size = new System.Drawing.Size(254, 22);
+            this.редактироватьДеньToolStripMenuItem.Size = new System.Drawing.Size(320, 22);
             this.редактироватьДеньToolStripMenuItem.Text = "Редактировать день";
             this.редактироватьДеньToolStripMenuItem.Click += new System.EventHandler(this.editDay_Click);
             // 
@@ -198,6 +206,7 @@
         private System.Windows.Forms.ToolStripMenuItem removeConceptionDay;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
         private System.Windows.Forms.ToolStripMenuItem редактироватьДеньToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem calendarMenu;
 
     }
 }

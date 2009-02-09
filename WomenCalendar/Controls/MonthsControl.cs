@@ -5,12 +5,17 @@ using System.Drawing;
 using System.Data;
 using System.Text;
 using System.Windows.Forms;
+using WomenCalendar.Properties;
+using System.Xml;
+using System.IO;
+using System.Diagnostics;
 
 namespace WomenCalendar
 {
     public partial class MonthsControl : UserControl
     {
         private OneMonthControl lastDroppedMenuMonth;
+        private Dictionary<string, Dictionary<int, string>> calendars = new Dictionary<string, Dictionary<int, string>>();
 
         public List<OneMonthControl> singleMonths = new List<OneMonthControl>();
         public int VisibleMonthsCount = 1;
@@ -128,6 +133,42 @@ namespace WomenCalendar
             oneMonthControl.MonthDayClicked += new OneMonthControl.DayClicked(control_MonthDayClicked);
             singleMonths.Add(oneMonthControl);
             CreateAndAdjustMonthsAmount();
+            InitializeContextPregnancySubmenu();
+        }
+
+        private void InitializeContextPregnancySubmenu()
+        {
+            var obj = Resources.ResourceManager.GetObject("calendar");
+            var doc = new XmlDocument();
+            doc.Load(new MemoryStream(Encoding.GetEncoding(1251).GetBytes(obj.ToString())));
+            foreach (XmlNode calendar in doc.ChildNodes[1])
+            {
+                if (calendar.Attributes == null) continue;
+                var weeks = new Dictionary<int, string>();
+                calendars.Add(calendar.Attributes["Name"].Value, weeks);
+                foreach (XmlNode week in calendar.ChildNodes)
+	            {
+                    if (calendar.Attributes == null) continue;
+                    weeks.Add(int.Parse(week.Attributes["Number"].Value), week.InnerXml);
+                }
+            }
+
+            List<ToolStripMenuItem> subitems = new List<ToolStripMenuItem>();
+            foreach (var calendarName in calendars.Keys)
+            {
+                var item = new ToolStripMenuItem(calendarName);
+                item.Click += new EventHandler(calendarItem_Click);
+                item.Tag = calendars[calendarName];
+                subitems.Add(item);
+            }
+            this.calendarMenu.DropDownItems.AddRange(subitems.ToArray());
+        }
+
+        void calendarItem_Click(object sender, EventArgs e)
+        {
+            var dic = ((sender as ToolStripDropDownItem).Tag as Dictionary<int, string>);
+            var week = Program.CurrentWoman.Conceptions.GetPregnancyWeekNumber(FocusDate);
+            Process.Start(dic[week]);
         }
 
         public bool IsDateVisible(DateTime date)
@@ -151,6 +192,13 @@ namespace WomenCalendar
             bool isPregnancyDay = Program.CurrentWoman.Conceptions.IsPregnancyDay(FocusDate);
             dayContextMenu.Items["setAsConceptionDay"].Visible = !isPregnancyDay;
             dayContextMenu.Items["removeConceptionDay"].Visible = isPregnancyDay;
+            dayContextMenu.Items["calendarMenu"].Visible = isPregnancyDay;
+            if (isPregnancyDay)
+            {
+                dayContextMenu.Items["calendarMenu"].Text = string.Format(
+                    "Подсказка беременным на {0}-й неделе с сайта...",
+                    Program.CurrentWoman.Conceptions.GetPregnancyWeekNumber(FocusDate));
+            }
 
             bool isMentruationDay = Program.CurrentWoman.Menstruations.IsMenstruationDay(FocusDate);
             dayContextMenu.Items["setAsMenstruationDay"].Visible = !isMentruationDay && !isPregnancyDay;
