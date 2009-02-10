@@ -15,7 +15,19 @@
     {
         "Entry"
         {
+        "MsmKey" = "8:_276E84E4C91F48F89D8B8CEFEDAB23EE"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_2D316EA470D95F31A0C76F99E6540968"
+        "OwnerKey" = "8:_9C763F4F87CE4EB8AEB574D0A518B8A2"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_94C21D5C16AA670B8C7EDEE7B2731DA3"
         "OwnerKey" = "8:_9C763F4F87CE4EB8AEB574D0A518B8A2"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -27,18 +39,18 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_A1F988620D1757E3FC762765462E3024"
-        "OwnerKey" = "8:_9C763F4F87CE4EB8AEB574D0A518B8A2"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_A3F46BCD65121B5B9935A78F216BB2E9"
         "OwnerKey" = "8:_9C763F4F87CE4EB8AEB574D0A518B8A2"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
+        "MsmKey" = "8:_F13BCCE6D3FD48C0B15437A52443DF53"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_9C763F4F87CE4EB8AEB574D0A518B8A2"
         "MsmSig" = "8:_UNDEFINED"
@@ -46,7 +58,7 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_A1F988620D1757E3FC762765462E3024"
+        "OwnerKey" = "8:_94C21D5C16AA670B8C7EDEE7B2731DA3"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -59,6 +71,12 @@
         {
         "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_2D316EA470D95F31A0C76F99E6540968"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_276E84E4C91F48F89D8B8CEFEDAB23EE"
         "MsmSig" = "8:_UNDEFINED"
         }
     }
@@ -86,6 +104,19 @@
             "PrerequisitesLocation" = "2:1"
             "Url" = "8:"
             "ComponentsUrl" = "8:"
+                "Items"
+                {
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:Microsoft.Net.Framework.3.5"
+                    {
+                    "Name" = "8:.NET Framework 3.5"
+                    "ProductCode" = "8:Microsoft.Net.Framework.3.5"
+                    }
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:Microsoft.Windows.Installer.3.1"
+                    {
+                    "Name" = "8:Windows Installer 3.1"
+                    "ProductCode" = "8:Microsoft.Windows.Installer.3.1"
+                    }
+                }
             }
         }
         "Release"
@@ -184,14 +215,14 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_A1F988620D1757E3FC762765462E3024"
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_94C21D5C16AA670B8C7EDEE7B2731DA3"
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:ZedGraph, Version=5.1.4.22355, Culture=neutral, PublicKeyToken=02a83cbd123fcd60, processorArchitecture=MSIL"
+            "AssemblyAsmDisplayName" = "8:ZedGraph, Version=5.1.4.2706, Culture=neutral, PublicKeyToken=02a83cbd123fcd60, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_A1F988620D1757E3FC762765462E3024"
+                    "_94C21D5C16AA670B8C7EDEE7B2731DA3"
                     {
                     "Name" = "8:ZedGraph.dll"
                     "Attributes" = "3:512"
@@ -246,24 +277,44 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_F13BCCE6D3FD48C0B15437A52443DF53"
+            {
+            "SourcePath" = "8:..\\WomenCalendar\\Resources\\ovulashki_logo.ico"
+            "TargetName" = "8:ovulashki_logo.ico"
+            "Tag" = "8:"
+            "Folder" = "8:_0C363D3A242941509ED0851336DD9D80"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
         }
         "FileType"
         {
-            "{5EB83D71-FA18-4901-BE56-DE22E13CC478}:_5037C344767C4BFDA1DF14F4456F4EF8"
+            "{5EB83D71-FA18-4901-BE56-DE22E13CC478}:_78387F232ED040208344D2CBF84BC591"
             {
-            "Name" = "8:Woman"
-            "Description" = "8:Файл программы Овуляшки"
+            "Name" = "8:.woman"
+            "Description" = "8:Ovulyashki file."
             "Extensions" = "8:.woman"
             "MIME" = "8:"
-            "Icon" = "8:_9C763F4F87CE4EB8AEB574D0A518B8A2"
-            "IconIndex" = "3:32512"
+            "Icon" = "8:_F13BCCE6D3FD48C0B15437A52443DF53"
+            "IconIndex" = "3:0"
                 "Command"
                 {
                 "Command" = "8:_9C763F4F87CE4EB8AEB574D0A518B8A2"
                 }
                 "Verbs"
                 {
-                    "{95C0C507-CBF0-42B8-B119-07219E384A4A}:_47AAEFBB4C0047F58FEF72E82CEDF30C"
+                    "{95C0C507-CBF0-42B8-B119-07219E384A4A}:_8D7263705EB84CD6BE51F25F8376E279"
                     {
                     "Command" = "8:&Open"
                     "Verb" = "8:open"
@@ -298,7 +349,7 @@
                 {
                     "{9EF0B969-E518-4E46-987F-47570745A589}:_0E0C53063D8446B2BC8068E73A32233A"
                     {
-                    "Name" = "8:Овуляшки"
+                    "Name" = "8:Ovulyashki"
                     "AlwaysCreate" = "11:FALSE"
                     "Condition" = "8:"
                     "Transitive" = "11:FALSE"
@@ -335,9 +386,9 @@
         "Product"
         {
         "Name" = "8:Microsoft Visual Studio"
-        "ProductName" = "8:Ovulyashki 1.3"
+        "ProductName" = "8:Ovulyashki"
         "ProductCode" = "8:{334556E0-10B1-4308-A487-DA137AF1BCF1}"
-        "PackageCode" = "8:{F54EBB91-4BBD-4B40-BB6B-2D12E3A6328F}"
+        "PackageCode" = "8:{B37742B0-693B-472D-BBE1-6A80FC83C9B8}"
         "UpgradeCode" = "8:{818ACBB0-9E3D-496C-9AA2-574730AFFED4}"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
@@ -456,32 +507,46 @@
         }
         "Shortcut"
         {
-            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_15973922BF6540CE8EB7D8FB3A506252"
+            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_228089906F7146879F41C1E40BCB347D"
             {
-            "Name" = "8:Овуляшки"
+            "Name" = "8:Ovulyashki"
             "Arguments" = "8:"
-            "Description" = "8:Овуляшки"
-            "ShowCmd" = "3:3"
-            "IconIndex" = "3:32512"
+            "Description" = "8:"
+            "ShowCmd" = "3:1"
+            "IconIndex" = "3:0"
             "Transitive" = "11:FALSE"
             "Target" = "8:_9C763F4F87CE4EB8AEB574D0A518B8A2"
             "Folder" = "8:_A6C710B5B4B049579F820736A31EB825"
             "WorkingFolder" = "8:_0C363D3A242941509ED0851336DD9D80"
-            "Icon" = "8:_9C763F4F87CE4EB8AEB574D0A518B8A2"
+            "Icon" = "8:"
             "Feature" = "8:"
             }
-            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_AFC533F5057747B385AE1D11AA2E0F02"
+            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_34DAFD4999304F69BAE34D4D01C36265"
             {
-            "Name" = "8:Овуляшки"
+            "Name" = "8:Uninstall"
             "Arguments" = "8:"
-            "Description" = "8:Овуляшки"
-            "ShowCmd" = "3:3"
+            "Description" = "8:"
+            "ShowCmd" = "3:1"
             "IconIndex" = "3:32512"
+            "Transitive" = "11:FALSE"
+            "Target" = "8:_276E84E4C91F48F89D8B8CEFEDAB23EE"
+            "Folder" = "8:_0E0C53063D8446B2BC8068E73A32233A"
+            "WorkingFolder" = "8:_0C363D3A242941509ED0851336DD9D80"
+            "Icon" = "8:_276E84E4C91F48F89D8B8CEFEDAB23EE"
+            "Feature" = "8:"
+            }
+            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_E673EA7B0E54463F97A1337A703F04F7"
+            {
+            "Name" = "8:Ovulyashki"
+            "Arguments" = "8:"
+            "Description" = "8:"
+            "ShowCmd" = "3:1"
+            "IconIndex" = "3:0"
             "Transitive" = "11:FALSE"
             "Target" = "8:_9C763F4F87CE4EB8AEB574D0A518B8A2"
             "Folder" = "8:_0E0C53063D8446B2BC8068E73A32233A"
             "WorkingFolder" = "8:_0C363D3A242941509ED0851336DD9D80"
-            "Icon" = "8:_9C763F4F87CE4EB8AEB574D0A518B8A2"
+            "Icon" = "8:_F13BCCE6D3FD48C0B15437A52443DF53"
             "Feature" = "8:"
             }
         }
@@ -883,9 +948,37 @@
         }
         "ProjectOutput"
         {
+            "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_276E84E4C91F48F89D8B8CEFEDAB23EE"
+            {
+            "SourcePath" = "8:..\\Uninstall\\obj\\Release\\Uninstall.exe"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_0C363D3A242941509ED0851336DD9D80"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            "ProjectOutputGroupRegister" = "3:1"
+            "OutputConfiguration" = "8:"
+            "OutputGroupCanonicalName" = "8:Built"
+            "OutputProjectGuid" = "8:{28DFD928-FB86-4777-94A6-2EC193397C0D}"
+            "ShowKeyOutput" = "11:TRUE"
+                "ExcludeFilters"
+                {
+                }
+            }
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_9C763F4F87CE4EB8AEB574D0A518B8A2"
             {
-            "SourcePath" = "8:..\\WomenCalendar\\obj\\Debug\\WomenCalendar.exe"
+            "SourcePath" = "8:..\\WomenCalendar\\obj\\Release\\WomenCalendar.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_0C363D3A242941509ED0851336DD9D80"

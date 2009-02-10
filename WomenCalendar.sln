@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZedGraph", "ZedGraph\ZedGra
 EndProject
 Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "OvulyashkiInstall", "OvulyashkiInstall\OvulyashkiInstall.vdproj", "{E3CFC459-6B82-4B83-B16B-E29913ADF799}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Uninstall", "Uninstall\Uninstall.csproj", "{28DFD928-FB86-4777-94A6-2EC193397C0D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -23,6 +25,10 @@ Global
 		{2541686B-1673-43BF-AF89-3163945DB009}.Release|Any CPU.Build.0 = Release|Any CPU
 		{E3CFC459-6B82-4B83-B16B-E29913ADF799}.Debug|Any CPU.ActiveCfg = Debug
 		{E3CFC459-6B82-4B83-B16B-E29913ADF799}.Release|Any CPU.ActiveCfg = Release
+		{28DFD928-FB86-4777-94A6-2EC193397C0D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{28DFD928-FB86-4777-94A6-2EC193397C0D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{28DFD928-FB86-4777-94A6-2EC193397C0D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{28DFD928-FB86-4777-94A6-2EC193397C0D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
