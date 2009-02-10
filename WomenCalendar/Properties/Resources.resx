@@ -201,4 +201,25 @@
   <data name="calendar" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\calendar.xml;System.String, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
   </data>
+  <data name="ovulashki_logo1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ovulashki_logo1.ico;System.Drawing.Icon, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="babyFace_Image" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\babyFace_Image.bmp;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="babyNot_Image" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\baby_Image1.bmp;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="babyQuestion_Image" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\baby_Image2.bmp;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="calendarEdit_Image" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\calendarEdit_Image.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="dropNot_Image" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\drop_Image1.bmp;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="noteNot_Image" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\note_Image1.bmp;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
 </root>

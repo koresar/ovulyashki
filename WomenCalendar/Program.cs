@@ -38,17 +38,15 @@ namespace WomenCalendar
                     _currentWoman.Conceptions.CollectionChanged -= ApplicationForm.RedrawCalendar;
                 }
                 _currentWoman = value;
-                if (ApplicationForm != null)
+                if (_currentWoman != null)
                 {
-                    if (_currentWoman != null)
-                    {
-                        _currentWoman.AveragePeriodLengthChanged += ApplicationForm.UpdateWomanInformation;
-                        _currentWoman.Menstruations.CollectionChanged += ApplicationForm.UpdateWomanInformation;
-                        _currentWoman.Menstruations.CollectionChanged += ApplicationForm.RedrawCalendar;
-                        _currentWoman.Conceptions.CollectionChanged += ApplicationForm.RedrawCalendar;
-                    }
-                    ApplicationForm.UpdateWomanInformation();
+                    _currentWoman.AveragePeriodLengthChanged += ApplicationForm.UpdateWomanInformation;
+                    _currentWoman.Menstruations.CollectionChanged += ApplicationForm.UpdateWomanInformation;
+                    _currentWoman.Menstruations.CollectionChanged += ApplicationForm.RedrawCalendar;
+                    _currentWoman.Conceptions.CollectionChanged += ApplicationForm.RedrawCalendar;
                 }
+                ApplicationForm.UpdateWomanInformation();
+                ApplicationForm.SetWomanName(_currentWoman.Name);
                 ApplicationForm.ResumeLayout();
             }
         }
@@ -152,7 +150,23 @@ namespace WomenCalendar
         {
             LoginForm form = new LoginForm();
             form.Text = woman.Name + ", " + form.Text;
-            return form.ShowDialog() == DialogResult.OK && form.Password == woman.Password;
+            while (true)
+            {
+                if (form.ShowDialog() != DialogResult.OK) break;
+                if (form.Password != woman.Password)
+                {
+                    if (MessageBox.Show("Неправильный пароль! Попытаемся еще раз?\n\n" +
+                        "Если нажмёшь 'Нет', то создадим новую женжину.", "Ошибка!", MessageBoxButtons.YesNo) != DialogResult.Yes)
+                    {
+                        break;
+                    }
+                }
+                else
+                {
+                    return true;
+                }
+            }
+            return false;
         }
         
         public static bool EditWoman()
@@ -169,6 +183,7 @@ namespace WomenCalendar
                 {
                     CurrentWoman.AllwaysAskPassword = true;
                 }
+                ApplicationForm.SetWomanName(CurrentWoman.Name);
                 return true;
             }
             return false;            

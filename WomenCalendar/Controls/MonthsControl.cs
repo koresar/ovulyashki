@@ -168,7 +168,7 @@ namespace WomenCalendar
         {
             var dic = ((sender as ToolStripDropDownItem).Tag as Dictionary<int, string>);
             var week = Program.CurrentWoman.Conceptions.GetPregnancyWeekNumber(FocusDate);
-            Process.Start(dic[week]);
+            if (dic.ContainsKey(week)) Process.Start(dic[week]);
         }
 
         public bool IsDateVisible(DateTime date)
@@ -192,6 +192,8 @@ namespace WomenCalendar
             bool isPregnancyDay = Program.CurrentWoman.Conceptions.IsPregnancyDay(FocusDate);
             dayContextMenu.Items["setAsConceptionDay"].Visible = !isPregnancyDay;
             dayContextMenu.Items["removeConceptionDay"].Visible = isPregnancyDay;
+            dayContextMenu.Items["setLastPregnancyDay"].Visible = isPregnancyDay;
+            dayContextMenu.Items["showBirthDate"].Visible = isPregnancyDay;
             dayContextMenu.Items["calendarMenu"].Visible = isPregnancyDay;
             if (isPregnancyDay)
             {
@@ -342,6 +344,7 @@ namespace WomenCalendar
             if (Program.CurrentWoman.AddMenstruationDay(FocusDate))
             {
                 ((MainForm)ParentForm).UpdateWomanInformation();
+                ((MainForm)ParentForm).UpdateDayInformation(FocusDate);
                 Redraw();
             }
         }
@@ -351,6 +354,7 @@ namespace WomenCalendar
             if (Program.CurrentWoman.RemoveMenstruationDay(FocusDate))
             {
                 ((MainForm)ParentForm).UpdateWomanInformation();
+                ((MainForm)ParentForm).UpdateDayInformation(FocusDate);
                 Redraw();
             }
         }
@@ -398,7 +402,7 @@ namespace WomenCalendar
         {
             if (Program.CurrentWoman.AddConceptionDay(FocusDate))
             {
-                ((MainForm)ParentForm).UpdateWomanInformation();
+                ((MainForm)ParentForm).UpdateDayInformation(FocusDate);
                 Redraw();
             }
         }
@@ -407,7 +411,7 @@ namespace WomenCalendar
         {
             if (Program.CurrentWoman.RemovePregnancy(FocusDate))
             {
-                ((MainForm)ParentForm).UpdateWomanInformation();
+                ((MainForm)ParentForm).UpdateDayInformation(FocusDate);
                 Redraw();
             }
         }
@@ -417,6 +421,29 @@ namespace WomenCalendar
             CellPopupControl.Visible = false;
             new DayEditForm(FocusDay).ShowDialog(this);
             RedrawFocusDay();
+        }
+
+        private void setLastPregnancyDay_Click(object sender, EventArgs e)
+        {
+            var period = Program.CurrentWoman.Conceptions.GetConceptionByDate(FocusDate);
+            if (period != null)
+            {
+                if (MessageBox.Show("Если сейчас нажмёшь 'Да', то потом нельзя будет удлиннить срок беременности. Уверена, что хочешь укоротить срок этой беременности?", 
+                    "Ты уверена?", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                {
+                    period.LastDay = FocusDate;
+                    Redraw();
+                }
+            }
+        }
+
+        private void showBirthDate_Click(object sender, EventArgs e)
+        {
+            var period = Program.CurrentWoman.Conceptions.GetConceptionByDate(FocusDate);
+            if (period != null)
+            {
+                FocusDate = period.LastDay;
+            }
         }
     }
 }

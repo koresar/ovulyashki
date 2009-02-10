@@ -22,5 +22,10 @@ namespace WomenCalendar
                 return txtPassword.Text;
             }
         }
+
+        private void LoginForm_Shown(object sender, EventArgs e)
+        {
+            txtPassword.Focus();
+        }
     }
 }

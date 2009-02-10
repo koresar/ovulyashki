@@ -67,6 +67,27 @@ namespace WomenCalendar.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap babyFace_Image {
+            get {
+                object obj = ResourceManager.GetObject("babyFace_Image", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap babyNot_Image {
+            get {
+                object obj = ResourceManager.GetObject("babyNot_Image", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap babyQuestion_Image {
+            get {
+                object obj = ResourceManager.GetObject("babyQuestion_Image", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap boy_Image {
             get {
                 object obj = ResourceManager.GetObject("boy_Image", resourceCulture);
@@ -75,17 +96,15 @@ namespace WomenCalendar.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &lt;calendars&gt;
+        ///   Looks up a localized string similar to &lt;?xml version=&quot;1.0&quot; encoding=&quot;windows-1251&quot;?&gt;
+        ///&lt;calendars xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; xmlns:xsd=&quot;http://www.w3.org/2001/XMLSchema&quot;&gt;&gt;
         ///	&lt;calendar Name=&quot;mama.ru&quot; Site=&quot;http://www.mama.ru/&quot;&gt;
         ///		&lt;week Number=&quot;1&quot;&gt;http://www.mama.ru/pregn/1/&lt;/week&gt;
         ///		&lt;week Number=&quot;2&quot;&gt;http://www.mama.ru/pregn/2/&lt;/week&gt;
         ///		&lt;week Number=&quot;3&quot;&gt;http://www.mama.ru/pregn/3/&lt;/week&gt;
         ///		&lt;week Number=&quot;4&quot;&gt;http://www.mama.ru/pregn/4/&lt;/week&gt;
         ///		&lt;week Number=&quot;5&quot;&gt;http://www.mama.ru/pregn/5/&lt;/week&gt;
-        ///		&lt;week Number=&quot;6&quot;&gt;http://www.mama.ru/pregn/6/&lt;/week&gt;
-        ///		&lt;week Number=&quot;7&quot;&gt;http://www.mama.ru/pregn/7/&lt;/week&gt;
-        ///		&lt;week Number=&quot;8&quot;&gt;http://www.mama.ru/pregn/8/&lt;/week&gt;
-        ///		&lt;w [rest of string was truncated]&quot;;.
+        ///		&lt;week Number=&quot;6&quot;&gt;htt [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string calendar {
             get {
@@ -93,9 +112,23 @@ namespace WomenCalendar.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap calendarEdit_Image {
+            get {
+                object obj = ResourceManager.GetObject("calendarEdit_Image", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap drop_Image {
             get {
                 object obj = ResourceManager.GetObject("drop_Image", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap dropNot_Image {
+            get {
+                object obj = ResourceManager.GetObject("dropNot_Image", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -121,9 +154,23 @@ namespace WomenCalendar.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap noteNot_Image {
+            get {
+                object obj = ResourceManager.GetObject("noteNot_Image", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Icon ovulashki_logo {
             get {
                 object obj = ResourceManager.GetObject("ovulashki_logo", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Icon ovulashki_logo1 {
+            get {
+                object obj = ResourceManager.GetObject("ovulashki_logo1", resourceCulture);
                 return ((System.Drawing.Icon)(obj));
             }
         }

@@ -47,6 +47,7 @@ namespace WomenCalendar
         {
             if (!ValidateData()) return;
             SaveData();
+            Program.ApplicationForm.UpdateDayInformation(date);
             DialogResult = DialogResult.OK;
         }
 
@@ -162,6 +163,7 @@ namespace WomenCalendar
 
             SaveData();
             date = date.AddDays(days);
+            Program.ApplicationForm.UpdateDayInformation(date);
             LoadForm();
             SetFocusTo(focus);
         }

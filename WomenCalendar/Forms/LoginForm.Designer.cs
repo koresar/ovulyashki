@@ -59,6 +59,7 @@
             this.Controls.Add(this.txtPassword);
             this.Name = "LoginForm";
             this.Text = "введите пароль";
+            this.Shown += new System.EventHandler(this.LoginForm_Shown);
             this.Controls.SetChildIndex(this.txtPassword, 0);
             this.Controls.SetChildIndex(this.lblPass, 0);
             this.ResumeLayout(false);

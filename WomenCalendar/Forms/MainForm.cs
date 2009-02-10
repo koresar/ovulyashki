@@ -20,7 +20,7 @@ namespace WomenCalendar
 
         public void UpdateDayInformation(DateTime date)
         {
-            lblDayDescription.Text = GenerateDayInfo(date);
+            lblDayDescription.Text = Program.CurrentWoman.GenerateDayInfo(date);
             xDay.Height = lblDayDescription.Height + 32;
         }
 
@@ -55,79 +55,6 @@ namespace WomenCalendar
             return sb.ToString();
         }
 
-        private string GenerateDayInfo(DateTime date)
-        {
-            StringBuilder sb = new StringBuilder();
-
-            sb.Append("Дата: ");
-            sb.Append(date.ToShortDateString());
-            if (date == DateTime.Today)
-            {
-                sb.Append(" (сегодня)");
-            }
-
-            MenstruationPeriod period = Program.CurrentWoman.Menstruations.GetPeriodByDate(date);
-            if (period != null)
-            {
-                sb.AppendLine();
-                sb.Append((date - period.StartDay).Days + 1);
-                sb.AppendLine("-й день менструашек");
-                sb.Append(DayCellPopupControl.EgestasNames[period.Egestas[date]]);
-            }
-
-            if (Program.CurrentWoman.IsPregnancyDay(date))
-            {
-                sb.AppendLine();
-
-                int week = Program.CurrentWoman.Conceptions.GetPregnancyWeekNumber(date);
-                if (week > 0)
-                {
-                    sb.Append(week);
-                    sb.AppendLine("-я неделя беременности");
-                }
-
-                if (Program.CurrentWoman.IsConceptionDay(date))
-                {
-                    sb.AppendLine("Это день зачатия! Ура!");
-                }
-
-                DateTime conceptionDate = Program.CurrentWoman.Conceptions.GetConceptionByDate(date).StartDay;
-                DateTime dateOfBirth = conceptionDate.AddDays(ConceptionPeriod.StandardLength);
-                sb.AppendLine("Ребёнок родится примерно ");
-                sb.AppendLine(dateOfBirth.ToLongDateString());
-                sb.Append("Знак зодиака будет ");
-                sb.Append(HoroscopDatePair.GetZodiacSignName(dateOfBirth));
-            }
-            else
-            {
-                if (Program.CurrentWoman.IsPredictedAsMenstruationDay(date))
-                {
-                    sb.AppendLine();
-                    sb.Append("Вероятны менструашки");
-                }
-
-                if (Program.CurrentWoman.HadSexList.ContainsKey(date))
-                {
-                    DateTime dateOfBirth = date.AddDays(ConceptionPeriod.StandardLength);
-                    sb.AppendLine();
-                    sb.Append("Если ты в этот день зачала ребёнка,\nто он родится примерно ");
-                    sb.AppendLine(dateOfBirth.ToLongDateString());
-                    sb.Append("Знак зодиака будет ");
-                    sb.Append(HoroscopDatePair.GetZodiacSignName(dateOfBirth));
-                }
-            }
-
-            // got to be last
-            string text;
-            if (Program.CurrentWoman.Notes.TryGetValue(date, out text))
-            {
-                sb.AppendLine();
-                sb.Append("Заметка: ");
-                sb.Append(text);
-            }
-
-            return sb.ToString();
-        }
 
         private void SetNumMenstrulationPriod(int length)
         {
@@ -190,6 +117,7 @@ namespace WomenCalendar
         private void monthControl_FocusDateChanged(object sender, FocusDateChangedEventArgs e)
         {
             UpdateDayInformation(e.NewDate);
+            dateTimePicker1.Value = e.NewDate;
         }
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
@@ -304,12 +232,24 @@ namespace WomenCalendar
 
         private void helpToolStripButton_Click(object sender, EventArgs e)
         {
-            new AboutForm().Show();
+            new AboutForm().ShowDialog(this);
         }
 
         private void exportToExcel_Click(object sender, EventArgs e)
         {
             Program.ExportWoman();
+        }
+
+        public void SetWomanName(string name)
+        {
+            if (string.IsNullOrEmpty(name))
+            {
+                this.Text = "Овуляшки";
+            }
+            else
+            {
+                this.Text = "Овуляшки красавицы по имени " + name;
+            }
         }
     }
 }

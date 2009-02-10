@@ -51,7 +51,9 @@
             this.lblDay.TabIndex = 1;
             this.lblDay.Text = "32";
             this.lblDay.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.lblDay.MouseLeave += new System.EventHandler(this.lblDay_MouseLeave);
             this.lblDay.MouseClick += new System.Windows.Forms.MouseEventHandler(this.lblDay_MouseClick);
+            this.lblDay.MouseEnter += new System.EventHandler(this.lblDay_MouseEnter);
             // 
             // toolTip
             // 

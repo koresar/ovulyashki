@@ -330,5 +330,116 @@ namespace WomenCalendar
         {
             return OneDayInfo.GetByDate(this, day);
         }
+
+        public string GenerateDayInfo(DateTime date)
+        {
+            StringBuilder sb = new StringBuilder();
+
+            sb.Append("Дата: ");
+            sb.Append(date.ToShortDateString());
+            if (date == DateTime.Today)
+            {
+                sb.Append(" (сегодня)");
+            }
+
+            MenstruationPeriod period = Menstruations.GetPeriodByDate(date);
+            if (period != null)
+            {
+                sb.AppendLine();
+                sb.Append((date - period.StartDay).Days + 1);
+                sb.AppendLine("-й день менструашек");
+                sb.Append(DayCellPopupControl.EgestasNames[period.Egestas[date]]);
+            }
+
+            if (IsPregnancyDay(date))
+            {
+                sb.AppendLine();
+
+                int week = Conceptions.GetPregnancyWeekNumber(date);
+                if (week > 0)
+                {
+                    sb.Append(week);
+                    sb.AppendLine("-я неделя беременности");
+                }
+
+                if (IsConceptionDay(date))
+                {
+                    sb.AppendLine("Это день зачатия! Ура!");
+                }
+
+                var concPeriod = Conceptions.GetConceptionByDate(date);
+                DateTime conceptionDate = concPeriod.StartDay;
+                DateTime dateOfBirth = conceptionDate.AddDays(ConceptionPeriod.StandardLength);
+                sb.AppendLine("Ребёнок родится примерно ");
+                sb.AppendLine(dateOfBirth.ToLongDateString());
+                sb.Append("Знак зодиака будет ");
+                sb.Append(HoroscopDatePair.GetZodiacSignName(dateOfBirth));
+
+                string gender = string.Empty;
+                if (IsPredictedAsBoyDay(concPeriod.StartDay))
+                {
+                    gender = "мальчик";
+                }
+                else if (IsPredictedAsGirlDay(concPeriod.StartDay))
+                {
+                    gender = "девочка";
+                }
+                if (!string.IsNullOrEmpty(gender))
+                {
+                    sb.AppendLine();
+                    sb.Append("и предположительно это будет " + gender);
+                }
+            }
+            else
+            {
+                if (IsPredictedAsMenstruationDay(date))
+                {
+                    sb.AppendLine();
+                    sb.Append("Вероятны менструашки");
+                }
+
+                if (IsPredictedAsOvulationDay(date))
+                {
+                    sb.AppendLine();
+                    sb.Append("Это примерный день овуляции");
+                }
+
+                string gender = string.Empty;
+                if (IsPredictedAsBoyDay(date))
+                {
+                    gender = "мальчика";
+                }
+                else if (IsPredictedAsGirlDay(date))
+                {
+                    gender = "девочки";
+                }
+                if (!string.IsNullOrEmpty(gender))
+                {
+                    sb.AppendLine();
+                    sb.Append("Более вероятно зачание " + gender);
+                }
+
+                if (HadSexList.ContainsKey(date))
+                {
+                    DateTime dateOfBirth = date.AddDays(ConceptionPeriod.StandardLength);
+                    sb.AppendLine();
+                    sb.Append("Если ты в этот день зачала ребёнка,\nто он родится примерно ");
+                    sb.AppendLine(dateOfBirth.ToLongDateString());
+                    sb.Append("Знак зодиака будет ");
+                    sb.Append(HoroscopDatePair.GetZodiacSignName(dateOfBirth));
+                }
+            }
+
+            // got to be last
+            string text;
+            if (Notes.TryGetValue(date, out text))
+            {
+                sb.AppendLine();
+                sb.Append("Заметка: ");
+                sb.Append(text);
+            }
+
+            return sb.ToString();
+        }
     }
 }

@@ -49,8 +49,6 @@ namespace WomenCalendar
                 if (FontNormal == null) FontNormal = Font;
                 if (FontBold == null) FontBold = new Font(FontNormal, FontStyle.Bold);
 
-                Font = (Enabled) ? FontBold : FontNormal;
-
                 Invalidate();
             }
         }
@@ -132,7 +130,7 @@ namespace WomenCalendar
                 }
                 else if (Egesta == 0)
                 {
-                    pe.Graphics.DrawEllipse(Pens.Red, 3, 14, 5, 5);
+                    pe.Graphics.DrawEllipse(Pens.Red, 3, 20, 5, 5);
                 }
             }
 
@@ -189,6 +187,8 @@ namespace WomenCalendar
 
         protected override void OnPaint(PaintEventArgs pe)
         {
+            Font = (Enabled) ? FontBold : FontNormal;
+
             if (!Enabled)
             {
                 DrawDisabled(pe);

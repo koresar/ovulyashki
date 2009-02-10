@@ -260,7 +260,14 @@
     <None Include="Resources\BOY_iMAGE.bmp" />
     <None Include="Resources\baby_Image.bmp" />
     <None Include="Resources\calendar.xml" />
+    <None Include="Resources\baby_Image1.bmp" />
+    <None Include="Resources\baby_Image2.bmp" />
+    <None Include="Resources\babyFace_Image.bmp" />
+    <None Include="Resources\calendarEdit_Image.gif" />
     <Content Include="Resources\drop16.bmp" />
+    <None Include="Resources\drop_Image1.bmp" />
+    <None Include="Resources\note_Image1.bmp" />
+    <None Include="Resources\ovulashki_logo1.ico" />
     <None Include="Resources\ovulashki_logo.ico" />
     <None Include="Resources\girl_Image.bmp" />
     <None Include="Resources\month_dropdown.bmp" />

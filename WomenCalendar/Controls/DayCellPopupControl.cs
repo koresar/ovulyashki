@@ -161,6 +161,12 @@ namespace WomenCalendar
             ShowTooltip("Базальная температура тела", bbt == 0 ? "Не установлена" : bbt.ToString());
         }
 
+        private void ShowDayInfoTooltip()
+        {
+            var info = Program.CurrentWoman.GenerateDayInfo(DayCell.Date);
+            ShowTooltip(DayCell.Date.ToShortDateString(), info);
+        }        
+
         private void ShowTooltip(string caption, string text)
         {
             toolTip.ToolTipTitle = caption;
@@ -272,12 +278,6 @@ namespace WomenCalendar
             {
                 OwnerMonthsControl.ShowDayContextMenu();
             }
-            else if (e.Button == MouseButtons.Left)
-            {
-                bool hadSex = Program.CurrentWoman.HadSexList[DayCell.Date];
-                Program.CurrentWoman.HadSexList[DayCell.Date] = !hadSex;
-                PaintHadSex();
-            }
         }
 
         private void lblBBT_MouseClick(object sender, MouseEventArgs e)
@@ -336,6 +336,16 @@ namespace WomenCalendar
         private void pictureNote_DoubleClick(object sender, EventArgs e)
         {
             ShowDayEditForm(DayEditFocus.Note);
+        }
+
+        private void lblDay_MouseEnter(object sender, EventArgs e)
+        {
+            ShowDayInfoTooltip();
+        }
+
+        private void lblDay_MouseLeave(object sender, EventArgs e)
+        {
+            HideTooltip();
         }
     }
 }
