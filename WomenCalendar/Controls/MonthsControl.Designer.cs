@@ -33,9 +33,6 @@
             this.setAsMenstruationDay = new System.Windows.Forms.ToolStripMenuItem();
             this.removeMenstruationDay = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.removeNote = new System.Windows.Forms.ToolStripMenuItem();
-            this.editNote = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.setLastPregnancyDay = new System.Windows.Forms.ToolStripMenuItem();
             this.setAsConceptionDay = new System.Windows.Forms.ToolStripMenuItem();
             this.removeConceptionDay = new System.Windows.Forms.ToolStripMenuItem();
@@ -57,9 +54,6 @@
             this.setAsMenstruationDay,
             this.removeMenstruationDay,
             this.toolStripSeparator1,
-            this.removeNote,
-            this.editNote,
-            this.toolStripSeparator2,
             this.setLastPregnancyDay,
             this.setAsConceptionDay,
             this.removeConceptionDay,
@@ -68,7 +62,7 @@
             this.toolStripSeparator3,
             this.редактироватьДеньToolStripMenuItem});
             this.dayContextMenu.Name = "contextMenu";
-            this.dayContextMenu.Size = new System.Drawing.Size(321, 264);
+            this.dayContextMenu.Size = new System.Drawing.Size(321, 214);
             // 
             // setAsMenstruationDay
             // 
@@ -90,27 +84,6 @@
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
             this.toolStripSeparator1.Size = new System.Drawing.Size(317, 6);
-            // 
-            // removeNote
-            // 
-            this.removeNote.Image = global::WomenCalendar.Properties.Resources.noteNot_Image;
-            this.removeNote.Name = "removeNote";
-            this.removeNote.Size = new System.Drawing.Size(320, 22);
-            this.removeNote.Text = "Удалить заметку";
-            this.removeNote.Click += new System.EventHandler(this.removeNote_Click);
-            // 
-            // editNote
-            // 
-            this.editNote.Image = global::WomenCalendar.Properties.Resources.note_Image;
-            this.editNote.Name = "editNote";
-            this.editNote.Size = new System.Drawing.Size(320, 22);
-            this.editNote.Text = "Редактировать заметку";
-            this.editNote.Click += new System.EventHandler(this.editNote_Click);
-            // 
-            // toolStripSeparator2
-            // 
-            this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(317, 6);
             // 
             // setLastPregnancyDay
             // 
@@ -224,12 +197,9 @@
         private System.Windows.Forms.ToolStripMenuItem setAsMenstruationDay;
         private System.Windows.Forms.ToolStripMenuItem removeMenstruationDay;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
-        private System.Windows.Forms.ToolStripMenuItem removeNote;
-        private System.Windows.Forms.ToolStripMenuItem editNote;
         private System.Windows.Forms.ContextMenuStrip monthMenu;
         private System.Windows.Forms.ToolStripMenuItem ToolStripBBTGraph;
         private System.Windows.Forms.ToolStripMenuItem построитьГрафикСамочувствияToolStripMenuItem;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripMenuItem setAsConceptionDay;
         private System.Windows.Forms.ToolStripMenuItem removeConceptionDay;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;

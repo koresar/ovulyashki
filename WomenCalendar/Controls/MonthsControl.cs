@@ -206,10 +206,6 @@ namespace WomenCalendar
             dayContextMenu.Items["setAsMenstruationDay"].Visible = !isMentruationDay && !isPregnancyDay;
             dayContextMenu.Items["removeMenstruationDay"].Visible = isMentruationDay && !isPregnancyDay;
 
-            bool haveNote = Program.CurrentWoman.Notes.ContainsKey(FocusDate);
-            dayContextMenu.Items["removeNote"].Visible = haveNote;
-            dayContextMenu.Items["editNote"].Visible = true;
-
             dayContextMenu.Show(FocusMonth, FocusMonth.PointToClient(MousePosition));
         }
 
@@ -356,23 +352,6 @@ namespace WomenCalendar
                 ((MainForm)ParentForm).UpdateWomanInformation();
                 ((MainForm)ParentForm).UpdateDayInformation(FocusDate);
                 Redraw();
-            }
-        }
-
-        private void editNote_Click(object sender, EventArgs e)
-        {
-            DayEditForm form = new DayEditForm(FocusDay, DayEditFocus.Note);
-            if (form.ShowDialog(this) == DialogResult.OK)
-            {
-                RedrawFocusDay();
-            }
-        }
-
-        private void removeNote_Click(object sender, EventArgs e)
-        {
-            if (Program.CurrentWoman.RemoveNote(FocusDate))
-            {
-                RedrawFocusDay();
             }
         }
 
