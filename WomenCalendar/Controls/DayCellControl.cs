@@ -94,7 +94,8 @@ namespace WomenCalendar
 
         private void DrawEnabled(PaintEventArgs pe)
         {
-            BackColor = IsPregnancyDay ? Color.LightBlue :
+            BackColor = IsConceptionDay ? Color.DeepSkyBlue :
+                IsPregnancyDay ? Color.LightCyan :                 
                 (IsMenstruationDay && Date <= DateTime.Today) ? Color.LightPink :
                 (IsMenstruationDay && Date > DateTime.Today) ? Color.LightGreen :
                 IsPredictedAsOvulationDay ? Color.Yellow :

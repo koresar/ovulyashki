@@ -15,13 +15,23 @@ namespace WomenCalendar
             InitializeComponent();
 
             xLegend.Collapse();
-            toolStrip1.Items.Add(new ToolStripControlHost(dateTimePicker1));
+            toolStrip1.Items.Insert(toolStrip1.Items.IndexOf(toolStripLabelJump) + 1, 
+                new ToolStripControlHost(dateTimePicker1));
+            helpToolStripButton.Alignment = ToolStripItemAlignment.Right;
         }
 
         public void UpdateDayInformation(DateTime date)
         {
             lblDayDescription.Text = Program.CurrentWoman.GenerateDayInfo(date);
             xDay.Height = lblDayDescription.Height + 32;
+        }
+
+        public void UpdateDayInformationIfFocused(DateTime date)
+        {
+            if (monthControl.FocusDate == date)
+            {
+                UpdateDayInformation(date);
+            }
         }
 
         /// <summary>

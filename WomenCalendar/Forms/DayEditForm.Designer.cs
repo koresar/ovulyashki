@@ -48,6 +48,7 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.chkMentrustions = new System.Windows.Forms.CheckBox();
             this.grpOv.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numMenstruationLength)).BeginInit();
             this.groupBox2.SuspendLayout();
@@ -75,7 +76,7 @@
             this.sliderEgestaAmount.ThumbInnerColor = System.Drawing.Color.White;
             this.sliderEgestaAmount.ThumbOuterColor = System.Drawing.Color.Pink;
             this.sliderEgestaAmount.ThumbRoundRectSize = new System.Drawing.Size(8, 8);
-            this.sliderEgestaAmount.Value = 4;
+            this.sliderEgestaAmount.Value = 0;
             this.sliderEgestaAmount.MouseLeave += new System.EventHandler(this.sliderEgestaAmount_MouseLeave);
             this.sliderEgestaAmount.Scroll += new System.Windows.Forms.ScrollEventHandler(this.sliderEgestaAmount_Scroll);
             this.sliderEgestaAmount.MouseEnter += new System.EventHandler(this.sliderEgestaAmount_MouseEnter);
@@ -103,7 +104,7 @@
             this.txtNote.Location = new System.Drawing.Point(8, 23);
             this.txtNote.Multiline = true;
             this.txtNote.Name = "txtNote";
-            this.txtNote.Size = new System.Drawing.Size(207, 150);
+            this.txtNote.Size = new System.Drawing.Size(267, 150);
             this.txtNote.TabIndex = 0;
             // 
             // toolTip
@@ -115,7 +116,7 @@
             // 
             // btnPrevDay
             // 
-            this.btnPrevDay.Location = new System.Drawing.Point(16, 13);
+            this.btnPrevDay.Location = new System.Drawing.Point(5, 13);
             this.btnPrevDay.Name = "btnPrevDay";
             this.btnPrevDay.Size = new System.Drawing.Size(124, 23);
             this.btnPrevDay.TabIndex = 0;
@@ -125,7 +126,7 @@
             // 
             // btnNextDay
             // 
-            this.btnNextDay.Location = new System.Drawing.Point(169, 13);
+            this.btnNextDay.Location = new System.Drawing.Point(164, 13);
             this.btnNextDay.Name = "btnNextDay";
             this.btnNextDay.Size = new System.Drawing.Size(124, 23);
             this.btnNextDay.TabIndex = 1;
@@ -182,16 +183,16 @@
             this.grpOv.Controls.Add(this.label1);
             this.grpOv.Controls.Add(this.verticalLabel1);
             this.grpOv.Controls.Add(this.sliderEgestaAmount);
-            this.grpOv.Location = new System.Drawing.Point(234, 42);
+            this.grpOv.Location = new System.Drawing.Point(323, 42);
             this.grpOv.Name = "grpOv";
-            this.grpOv.Size = new System.Drawing.Size(72, 261);
+            this.grpOv.Size = new System.Drawing.Size(90, 243);
             this.grpOv.TabIndex = 10008;
             this.grpOv.TabStop = false;
             this.grpOv.Text = "Менструашки";
             // 
             // numMenstruationLength
             // 
-            this.numMenstruationLength.Location = new System.Drawing.Point(4, 234);
+            this.numMenstruationLength.Location = new System.Drawing.Point(12, 216);
             this.numMenstruationLength.Maximum = new decimal(new int[] {
             9,
             0,
@@ -215,7 +216,7 @@
             // lblMenstruationLength
             // 
             this.lblMenstruationLength.AutoSize = true;
-            this.lblMenstruationLength.Location = new System.Drawing.Point(39, 236);
+            this.lblMenstruationLength.Location = new System.Drawing.Point(47, 218);
             this.lblMenstruationLength.Name = "lblMenstruationLength";
             this.lblMenstruationLength.Size = new System.Drawing.Size(31, 13);
             this.lblMenstruationLength.TabIndex = 10011;
@@ -223,9 +224,9 @@
             // 
             // label1
             // 
-            this.label1.Location = new System.Drawing.Point(2, 202);
+            this.label1.Location = new System.Drawing.Point(1, 196);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(68, 29);
+            this.label1.Size = new System.Drawing.Size(83, 17);
             this.label1.TabIndex = 10009;
             this.label1.Text = "Длительность";
             // 
@@ -243,7 +244,7 @@
             this.groupBox2.Controls.Add(this.txtNote);
             this.groupBox2.Location = new System.Drawing.Point(5, 42);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(223, 179);
+            this.groupBox2.Size = new System.Drawing.Size(283, 179);
             this.groupBox2.TabIndex = 10009;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Заметка к этому дню";
@@ -271,12 +272,27 @@
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Самочувствие";
             // 
+            // chkMentrustions
+            // 
+            this.chkMentrustions.Appearance = System.Windows.Forms.Appearance.Button;
+            this.chkMentrustions.Image = global::WomenCalendar.Properties.Resources.drop_Image;
+            this.chkMentrustions.Location = new System.Drawing.Point(292, 126);
+            this.chkMentrustions.Name = "chkMentrustions";
+            this.chkMentrustions.Size = new System.Drawing.Size(27, 65);
+            this.chkMentrustions.TabIndex = 10013;
+            this.chkMentrustions.Text = ">>          >>";
+            this.chkMentrustions.UseVisualStyleBackColor = true;
+            this.chkMentrustions.MouseLeave += new System.EventHandler(this.chkMentrustions_MouseLeave);
+            this.chkMentrustions.MouseEnter += new System.EventHandler(this.chkMentrustions_MouseEnter);
+            this.chkMentrustions.CheckedChanged += new System.EventHandler(this.chkMentrustions_CheckedChanged);
+            // 
             // DayEditForm
             // 
             this.AcceptButton = null;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(312, 414);
+            this.ClientSize = new System.Drawing.Size(418, 414);
+            this.Controls.Add(this.chkMentrustions);
             this.Controls.Add(this.btnNextDay);
             this.Controls.Add(this.chkHadSex);
             this.Controls.Add(this.btnPrevDay);
@@ -297,6 +313,7 @@
             this.Controls.SetChildIndex(this.btnPrevDay, 0);
             this.Controls.SetChildIndex(this.chkHadSex, 0);
             this.Controls.SetChildIndex(this.btnNextDay, 0);
+            this.Controls.SetChildIndex(this.chkMentrustions, 0);
             this.grpOv.ResumeLayout(false);
             this.grpOv.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numMenstruationLength)).EndInit();
@@ -331,6 +348,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.NumericUpDown numMenstruationLength;
         private System.Windows.Forms.Label lblMenstruationLength;
+        private System.Windows.Forms.CheckBox chkMentrustions;
 
     }
 }

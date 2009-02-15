@@ -269,7 +269,9 @@
     <None Include="Resources\babyFace_Image.bmp" />
     <None Include="Resources\calendarEdit_Image.gif" />
     <None Include="Resources\drop.Image.gif" />
+    <None Include="Resources\about.png" />
     <Content Include="Resources\drop16.bmp" />
+    <None Include="Resources\logo.png" />
     <None Include="Resources\ovulashki_logo.png" />
     <None Include="Resources\exportGreen.png" />
     <None Include="Resources\saveGreen.png" />

@@ -34,13 +34,11 @@
             this.openToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.saveToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.exportToExcel = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripLabelJump = new System.Windows.Forms.ToolStripLabel();
             this.prevStripButton = new System.Windows.Forms.ToolStripButton();
             this.nextStripButton = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.helpToolStripButton = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.xPanderList1 = new XPanderControl.XPanderList();
@@ -104,13 +102,11 @@
             this.openToolStripButton,
             this.saveToolStripButton,
             this.exportToExcel,
-            this.toolStripSeparator,
+            this.toolStripSeparator2,
+            this.toolStripLabelJump,
             this.prevStripButton,
             this.nextStripButton,
-            this.toolStripSeparator1,
-            this.helpToolStripButton,
-            this.toolStripSeparator2,
-            this.toolStripLabel1});
+            this.helpToolStripButton});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(747, 39);
@@ -157,10 +153,17 @@
             this.exportToExcel.Text = "Экспортировать женщину в Excel";
             this.exportToExcel.Click += new System.EventHandler(this.exportToExcel_Click);
             // 
-            // toolStripSeparator
+            // toolStripSeparator2
             // 
-            this.toolStripSeparator.Name = "toolStripSeparator";
-            this.toolStripSeparator.Size = new System.Drawing.Size(6, 39);
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 39);
+            // 
+            // toolStripLabelJump
+            // 
+            this.toolStripLabelJump.Name = "toolStripLabelJump";
+            this.toolStripLabelJump.Size = new System.Drawing.Size(61, 36);
+            this.toolStripLabelJump.Text = "Прыгнуть:";
+            this.toolStripLabelJump.ToolTipText = "Выбранная дата";
             // 
             // prevStripButton
             // 
@@ -182,36 +185,21 @@
             this.nextStripButton.Text = "Сдвинуть на месяц вперёд";
             this.nextStripButton.Click += new System.EventHandler(this.nextStripButton_Click);
             // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 39);
-            // 
             // helpToolStripButton
             // 
             this.helpToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.helpToolStripButton.Image = global::WomenCalendar.Properties.Resources.ovulashki_logo2;
+            this.helpToolStripButton.Image = global::WomenCalendar.Properties.Resources.about;
             this.helpToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.helpToolStripButton.Name = "helpToolStripButton";
+            this.helpToolStripButton.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.helpToolStripButton.Size = new System.Drawing.Size(36, 36);
             this.helpToolStripButton.Text = "Помощь";
+            this.helpToolStripButton.ToolTipText = "О программе";
             this.helpToolStripButton.Click += new System.EventHandler(this.helpToolStripButton_Click);
-            // 
-            // toolStripSeparator2
-            // 
-            this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 39);
-            // 
-            // toolStripLabel1
-            // 
-            this.toolStripLabel1.Name = "toolStripLabel1";
-            this.toolStripLabel1.Size = new System.Drawing.Size(61, 36);
-            this.toolStripLabel1.Text = "Прыгнуть:";
-            this.toolStripLabel1.ToolTipText = "Выбранная дата";
             // 
             // dateTimePicker1
             // 
-            this.dateTimePicker1.Location = new System.Drawing.Point(312, 3);
+            this.dateTimePicker1.Location = new System.Drawing.Point(400, 13);
             this.dateTimePicker1.Name = "dateTimePicker1";
             this.dateTimePicker1.Size = new System.Drawing.Size(203, 20);
             this.dateTimePicker1.TabIndex = 3;
@@ -295,11 +283,11 @@
             this.xLegend.Controls.Add(this.dayLegendMenstruations);
             this.xLegend.ExpandedHighlightImage = ((System.Drawing.Bitmap)(resources.GetObject("xLegend.ExpandedHighlightImage")));
             this.xLegend.ExpandedImage = ((System.Drawing.Bitmap)(resources.GetObject("xLegend.ExpandedImage")));
-            this.xLegend.Location = new System.Drawing.Point(0, 0);
+            this.xLegend.Location = new System.Drawing.Point(8, 10);
             this.xLegend.Margin = new System.Windows.Forms.Padding(0);
             this.xLegend.Name = "xLegend";
             this.xLegend.Padding = new System.Windows.Forms.Padding(0, 25, 0, 0);
-            this.xLegend.Size = new System.Drawing.Size(250, 520);
+            this.xLegend.Size = new System.Drawing.Size(234, 520);
             this.xLegend.TabIndex = 2;
             this.xLegend.Tag = 0;
             this.xLegend.TooltipText = null;
@@ -553,7 +541,7 @@
             // 
             // dayCellControl12
             // 
-            this.dayCellControl12.BackColor = System.Drawing.Color.LightBlue;
+            this.dayCellControl12.BackColor = System.Drawing.Color.LightCyan;
             this.dayCellControl12.Date = new System.DateTime(((long)(0)));
             this.dayCellControl12.Egesta = 5;
             this.dayCellControl12.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
@@ -579,7 +567,7 @@
             // 
             // dayCellControl10
             // 
-            this.dayCellControl10.BackColor = System.Drawing.Color.LightBlue;
+            this.dayCellControl10.BackColor = System.Drawing.Color.DeepSkyBlue;
             this.dayCellControl10.Date = new System.DateTime(((long)(0)));
             this.dayCellControl10.Egesta = 5;
             this.dayCellControl10.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
@@ -605,7 +593,7 @@
             // 
             // dayCellControl9
             // 
-            this.dayCellControl9.BackColor = System.Drawing.Color.LightBlue;
+            this.dayCellControl9.BackColor = System.Drawing.Color.LightCyan;
             this.dayCellControl9.Date = new System.DateTime(((long)(0)));
             this.dayCellControl9.Egesta = 5;
             this.dayCellControl9.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
@@ -812,11 +800,11 @@
             this.xWoman.Controls.Add(this.lblAverageCycle);
             this.xWoman.ExpandedHighlightImage = ((System.Drawing.Bitmap)(resources.GetObject("xWoman.ExpandedHighlightImage")));
             this.xWoman.ExpandedImage = ((System.Drawing.Bitmap)(resources.GetObject("xWoman.ExpandedImage")));
-            this.xWoman.Location = new System.Drawing.Point(0, 529);
+            this.xWoman.Location = new System.Drawing.Point(8, 544);
             this.xWoman.Margin = new System.Windows.Forms.Padding(0);
             this.xWoman.Name = "xWoman";
             this.xWoman.Padding = new System.Windows.Forms.Padding(0, 25, 0, 0);
-            this.xWoman.Size = new System.Drawing.Size(250, 155);
+            this.xWoman.Size = new System.Drawing.Size(234, 155);
             this.xWoman.TabIndex = 0;
             this.xWoman.Tag = 1;
             this.xWoman.TooltipText = null;
@@ -944,11 +932,11 @@
             this.xDay.Controls.Add(this.lblDayDescription);
             this.xDay.ExpandedHighlightImage = ((System.Drawing.Bitmap)(resources.GetObject("xDay.ExpandedHighlightImage")));
             this.xDay.ExpandedImage = ((System.Drawing.Bitmap)(resources.GetObject("xDay.ExpandedImage")));
-            this.xDay.Location = new System.Drawing.Point(0, 693);
+            this.xDay.Location = new System.Drawing.Point(8, 713);
             this.xDay.Margin = new System.Windows.Forms.Padding(0);
             this.xDay.Name = "xDay";
             this.xDay.Padding = new System.Windows.Forms.Padding(0, 25, 0, 0);
-            this.xDay.Size = new System.Drawing.Size(251, 76);
+            this.xDay.Size = new System.Drawing.Size(234, 61);
             this.xDay.TabIndex = 1;
             this.xDay.Tag = 2;
             this.xDay.TooltipText = null;
@@ -1020,14 +1008,12 @@
         private System.Windows.Forms.ToolStripButton newToolStripButton;
         private System.Windows.Forms.ToolStripButton openToolStripButton;
         private System.Windows.Forms.ToolStripButton saveToolStripButton;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator;
         private System.Windows.Forms.ToolStripButton helpToolStripButton;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.DateTimePicker dateTimePicker1;
-        private System.Windows.Forms.ToolStripLabel toolStripLabel1;
+        private System.Windows.Forms.ToolStripLabel toolStripLabelJump;
         private System.Windows.Forms.ToolStripButton prevStripButton;
         private System.Windows.Forms.ToolStripButton nextStripButton;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.SplitContainer splitContainer1;
         private MonthsControl monthControl;
         private XPanderControl.XPanderList xPanderList1;

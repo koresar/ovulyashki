@@ -113,9 +113,8 @@ namespace WomenCalendar
             return false;
         }
 
-        public MenstruationPeriod SetPeriodLength(DateTime date, int length)
+        public MenstruationPeriod SetPeriodLength(MenstruationPeriod period, int length)
         {
-            MenstruationPeriod period = GetPeriodByDate(date);
             if (period != null && period.Length != length)
             {
                 period.Length = length;

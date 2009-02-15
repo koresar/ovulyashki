@@ -13,6 +13,25 @@ namespace WomenCalendar
 
     public partial class DayEditForm : ModalBaseForm
     {
+        class DayData
+        {
+            public string BBT;
+            public bool HadSex;
+            public int Health;
+            public string Note;
+            public bool HasMenstr;
+            public decimal MenstrLength;
+            public int Egesta;
+
+            public override bool Equals(object obj)
+            {
+                DayData d = obj as DayData;
+                return d.BBT == BBT && d.HadSex == HadSex && d.Health == Health && d.Note == Note && 
+                    d.HasMenstr == HasMenstr && d.MenstrLength == MenstrLength && d.Egesta == Egesta;
+            }
+        }
+
+        private DayData initialData;
         private DayCellControl DayCell;
         private DateTime date;
         private DayEditFocus defaultFocus;
@@ -45,9 +64,13 @@ namespace WomenCalendar
 
         public override void AcceptAction()
         {
-            if (!ValidateData()) return;
-            SaveData();
-            Program.ApplicationForm.UpdateDayInformation(date);
+            if (DataChanged)
+            {
+                if (!ValidateData()) return;
+                SaveData();
+                Program.ApplicationForm.UpdateDayInformationIfFocused(date);
+            }
+
             DialogResult = DialogResult.OK;
         }
 
@@ -56,10 +79,18 @@ namespace WomenCalendar
             Woman w = Program.CurrentWoman;
             w.BBT.SetBBT(date, txtBBT.Text);
 
-            if (grpOv.Visible)
+            if (chkMentrustions.Checked)
             {
-                MenstruationPeriod period = w.Menstruations.SetPeriodLength(date, (int) numMenstruationLength.Value);
-                period.Egestas[date] = EgestaSliderValue;
+                MenstruationPeriod period = w.Menstruations.GetPeriodByDate(date);
+                if (period != null)
+                {
+                    w.Menstruations.SetPeriodLength(period, (int)numMenstruationLength.Value);
+                    period.Egestas[date] = EgestaSliderValue;
+                }
+            }
+            else
+            {
+                w.Menstruations.Remove(date);
             }
 
             w.Notes[date] = txtNote.Text;
@@ -74,6 +105,12 @@ namespace WomenCalendar
         private void ShowEgestaTooltip()
         {
             ShowTooltip("Количество выделений", DayCellPopupControl.EgestasNames[EgestaSliderValue], sliderEgestaAmount);
+        }
+
+        private void ShowMenstButtonToolTip(bool isMenstr)
+        {
+            ShowTooltip("Кнопка включения/выключения менструашек", 
+                !isMenstr ? "Установить этот день как начало менструашек" : "Отменить эти менструашки", chkMentrustions);
         }
 
         private void HideTooltip(IWin32Window control)
@@ -99,8 +136,14 @@ namespace WomenCalendar
                 numMenstruationLength.Value = period.Length;
                 int egesta = period.Egestas[date];
                 EgestaSliderValue = egesta;
+                ShowOv(true);
+                chkMentrustions.Enabled = period.StartDay == date;
             }
-            grpOv.Visible = period != null;
+            else
+            {
+                ShowOv(false);
+                chkMentrustions.Enabled = true;
+            }
 
             txtBBT.Text = w.BBT.GetBBTString(date);
 
@@ -110,45 +153,73 @@ namespace WomenCalendar
             chkHadSex.Checked = w.HadSexList[date];
 
             sliderHealth.Value = w.Health[date];
+
+            initialData = CollectDayData();
+        }
+
+        private DayData CollectDayData()
+        {
+            return new DayData()
+            {
+                BBT = txtBBT.Text,
+                HadSex = chkHadSex.Checked,
+                Health = sliderHealth.Value,
+                Note = txtNote.Text,
+                HasMenstr = chkMentrustions.Checked,
+                MenstrLength = numMenstruationLength.Value,
+                Egesta = EgestaSliderValue,
+            };
         }
 
         private bool ValidateData()
         {
             HideTooltip(txtBBT);
-            if (string.IsNullOrEmpty(txtBBT.Text)) return true;
-
-            double res;
-            string bbt = txtBBT.Text.Trim().Replace(',', '.');
-            if (double.TryParse(bbt, out res))
+            if (!string.IsNullOrEmpty(txtBBT.Text))
             {
-                txtBBT.Text = bbt;
-            }
-            else
-            {
-                bbt = txtBBT.Text.Trim().Replace('.', ',');
+                double res;
+                string bbt = txtBBT.Text.Trim().Replace(',', '.');
                 if (double.TryParse(bbt, out res))
                 {
                     txtBBT.Text = bbt;
                 }
-            }
-
-            if (double.TryParse(txtBBT.Text, out res))
-            {
-                if (BBTCollection.IsBBTInCorrectRange(res))
+                else
                 {
-                    return true;
+                    bbt = txtBBT.Text.Trim().Replace('.', ',');
+                    if (double.TryParse(bbt, out res))
+                    {
+                        txtBBT.Text = bbt;
+                    }
+                }
+
+                if (double.TryParse(txtBBT.Text, out res))
+                {
+                    if (!BBTCollection.IsBBTInCorrectRange(res))
+                    {
+                        ShowTooltip("Базальная температура тела", "У человека не может быть такой температуры. Или ты ящерица?", txtBBT);
+                        return false;
+                    }
                 }
                 else
                 {
-                    ShowTooltip("Базальная температура тела", "У человека не может быть такой температуры. Или ты ящерица?", txtBBT);
+                    ShowTooltip("Базальная температура тела", "Что это за фигню ты сюда ввела? Это не температура!", txtBBT);
+                    return false;
                 }
             }
-            else
+
+            if (chkMentrustions.Checked)
             {
-                ShowTooltip("Базальная температура тела", "Что это за фигню ты сюда ввела? Это не температура!", txtBBT);
+                MenstruationPeriod period = Program.CurrentWoman.Menstruations.GetPeriodByDate(date);
+                if (period == null)
+                { // this is new period user want to add
+                    if (!Program.CurrentWoman.Menstruations.Add(date, (int)numMenstruationLength.Value))
+                    {
+                        return false;
+                    }
+                    Program.CurrentWoman.Menstruations.SetEgesta(date, EgestaSliderValue);
+                }
             }
 
-            return false;
+            return true;
         }
 
         /// <summary>
@@ -157,13 +228,15 @@ namespace WomenCalendar
         /// <param name="days">Amount of days from current to shift. Can be either negative or positive.</param>
         private void Rotate(int days)
         {
-            if (!ValidateData()) return;
+            if (DataChanged)
+            {
+                if (!ValidateData()) return;
+                SaveData();
+                Program.ApplicationForm.UpdateDayInformationIfFocused(date);
+            }
 
             DayEditFocus focus = txtBBT.Focused ? DayEditFocus.BBT : DayEditFocus.Note;
-
-            SaveData();
             date = date.AddDays(days);
-            Program.ApplicationForm.UpdateDayInformation(date);
             LoadForm();
             SetFocusTo(focus);
         }
@@ -219,6 +292,53 @@ namespace WomenCalendar
             {
                 case DayEditFocus.Note: txtNote.Focus(); break;
                 case DayEditFocus.BBT: txtBBT.Focus(); break;
+            }
+        }
+
+        private void chkMentrustions_CheckedChanged(object sender, EventArgs e)
+        {
+            ShowOv(chkMentrustions.Checked);
+            HideTooltip(chkMentrustions);
+        }
+
+        private void ShowOv(bool show)
+        {
+            if (chkMentrustions.Checked != show)
+            {
+                chkMentrustions.Checked = show;
+            }
+
+            if (show)
+            {
+                this.Width = 424;
+                chkMentrustions.Image = global::WomenCalendar.Properties.Resources.dropNot_Image;
+                chkMentrustions.Text = "<<          <<";
+                this.grpOv.Visible = true;
+            }
+            else
+            {
+                this.Width = 330;
+                chkMentrustions.Image = global::WomenCalendar.Properties.Resources.drop_Image;
+                chkMentrustions.Text = ">>          >>";
+                this.grpOv.Visible = false;
+            }
+        }
+
+        private void chkMentrustions_MouseEnter(object sender, EventArgs e)
+        {
+            ShowMenstButtonToolTip(chkMentrustions.Checked);
+        }
+
+        private void chkMentrustions_MouseLeave(object sender, EventArgs e)
+        {
+            HideTooltip(chkMentrustions);
+        }
+
+        private bool DataChanged
+        {
+            get
+            {
+                return !initialData.Equals(CollectDayData());
             }
         }
     }
