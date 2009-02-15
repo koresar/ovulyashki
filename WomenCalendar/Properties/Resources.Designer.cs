@@ -133,6 +133,13 @@ namespace WomenCalendar.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap exportGreen {
+            get {
+                object obj = ResourceManager.GetObject("exportGreen", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap girl_Image {
             get {
                 object obj = ResourceManager.GetObject("girl_Image", resourceCulture);
@@ -140,9 +147,37 @@ namespace WomenCalendar.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap Green_01 {
+            get {
+                object obj = ResourceManager.GetObject("Green_01", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap Green_04 {
+            get {
+                object obj = ResourceManager.GetObject("Green_04", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap logo {
+            get {
+                object obj = ResourceManager.GetObject("logo", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap month_dropdown {
             get {
                 object obj = ResourceManager.GetObject("month_dropdown", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap newGreen {
+            get {
+                object obj = ResourceManager.GetObject("newGreen", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -161,6 +196,13 @@ namespace WomenCalendar.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap openGreen {
+            get {
+                object obj = ResourceManager.GetObject("openGreen", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Icon ovulashki_logo {
             get {
                 object obj = ResourceManager.GetObject("ovulashki_logo", resourceCulture);
@@ -168,10 +210,17 @@ namespace WomenCalendar.Properties {
             }
         }
         
-        internal static System.Drawing.Icon ovulashki_logo1 {
+        internal static System.Drawing.Bitmap ovulashki_logo2 {
             get {
-                object obj = ResourceManager.GetObject("ovulashki_logo1", resourceCulture);
-                return ((System.Drawing.Icon)(obj));
+                object obj = ResourceManager.GetObject("ovulashki_logo2", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap saveGreen {
+            get {
+                object obj = ResourceManager.GetObject("saveGreen", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
     }

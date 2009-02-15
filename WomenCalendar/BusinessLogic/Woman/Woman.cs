@@ -6,6 +6,7 @@ using System.Reflection;
 using System.Xml.Serialization;
 using System.IO;
 using System.Windows.Forms;
+using ICSharpCode.SharpZipLib.BZip2;
 
 namespace WomenCalendar
 {
@@ -78,27 +79,50 @@ namespace WomenCalendar
             BBT = new BBTCollection();
             HadSexList = new HadSexCollection();
             Health = new HealthCollection();
-            DefaultMenstruationLength = 4;
+            DefaultMenstruationLength = 5;
             Menstruations = new MenstruationsCollection();
             Conceptions = new ConceptionsCollection();
             ManualPeriodLength = 28;
             averagePeriodLength = 28;
+            Name = Environment.UserName;
         }
 
         public static bool SaveTo(Woman w, string path)
         {
-            FileStream fs = new FileStream(path, FileMode.Create);
-            new XmlSerializer(w.GetType()).Serialize(fs, w);
-            fs.Close();
+            var s = new BZip2OutputStream(new FileStream(path, FileMode.Create), 9);
+            new XmlSerializer(w.GetType()).Serialize(s, w);
+            s.Close();
+
             w.AssociatedFile = path;
+
             return true;
         }
 
         public static Woman ReadFrom(string path)
         {
-            FileStream fs = new FileStream(path, FileMode.Open);
-            Woman w = (Woman)(new XmlSerializer(typeof(Woman)).Deserialize(fs));
-            fs.Close();
+            Woman w = null;
+            var fs = new FileStream(path, FileMode.Open);
+            try
+            {
+                var s = new BZip2InputStream(fs);
+                w = (Woman)(new XmlSerializer(typeof(Woman)).Deserialize(s));
+                s.Close();
+            }
+            catch (BZip2Exception)
+            { // old file type support
+                fs.Seek(0, SeekOrigin.Begin);
+                w = (Woman)(new XmlSerializer(typeof(Woman)).Deserialize(fs));
+            }
+            finally
+            {
+                fs.Close();
+            }
+
+            if (w == null)
+            {
+                return null;
+            }
+
             w.AssociatedFile = path;
             return w;
         }

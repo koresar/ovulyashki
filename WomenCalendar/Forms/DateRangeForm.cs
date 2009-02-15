@@ -17,8 +17,11 @@ namespace WomenCalendar
 
         private void ExportForm_Load(object sender, EventArgs e)
         {
-            dateFrom.Value = Program.CurrentWoman.Menstruations.First.StartDay;
-            dateTo.Value = Program.CurrentWoman.Menstruations.Last.LastDay;
+            if (Program.CurrentWoman.Menstruations.Count > 0)
+            {
+                dateFrom.Value = Program.CurrentWoman.Menstruations.First.StartDay;
+                dateTo.Value = Program.CurrentWoman.Menstruations.Last.LastDay;
+            }
         }
 
         public DateTime From { get { return dateFrom.Value; } }

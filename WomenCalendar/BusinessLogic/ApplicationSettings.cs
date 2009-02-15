@@ -31,7 +31,7 @@ namespace WomenCalendar
             set { defaultWindowSize = value; }
         }
 
-        private bool defaultWindowIsMaximized;
+        private bool defaultWindowIsMaximized = true;
         public bool DefaultWindowIsMaximized
         {
             get { return defaultWindowIsMaximized; }

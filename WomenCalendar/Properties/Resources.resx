@@ -121,9 +121,6 @@
   <data name="note_Image" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\note_Image.bmp;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="drop_Image" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\drop_Image.bmp;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="month_dropdown" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\month_dropdown.bmp;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -201,9 +198,6 @@
   <data name="calendar" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\calendar.xml;System.String, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
   </data>
-  <data name="ovulashki_logo1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\ovulashki_logo1.ico;System.Drawing.Icon, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="babyFace_Image" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\babyFace_Image.bmp;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -221,5 +215,32 @@
   </data>
   <data name="noteNot_Image" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\note_Image1.bmp;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="logo" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\logo.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="exportGreen" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\exportGreen.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Green_01" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Green_01.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Green_04" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Green_04.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="newGreen" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\newGreen.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="openGreen" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\openGreen.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ovulashki_logo2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ovulashki_logo.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="saveGreen" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\saveGreen.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="drop_Image" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\drop.Image.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

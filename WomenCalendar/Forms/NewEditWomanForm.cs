@@ -13,6 +13,7 @@ namespace WomenCalendar
         public NewEditWomanForm()
         {
             InitializeComponent();
+            txtName.Text = Environment.UserName;
         }
         
         public string WomanName

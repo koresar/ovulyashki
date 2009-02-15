@@ -38,7 +38,6 @@ namespace WomenCalendar
 
             lblAverageCycle.Text = GenerateWomanInformation();
             SetNumMenstrulationPriod(Program.CurrentWoman.ManualPeriodLength);
-            numMenstruationLength.Value = Program.CurrentWoman.DefaultMenstruationLength;
             chbAskPassword.Checked = Program.CurrentWoman.AllwaysAskPassword;
         }
 
@@ -187,15 +186,6 @@ namespace WomenCalendar
         private void MainForm_MouseLeave(object sender, EventArgs e)
         {
             monthControl.CellPopupControl.Visible = false;
-        }
-
-        private void numMenstruationLength_ValueChanged(object sender, EventArgs e)
-        {
-            lblMenstruationLength2.Text = GetDaysString((int)numMenstruationLength.Value);
-
-            Program.CurrentWoman.DefaultMenstruationLength = (int)numMenstruationLength.Value;
-
-            monthControl.Redraw();
         }
 
         private void chbDefaultWoman_CheckedChanged(object sender, EventArgs e)

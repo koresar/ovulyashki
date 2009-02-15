@@ -142,7 +142,9 @@ namespace WomenCalendar
 
         private void ShowHasSexToolTip()
         {
-            ShowTooltip("Секс", "А в этот день у меня был секс.");
+            ShowTooltip("Секс", Program.CurrentWoman.HadSexList[DayCell.Date] ? 
+                "А в этот день у меня был секс." : 
+                "В этот день у меня не было секса.");
         }
 
         private void ShowNoteToolTip()
@@ -164,7 +166,7 @@ namespace WomenCalendar
         private void ShowDayInfoTooltip()
         {
             var info = Program.CurrentWoman.GenerateDayInfo(DayCell.Date);
-            ShowTooltip(DayCell.Date.ToShortDateString(), info);
+            ShowTooltip("Кликни для редактирования", info);
         }        
 
         private void ShowTooltip(string caption, string text)

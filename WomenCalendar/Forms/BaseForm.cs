@@ -19,12 +19,14 @@ namespace WomenCalendar
 
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(BaseForm));
             this.SuspendLayout();
             // 
             // BaseForm
             // 
             this.ClientSize = new System.Drawing.Size(292, 266);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "BaseForm";

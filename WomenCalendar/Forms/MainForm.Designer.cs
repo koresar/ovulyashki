@@ -75,10 +75,7 @@
             this.btnChangeWoman = new System.Windows.Forms.Button();
             this.chbAskPassword = new System.Windows.Forms.CheckBox();
             this.chbDefaultWoman = new System.Windows.Forms.CheckBox();
-            this.numMenstruationLength = new System.Windows.Forms.NumericUpDown();
             this.lblMyCycle2 = new System.Windows.Forms.Label();
-            this.lblMenstruationLength2 = new System.Windows.Forms.Label();
-            this.lblMenstruationLength1 = new System.Windows.Forms.Label();
             this.numMenstruationPeriod = new System.Windows.Forms.NumericUpDown();
             this.lblMyCycle = new System.Windows.Forms.Label();
             this.rbManual = new System.Windows.Forms.RadioButton();
@@ -94,7 +91,6 @@
             this.xPanderList1.SuspendLayout();
             this.xLegend.SuspendLayout();
             this.xWoman.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numMenstruationLength)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numMenstruationPeriod)).BeginInit();
             this.xDay.SuspendLayout();
             this.SuspendLayout();
@@ -102,6 +98,7 @@
             // toolStrip1
             // 
             this.toolStrip1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
+            this.toolStrip1.ImageScalingSize = new System.Drawing.Size(32, 32);
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.newToolStripButton,
             this.openToolStripButton,
@@ -116,100 +113,101 @@
             this.toolStripLabel1});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(747, 25);
+            this.toolStrip1.Size = new System.Drawing.Size(747, 39);
             this.toolStrip1.TabIndex = 1;
             this.toolStrip1.Text = "toolStrip1";
             // 
             // newToolStripButton
             // 
             this.newToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.newToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("newToolStripButton.Image")));
+            this.newToolStripButton.Image = global::WomenCalendar.Properties.Resources.newGreen;
             this.newToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.newToolStripButton.Name = "newToolStripButton";
-            this.newToolStripButton.Size = new System.Drawing.Size(23, 22);
+            this.newToolStripButton.Size = new System.Drawing.Size(36, 36);
             this.newToolStripButton.Text = "Создать новую женщину";
             this.newToolStripButton.Click += new System.EventHandler(this.newToolStripButton_Click);
             // 
             // openToolStripButton
             // 
             this.openToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.openToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("openToolStripButton.Image")));
+            this.openToolStripButton.Image = global::WomenCalendar.Properties.Resources.openGreen;
             this.openToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.openToolStripButton.Name = "openToolStripButton";
-            this.openToolStripButton.Size = new System.Drawing.Size(23, 22);
+            this.openToolStripButton.Size = new System.Drawing.Size(36, 36);
             this.openToolStripButton.Text = "Открыть женщину";
             this.openToolStripButton.Click += new System.EventHandler(this.openToolStripButton_Click);
             // 
             // saveToolStripButton
             // 
             this.saveToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.saveToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("saveToolStripButton.Image")));
+            this.saveToolStripButton.Image = global::WomenCalendar.Properties.Resources.saveGreen;
             this.saveToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.saveToolStripButton.Name = "saveToolStripButton";
-            this.saveToolStripButton.Size = new System.Drawing.Size(23, 22);
+            this.saveToolStripButton.Size = new System.Drawing.Size(36, 36);
             this.saveToolStripButton.Text = "Сохранить женщину";
             this.saveToolStripButton.Click += new System.EventHandler(this.saveToolStripButton_Click);
             // 
             // exportToExcel
             // 
             this.exportToExcel.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.exportToExcel.Image = ((System.Drawing.Image)(resources.GetObject("exportToExcel.Image")));
+            this.exportToExcel.Image = global::WomenCalendar.Properties.Resources.exportGreen;
             this.exportToExcel.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.exportToExcel.Name = "exportToExcel";
-            this.exportToExcel.Size = new System.Drawing.Size(23, 22);
+            this.exportToExcel.Size = new System.Drawing.Size(36, 36);
             this.exportToExcel.Text = "Экспортировать женщину в Excel";
             this.exportToExcel.Click += new System.EventHandler(this.exportToExcel_Click);
             // 
             // toolStripSeparator
             // 
             this.toolStripSeparator.Name = "toolStripSeparator";
-            this.toolStripSeparator.Size = new System.Drawing.Size(6, 25);
+            this.toolStripSeparator.Size = new System.Drawing.Size(6, 39);
             // 
             // prevStripButton
             // 
             this.prevStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.prevStripButton.Image = ((System.Drawing.Image)(resources.GetObject("prevStripButton.Image")));
+            this.prevStripButton.Image = global::WomenCalendar.Properties.Resources.Green_04;
             this.prevStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.prevStripButton.Name = "prevStripButton";
-            this.prevStripButton.Size = new System.Drawing.Size(23, 22);
+            this.prevStripButton.Size = new System.Drawing.Size(36, 36);
             this.prevStripButton.Text = "Сдвинуть на месяц назад";
             this.prevStripButton.Click += new System.EventHandler(this.prevStripButton_Click);
             // 
             // nextStripButton
             // 
             this.nextStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.nextStripButton.Image = ((System.Drawing.Image)(resources.GetObject("nextStripButton.Image")));
+            this.nextStripButton.Image = global::WomenCalendar.Properties.Resources.Green_01;
             this.nextStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.nextStripButton.Name = "nextStripButton";
-            this.nextStripButton.Size = new System.Drawing.Size(23, 22);
+            this.nextStripButton.Size = new System.Drawing.Size(36, 36);
             this.nextStripButton.Text = "Сдвинуть на месяц вперёд";
             this.nextStripButton.Click += new System.EventHandler(this.nextStripButton_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 39);
             // 
             // helpToolStripButton
             // 
             this.helpToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.helpToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("helpToolStripButton.Image")));
+            this.helpToolStripButton.Image = global::WomenCalendar.Properties.Resources.ovulashki_logo2;
             this.helpToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.helpToolStripButton.Name = "helpToolStripButton";
-            this.helpToolStripButton.Size = new System.Drawing.Size(23, 22);
+            this.helpToolStripButton.Size = new System.Drawing.Size(36, 36);
             this.helpToolStripButton.Text = "Помощь";
             this.helpToolStripButton.Click += new System.EventHandler(this.helpToolStripButton_Click);
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 25);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 39);
             // 
             // toolStripLabel1
             // 
             this.toolStripLabel1.Name = "toolStripLabel1";
-            this.toolStripLabel1.Size = new System.Drawing.Size(61, 22);
+            this.toolStripLabel1.Size = new System.Drawing.Size(61, 36);
             this.toolStripLabel1.Text = "Прыгнуть:";
+            this.toolStripLabel1.ToolTipText = "Выбранная дата";
             // 
             // dateTimePicker1
             // 
@@ -225,7 +223,7 @@
             this.splitContainer1.CausesValidation = false;
             this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.splitContainer1.FixedPanel = System.Windows.Forms.FixedPanel.Panel1;
-            this.splitContainer1.Location = new System.Drawing.Point(0, 25);
+            this.splitContainer1.Location = new System.Drawing.Point(0, 39);
             this.splitContainer1.Name = "splitContainer1";
             // 
             // splitContainer1.Panel1
@@ -235,7 +233,7 @@
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.monthControl);
-            this.splitContainer1.Size = new System.Drawing.Size(747, 817);
+            this.splitContainer1.Size = new System.Drawing.Size(747, 803);
             this.splitContainer1.SplitterDistance = 250;
             this.splitContainer1.TabIndex = 5;
             // 
@@ -250,7 +248,7 @@
             this.xPanderList1.Location = new System.Drawing.Point(0, 0);
             this.xPanderList1.Margin = new System.Windows.Forms.Padding(0);
             this.xPanderList1.Name = "xPanderList1";
-            this.xPanderList1.Size = new System.Drawing.Size(250, 817);
+            this.xPanderList1.Size = new System.Drawing.Size(250, 803);
             this.xPanderList1.TabIndex = 0;
             // 
             // xLegend
@@ -454,6 +452,7 @@
             this.dayCellControl4.BackColor = System.Drawing.Color.LightGreen;
             this.dayCellControl4.Date = new System.DateTime(((long)(0)));
             this.dayCellControl4.Egesta = 5;
+            this.dayCellControl4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
             this.dayCellControl4.IsConceptionDay = false;
             this.dayCellControl4.IsFocusDay = false;
             this.dayCellControl4.IsHadSex = false;
@@ -479,6 +478,7 @@
             this.dayCellControl6.BackColor = System.Drawing.Color.White;
             this.dayCellControl6.Date = new System.DateTime(((long)(0)));
             this.dayCellControl6.Egesta = 5;
+            this.dayCellControl6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
             this.dayCellControl6.IsConceptionDay = false;
             this.dayCellControl6.IsFocusDay = false;
             this.dayCellControl6.IsHadSex = true;
@@ -504,6 +504,7 @@
             this.dayCellControl8.BackColor = System.Drawing.Color.White;
             this.dayCellControl8.Date = new System.DateTime(((long)(0)));
             this.dayCellControl8.Egesta = 5;
+            this.dayCellControl8.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
             this.dayCellControl8.IsConceptionDay = false;
             this.dayCellControl8.IsFocusDay = false;
             this.dayCellControl8.IsHadSex = false;
@@ -529,6 +530,7 @@
             this.dayCellControl7.BackColor = System.Drawing.Color.White;
             this.dayCellControl7.Date = new System.DateTime(((long)(0)));
             this.dayCellControl7.Egesta = 5;
+            this.dayCellControl7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
             this.dayCellControl7.IsConceptionDay = false;
             this.dayCellControl7.IsFocusDay = false;
             this.dayCellControl7.IsHadSex = false;
@@ -554,6 +556,7 @@
             this.dayCellControl12.BackColor = System.Drawing.Color.LightBlue;
             this.dayCellControl12.Date = new System.DateTime(((long)(0)));
             this.dayCellControl12.Egesta = 5;
+            this.dayCellControl12.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
             this.dayCellControl12.IsConceptionDay = false;
             this.dayCellControl12.IsFocusDay = false;
             this.dayCellControl12.IsHadSex = false;
@@ -579,6 +582,7 @@
             this.dayCellControl10.BackColor = System.Drawing.Color.LightBlue;
             this.dayCellControl10.Date = new System.DateTime(((long)(0)));
             this.dayCellControl10.Egesta = 5;
+            this.dayCellControl10.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
             this.dayCellControl10.IsConceptionDay = true;
             this.dayCellControl10.IsFocusDay = false;
             this.dayCellControl10.IsHadSex = false;
@@ -604,6 +608,7 @@
             this.dayCellControl9.BackColor = System.Drawing.Color.LightBlue;
             this.dayCellControl9.Date = new System.DateTime(((long)(0)));
             this.dayCellControl9.Egesta = 5;
+            this.dayCellControl9.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
             this.dayCellControl9.IsConceptionDay = false;
             this.dayCellControl9.IsFocusDay = false;
             this.dayCellControl9.IsHadSex = false;
@@ -629,6 +634,7 @@
             this.dayCellControl5.BackColor = System.Drawing.Color.LightGreen;
             this.dayCellControl5.Date = new System.DateTime(((long)(0)));
             this.dayCellControl5.Egesta = 5;
+            this.dayCellControl5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
             this.dayCellControl5.IsConceptionDay = false;
             this.dayCellControl5.IsFocusDay = false;
             this.dayCellControl5.IsHadSex = false;
@@ -654,6 +660,7 @@
             this.dayCellControl3.BackColor = System.Drawing.Color.Yellow;
             this.dayCellControl3.Date = new System.DateTime(((long)(0)));
             this.dayCellControl3.Egesta = 5;
+            this.dayCellControl3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
             this.dayCellControl3.IsConceptionDay = false;
             this.dayCellControl3.IsFocusDay = false;
             this.dayCellControl3.IsHadSex = false;
@@ -679,6 +686,7 @@
             this.dayCellControl2.BackColor = System.Drawing.Color.LightPink;
             this.dayCellControl2.Date = new System.DateTime(((long)(0)));
             this.dayCellControl2.Egesta = 4;
+            this.dayCellControl2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
             this.dayCellControl2.IsConceptionDay = false;
             this.dayCellControl2.IsFocusDay = false;
             this.dayCellControl2.IsHadSex = false;
@@ -704,6 +712,7 @@
             this.dayCellControl11.BackColor = System.Drawing.Color.White;
             this.dayCellControl11.Date = new System.DateTime(((long)(0)));
             this.dayCellControl11.Egesta = 5;
+            this.dayCellControl11.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
             this.dayCellControl11.IsConceptionDay = false;
             this.dayCellControl11.IsFocusDay = true;
             this.dayCellControl11.IsHadSex = false;
@@ -729,6 +738,7 @@
             this.dayCellControl1.BackColor = System.Drawing.Color.White;
             this.dayCellControl1.Date = new System.DateTime(((long)(0)));
             this.dayCellControl1.Egesta = 5;
+            this.dayCellControl1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
             this.dayCellControl1.IsConceptionDay = false;
             this.dayCellControl1.IsFocusDay = false;
             this.dayCellControl1.IsHadSex = false;
@@ -754,6 +764,7 @@
             this.dayLegendMenstruations.BackColor = System.Drawing.Color.White;
             this.dayLegendMenstruations.Date = new System.DateTime(((long)(0)));
             this.dayLegendMenstruations.Egesta = 5;
+            this.dayLegendMenstruations.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
             this.dayLegendMenstruations.IsConceptionDay = false;
             this.dayLegendMenstruations.IsFocusDay = false;
             this.dayLegendMenstruations.IsHadSex = false;
@@ -793,10 +804,7 @@
             this.xWoman.Controls.Add(this.btnChangeWoman);
             this.xWoman.Controls.Add(this.chbAskPassword);
             this.xWoman.Controls.Add(this.chbDefaultWoman);
-            this.xWoman.Controls.Add(this.numMenstruationLength);
             this.xWoman.Controls.Add(this.lblMyCycle2);
-            this.xWoman.Controls.Add(this.lblMenstruationLength2);
-            this.xWoman.Controls.Add(this.lblMenstruationLength1);
             this.xWoman.Controls.Add(this.numMenstruationPeriod);
             this.xWoman.Controls.Add(this.lblMyCycle);
             this.xWoman.Controls.Add(this.rbManual);
@@ -808,14 +816,14 @@
             this.xWoman.Margin = new System.Windows.Forms.Padding(0);
             this.xWoman.Name = "xWoman";
             this.xWoman.Padding = new System.Windows.Forms.Padding(0, 25, 0, 0);
-            this.xWoman.Size = new System.Drawing.Size(250, 176);
+            this.xWoman.Size = new System.Drawing.Size(250, 155);
             this.xWoman.TabIndex = 0;
             this.xWoman.Tag = 1;
             this.xWoman.TooltipText = null;
             // 
             // btnChangeWoman
             // 
-            this.btnChangeWoman.Location = new System.Drawing.Point(12, 147);
+            this.btnChangeWoman.Location = new System.Drawing.Point(12, 124);
             this.btnChangeWoman.Name = "btnChangeWoman";
             this.btnChangeWoman.Size = new System.Drawing.Size(185, 23);
             this.btnChangeWoman.TabIndex = 9;
@@ -826,7 +834,7 @@
             // chbAskPassword
             // 
             this.chbAskPassword.AutoSize = true;
-            this.chbAskPassword.Location = new System.Drawing.Point(12, 95);
+            this.chbAskPassword.Location = new System.Drawing.Point(12, 72);
             this.chbAskPassword.Name = "chbAskPassword";
             this.chbAskPassword.Size = new System.Drawing.Size(188, 17);
             this.chbAskPassword.TabIndex = 8;
@@ -836,36 +844,13 @@
             // 
             // chbDefaultWoman
             // 
-            this.chbDefaultWoman.Location = new System.Drawing.Point(12, 109);
+            this.chbDefaultWoman.Location = new System.Drawing.Point(12, 86);
             this.chbDefaultWoman.Name = "chbDefaultWoman";
             this.chbDefaultWoman.Size = new System.Drawing.Size(185, 43);
             this.chbDefaultWoman.TabIndex = 7;
             this.chbDefaultWoman.Text = "При запуске программы открывать меня по умолчанию";
             this.chbDefaultWoman.UseVisualStyleBackColor = true;
             this.chbDefaultWoman.CheckedChanged += new System.EventHandler(this.chbDefaultWoman_CheckedChanged);
-            // 
-            // numMenstruationLength
-            // 
-            this.numMenstruationLength.Location = new System.Drawing.Point(150, 69);
-            this.numMenstruationLength.Maximum = new decimal(new int[] {
-            9,
-            0,
-            0,
-            0});
-            this.numMenstruationLength.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.numMenstruationLength.Name = "numMenstruationLength";
-            this.numMenstruationLength.Size = new System.Drawing.Size(32, 20);
-            this.numMenstruationLength.TabIndex = 4;
-            this.numMenstruationLength.Value = new decimal(new int[] {
-            5,
-            0,
-            0,
-            0});
-            this.numMenstruationLength.ValueChanged += new System.EventHandler(this.numMenstruationLength_ValueChanged);
             // 
             // lblMyCycle2
             // 
@@ -875,24 +860,6 @@
             this.lblMyCycle2.Size = new System.Drawing.Size(25, 13);
             this.lblMyCycle2.TabIndex = 6;
             this.lblMyCycle2.Text = "дня";
-            // 
-            // lblMenstruationLength2
-            // 
-            this.lblMenstruationLength2.AutoSize = true;
-            this.lblMenstruationLength2.Location = new System.Drawing.Point(185, 71);
-            this.lblMenstruationLength2.Name = "lblMenstruationLength2";
-            this.lblMenstruationLength2.Size = new System.Drawing.Size(31, 13);
-            this.lblMenstruationLength2.TabIndex = 6;
-            this.lblMenstruationLength2.Text = "дней";
-            // 
-            // lblMenstruationLength1
-            // 
-            this.lblMenstruationLength1.AutoSize = true;
-            this.lblMenstruationLength1.Location = new System.Drawing.Point(9, 71);
-            this.lblMenstruationLength1.Name = "lblMenstruationLength1";
-            this.lblMenstruationLength1.Size = new System.Drawing.Size(142, 13);
-            this.lblMenstruationLength1.TabIndex = 5;
-            this.lblMenstruationLength1.Text = "Обычно менструашки идут";
             // 
             // numMenstruationPeriod
             // 
@@ -977,7 +944,7 @@
             this.xDay.Controls.Add(this.lblDayDescription);
             this.xDay.ExpandedHighlightImage = ((System.Drawing.Bitmap)(resources.GetObject("xDay.ExpandedHighlightImage")));
             this.xDay.ExpandedImage = ((System.Drawing.Bitmap)(resources.GetObject("xDay.ExpandedImage")));
-            this.xDay.Location = new System.Drawing.Point(0, 714);
+            this.xDay.Location = new System.Drawing.Point(0, 693);
             this.xDay.Margin = new System.Windows.Forms.Padding(0);
             this.xDay.Name = "xDay";
             this.xDay.Padding = new System.Windows.Forms.Padding(0, 25, 0, 0);
@@ -1008,7 +975,7 @@
             this.monthControl.MonthsMarginX = 10;
             this.monthControl.MonthsMarginY = 10;
             this.monthControl.Name = "monthControl";
-            this.monthControl.Size = new System.Drawing.Size(493, 817);
+            this.monthControl.Size = new System.Drawing.Size(493, 803);
             this.monthControl.StartMonth = new System.DateTime(2007, 2, 1, 0, 0, 0, 0);
             this.monthControl.TabIndex = 0;
             this.monthControl.FocusDateChanged += new WomenCalendar.MonthsControl.FocusDateChangedDelegate(this.monthControl_FocusDateChanged);
@@ -1039,7 +1006,6 @@
             this.xLegend.ResumeLayout(false);
             this.xWoman.ResumeLayout(false);
             this.xWoman.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numMenstruationLength)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numMenstruationPeriod)).EndInit();
             this.xDay.ResumeLayout(false);
             this.xDay.PerformLayout();
@@ -1072,9 +1038,6 @@
         private System.Windows.Forms.RadioButton rbManual;
         private System.Windows.Forms.RadioButton rbAuto;
         private System.Windows.Forms.NumericUpDown numMenstruationPeriod;
-        private System.Windows.Forms.NumericUpDown numMenstruationLength;
-        private System.Windows.Forms.Label lblMenstruationLength2;
-        private System.Windows.Forms.Label lblMenstruationLength1;
         private System.Windows.Forms.CheckBox chbDefaultWoman;
         private System.Windows.Forms.CheckBox chbAskPassword;
         private System.Windows.Forms.Label lblMyCycle2;

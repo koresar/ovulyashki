@@ -219,7 +219,7 @@
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:ZedGraph, Version=5.1.4.2706, Culture=neutral, PublicKeyToken=02a83cbd123fcd60, processorArchitecture=MSIL"
+            "AssemblyAsmDisplayName" = "8:ZedGraph, Version=5.1.4.3327, Culture=neutral, PublicKeyToken=02a83cbd123fcd60, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
                     "_94C21D5C16AA670B8C7EDEE7B2731DA3"
@@ -518,7 +518,7 @@
             "Target" = "8:_9C763F4F87CE4EB8AEB574D0A518B8A2"
             "Folder" = "8:_A6C710B5B4B049579F820736A31EB825"
             "WorkingFolder" = "8:_0C363D3A242941509ED0851336DD9D80"
-            "Icon" = "8:"
+            "Icon" = "8:_F13BCCE6D3FD48C0B15437A52443DF53"
             "Feature" = "8:"
             }
             "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_34DAFD4999304F69BAE34D4D01C36265"

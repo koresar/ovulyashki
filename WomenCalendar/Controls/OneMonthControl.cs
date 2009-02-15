@@ -180,5 +180,17 @@ namespace WomenCalendar
         {
             OwnerMonthsControl.DropMonthMenu(PointToScreen(btnDropDown.Location + btnDropDown.Size), this);
         }
+
+        private void btnDropDown_MouseEnter(object sender, EventArgs e)
+        {
+            toolTip.ToolTipTitle = "Кнопка с графиками";
+            toolTip.Show("С помощью этой кнопки можно построить всяческие графики.", 
+                btnDropDown, btnDropDown.Width, btnDropDown.Height);
+        }
+
+        private void btnDropDown_MouseLeave(object sender, EventArgs e)
+        {
+            toolTip.Hide(this);
+        }
     }
 }

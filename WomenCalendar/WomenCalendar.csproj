@@ -37,6 +37,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\libs\CarlosAg.ExcelXmlWriter.dll</HintPath>
     </Reference>
+    <Reference Include="ICSharpCode.SharpZipLib, Version=0.85.5.452, Culture=neutral, PublicKeyToken=1b03e6acf1164f73, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\libs\ICSharpCode.SharpZipLib.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Design" />
     <Reference Include="System.Data" />
@@ -264,7 +268,17 @@
     <None Include="Resources\baby_Image2.bmp" />
     <None Include="Resources\babyFace_Image.bmp" />
     <None Include="Resources\calendarEdit_Image.gif" />
+    <None Include="Resources\drop.Image.gif" />
     <Content Include="Resources\drop16.bmp" />
+    <None Include="Resources\ovulashki_logo.png" />
+    <None Include="Resources\exportGreen.png" />
+    <None Include="Resources\saveGreen.png" />
+    <None Include="Resources\openGreen.png" />
+    <None Include="Resources\newGreen.png" />
+    <None Include="Resources\Green_04.png" />
+    <None Include="Resources\Green_01.png" />
+    <None Include="Resources\open1.png" />
+    <None Include="Resources\logo.gif" />
     <None Include="Resources\drop_Image1.bmp" />
     <None Include="Resources\note_Image1.bmp" />
     <None Include="Resources\ovulashki_logo1.ico" />
