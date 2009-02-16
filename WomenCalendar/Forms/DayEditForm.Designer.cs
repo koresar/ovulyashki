@@ -34,6 +34,7 @@
             this.lblBBT = new System.Windows.Forms.Label();
             this.txtNote = new System.Windows.Forms.TextBox();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
+            this.numMenstruationLength = new System.Windows.Forms.NumericUpDown();
             this.btnPrevDay = new System.Windows.Forms.Button();
             this.btnNextDay = new System.Windows.Forms.Button();
             this.chkHadSex = new System.Windows.Forms.CheckBox();
@@ -41,7 +42,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.grpOv = new System.Windows.Forms.GroupBox();
-            this.numMenstruationLength = new System.Windows.Forms.NumericUpDown();
+            this.pnlSurroundMentsLength = new System.Windows.Forms.Panel();
             this.lblMenstruationLength = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.verticalLabel1 = new WomenCalendar.VerticalLabel();
@@ -49,8 +50,9 @@
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.chkMentrustions = new System.Windows.Forms.CheckBox();
-            this.grpOv.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numMenstruationLength)).BeginInit();
+            this.grpOv.SuspendLayout();
+            this.pnlSurroundMentsLength.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox4.SuspendLayout();
@@ -113,6 +115,29 @@
             this.toolTip.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Info;
             this.toolTip.UseAnimation = false;
             this.toolTip.UseFading = false;
+            // 
+            // numMenstruationLength
+            // 
+            this.numMenstruationLength.Location = new System.Drawing.Point(3, 25);
+            this.numMenstruationLength.Maximum = new decimal(new int[] {
+            9,
+            0,
+            0,
+            0});
+            this.numMenstruationLength.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numMenstruationLength.Name = "numMenstruationLength";
+            this.numMenstruationLength.Size = new System.Drawing.Size(32, 20);
+            this.numMenstruationLength.TabIndex = 1;
+            this.numMenstruationLength.Value = new decimal(new int[] {
+            5,
+            0,
+            0,
+            0});
+            this.numMenstruationLength.ValueChanged += new System.EventHandler(this.numMenstruationLength_ValueChanged);
             // 
             // btnPrevDay
             // 
@@ -178,9 +203,7 @@
             // 
             // grpOv
             // 
-            this.grpOv.Controls.Add(this.numMenstruationLength);
-            this.grpOv.Controls.Add(this.lblMenstruationLength);
-            this.grpOv.Controls.Add(this.label1);
+            this.grpOv.Controls.Add(this.pnlSurroundMentsLength);
             this.grpOv.Controls.Add(this.verticalLabel1);
             this.grpOv.Controls.Add(this.sliderEgestaAmount);
             this.grpOv.Location = new System.Drawing.Point(323, 42);
@@ -190,45 +213,41 @@
             this.grpOv.TabStop = false;
             this.grpOv.Text = "Менструашки";
             // 
-            // numMenstruationLength
+            // pnlSurroundMentsLength
             // 
-            this.numMenstruationLength.Location = new System.Drawing.Point(12, 216);
-            this.numMenstruationLength.Maximum = new decimal(new int[] {
-            9,
-            0,
-            0,
-            0});
-            this.numMenstruationLength.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.numMenstruationLength.Name = "numMenstruationLength";
-            this.numMenstruationLength.Size = new System.Drawing.Size(32, 20);
-            this.numMenstruationLength.TabIndex = 1;
-            this.numMenstruationLength.Value = new decimal(new int[] {
-            5,
-            0,
-            0,
-            0});
-            this.numMenstruationLength.ValueChanged += new System.EventHandler(this.numMenstruationLength_ValueChanged);
+            this.pnlSurroundMentsLength.BackColor = System.Drawing.Color.Transparent;
+            this.pnlSurroundMentsLength.Controls.Add(this.lblMenstruationLength);
+            this.pnlSurroundMentsLength.Controls.Add(this.numMenstruationLength);
+            this.pnlSurroundMentsLength.Controls.Add(this.label1);
+            this.pnlSurroundMentsLength.Location = new System.Drawing.Point(2, 192);
+            this.pnlSurroundMentsLength.Name = "pnlSurroundMentsLength";
+            this.pnlSurroundMentsLength.Size = new System.Drawing.Size(86, 48);
+            this.pnlSurroundMentsLength.TabIndex = 10014;
+            this.pnlSurroundMentsLength.MouseLeave += new System.EventHandler(this.pnlSurroundMentsLength_MouseLeave);
+            this.pnlSurroundMentsLength.MouseEnter += new System.EventHandler(this.pnlSurroundMentsLength_MouseEnter);
             // 
             // lblMenstruationLength
             // 
             this.lblMenstruationLength.AutoSize = true;
-            this.lblMenstruationLength.Location = new System.Drawing.Point(47, 218);
+            this.lblMenstruationLength.BackColor = System.Drawing.Color.Transparent;
+            this.lblMenstruationLength.Location = new System.Drawing.Point(41, 27);
             this.lblMenstruationLength.Name = "lblMenstruationLength";
             this.lblMenstruationLength.Size = new System.Drawing.Size(31, 13);
             this.lblMenstruationLength.TabIndex = 10011;
             this.lblMenstruationLength.Text = "дней";
+            this.lblMenstruationLength.MouseLeave += new System.EventHandler(this.lblMenstruationLength_MouseLeave);
+            this.lblMenstruationLength.MouseEnter += new System.EventHandler(this.lblMenstruationLength_MouseEnter);
             // 
             // label1
             // 
-            this.label1.Location = new System.Drawing.Point(1, 196);
+            this.label1.BackColor = System.Drawing.Color.Transparent;
+            this.label1.Location = new System.Drawing.Point(2, 5);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(83, 17);
+            this.label1.Size = new System.Drawing.Size(82, 17);
             this.label1.TabIndex = 10009;
             this.label1.Text = "Длительность";
+            this.label1.MouseLeave += new System.EventHandler(this.label1_MouseLeave);
+            this.label1.MouseEnter += new System.EventHandler(this.label1_MouseEnter);
             // 
             // verticalLabel1
             // 
@@ -314,9 +333,10 @@
             this.Controls.SetChildIndex(this.chkHadSex, 0);
             this.Controls.SetChildIndex(this.btnNextDay, 0);
             this.Controls.SetChildIndex(this.chkMentrustions, 0);
-            this.grpOv.ResumeLayout(false);
-            this.grpOv.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numMenstruationLength)).EndInit();
+            this.grpOv.ResumeLayout(false);
+            this.pnlSurroundMentsLength.ResumeLayout(false);
+            this.pnlSurroundMentsLength.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             this.groupBox3.ResumeLayout(false);
@@ -349,6 +369,7 @@
         private System.Windows.Forms.NumericUpDown numMenstruationLength;
         private System.Windows.Forms.Label lblMenstruationLength;
         private System.Windows.Forms.CheckBox chkMentrustions;
+        private System.Windows.Forms.Panel pnlSurroundMentsLength;
 
     }
 }

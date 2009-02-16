@@ -342,6 +342,7 @@ namespace WomenCalendar
                 ((MainForm)ParentForm).UpdateWomanInformation();
                 ((MainForm)ParentForm).UpdateDayInformation(FocusDate);
                 Redraw();
+                new DayEditForm(FocusDay, DayEditFocus.Length).ShowDialog(this);
             }
         }
 

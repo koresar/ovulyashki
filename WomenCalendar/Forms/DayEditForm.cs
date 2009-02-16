@@ -9,7 +9,7 @@ using System.Windows.Forms;
 
 namespace WomenCalendar
 {
-    public enum DayEditFocus { Note, BBT };
+    public enum DayEditFocus { Note, BBT, Length };
 
     public partial class DayEditForm : ModalBaseForm
     {
@@ -111,6 +111,11 @@ namespace WomenCalendar
         {
             ShowTooltip("Кнопка включения/выключения менструашек", 
                 !isMenstr ? "Установить этот день как начало менструашек" : "Отменить эти менструашки", chkMentrustions);
+        }
+
+        private void ShowLengthTooltip()
+        {
+            ShowTooltip("Длительность менструашек", "Укажи сколько дней они шли!", numMenstruationLength);
         }
 
         private void HideTooltip(IWin32Window control)
@@ -290,15 +295,26 @@ namespace WomenCalendar
         {
             switch (focusTo)
             {
-                case DayEditFocus.Note: txtNote.Focus(); break;
-                case DayEditFocus.BBT: txtBBT.Focus(); break;
+                case DayEditFocus.Note:
+                    txtNote.Focus();
+                    pnlSurroundMentsLength.BackColor = Color.Transparent;
+                    break;
+                case DayEditFocus.BBT:
+                    txtBBT.Focus();
+                    pnlSurroundMentsLength.BackColor = Color.Transparent;
+                    break;
+                case DayEditFocus.Length:
+                    numMenstruationLength.Focus();
+                    pnlSurroundMentsLength.BackColor = Color.Red;
+                    ShowLengthTooltip();
+                    break;
             }
         }
 
         private void chkMentrustions_CheckedChanged(object sender, EventArgs e)
         {
-            ShowOv(chkMentrustions.Checked);
             HideTooltip(chkMentrustions);
+            ShowOv(chkMentrustions.Checked);
         }
 
         private void ShowOv(bool show)
@@ -314,6 +330,10 @@ namespace WomenCalendar
                 chkMentrustions.Image = global::WomenCalendar.Properties.Resources.dropNot_Image;
                 chkMentrustions.Text = "<<          <<";
                 this.grpOv.Visible = true;
+                if (initialData != null && initialData.HasMenstr != true)
+                { // this is first time we expand the dialog, this means user want to add new menstr. day.
+                    SetFocusTo(DayEditFocus.Length);
+                }
             }
             else
             {
@@ -340,6 +360,36 @@ namespace WomenCalendar
             {
                 return !initialData.Equals(CollectDayData());
             }
+        }
+
+        private void lblMenstruationLength_MouseEnter(object sender, EventArgs e)
+        {
+            ShowLengthTooltip();
+        }
+
+        private void label1_MouseEnter(object sender, EventArgs e)
+        {
+            ShowLengthTooltip();
+        }
+
+        private void pnlSurroundMentsLength_MouseEnter(object sender, EventArgs e)
+        {
+            ShowLengthTooltip();
+        }
+
+        private void lblMenstruationLength_MouseLeave(object sender, EventArgs e)
+        {
+            HideTooltip(numMenstruationLength);
+        }
+
+        private void label1_MouseLeave(object sender, EventArgs e)
+        {
+            HideTooltip(numMenstruationLength);
+        }
+
+        private void pnlSurroundMentsLength_MouseLeave(object sender, EventArgs e)
+        {
+            HideTooltip(numMenstruationLength);
         }
     }
 }
