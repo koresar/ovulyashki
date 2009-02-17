@@ -23,7 +23,9 @@ namespace WomenCalendar
                 "Спасибо randz за VerticalLabel: http://www.codeproject.com/KB/miscctrl/Vertical_Label_Control.aspx" + Environment.NewLine + Environment.NewLine +
                 "Спасибо BobK, Darren Martz, John Champion, Jerry Vos, Chris Champoin, Brian Chappell, Ronan O Sullivan, Benjamin Mayrargue за ZegGraph: https://sourceforge.net/projects/zedgraph/ , http://zedgraph.org" + Environment.NewLine + Environment.NewLine +
                 "Спасибо mkg за XPanderControl: http://www.codeproject.com/KB/cpp/XPander.aspx" + Environment.NewLine + Environment.NewLine + 
-                "Спасибо Carlos Aguilar Mares за ExcelXmlWriter: http://www.carlosag.net/Tools/ExcelXmlWriter/";
+                "Спасибо Carlos Aguilar Mares за ExcelXmlWriter: http://www.carlosag.net/Tools/ExcelXmlWriter/"  + Environment.NewLine + Environment.NewLine + 
+                "Спасибо Mike Krueger, John Reilly за SharpZipLib: http://icsharpcode.net/" + Environment.NewLine + Environment.NewLine
+                ;
             txtThanks.Text = s;
         }
 

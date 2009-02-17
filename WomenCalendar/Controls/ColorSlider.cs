@@ -295,6 +295,24 @@ namespace MB.Controls
             }
         }
 
+        private bool darkenBarIfLess = true;
+        /// <summary>
+        /// Gets or sets a value indicating whether to darken bar when the value is lower.
+        /// </summary>
+        /// <value><c>true</c> if darken bar should be drawn; otherwise, <c>false</c>.</value>
+        [Description("Set whether to darken bar when the value is lower")]
+        [Category("ColorSlider")]
+        [DefaultValue(true)]
+        public bool DarkenBarIfLess
+        {
+            get { return darkenBarIfLess; }
+            set
+            {
+                darkenBarIfLess = value;
+                Invalidate();
+            }
+        }
+
         private bool drawSemitransparentThumb = true;
         /// <summary>
         /// Gets or sets a value indicating whether to draw semitransparent thumb.
@@ -600,11 +618,21 @@ namespace MB.Controls
         /// <param name="e">A <see cref="T:System.Windows.Forms.PaintEventArgs"></see> that contains the event data.</param>
         protected override void OnPaint(PaintEventArgs e)
         {
+            Color[] usedColors = new Color[]
+            { 
+                thumbOuterColor, thumbInnerColor, thumbPenColor,
+                barOuterColor, barInnerColor, barPenColor,
+                elapsedOuterColor, elapsedInnerColor 
+            };
+
+            if (DarkenBarIfLess)
+            {
+                usedColors = DarkenColors(usedColors);
+            }
+
             if (!Enabled)
             {
-                Color[] desaturatedColors = DesaturateColors(thumbOuterColor, thumbInnerColor, thumbPenColor,
-                                                             barOuterColor, barInnerColor, barPenColor,
-                                                             elapsedOuterColor, elapsedInnerColor);
+                Color[] desaturatedColors = DesaturateColors(usedColors);
                 DrawColorSlider(e, desaturatedColors[0], desaturatedColors[1], desaturatedColors[2],
                                 desaturatedColors[3],
                                 desaturatedColors[4], desaturatedColors[5], desaturatedColors[6], desaturatedColors[7]);
@@ -613,17 +641,14 @@ namespace MB.Controls
             {
                 if (mouseEffects && mouseInRegion)
                 {
-                    Color[] lightenedColors = LightenColors(thumbOuterColor, thumbInnerColor, thumbPenColor,
-                                                            barOuterColor, barInnerColor, barPenColor,
-                                                            elapsedOuterColor, elapsedInnerColor);
+                    Color[] lightenedColors = LightenColors(usedColors);
                     DrawColorSlider(e, lightenedColors[0], lightenedColors[1], lightenedColors[2], lightenedColors[3],
                                     lightenedColors[4], lightenedColors[5], lightenedColors[6], lightenedColors[7]);
                 }
                 else
                 {
-                    DrawColorSlider(e, thumbOuterColor, thumbInnerColor, thumbPenColor,
-                                    barOuterColor, barInnerColor, barPenColor,
-                                    elapsedOuterColor, elapsedInnerColor);
+                    DrawColorSlider(e, usedColors[0], usedColors[1], usedColors[2], usedColors[3],
+                                    usedColors[4], usedColors[5], usedColors[6], usedColors[7]);
                 }
             }
         }
@@ -1036,6 +1061,22 @@ namespace MB.Controls
             for (int i = 0; i < colorsToLighten.Length; i++)
             {
                 colorsToReturn[i] = ControlPaint.Light(colorsToLighten[i]);
+            }
+            return colorsToReturn;
+        }
+
+        /// <summary>
+        /// Darken colors from given array.
+        /// </summary>
+        /// <param name="colorsToLighten">The colors to darken.</param>
+        /// <returns></returns>
+        public Color[] DarkenColors(params Color[] colorsToDarken)
+        {
+            Color[] colorsToReturn = new Color[colorsToDarken.Length];
+            for (int i = 0; i < colorsToDarken.Length; i++)
+            {
+                colorsToReturn[i] = ControlPaint.Dark(colorsToDarken[i],
+                    1 - (float)Math.Log(((float)Value - Minimum + 2)/2, Maximum / 2));
             }
             return colorsToReturn;
         }

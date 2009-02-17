@@ -108,7 +108,12 @@
             // sliderHealth
             // 
             this.sliderHealth.BackColor = System.Drawing.Color.Transparent;
+            this.sliderHealth.BarInnerColor = System.Drawing.Color.AliceBlue;
+            this.sliderHealth.BarOuterColor = System.Drawing.Color.LightCyan;
             this.sliderHealth.BorderRoundRectSize = new System.Drawing.Size(8, 8);
+            this.sliderHealth.DrawFocusRectangle = false;
+            this.sliderHealth.ElapsedInnerColor = System.Drawing.Color.AliceBlue;
+            this.sliderHealth.ElapsedOuterColor = System.Drawing.Color.LightCyan;
             this.sliderHealth.LargeChange = ((uint)(5u));
             this.sliderHealth.Location = new System.Drawing.Point(-1, 47);
             this.sliderHealth.Maximum = 10;
@@ -130,6 +135,7 @@
             this.sliderEgestaAmount.BarInnerColor = System.Drawing.Color.Pink;
             this.sliderEgestaAmount.BarOuterColor = System.Drawing.Color.DeepPink;
             this.sliderEgestaAmount.BorderRoundRectSize = new System.Drawing.Size(8, 8);
+            this.sliderEgestaAmount.DarkenBarIfLess = false;
             this.sliderEgestaAmount.DrawFocusRectangle = false;
             this.sliderEgestaAmount.ElapsedInnerColor = System.Drawing.Color.Pink;
             this.sliderEgestaAmount.ElapsedOuterColor = System.Drawing.Color.DeepPink;
