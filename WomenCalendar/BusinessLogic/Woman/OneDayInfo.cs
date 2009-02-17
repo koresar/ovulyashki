@@ -8,7 +8,7 @@ namespace WomenCalendar
     {
         public static readonly string[] Header = 
         { 
-            "Дата", "Менструации", "Интенсивность", "Был секс", "БTT", "Самочувствие (1-10)", "Заметка"
+            "Дата", "Менструации", "Интенсивность", "Был секс", "БTT", "Самочувствие (0-10)", "Заметка"
         };
 
         public static OneDayInfo GetByDate(Woman w, DateTime day)

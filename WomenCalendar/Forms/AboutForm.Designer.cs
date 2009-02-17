@@ -102,7 +102,7 @@
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(76, 13);
             this.label1.TabIndex = 0;
-            this.label1.Text = "Овуляшки 1.4";
+            this.label1.Text = "Овуляшки 1.5";
             // 
             // btnThanks
             // 

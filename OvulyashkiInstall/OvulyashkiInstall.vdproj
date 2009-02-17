@@ -27,7 +27,7 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_94C21D5C16AA670B8C7EDEE7B2731DA3"
+        "MsmKey" = "8:_91503EC5D093431BAEE9C1E1478C8293"
         "OwnerKey" = "8:_9C763F4F87CE4EB8AEB574D0A518B8A2"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -35,6 +35,12 @@
         {
         "MsmKey" = "8:_9C763F4F87CE4EB8AEB574D0A518B8A2"
         "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_A1F988620D1757E3FC762765462E3024"
+        "OwnerKey" = "8:_9C763F4F87CE4EB8AEB574D0A518B8A2"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -58,13 +64,19 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_94C21D5C16AA670B8C7EDEE7B2731DA3"
+        "OwnerKey" = "8:_A1F988620D1757E3FC762765462E3024"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_A3F46BCD65121B5B9935A78F216BB2E9"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_91503EC5D093431BAEE9C1E1478C8293"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -215,14 +227,45 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_94C21D5C16AA670B8C7EDEE7B2731DA3"
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_91503EC5D093431BAEE9C1E1478C8293"
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:ZedGraph, Version=5.1.4.3327, Culture=neutral, PublicKeyToken=02a83cbd123fcd60, processorArchitecture=MSIL"
+            "AssemblyAsmDisplayName" = "8:ICSharpCode.SharpZipLib, Version=0.85.5.452, Culture=neutral, PublicKeyToken=1b03e6acf1164f73, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_94C21D5C16AA670B8C7EDEE7B2731DA3"
+                    "_91503EC5D093431BAEE9C1E1478C8293"
+                    {
+                    "Name" = "8:ICSharpCode.SharpZipLib.dll"
+                    "Attributes" = "3:512"
+                    }
+                }
+            "SourcePath" = "8:ICSharpCode.SharpZipLib.dll"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_0C363D3A242941509ED0851336DD9D80"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_A1F988620D1757E3FC762765462E3024"
+            {
+            "AssemblyRegister" = "3:1"
+            "AssemblyIsInGAC" = "11:FALSE"
+            "AssemblyAsmDisplayName" = "8:ZedGraph, Version=5.1.4.3013, Culture=neutral, PublicKeyToken=02a83cbd123fcd60, processorArchitecture=MSIL"
+                "ScatterAssemblies"
+                {
+                    "_A1F988620D1757E3FC762765462E3024"
                     {
                     "Name" = "8:ZedGraph.dll"
                     "Attributes" = "3:512"
@@ -403,7 +446,7 @@
         "ARPCONTACT" = "8:kore_sar"
         "Keywords" = "8:"
         "ARPCOMMENTS" = "8:Овуляшки"
-        "ARPURLINFOABOUT" = "8:http://task.rulezdev.com/"
+        "ARPURLINFOABOUT" = "8:http://rulezdev.com/"
         "ARPPRODUCTICON" = "8:"
         "ARPIconIndex" = "3:0"
         "SearchPath" = "8:"
@@ -950,7 +993,7 @@
         {
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_276E84E4C91F48F89D8B8CEFEDAB23EE"
             {
-            "SourcePath" = "8:..\\Uninstall\\obj\\Release\\Uninstall.exe"
+            "SourcePath" = "8:..\\Uninstall\\obj\\Debug\\Uninstall.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_0C363D3A242941509ED0851336DD9D80"
@@ -978,7 +1021,7 @@
             }
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_9C763F4F87CE4EB8AEB574D0A518B8A2"
             {
-            "SourcePath" = "8:..\\WomenCalendar\\obj\\Release\\WomenCalendar.exe"
+            "SourcePath" = "8:..\\WomenCalendar\\obj\\Debug\\WomenCalendar.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_0C363D3A242941509ED0851336DD9D80"

@@ -279,11 +279,8 @@
     <None Include="Resources\newGreen.png" />
     <None Include="Resources\Green_04.png" />
     <None Include="Resources\Green_01.png" />
-    <None Include="Resources\open1.png" />
-    <None Include="Resources\logo.gif" />
     <None Include="Resources\drop_Image1.bmp" />
     <None Include="Resources\note_Image1.bmp" />
-    <None Include="Resources\ovulashki_logo1.ico" />
     <None Include="Resources\ovulashki_logo.ico" />
     <None Include="Resources\girl_Image.bmp" />
     <None Include="Resources\month_dropdown.bmp" />
