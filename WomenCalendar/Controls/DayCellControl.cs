@@ -46,7 +46,7 @@ namespace WomenCalendar
                 _date = value;
                 Enabled = OwnerOneMonthControl.Date.Month == Date.Month;
 
-                if (FontNormal == null) FontNormal = Font;
+                if (FontNormal == null) FontNormal = new Font(Font, FontStyle.Regular);
                 if (FontBold == null) FontBold = new Font(FontNormal, FontStyle.Bold);
 
                 Invalidate();
@@ -183,7 +183,7 @@ namespace WomenCalendar
                 pe.Graphics.DrawString("S", Font, Brushes.Red, 22, 19);
             }
 
-            pe.Graphics.DrawString(Date.Day.ToString(), Font, Brushes.Black, 0, 0);
+            pe.Graphics.DrawString(Date.Day.ToString(), Font, Brushes.RoyalBlue, 0, 0);
         }
 
         protected override void OnPaint(PaintEventArgs pe)

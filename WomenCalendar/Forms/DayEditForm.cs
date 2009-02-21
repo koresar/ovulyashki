@@ -35,6 +35,7 @@ namespace WomenCalendar
         private DayCellControl DayCell;
         private DateTime date;
         private DayEditFocus defaultFocus;
+        private DayEditFocus lastFocus;
 
         public DayEditForm(DayCellControl dayCell)
             : this(dayCell, DayEditFocus.Note)
@@ -240,10 +241,10 @@ namespace WomenCalendar
                 Program.ApplicationForm.UpdateDayInformationIfFocused(date);
             }
 
-            DayEditFocus focus = txtBBT.Focused ? DayEditFocus.BBT : DayEditFocus.Note;
             date = date.AddDays(days);
             LoadForm();
-            SetFocusTo(focus);
+            SetFocusTo(lastFocus);
+            lastFocus = txtBBT.Focused ? DayEditFocus.BBT : DayEditFocus.Note;
         }
 
         private void DayEditForm_Load(object sender, EventArgs e)
@@ -269,6 +270,7 @@ namespace WomenCalendar
         private void txtBBT_Leave(object sender, EventArgs e)
         {
             HideTooltip(txtBBT);
+            lastFocus = DayEditFocus.BBT;
         }
 
         private void btnPrevDay_Click(object sender, EventArgs e)
@@ -390,6 +392,11 @@ namespace WomenCalendar
         private void pnlSurroundMentsLength_MouseLeave(object sender, EventArgs e)
         {
             HideTooltip(numMenstruationLength);
+        }
+
+        private void txtNote_Leave(object sender, EventArgs e)
+        {
+            lastFocus = DayEditFocus.Note;
         }
     }
 }

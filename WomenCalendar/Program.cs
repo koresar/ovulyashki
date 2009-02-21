@@ -272,9 +272,14 @@ namespace WomenCalendar
 
         public static class MonthAppearance
         {
-            public static Brush HeaderBrush = Brushes.White;
-            public static Pen HeaderPen = new Pen(HeaderBrush, OneMonthControl.EdgeWidth + 1);
-            public static Pen TodayEdgePen = new Pen(Brushes.Blue, 10);
+            public static Brush MonthHeaderBrush = new SolidBrush(Color.FromArgb(248, 193, 250)); // Brushes.Orange; //GreenYellow;// Brushes.White;
+            public static Brush WeekDayHeaderBrush = Brushes.RoyalBlue;
+            public static Brush MonthNameBrush = Brushes.Purple;
+            public static Brush WeekDayTextBrush = Brushes.White;
+            public static Brush WeekDayHolidayTextBrush = Brushes.LightSalmon;
+            public static Pen MonthEdgePen = new Pen(Brushes.Gray, 6);//OneMonthControl.EdgeWidth + 1);
+            public static Pen WeekDayEdgePen = new Pen(Brushes.White, 1);
+            public static Pen TodayEdgePen = new Pen(Brushes.Blue, 6);
         }
 
         public static class DayCellAppearance

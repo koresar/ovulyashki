@@ -259,7 +259,7 @@ namespace WomenCalendar
         private void dateFrom_ValueChanged(object sender, EventArgs e)
         {
             valuesCount = (dateTo.Value - dateFrom.Value).Days + 1;
-            initialMonth = dateTo.Value;
+            initialMonth = dateFrom.Value;
             zgc.Invalidate();
             CreateChart();
         }

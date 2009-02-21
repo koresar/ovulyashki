@@ -58,6 +58,7 @@
             // 
             // OneMonthControl
             // 
+            this.BackColor = System.Drawing.Color.White;
             this.Controls.Add(this.btnDropDown);
             this.DoubleBuffered = true;
             this.ForeColor = System.Drawing.Color.Transparent;

@@ -109,6 +109,7 @@
             this.txtNote.Name = "txtNote";
             this.txtNote.Size = new System.Drawing.Size(267, 150);
             this.txtNote.TabIndex = 0;
+            this.txtNote.Leave += new System.EventHandler(this.txtNote_Leave);
             // 
             // toolTip
             // 
