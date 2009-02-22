@@ -51,7 +51,7 @@ namespace WomenCalendar
 
         private void btnSite_Click(object sender, EventArgs e)
         {
-            Process.Start(@"http://sourceforge.net/projects/ovulyashki/");
+            Process.Start(@"http://ovulyashki.dp.ua");
         }
 
         private void btnThanks_Click(object sender, EventArgs e)

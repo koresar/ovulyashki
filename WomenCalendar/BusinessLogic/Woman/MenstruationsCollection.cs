@@ -196,7 +196,7 @@ namespace WomenCalendar
                     resultPeriodBefore = period;
                 }
 
-                if (period.StartDay > date && (resultPeriodAfter == null || period.StartDay < resultPeriodAfter.StartDay))
+                if (period.StartDay >= date && (resultPeriodAfter == null || period.StartDay < resultPeriodAfter.StartDay))
                 {
                     resultPeriodAfter = period;
                 }

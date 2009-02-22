@@ -7,6 +7,7 @@ using WomenCalendar.Properties;
 using System.ComponentModel;
 using System.Resources;
 using CarlosAg.ExcelXmlWriter;
+using System.Drawing.Drawing2D;
 
 namespace WomenCalendar
 {
@@ -272,12 +273,14 @@ namespace WomenCalendar
 
         public static class MonthAppearance
         {
-            public static Brush MonthHeaderBrush = new SolidBrush(Color.FromArgb(248, 193, 250)); // Brushes.Orange; //GreenYellow;// Brushes.White;
-            public static Brush WeekDayHeaderBrush = Brushes.RoyalBlue;
+            public static Brush MonthHeaderBrush = new LinearGradientBrush(new Point(0, 0), new Point(120, 0), 
+                Color.FromArgb(248, 153, 250), Color.White) { WrapMode = WrapMode.TileFlipXY };
+            public static Brush WeekDayHeaderBrush = new LinearGradientBrush(new Point(0, 0), new Point(0, 16),
+                Color.RoyalBlue, ControlPaint.LightLight(Color.RoyalBlue)) { WrapMode = WrapMode.TileFlipXY, };
             public static Brush MonthNameBrush = Brushes.Purple;
             public static Brush WeekDayTextBrush = Brushes.White;
-            public static Brush WeekDayHolidayTextBrush = Brushes.LightSalmon;
-            public static Pen MonthEdgePen = new Pen(Brushes.Gray, 6);//OneMonthControl.EdgeWidth + 1);
+            public static Brush WeekDayHolidayTextBrush = Brushes.Salmon;
+            public static Pen MonthEdgePen = new Pen(Brushes.Gray, 6);
             public static Pen WeekDayEdgePen = new Pen(Brushes.White, 1);
             public static Pen TodayEdgePen = new Pen(Brushes.Blue, 6);
         }
@@ -287,6 +290,19 @@ namespace WomenCalendar
             public static Pen FocusEdgePen = new Pen(Brushes.Red, 2);
             public static Pen TodayEdgePen = new Pen(Brushes.Blue, 2);
             public static Pen EdgePen = Pens.Black;
+            public static Brush DayNumberBrush = Brushes.RoyalBlue;
+            public static Brush PregnancyWeekNumberBrush = Brushes.Green;
+            public static Brush MenstruationPredictionBrush = Brushes.Red;
+            public static Brush HadSexBrush = Brushes.Red;
+
+            // Back colors
+            public static Color BackConceptionDay = Color.DeepSkyBlue;
+            public static Color BackPregnancyDay = Color.LightCyan;
+            public static Color BackMenstruationDay = Color.LightPink;
+            public static Color BackPredictedMenstruationDay = Color.LightGreen;
+            public static Color BackOvulationDay = Color.Gold;
+            public static Color BackSafeSex = Color.LightGreen;
+            public static Color BackEmpty = Color.White;
         }
     }
 }

@@ -43,7 +43,7 @@
             this.btnDropDown.ForeColor = System.Drawing.Color.Black;
             this.btnDropDown.Image = global::WomenCalendar.Properties.Resources.month_dropdown;
             this.btnDropDown.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnDropDown.Location = new System.Drawing.Point(170, 5);
+            this.btnDropDown.Location = new System.Drawing.Point(172, 3);
             this.btnDropDown.Margin = new System.Windows.Forms.Padding(0);
             this.btnDropDown.Name = "btnDropDown";
             this.btnDropDown.Size = new System.Drawing.Size(55, 16);

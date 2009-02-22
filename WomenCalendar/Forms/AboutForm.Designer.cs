@@ -33,7 +33,7 @@
             this.btnBug = new System.Windows.Forms.Button();
             this.btnNewFeature = new System.Windows.Forms.Button();
             this.btnAskQuestion = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
+            this.lblVersion = new System.Windows.Forms.Label();
             this.btnThanks = new System.Windows.Forms.Button();
             this.txtThanks = new System.Windows.Forms.TextBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
@@ -95,14 +95,14 @@
             this.btnAskQuestion.UseVisualStyleBackColor = true;
             this.btnAskQuestion.Click += new System.EventHandler(this.btnAskQuestion_Click);
             // 
-            // label1
+            // lblVersion
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(13, 67);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(76, 13);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Овуляшки 1.5";
+            this.lblVersion.AutoSize = true;
+            this.lblVersion.Location = new System.Drawing.Point(13, 67);
+            this.lblVersion.Name = "lblVersion";
+            this.lblVersion.Size = new System.Drawing.Size(85, 13);
+            this.lblVersion.TabIndex = 0;
+            this.lblVersion.Text = "Овуляшки 1.5.1";
             // 
             // btnThanks
             // 
@@ -140,7 +140,7 @@
             this.ClientSize = new System.Drawing.Size(634, 276);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.txtThanks);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.lblVersion);
             this.Controls.Add(this.btnAskQuestion);
             this.Controls.Add(this.btnNewFeature);
             this.Controls.Add(this.btnBug);
@@ -162,7 +162,7 @@
         private System.Windows.Forms.Button btnBug;
         private System.Windows.Forms.Button btnNewFeature;
         private System.Windows.Forms.Button btnAskQuestion;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label lblVersion;
         private System.Windows.Forms.Button btnThanks;
         private System.Windows.Forms.TextBox txtThanks;
         private System.Windows.Forms.PictureBox pictureBox1;

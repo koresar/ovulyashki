@@ -69,6 +69,7 @@ namespace WomenCalendar
         {
             numMenstruationPeriod.Minimum = (length == 0) ? 0 : 10;
             numMenstruationPeriod.Value = length;
+            numMenstruationPeriod.Enabled = !rbAuto.Checked;
         }
 
         public static string GetDaysString(int days)
