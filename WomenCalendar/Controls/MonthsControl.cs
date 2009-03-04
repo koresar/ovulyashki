@@ -216,6 +216,9 @@ namespace WomenCalendar
         
         public void CreateAndAdjustMonthsAmount(bool force)
         { // adjust amount of month calendars in the control according to its size.
+            if (CellPopupControl == null || oneMonthControl == null || singleMonths == null || Controls == null || singleMonths.Count == 0)
+                return;
+
             CellPopupControl.Visible = false;
 
             int monthesX = Size.Width / (oneMonthControl.Width + MonthsMarginX);
@@ -424,6 +427,11 @@ namespace WomenCalendar
             {
                 FocusDate = period.LastDay;
             }
+        }
+
+        private void ToolStripCycleLengthGraph_Click(object sender, EventArgs e)
+        {
+            new CycleLengthForm().Show();
         }
     }
 }

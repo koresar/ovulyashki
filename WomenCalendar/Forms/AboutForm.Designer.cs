@@ -102,7 +102,7 @@
             this.lblVersion.Name = "lblVersion";
             this.lblVersion.Size = new System.Drawing.Size(85, 13);
             this.lblVersion.TabIndex = 0;
-            this.lblVersion.Text = "Овуляшки 1.5.1";
+            this.lblVersion.Text = "Овуляшки 1.5.2";
             // 
             // btnThanks
             // 

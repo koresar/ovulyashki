@@ -56,18 +56,6 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.xWoman = new XPanderControl.XPander();
-            this.btnChangeWoman = new System.Windows.Forms.Button();
-            this.chbAskPassword = new System.Windows.Forms.CheckBox();
-            this.chbDefaultWoman = new System.Windows.Forms.CheckBox();
-            this.lblMyCycle2 = new System.Windows.Forms.Label();
-            this.numMenstruationPeriod = new System.Windows.Forms.NumericUpDown();
-            this.lblMyCycle = new System.Windows.Forms.Label();
-            this.rbManual = new System.Windows.Forms.RadioButton();
-            this.rbAuto = new System.Windows.Forms.RadioButton();
-            this.lblAverageCycle = new System.Windows.Forms.Label();
-            this.xDay = new XPanderControl.XPander();
-            this.lblDayDescription = new System.Windows.Forms.Label();
             this.dayCellControl4 = new WomenCalendar.DayCellControl();
             this.dayCellControl6 = new WomenCalendar.DayCellControl();
             this.dayCellControl8 = new WomenCalendar.DayCellControl();
@@ -81,6 +69,18 @@
             this.dayCellControl11 = new WomenCalendar.DayCellControl();
             this.dayCellControl1 = new WomenCalendar.DayCellControl();
             this.dayLegendMenstruations = new WomenCalendar.DayCellControl();
+            this.xWoman = new XPanderControl.XPander();
+            this.btnChangeWoman = new System.Windows.Forms.Button();
+            this.chbAskPassword = new System.Windows.Forms.CheckBox();
+            this.chbDefaultWoman = new System.Windows.Forms.CheckBox();
+            this.lblMyCycle2 = new System.Windows.Forms.Label();
+            this.numMenstruationPeriod = new System.Windows.Forms.NumericUpDown();
+            this.lblMyCycle = new System.Windows.Forms.Label();
+            this.rbManual = new System.Windows.Forms.RadioButton();
+            this.rbAuto = new System.Windows.Forms.RadioButton();
+            this.lblAverageCycle = new System.Windows.Forms.Label();
+            this.xDay = new XPanderControl.XPander();
+            this.lblDayDescription = new System.Windows.Forms.Label();
             this.monthControl = new WomenCalendar.MonthsControl();
             this.toolStrip1.SuspendLayout();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -289,7 +289,7 @@
             this.xLegend.Padding = new System.Windows.Forms.Padding(0, 25, 0, 0);
             this.xLegend.Size = new System.Drawing.Size(234, 520);
             this.xLegend.TabIndex = 2;
-            this.xLegend.Tag = 6;
+            this.xLegend.Tag = 0;
             this.xLegend.TooltipText = null;
             // 
             // label13
@@ -434,184 +434,6 @@
             this.label1.TabIndex = 2;
             this.label1.Text = "Сегодняшний день";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // xWoman
-            // 
-            this.xWoman.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.xWoman.Animated = true;
-            this.xWoman.AnimationTime = 1;
-            this.xWoman.BackColor = System.Drawing.Color.Transparent;
-            this.xWoman.BorderStyle = System.Windows.Forms.Border3DStyle.Flat;
-            this.xWoman.CaptionFont = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Bold);
-            this.xWoman.CaptionFormatFlag = XPanderControl.XPander.FormatFlag.NoWrap;
-            this.xWoman.CaptionStyle = XPanderControl.XPander.CaptionStyleEnum.Normal;
-            this.xWoman.CaptionText = "О женщине";
-            this.xWoman.CaptionTextAlign = XPanderControl.XPander.CaptionTextAlignment.Left;
-            this.xWoman.ChevronStyle = XPanderControl.XPander.ChevronStyleEnum.Image;
-            this.xWoman.CollapsedHighlightImage = ((System.Drawing.Bitmap)(resources.GetObject("xWoman.CollapsedHighlightImage")));
-            this.xWoman.CollapsedImage = ((System.Drawing.Bitmap)(resources.GetObject("xWoman.CollapsedImage")));
-            this.xWoman.Controls.Add(this.btnChangeWoman);
-            this.xWoman.Controls.Add(this.chbAskPassword);
-            this.xWoman.Controls.Add(this.chbDefaultWoman);
-            this.xWoman.Controls.Add(this.lblMyCycle2);
-            this.xWoman.Controls.Add(this.numMenstruationPeriod);
-            this.xWoman.Controls.Add(this.lblMyCycle);
-            this.xWoman.Controls.Add(this.rbManual);
-            this.xWoman.Controls.Add(this.rbAuto);
-            this.xWoman.Controls.Add(this.lblAverageCycle);
-            this.xWoman.ExpandedHighlightImage = ((System.Drawing.Bitmap)(resources.GetObject("xWoman.ExpandedHighlightImage")));
-            this.xWoman.ExpandedImage = ((System.Drawing.Bitmap)(resources.GetObject("xWoman.ExpandedImage")));
-            this.xWoman.Location = new System.Drawing.Point(8, 544);
-            this.xWoman.Margin = new System.Windows.Forms.Padding(0);
-            this.xWoman.Name = "xWoman";
-            this.xWoman.Padding = new System.Windows.Forms.Padding(0, 25, 0, 0);
-            this.xWoman.Size = new System.Drawing.Size(234, 155);
-            this.xWoman.TabIndex = 0;
-            this.xWoman.Tag = 7;
-            this.xWoman.TooltipText = null;
-            // 
-            // btnChangeWoman
-            // 
-            this.btnChangeWoman.Location = new System.Drawing.Point(12, 124);
-            this.btnChangeWoman.Name = "btnChangeWoman";
-            this.btnChangeWoman.Size = new System.Drawing.Size(185, 23);
-            this.btnChangeWoman.TabIndex = 9;
-            this.btnChangeWoman.Text = "Изменить имя и пароль";
-            this.btnChangeWoman.UseVisualStyleBackColor = true;
-            this.btnChangeWoman.Click += new System.EventHandler(this.btnChangeWoman_Click);
-            // 
-            // chbAskPassword
-            // 
-            this.chbAskPassword.AutoSize = true;
-            this.chbAskPassword.Location = new System.Drawing.Point(12, 72);
-            this.chbAskPassword.Name = "chbAskPassword";
-            this.chbAskPassword.Size = new System.Drawing.Size(188, 17);
-            this.chbAskPassword.TabIndex = 8;
-            this.chbAskPassword.Text = "Всегда спрашивать мой пароль";
-            this.chbAskPassword.UseVisualStyleBackColor = true;
-            this.chbAskPassword.CheckedChanged += new System.EventHandler(this.chbAskPassword_CheckedChanged);
-            // 
-            // chbDefaultWoman
-            // 
-            this.chbDefaultWoman.Location = new System.Drawing.Point(12, 86);
-            this.chbDefaultWoman.Name = "chbDefaultWoman";
-            this.chbDefaultWoman.Size = new System.Drawing.Size(185, 43);
-            this.chbDefaultWoman.TabIndex = 7;
-            this.chbDefaultWoman.Text = "При запуске программы открывать меня по умолчанию";
-            this.chbDefaultWoman.UseVisualStyleBackColor = true;
-            this.chbDefaultWoman.CheckedChanged += new System.EventHandler(this.chbDefaultWoman_CheckedChanged);
-            // 
-            // lblMyCycle2
-            // 
-            this.lblMyCycle2.AutoSize = true;
-            this.lblMyCycle2.Location = new System.Drawing.Point(129, 50);
-            this.lblMyCycle2.Name = "lblMyCycle2";
-            this.lblMyCycle2.Size = new System.Drawing.Size(25, 13);
-            this.lblMyCycle2.TabIndex = 6;
-            this.lblMyCycle2.Text = "дня";
-            // 
-            // numMenstruationPeriod
-            // 
-            this.numMenstruationPeriod.Location = new System.Drawing.Point(89, 48);
-            this.numMenstruationPeriod.Maximum = new decimal(new int[] {
-            99,
-            0,
-            0,
-            0});
-            this.numMenstruationPeriod.Minimum = new decimal(new int[] {
-            10,
-            0,
-            0,
-            0});
-            this.numMenstruationPeriod.Name = "numMenstruationPeriod";
-            this.numMenstruationPeriod.Size = new System.Drawing.Size(37, 20);
-            this.numMenstruationPeriod.TabIndex = 4;
-            this.numMenstruationPeriod.Value = new decimal(new int[] {
-            10,
-            0,
-            0,
-            0});
-            this.numMenstruationPeriod.ValueChanged += new System.EventHandler(this.numMenstruationPeriod_ValueChanged);
-            // 
-            // lblMyCycle
-            // 
-            this.lblMyCycle.AutoSize = true;
-            this.lblMyCycle.Location = new System.Drawing.Point(31, 50);
-            this.lblMyCycle.Name = "lblMyCycle";
-            this.lblMyCycle.Size = new System.Drawing.Size(55, 13);
-            this.lblMyCycle.TabIndex = 3;
-            this.lblMyCycle.Text = "Мой цикл";
-            // 
-            // rbManual
-            // 
-            this.rbManual.AutoSize = true;
-            this.rbManual.Location = new System.Drawing.Point(12, 50);
-            this.rbManual.Name = "rbManual";
-            this.rbManual.Size = new System.Drawing.Size(14, 13);
-            this.rbManual.TabIndex = 2;
-            this.rbManual.TabStop = true;
-            this.rbManual.UseVisualStyleBackColor = true;
-            // 
-            // rbAuto
-            // 
-            this.rbAuto.AutoSize = true;
-            this.rbAuto.Checked = true;
-            this.rbAuto.Location = new System.Drawing.Point(12, 28);
-            this.rbAuto.Name = "rbAuto";
-            this.rbAuto.Size = new System.Drawing.Size(14, 13);
-            this.rbAuto.TabIndex = 1;
-            this.rbAuto.TabStop = true;
-            this.rbAuto.UseVisualStyleBackColor = true;
-            this.rbAuto.CheckedChanged += new System.EventHandler(this.rbAuto_CheckedChanged);
-            // 
-            // lblAverageCycle
-            // 
-            this.lblAverageCycle.AutoEllipsis = true;
-            this.lblAverageCycle.AutoSize = true;
-            this.lblAverageCycle.Location = new System.Drawing.Point(31, 29);
-            this.lblAverageCycle.Name = "lblAverageCycle";
-            this.lblAverageCycle.Size = new System.Drawing.Size(80, 13);
-            this.lblAverageCycle.TabIndex = 0;
-            this.lblAverageCycle.Text = "Средний цикл:";
-            // 
-            // xDay
-            // 
-            this.xDay.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.xDay.Animated = true;
-            this.xDay.AnimationTime = 1;
-            this.xDay.BackColor = System.Drawing.Color.Transparent;
-            this.xDay.BorderStyle = System.Windows.Forms.Border3DStyle.Flat;
-            this.xDay.CaptionFont = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Bold);
-            this.xDay.CaptionFormatFlag = XPanderControl.XPander.FormatFlag.NoWrap;
-            this.xDay.CaptionStyle = XPanderControl.XPander.CaptionStyleEnum.Normal;
-            this.xDay.CaptionText = "Описание дня";
-            this.xDay.CaptionTextAlign = XPanderControl.XPander.CaptionTextAlignment.Left;
-            this.xDay.ChevronStyle = XPanderControl.XPander.ChevronStyleEnum.Image;
-            this.xDay.CollapsedHighlightImage = ((System.Drawing.Bitmap)(resources.GetObject("xDay.CollapsedHighlightImage")));
-            this.xDay.CollapsedImage = ((System.Drawing.Bitmap)(resources.GetObject("xDay.CollapsedImage")));
-            this.xDay.Controls.Add(this.lblDayDescription);
-            this.xDay.ExpandedHighlightImage = ((System.Drawing.Bitmap)(resources.GetObject("xDay.ExpandedHighlightImage")));
-            this.xDay.ExpandedImage = ((System.Drawing.Bitmap)(resources.GetObject("xDay.ExpandedImage")));
-            this.xDay.Location = new System.Drawing.Point(8, 713);
-            this.xDay.Margin = new System.Windows.Forms.Padding(0);
-            this.xDay.Name = "xDay";
-            this.xDay.Padding = new System.Windows.Forms.Padding(0, 25, 0, 0);
-            this.xDay.Size = new System.Drawing.Size(234, 61);
-            this.xDay.TabIndex = 1;
-            this.xDay.Tag = 8;
-            this.xDay.TooltipText = null;
-            // 
-            // lblDayDescription
-            // 
-            this.lblDayDescription.AutoEllipsis = true;
-            this.lblDayDescription.AutoSize = true;
-            this.lblDayDescription.Location = new System.Drawing.Point(5, 29);
-            this.lblDayDescription.Name = "lblDayDescription";
-            this.lblDayDescription.Size = new System.Drawing.Size(42, 13);
-            this.lblDayDescription.TabIndex = 0;
-            this.lblDayDescription.Text = "...day...";
             // 
             // dayCellControl4
             // 
@@ -823,7 +645,7 @@
             // 
             // dayCellControl3
             // 
-            this.dayCellControl3.BackColor = System.Drawing.Color.Yellow;
+            this.dayCellControl3.BackColor = System.Drawing.Color.Gold;
             this.dayCellControl3.Date = new System.DateTime(((long)(0)));
             this.dayCellControl3.Egesta = 5;
             this.dayCellControl3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
@@ -950,6 +772,184 @@
             this.dayLegendMenstruations.PregnancyWeek = 0;
             this.dayLegendMenstruations.Size = new System.Drawing.Size(32, 32);
             this.dayLegendMenstruations.TabIndex = 0;
+            // 
+            // xWoman
+            // 
+            this.xWoman.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.xWoman.Animated = true;
+            this.xWoman.AnimationTime = 1;
+            this.xWoman.BackColor = System.Drawing.Color.Transparent;
+            this.xWoman.BorderStyle = System.Windows.Forms.Border3DStyle.Flat;
+            this.xWoman.CaptionFont = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Bold);
+            this.xWoman.CaptionFormatFlag = XPanderControl.XPander.FormatFlag.NoWrap;
+            this.xWoman.CaptionStyle = XPanderControl.XPander.CaptionStyleEnum.Normal;
+            this.xWoman.CaptionText = "О женщине";
+            this.xWoman.CaptionTextAlign = XPanderControl.XPander.CaptionTextAlignment.Left;
+            this.xWoman.ChevronStyle = XPanderControl.XPander.ChevronStyleEnum.Image;
+            this.xWoman.CollapsedHighlightImage = ((System.Drawing.Bitmap)(resources.GetObject("xWoman.CollapsedHighlightImage")));
+            this.xWoman.CollapsedImage = ((System.Drawing.Bitmap)(resources.GetObject("xWoman.CollapsedImage")));
+            this.xWoman.Controls.Add(this.btnChangeWoman);
+            this.xWoman.Controls.Add(this.chbAskPassword);
+            this.xWoman.Controls.Add(this.chbDefaultWoman);
+            this.xWoman.Controls.Add(this.lblMyCycle2);
+            this.xWoman.Controls.Add(this.numMenstruationPeriod);
+            this.xWoman.Controls.Add(this.lblMyCycle);
+            this.xWoman.Controls.Add(this.rbManual);
+            this.xWoman.Controls.Add(this.rbAuto);
+            this.xWoman.Controls.Add(this.lblAverageCycle);
+            this.xWoman.ExpandedHighlightImage = ((System.Drawing.Bitmap)(resources.GetObject("xWoman.ExpandedHighlightImage")));
+            this.xWoman.ExpandedImage = ((System.Drawing.Bitmap)(resources.GetObject("xWoman.ExpandedImage")));
+            this.xWoman.Location = new System.Drawing.Point(8, 544);
+            this.xWoman.Margin = new System.Windows.Forms.Padding(0);
+            this.xWoman.Name = "xWoman";
+            this.xWoman.Padding = new System.Windows.Forms.Padding(0, 25, 0, 0);
+            this.xWoman.Size = new System.Drawing.Size(234, 155);
+            this.xWoman.TabIndex = 0;
+            this.xWoman.Tag = 1;
+            this.xWoman.TooltipText = null;
+            // 
+            // btnChangeWoman
+            // 
+            this.btnChangeWoman.Location = new System.Drawing.Point(12, 124);
+            this.btnChangeWoman.Name = "btnChangeWoman";
+            this.btnChangeWoman.Size = new System.Drawing.Size(185, 23);
+            this.btnChangeWoman.TabIndex = 9;
+            this.btnChangeWoman.Text = "Изменить имя и пароль";
+            this.btnChangeWoman.UseVisualStyleBackColor = true;
+            this.btnChangeWoman.Click += new System.EventHandler(this.btnChangeWoman_Click);
+            // 
+            // chbAskPassword
+            // 
+            this.chbAskPassword.AutoSize = true;
+            this.chbAskPassword.Location = new System.Drawing.Point(12, 72);
+            this.chbAskPassword.Name = "chbAskPassword";
+            this.chbAskPassword.Size = new System.Drawing.Size(188, 17);
+            this.chbAskPassword.TabIndex = 8;
+            this.chbAskPassword.Text = "Всегда спрашивать мой пароль";
+            this.chbAskPassword.UseVisualStyleBackColor = true;
+            this.chbAskPassword.CheckedChanged += new System.EventHandler(this.chbAskPassword_CheckedChanged);
+            // 
+            // chbDefaultWoman
+            // 
+            this.chbDefaultWoman.Location = new System.Drawing.Point(12, 86);
+            this.chbDefaultWoman.Name = "chbDefaultWoman";
+            this.chbDefaultWoman.Size = new System.Drawing.Size(185, 43);
+            this.chbDefaultWoman.TabIndex = 7;
+            this.chbDefaultWoman.Text = "При запуске программы открывать меня по умолчанию";
+            this.chbDefaultWoman.UseVisualStyleBackColor = true;
+            this.chbDefaultWoman.CheckedChanged += new System.EventHandler(this.chbDefaultWoman_CheckedChanged);
+            // 
+            // lblMyCycle2
+            // 
+            this.lblMyCycle2.AutoSize = true;
+            this.lblMyCycle2.Location = new System.Drawing.Point(180, 50);
+            this.lblMyCycle2.Name = "lblMyCycle2";
+            this.lblMyCycle2.Size = new System.Drawing.Size(25, 13);
+            this.lblMyCycle2.TabIndex = 6;
+            this.lblMyCycle2.Text = "дня";
+            // 
+            // numMenstruationPeriod
+            // 
+            this.numMenstruationPeriod.Location = new System.Drawing.Point(140, 48);
+            this.numMenstruationPeriod.Maximum = new decimal(new int[] {
+            99,
+            0,
+            0,
+            0});
+            this.numMenstruationPeriod.Minimum = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
+            this.numMenstruationPeriod.Name = "numMenstruationPeriod";
+            this.numMenstruationPeriod.Size = new System.Drawing.Size(37, 20);
+            this.numMenstruationPeriod.TabIndex = 4;
+            this.numMenstruationPeriod.Value = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
+            this.numMenstruationPeriod.ValueChanged += new System.EventHandler(this.numMenstruationPeriod_ValueChanged);
+            // 
+            // lblMyCycle
+            // 
+            this.lblMyCycle.AutoSize = true;
+            this.lblMyCycle.Location = new System.Drawing.Point(31, 50);
+            this.lblMyCycle.Name = "lblMyCycle";
+            this.lblMyCycle.Size = new System.Drawing.Size(103, 13);
+            this.lblMyCycle.TabIndex = 3;
+            this.lblMyCycle.Text = "Специальный цикл";
+            // 
+            // rbManual
+            // 
+            this.rbManual.AutoSize = true;
+            this.rbManual.Location = new System.Drawing.Point(12, 50);
+            this.rbManual.Name = "rbManual";
+            this.rbManual.Size = new System.Drawing.Size(14, 13);
+            this.rbManual.TabIndex = 2;
+            this.rbManual.TabStop = true;
+            this.rbManual.UseVisualStyleBackColor = true;
+            // 
+            // rbAuto
+            // 
+            this.rbAuto.AutoSize = true;
+            this.rbAuto.Checked = true;
+            this.rbAuto.Location = new System.Drawing.Point(12, 28);
+            this.rbAuto.Name = "rbAuto";
+            this.rbAuto.Size = new System.Drawing.Size(14, 13);
+            this.rbAuto.TabIndex = 1;
+            this.rbAuto.TabStop = true;
+            this.rbAuto.UseVisualStyleBackColor = true;
+            this.rbAuto.CheckedChanged += new System.EventHandler(this.rbAuto_CheckedChanged);
+            // 
+            // lblAverageCycle
+            // 
+            this.lblAverageCycle.AutoEllipsis = true;
+            this.lblAverageCycle.AutoSize = true;
+            this.lblAverageCycle.Location = new System.Drawing.Point(31, 29);
+            this.lblAverageCycle.Name = "lblAverageCycle";
+            this.lblAverageCycle.Size = new System.Drawing.Size(144, 13);
+            this.lblAverageCycle.TabIndex = 0;
+            this.lblAverageCycle.Text = "Мой автоматический цикл:";
+            // 
+            // xDay
+            // 
+            this.xDay.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.xDay.Animated = true;
+            this.xDay.AnimationTime = 1;
+            this.xDay.BackColor = System.Drawing.Color.Transparent;
+            this.xDay.BorderStyle = System.Windows.Forms.Border3DStyle.Flat;
+            this.xDay.CaptionFont = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Bold);
+            this.xDay.CaptionFormatFlag = XPanderControl.XPander.FormatFlag.NoWrap;
+            this.xDay.CaptionStyle = XPanderControl.XPander.CaptionStyleEnum.Normal;
+            this.xDay.CaptionText = "Описание дня";
+            this.xDay.CaptionTextAlign = XPanderControl.XPander.CaptionTextAlignment.Left;
+            this.xDay.ChevronStyle = XPanderControl.XPander.ChevronStyleEnum.Image;
+            this.xDay.CollapsedHighlightImage = ((System.Drawing.Bitmap)(resources.GetObject("xDay.CollapsedHighlightImage")));
+            this.xDay.CollapsedImage = ((System.Drawing.Bitmap)(resources.GetObject("xDay.CollapsedImage")));
+            this.xDay.Controls.Add(this.lblDayDescription);
+            this.xDay.ExpandedHighlightImage = ((System.Drawing.Bitmap)(resources.GetObject("xDay.ExpandedHighlightImage")));
+            this.xDay.ExpandedImage = ((System.Drawing.Bitmap)(resources.GetObject("xDay.ExpandedImage")));
+            this.xDay.Location = new System.Drawing.Point(8, 713);
+            this.xDay.Margin = new System.Windows.Forms.Padding(0);
+            this.xDay.Name = "xDay";
+            this.xDay.Padding = new System.Windows.Forms.Padding(0, 25, 0, 0);
+            this.xDay.Size = new System.Drawing.Size(234, 61);
+            this.xDay.TabIndex = 1;
+            this.xDay.Tag = 2;
+            this.xDay.TooltipText = null;
+            // 
+            // lblDayDescription
+            // 
+            this.lblDayDescription.AutoEllipsis = true;
+            this.lblDayDescription.AutoSize = true;
+            this.lblDayDescription.Location = new System.Drawing.Point(5, 29);
+            this.lblDayDescription.Name = "lblDayDescription";
+            this.lblDayDescription.Size = new System.Drawing.Size(42, 13);
+            this.lblDayDescription.TabIndex = 0;
+            this.lblDayDescription.Text = "...day...";
             // 
             // monthControl
             // 

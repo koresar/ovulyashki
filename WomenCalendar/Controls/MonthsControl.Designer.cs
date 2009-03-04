@@ -42,8 +42,9 @@
             this.редактироватьДеньToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.monthMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.ToolStripBBTGraph = new System.Windows.Forms.ToolStripMenuItem();
-            this.построитьГрафикСамочувствияToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ToolStripHealthGraph = new System.Windows.Forms.ToolStripMenuItem();
             this.oneMonthControl = new WomenCalendar.OneMonthControl();
+            this.ToolStripCycleLengthGraph = new System.Windows.Forms.ToolStripMenuItem();
             this.dayContextMenu.SuspendLayout();
             this.monthMenu.SuspendLayout();
             this.SuspendLayout();
@@ -62,7 +63,7 @@
             this.toolStripSeparator3,
             this.редактироватьДеньToolStripMenuItem});
             this.dayContextMenu.Name = "contextMenu";
-            this.dayContextMenu.Size = new System.Drawing.Size(321, 214);
+            this.dayContextMenu.Size = new System.Drawing.Size(321, 192);
             // 
             // setAsMenstruationDay
             // 
@@ -141,9 +142,10 @@
             // 
             this.monthMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.ToolStripBBTGraph,
-            this.построитьГрафикСамочувствияToolStripMenuItem});
+            this.ToolStripHealthGraph,
+            this.ToolStripCycleLengthGraph});
             this.monthMenu.Name = "monthMenu";
-            this.monthMenu.Size = new System.Drawing.Size(334, 48);
+            this.monthMenu.Size = new System.Drawing.Size(334, 92);
             // 
             // ToolStripBBTGraph
             // 
@@ -152,18 +154,20 @@
             this.ToolStripBBTGraph.Text = "Построить график Базальной Температуры Тела";
             this.ToolStripBBTGraph.Click += new System.EventHandler(this.ToolStripBBTGraph_Click);
             // 
-            // построитьГрафикСамочувствияToolStripMenuItem
+            // ToolStripHealthGraph
             // 
-            this.построитьГрафикСамочувствияToolStripMenuItem.Name = "построитьГрафикСамочувствияToolStripMenuItem";
-            this.построитьГрафикСамочувствияToolStripMenuItem.Size = new System.Drawing.Size(333, 22);
-            this.построитьГрафикСамочувствияToolStripMenuItem.Text = "Построить график Самочувствия";
-            this.построитьГрафикСамочувствияToolStripMenuItem.Click += new System.EventHandler(this.ToolStripHealthesGraph_Click);
+            this.ToolStripHealthGraph.Name = "ToolStripHealthGraph";
+            this.ToolStripHealthGraph.Size = new System.Drawing.Size(333, 22);
+            this.ToolStripHealthGraph.Text = "Построить график Самочувствия";
+            this.ToolStripHealthGraph.Click += new System.EventHandler(this.ToolStripHealthesGraph_Click);
             // 
             // oneMonthControl
             // 
+            this.oneMonthControl.BackColor = System.Drawing.Color.White;
             this.oneMonthControl.Date = new System.DateTime(2008, 2, 1, 0, 0, 0, 0);
             this.oneMonthControl.FocusDate = new System.DateTime(((long)(0)));
             this.oneMonthControl.FocusDay = null;
+            this.oneMonthControl.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
             this.oneMonthControl.ForeColor = System.Drawing.Color.Transparent;
             this.oneMonthControl.Location = new System.Drawing.Point(0, 0);
             this.oneMonthControl.Margin = new System.Windows.Forms.Padding(0);
@@ -171,6 +175,13 @@
             this.oneMonthControl.OwnerMonthsControl = null;
             this.oneMonthControl.Size = new System.Drawing.Size(230, 230);
             this.oneMonthControl.TabIndex = 0;
+            // 
+            // ToolStripCycleLengthGraph
+            // 
+            this.ToolStripCycleLengthGraph.Name = "ToolStripCycleLengthGraph";
+            this.ToolStripCycleLengthGraph.Size = new System.Drawing.Size(333, 22);
+            this.ToolStripCycleLengthGraph.Text = "Построить график Длины Циклов";
+            this.ToolStripCycleLengthGraph.Click += new System.EventHandler(this.ToolStripCycleLengthGraph_Click);
             // 
             // MonthsControl
             // 
@@ -199,7 +210,7 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ContextMenuStrip monthMenu;
         private System.Windows.Forms.ToolStripMenuItem ToolStripBBTGraph;
-        private System.Windows.Forms.ToolStripMenuItem построитьГрафикСамочувствияToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem ToolStripHealthGraph;
         private System.Windows.Forms.ToolStripMenuItem setAsConceptionDay;
         private System.Windows.Forms.ToolStripMenuItem removeConceptionDay;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
@@ -207,6 +218,7 @@
         private System.Windows.Forms.ToolStripMenuItem calendarMenu;
         private System.Windows.Forms.ToolStripMenuItem setLastPregnancyDay;
         private System.Windows.Forms.ToolStripMenuItem showBirthDate;
+        private System.Windows.Forms.ToolStripMenuItem ToolStripCycleLengthGraph;
 
     }
 }

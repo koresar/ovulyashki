@@ -31,22 +31,22 @@ namespace WomenCalendar
 
         private void btnBug_Click(object sender, EventArgs e)
         {
-            Process.Start(@"http://sourceforge.net/tracker/?func=add&group_id=219686&atid=1048403");
+            Process.Start(@"http://ovulyashki.dp.ua/bugtrack/bugs/add/");
         }
 
         private void btnNewFeature_Click(object sender, EventArgs e)
         {
-            Process.Start(@"http://sourceforge.net/tracker/?func=add&group_id=219686&atid=1048406");
+            Process.Start(@"http://ovulyashki.dp.ua/bugtrack/features/add/");
         }
 
         private void btnFeedback_Click(object sender, EventArgs e)
         {
-            Process.Start(@"http://sourceforge.net/forum/forum.php?forum_id=791627");
+            Process.Start(@"http://ovulyashki.dp.ua/feedback/");
         }
 
         private void btnAskQuestion_Click(object sender, EventArgs e)
         {
-            Process.Start(@"http://sourceforge.net/forum/forum.php?forum_id=791628");
+            Process.Start(@"http://ovulyashki.dp.ua/questions/");
         }
 
         private void btnSite_Click(object sender, EventArgs e)

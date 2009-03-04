@@ -285,7 +285,7 @@ namespace WomenCalendar
 
         private void numMenstruationLength_ValueChanged(object sender, EventArgs e)
         {
-            lblMenstruationLength.Text = MainForm.GetDaysString((int)numMenstruationLength.Value);
+            lblMenstruationLength.Text = Woman.GetDaysString((int)numMenstruationLength.Value);
         }
 
         private void DayEditForm_Shown(object sender, EventArgs e)

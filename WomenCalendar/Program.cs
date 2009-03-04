@@ -21,7 +21,12 @@ namespace WomenCalendar
 
         private static string SettingsFileName
         {
-            get { return Path.Combine(Application.StartupPath, "WomenCalendar.settings"); }
+            get
+            {
+                var dir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), @"Ovulyashki");
+                if (!Directory.Exists(dir)) Directory.CreateDirectory(dir);
+                return Path.Combine(dir, "Ovulyashki.settings");
+            }
         }
 
         public static Woman _currentWoman;
@@ -242,33 +247,54 @@ namespace WomenCalendar
         [STAThread]
         static void Main(String[] args)
         {
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
-
-            ApplicationForm = new MainForm();
-
-            Settings = ApplicationSettings.Read(SettingsFileName);
-
-            if (args.Length == 0 || !File.Exists(args[0]) || !LoadWoman(args[0])) // command line
+            AppDomain.CurrentDomain.UnhandledException += new UnhandledExceptionEventHandler(CurrentDomain_UnhandledException);
+            Application.ThreadException += new System.Threading.ThreadExceptionEventHandler(Application_ThreadException);
+            try
             {
-                if (string.IsNullOrEmpty(Settings.DefaultWomanPath) ||
-                    !File.Exists(Settings.DefaultWomanPath) || !LoadWoman(Settings.DefaultWomanPath))
+                Application.EnableVisualStyles();
+                Application.SetCompatibleTextRenderingDefault(false);
+
+                ApplicationForm = new MainForm();
+
+                Settings = ApplicationSettings.Read(SettingsFileName);
+
+                if (args.Length == 0 || !File.Exists(args[0]) || !LoadWoman(args[0])) // command line
                 {
-                    Settings.DefaultWomanPath = string.Empty;
+                    if (string.IsNullOrEmpty(Settings.DefaultWomanPath) ||
+                        !File.Exists(Settings.DefaultWomanPath) || !LoadWoman(Settings.DefaultWomanPath))
+                    {
+                        Settings.DefaultWomanPath = string.Empty;
+                    }
                 }
-            }
 
-            bool isMaximazed = Settings.DefaultWindowIsMaximized;
-            ApplicationForm.Location = Settings.DefaultWindowPosition;
-            ApplicationForm.Size = Settings.DefaultWindowSize;
-            if (isMaximazed)
-            {
-                ApplicationForm.WindowState = FormWindowState.Maximized;
-            }
+                bool isMaximazed = Settings.DefaultWindowIsMaximized;
+                ApplicationForm.Location = Settings.DefaultWindowPosition;
+                ApplicationForm.Size = Settings.DefaultWindowSize;
+                if (isMaximazed)
+                {
+                    ApplicationForm.WindowState = FormWindowState.Maximized;
+                }
 
-            IconResource = Resources.ResourceManager;
+                IconResource = Resources.ResourceManager;
                 //new System.Resources.ResourceManager(System.Reflection.Assembly.GetExecutingAssembly());
-            Application.Run(ApplicationForm);
+                Application.Run(ApplicationForm);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message + Environment.NewLine + ex.StackTrace, "ААА! ОШИБКА! Пошли скриншот этого окошка разработчику!");
+            }
+        }
+
+        static void Application_ThreadException(object sender, System.Threading.ThreadExceptionEventArgs e)
+        {
+            var ex = e.Exception;
+            MessageBox.Show(ex.Message + Environment.NewLine + ex.StackTrace, "ААА! ОШИБКА! Пошли скриншот этого окошка разработчику!");
+        }
+
+        static void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
+        {
+            var ex = e.ExceptionObject as Exception;
+            MessageBox.Show(ex.Message + Environment.NewLine + ex.StackTrace, "ААА! ОШИБКА! Пошли скриншот этого окошка разработчику!");
         }
 
         public static class MonthAppearance

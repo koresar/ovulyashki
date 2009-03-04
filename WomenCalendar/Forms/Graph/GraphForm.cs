@@ -16,14 +16,16 @@ namespace WomenCalendar
         private SplitContainer splitContainer;
         protected ZedGraphControl zgc;
         private System.Windows.Forms.Label lbl1;
-        private DateTimePicker dateTo;
-        private DateTimePicker dateFrom;
+        protected DateTimePicker dateTo;
+        protected DateTimePicker dateFrom;
         private System.Windows.Forms.Label lbl2;
 
         protected DateTime initialMonth;
         protected int valuesCount;
         protected double MinYValue = double.MaxValue;
         protected double MaxYValue = double.MinValue;
+        protected DateTime MaxXValue = DateTime.MinValue;
+        protected DateTime MinXValue = DateTime.MaxValue;
         private static Dictionary<string, string> _labels;
         private static Dictionary<string, string> Labels
         {
@@ -59,6 +61,11 @@ namespace WomenCalendar
         protected virtual double[] GetYValues()
         {
             return new double[10] {1, 2, 3, 4, 5, 4, 3, 2, 1, 2};
+        }
+
+        protected virtual double[] GetXValues()
+        {
+            return null;
         }
 
         protected virtual void SetupGraph()
@@ -173,10 +180,16 @@ namespace WomenCalendar
         {
             if (!DesignMode)
             {
-                dateFrom.Value = initialMonth;
-                dateTo.Value = initialMonth.AddDays(valuesCount - 1);
+                if (initialMonth != DateTime.MinValue)
+                {
+                    dateFrom.Value = initialMonth;
+                    dateTo.Value = initialMonth.AddDays(valuesCount - 1);
+                }
                 CreateChart();
                 SetGraphSize();
+
+                dateFrom.MaxDate = dateTo.Value;
+                dateTo.MinDate = dateFrom.Value;
 
                 this.dateFrom.ValueChanged += new System.EventHandler(this.dateFrom_ValueChanged);
                 this.dateTo.ValueChanged += new System.EventHandler(this.dateTo_ValueChanged);
@@ -185,11 +198,6 @@ namespace WomenCalendar
 
         public void CreateChart()
         {
-            if (valuesCount <= 0)
-            {
-                zgc.Visible = false;
-                return;
-            }
             zgc.Visible = true;
 
             GraphPane myPane = zgc.GraphPane;
@@ -202,11 +210,13 @@ namespace WomenCalendar
             myPane.Legend.IsVisible = false;
             myPane.XAxis.Type = AxisType.Date;
 
-            double[] y = GetYValues();
+            var y = GetYValues();
                 //Program.CurrentWoman.BBT.GetTemperaturesSince(initialMonth, valuesCount);
                 //DateTime.DaysInMonth(initialMonth.Year, initialMonth.Month));
                 //{ 36.6, 36.4, 36.2, 36.9, 36.8, 36.4, 36.8, 36.6, 36.8, 36.5 };
-            //double[] x = new double[10];
+            var x = GetXValues();
+            var labels = new List<GraphObj>();
+
             PointPairList list = new PointPairList();
             Symbol emptyCircle = new Symbol(SymbolType.Circle, Color.Blue);
             emptyCircle.Size = 10;
@@ -215,20 +225,68 @@ namespace WomenCalendar
             filledCircle.Size = 10;
             filledCircle.Fill = new Fill(Color.Blue);
 
-            for (int i = 0; i < y.Length; i++)
+            myPane.GraphObjList.Clear();
+
+            if (x == null)
             {
-                if (y[i] == 0) continue;
-                DateTime d = initialMonth.AddDays(i);
-                PointPair point = new PointPair((double)new XDate(d.Year, d.Month, d.Day), y[i]);
-                point.Symbol = filledCircle;
-                point.DashStyle = (i+1 < y.Length && y[i + 1] == 0) ? DashStyle.Dash : DashStyle.Solid;
-                list.Add(point);
-                if (y[i] > MaxYValue) MaxYValue = y[i];
-                if (y[i] < MinYValue) MinYValue = y[i];
+                for (int i = 0; i < y.Length; i++)
+                {
+                    if (y[i] == 0) continue;
+                    DateTime d = initialMonth.AddDays(i);
+                    PointPair point = new PointPair((double)new XDate(d.Year, d.Month, d.Day), y[i]);
+                    point.Symbol = filledCircle;
+                    point.DashStyle = (i + 1 < y.Length && y[i + 1] == 0) ? DashStyle.Dash : DashStyle.Solid;
+                    list.Add(point);
+                    if (y[i] > MaxYValue) MaxYValue = y[i];
+                    if (y[i] < MinYValue) MinYValue = y[i];
+                }
+                var curve = myPane.AddCurve("Main", list, Color.Blue, SymbolType.Circle);
+                curve.Line.Width = 2.0F;
+            }
+            else
+            {
+                if (x.Length != y.Length) throw new Exception("Number of X values must mach number of Y values.");
+                filledCircle.Size = 5;
+                for (int i = 0; i < y.Length; i++)
+                {
+                    if (y[i] == 0) continue;
+                    PointPair point = new PointPair(x[i], y[i]);
+                    point.Symbol = filledCircle;
+                    point.DashStyle = DashStyle.Solid;
+                    list.Add(point);
+
+                    var txt = new TextObj((i + 1).ToString(), point.X, point.Y - 1, CoordType.AxisXYScale, AlignH.Center, AlignV.Top);
+                    txt.ZOrder = ZOrder.A_InFront;
+                    txt.FontSpec.Border.IsVisible = false;
+                    txt.FontSpec.Fill.IsVisible = false;
+                    labels.Add(txt);
+
+                    var txt1 = new TextObj(y[i].ToString(), point.X, point.Y, CoordType.AxisXYScale, AlignH.Center, AlignV.Bottom);
+                    txt1.ZOrder = ZOrder.A_InFront;
+                    txt1.FontSpec.Border.IsVisible = false;
+                    txt1.FontSpec.Fill.IsVisible = false;
+                    labels.Add(txt1);
+
+                    var s = ((XDate)x[i]).ToString("d");
+                    var txt2 = new TextObj(s, point.X, 0, CoordType.AxisXYScale, AlignH.Left, AlignV.Center);
+                    txt2.ZOrder = ZOrder.A_InFront;
+                    txt2.FontSpec.Border.IsVisible = false;
+                    txt2.FontSpec.Fill.IsVisible = false;
+                    txt2.FontSpec.Angle = 90;
+
+                    labels.Add(txt2);
+
+                    if (y[i] > MaxYValue) MaxYValue = y[i];
+                    if (y[i] < MinYValue) MinYValue = y[i];
+                }
+
+                var bar = myPane.AddBar("Main", list, Color.Blue);
+                bar.Bar.Fill = new Fill(Color.LightSkyBlue, Color.White, Color.LightSkyBlue);
+                myPane.BarSettings.ClusterScaleWidthAuto = true;
+                myPane.BarSettings.MinClusterGap = 0.0f;
             }
 
-            LineItem curve = myPane.AddCurve("ÁÒÒ", list, Color.Blue, SymbolType.Circle);
-            curve.Line.Width = 2.0F;
+            myPane.GraphObjList.AddRange(labels);
 
             SetupGraph();
 
@@ -258,6 +316,7 @@ namespace WomenCalendar
 
         private void dateFrom_ValueChanged(object sender, EventArgs e)
         {
+            dateTo.MinDate = dateFrom.Value;
             valuesCount = (dateTo.Value - dateFrom.Value).Days + 1;
             initialMonth = dateFrom.Value;
             zgc.Invalidate();
@@ -266,6 +325,7 @@ namespace WomenCalendar
 
         private void dateTo_ValueChanged(object sender, EventArgs e)
         {
+            dateFrom.MaxDate = dateTo.Value;
             valuesCount = (dateTo.Value - dateFrom.Value).Days + 1;
             zgc.Invalidate();
             CreateChart();

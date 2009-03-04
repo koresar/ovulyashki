@@ -318,7 +318,16 @@ namespace WomenCalendar
             }
             return false;
         }
-        
+
+        public static string GetDaysString(int days)
+        {
+            if (days > 4 && days < 21) return "дней";
+            int tmpDays = days % 10;
+            if (tmpDays == 1) return "день";
+            if (tmpDays < 5 && tmpDays > 1) return "дня";
+            return "дней";
+        }
+
         public bool RemoveConceptionDay(DateTime date)
         {
             MenstruationPeriod period = Menstruations.GetClosestPeriodBeforeDay(date);
@@ -416,6 +425,21 @@ namespace WomenCalendar
             }
             else
             {
+                var closestBefore = Menstruations.GetClosestPeriodBeforeDay(date);
+                if (closestBefore != null)
+                {
+                    sb.AppendLine();
+                    sb.Append("Это " + ((date - closestBefore.StartDay).Days + 1).ToString() + "-й день цикла.");
+                }
+
+                var closestAfter = Menstruations.GetClosestPeriodAfterDay(date);
+                if (closestBefore != null && closestAfter != null)
+                {
+                    int days = (closestAfter.StartDay - closestBefore.StartDay).Days;
+                    sb.AppendLine();
+                    sb.Append("Этот цикл длился " + days.ToString() + " " + GetDaysString(days));
+                }
+
                 if (IsPredictedAsMenstruationDay(date))
                 {
                     sb.AppendLine();

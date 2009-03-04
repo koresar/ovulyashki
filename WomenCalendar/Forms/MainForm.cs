@@ -56,10 +56,10 @@ namespace WomenCalendar
             StringBuilder sb = new StringBuilder();
 
             int usedDays = Program.CurrentWoman.AveragePeriodLength == 0 ? 28 : Program.CurrentWoman.AveragePeriodLength;
-            sb.Append("Средний цикл: ");
+            sb.Append("Мой автоматический цикл: ");
             sb.Append(usedDays);
             sb.Append(' ');
-            sb.Append(GetDaysString(usedDays));
+            sb.Append(Woman.GetDaysString(usedDays));
 
             return sb.ToString();
         }
@@ -70,15 +70,6 @@ namespace WomenCalendar
             numMenstruationPeriod.Minimum = (length == 0) ? 0 : 10;
             numMenstruationPeriod.Value = length;
             numMenstruationPeriod.Enabled = !rbAuto.Checked;
-        }
-
-        public static string GetDaysString(int days)
-        {
-            if (days > 4 && days < 21) return "дней";
-            int tmpDays = days % 10;
-            if (tmpDays == 1) return "день";
-            if (tmpDays < 5 && tmpDays > 1) return "дня";
-            return "дней";
         }
 
         public void RedrawCalendar()
@@ -184,13 +175,13 @@ namespace WomenCalendar
                                     MessageBoxButtons.YesNo, MessageBoxIcon.Question) != DialogResult.Yes)
                 {
                     numMenstruationPeriod.Value = Program.CurrentWoman.ManualPeriodLength;
-                    lblMyCycle2.Text = GetDaysString(Program.CurrentWoman.ManualPeriodLength);
+                    lblMyCycle2.Text = Woman.GetDaysString(Program.CurrentWoman.ManualPeriodLength);
                     return;
                 }
             }
 
             Program.CurrentWoman.ManualPeriodLength = newValue;
-            lblMyCycle2.Text = GetDaysString(newValue);
+            lblMyCycle2.Text = Woman.GetDaysString(newValue);
             monthControl.Redraw();
         }
 
