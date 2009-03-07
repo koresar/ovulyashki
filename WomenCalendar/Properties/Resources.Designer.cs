@@ -224,6 +224,20 @@ namespace WomenCalendar.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap printGreen {
+            get {
+                object obj = ResourceManager.GetObject("printGreen", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap printPreviewGreen {
+            get {
+                object obj = ResourceManager.GetObject("printPreviewGreen", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap saveGreen {
             get {
                 object obj = ResourceManager.GetObject("saveGreen", resourceCulture);

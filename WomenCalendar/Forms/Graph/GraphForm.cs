@@ -13,21 +13,23 @@ namespace WomenCalendar
     public class GraphForm : Form
     {
         private IContainer components;
-        private SplitContainer splitContainer;
+        protected SplitContainer splitContainer;
         protected ZedGraphControl zgc;
-        private System.Windows.Forms.Label lbl1;
+        protected System.Windows.Forms.Label lbl1;
         protected DateTimePicker dateTo;
         protected DateTimePicker dateFrom;
-        private System.Windows.Forms.Label lbl2;
+        protected System.Windows.Forms.Label lbl2;
 
         protected DateTime initialMonth;
-        protected int valuesCount;
         protected double MinYValue = double.MaxValue;
         protected double MaxYValue = double.MinValue;
         protected DateTime MaxXValue = DateTime.MinValue;
         protected DateTime MinXValue = DateTime.MaxValue;
-        private static Dictionary<string, string> _labels;
-        private static Dictionary<string, string> Labels
+        protected ToolStrip toolStrip1;
+        protected ToolStripButton toolStripButton1;
+        protected ToolStripButton toolStripButton2;
+        protected static Dictionary<string, string> _labels;
+        protected static Dictionary<string, string> Labels
         {
             get
             {
@@ -52,10 +54,21 @@ namespace WomenCalendar
             InitializeComponent();
         }
 
-        public GraphForm(DateTime month, int valuesCount) : this()
+        public GraphForm(DateTime month) : this()
         {
             initialMonth = new DateTime(month.Year, month.Month, 1);
-            this.valuesCount = valuesCount;
+
+            if (initialMonth != DateTime.MinValue)
+            {
+                dateFrom.Value = initialMonth;
+                int valuesCount = DateTime.DaysInMonth(initialMonth.Year, initialMonth.Month);
+                dateTo.Value =  initialMonth.AddDays(valuesCount - 1);
+            }
+            RedrawGraph();
+            SetGraphSize();
+
+            this.dateFrom.ValueChanged += new System.EventHandler(this.dateFrom_ValueChanged);
+            this.dateTo.ValueChanged += new System.EventHandler(this.dateTo_ValueChanged);
         }
 
         protected virtual double[] GetYValues()
@@ -76,6 +89,9 @@ namespace WomenCalendar
         {
             this.components = new System.ComponentModel.Container();
             this.splitContainer = new System.Windows.Forms.SplitContainer();
+            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
+            this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.lbl2 = new System.Windows.Forms.Label();
             this.lbl1 = new System.Windows.Forms.Label();
             this.dateTo = new System.Windows.Forms.DateTimePicker();
@@ -84,6 +100,7 @@ namespace WomenCalendar
             this.splitContainer.Panel1.SuspendLayout();
             this.splitContainer.Panel2.SuspendLayout();
             this.splitContainer.SuspendLayout();
+            this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // splitContainer
@@ -97,6 +114,7 @@ namespace WomenCalendar
             // 
             // splitContainer.Panel1
             // 
+            this.splitContainer.Panel1.Controls.Add(this.toolStrip1);
             this.splitContainer.Panel1.Controls.Add(this.lbl2);
             this.splitContainer.Panel1.Controls.Add(this.lbl1);
             this.splitContainer.Panel1.Controls.Add(this.dateTo);
@@ -106,13 +124,42 @@ namespace WomenCalendar
             // 
             this.splitContainer.Panel2.Controls.Add(this.zgc);
             this.splitContainer.Size = new System.Drawing.Size(638, 448);
-            this.splitContainer.SplitterDistance = 32;
+            this.splitContainer.SplitterDistance = 60;
             this.splitContainer.TabIndex = 1;
+            // 
+            // toolStrip1
+            // 
+            this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripButton2,
+            this.toolStripButton1});
+            this.toolStrip1.Location = new System.Drawing.Point(0, 0);
+            this.toolStrip1.Name = "toolStrip1";
+            this.toolStrip1.Size = new System.Drawing.Size(638, 25);
+            this.toolStrip1.TabIndex = 3;
+            this.toolStrip1.Text = "toolStrip1";
+            // 
+            // toolStripButton2
+            // 
+            this.toolStripButton2.Image = global::WomenCalendar.Properties.Resources.printPreviewGreen;
+            this.toolStripButton2.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton2.Name = "toolStripButton2";
+            this.toolStripButton2.Size = new System.Drawing.Size(175, 22);
+            this.toolStripButton2.Text = "Просмотреть перед печатью";
+            this.toolStripButton2.Click += new System.EventHandler(this.toolStripButton2_Click);
+            // 
+            // toolStripButton1
+            // 
+            this.toolStripButton1.Image = global::WomenCalendar.Properties.Resources.printGreen;
+            this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton1.Name = "toolStripButton1";
+            this.toolStripButton1.Size = new System.Drawing.Size(158, 22);
+            this.toolStripButton1.Text = "Распечатать этот график";
+            this.toolStripButton1.Click += new System.EventHandler(this.toolStripButton1_Click);
             // 
             // lbl2
             // 
             this.lbl2.AutoSize = true;
-            this.lbl2.Location = new System.Drawing.Point(301, 13);
+            this.lbl2.Location = new System.Drawing.Point(370, 38);
             this.lbl2.Name = "lbl2";
             this.lbl2.Size = new System.Drawing.Size(19, 13);
             this.lbl2.TabIndex = 2;
@@ -121,22 +168,22 @@ namespace WomenCalendar
             // lbl1
             // 
             this.lbl1.AutoSize = true;
-            this.lbl1.Location = new System.Drawing.Point(12, 13);
+            this.lbl1.Location = new System.Drawing.Point(31, 38);
             this.lbl1.Name = "lbl1";
-            this.lbl1.Size = new System.Drawing.Size(59, 13);
+            this.lbl1.Size = new System.Drawing.Size(109, 13);
             this.lbl1.TabIndex = 1;
-            this.lbl1.Text = "Начиная с";
+            this.lbl1.Text = "Показать начиная с";
             // 
             // dateTo
             // 
-            this.dateTo.Location = new System.Drawing.Point(343, 9);
+            this.dateTo.Location = new System.Drawing.Point(412, 34);
             this.dateTo.Name = "dateTo";
             this.dateTo.Size = new System.Drawing.Size(206, 20);
             this.dateTo.TabIndex = 0;
             // 
             // dateFrom
             // 
-            this.dateFrom.Location = new System.Drawing.Point(77, 9);
+            this.dateFrom.Location = new System.Drawing.Point(146, 34);
             this.dateFrom.Name = "dateFrom";
             this.dateFrom.Size = new System.Drawing.Size(206, 20);
             this.dateFrom.TabIndex = 0;
@@ -154,7 +201,7 @@ namespace WomenCalendar
             this.zgc.ScrollMinX = 0;
             this.zgc.ScrollMinY = 0;
             this.zgc.ScrollMinY2 = 0;
-            this.zgc.Size = new System.Drawing.Size(638, 412);
+            this.zgc.Size = new System.Drawing.Size(638, 384);
             this.zgc.TabIndex = 1;
             this.zgc.ContextMenuBuilder += new ZedGraph.ZedGraphControl.ContextMenuBuilderEventHandler(this.zgc_ContextMenuBuilder);
             // 
@@ -166,37 +213,24 @@ namespace WomenCalendar
             this.Name = "GraphForm";
             this.ShowIcon = false;
             this.Text = "График";
-            this.Load += new System.EventHandler(this.GraphForm_Load);
             this.Resize += new System.EventHandler(this.GraphForm_Resize);
             this.splitContainer.Panel1.ResumeLayout(false);
             this.splitContainer.Panel1.PerformLayout();
             this.splitContainer.Panel2.ResumeLayout(false);
             this.splitContainer.ResumeLayout(false);
+            this.toolStrip1.ResumeLayout(false);
+            this.toolStrip1.PerformLayout();
             this.ResumeLayout(false);
 
         }
 
-        private void GraphForm_Load(object sender, EventArgs e)
+        public void RedrawGraph()
         {
-            if (!DesignMode)
-            {
-                if (initialMonth != DateTime.MinValue)
-                {
-                    dateFrom.Value = initialMonth;
-                    dateTo.Value = initialMonth.AddDays(valuesCount - 1);
-                }
-                CreateChart();
-                SetGraphSize();
-
-                dateFrom.MaxDate = dateTo.Value;
-                dateTo.MinDate = dateFrom.Value;
-
-                this.dateFrom.ValueChanged += new System.EventHandler(this.dateFrom_ValueChanged);
-                this.dateTo.ValueChanged += new System.EventHandler(this.dateTo_ValueChanged);
-            }
+            zgc.Invalidate();
+            CreateChart();
         }
 
-        public void CreateChart()
+        protected void CreateChart()
         {
             zgc.Visible = true;
 
@@ -232,7 +266,7 @@ namespace WomenCalendar
                 for (int i = 0; i < y.Length; i++)
                 {
                     if (y[i] == 0) continue;
-                    DateTime d = initialMonth.AddDays(i);
+                    DateTime d = dateFrom.Value.AddDays(i);
                     PointPair point = new PointPair((double)new XDate(d.Year, d.Month, d.Day), y[i]);
                     point.Symbol = filledCircle;
                     point.DashStyle = (i + 1 < y.Length && y[i + 1] == 0) ? DashStyle.Dash : DashStyle.Solid;
@@ -245,14 +279,12 @@ namespace WomenCalendar
             }
             else
             {
-                if (x.Length != y.Length) throw new Exception("Number of X values must mach number of Y values.");
+                if (x.Length != y.Length) throw new Exception("Number of X values must match number of Y values.");
                 filledCircle.Size = 5;
                 for (int i = 0; i < y.Length; i++)
                 {
                     if (y[i] == 0) continue;
                     PointPair point = new PointPair(x[i], y[i]);
-                    point.Symbol = filledCircle;
-                    point.DashStyle = DashStyle.Solid;
                     list.Add(point);
 
                     var txt = new TextObj((i + 1).ToString(), point.X, point.Y - 1, CoordType.AxisXYScale, AlignH.Center, AlignV.Top);
@@ -261,10 +293,20 @@ namespace WomenCalendar
                     txt.FontSpec.Fill.IsVisible = false;
                     labels.Add(txt);
 
-                    var txt1 = new TextObj(y[i].ToString(), point.X, point.Y, CoordType.AxisXYScale, AlignH.Center, AlignV.Bottom);
+                    var txt1 = new TextObj(y[i].ToString(), point.X, point.Y + 1, CoordType.AxisXYScale, AlignH.Center, AlignV.Bottom);
                     txt1.ZOrder = ZOrder.A_InFront;
                     txt1.FontSpec.Border.IsVisible = false;
-                    txt1.FontSpec.Fill.IsVisible = false;
+                    if (y[i] < 21 || y[i] > 35)
+                    {
+                        txt1.FontSpec.Fill.IsVisible = true;
+                        txt1.FontSpec.IsBold = true;
+                        txt1.FontSpec.Fill.Color = Color.LightCoral;
+                        txt1.FontSpec.Fill.Brush = Brushes.LightCoral;
+                    }
+                    else
+                    {
+                        txt1.FontSpec.Fill.IsVisible = false;
+                    }
                     labels.Add(txt1);
 
                     var s = ((XDate)x[i]).ToString("d");
@@ -280,10 +322,11 @@ namespace WomenCalendar
                     if (y[i] < MinYValue) MinYValue = y[i];
                 }
 
-                var bar = myPane.AddBar("Main", list, Color.Blue);
-                bar.Bar.Fill = new Fill(Color.LightSkyBlue, Color.White, Color.LightSkyBlue);
                 myPane.BarSettings.ClusterScaleWidthAuto = true;
                 myPane.BarSettings.MinClusterGap = 0.0f;
+
+                var bar = myPane.AddBar("Main", list, Color.Blue);
+                bar.Bar.Fill = new Fill(Color.LightSkyBlue, Color.White, Color.LightSkyBlue);
             }
 
             myPane.GraphObjList.AddRange(labels);
@@ -294,19 +337,19 @@ namespace WomenCalendar
             zgc.AxisChange();
         }
 
-        private void SetGraphSize()
+        protected void SetGraphSize()
         {
             zgc.Location = new Point(0, 0);
             // Leave a small margin around the outside of the control
             zgc.Size = ClientRectangle.Size; //new Size(this.ClientRectangle.Width - 20, this.ClientRectangle.Height - 20);
         }
 
-        private void GraphForm_Resize(object sender, EventArgs e)
+        protected void GraphForm_Resize(object sender, EventArgs e)
         {
             SetGraphSize();
         }
 
-        private void zgc_ContextMenuBuilder(ZedGraphControl sender, ContextMenuStrip menuStrip, Point mousePt, ZedGraphControl.ContextMenuObjectState objState)
+        protected void zgc_ContextMenuBuilder(ZedGraphControl sender, ContextMenuStrip menuStrip, Point mousePt, ZedGraphControl.ContextMenuObjectState objState)
         {
             foreach (ToolStripItem item in menuStrip.Items)
             {
@@ -314,21 +357,25 @@ namespace WomenCalendar
             }
         }
 
-        private void dateFrom_ValueChanged(object sender, EventArgs e)
+        protected void dateFrom_ValueChanged(object sender, EventArgs e)
         {
-            dateTo.MinDate = dateFrom.Value;
-            valuesCount = (dateTo.Value - dateFrom.Value).Days + 1;
             initialMonth = dateFrom.Value;
-            zgc.Invalidate();
-            CreateChart();
+            RedrawGraph();
         }
 
-        private void dateTo_ValueChanged(object sender, EventArgs e)
+        protected void dateTo_ValueChanged(object sender, EventArgs e)
         {
-            dateFrom.MaxDate = dateTo.Value;
-            valuesCount = (dateTo.Value - dateFrom.Value).Days + 1;
-            zgc.Invalidate();
-            CreateChart();
+            RedrawGraph();
+        }
+
+        protected void toolStripButton1_Click(object sender, EventArgs e)
+        {
+            zgc.DoPrint();
+        }
+
+        protected void toolStripButton2_Click(object sender, EventArgs e)
+        {
+            zgc.DoPrintPreview();
         }
     }
 }

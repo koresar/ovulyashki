@@ -372,13 +372,13 @@ namespace WomenCalendar
         private void ToolStripBBTGraph_Click(object sender, EventArgs e)
         {
             DateTime d = lastDroppedMenuMonth.Date;
-            new BBTForm(d, DateTime.DaysInMonth(d.Year, d.Month)).Show();
+            new BBTForm(d).Show();
         }
 
         private void ToolStripHealthesGraph_Click(object sender, EventArgs e)
         {
             DateTime d = lastDroppedMenuMonth.Date;
-            new HealthForm(d, DateTime.DaysInMonth(d.Year, d.Month)).Show();
+            new HealthForm(d).Show();
         }
 
         private void setAsConceptionDay_Click(object sender, EventArgs e)

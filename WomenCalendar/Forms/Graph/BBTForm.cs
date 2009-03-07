@@ -5,10 +5,10 @@ using ZedGraph;
 
 namespace WomenCalendar
 {
-    public class BBTForm : GraphForm
+    public class BBTForm : MonthlyGraphForm
     {
-        public BBTForm(DateTime month, int valuesCount)
-            : base(month, valuesCount)
+        public BBTForm(DateTime month)
+            : base(month)
         {
             InitializeComponent();
         }
@@ -20,7 +20,7 @@ namespace WomenCalendar
 
         protected override double[] GetYValues()
         {
-            return Program.CurrentWoman.BBT.GetTemperaturesSince(initialMonth, valuesCount);
+            return Program.CurrentWoman.BBT.GetTemperaturesSince(dateFrom.Value, (dateTo.Value - dateFrom.Value).Days + 1);
         }
 
         protected override void SetupGraph()
@@ -39,9 +39,9 @@ namespace WomenCalendar
             myPane.XAxis.Scale.MajorStep = 1;
             myPane.XAxis.Scale.MinorStep = 1;
             myPane.XAxis.Scale.MaxAuto = false;
-            DateTime d1 = initialMonth;
+            DateTime d1 = dateFrom.Value;
             myPane.XAxis.Scale.Min = (double)new XDate(d1.Year, d1.Month, d1.Day);
-            d1 = d1.AddDays(valuesCount - 1);
+            d1 = dateTo.Value;
             myPane.XAxis.Scale.Max = (double)new XDate(d1.Year, d1.Month, d1.Day);
 
             myPane.YAxis.Scale.MajorStep = 0.1;

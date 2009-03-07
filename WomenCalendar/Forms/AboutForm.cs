@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 using System.Diagnostics;
+using System.Reflection;
 
 namespace WomenCalendar
 {
@@ -27,6 +28,11 @@ namespace WomenCalendar
                 "Спасибо Mike Krueger, John Reilly за SharpZipLib: http://icsharpcode.net/" + Environment.NewLine + Environment.NewLine
                 ;
             txtThanks.Text = s;
+            int verLen = 4;
+            var ver = Assembly.GetEntryAssembly().GetName().Version;
+            var verText = ver.ToString(verLen);
+            while (verText.EndsWith(".0")) verText = ver.ToString(--verLen);
+            lblVersion.Text = "Овуляшки " + verText;
         }
 
         private void btnBug_Click(object sender, EventArgs e)

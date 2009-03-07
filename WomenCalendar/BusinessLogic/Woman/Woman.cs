@@ -379,6 +379,7 @@ namespace WomenCalendar
             if (period != null)
             {
                 sb.AppendLine();
+                sb.Append("Это ");
                 sb.Append((date - period.StartDay).Days + 1);
                 sb.AppendLine("-й день менструашек");
                 sb.Append(DayCellPopupControl.EgestasNames[period.Egestas[date]]);
@@ -426,7 +427,7 @@ namespace WomenCalendar
             else
             {
                 var closestBefore = Menstruations.GetClosestPeriodBeforeDay(date);
-                if (closestBefore != null)
+                if (closestBefore != null && period == null)
                 {
                     sb.AppendLine();
                     sb.Append("Это " + ((date - closestBefore.StartDay).Days + 1).ToString() + "-й день цикла.");

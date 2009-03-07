@@ -254,9 +254,9 @@ namespace WomenCalendar
                 Application.EnableVisualStyles();
                 Application.SetCompatibleTextRenderingDefault(false);
 
-                ApplicationForm = new MainForm();
-
                 Settings = ApplicationSettings.Read(SettingsFileName);
+
+                ApplicationForm = new MainForm();
 
                 if (args.Length == 0 || !File.Exists(args[0]) || !LoadWoman(args[0])) // command line
                 {

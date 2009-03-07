@@ -29,6 +29,7 @@ namespace WomenCalendar
 
         public double[] GetHealthesSince(DateTime date, int count)
         {
+            if (count <= 0) return new double[0];
             double[] ret = new double[count];
             DateTime d = date.Date;
             for (int i = 0; i < count; i++, d = d.AddDays(1))

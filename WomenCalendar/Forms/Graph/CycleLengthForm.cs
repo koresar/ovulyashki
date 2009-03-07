@@ -25,6 +25,9 @@ namespace WomenCalendar
                     dateTo.Value = dateFrom.Value;
                 }
             }
+
+            this.dateFrom.ValueChanged += new System.EventHandler(this.dateFrom_ValueChanged);
+            this.dateTo.ValueChanged += new System.EventHandler(this.dateTo_ValueChanged);
         }
 
         private bool InSelectedRange(DateTime d)
@@ -150,13 +153,30 @@ namespace WomenCalendar
 
         private void InitializeComponent()
         {
+            this.splitContainer.Panel1.SuspendLayout();
+            this.splitContainer.Panel2.SuspendLayout();
+            this.splitContainer.SuspendLayout();
             this.SuspendLayout();
             // 
-            // HealthForm
+            // splitContainer
+            // 
+            // 
+            // CycleLengthForm
             // 
             this.ClientSize = new System.Drawing.Size(638, 448);
-            this.Name = "HealthForm";
+            this.Name = "CycleLengthForm";
+            this.Load += new System.EventHandler(this.CycleLengthForm_Load);
+            this.splitContainer.Panel1.ResumeLayout(false);
+            this.splitContainer.Panel1.PerformLayout();
+            this.splitContainer.Panel2.ResumeLayout(false);
+            this.splitContainer.ResumeLayout(false);
             this.ResumeLayout(false);
+
+        }
+
+        private void CycleLengthForm_Load(object sender, EventArgs e)
+        {
+            RedrawGraph();
         }
     }
 }
