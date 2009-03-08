@@ -68,7 +68,7 @@ namespace WomenCalendar
             {
                 var p1 = Program.CurrentWoman.Menstruations[i];
                 var p2 = i == Program.CurrentWoman.Menstruations.Count - 1 ? null : Program.CurrentWoman.Menstruations[i + 1];
-                int days = p2 == null ? Program.CurrentWoman.ManualPeriodLength : ((p2.StartDay - p1.StartDay).Days - 1);
+                int days = p2 == null ? Program.CurrentWoman.ManualPeriodLength : ((p2.StartDay - p1.StartDay).Days);
                 var start = p1.StartDay;
                 var stop = p2 == null ? p1.StartDay.AddDays(Program.CurrentWoman.ManualPeriodLength) : p2.StartDay.AddDays(-1);
                 int index = cmbPeriods.Items.Add(new PeriodDisplayItem(i + 1, start, stop, days));

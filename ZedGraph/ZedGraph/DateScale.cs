@@ -849,7 +849,7 @@ namespace ZedGraph
 			if ( _format == null )
 				_format = Scale.Default.Format;
 
-			return XDate.ToString( dVal, _format );
+			return XDate.ToString( dVal, _format ) + (FormatAdditional == null ? string.Empty : FormatAdditional[dVal]);
 		}
 
 		/// <summary>

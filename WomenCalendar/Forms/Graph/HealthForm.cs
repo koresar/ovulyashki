@@ -48,7 +48,11 @@ namespace WomenCalendar
             myPane.YAxis.Scale.MinorStep = 1;
             myPane.YAxis.Scale.MaxAuto = false;
             myPane.YAxis.Scale.Max = 10.0;
-            myPane.YAxis.Scale.Min = 0.0;
+            myPane.YAxis.Scale.Min = 0;
+            //myPane.YAxis.Scale.IsSkipFirstLabel = true;
+            myPane.YAxis.Scale.MaxAuto = false;
+            myPane.YAxis.Scale.MinAuto = false;
+            myPane.YAxis.Scale.IsVisible = true;
 
             myPane.XAxis.MinorGrid.IsVisible = false;
             myPane.YAxis.MinorGrid.IsVisible = false;

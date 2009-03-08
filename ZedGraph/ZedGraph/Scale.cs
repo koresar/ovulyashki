@@ -24,6 +24,7 @@ using System.Runtime.Serialization;
 using System.Security.Permissions;
 using System.Drawing;
 using System.Drawing.Drawing2D;
+using System.Collections.Generic;
 
 namespace ZedGraph
 {
@@ -1342,6 +1343,8 @@ namespace ZedGraph
 			get { return _format; }
 			set { _format = value; _formatAuto = false; }
 		}
+
+        public Dictionary<double, string> FormatAdditional { get; set; }
 
 		/// <summary>
 		/// The magnitude multiplier for scale values.

@@ -263,6 +263,7 @@ namespace WomenCalendar
 
             if (x == null)
             {
+                myPane.XAxis.Scale.FormatAdditional = new Dictionary<double, string>();
                 for (int i = 0; i < y.Length; i++)
                 {
                     if (y[i] == 0) continue;
@@ -273,6 +274,7 @@ namespace WomenCalendar
                     list.Add(point);
                     if (y[i] > MaxYValue) MaxYValue = y[i];
                     if (y[i] < MinYValue) MinYValue = y[i];
+                    myPane.XAxis.Scale.FormatAdditional[point.X] = " - " + (i + 1).ToString();
                 }
                 var curve = myPane.AddCurve("Main", list, Color.Blue, SymbolType.Circle);
                 curve.Line.Width = 2.0F;
