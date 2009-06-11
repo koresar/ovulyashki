@@ -55,8 +55,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\libs\ICSharpCode.SharpZipLib.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-    <Reference Include="Microsoft.VisualStudio.TeamSystem.Data.UnitTesting, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Design" />
@@ -85,7 +83,6 @@
     <Compile Include="Controls\ColorSlider.designer.cs">
       <DependentUpon>ColorSlider.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\DatabaseSetup.cs" />
     <Compile Include="Controls\DayCellClickEventArgs.cs" />
     <Compile Include="Controls\DayCellControl.cs">
       <SubType>UserControl</SubType>
