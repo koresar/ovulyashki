@@ -73,6 +73,8 @@ namespace WomenCalendar
 
         public HealthCollection Health { get; set; }
 
+        public SchedulesCollection Schedules { get; set; }
+
         public Woman()
         {
             Notes = new NotesCollection();

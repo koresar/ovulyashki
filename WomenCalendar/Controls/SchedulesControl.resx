@@ -117,29 +117,19 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <metadata name="toolTip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>183, 17</value>
+  <metadata name="Description.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
   </metadata>
-  <metadata name="toolTipCF.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>268, 17</value>
+  <metadata name="Start.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
   </metadata>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="btnSchedulesEdit.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAAAeFJREFUOE+9k11I
-        k3EUh4UiDRExkVbqXErvoI+LLBySwnIVFSFErRQcgi1iFBg1GmW1ChSaRTHJSGFivSzKnAtmiMRclNtM
-        K/YOY5GLGOEHQXThlVpPL0Z303fddK7P83B+5/8/aWkp1i5VBgNHtdi3ZqNevYIUsT9t+wwG3nlFxlrr
-        CZ/ZRPfO3NQleyoreRMIkEgkiEoS4XuXeF6dz+3NWcpTbNiWTrtoY2ZmCkmGY7EYwVCIsOM0j3U5ywuE
-        8kzqHGs569qOw1ODND62KInH44wGXyEa1EsLtujXcLJTw9VeA5c9FZjbC7nYXcX0t0mkSIQhOVJJviq5
-        oPzARq759Dj9tdzxG2l0a7G4irGKpbgGbfQ87UUQtMnh3Yd20DFs5tF7G+LbczgGq2nq03HdV8WFnjLq
-        WtQyLCSHNQV5fPzah3/iLs8+tHB/uAFnoJaO4AlZdJCGtiJy1q1cOnd9zX5+zX5mNuHGG71C18gpnkSa
-        eDDaiPVhGbkFq5bfusfdxs+pARbGm/khneflhJP+WCs3fIfJK0pXfvPvn/qZj9qZHzGzII/85cURul5b
-        WV+SrQwbjUZu2o8zN3SMOa+e0K1Sms0CKrXCZ/l7EBaLBZPJxF6dhqxMhaz/dEX/o/k3O2wQhvaFBBAA
-        AAAASUVORK5CYII=
-</value>
-  </data>
-  <metadata name="schedulesContextMenu.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 17</value>
+  <metadata name="Stop.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="Length.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="Pause.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
   </metadata>
 </root>

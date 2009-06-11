@@ -29,11 +29,16 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DayEditForm));
             this.sliderEgestaAmount = new MB.Controls.ColorSlider();
             this.txtBBT = new System.Windows.Forms.TextBox();
             this.lblBBT = new System.Windows.Forms.Label();
             this.txtNote = new System.Windows.Forms.TextBox();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
+            this.rbtCF4 = new System.Windows.Forms.RadioButton();
+            this.rbtCF3 = new System.Windows.Forms.RadioButton();
+            this.rbtCF2 = new System.Windows.Forms.RadioButton();
+            this.rbtCF1 = new System.Windows.Forms.RadioButton();
             this.numMenstruationLength = new System.Windows.Forms.NumericUpDown();
             this.btnPrevDay = new System.Windows.Forms.Button();
             this.btnNextDay = new System.Windows.Forms.Button();
@@ -41,21 +46,34 @@
             this.sliderHealth = new MB.Controls.ColorSlider();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.grpOv = new System.Windows.Forms.GroupBox();
+            this.grpMenstr = new System.Windows.Forms.GroupBox();
             this.pnlSurroundMentsLength = new System.Windows.Forms.Panel();
             this.lblMenstruationLength = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.verticalLabel1 = new WomenCalendar.VerticalLabel();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.grpNote = new System.Windows.Forms.GroupBox();
+            this.grpBT = new System.Windows.Forms.GroupBox();
+            this.grpHealth = new System.Windows.Forms.GroupBox();
             this.chkMentrustions = new System.Windows.Forms.CheckBox();
+            this.grpSchedule = new System.Windows.Forms.GroupBox();
+            this.btnEditCompleteSchedulesList = new System.Windows.Forms.Button();
+            this.lblSchedulesComplete = new System.Windows.Forms.Label();
+            this.lblSchedulesPlanned = new System.Windows.Forms.Label();
+            this.txtSchedulesComplete = new System.Windows.Forms.TextBox();
+            this.btnSchedulesEdit = new System.Windows.Forms.Button();
+            this.txtSchedulesPlanned = new System.Windows.Forms.TextBox();
+            this.schedulesContextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.grpCF = new System.Windows.Forms.GroupBox();
+            this.toolTipCF = new System.Windows.Forms.ToolTip(this.components);
+            this.chkSchedules = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.numMenstruationLength)).BeginInit();
-            this.grpOv.SuspendLayout();
+            this.grpMenstr.SuspendLayout();
             this.pnlSurroundMentsLength.SuspendLayout();
-            this.groupBox2.SuspendLayout();
-            this.groupBox3.SuspendLayout();
-            this.groupBox4.SuspendLayout();
+            this.grpNote.SuspendLayout();
+            this.grpBT.SuspendLayout();
+            this.grpHealth.SuspendLayout();
+            this.grpSchedule.SuspendLayout();
+            this.grpCF.SuspendLayout();
             this.SuspendLayout();
             // 
             // sliderEgestaAmount
@@ -107,7 +125,7 @@
             this.txtNote.Location = new System.Drawing.Point(8, 23);
             this.txtNote.Multiline = true;
             this.txtNote.Name = "txtNote";
-            this.txtNote.Size = new System.Drawing.Size(267, 150);
+            this.txtNote.Size = new System.Drawing.Size(267, 120);
             this.txtNote.TabIndex = 0;
             this.txtNote.Leave += new System.EventHandler(this.txtNote_Leave);
             // 
@@ -117,6 +135,66 @@
             this.toolTip.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Info;
             this.toolTip.UseAnimation = false;
             this.toolTip.UseFading = false;
+            // 
+            // rbtCF4
+            // 
+            this.rbtCF4.Appearance = System.Windows.Forms.Appearance.Button;
+            this.rbtCF4.Location = new System.Drawing.Point(106, 13);
+            this.rbtCF4.Name = "rbtCF4";
+            this.rbtCF4.Size = new System.Drawing.Size(24, 24);
+            this.rbtCF4.TabIndex = 10014;
+            this.rbtCF4.TabStop = true;
+            this.rbtCF4.Tag = "4";
+            this.rbtCF4.Text = "В";
+            this.rbtCF4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.toolTipCF.SetToolTip(this.rbtCF4, "Водянистая");
+            this.rbtCF4.UseVisualStyleBackColor = true;
+            this.rbtCF4.Click += new System.EventHandler(this.rbtCF_Click);
+            // 
+            // rbtCF3
+            // 
+            this.rbtCF3.Appearance = System.Windows.Forms.Appearance.Button;
+            this.rbtCF3.Location = new System.Drawing.Point(74, 13);
+            this.rbtCF3.Name = "rbtCF3";
+            this.rbtCF3.Size = new System.Drawing.Size(24, 24);
+            this.rbtCF3.TabIndex = 10014;
+            this.rbtCF3.TabStop = true;
+            this.rbtCF3.Tag = "3";
+            this.rbtCF3.Text = "Я";
+            this.rbtCF3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.toolTipCF.SetToolTip(this.rbtCF3, "Яичный белок");
+            this.rbtCF3.UseVisualStyleBackColor = true;
+            this.rbtCF3.Click += new System.EventHandler(this.rbtCF_Click);
+            // 
+            // rbtCF2
+            // 
+            this.rbtCF2.Appearance = System.Windows.Forms.Appearance.Button;
+            this.rbtCF2.Location = new System.Drawing.Point(42, 13);
+            this.rbtCF2.Name = "rbtCF2";
+            this.rbtCF2.Size = new System.Drawing.Size(24, 24);
+            this.rbtCF2.TabIndex = 10014;
+            this.rbtCF2.TabStop = true;
+            this.rbtCF2.Tag = "2";
+            this.rbtCF2.Text = "К";
+            this.rbtCF2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.toolTipCF.SetToolTip(this.rbtCF2, "Клейкая");
+            this.rbtCF2.UseVisualStyleBackColor = true;
+            this.rbtCF2.Click += new System.EventHandler(this.rbtCF_Click);
+            // 
+            // rbtCF1
+            // 
+            this.rbtCF1.Appearance = System.Windows.Forms.Appearance.Button;
+            this.rbtCF1.Location = new System.Drawing.Point(10, 13);
+            this.rbtCF1.Name = "rbtCF1";
+            this.rbtCF1.Size = new System.Drawing.Size(24, 24);
+            this.rbtCF1.TabIndex = 10014;
+            this.rbtCF1.TabStop = true;
+            this.rbtCF1.Tag = "1";
+            this.rbtCF1.Text = "Л";
+            this.rbtCF1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.toolTipCF.SetToolTip(this.rbtCF1, "Липкая");
+            this.rbtCF1.UseVisualStyleBackColor = true;
+            this.rbtCF1.Click += new System.EventHandler(this.rbtCF_Click);
             // 
             // numMenstruationLength
             // 
@@ -164,7 +242,7 @@
             // chkHadSex
             // 
             this.chkHadSex.AutoSize = true;
-            this.chkHadSex.Location = new System.Drawing.Point(12, 237);
+            this.chkHadSex.Location = new System.Drawing.Point(12, 202);
             this.chkHadSex.Name = "chkHadSex";
             this.chkHadSex.Size = new System.Drawing.Size(184, 17);
             this.chkHadSex.TabIndex = 0;
@@ -208,17 +286,17 @@
             this.label3.TabIndex = 10007;
             this.label3.Text = "Хорошее";
             // 
-            // grpOv
+            // grpMenstr
             // 
-            this.grpOv.Controls.Add(this.pnlSurroundMentsLength);
-            this.grpOv.Controls.Add(this.verticalLabel1);
-            this.grpOv.Controls.Add(this.sliderEgestaAmount);
-            this.grpOv.Location = new System.Drawing.Point(323, 42);
-            this.grpOv.Name = "grpOv";
-            this.grpOv.Size = new System.Drawing.Size(90, 243);
-            this.grpOv.TabIndex = 10008;
-            this.grpOv.TabStop = false;
-            this.grpOv.Text = "Менструашки";
+            this.grpMenstr.Controls.Add(this.pnlSurroundMentsLength);
+            this.grpMenstr.Controls.Add(this.verticalLabel1);
+            this.grpMenstr.Controls.Add(this.sliderEgestaAmount);
+            this.grpMenstr.Location = new System.Drawing.Point(323, 42);
+            this.grpMenstr.Name = "grpMenstr";
+            this.grpMenstr.Size = new System.Drawing.Size(90, 243);
+            this.grpMenstr.TabIndex = 10008;
+            this.grpMenstr.TabStop = false;
+            this.grpMenstr.Text = "Менструашки";
             // 
             // pnlSurroundMentsLength
             // 
@@ -265,42 +343,43 @@
             this.verticalLabel1.Text = "Интенсивность";
             this.verticalLabel1.TextDrawMode = WomenCalendar.DrawMode.BottomUp;
             // 
-            // groupBox2
+            // grpNote
             // 
-            this.groupBox2.Controls.Add(this.txtNote);
-            this.groupBox2.Location = new System.Drawing.Point(5, 42);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(283, 179);
-            this.groupBox2.TabIndex = 10009;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Заметка к этому дню";
+            this.grpNote.Controls.Add(this.txtNote);
+            this.grpNote.Location = new System.Drawing.Point(5, 42);
+            this.grpNote.Name = "grpNote";
+            this.grpNote.Size = new System.Drawing.Size(283, 149);
+            this.grpNote.TabIndex = 10009;
+            this.grpNote.TabStop = false;
+            this.grpNote.Text = "Заметка к этому дню";
             // 
-            // groupBox3
+            // grpBT
             // 
-            this.groupBox3.Controls.Add(this.txtBBT);
-            this.groupBox3.Location = new System.Drawing.Point(5, 260);
-            this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(170, 43);
-            this.groupBox3.TabIndex = 10010;
-            this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "Базальная температура тела";
+            this.grpBT.Controls.Add(this.txtBBT);
+            this.grpBT.Location = new System.Drawing.Point(5, 277);
+            this.grpBT.Name = "grpBT";
+            this.grpBT.Size = new System.Drawing.Size(170, 43);
+            this.grpBT.TabIndex = 10010;
+            this.grpBT.TabStop = false;
+            this.grpBT.Text = "Базальная температура тела";
             // 
-            // groupBox4
+            // grpHealth
             // 
-            this.groupBox4.BackColor = System.Drawing.Color.Transparent;
-            this.groupBox4.Controls.Add(this.sliderHealth);
-            this.groupBox4.Controls.Add(this.label2);
-            this.groupBox4.Controls.Add(this.label3);
-            this.groupBox4.Location = new System.Drawing.Point(5, 309);
-            this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(267, 46);
-            this.groupBox4.TabIndex = 10011;
-            this.groupBox4.TabStop = false;
-            this.groupBox4.Text = "Самочувствие";
+            this.grpHealth.BackColor = System.Drawing.Color.Transparent;
+            this.grpHealth.Controls.Add(this.sliderHealth);
+            this.grpHealth.Controls.Add(this.label2);
+            this.grpHealth.Controls.Add(this.label3);
+            this.grpHealth.Location = new System.Drawing.Point(5, 225);
+            this.grpHealth.Name = "grpHealth";
+            this.grpHealth.Size = new System.Drawing.Size(267, 46);
+            this.grpHealth.TabIndex = 10011;
+            this.grpHealth.TabStop = false;
+            this.grpHealth.Text = "Самочувствие";
             // 
             // chkMentrustions
             // 
             this.chkMentrustions.Appearance = System.Windows.Forms.Appearance.Button;
+            this.chkMentrustions.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.chkMentrustions.Image = global::WomenCalendar.Properties.Resources.drop_Image;
             this.chkMentrustions.Location = new System.Drawing.Point(292, 126);
             this.chkMentrustions.Name = "chkMentrustions";
@@ -312,43 +391,173 @@
             this.chkMentrustions.MouseEnter += new System.EventHandler(this.chkMentrustions_MouseEnter);
             this.chkMentrustions.CheckedChanged += new System.EventHandler(this.chkMentrustions_CheckedChanged);
             // 
+            // grpSchedule
+            // 
+            this.grpSchedule.Controls.Add(this.btnEditCompleteSchedulesList);
+            this.grpSchedule.Controls.Add(this.lblSchedulesComplete);
+            this.grpSchedule.Controls.Add(this.lblSchedulesPlanned);
+            this.grpSchedule.Controls.Add(this.txtSchedulesComplete);
+            this.grpSchedule.Controls.Add(this.btnSchedulesEdit);
+            this.grpSchedule.Controls.Add(this.txtSchedulesPlanned);
+            this.grpSchedule.Location = new System.Drawing.Point(5, 352);
+            this.grpSchedule.Name = "grpSchedule";
+            this.grpSchedule.Size = new System.Drawing.Size(314, 76);
+            this.grpSchedule.TabIndex = 10010;
+            this.grpSchedule.TabStop = false;
+            this.grpSchedule.Text = "Расписание этого дня";
+            this.grpSchedule.Visible = false;
+            // 
+            // btnEditCompleteSchedulesList
+            // 
+            this.btnEditCompleteSchedulesList.Location = new System.Drawing.Point(287, 46);
+            this.btnEditCompleteSchedulesList.Name = "btnEditCompleteSchedulesList";
+            this.btnEditCompleteSchedulesList.Size = new System.Drawing.Size(23, 23);
+            this.btnEditCompleteSchedulesList.TabIndex = 3;
+            this.btnEditCompleteSchedulesList.Text = ">";
+            this.btnEditCompleteSchedulesList.UseVisualStyleBackColor = true;
+            this.btnEditCompleteSchedulesList.MouseLeave += new System.EventHandler(this.btnEditSchedulesCompleteList_MouseLeave);
+            this.btnEditCompleteSchedulesList.Click += new System.EventHandler(this.btnEditCompleteSchedulesList_Click);
+            this.btnEditCompleteSchedulesList.MouseEnter += new System.EventHandler(this.btnEditSchedulesCompleteList_MouseEnter);
+            // 
+            // lblSchedulesComplete
+            // 
+            this.lblSchedulesComplete.Location = new System.Drawing.Point(5, 51);
+            this.lblSchedulesComplete.Name = "lblSchedulesComplete";
+            this.lblSchedulesComplete.Size = new System.Drawing.Size(91, 17);
+            this.lblSchedulesComplete.TabIndex = 2;
+            this.lblSchedulesComplete.Text = "Сделано:";
+            this.lblSchedulesComplete.MouseLeave += new System.EventHandler(this.txtSchedulesComplete_MouseLeave);
+            this.lblSchedulesComplete.MouseEnter += new System.EventHandler(this.txtSchedulesComplete_MouseEnter);
+            // 
+            // lblSchedulesPlanned
+            // 
+            this.lblSchedulesPlanned.Location = new System.Drawing.Point(5, 20);
+            this.lblSchedulesPlanned.Name = "lblSchedulesPlanned";
+            this.lblSchedulesPlanned.Size = new System.Drawing.Size(91, 17);
+            this.lblSchedulesPlanned.TabIndex = 2;
+            this.lblSchedulesPlanned.Text = "Запланировано:";
+            this.lblSchedulesPlanned.MouseLeave += new System.EventHandler(this.txtSchedulesPlanned_MouseLeave);
+            this.lblSchedulesPlanned.MouseEnter += new System.EventHandler(this.txtSchedulesPlanned_MouseEnter);
+            // 
+            // txtSchedulesComplete
+            // 
+            this.txtSchedulesComplete.CausesValidation = false;
+            this.txtSchedulesComplete.Location = new System.Drawing.Point(99, 48);
+            this.txtSchedulesComplete.MaxLength = 5;
+            this.txtSchedulesComplete.Name = "txtSchedulesComplete";
+            this.txtSchedulesComplete.ReadOnly = true;
+            this.txtSchedulesComplete.Size = new System.Drawing.Size(184, 20);
+            this.txtSchedulesComplete.TabIndex = 0;
+            this.txtSchedulesComplete.MouseLeave += new System.EventHandler(this.txtSchedulesComplete_MouseLeave);
+            this.txtSchedulesComplete.Leave += new System.EventHandler(this.txtBBT_Leave);
+            this.txtSchedulesComplete.MouseEnter += new System.EventHandler(this.txtSchedulesComplete_MouseEnter);
+            // 
+            // btnSchedulesEdit
+            // 
+            this.btnSchedulesEdit.Image = ((System.Drawing.Image)(resources.GetObject("btnSchedulesEdit.Image")));
+            this.btnSchedulesEdit.Location = new System.Drawing.Point(287, 15);
+            this.btnSchedulesEdit.Name = "btnSchedulesEdit";
+            this.btnSchedulesEdit.Size = new System.Drawing.Size(23, 23);
+            this.btnSchedulesEdit.TabIndex = 1;
+            this.btnSchedulesEdit.UseVisualStyleBackColor = true;
+            this.btnSchedulesEdit.MouseLeave += new System.EventHandler(this.btnSchedulesEdit_MouseLeave);
+            this.btnSchedulesEdit.Click += new System.EventHandler(this.btnSchedulesEdit_Click);
+            this.btnSchedulesEdit.MouseEnter += new System.EventHandler(this.btnSchedulesEdit_MouseEnter);
+            // 
+            // txtSchedulesPlanned
+            // 
+            this.txtSchedulesPlanned.CausesValidation = false;
+            this.txtSchedulesPlanned.Location = new System.Drawing.Point(99, 17);
+            this.txtSchedulesPlanned.MaxLength = 5;
+            this.txtSchedulesPlanned.Name = "txtSchedulesPlanned";
+            this.txtSchedulesPlanned.ReadOnly = true;
+            this.txtSchedulesPlanned.Size = new System.Drawing.Size(184, 20);
+            this.txtSchedulesPlanned.TabIndex = 0;
+            this.txtSchedulesPlanned.MouseLeave += new System.EventHandler(this.txtSchedulesPlanned_MouseLeave);
+            this.txtSchedulesPlanned.MouseEnter += new System.EventHandler(this.txtSchedulesPlanned_MouseEnter);
+            // 
+            // schedulesContextMenu
+            // 
+            this.schedulesContextMenu.Name = "schedulesContextMenu";
+            this.schedulesContextMenu.Size = new System.Drawing.Size(61, 4);
+            // 
+            // grpCF
+            // 
+            this.grpCF.Controls.Add(this.rbtCF4);
+            this.grpCF.Controls.Add(this.rbtCF3);
+            this.grpCF.Controls.Add(this.rbtCF2);
+            this.grpCF.Controls.Add(this.rbtCF1);
+            this.grpCF.Location = new System.Drawing.Point(181, 277);
+            this.grpCF.Name = "grpCF";
+            this.grpCF.Size = new System.Drawing.Size(138, 43);
+            this.grpCF.TabIndex = 10010;
+            this.grpCF.TabStop = false;
+            this.grpCF.Text = "ЦЖ";
+            this.grpCF.Visible = false;
+            // 
+            // toolTipCF
+            // 
+            this.toolTipCF.ToolTipTitle = "Цервикальная жидкость";
+            // 
+            // chkSchedules
+            // 
+            this.chkSchedules.Appearance = System.Windows.Forms.Appearance.Button;
+            this.chkSchedules.Location = new System.Drawing.Point(5, 327);
+            this.chkSchedules.Name = "chkSchedules";
+            this.chkSchedules.Size = new System.Drawing.Size(314, 22);
+            this.chkSchedules.TabIndex = 10014;
+            this.chkSchedules.Text = "Показать/скрыть расписание на этот день";
+            this.chkSchedules.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.chkSchedules.UseVisualStyleBackColor = true;
+            this.chkSchedules.Visible = false;
+            // 
             // DayEditForm
             // 
             this.AcceptButton = null;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(418, 414);
+            this.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.ClientSize = new System.Drawing.Size(418, 360);
+            this.Controls.Add(this.chkSchedules);
             this.Controls.Add(this.chkMentrustions);
             this.Controls.Add(this.btnNextDay);
             this.Controls.Add(this.chkHadSex);
             this.Controls.Add(this.btnPrevDay);
             this.Controls.Add(this.lblBBT);
-            this.Controls.Add(this.grpOv);
-            this.Controls.Add(this.groupBox2);
-            this.Controls.Add(this.groupBox3);
-            this.Controls.Add(this.groupBox4);
+            this.Controls.Add(this.grpMenstr);
+            this.Controls.Add(this.grpNote);
+            this.Controls.Add(this.grpSchedule);
+            this.Controls.Add(this.grpCF);
+            this.Controls.Add(this.grpBT);
+            this.Controls.Add(this.grpHealth);
             this.Name = "DayEditForm";
             this.Text = "Изменить день";
             this.Load += new System.EventHandler(this.DayEditForm_Load);
             this.Shown += new System.EventHandler(this.DayEditForm_Shown);
-            this.Controls.SetChildIndex(this.groupBox4, 0);
-            this.Controls.SetChildIndex(this.groupBox3, 0);
-            this.Controls.SetChildIndex(this.groupBox2, 0);
-            this.Controls.SetChildIndex(this.grpOv, 0);
+            this.Controls.SetChildIndex(this.grpHealth, 0);
+            this.Controls.SetChildIndex(this.grpBT, 0);
+            this.Controls.SetChildIndex(this.grpCF, 0);
+            this.Controls.SetChildIndex(this.grpSchedule, 0);
+            this.Controls.SetChildIndex(this.grpNote, 0);
+            this.Controls.SetChildIndex(this.grpMenstr, 0);
             this.Controls.SetChildIndex(this.lblBBT, 0);
             this.Controls.SetChildIndex(this.btnPrevDay, 0);
             this.Controls.SetChildIndex(this.chkHadSex, 0);
             this.Controls.SetChildIndex(this.btnNextDay, 0);
             this.Controls.SetChildIndex(this.chkMentrustions, 0);
+            this.Controls.SetChildIndex(this.chkSchedules, 0);
             ((System.ComponentModel.ISupportInitialize)(this.numMenstruationLength)).EndInit();
-            this.grpOv.ResumeLayout(false);
+            this.grpMenstr.ResumeLayout(false);
             this.pnlSurroundMentsLength.ResumeLayout(false);
             this.pnlSurroundMentsLength.PerformLayout();
-            this.groupBox2.ResumeLayout(false);
-            this.groupBox2.PerformLayout();
-            this.groupBox3.ResumeLayout(false);
-            this.groupBox3.PerformLayout();
-            this.groupBox4.ResumeLayout(false);
+            this.grpNote.ResumeLayout(false);
+            this.grpNote.PerformLayout();
+            this.grpBT.ResumeLayout(false);
+            this.grpBT.PerformLayout();
+            this.grpHealth.ResumeLayout(false);
+            this.grpSchedule.ResumeLayout(false);
+            this.grpSchedule.PerformLayout();
+            this.grpCF.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -367,16 +576,31 @@
         private MB.Controls.ColorSlider sliderHealth;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.GroupBox grpOv;
-        private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.GroupBox groupBox3;
-        private System.Windows.Forms.GroupBox groupBox4;
+        private System.Windows.Forms.GroupBox grpMenstr;
+        private System.Windows.Forms.GroupBox grpNote;
+        private System.Windows.Forms.GroupBox grpBT;
+        private System.Windows.Forms.GroupBox grpHealth;
         private VerticalLabel verticalLabel1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.NumericUpDown numMenstruationLength;
         private System.Windows.Forms.Label lblMenstruationLength;
         private System.Windows.Forms.CheckBox chkMentrustions;
         private System.Windows.Forms.Panel pnlSurroundMentsLength;
+        private System.Windows.Forms.GroupBox grpSchedule;
+        private System.Windows.Forms.Button btnSchedulesEdit;
+        private System.Windows.Forms.TextBox txtSchedulesPlanned;
+        private System.Windows.Forms.Label lblSchedulesPlanned;
+        private System.Windows.Forms.Label lblSchedulesComplete;
+        private System.Windows.Forms.TextBox txtSchedulesComplete;
+        private System.Windows.Forms.Button btnEditCompleteSchedulesList;
+        private System.Windows.Forms.ContextMenuStrip schedulesContextMenu;
+        private System.Windows.Forms.GroupBox grpCF;
+        private System.Windows.Forms.RadioButton rbtCF4;
+        private System.Windows.Forms.RadioButton rbtCF3;
+        private System.Windows.Forms.RadioButton rbtCF2;
+        private System.Windows.Forms.RadioButton rbtCF1;
+        private System.Windows.Forms.ToolTip toolTipCF;
+        private System.Windows.Forms.CheckBox chkSchedules;
 
     }
 }

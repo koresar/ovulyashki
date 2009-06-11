@@ -55,7 +55,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\libs\ICSharpCode.SharpZipLib.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+    <Reference Include="Microsoft.VisualStudio.TeamSystem.Data.UnitTesting, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Design" />
     <Reference Include="System.Data" />
     <Reference Include="System.Deployment" />
@@ -73,6 +76,8 @@
     <Compile Include="BusinessLogic\HoroscopeDatePair.cs" />
     <Compile Include="BusinessLogic\Report\ReportWriter.cs" />
     <Compile Include="BusinessLogic\Report\XlsWriter.cs" />
+    <Compile Include="BusinessLogic\Woman\Schedule.cs" />
+    <Compile Include="BusinessLogic\Woman\SchedulesCollection.cs" />
     <Compile Include="BusinessLogic\Woman\OneDayInfo.cs" />
     <Compile Include="Controls\ColorSlider.cs">
       <SubType>Component</SubType>
@@ -80,6 +85,7 @@
     <Compile Include="Controls\ColorSlider.designer.cs">
       <DependentUpon>ColorSlider.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\DatabaseSetup.cs" />
     <Compile Include="Controls\DayCellClickEventArgs.cs" />
     <Compile Include="Controls\DayCellControl.cs">
       <SubType>UserControl</SubType>
@@ -93,7 +99,19 @@
     <Compile Include="Controls\DayCellPopupControl.Designer.cs">
       <DependentUpon>DayCellPopupControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\SchedulesControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\SchedulesControl.Designer.cs">
+      <DependentUpon>SchedulesControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\FocusDateChangedEventArgs.cs" />
+    <Compile Include="Controls\ScheduleEditControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\ScheduleEditControl.Designer.cs">
+      <DependentUpon>ScheduleEditControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\VerticalLabel.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -105,6 +123,12 @@
     </Compile>
     <Compile Include="Forms\BaseForm.cs">
       <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\SchedulesEditForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\SchedulesEditForm.Designer.cs">
+      <DependentUpon>SchedulesEditForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Graph\BBTForm.cs">
       <SubType>Form</SubType>
@@ -228,6 +252,7 @@
     <None Include="Resources\prev.Image.bmp" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Controls\app.config" />
     <None Include="Resources\drop.bmp" />
     <EmbeddedResource Include="Controls\ColorSlider.resx">
       <DependentUpon>ColorSlider.cs</DependentUpon>
@@ -235,6 +260,14 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\DayCellPopupControl.resx">
       <DependentUpon>DayCellPopupControl.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\ScheduleEditControl.resx">
+      <DependentUpon>ScheduleEditControl.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\SchedulesControl.resx">
+      <DependentUpon>SchedulesControl.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\AboutForm.resx">
@@ -251,6 +284,10 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\DayEditForm.resx">
       <DependentUpon>DayEditForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\SchedulesEditForm.resx">
+      <DependentUpon>SchedulesEditForm.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Graph\CycleLengthForm.resx">
@@ -291,6 +328,7 @@
     <None Include="Resources\drop.Image.gif" />
     <None Include="Resources\about.png" />
     <Content Include="Resources\drop16.bmp" />
+    <None Include="Resources\editGreen16x16.png" />
     <None Include="Resources\printPreviewGreen.png" />
     <None Include="Resources\printGreen.png" />
     <None Include="Resources\EULA.rtf" />

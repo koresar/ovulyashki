@@ -22,12 +22,13 @@ namespace WomenCalendar
             public bool HasMenstr;
             public decimal MenstrLength;
             public int Egesta;
+            public int CF;
 
             public override bool Equals(object obj)
             {
                 DayData d = obj as DayData;
                 return d.BBT == BBT && d.HadSex == HadSex && d.Health == Health && d.Note == Note && 
-                    d.HasMenstr == HasMenstr && d.MenstrLength == MenstrLength && d.Egesta == Egesta;
+                    d.HasMenstr == HasMenstr && d.MenstrLength == MenstrLength && d.Egesta == Egesta && d.CF == CF;
             }
         }
 
@@ -36,6 +37,7 @@ namespace WomenCalendar
         private DateTime date;
         private DayEditFocus defaultFocus;
         private DayEditFocus lastFocus;
+        private int currentCF;
 
         public DayEditForm(DayCellControl dayCell)
             : this(dayCell, DayEditFocus.Note)
@@ -103,6 +105,8 @@ namespace WomenCalendar
             DayCell.OwnerOneMonthControl.OwnerMonthsControl.Redraw(); // redraw whole calendar
         }
 
+        #region Tooltip functions
+
         private void ShowEgestaTooltip()
         {
             ShowTooltip("Количество выделений", DayCellPopupControl.EgestasNames[EgestaSliderValue], sliderEgestaAmount);
@@ -119,6 +123,30 @@ namespace WomenCalendar
             ShowTooltip("Длительность менструашек", "Укажи сколько дней они шли!", numMenstruationLength);
         }
 
+        private void ShowEditSchedulesTooltip()
+        {
+            ShowTooltip("Кнопка редактирования расписаний", 
+                "Здесь можно отредактировать список расписаний", 
+                btnSchedulesEdit);
+        }
+
+        private void ShowPlannedSchedulesTooltip()
+        {
+            ShowTooltip("Это те лекарства, которые надо принять", txtSchedulesPlanned.Text, txtSchedulesPlanned);
+        }
+
+        private void ShowTakenSchedulesTooltip()
+        {
+            ShowTooltip("Это лекарства, которые ты приняла в этот день", txtSchedulesComplete.Text, txtSchedulesComplete);
+        }
+
+        private void ShowEditTakenSchedulesListTooltip()
+        {
+            ShowTooltip("Кнопка редактирования списка принятых лекарств", 
+                "Нажми эту кнопку, чтобы добавить или удалить лекарство из списка.",
+                txtSchedulesComplete);
+        }
+
         private void HideTooltip(IWin32Window control)
         {
             toolTip.Hide(control);
@@ -129,6 +157,8 @@ namespace WomenCalendar
             toolTip.ToolTipTitle = caption;
             toolTip.Show(text, control, control.Width, control.Height);
         }
+
+        #endregion
 
         private void LoadForm()
         {
@@ -161,6 +191,9 @@ namespace WomenCalendar
             sliderHealth.Value = w.Health[date];
 
             initialData = CollectDayData();
+
+            UpdatePlannedSchedulesList();
+            UpdateCompleteSchedulesList();
         }
 
         private DayData CollectDayData()
@@ -174,6 +207,7 @@ namespace WomenCalendar
                 HasMenstr = chkMentrustions.Checked,
                 MenstrLength = numMenstruationLength.Value,
                 Egesta = EgestaSliderValue,
+                CF = currentCF,
             };
         }
 
@@ -252,16 +286,6 @@ namespace WomenCalendar
             LoadForm();
         }
 
-        private void sliderEgestaAmount_MouseEnter(object sender, EventArgs e)
-        {
-            ShowEgestaTooltip();
-        }
-
-        private void sliderEgestaAmount_MouseLeave(object sender, EventArgs e)
-        {
-            HideTooltip(sliderEgestaAmount);
-        }
-
         private void sliderEgestaAmount_Scroll(object sender, ScrollEventArgs e)
         {
             ShowEgestaTooltip();
@@ -331,7 +355,7 @@ namespace WomenCalendar
                 this.Width = 424;
                 chkMentrustions.Image = global::WomenCalendar.Properties.Resources.dropNot_Image;
                 chkMentrustions.Text = "<<          <<";
-                this.grpOv.Visible = true;
+                this.grpMenstr.Visible = true;
                 if (initialData != null && initialData.HasMenstr != true)
                 { // this is first time we expand the dialog, this means user want to add new menstr. day.
                     SetFocusTo(DayEditFocus.Length);
@@ -342,8 +366,33 @@ namespace WomenCalendar
                 this.Width = 330;
                 chkMentrustions.Image = global::WomenCalendar.Properties.Resources.drop_Image;
                 chkMentrustions.Text = ">>          >>";
-                this.grpOv.Visible = false;
+                this.grpMenstr.Visible = false;
             }
+        }
+
+        private void txtNote_Leave(object sender, EventArgs e)
+        {
+            lastFocus = DayEditFocus.Note;
+        }
+
+        private bool DataChanged
+        {
+            get
+            {
+                return !initialData.Equals(CollectDayData());
+            }
+        }
+
+        #region MouseEnter and MouseLeave event handlers
+
+        private void sliderEgestaAmount_MouseEnter(object sender, EventArgs e)
+        {
+            ShowEgestaTooltip();
+        }
+
+        private void sliderEgestaAmount_MouseLeave(object sender, EventArgs e)
+        {
+            HideTooltip(sliderEgestaAmount);
         }
 
         private void chkMentrustions_MouseEnter(object sender, EventArgs e)
@@ -354,14 +403,6 @@ namespace WomenCalendar
         private void chkMentrustions_MouseLeave(object sender, EventArgs e)
         {
             HideTooltip(chkMentrustions);
-        }
-
-        private bool DataChanged
-        {
-            get
-            {
-                return !initialData.Equals(CollectDayData());
-            }
         }
 
         private void lblMenstruationLength_MouseEnter(object sender, EventArgs e)
@@ -394,9 +435,122 @@ namespace WomenCalendar
             HideTooltip(numMenstruationLength);
         }
 
-        private void txtNote_Leave(object sender, EventArgs e)
+        private void btnSchedulesEdit_MouseEnter(object sender, EventArgs e)
         {
-            lastFocus = DayEditFocus.Note;
+            ShowEditSchedulesTooltip();
+        }
+
+        private void btnSchedulesEdit_MouseLeave(object sender, EventArgs e)
+        {
+            HideTooltip(btnSchedulesEdit);
+        }
+
+        private void txtSchedulesPlanned_MouseEnter(object sender, EventArgs e)
+        {
+            ShowPlannedSchedulesTooltip();
+        }
+
+        private void txtSchedulesPlanned_MouseLeave(object sender, EventArgs e)
+        {
+            HideTooltip(txtSchedulesPlanned);
+        }
+
+        private void txtSchedulesComplete_MouseEnter(object sender, EventArgs e)
+        {
+            ShowTakenSchedulesTooltip();
+        }
+
+        private void txtSchedulesComplete_MouseLeave(object sender, EventArgs e)
+        {
+            HideTooltip(txtSchedulesComplete);
+        }
+
+        private void btnEditSchedulesCompleteList_MouseEnter(object sender, EventArgs e)
+        {
+            ShowEditTakenSchedulesListTooltip();
+        }
+
+        private void btnEditSchedulesCompleteList_MouseLeave(object sender, EventArgs e)
+        {
+            HideTooltip(btnEditCompleteSchedulesList);
+        }
+
+        #endregion
+
+        private void btnSchedulesEdit_Click(object sender, EventArgs e)
+        {
+            if (new SchedulesEditForm(date).ShowDialog() == DialogResult.OK)
+            {
+                UpdatePlannedSchedulesList();
+            }
+        }
+
+        private void btnEditCompleteSchedulesList_Click(object sender, EventArgs e)
+        {
+            schedulesContextMenu.Items.Clear();
+            //foreach ()
+            {
+                //string itemText = drug.Name;
+                //bool isTaken = takenList.Contains(drug);
+                //bool isPlanned = plannedList.Contains(drug);
+                //if (isTaken && !isPlanned)
+                //{
+                //    itemText = itemText + "\nЭто лекарство: Принято";
+                //}
+                //else if (isPlanned && !isTaken)
+                //{
+                //    itemText = itemText + "\nЭто лекарство: Надо бы принять";
+                //}
+                //else if (isPlanned && isTaken)
+                //{
+                //    itemText = itemText + "\nЭто лекарство: Запланировано и принято";
+                //}
+
+                //var item = schedulesContextMenu.Items.Add(itemText, null, schedulesMenu_Click);
+                //item.Tag = drug;
+                //if (!string.IsNullOrEmpty(drug.Description)) item.ToolTipText = drug.Description;
+            }
+
+            schedulesContextMenu.Show(this, this.PointToClient(MousePosition));
+        }
+
+        private void schedulesMenu_Click(object sender, EventArgs e)
+        {
+            //Program.CurrentWoman.TakenDrugs.Switch(date, (sender as ToolStripItem).Tag as Drug);
+            UpdateCompleteSchedulesList();
+        }
+
+        private void UpdateCompleteSchedulesList()
+        {
+            //var list = Program.CurrentWoman.TakenDrugs.At(date);
+            //if (list.Count == 0) return;
+            //var sb = new StringBuilder();
+            //foreach (var drug in list) sb.Append((sb.Length == 0 ? string.Empty : ", ") + drug.Name);
+            //txtDrugsTaken.Text = sb.ToString();
+        }
+
+        private void UpdatePlannedSchedulesList()
+        {
+            //var list = Program.CurrentWoman.PlannedDrugs.At(date);
+            //if (list.Count == 0) return;
+            //var sb = new StringBuilder();
+            //foreach (var drug in list) sb.Append(drug.Name + (sb.Length == 0 ? string.Empty : ", "));
+            //txtDrugsPlanned.Text = sb.ToString();
+        }
+
+        private void rbtCF_Click(object sender, EventArgs e)
+        {
+            var rb = sender as RadioButton;
+            int newCF = int.Parse(rb.Tag as string);
+            if (currentCF == newCF)
+            {
+                rb.Checked = false;
+                currentCF = 0;
+            }
+            else
+            {
+                currentCF = newCF;
+            }
         }
     }
 }

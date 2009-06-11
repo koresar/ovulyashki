@@ -140,6 +140,13 @@ namespace WomenCalendar.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap editGreen16x16 {
+            get {
+                object obj = ResourceManager.GetObject("editGreen16x16", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap exportGreen {
             get {
                 object obj = ResourceManager.GetObject("exportGreen", resourceCulture);
