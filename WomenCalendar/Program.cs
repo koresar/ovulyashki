@@ -8,6 +8,7 @@ using System.ComponentModel;
 using System.Resources;
 using CarlosAg.ExcelXmlWriter;
 using System.Drawing.Drawing2D;
+using WomenCalendar.Forms;
 
 namespace WomenCalendar
 {
@@ -281,20 +282,20 @@ namespace WomenCalendar
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message + Environment.NewLine + ex.StackTrace, "ААА! ОШИБКА! Пошли скриншот этого окошка разработчику!");
+                ErrorForm.Show(ex);
             }
         }
 
         static void Application_ThreadException(object sender, System.Threading.ThreadExceptionEventArgs e)
         {
             var ex = e.Exception;
-            MessageBox.Show(ex.Message + Environment.NewLine + ex.StackTrace, "ААА! ОШИБКА! Пошли скриншот этого окошка разработчику!");
+            ErrorForm.Show(ex);
         }
 
         static void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
         {
             var ex = e.ExceptionObject as Exception;
-            MessageBox.Show(ex.Message + Environment.NewLine + ex.StackTrace, "ААА! ОШИБКА! Пошли скриншот этого окошка разработчику!");
+            ErrorForm.Show(ex);
         }
 
         public static class MonthAppearance

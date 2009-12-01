@@ -16,7 +16,7 @@ namespace WomenCalendar
         public bool IsInRange(DateTime date)
         {
             DateTime d = new DateTime(DateTime.MinValue.Year, date.Month, date.Day);
-            if (d.Month == 1) d = d.AddYears(1);
+            if (d.Month == 1 && d.Day < 20) d = d.AddYears(1);
             return d >= From && d <= To;
         }
 
@@ -51,7 +51,7 @@ namespace WomenCalendar
                     return ZodiacNames[i];
                 }
             }
-            throw new Exception("AAAAAAAAAAAA!!! That must never happen!");
+            throw new Exception("Unable to find zodiac sign for " + date.ToString());
         }
     }
 }

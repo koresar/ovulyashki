@@ -436,6 +436,7 @@ namespace WomenCalendar
                 }
 
                 var closestAfter = Menstruations.GetClosestPeriodAfterDay(date);
+                closestBefore = Menstruations.GetClosestPeriodBeforeDay(date.AddDays(1));
                 if (closestBefore != null && closestAfter != null)
                 {
                     int days = (closestAfter.StartDay - closestBefore.StartDay).Days;

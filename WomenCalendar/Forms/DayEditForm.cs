@@ -217,17 +217,25 @@ namespace WomenCalendar
             if (!string.IsNullOrEmpty(txtBBT.Text))
             {
                 double res;
-                string bbt = txtBBT.Text.Trim().Replace(',', '.');
+                string bbt = txtBBT.Text.Trim();
                 if (double.TryParse(bbt, out res))
                 {
                     txtBBT.Text = bbt;
                 }
                 else
                 {
-                    bbt = txtBBT.Text.Trim().Replace('.', ',');
+                    bbt = txtBBT.Text.Trim().Replace(',', '.');
                     if (double.TryParse(bbt, out res))
                     {
                         txtBBT.Text = bbt;
+                    }
+                    else
+                    {
+                        bbt = txtBBT.Text.Trim().Replace('.', ',');
+                        if (double.TryParse(bbt, out res))
+                        {
+                            txtBBT.Text = bbt;
+                        }
                     }
                 }
 
