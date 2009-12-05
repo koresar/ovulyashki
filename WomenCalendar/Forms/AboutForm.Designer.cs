@@ -47,7 +47,7 @@
             this.btnSite.Name = "btnSite";
             this.btnSite.Size = new System.Drawing.Size(267, 23);
             this.btnSite.TabIndex = 2;
-            this.btnSite.Text = "Посетить сайт Овуляшек";
+            this.btnSite.Text = "Visit Ovulyashki site";
             this.btnSite.UseVisualStyleBackColor = true;
             this.btnSite.Click += new System.EventHandler(this.btnSite_Click);
             // 
@@ -58,7 +58,7 @@
             this.btnFeedback.Name = "btnFeedback";
             this.btnFeedback.Size = new System.Drawing.Size(267, 23);
             this.btnFeedback.TabIndex = 3;
-            this.btnFeedback.Text = "Написать слова благодарности автору";
+            this.btnFeedback.Text = "Leave some thanks words";
             this.btnFeedback.UseVisualStyleBackColor = true;
             this.btnFeedback.Click += new System.EventHandler(this.btnFeedback_Click);
             // 
@@ -69,7 +69,7 @@
             this.btnBug.Name = "btnBug";
             this.btnBug.Size = new System.Drawing.Size(267, 23);
             this.btnBug.TabIndex = 4;
-            this.btnBug.Text = "Рассказать об ошибке в программе";
+            this.btnBug.Text = "Tell us about a bug";
             this.btnBug.UseVisualStyleBackColor = true;
             this.btnBug.Click += new System.EventHandler(this.btnBug_Click);
             // 
@@ -80,7 +80,7 @@
             this.btnNewFeature.Name = "btnNewFeature";
             this.btnNewFeature.Size = new System.Drawing.Size(267, 23);
             this.btnNewFeature.TabIndex = 5;
-            this.btnNewFeature.Text = "Попросить автора добавить новую фишку";
+            this.btnNewFeature.Text = "Request a feature";
             this.btnNewFeature.UseVisualStyleBackColor = true;
             this.btnNewFeature.Click += new System.EventHandler(this.btnNewFeature_Click);
             // 
@@ -91,7 +91,7 @@
             this.btnAskQuestion.Name = "btnAskQuestion";
             this.btnAskQuestion.Size = new System.Drawing.Size(267, 23);
             this.btnAskQuestion.TabIndex = 6;
-            this.btnAskQuestion.Text = "Задать вопрос";
+            this.btnAskQuestion.Text = "Ask us question";
             this.btnAskQuestion.UseVisualStyleBackColor = true;
             this.btnAskQuestion.Click += new System.EventHandler(this.btnAskQuestion_Click);
             // 
@@ -102,7 +102,7 @@
             this.lblVersion.Name = "lblVersion";
             this.lblVersion.Size = new System.Drawing.Size(85, 13);
             this.lblVersion.TabIndex = 0;
-            this.lblVersion.Text = "Овуляшки 1.5.2";
+            this.lblVersion.Text = "Ovulyashki X.X.X";
             // 
             // btnThanks
             // 
@@ -110,7 +110,7 @@
             this.btnThanks.Name = "btnThanks";
             this.btnThanks.Size = new System.Drawing.Size(267, 23);
             this.btnThanks.TabIndex = 1;
-            this.btnThanks.Text = "Благодарности";
+            this.btnThanks.Text = "Thanks to...";
             this.btnThanks.UseVisualStyleBackColor = true;
             this.btnThanks.Click += new System.EventHandler(this.btnThanks_Click);
             // 
@@ -148,7 +148,7 @@
             this.Controls.Add(this.btnThanks);
             this.Controls.Add(this.btnSite);
             this.Name = "AboutForm";
-            this.Text = "Всяко разно о программе";
+            this.Text = "About application";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

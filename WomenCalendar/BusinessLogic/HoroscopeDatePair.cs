@@ -23,8 +23,21 @@ namespace WomenCalendar
         public enum ZodiacSign 
             { Aries = 0, Taurus, Gemini, Cancer, Leo, Virgo, Libra, Scorpio, Sagittarius, Capricorn, Aquarius, Pisces }
 
-        public static string[] ZodiacNames = new string[]
-            { "Овен", "Телец", "Близнецы", "Рак", "Лев", "Дева", "Весы", "Скорпион", "Стрелец", "Козерог", "Водолей", "Рыбы" };
+        private static string[] zodiacNames;
+        public static string[] ZodiacNames
+        {
+            get
+            {
+                if (zodiacNames == null)
+                {
+                    var signIds = new string[] { "Aries", "Sagittarius", "Gemini", "Cancer", "Leo", "Virgo", "Libra", "Scorpio", "Sagittarius", "Capricorn", "Aquarius", "Pisces" };
+                    zodiacNames = new string[signIds.Length];
+                    for (int i = 0; i < signIds.Length; i++)
+                        zodiacNames[i] = TEXT.Get[signIds[i]];
+                }
+                return zodiacNames;
+            }
+        }
 
         public static HoroscopDatePair[] ZodiacSigns = new HoroscopDatePair[]
             {

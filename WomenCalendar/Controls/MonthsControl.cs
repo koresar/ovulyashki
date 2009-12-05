@@ -12,7 +12,7 @@ using System.Diagnostics;
 
 namespace WomenCalendar
 {
-    public partial class MonthsControl : UserControl
+    public partial class MonthsControl : UserControl, ITranslatable
     {
         private OneMonthControl lastDroppedMenuMonth;
         private Dictionary<string, Dictionary<int, string>> calendars = new Dictionary<string, Dictionary<int, string>>();
@@ -123,9 +123,29 @@ namespace WomenCalendar
             get { return monthMenu; }
         }
 
+        #region ITranslatable interface impementation
+
+        public void ReReadTranslations()
+        {
+            singleMonths.ForEach(m => m.ReReadTranslations());
+            this.setAsMenstruationDay.Text = TEXT.Get["Set_menses_start"];
+            this.removeMenstruationDay.Text = TEXT.Get["Cancel_menses"];
+            this.setLastPregnancyDay.Text = TEXT.Get["Set_last_pregn_day"];
+            this.setAsConceptionDay.Text = TEXT.Get["Set_pregnancy"];
+            this.removeConceptionDay.Text = TEXT.Get["Cancel_pregnancy"];
+            this.showBirthDate.Text = TEXT.Get["Show_childbirth_day"];
+            this.ediDayToolStripMenuItem.Text = TEXT.Get["Edit_day"];
+            this.ToolStripBBTGraph.Text = TEXT.Get["Show_BBT_graph"];
+            this.ToolStripHealthGraph.Text = TEXT.Get["Show_wellbeing_graph"];
+            this.ToolStripCycleLengthGraph.Text = TEXT.Get["Show_cycle_length_graph"];
+        }
+
+        #endregion
+
         public MonthsControl()
         {
             InitializeComponent();
+            if (TEXT.Get != null) ReReadTranslations();
 
             cellPopupControl = new DayCellPopupControl(this);
 
@@ -197,8 +217,7 @@ namespace WomenCalendar
             dayContextMenu.Items["calendarMenu"].Visible = isPregnancyDay;
             if (isPregnancyDay)
             {
-                dayContextMenu.Items["calendarMenu"].Text = string.Format(
-                    "Подсказка беременным на {0}-й неделе с сайта...",
+                dayContextMenu.Items["calendarMenu"].Text = TEXT.Get.Format("Pregn_week_help",
                     Program.CurrentWoman.Conceptions.GetPregnancyWeekNumber(FocusDate));
             }
 
@@ -411,8 +430,8 @@ namespace WomenCalendar
             var period = Program.CurrentWoman.Conceptions.GetConceptionByDate(FocusDate);
             if (period != null)
             {
-                if (MessageBox.Show("Если сейчас нажмёшь 'Да', то потом нельзя будет удлиннить срок беременности. Уверена, что хочешь укоротить срок этой беременности?", 
-                    "Ты уверена?", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                if (MessageBox.Show(TEXT.Get["Shorten_pregn_question"], 
+                    TEXT.Get["Are_you_sure"], MessageBoxButtons.YesNo) == DialogResult.Yes)
                 {
                     period.LastDay = FocusDate;
                     Redraw();

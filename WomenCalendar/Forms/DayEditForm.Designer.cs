@@ -225,7 +225,7 @@
             this.btnPrevDay.Name = "btnPrevDay";
             this.btnPrevDay.Size = new System.Drawing.Size(124, 23);
             this.btnPrevDay.TabIndex = 0;
-            this.btnPrevDay.Text = "<< Предыдущий день";
+            this.btnPrevDay.Text = "<< Previous day";
             this.btnPrevDay.UseVisualStyleBackColor = true;
             this.btnPrevDay.Click += new System.EventHandler(this.btnPrevDay_Click);
             // 
@@ -235,7 +235,7 @@
             this.btnNextDay.Name = "btnNextDay";
             this.btnNextDay.Size = new System.Drawing.Size(124, 23);
             this.btnNextDay.TabIndex = 1;
-            this.btnNextDay.Text = "Следующий день >>";
+            this.btnNextDay.Text = "Next day >>";
             this.btnNextDay.UseVisualStyleBackColor = true;
             this.btnNextDay.Click += new System.EventHandler(this.btnNextDay_Click);
             // 
@@ -246,7 +246,7 @@
             this.chkHadSex.Name = "chkHadSex";
             this.chkHadSex.Size = new System.Drawing.Size(184, 17);
             this.chkHadSex.TabIndex = 0;
-            this.chkHadSex.Text = "А в этот день у меня был секс!";
+            this.chkHadSex.Text = "I had sex that day!";
             this.chkHadSex.UseVisualStyleBackColor = true;
             // 
             // sliderHealth
@@ -275,7 +275,7 @@
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(48, 23);
             this.label2.TabIndex = 10007;
-            this.label2.Text = "Плохое";
+            this.label2.Text = "Bad";
             this.label2.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
             // label3
@@ -284,7 +284,7 @@
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(52, 23);
             this.label3.TabIndex = 10007;
-            this.label3.Text = "Хорошее";
+            this.label3.Text = "Good";
             // 
             // grpMenstr
             // 
@@ -296,7 +296,7 @@
             this.grpMenstr.Size = new System.Drawing.Size(90, 243);
             this.grpMenstr.TabIndex = 10008;
             this.grpMenstr.TabStop = false;
-            this.grpMenstr.Text = "Менструашки";
+            this.grpMenstr.Text = "Menses";
             // 
             // pnlSurroundMentsLength
             // 
@@ -319,7 +319,7 @@
             this.lblMenstruationLength.Name = "lblMenstruationLength";
             this.lblMenstruationLength.Size = new System.Drawing.Size(31, 13);
             this.lblMenstruationLength.TabIndex = 10011;
-            this.lblMenstruationLength.Text = "дней";
+            this.lblMenstruationLength.Text = "days";
             this.lblMenstruationLength.MouseLeave += new System.EventHandler(this.lblMenstruationLength_MouseLeave);
             this.lblMenstruationLength.MouseEnter += new System.EventHandler(this.lblMenstruationLength_MouseEnter);
             // 
@@ -330,7 +330,7 @@
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(82, 17);
             this.label1.TabIndex = 10009;
-            this.label1.Text = "Длительность";
+            this.label1.Text = "Length";
             this.label1.MouseLeave += new System.EventHandler(this.label1_MouseLeave);
             this.label1.MouseEnter += new System.EventHandler(this.label1_MouseEnter);
             // 
@@ -351,7 +351,7 @@
             this.grpNote.Size = new System.Drawing.Size(283, 149);
             this.grpNote.TabIndex = 10009;
             this.grpNote.TabStop = false;
-            this.grpNote.Text = "Заметка к этому дню";
+            this.grpNote.Text = "Note for this day";
             // 
             // grpBT
             // 
@@ -361,7 +361,7 @@
             this.grpBT.Size = new System.Drawing.Size(170, 43);
             this.grpBT.TabIndex = 10010;
             this.grpBT.TabStop = false;
-            this.grpBT.Text = "Базальная температура тела";
+            this.grpBT.Text = "Basal Body Temperature";
             // 
             // grpHealth
             // 
@@ -374,7 +374,7 @@
             this.grpHealth.Size = new System.Drawing.Size(267, 46);
             this.grpHealth.TabIndex = 10011;
             this.grpHealth.TabStop = false;
-            this.grpHealth.Text = "Самочувствие";
+            this.grpHealth.Text = "Wellbeing";
             // 
             // chkMentrustions
             // 
@@ -531,7 +531,7 @@
             this.Controls.Add(this.grpBT);
             this.Controls.Add(this.grpHealth);
             this.Name = "DayEditForm";
-            this.Text = "Изменить день";
+            this.Text = "Edit this day";
             this.Load += new System.EventHandler(this.DayEditForm_Load);
             this.Shown += new System.EventHandler(this.DayEditForm_Shown);
             this.Controls.SetChildIndex(this.grpHealth, 0);

@@ -10,7 +10,7 @@ using System.Reflection;
 
 namespace WomenCalendar
 {
-    public partial class AboutForm : BaseForm
+    public partial class AboutForm : BaseForm, ITranslatable
     {
         private const int minWidth = 300;
         private const int maxWidth = 640;
@@ -18,22 +18,31 @@ namespace WomenCalendar
         public AboutForm()
         {
             InitializeComponent();
+            if (TEXT.Get != null) ReReadTranslations();
 
             this.Width = minWidth;
-            string s = "Спасибо Michal Brylka за ColorSlider: http://www.codeproject.com/KB/selection/ColorSlider.aspx" + Environment.NewLine + Environment.NewLine +
-                "Спасибо randz за VerticalLabel: http://www.codeproject.com/KB/miscctrl/Vertical_Label_Control.aspx" + Environment.NewLine + Environment.NewLine +
-                "Спасибо BobK, Darren Martz, John Champion, Jerry Vos, Chris Champoin, Brian Chappell, Ronan O Sullivan, Benjamin Mayrargue за ZegGraph: https://sourceforge.net/projects/zedgraph/ , http://zedgraph.org" + Environment.NewLine + Environment.NewLine +
-                "Спасибо mkg за XPanderControl: http://www.codeproject.com/KB/cpp/XPander.aspx" + Environment.NewLine + Environment.NewLine + 
-                "Спасибо Carlos Aguilar Mares за ExcelXmlWriter: http://www.carlosag.net/Tools/ExcelXmlWriter/"  + Environment.NewLine + Environment.NewLine + 
-                "Спасибо Mike Krueger, John Reilly за SharpZipLib: http://icsharpcode.net/" + Environment.NewLine + Environment.NewLine
-                ;
-            txtThanks.Text = s;
+            txtThanks.Text = TEXT.Get["Thanks_to_components"];
             int verLen = 4;
             var ver = Assembly.GetEntryAssembly().GetName().Version;
             var verText = ver.ToString(verLen);
             while (verText.EndsWith(".0")) verText = ver.ToString(--verLen);
-            lblVersion.Text = "Овуляшки " + verText;
+            lblVersion.Text = TEXT.Get["Ovulyashki"] + " " + verText;
         }
+
+        #region ITranslatable interface impementation
+
+        public void ReReadTranslations()
+        {
+            this.btnSite.Text = TEXT.Get["Visit_site"];
+            this.btnFeedback.Text = TEXT.Get["Leave_thanks"];
+            this.btnBug.Text = TEXT.Get["Tell_about_bug"];
+            this.btnNewFeature.Text = TEXT.Get["Ask_feature_request"];
+            this.btnAskQuestion.Text = TEXT.Get["Ask_question"];
+            this.btnThanks.Text = TEXT.Get["Thanks_to"];
+            this.Text = TEXT.Get["About_application"];
+        }
+
+        #endregion
 
         private void btnBug_Click(object sender, EventArgs e)
         {

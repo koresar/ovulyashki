@@ -13,6 +13,7 @@
     <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ApplicationIcon>Resources\ovulashki_logo.ico</ApplicationIcon>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -25,7 +26,6 @@
     <MapFileExtensions>true</MapFileExtensions>
     <ApplicationRevision>0</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
-    <IsWebBootstrapper>false</IsWebBootstrapper>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
@@ -74,6 +74,7 @@
     <Compile Include="BusinessLogic\HoroscopeDatePair.cs" />
     <Compile Include="BusinessLogic\Report\ReportWriter.cs" />
     <Compile Include="BusinessLogic\Report\XlsWriter.cs" />
+    <Compile Include="BusinessLogic\TEXT.cs" />
     <Compile Include="BusinessLogic\Woman\Schedule.cs" />
     <Compile Include="BusinessLogic\Woman\SchedulesCollection.cs" />
     <Compile Include="BusinessLogic\Woman\OneDayInfo.cs" />
@@ -96,6 +97,7 @@
     <Compile Include="Controls\DayCellPopupControl.Designer.cs">
       <DependentUpon>DayCellPopupControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\ITranslatable.cs" />
     <Compile Include="Controls\SchedulesControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -335,6 +337,12 @@
     <None Include="Resources\drop.Image.gif" />
     <None Include="Resources\about.png" />
     <Content Include="Resources\drop16.bmp" />
+    <Content Include="en_lang.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="ru_lang.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <None Include="Resources\editGreen16x16.png" />
     <None Include="Resources\printPreviewGreen.png" />
     <None Include="Resources\printGreen.png" />

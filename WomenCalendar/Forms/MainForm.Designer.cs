@@ -39,6 +39,8 @@
             this.prevStripButton = new System.Windows.Forms.ToolStripButton();
             this.nextStripButton = new System.Windows.Forms.ToolStripButton();
             this.helpToolStripButton = new System.Windows.Forms.ToolStripButton();
+            this.languageButton = new System.Windows.Forms.ToolStripDropDownButton();
+            this.englishToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.xPanderList1 = new XPanderControl.XPanderList();
@@ -106,7 +108,8 @@
             this.toolStripLabelJump,
             this.prevStripButton,
             this.nextStripButton,
-            this.helpToolStripButton});
+            this.helpToolStripButton,
+            this.languageButton});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(747, 39);
@@ -120,7 +123,7 @@
             this.newToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.newToolStripButton.Name = "newToolStripButton";
             this.newToolStripButton.Size = new System.Drawing.Size(36, 36);
-            this.newToolStripButton.Text = "Создать новую женщину";
+            this.newToolStripButton.Text = "Create new woman";
             this.newToolStripButton.Click += new System.EventHandler(this.newToolStripButton_Click);
             // 
             // openToolStripButton
@@ -130,7 +133,7 @@
             this.openToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.openToolStripButton.Name = "openToolStripButton";
             this.openToolStripButton.Size = new System.Drawing.Size(36, 36);
-            this.openToolStripButton.Text = "Открыть женщину";
+            this.openToolStripButton.Text = "Open woman";
             this.openToolStripButton.Click += new System.EventHandler(this.openToolStripButton_Click);
             // 
             // saveToolStripButton
@@ -140,7 +143,7 @@
             this.saveToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.saveToolStripButton.Name = "saveToolStripButton";
             this.saveToolStripButton.Size = new System.Drawing.Size(36, 36);
-            this.saveToolStripButton.Text = "Сохранить женщину";
+            this.saveToolStripButton.Text = "Save woman";
             this.saveToolStripButton.Click += new System.EventHandler(this.saveToolStripButton_Click);
             // 
             // exportToExcel
@@ -150,7 +153,7 @@
             this.exportToExcel.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.exportToExcel.Name = "exportToExcel";
             this.exportToExcel.Size = new System.Drawing.Size(36, 36);
-            this.exportToExcel.Text = "Экспортировать женщину в Excel";
+            this.exportToExcel.Text = "Export woman to Excel";
             this.exportToExcel.Click += new System.EventHandler(this.exportToExcel_Click);
             // 
             // toolStripSeparator2
@@ -161,9 +164,9 @@
             // toolStripLabelJump
             // 
             this.toolStripLabelJump.Name = "toolStripLabelJump";
-            this.toolStripLabelJump.Size = new System.Drawing.Size(61, 36);
-            this.toolStripLabelJump.Text = "Прыгнуть:";
-            this.toolStripLabelJump.ToolTipText = "Выбранная дата";
+            this.toolStripLabelJump.Size = new System.Drawing.Size(64, 36);
+            this.toolStripLabelJump.Text = "Jump to:";
+            this.toolStripLabelJump.ToolTipText = "Selected date";
             // 
             // prevStripButton
             // 
@@ -172,7 +175,7 @@
             this.prevStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.prevStripButton.Name = "prevStripButton";
             this.prevStripButton.Size = new System.Drawing.Size(36, 36);
-            this.prevStripButton.Text = "Сдвинуть на месяц назад";
+            this.prevStripButton.Text = "Shift one month back";
             this.prevStripButton.Click += new System.EventHandler(this.prevStripButton_Click);
             // 
             // nextStripButton
@@ -182,20 +185,39 @@
             this.nextStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.nextStripButton.Name = "nextStripButton";
             this.nextStripButton.Size = new System.Drawing.Size(36, 36);
-            this.nextStripButton.Text = "Сдвинуть на месяц вперёд";
+            this.nextStripButton.Text = "Shift one month forward";
             this.nextStripButton.Click += new System.EventHandler(this.nextStripButton_Click);
             // 
             // helpToolStripButton
             // 
+            this.helpToolStripButton.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
             this.helpToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.helpToolStripButton.Image = global::WomenCalendar.Properties.Resources.about;
             this.helpToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.helpToolStripButton.Name = "helpToolStripButton";
             this.helpToolStripButton.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.helpToolStripButton.Size = new System.Drawing.Size(36, 36);
-            this.helpToolStripButton.Text = "Помощь";
-            this.helpToolStripButton.ToolTipText = "О программе";
+            this.helpToolStripButton.Text = "Help";
+            this.helpToolStripButton.ToolTipText = "About application";
             this.helpToolStripButton.Click += new System.EventHandler(this.helpToolStripButton_Click);
+            // 
+            // languageButton
+            // 
+            this.languageButton.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.languageButton.AutoToolTip = false;
+            this.languageButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.languageButton.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.englishToolStripMenuItem});
+            this.languageButton.Name = "languageButton";
+            this.languageButton.Size = new System.Drawing.Size(72, 36);
+            this.languageButton.Text = "Language";
+            this.languageButton.Click += new System.EventHandler(this.languageButton_Click);
+            // 
+            // englishToolStripMenuItem
+            // 
+            this.englishToolStripMenuItem.Name = "englishToolStripMenuItem";
+            this.englishToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.englishToolStripMenuItem.Text = "English";
             // 
             // dateTimePicker1
             // 
@@ -250,7 +272,7 @@
             this.xLegend.CaptionFont = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Bold);
             this.xLegend.CaptionFormatFlag = XPanderControl.XPander.FormatFlag.NoWrap;
             this.xLegend.CaptionStyle = XPanderControl.XPander.CaptionStyleEnum.Normal;
-            this.xLegend.CaptionText = "Описание обозначений";
+            this.xLegend.CaptionText = "Legend";
             this.xLegend.CaptionTextAlign = XPanderControl.XPander.CaptionTextAlignment.Left;
             this.xLegend.ChevronStyle = XPanderControl.XPander.ChevronStyleEnum.Image;
             this.xLegend.CollapsedHighlightImage = ((System.Drawing.Bitmap)(resources.GetObject("xLegend.CollapsedHighlightImage")));
@@ -300,7 +322,7 @@
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(202, 32);
             this.label13.TabIndex = 2;
-            this.label13.Text = "Номер недели беременности";
+            this.label13.Text = "Pregnancy week number";
             this.label13.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // label12
@@ -311,7 +333,7 @@
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(202, 32);
             this.label12.TabIndex = 2;
-            this.label12.Text = "День зачатия";
+            this.label12.Text = "Conception day";
             this.label12.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // label11
@@ -322,7 +344,7 @@
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(201, 32);
             this.label11.TabIndex = 2;
-            this.label11.Text = "Беременность";
+            this.label11.Text = "Pregnancy";
             this.label11.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // label10
@@ -333,7 +355,7 @@
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(202, 32);
             this.label10.TabIndex = 2;
-            this.label10.Text = "День овуляции";
+            this.label10.Text = "Ovulation day";
             this.label10.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // label9
@@ -344,7 +366,7 @@
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(201, 32);
             this.label9.TabIndex = 2;
-            this.label9.Text = "День будущих менструаций";
+            this.label9.Text = "Forecasted menses day";
             this.label9.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // label8
@@ -355,7 +377,7 @@
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(201, 32);
             this.label8.TabIndex = 2;
-            this.label8.Text = "Дни с наименьшей вероятностью зачатия";
+            this.label8.Text = "Minimal conception brobability day";
             this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // label7
@@ -366,7 +388,7 @@
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(201, 32);
             this.label7.TabIndex = 2;
-            this.label7.Text = "Менструации";
+            this.label7.Text = "Menses";
             this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // label6
@@ -377,7 +399,7 @@
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(201, 32);
             this.label6.TabIndex = 2;
-            this.label6.Text = "Вероятно зачатие девочки";
+            this.label6.Text = "More chances to conceive girl";
             this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // label5
@@ -388,7 +410,7 @@
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(201, 32);
             this.label5.TabIndex = 2;
-            this.label5.Text = "Вероятно зачатие мальчика";
+            this.label5.Text = "More chances to conceive girl";
             this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // label4
@@ -399,7 +421,7 @@
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(201, 32);
             this.label4.TabIndex = 2;
-            this.label4.Text = "День секса";
+            this.label4.Text = "Had sex that day";
             this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // label3
@@ -410,7 +432,7 @@
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(201, 32);
             this.label3.TabIndex = 2;
-            this.label3.Text = "Заметка";
+            this.label3.Text = "There is note";
             this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // label2
@@ -421,7 +443,7 @@
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(201, 32);
             this.label2.TabIndex = 2;
-            this.label2.Text = "Выбраный день (в фокусе)";
+            this.label2.Text = "Selected (focused) day";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // label1
@@ -432,7 +454,7 @@
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(201, 32);
             this.label1.TabIndex = 2;
-            this.label1.Text = "Сегодняшний день";
+            this.label1.Text = "Today";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // dayCellControl4
@@ -784,7 +806,7 @@
             this.xWoman.CaptionFont = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Bold);
             this.xWoman.CaptionFormatFlag = XPanderControl.XPander.FormatFlag.NoWrap;
             this.xWoman.CaptionStyle = XPanderControl.XPander.CaptionStyleEnum.Normal;
-            this.xWoman.CaptionText = "О женщине";
+            this.xWoman.CaptionText = "About woman";
             this.xWoman.CaptionTextAlign = XPanderControl.XPander.CaptionTextAlignment.Left;
             this.xWoman.ChevronStyle = XPanderControl.XPander.ChevronStyleEnum.Image;
             this.xWoman.CollapsedHighlightImage = ((System.Drawing.Bitmap)(resources.GetObject("xWoman.CollapsedHighlightImage")));
@@ -815,7 +837,7 @@
             this.btnChangeWoman.Name = "btnChangeWoman";
             this.btnChangeWoman.Size = new System.Drawing.Size(185, 23);
             this.btnChangeWoman.TabIndex = 9;
-            this.btnChangeWoman.Text = "Изменить имя и пароль";
+            this.btnChangeWoman.Text = "Change name and password";
             this.btnChangeWoman.UseVisualStyleBackColor = true;
             this.btnChangeWoman.Click += new System.EventHandler(this.btnChangeWoman_Click);
             // 
@@ -826,7 +848,7 @@
             this.chbAskPassword.Name = "chbAskPassword";
             this.chbAskPassword.Size = new System.Drawing.Size(188, 17);
             this.chbAskPassword.TabIndex = 8;
-            this.chbAskPassword.Text = "Всегда спрашивать мой пароль";
+            this.chbAskPassword.Text = "Always ask my password";
             this.chbAskPassword.UseVisualStyleBackColor = true;
             this.chbAskPassword.CheckedChanged += new System.EventHandler(this.chbAskPassword_CheckedChanged);
             // 
@@ -836,7 +858,7 @@
             this.chbDefaultWoman.Name = "chbDefaultWoman";
             this.chbDefaultWoman.Size = new System.Drawing.Size(185, 43);
             this.chbDefaultWoman.TabIndex = 7;
-            this.chbDefaultWoman.Text = "При запуске программы открывать меня по умолчанию";
+            this.chbDefaultWoman.Text = "On start open me by default";
             this.chbDefaultWoman.UseVisualStyleBackColor = true;
             this.chbDefaultWoman.CheckedChanged += new System.EventHandler(this.chbDefaultWoman_CheckedChanged);
             // 
@@ -847,7 +869,7 @@
             this.lblMyCycle2.Name = "lblMyCycle2";
             this.lblMyCycle2.Size = new System.Drawing.Size(25, 13);
             this.lblMyCycle2.TabIndex = 6;
-            this.lblMyCycle2.Text = "дня";
+            this.lblMyCycle2.Text = "days";
             // 
             // numMenstruationPeriod
             // 
@@ -879,7 +901,7 @@
             this.lblMyCycle.Name = "lblMyCycle";
             this.lblMyCycle.Size = new System.Drawing.Size(103, 13);
             this.lblMyCycle.TabIndex = 3;
-            this.lblMyCycle.Text = "Специальный цикл";
+            this.lblMyCycle.Text = "Special cycle";
             // 
             // rbManual
             // 
@@ -911,7 +933,7 @@
             this.lblAverageCycle.Name = "lblAverageCycle";
             this.lblAverageCycle.Size = new System.Drawing.Size(144, 13);
             this.lblAverageCycle.TabIndex = 0;
-            this.lblAverageCycle.Text = "Мой автоматический цикл:";
+            this.lblAverageCycle.Text = "My automatic cycle: ";
             // 
             // xDay
             // 
@@ -924,7 +946,7 @@
             this.xDay.CaptionFont = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Bold);
             this.xDay.CaptionFormatFlag = XPanderControl.XPander.FormatFlag.NoWrap;
             this.xDay.CaptionStyle = XPanderControl.XPander.CaptionStyleEnum.Normal;
-            this.xDay.CaptionText = "Описание дня";
+            this.xDay.CaptionText = "Day description";
             this.xDay.CaptionTextAlign = XPanderControl.XPander.CaptionTextAlignment.Left;
             this.xDay.ChevronStyle = XPanderControl.XPander.ChevronStyleEnum.Image;
             this.xDay.CollapsedHighlightImage = ((System.Drawing.Bitmap)(resources.GetObject("xDay.CollapsedHighlightImage")));
@@ -980,7 +1002,7 @@
             this.MinimumSize = new System.Drawing.Size(540, 340);
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
-            this.Text = "Овуляшки";
+            this.Text = "Ovulyashki";
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.SizeChanged += new System.EventHandler(this.MainForm_SizeChanged);
             this.MouseLeave += new System.EventHandler(this.MainForm_MouseLeave);
@@ -1057,6 +1079,8 @@
         private System.Windows.Forms.ToolStripButton exportToExcel;
         private System.Windows.Forms.Label label13;
         private DayCellControl dayCellControl12;
+        private System.Windows.Forms.ToolStripDropDownButton languageButton;
+        private System.Windows.Forms.ToolStripMenuItem englishToolStripMenuItem;
 
 
     }

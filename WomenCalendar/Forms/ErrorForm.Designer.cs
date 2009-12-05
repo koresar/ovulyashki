@@ -50,7 +50,7 @@
             this.btnCopyToClipboard.Name = "btnCopyToClipboard";
             this.btnCopyToClipboard.Size = new System.Drawing.Size(275, 23);
             this.btnCopyToClipboard.TabIndex = 1;
-            this.btnCopyToClipboard.Text = "Копировать в буфер обмена";
+            this.btnCopyToClipboard.Text = "Copy to clipboard";
             this.btnCopyToClipboard.UseVisualStyleBackColor = true;
             this.btnCopyToClipboard.Click += new System.EventHandler(this.btnCopyToClipboard_Click);
             // 
@@ -65,7 +65,7 @@
             this.MinimizeBox = false;
             this.Name = "ErrorForm";
             this.ShowIcon = false;
-            this.Text = "ААА! ОШИБКА! Пошли этот текст разработчикам!";
+            this.Text = "FFFUUUUUUUUUUUUUU! Error! Send this text to application developers.";
             this.TopMost = true;
             this.ResumeLayout(false);
             this.PerformLayout();

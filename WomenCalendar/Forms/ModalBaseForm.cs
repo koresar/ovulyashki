@@ -8,13 +8,24 @@ using System.Windows.Forms;
 
 namespace WomenCalendar
 {
-    public partial class ModalBaseForm : BaseForm
+    public partial class ModalBaseForm : BaseForm, ITranslatable
     {
         public ModalBaseForm()
         {
             InitializeComponent();
+            if (TEXT.Get != null) ReReadTranslations();
         }
-        
+
+        #region ITranslatable interface impementation
+
+        public void ReReadTranslations()
+        {
+            this.btnCancel.Text = TEXT.Get["Cancel_this"];
+            this.btnOK.Text = TEXT.Get["OK_this"];
+        }
+
+        #endregion
+
         public virtual void AcceptAction()
         {
             DialogResult = DialogResult.OK;

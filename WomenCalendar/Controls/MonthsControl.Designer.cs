@@ -39,7 +39,7 @@
             this.calendarMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.showBirthDate = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
-            this.редактироватьДеньToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ediDayToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.monthMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.ToolStripBBTGraph = new System.Windows.Forms.ToolStripMenuItem();
             this.ToolStripHealthGraph = new System.Windows.Forms.ToolStripMenuItem();
@@ -61,7 +61,7 @@
             this.calendarMenu,
             this.showBirthDate,
             this.toolStripSeparator3,
-            this.редактироватьДеньToolStripMenuItem});
+            this.ediDayToolStripMenuItem});
             this.dayContextMenu.Name = "contextMenu";
             this.dayContextMenu.Size = new System.Drawing.Size(321, 192);
             // 
@@ -70,7 +70,7 @@
             this.setAsMenstruationDay.Image = global::WomenCalendar.Properties.Resources.drop_Image;
             this.setAsMenstruationDay.Name = "setAsMenstruationDay";
             this.setAsMenstruationDay.Size = new System.Drawing.Size(320, 22);
-            this.setAsMenstruationDay.Text = "Установить начало менструашек";
+            this.setAsMenstruationDay.Text = "Set menses start";
             this.setAsMenstruationDay.Click += new System.EventHandler(this.setAsMenstruationDay_Click);
             // 
             // removeMenstruationDay
@@ -78,7 +78,7 @@
             this.removeMenstruationDay.Image = global::WomenCalendar.Properties.Resources.dropNot_Image;
             this.removeMenstruationDay.Name = "removeMenstruationDay";
             this.removeMenstruationDay.Size = new System.Drawing.Size(320, 22);
-            this.removeMenstruationDay.Text = "Отменить менструашки";
+            this.removeMenstruationDay.Text = "Cancel menses";
             this.removeMenstruationDay.Click += new System.EventHandler(this.removeMenstruationDay_Click);
             // 
             // toolStripSeparator1
@@ -91,7 +91,7 @@
             this.setLastPregnancyDay.Image = global::WomenCalendar.Properties.Resources.baby_Image;
             this.setLastPregnancyDay.Name = "setLastPregnancyDay";
             this.setLastPregnancyDay.Size = new System.Drawing.Size(320, 22);
-            this.setLastPregnancyDay.Text = "Установить последний день беременности";
+            this.setLastPregnancyDay.Text = "Set last pregnancy day";
             this.setLastPregnancyDay.Click += new System.EventHandler(this.setLastPregnancyDay_Click);
             // 
             // setAsConceptionDay
@@ -99,7 +99,7 @@
             this.setAsConceptionDay.Image = global::WomenCalendar.Properties.Resources.baby_Image;
             this.setAsConceptionDay.Name = "setAsConceptionDay";
             this.setAsConceptionDay.Size = new System.Drawing.Size(320, 22);
-            this.setAsConceptionDay.Text = "Установить беременность";
+            this.setAsConceptionDay.Text = "Set pregnancy";
             this.setAsConceptionDay.Click += new System.EventHandler(this.setAsConceptionDay_Click);
             // 
             // removeConceptionDay
@@ -107,7 +107,7 @@
             this.removeConceptionDay.Image = global::WomenCalendar.Properties.Resources.babyNot_Image;
             this.removeConceptionDay.Name = "removeConceptionDay";
             this.removeConceptionDay.Size = new System.Drawing.Size(320, 22);
-            this.removeConceptionDay.Text = "Отменить беременность";
+            this.removeConceptionDay.Text = "Cancel pregnancy";
             this.removeConceptionDay.Click += new System.EventHandler(this.removeConceptionDay_Click);
             // 
             // calendarMenu
@@ -115,14 +115,14 @@
             this.calendarMenu.Image = global::WomenCalendar.Properties.Resources.babyQuestion_Image;
             this.calendarMenu.Name = "calendarMenu";
             this.calendarMenu.Size = new System.Drawing.Size(320, 22);
-            this.calendarMenu.Text = "Подсказка беременным на $ неделе с сайта...";
+            this.calendarMenu.Text = "Help for {0} week pregnancy from site...";
             // 
             // showBirthDate
             // 
             this.showBirthDate.Image = global::WomenCalendar.Properties.Resources.babyFace_Image;
             this.showBirthDate.Name = "showBirthDate";
             this.showBirthDate.Size = new System.Drawing.Size(320, 22);
-            this.showBirthDate.Text = "Показать предполагаемый день родов";
+            this.showBirthDate.Text = "Show forecasted childbirth day";
             this.showBirthDate.Click += new System.EventHandler(this.showBirthDate_Click);
             // 
             // toolStripSeparator3
@@ -132,11 +132,11 @@
             // 
             // редактироватьДеньToolStripMenuItem
             // 
-            this.редактироватьДеньToolStripMenuItem.Image = global::WomenCalendar.Properties.Resources.calendarEdit_Image;
-            this.редактироватьДеньToolStripMenuItem.Name = "редактироватьДеньToolStripMenuItem";
-            this.редактироватьДеньToolStripMenuItem.Size = new System.Drawing.Size(320, 22);
-            this.редактироватьДеньToolStripMenuItem.Text = "Редактировать день";
-            this.редактироватьДеньToolStripMenuItem.Click += new System.EventHandler(this.editDay_Click);
+            this.ediDayToolStripMenuItem.Image = global::WomenCalendar.Properties.Resources.calendarEdit_Image;
+            this.ediDayToolStripMenuItem.Name = "editDayToolStripMenuItem";
+            this.ediDayToolStripMenuItem.Size = new System.Drawing.Size(320, 22);
+            this.ediDayToolStripMenuItem.Text = "Edit day";
+            this.ediDayToolStripMenuItem.Click += new System.EventHandler(this.editDay_Click);
             // 
             // monthMenu
             // 
@@ -151,14 +151,14 @@
             // 
             this.ToolStripBBTGraph.Name = "ToolStripBBTGraph";
             this.ToolStripBBTGraph.Size = new System.Drawing.Size(333, 22);
-            this.ToolStripBBTGraph.Text = "Построить график Базальной Температуры Тела";
+            this.ToolStripBBTGraph.Text = "Show Basal Body Temperature graph";
             this.ToolStripBBTGraph.Click += new System.EventHandler(this.ToolStripBBTGraph_Click);
             // 
             // ToolStripHealthGraph
             // 
             this.ToolStripHealthGraph.Name = "ToolStripHealthGraph";
             this.ToolStripHealthGraph.Size = new System.Drawing.Size(333, 22);
-            this.ToolStripHealthGraph.Text = "Построить график Самочувствия";
+            this.ToolStripHealthGraph.Text = "Show wellbeing graph";
             this.ToolStripHealthGraph.Click += new System.EventHandler(this.ToolStripHealthesGraph_Click);
             // 
             // oneMonthControl
@@ -180,7 +180,7 @@
             // 
             this.ToolStripCycleLengthGraph.Name = "ToolStripCycleLengthGraph";
             this.ToolStripCycleLengthGraph.Size = new System.Drawing.Size(333, 22);
-            this.ToolStripCycleLengthGraph.Text = "Построить график Длины Циклов";
+            this.ToolStripCycleLengthGraph.Text = "Show cycle length graph";
             this.ToolStripCycleLengthGraph.Click += new System.EventHandler(this.ToolStripCycleLengthGraph_Click);
             // 
             // MonthsControl
@@ -214,7 +214,7 @@
         private System.Windows.Forms.ToolStripMenuItem setAsConceptionDay;
         private System.Windows.Forms.ToolStripMenuItem removeConceptionDay;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
-        private System.Windows.Forms.ToolStripMenuItem редактироватьДеньToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem ediDayToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem calendarMenu;
         private System.Windows.Forms.ToolStripMenuItem setLastPregnancyDay;
         private System.Windows.Forms.ToolStripMenuItem showBirthDate;

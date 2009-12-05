@@ -5,20 +5,66 @@ using System.Data;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
+using System.Globalization;
+using System.Reflection;
 
 namespace WomenCalendar
 {
-    public partial class MainForm : Form
+    public partial class MainForm : Form, ITranslatable
     {
         public MainForm()
         {
             InitializeComponent();
+            if (TEXT.Get != null) ReReadTranslations();
 
             xLegend.Collapse();
             toolStrip1.Items.Insert(toolStrip1.Items.IndexOf(toolStripLabelJump) + 1, 
                 new ToolStripControlHost(dateTimePicker1));
             helpToolStripButton.Alignment = ToolStripItemAlignment.Right;
         }
+        
+        #region ITranslatable interface impementation
+
+        public void ReReadTranslations()
+        {
+            this.newToolStripButton.Text = TEXT.Get["Create_new_woman"];
+            this.openToolStripButton.Text = TEXT.Get["Open_woman"];
+            this.saveToolStripButton.Text = TEXT.Get["Save_woman"];
+            this.exportToExcel.Text = TEXT.Get["Export_woman_to_excel"];
+            this.toolStripLabelJump.Text = TEXT.Get["Jump_to_colon"];
+            this.toolStripLabelJump.ToolTipText = TEXT.Get["Selected_date"];
+            this.prevStripButton.Text = TEXT.Get["Shift_one_month_back"];
+            this.nextStripButton.Text = TEXT.Get["Shift_one_month_forward"];
+            this.helpToolStripButton.Text = TEXT.Get["Help"];
+            this.helpToolStripButton.ToolTipText = TEXT.Get["About_application"];
+            this.languageButton.Text = TEXT.Get["Language"];
+
+            this.xLegend.CaptionText = TEXT.Get["Legend"];
+            this.label13.Text = TEXT.Get["Legend_pregn_week"];
+            this.label12.Text = TEXT.Get["Legend_conception_day"];
+            this.label11.Text = TEXT.Get["Legend_pregnancy"];
+            this.label10.Text = TEXT.Get["Legend_ovulation_day"];
+            this.label9.Text = TEXT.Get["Legend_future_menses"];
+            this.label8.Text = TEXT.Get["Legend_min_conception_probapility"];
+            this.label7.Text = TEXT.Get["Legend_menses"];
+            this.label6.Text = TEXT.Get["Legend_conceive_girl_day"];
+            this.label5.Text = TEXT.Get["Legend_conceive_girl_day"];
+            this.label4.Text = TEXT.Get["Legend_had_sex"];
+            this.label3.Text = TEXT.Get["Legend_note"];
+            this.label2.Text = TEXT.Get["Legend_selected_day"];
+            this.label1.Text = TEXT.Get["Ledend_today_day"];
+
+            this.xWoman.CaptionText = TEXT.Get["About_woman"];
+            this.btnChangeWoman.Text = TEXT.Get["Change_woman"];
+            this.chbAskPassword.Text = TEXT.Get["Always_ask_my_pwd"];
+            this.chbDefaultWoman.Text = TEXT.Get["Set_as_default_woman"];
+            this.lblMyCycle.Text = TEXT.Get["Special_cycle"];
+            this.lblAverageCycle.Text = GenerateWomanInformation();
+            this.xDay.CaptionText = TEXT.Get["Day_description"];
+            this.Text = TEXT.Get["Ovulyashki"];
+        }
+
+        #endregion
 
         public void UpdateDayInformation(DateTime date)
         {
@@ -56,10 +102,10 @@ namespace WomenCalendar
             StringBuilder sb = new StringBuilder();
 
             int usedDays = Program.CurrentWoman.AveragePeriodLength == 0 ? 28 : Program.CurrentWoman.AveragePeriodLength;
-            sb.Append("Мой автоматический цикл: ");
+            sb.Append(TEXT.Get["My_auto_cycle"]);
             sb.Append(usedDays);
             sb.Append(' ');
-            sb.Append(Woman.GetDaysString(usedDays));
+            sb.Append(TEXT.GetDaysString(usedDays));
 
             return sb.ToString();
         }
@@ -171,17 +217,19 @@ namespace WomenCalendar
             if (Program.CurrentWoman.ManualPeriodLength <= MenstruationPeriod.NormalMaximalPeriod && 
                 newValue > MenstruationPeriod.NormalMaximalPeriod)
             {
-                if (MessageBox.Show(this, "Ты хочешь чтобы цикл был больше 35-ти дней?", "Вот это цикл!",
-                                    MessageBoxButtons.YesNo, MessageBoxIcon.Question) != DialogResult.Yes)
+                if (MessageBox.Show(this,
+                    TEXT.Get.Format("Cycle_more_than", MenstruationPeriod.NormalMaximalPeriod),
+                    TEXT.Get["What_a_cycle"],
+                    MessageBoxButtons.YesNo, MessageBoxIcon.Question) != DialogResult.Yes)
                 {
                     numMenstruationPeriod.Value = Program.CurrentWoman.ManualPeriodLength;
-                    lblMyCycle2.Text = Woman.GetDaysString(Program.CurrentWoman.ManualPeriodLength);
+                    lblMyCycle2.Text = TEXT.GetDaysString(Program.CurrentWoman.ManualPeriodLength);
                     return;
                 }
             }
 
             Program.CurrentWoman.ManualPeriodLength = newValue;
-            lblMyCycle2.Text = Woman.GetDaysString(newValue);
+            lblMyCycle2.Text = TEXT.GetDaysString(newValue);
             monthControl.Redraw();
         }
 
@@ -236,11 +284,47 @@ namespace WomenCalendar
         {
             if (string.IsNullOrEmpty(name))
             {
-                this.Text = "Овуляшки";
+                this.Text = TEXT.Get["Ovulyashki"];
             }
             else
             {
-                this.Text = "Овуляшки красавицы по имени " + name;
+                this.Text = TEXT.Get.Format("Ovulyashki_of", name);
+            }
+        }
+
+        private void languageButton_Click(object sender, EventArgs e)
+        {
+            this.languageButton.DropDownItems.Clear();
+            foreach (var langFilePair in TEXT.FindAllLangFiles())
+            {
+                CultureInfo cult;
+                try
+                {
+                    cult = CultureInfo.GetCultureInfo(langFilePair.Key);
+                }
+                catch
+                {
+                    continue;
+                }
+                var menuItem = new ToolStripMenuItem();
+                menuItem.Name = cult.EnglishName;
+                menuItem.Text = cult.NativeName;
+                menuItem.Tag = langFilePair;
+                menuItem.Click += languageButtonMenuItem_Click;
+                menuItem.Enabled = CultureInfo.CurrentUICulture.TwoLetterISOLanguageName != langFilePair.Key;
+                this.languageButton.DropDownItems.Add(menuItem);
+            }
+        }
+
+        private void languageButtonMenuItem_Click(object sender, EventArgs e)
+        {
+            var pair = (KeyValuePair<string, string>)((sender as ToolStripMenuItem).Tag);
+            if (TEXT.ApplyLanguageFile(pair.Key, pair.Value))
+            {
+                this.ReReadTranslations();
+                UpdateDayInformationIfFocused(monthControl.FocusDate);
+                monthControl.ReReadTranslations();
+                monthControl.Redraw();
             }
         }
     }

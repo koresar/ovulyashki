@@ -8,12 +8,26 @@ using System.Windows.Forms;
 
 namespace WomenCalendar
 {
-    public partial class DateRangeForm : BaseForm
+    public partial class DateRangeForm : BaseForm, ITranslatable
     {
         public DateRangeForm()
         {
             InitializeComponent();
+            if (TEXT.Get != null) ReReadTranslations();
         }
+
+        #region ITranslatable interface impementation
+
+        public void ReReadTranslations()
+        {
+            this.label1.Text = TEXT.Get["From_dates"];
+            this.label2.Text = TEXT.Get["To_dates"];
+            this.button1.Text = TEXT.Get["Export_this"];
+            this.button2.Text = TEXT.Get["Cancel_this"];
+            this.Text = TEXT.Get["Enter_dates"];
+        }
+
+        #endregion
 
         private void ExportForm_Load(object sender, EventArgs e)
         {

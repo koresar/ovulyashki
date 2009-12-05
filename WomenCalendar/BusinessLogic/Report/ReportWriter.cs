@@ -27,7 +27,7 @@ namespace WomenCalendar
         }
         public static string B(bool b)
         {
-            return b ? "Да" : "Нет";
+            return b ? TEXT.Get["Yes"] : TEXT.Get["No"];
         }
         public static string D(double d)
         {

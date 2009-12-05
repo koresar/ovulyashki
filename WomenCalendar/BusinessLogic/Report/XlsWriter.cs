@@ -18,7 +18,7 @@ namespace WomenCalendar
             wb.Properties.Version = "10.4219";
             WorksheetStyle dateStyle = wb.Styles.Add("dateStyle");
             dateStyle.NumberFormat = "Short Date";
-            ws = wb.Worksheets.Add("Менструации");
+            ws = wb.Worksheets.Add(TEXT.Get["Menses"]);
             WorksheetStyle floatStyle = wb.Styles.Add("floatStyle");
             floatStyle.NumberFormat = "Fixed";
             WorksheetStyle Default = wb.Styles.Add("Default");

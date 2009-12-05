@@ -30,6 +30,12 @@ namespace WomenCalendar
                 return d.BBT == BBT && d.HadSex == HadSex && d.Health == Health && d.Note == Note && 
                     d.HasMenstr == HasMenstr && d.MenstrLength == MenstrLength && d.Egesta == Egesta && d.CF == CF;
             }
+
+            public override int GetHashCode()
+            {
+                return BBT.GetHashCode() ^ HadSex.GetHashCode() ^ Health.GetHashCode() ^ Note.GetHashCode() ^
+                    HasMenstr.GetHashCode() ^ MenstrLength.GetHashCode() ^ Egesta.GetHashCode() ^ CF.GetHashCode();
+            }
         }
 
         private DayData initialData;
@@ -47,10 +53,32 @@ namespace WomenCalendar
         public DayEditForm(DayCellControl dayCell, DayEditFocus focus)
         {
             InitializeComponent();
+            if (TEXT.Get != null) ReReadTranslations();
             this.date = dayCell.Date;
             DayCell = dayCell;
             defaultFocus = focus;
         }
+
+        #region ITranslatable interface impementation
+
+        public new void ReReadTranslations()
+        {
+            base.ReReadTranslations();
+            this.btnPrevDay.Text = "<< " + TEXT.Get["Previous_day"];
+            this.btnNextDay.Text = TEXT.Get["Next_day"] + " >>";
+            this.chkHadSex.Text = TEXT.Get["Sex_was"];
+            this.label2.Text = TEXT.Get["Bad_wellbeing"];
+            this.label3.Text = TEXT.Get["Good_wellbeing"];
+            this.grpMenstr.Text = TEXT.Get["Menses"];
+            this.label1.Text = TEXT.Get["Length_cycle"];
+            this.verticalLabel1.Text = TEXT.Get["Intensity"];
+            this.grpNote.Text = TEXT.Get["Note_for_day"];
+            this.grpBT.Text = TEXT.Get["BBT_full"];
+            this.grpHealth.Text = TEXT.Get["Wellbeing"];
+            this.Text = TEXT.Get["Change_day"];
+        }
+
+        #endregion
 
         private int EgestaSliderValue
         {
@@ -109,18 +137,18 @@ namespace WomenCalendar
 
         private void ShowEgestaTooltip()
         {
-            ShowTooltip("Количество выделений", DayCellPopupControl.EgestasNames[EgestaSliderValue], sliderEgestaAmount);
+            ShowTooltip(TEXT.Get["Excreta_amount"], DayCellPopupControl.EgestasNames[EgestaSliderValue], sliderEgestaAmount);
         }
 
         private void ShowMenstButtonToolTip(bool isMenstr)
         {
-            ShowTooltip("Кнопка включения/выключения менструашек", 
-                !isMenstr ? "Установить этот день как начало менструашек" : "Отменить эти менструашки", chkMentrustions);
+            ShowTooltip(TEXT.Get["On_off_menses_button"], 
+                !isMenstr ? TEXT.Get["Set_day_as_menses_start"] : TEXT.Get["Cancel_these_menses"], chkMentrustions);
         }
 
         private void ShowLengthTooltip()
         {
-            ShowTooltip("Длительность менструашек", "Укажи сколько дней они шли!", numMenstruationLength);
+            ShowTooltip(TEXT.Get["Menses_length"], TEXT.Get["Please_set_menses_length"], numMenstruationLength);
         }
 
         private void ShowEditSchedulesTooltip()
@@ -243,13 +271,13 @@ namespace WomenCalendar
                 {
                     if (!BBTCollection.IsBBTInCorrectRange(res))
                     {
-                        ShowTooltip("Базальная температура тела", "У человека не может быть такой температуры. Или ты ящерица?", txtBBT);
+                        ShowTooltip(TEXT.Get["BBT_full"], TEXT.Get["Wrong_temperature"], txtBBT);
                         return false;
                     }
                 }
                 else
                 {
-                    ShowTooltip("Базальная температура тела", "Что это за фигню ты сюда ввела? Это не температура!", txtBBT);
+                    ShowTooltip(TEXT.Get["BBT_full"], TEXT.Get["Wrong_temperature_entered"], txtBBT);
                     return false;
                 }
             }
@@ -317,7 +345,7 @@ namespace WomenCalendar
 
         private void numMenstruationLength_ValueChanged(object sender, EventArgs e)
         {
-            lblMenstruationLength.Text = Woman.GetDaysString((int)numMenstruationLength.Value);
+            lblMenstruationLength.Text = TEXT.GetDaysString((int)numMenstruationLength.Value);
         }
 
         private void DayEditForm_Shown(object sender, EventArgs e)

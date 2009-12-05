@@ -27,7 +27,7 @@ namespace WomenCalendar
         {
             GraphPane myPane = zgc.GraphPane;
 
-            myPane.Title.Text = "График Базальной Tемпературы Tела";
+            myPane.Title.Text = TEXT.Get["BBT_graph"];
 
             myPane.XAxis.MajorGrid.IsVisible = true;
             myPane.YAxis.MajorGrid.IsVisible = true;

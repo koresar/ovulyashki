@@ -10,7 +10,7 @@ using ZedGraph;
 
 namespace WomenCalendar
 {
-    public class GraphForm : Form
+    public class GraphForm : Form, ITranslatable
     {
         private IContainer components;
         protected SplitContainer splitContainer;
@@ -36,22 +36,36 @@ namespace WomenCalendar
                 if (_labels == null)
                 {
                     _labels = new Dictionary<string, string>();
-                    _labels["copy"] = "Скопировать в буфер";
-                    _labels["page_setup"] = "Настройка печати...";
-                    _labels["print"] = "Печатать...";
-                    _labels["save_as"] = "Сохранить картинку как...";
-                    _labels["set_default"] = "Восстановить график в нормальный вид";
-                    _labels["show_val"] = "Показывать точечные значения";
-                    _labels["undo_all"] = "Отменить всё сделаное приближение/вращение";
-                    _labels["unzoom"] = "Отменить последнее действие";
+                    _labels["copy"] = TEXT.Get["Copy_to_clipboard"];
+                    _labels["page_setup"] = TEXT.Get["Print_setup"];
+                    _labels["print"] = TEXT.Get["Print_dialog"];
+                    _labels["save_as"] = TEXT.Get["Save_picture_as"];
+                    _labels["set_default"] = TEXT.Get["Set_scale_to_default"];
+                    _labels["show_val"] = TEXT.Get["Show_point_values"];
+                    _labels["undo_all"] = TEXT.Get["Undo_all_zoom"];
+                    _labels["unzoom"] = TEXT.Get["Undo_last_zoom"];
                 }
                 return _labels;
             }
         }
 
+        #region ITranslatable interface impementation
+
+        public void ReReadTranslations()
+        {
+            this.toolStripButton2.Text = TEXT.Get["Print_preview"];
+            this.toolStripButton1.Text = TEXT.Get["Print_graph"];
+            this.lbl2.Text = TEXT.Get["To_dates"];
+            this.lbl1.Text = TEXT.Get["Show_from"];
+            this.Text = TEXT.Get["Graph"];
+        }
+
+        #endregion
+
         public GraphForm()
         {
             InitializeComponent();
+            if (TEXT.Get != null) ReReadTranslations();
         }
 
         public GraphForm(DateTime month) : this()
@@ -144,7 +158,7 @@ namespace WomenCalendar
             this.toolStripButton2.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton2.Name = "toolStripButton2";
             this.toolStripButton2.Size = new System.Drawing.Size(175, 22);
-            this.toolStripButton2.Text = "Просмотреть перед печатью";
+            this.toolStripButton2.Text = "Print preview";
             this.toolStripButton2.Click += new System.EventHandler(this.toolStripButton2_Click);
             // 
             // toolStripButton1
@@ -153,7 +167,7 @@ namespace WomenCalendar
             this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton1.Name = "toolStripButton1";
             this.toolStripButton1.Size = new System.Drawing.Size(158, 22);
-            this.toolStripButton1.Text = "Распечатать этот график";
+            this.toolStripButton1.Text = "Print graph";
             this.toolStripButton1.Click += new System.EventHandler(this.toolStripButton1_Click);
             // 
             // lbl2
@@ -163,7 +177,7 @@ namespace WomenCalendar
             this.lbl2.Name = "lbl2";
             this.lbl2.Size = new System.Drawing.Size(19, 13);
             this.lbl2.TabIndex = 2;
-            this.lbl2.Text = "по";
+            this.lbl2.Text = "to";
             // 
             // lbl1
             // 
@@ -172,7 +186,7 @@ namespace WomenCalendar
             this.lbl1.Name = "lbl1";
             this.lbl1.Size = new System.Drawing.Size(109, 13);
             this.lbl1.TabIndex = 1;
-            this.lbl1.Text = "Показать начиная с";
+            this.lbl1.Text = "Show from";
             // 
             // dateTo
             // 
@@ -212,7 +226,7 @@ namespace WomenCalendar
             this.MinimumSize = new System.Drawing.Size(427, 307);
             this.Name = "GraphForm";
             this.ShowIcon = false;
-            this.Text = "График";
+            this.Text = "Graph";
             this.Resize += new System.EventHandler(this.GraphForm_Resize);
             this.splitContainer.Panel1.ResumeLayout(false);
             this.splitContainer.Panel1.PerformLayout();

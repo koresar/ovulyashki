@@ -53,13 +53,13 @@ namespace WomenCalendar
 
         private void numTake_ValueChanged(object sender, EventArgs e)
         {
-            lblDays1.Text = Woman.GetDaysString((int)numTake.Value);
+            lblDays1.Text = TEXT.GetDaysString((int)numTake.Value);
             EditingSchedule.TakeDays = (int)numTake.Value;
         }
 
         private void numPause_ValueChanged(object sender, EventArgs e)
         {
-            lblDays2.Text = Woman.GetDaysString((int)numPause.Value);
+            lblDays2.Text = TEXT.GetDaysString((int)numPause.Value);
             EditingSchedule.PauseDays = (int)numPause.Value;
         }
 

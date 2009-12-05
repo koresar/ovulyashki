@@ -38,6 +38,13 @@ namespace WomenCalendar
             set { defaultWindowIsMaximized = value; }
         }
 
+        private string applicationLanguage;
+        public string ApplicationLanguage
+        {
+            get { return applicationLanguage; }
+            set { applicationLanguage = value; }
+        }
+
         public static ApplicationSettings Read(string fileName)
         {
             ApplicationSettings settings;

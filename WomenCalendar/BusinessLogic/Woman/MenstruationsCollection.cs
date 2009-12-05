@@ -32,8 +32,8 @@ namespace WomenCalendar
             MenstruationPeriod closestPeriod = GetClosestPeriodAfterDay(date);
             if (closestPeriod != null)
             {
-                if (MessageBox.Show("После этих менструашек у тебя были другие!\nТЫ УВЕРЕНА В ТОМ ЧТО ДЕЛАЕШЬ?", 
-                    "Ты с ума сошла?", MessageBoxButtons.YesNo) != DialogResult.Yes)
+                if (MessageBox.Show(TEXT.Get["Menstr_after_day"] + TEXT.Get["Are_you_sure_capital"], 
+                    TEXT.Get["Are_you_crazy"], MessageBoxButtons.YesNo) != DialogResult.Yes)
                 {
                     return false;
                 }
@@ -55,21 +55,23 @@ namespace WomenCalendar
                     int distance = (date - closestPeriod.StartDay).Days;
                     if (distance < MenstruationPeriod.NormalMinimalPeriod)
                     {
-                        askMessage += "Между менструашками меньше 21-го дня! Такой маленький цикл мы не будем учитывать при прогнозировании.";
+                        askMessage += TEXT.Get.Format("Msg_short_menstr_period", 
+                            MenstruationPeriod.NormalMinimalPeriod, TEXT.GetDaysString(MenstruationPeriod.NormalMinimalPeriod));
                     }
                     else if (distance > MenstruationPeriod.NormalMaximalPeriod)
                     {
-                        askMessage += "Между менструашками больше 35-ти дней! Такой большой цикл мы не будем учитывать при прогнозировании.";
+                        askMessage += TEXT.Get.Format("Msg_large_menstr_period",
+                            MenstruationPeriod.NormalMaximalPeriod, TEXT.GetDaysString(MenstruationPeriod.NormalMaximalPeriod));
                     }
                 }
 
                 if (date > DateTime.Today)
                 {
-                    askMessage += "\nЭто же день из будущего! Он еще не настал. Записалась в Нострадамусы?";
+                    askMessage += "\n" + TEXT.Get["Future_day_question"];
                 }
 
-                if (!string.IsNullOrEmpty(askMessage) && MessageBox.Show(askMessage + "\nТЫ УВЕРЕНА В ТОМ ЧТО ДЕЛАЕШЬ?",
-                    "Ухты, какая необычная ситуация!", MessageBoxButtons.YesNo) != DialogResult.Yes)
+                if (!string.IsNullOrEmpty(askMessage) && MessageBox.Show(askMessage + TEXT.Get["Are_you_sure_capital"],
+                    TEXT.Get["What_a_situation"], MessageBoxButtons.YesNo) != DialogResult.Yes)
                 {
                     return false;
                 }

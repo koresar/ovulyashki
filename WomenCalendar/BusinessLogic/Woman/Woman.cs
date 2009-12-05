@@ -296,8 +296,8 @@ namespace WomenCalendar
             {
                 if (date > DateTime.Today)
                 {
-                    if (MessageBox.Show("Этот день еще не наступил! Врядли ты забеременеешь именно в этот день.\nТЫ УВЕРЕНА В ТОМ ЧТО ДЕЛАЕШЬ?",
-                        "Ухты, какая необычная ситуация!", MessageBoxButtons.YesNo) != DialogResult.Yes)
+                    if (MessageBox.Show(TEXT.Get["Future_pregnancy_day"] + TEXT.Get["Are_you_sure_capital"],
+                        TEXT.Get["What_a_situation"], MessageBoxButtons.YesNo) != DialogResult.Yes)
                     {
                         return false;
                     }
@@ -306,8 +306,9 @@ namespace WomenCalendar
                 ConceptionPeriod concPeriod = Conceptions.GetConceptionAfterDate(date);
                 if (concPeriod != null && (concPeriod.StartDay - date).Days <= ConceptionPeriod.StandardLength)
                 {
-                    MessageBox.Show("У вас уже есть беременность через " +
-                        (concPeriod.StartDay - date).Days.ToString() + " дней после этого.", "Не-не-не!");
+                    MessageBox.Show(
+                        TEXT.Get.Format("Already_pregnant_after", (concPeriod.StartDay - date).Days.ToString()), 
+                        TEXT.Get["No_no_no"]);
                     return false;
                 }
 
@@ -319,15 +320,6 @@ namespace WomenCalendar
                 return Conceptions.Add(date);
             }
             return false;
-        }
-
-        public static string GetDaysString(int days)
-        {
-            if (days > 4 && days < 21) return "дней";
-            int tmpDays = days % 10;
-            if (tmpDays == 1) return "день";
-            if (tmpDays < 5 && tmpDays > 1) return "дня";
-            return "дней";
         }
 
         public bool RemoveConceptionDay(DateTime date)
@@ -370,20 +362,18 @@ namespace WomenCalendar
         {
             StringBuilder sb = new StringBuilder();
 
-            sb.Append("Дата: ");
+            sb.Append(TEXT.Get["Date_double_colon"]);
             sb.Append(date.ToShortDateString());
             if (date == DateTime.Today)
             {
-                sb.Append(" (сегодня)");
+                sb.Append(TEXT.Get["Today_parentheses"]);
             }
 
             MenstruationPeriod period = Menstruations.GetPeriodByDate(date);
             if (period != null)
             {
                 sb.AppendLine();
-                sb.Append("Это ");
-                sb.Append((date - period.StartDay).Days + 1);
-                sb.AppendLine("-й день менструашек");
+                sb.AppendLine(TEXT.Get.Format("This_is_N_menstr_day", (date - period.StartDay).Days + 1));
                 sb.Append(DayCellPopupControl.EgestasNames[period.Egestas[date]]);
             }
 
@@ -394,36 +384,33 @@ namespace WomenCalendar
                 int week = Conceptions.GetPregnancyWeekNumber(date);
                 if (week > 0)
                 {
-                    sb.Append(week);
-                    sb.AppendLine("-я неделя беременности");
+                    sb.AppendLine(TEXT.Get.Format("Preg_week_number_N", week));
                 }
 
                 if (IsConceptionDay(date))
                 {
-                    sb.AppendLine("Это день зачатия! Ура!");
+                    sb.AppendLine(TEXT.Get["Conception_day"]);
                 }
 
                 var concPeriod = Conceptions.GetConceptionByDate(date);
                 DateTime conceptionDate = concPeriod.StartDay;
                 DateTime dateOfBirth = conceptionDate.AddDays(ConceptionPeriod.StandardLength);
-                sb.AppendLine("Ребёнок родится примерно ");
-                sb.AppendLine(dateOfBirth.ToLongDateString());
-                sb.Append("Знак зодиака будет ");
-                sb.Append(HoroscopDatePair.GetZodiacSignName(dateOfBirth));
+                sb.AppendLine(TEXT.Get.Format("Probable_birth_date", dateOfBirth.ToLongDateString()));
+                sb.Append(TEXT.Get.Format("Zodiac_will_be", HoroscopDatePair.GetZodiacSignName(dateOfBirth)));
 
                 string gender = string.Empty;
                 if (IsPredictedAsBoyDay(concPeriod.StartDay))
                 {
-                    gender = "мальчик";
+                    gender = TEXT.Get["Boy"];
                 }
                 else if (IsPredictedAsGirlDay(concPeriod.StartDay))
                 {
-                    gender = "девочка";
+                    gender = TEXT.Get["Girl"];
                 }
                 if (!string.IsNullOrEmpty(gender))
                 {
                     sb.AppendLine();
-                    sb.Append("и предположительно это будет " + gender);
+                    sb.Append(TEXT.Get.Format("Child_gender_will_be", gender));
                 }
             }
             else
@@ -432,7 +419,7 @@ namespace WomenCalendar
                 if (closestBefore != null && period == null)
                 {
                     sb.AppendLine();
-                    sb.Append("Это " + ((date - closestBefore.StartDay).Days + 1).ToString() + "-й день цикла.");
+                    sb.Append(TEXT.Get.Format("Cycle_day_number_N", ((date - closestBefore.StartDay).Days + 1).ToString()));
                 }
 
                 var closestAfter = Menstruations.GetClosestPeriodAfterDay(date);
@@ -441,44 +428,39 @@ namespace WomenCalendar
                 {
                     int days = (closestAfter.StartDay - closestBefore.StartDay).Days;
                     sb.AppendLine();
-                    sb.Append("Этот цикл длился " + days.ToString() + " " + GetDaysString(days));
+                    sb.Append(TEXT.Get.Format("Cycle_length_days", days.ToString(), TEXT.GetDaysString(days)));
                 }
 
                 if (IsPredictedAsMenstruationDay(date))
                 {
                     sb.AppendLine();
-                    sb.Append("Вероятны менструашки");
+                    sb.Append(TEXT.Get["Possible_menst"]);
                 }
 
                 if (IsPredictedAsOvulationDay(date))
                 {
                     sb.AppendLine();
-                    sb.Append("Это примерный день овуляции");
+                    sb.Append(TEXT.Get["Estimated_ovulation_day"]);
                 }
 
                 string gender = string.Empty;
                 if (IsPredictedAsBoyDay(date))
                 {
-                    gender = "мальчика";
+                    sb.AppendLine();
+                    sb.Append(TEXT.Get["Boy_conception_day"]);
                 }
                 else if (IsPredictedAsGirlDay(date))
                 {
-                    gender = "девочки";
-                }
-                if (!string.IsNullOrEmpty(gender))
-                {
                     sb.AppendLine();
-                    sb.Append("Более вероятно зачание " + gender);
+                    sb.Append(TEXT.Get["Boy_conception_day"]);
                 }
 
                 if (HadSexList.ContainsKey(date))
                 {
                     DateTime dateOfBirth = date.AddDays(ConceptionPeriod.StandardLength);
                     sb.AppendLine();
-                    sb.Append("Если ты в этот день зачала ребёнка,\nто он родится примерно ");
-                    sb.AppendLine(dateOfBirth.ToLongDateString());
-                    sb.Append("Знак зодиака будет ");
-                    sb.Append(HoroscopDatePair.GetZodiacSignName(dateOfBirth));
+                    sb.Append(TEXT.Get.Format("If_conceive_info", 
+                        dateOfBirth.ToLongDateString(), HoroscopDatePair.GetZodiacSignName(dateOfBirth)));
                 }
             }
 
@@ -487,7 +469,7 @@ namespace WomenCalendar
             if (Notes.TryGetValue(date, out text))
             {
                 sb.AppendLine();
-                sb.Append("Заметка: ");
+                sb.Append(TEXT.Get["Note_semicolon"]);
                 sb.Append(text);
             }
 

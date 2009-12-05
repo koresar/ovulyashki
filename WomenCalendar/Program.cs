@@ -9,6 +9,10 @@ using System.Resources;
 using CarlosAg.ExcelXmlWriter;
 using System.Drawing.Drawing2D;
 using WomenCalendar.Forms;
+using System.Reflection;
+using System.Globalization;
+using System.Xml;
+using System.Text;
 
 namespace WomenCalendar
 {
@@ -63,7 +67,7 @@ namespace WomenCalendar
             if (string.IsNullOrEmpty(CurrentWoman.AssociatedFile))
             {
                 SaveFileDialog dialog = new SaveFileDialog();
-                dialog.Filter = "Woman files (*.woman)|*.woman";
+                dialog.Filter = TEXT.Get["Woman_files"] + " (*.woman)|*.woman";
                 dialog.AddExtension = true;
                 dialog.DefaultExt = ".woman";
                 if (dialog.ShowDialog(ApplicationForm) == DialogResult.OK)
@@ -90,7 +94,7 @@ namespace WomenCalendar
             }
 
             OpenFileDialog dialog = new OpenFileDialog();
-            dialog.Filter = "Woman files (*.woman)|*.woman";
+            dialog.Filter = TEXT.Get["Woman_files"] + " (*.woman)|*.woman";
             if (dialog.ShowDialog(ApplicationForm) == DialogResult.OK)
             {
                 return LoadWoman(dialog.FileName);
@@ -121,7 +125,7 @@ namespace WomenCalendar
         
         public static bool AskAndSaveCurrentWoman()
         {
-            DialogResult res = MessageBox.Show("Сохранить эту женщину, прежде чем продолжить?", ApplicationForm.Text,
+            DialogResult res = MessageBox.Show(TEXT.Get["Save_woman_question"], ApplicationForm.Text,
                                 MessageBoxButtons.YesNoCancel);
             switch (res)
             {
@@ -162,8 +166,7 @@ namespace WomenCalendar
                 if (form.ShowDialog() != DialogResult.OK) break;
                 if (form.Password != woman.Password)
                 {
-                    if (MessageBox.Show("Неправильный пароль! Попытаемся еще раз?\n\n" +
-                        "Если нажмёшь 'Нет', то создадим новую женжину.", "Ошибка!", MessageBoxButtons.YesNo) != DialogResult.Yes)
+                    if (MessageBox.Show(TEXT.Get["Wrong_password_question"], TEXT.Get["Error"], MessageBoxButtons.YesNo) != DialogResult.Yes)
                     {
                         break;
                     }
@@ -181,7 +184,7 @@ namespace WomenCalendar
             NewEditWomanForm form = new NewEditWomanForm();
             form.WomanName = CurrentWoman.Name;
             form.WomanPassword = CurrentWoman.Password;
-            form.Text = "Изменяем женщину";
+            form.Text = TEXT.Get["Edit_woman"];
             if (form.ShowDialog() == DialogResult.OK)
             {
                 CurrentWoman.Name = form.WomanName;
@@ -205,19 +208,22 @@ namespace WomenCalendar
             }
 
             SaveFileDialog dialog = new SaveFileDialog();
-            dialog.Filter = "Excel files (*.xls)|*.xls|Comma Separated Values files (*.csv)|*.csv";
+            dialog.Filter = 
+                TEXT.Get["Excel files"] + " (*.xls)|*.xls|" + 
+                TEXT.Get["CSV_files"] + " (*.csv)|*.csv";
             dialog.RestoreDirectory = true;
             dialog.CheckPathExists = true;
-            dialog.Title = "Укажите файл";
+            dialog.Title = TEXT.Get["Point_the_file"];
             dialog.SupportMultiDottedExtensions = true;
             if (dialog.ShowDialog() != DialogResult.OK)
             {
                 return false;
             }
             string fileName = dialog.FileName;
-            if (!fileName.EndsWith(".csv") && !fileName.EndsWith(".xls"))
+            if (!fileName.EndsWith(".csv", StringComparison.OrdinalIgnoreCase) && 
+                !fileName.EndsWith(".xls", StringComparison.OrdinalIgnoreCase))
             {
-                MessageBox.Show("Расширение файла должно быть .xls или .csv!", "Ошибка!");
+                MessageBox.Show(TEXT.Get["File_ext_must_to_be"], TEXT.Get["Error"]);
                     return false;
             }
 
@@ -235,8 +241,7 @@ namespace WomenCalendar
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Не могу экспортировать в файл. Сообщение об ошибке:\n" + 
-                    ex.Message, "Ошибка!");
+                MessageBox.Show(TEXT.Get["Cant_export"] + "\n" + ex.Message, TEXT.Get["Error"]);
                 return false;
             }
             return true;
@@ -256,6 +261,8 @@ namespace WomenCalendar
                 Application.SetCompatibleTextRenderingDefault(false);
 
                 Settings = ApplicationSettings.Read(SettingsFileName);
+
+                TEXT.InitializeLanguage(Settings.ApplicationLanguage);
 
                 ApplicationForm = new MainForm();
 

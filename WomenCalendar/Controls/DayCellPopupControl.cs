@@ -10,8 +10,21 @@ namespace WomenCalendar
 {
     public partial class DayCellPopupControl : UserControl
     {
-        public static string[] EgestasNames = {"День без менструашек", "Мало менструашек", "Посредственные менструашки", 
-            "Средняя интенсивность менструашек", "Много менструашек" };
+        public static string[] egestasNames;
+        public static string[] EgestasNames
+        {
+            get
+            {
+                if (egestasNames == null)
+                {
+                    var ids = new string[] { "Egesta_amount_0", "Egesta_amount_1", "Egesta_amount_2", "Egesta_amount_3", "Egesta_amount_4" };
+                    egestasNames = new string[ids.Length];
+                    for (int i = 0; i < ids.Length; i++)
+                        egestasNames[i] = TEXT.Get[ids[i]];
+                }
+                return egestasNames;
+            }
+        }
 
         private bool initializing;
 
@@ -137,36 +150,36 @@ namespace WomenCalendar
 
         private void ShowEgestaTooltip()
         {
-            ShowTooltip("Количество менструашек", EgestasNames[EgestaSliderValue]);
+            ShowTooltip(TEXT.Get["Amount_of_bleeding"], EgestasNames[EgestaSliderValue]);
         }
 
         private void ShowHasSexToolTip()
         {
-            ShowTooltip("Секс", Program.CurrentWoman.HadSexList[DayCell.Date] ? 
-                "А в этот день у меня был секс." : 
-                "В этот день у меня не было секса.");
+            ShowTooltip(TEXT.Get["Sex"], Program.CurrentWoman.HadSexList[DayCell.Date] ? 
+                TEXT.Get["Sex_was"] : 
+                TEXT.Get["Sex_was_not"]);
         }
 
         private void ShowNoteToolTip()
         {
-            ShowTooltip("Заметка", Program.CurrentWoman.Notes[DayCell.Date]);
+            ShowTooltip(TEXT.Get["Note"], Program.CurrentWoman.Notes[DayCell.Date]);
         }
 
         private void ShowHealthTooltip()
         {
-            ShowTooltip("Самочувствие", sliderHealth.Value.ToString() + " из 10");
+            ShowTooltip(TEXT.Get["Wellbeing"], TEXT.Get.Format("N_of_10", sliderHealth.Value.ToString()));
         }
 
         private void ShowBBTTooltip()
         {
             var bbt = Program.CurrentWoman.BBT.GetBBT(DayCell.Date);
-            ShowTooltip("Базальная температура тела", bbt == 0 ? "Не установлена" : bbt.ToString());
+            ShowTooltip(TEXT.Get["BBT_full"], bbt == 0 ? TEXT.Get["Not_set_f"] : bbt.ToString());
         }
 
         private void ShowDayInfoTooltip()
         {
             var info = Program.CurrentWoman.GenerateDayInfo(DayCell.Date);
-            ShowTooltip("Кликни для редактирования", info);
+            ShowTooltip(TEXT.Get["Click_to_edit"], info);
         }        
 
         private void ShowTooltip(string caption, string text)

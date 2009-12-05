@@ -9,17 +9,28 @@ using System.Globalization;
 
 namespace WomenCalendar
 {
-    public partial class OneMonthControl : UserControl
+    public partial class OneMonthControl : UserControl, ITranslatable
     {
         public const int EdgeWidth = 3;
 
         private const int CellsAmount = 42;
         private readonly List<DayCellControl> _cells = new List<DayCellControl>(CellsAmount);
 
-        private static string[] MonthNames = {
-            "Январь", "Февраль", "Март", "Апрель", "Май", "Июнь", "Июль", "Август", "Сентябрь", "Октябрь", "Ноябрь", "Декабрь" };
+        private static string[] MonthNames
+        {
+            get
+            {
+                return CultureInfo.CurrentUICulture.DateTimeFormat.MonthNames;
+            }
+        }
 
-        private static string[] WeekDayNames = {"Пн", "Вт", "Ср", "Чт", "Пт", "Сб", "Вс"};
+        private static string[] WeekDayNames
+        {
+            get
+            {
+                return CultureInfo.CurrentUICulture.DateTimeFormat.AbbreviatedDayNames;
+            }
+        }
 
         public delegate void DayClicked(object sender, DayCellClickEventArgs e);
         public event DayClicked MonthDayClicked;
@@ -105,6 +116,7 @@ namespace WomenCalendar
         public OneMonthControl()
         {
             InitializeComponent();
+            if (TEXT.Get != null) ReReadTranslations();
 
             SuspendLayout();
 
@@ -121,6 +133,15 @@ namespace WomenCalendar
 
             ResumeLayout();
         }
+
+        #region ITranslatable interface impementation
+
+        public void ReReadTranslations()
+        {
+            this.btnDropDown.Text = TEXT.Get["Graphs"];
+        }
+
+        #endregion
 
         public DayCellControl CreateNewDefaultCellControl(int number)
         {
@@ -158,7 +179,7 @@ namespace WomenCalendar
 
                 for (int i = 0; i < 7; i++)
                 {
-                    string aDay = WeekDayNames[i];
+                    string aDay = WeekDayNames[(i + 1) % 7];
                     textSize = pe.Graphics.MeasureString(aDay, Font, DayCellControl.DefaultCellWidth);
 
                     Rectangle rect = new Rectangle(EdgeWidth + DayCellControl.DefaultCellWidth * i, EdgeWidth + DayCellControl.DefaultCellHeight / 2,
@@ -192,8 +213,8 @@ namespace WomenCalendar
 
         private void btnDropDown_MouseEnter(object sender, EventArgs e)
         {
-            toolTip.ToolTipTitle = "Кнопка с графиками";
-            toolTip.Show("С помощью этой кнопки можно построить всяческие графики.", 
+            toolTip.ToolTipTitle = TEXT.Get["Special_button_title"];
+            toolTip.Show(TEXT.Get["Special_button_descr"], 
                 btnDropDown, btnDropDown.Width, btnDropDown.Height);
         }
 

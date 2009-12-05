@@ -5,7 +5,7 @@ using ZedGraph;
 
 namespace WomenCalendar
 {
-    public class MonthlyGraphForm : GraphForm
+    public class MonthlyGraphForm : GraphForm, ITranslatable
     {
         public class PeriodDisplayItem
         {
@@ -24,7 +24,7 @@ namespace WomenCalendar
             public override string ToString()
             {
                 return string.Format("{0}: {1} - {2} ({3} {4})",
-                    Number, Start.ToString("d"), Stop.ToString("d"), Length, Woman.GetDaysString(Length));
+                    Number, Start.ToString("d"), Stop.ToString("d"), Length, TEXT.GetDaysString(Length));
             }
         }
 
@@ -37,6 +37,7 @@ namespace WomenCalendar
             : base(month)
         {
             InitializeComponent();
+            if (TEXT.Get != null) ReReadTranslations();
 
             InitializePeriodList();
         }
@@ -44,7 +45,18 @@ namespace WomenCalendar
         public MonthlyGraphForm()
         {
             InitializeComponent();
+            if (TEXT.Get != null) ReReadTranslations();
         }
+
+        #region ITranslatable interface impementation
+
+        public new void ReReadTranslations()
+        {
+            base.ReReadTranslations();
+            this.label1.Text = TEXT.Get["Show_cycle_number"];            
+        }
+
+        #endregion
         
         protected void InitializePeriodList()
         {
@@ -130,7 +142,7 @@ namespace WomenCalendar
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(97, 13);
             this.label1.TabIndex = 6;
-            this.label1.Text = "Показать цикл №";
+            this.label1.Text = "Show cycle #";
             // 
             // cmbPeriods
             // 

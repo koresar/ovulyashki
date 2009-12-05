@@ -27,7 +27,7 @@ namespace WomenCalendar
         {
             GraphPane myPane = zgc.GraphPane;
 
-            myPane.Title.Text = "График Самочувствия";
+            myPane.Title.Text = TEXT.Get["Wellbeing_graph"];
 
             myPane.XAxis.MajorGrid.IsVisible = true;
             myPane.YAxis.MajorGrid.IsVisible = true;

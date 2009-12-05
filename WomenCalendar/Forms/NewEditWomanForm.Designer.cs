@@ -39,13 +39,13 @@
             this.lblName.AutoSize = true;
             this.lblName.Location = new System.Drawing.Point(13, 13);
             this.lblName.Name = "lblName";
-            this.lblName.Size = new System.Drawing.Size(89, 13);
+            this.lblName.Size = new System.Drawing.Size(101, 13);
             this.lblName.TabIndex = 0;
-            this.lblName.Text = "Как тебя зовут?";
+            this.lblName.Text = "What is your name?";
             // 
             // txtName
             // 
-            this.txtName.Location = new System.Drawing.Point(108, 12);
+            this.txtName.Location = new System.Drawing.Point(210, 12);
             this.txtName.Name = "txtName";
             this.txtName.Size = new System.Drawing.Size(172, 20);
             this.txtName.TabIndex = 1;
@@ -54,13 +54,13 @@
             // 
             this.lblPassword.Location = new System.Drawing.Point(13, 47);
             this.lblPassword.Name = "lblPassword";
-            this.lblPassword.Size = new System.Drawing.Size(89, 42);
+            this.lblPassword.Size = new System.Drawing.Size(191, 42);
             this.lblPassword.TabIndex = 2;
-            this.lblPassword.Text = "Введи пароль (если надо защитить)";
+            this.lblPassword.Text = "Enter your password (if need to be protected)";
             // 
             // txtPassword
             // 
-            this.txtPassword.Location = new System.Drawing.Point(108, 58);
+            this.txtPassword.Location = new System.Drawing.Point(210, 58);
             this.txtPassword.Name = "txtPassword";
             this.txtPassword.Size = new System.Drawing.Size(172, 20);
             this.txtPassword.TabIndex = 3;
@@ -69,13 +69,13 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(292, 126);
+            this.ClientSize = new System.Drawing.Size(394, 126);
             this.Controls.Add(this.lblPassword);
             this.Controls.Add(this.txtPassword);
             this.Controls.Add(this.txtName);
             this.Controls.Add(this.lblName);
             this.Name = "NewEditWomanForm";
-            this.Text = "Создаём новую женщину";
+            this.Text = "Creating new woman";
             this.Controls.SetChildIndex(this.lblName, 0);
             this.Controls.SetChildIndex(this.txtName, 0);
             this.Controls.SetChildIndex(this.txtPassword, 0);

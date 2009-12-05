@@ -6,10 +6,21 @@ namespace WomenCalendar
 {
     public class OneDayInfo
     {
-        public static readonly string[] Header = 
-        { 
-            "Дата", "Менструации", "Интенсивность", "Был секс", "БTT", "Самочувствие (0-10)", "Заметка"
-        };
+        private static string[] header;
+        public static string[] Header
+        {
+            get
+            {
+                if (header == null)
+                {
+                    var ids = new string[] { "Date", "Menses", "Intensity", "Had_sex", "BBT", "Wellbeing_1_10", "Note" };
+                    header = new string[ids.Length];
+                    for (int i = 0; i < ids.Length; i++)
+                        header[i] = TEXT.Get[ids[i]];
+                }
+                return header;
+            }
+        }
 
         public static OneDayInfo GetByDate(Woman w, DateTime day)
         {

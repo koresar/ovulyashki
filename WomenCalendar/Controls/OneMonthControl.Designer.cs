@@ -49,7 +49,7 @@
             this.btnDropDown.Size = new System.Drawing.Size(55, 16);
             this.btnDropDown.TabIndex = 0;
             this.btnDropDown.TabStop = false;
-            this.btnDropDown.Text = "Графики";
+            this.btnDropDown.Text = "Graphs";
             this.btnDropDown.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnDropDown.UseVisualStyleBackColor = false;
             this.btnDropDown.MouseLeave += new System.EventHandler(this.btnDropDown_MouseLeave);

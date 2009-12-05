@@ -14,17 +14,17 @@ namespace Uninstall
         {
             try
             {
-                if (MessageBox.Show("Уверена, что хочешь удалить Овуляшки?", "Подумай еще раз",
+                if (MessageBox.Show("Areyou sure you want to delete Ovulyashki?", "Think again",
                     MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) == DialogResult.Yes)
                 {
-                    Process.Start(Environment.GetFolderPath(Environment.SpecialFolder.System) + @"\msiexec.exe", 
-                        @" /x {334556E0-10B1-4308-A487-DA137AF1BCF1}");
+                    Process.Start(Environment.GetFolderPath(Environment.SpecialFolder.System) + @"\msiexec.exe",
+                        @" /x {703F808B-60BC-4F04-B7EE-0ABB7BA5F909}");
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Что-то ужасное произошло! Попробуй удалить Овуляшки через Установку/Удаление программ.\n\n" + 
-                    ex.Message, "ОЙ!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Something weird happened! Try to remove Ovulyashki thru Add/Remove Programs.\n\n" + 
+                    ex.Message, "WOW!", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }

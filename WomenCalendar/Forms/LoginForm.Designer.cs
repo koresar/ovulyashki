@@ -48,7 +48,7 @@
             this.lblPass.Name = "lblPass";
             this.lblPass.Size = new System.Drawing.Size(88, 13);
             this.lblPass.TabIndex = 0;
-            this.lblPass.Text = "Введите пароль";
+            this.lblPass.Text = "Please enter password";
             // 
             // LoginForm
             // 
@@ -58,7 +58,7 @@
             this.Controls.Add(this.lblPass);
             this.Controls.Add(this.txtPassword);
             this.Name = "LoginForm";
-            this.Text = "введите пароль";
+            this.Text = "Please enter password";
             this.Shown += new System.EventHandler(this.LoginForm_Shown);
             this.Controls.SetChildIndex(this.txtPassword, 0);
             this.Controls.SetChildIndex(this.lblPass, 0);

@@ -117,7 +117,7 @@ namespace WomenCalendar
             */
             GraphPane myPane = zgc.GraphPane;
 
-            myPane.Title.Text = "График Длины Циклов";
+            myPane.Title.Text = TEXT.Get["Cycle_length_graph"];
 
             myPane.XAxis.MajorGrid.IsVisible = true;
             myPane.YAxis.MajorGrid.IsVisible = true;
