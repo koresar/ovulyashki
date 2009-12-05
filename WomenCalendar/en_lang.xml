@@ -25,6 +25,8 @@
   <item id="Cycle_length_days">This cycle lasted {0} {1}</item>
   <item id="Possible_menst">Menses are possible</item>
   <item id="Estimated_ovulation_day">This is estimated day of ovulation</item>
+  <item id="Boy_conception_day">More chances to conceive boy</item>
+  <item id="Girl_conception_day">More chances to conceive girl</item>
   <item id="If_conceive_info">If you conceive this day
 it will be born about {0}.
 Zodiac sign will be {1}.</item>

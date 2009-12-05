@@ -32,7 +32,7 @@ namespace WomenCalendar
                 return
                     Get.translations.TryGetValue(id, out val) ? val : // search in translations
                     Get.defaultText.TryGetValue(id, out val) ? val : // search in default
-                    noValueText; // return ERROR text
+                    noValueText + id; // return ERROR text
             }
         }
 
@@ -42,7 +42,7 @@ namespace WomenCalendar
             return
                 Get.translations.TryGetValue(id, out val) ? string.Format(val, parameters) : // search in translations
                 Get.defaultText.TryGetValue(id, out val) ? string.Format(val, parameters) : // search in default
-                noValueText; // return ERROR text
+                noValueText + id; // return ERROR text
         }
 
         public static TEXT Get { get; private set; }
