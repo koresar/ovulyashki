@@ -312,12 +312,39 @@ namespace WomenCalendar
                     return false;
                 }
 
-                MenstruationPeriod mensPeriod = Menstruations.GetClosestPeriodBeforeDay(date);
-                if (mensPeriod != null)
+                MenstruationPeriod nextMenses = Menstruations.GetClosestPeriodAfterDay(date);
+                if (nextMenses != null)
                 {
-                    mensPeriod.HasPregnancy = true;
+                    if (MessageBox.Show(TEXT.Get["Have_menses_after_pregn"] + TEXT.Get["Are_you_sure_capital"],
+                        TEXT.Get["What_a_situation"], MessageBoxButtons.YesNo) != DialogResult.Yes)
+                    {
+                        return false;
+                    }
                 }
-                return Conceptions.Add(date);
+
+                MenstruationPeriod prevMenses = Menstruations.GetPeriodByDate(date);
+                if (prevMenses != null)
+                {
+                    if (MessageBox.Show(TEXT.Get["Pregn_on_menses"] + TEXT.Get["Are_you_sure_capital"],
+                        TEXT.Get["What_a_situation"], MessageBoxButtons.YesNo) != DialogResult.Yes)
+                    {
+                        return false;
+                    }
+                }
+                else
+                {
+                    prevMenses = Menstruations.GetClosestPeriodBeforeDay(date);
+                }
+
+                if (prevMenses != null)
+                {
+                    prevMenses.HasPregnancy = true;
+                    return Conceptions.Add(prevMenses.StartDay);
+                }
+                else
+                {
+                    return Conceptions.Add(date);
+                }
             }
             return false;
         }

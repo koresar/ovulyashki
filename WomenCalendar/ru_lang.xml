@@ -193,10 +193,17 @@
   <item id="Cancel_these_menses">Отменить эти менструашки</item>
   <item id="Menses_length">Длительность менструашек</item>
   <item id="Please_set_menses_length">Укажи сколько дней они шли!</item>
-  <item id=""></item>
-  <item id=""></item>
-  <item id=""></item>
-  <item id=""></item>
-  <item id=""></item>
-  <item id=""></item>
+  <item id="Have_menses_after_pregn">АЛЁ! После этого дня у тебя есть менструашки! Это очень-очень странно устанавливать этот день как день зачатия.</item>
+  <item id="Pregn_on_menses">Есть очень малая вероятность забеременеть в день менструашек!</item>
+  <item id="Update_application">Проверить обновления</item>
+  <item id="Update_found_text">
+Вышла новая версия Овуляшек {0} (у тебя сейчас {1}).
+Она была выпущена {2}.
+Её размер всего лишь {3} МБайт.
+И её уже скачали {4} раз.
+
+Хочешь обновиться прямо сейчас?</item>
+  <item id="Latest_application">У тебя уже и так самая последняя версия овуляшек. Будь счастлива!</item>
+  <item id="Unable_to_update">Не могу обновиться. Вот такую ошибку нам выдаёт система: {0}</item>
+  <item id="Unknown">Unknown</item>
 </translation>

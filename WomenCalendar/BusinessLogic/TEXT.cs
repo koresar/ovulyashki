@@ -82,7 +82,7 @@ namespace WomenCalendar
 
         private static string LocalPath
         {
-            get { return Path.GetDirectoryName(Assembly.GetEntryAssembly().Location); }
+            get { return Path.GetDirectoryName(Application.ExecutablePath); }
         }
 
         public static Dictionary<string, string> FindAllLangFiles()
@@ -94,7 +94,7 @@ namespace WomenCalendar
                 if (fileName.EndsWith(langFileEnd, StringComparison.OrdinalIgnoreCase) &&
                     fileName.Length == defaultLang.Length + langFileEnd.Length)
                 {
-                    langFiles[fileName.Substring(0, 2).ToLower()] = fileName;
+                    langFiles[fileName.Substring(0, 2).ToLower()] = f;
                 }
             }
             return langFiles;

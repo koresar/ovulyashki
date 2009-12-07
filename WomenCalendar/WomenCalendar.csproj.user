@@ -16,4 +16,7 @@
     <FallbackCulture>en-US</FallbackCulture>
     <VerifyUploadedFiles>false</VerifyUploadedFiles>
   </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <StartArguments>C:\Users\Боровяки\Documents\My Dropbox\Катя.woman</StartArguments>
+  </PropertyGroup>
 </Project>

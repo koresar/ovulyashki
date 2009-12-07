@@ -193,11 +193,16 @@ Thanks Mike Krueger, John Reilly for SharpZipLib: http://icsharpcode.net/
   <item id="Cancel_these_menses">Cancel these menses</item>
   <item id="Menses_length">Menses length</item>
   <item id="Please_set_menses_length">Please set menses length!</item>
-  <item id=""></item>
-  <item id=""></item>
-  <item id=""></item>
-  <item id=""></item>
-  <item id=""></item>
-  <item id=""></item>
-  <item id=""></item>
+  <item id="Have_menses_after_pregn">Hey! You have menses after that day! This is very-very weird to set pregnancy here.</item>
+  <item id="Pregn_on_menses">There is very low possibility to conceive at the menses day!</item>
+  <item id="Update_application">Update Application</item>
+  <item id="Update_found_text">There is newer Ovulyashki version {0} (you have {1} now).
+It was released {2}.
+Its size only {3} MBytes.
+And it was already downloaded {4} times.
+
+Would you like to download it now?</item>
+  <item id="Latest_application">You are already useing latest Ovulyashki. Be happy!</item>
+  <item id="Unable_to_update">Unable to update. Here is the error from the system: {0}</item>
+  <item id="Unknown">Unknown</item>
 </translation>

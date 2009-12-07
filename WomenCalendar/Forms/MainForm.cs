@@ -38,6 +38,7 @@ namespace WomenCalendar
             this.helpToolStripButton.Text = TEXT.Get["Help"];
             this.helpToolStripButton.ToolTipText = TEXT.Get["About_application"];
             this.languageButton.Text = TEXT.Get["Language"];
+            this.toolUpdate.Text = TEXT.Get["Update_application"];
 
             this.xLegend.CaptionText = TEXT.Get["Legend"];
             this.label13.Text = TEXT.Get["Legend_pregn_week"];
@@ -326,6 +327,21 @@ namespace WomenCalendar
                 monthControl.ReReadTranslations();
                 monthControl.Redraw();
             }
+        }
+
+        private void toolUpdate_Click(object sender, EventArgs e)
+        {
+            AppUpdater.TryUpdate();
+        }
+
+        public void DisableUpdate()
+        {
+            toolUpdate.Enabled = false;
+        }
+
+        public void EnableUpdate()
+        {
+            toolUpdate.Enabled = true;
         }
     }
 }

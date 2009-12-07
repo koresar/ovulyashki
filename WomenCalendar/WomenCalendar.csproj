@@ -70,6 +70,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BusinessLogic\ApplicationSettings.cs" />
+    <Compile Include="BusinessLogic\AppUpdater.cs" />
     <Compile Include="BusinessLogic\Report\CsvWriter.cs" />
     <Compile Include="BusinessLogic\HoroscopeDatePair.cs" />
     <Compile Include="BusinessLogic\Report\ReportWriter.cs" />
@@ -340,6 +341,7 @@
     <Content Include="en_lang.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <None Include="Resources\updateGreen.png" />
     <Content Include="ru_lang.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

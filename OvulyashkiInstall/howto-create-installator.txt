@@ -1,0 +1,3 @@
+Change Version of OvulyashkiInstall. Do NOT change product code.
+Change UpgradeCode.
+Change Versions of main executable assembly.

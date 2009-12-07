@@ -183,7 +183,6 @@ namespace WomenCalendar
                 }
             }
             return resultPeriod;
-            //return (from p in this where p.StartDay < date orderby p.StartDay descending select p).FirstOrDefault();
         }
 
         public DateTime GetClosestOvulationDay(DateTime date)

@@ -13,6 +13,8 @@ using System.Reflection;
 using System.Globalization;
 using System.Xml;
 using System.Text;
+using System.Net;
+using System.Threading;
 
 namespace WomenCalendar
 {

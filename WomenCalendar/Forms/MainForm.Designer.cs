@@ -39,6 +39,7 @@
             this.prevStripButton = new System.Windows.Forms.ToolStripButton();
             this.nextStripButton = new System.Windows.Forms.ToolStripButton();
             this.helpToolStripButton = new System.Windows.Forms.ToolStripButton();
+            this.toolUpdate = new System.Windows.Forms.ToolStripButton();
             this.languageButton = new System.Windows.Forms.ToolStripDropDownButton();
             this.englishToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
@@ -109,6 +110,7 @@
             this.prevStripButton,
             this.nextStripButton,
             this.helpToolStripButton,
+            this.toolUpdate,
             this.languageButton});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
@@ -164,7 +166,7 @@
             // toolStripLabelJump
             // 
             this.toolStripLabelJump.Name = "toolStripLabelJump";
-            this.toolStripLabelJump.Size = new System.Drawing.Size(64, 36);
+            this.toolStripLabelJump.Size = new System.Drawing.Size(53, 36);
             this.toolStripLabelJump.Text = "Jump to:";
             this.toolStripLabelJump.ToolTipText = "Selected date";
             // 
@@ -201,6 +203,17 @@
             this.helpToolStripButton.ToolTipText = "About application";
             this.helpToolStripButton.Click += new System.EventHandler(this.helpToolStripButton_Click);
             // 
+            // toolUpdate
+            // 
+            this.toolUpdate.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.toolUpdate.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolUpdate.Image = global::WomenCalendar.Properties.Resources.updateGreen;
+            this.toolUpdate.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolUpdate.Name = "toolUpdate";
+            this.toolUpdate.Size = new System.Drawing.Size(36, 36);
+            this.toolUpdate.Text = "Update Application";
+            this.toolUpdate.Click += new System.EventHandler(this.toolUpdate_Click);
+            // 
             // languageButton
             // 
             this.languageButton.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
@@ -216,12 +229,12 @@
             // englishToolStripMenuItem
             // 
             this.englishToolStripMenuItem.Name = "englishToolStripMenuItem";
-            this.englishToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.englishToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
             this.englishToolStripMenuItem.Text = "English";
             // 
             // dateTimePicker1
             // 
-            this.dateTimePicker1.Location = new System.Drawing.Point(400, 13);
+            this.dateTimePicker1.Location = new System.Drawing.Point(290, 12);
             this.dateTimePicker1.Name = "dateTimePicker1";
             this.dateTimePicker1.Size = new System.Drawing.Size(203, 20);
             this.dateTimePicker1.TabIndex = 3;
@@ -846,7 +859,7 @@
             this.chbAskPassword.AutoSize = true;
             this.chbAskPassword.Location = new System.Drawing.Point(12, 72);
             this.chbAskPassword.Name = "chbAskPassword";
-            this.chbAskPassword.Size = new System.Drawing.Size(188, 17);
+            this.chbAskPassword.Size = new System.Drawing.Size(143, 17);
             this.chbAskPassword.TabIndex = 8;
             this.chbAskPassword.Text = "Always ask my password";
             this.chbAskPassword.UseVisualStyleBackColor = true;
@@ -867,7 +880,7 @@
             this.lblMyCycle2.AutoSize = true;
             this.lblMyCycle2.Location = new System.Drawing.Point(180, 50);
             this.lblMyCycle2.Name = "lblMyCycle2";
-            this.lblMyCycle2.Size = new System.Drawing.Size(25, 13);
+            this.lblMyCycle2.Size = new System.Drawing.Size(29, 13);
             this.lblMyCycle2.TabIndex = 6;
             this.lblMyCycle2.Text = "days";
             // 
@@ -899,7 +912,7 @@
             this.lblMyCycle.AutoSize = true;
             this.lblMyCycle.Location = new System.Drawing.Point(31, 50);
             this.lblMyCycle.Name = "lblMyCycle";
-            this.lblMyCycle.Size = new System.Drawing.Size(103, 13);
+            this.lblMyCycle.Size = new System.Drawing.Size(70, 13);
             this.lblMyCycle.TabIndex = 3;
             this.lblMyCycle.Text = "Special cycle";
             // 
@@ -931,7 +944,7 @@
             this.lblAverageCycle.AutoSize = true;
             this.lblAverageCycle.Location = new System.Drawing.Point(31, 29);
             this.lblAverageCycle.Name = "lblAverageCycle";
-            this.lblAverageCycle.Size = new System.Drawing.Size(144, 13);
+            this.lblAverageCycle.Size = new System.Drawing.Size(104, 13);
             this.lblAverageCycle.TabIndex = 0;
             this.lblAverageCycle.Text = "My automatic cycle: ";
             // 
@@ -1081,6 +1094,7 @@
         private DayCellControl dayCellControl12;
         private System.Windows.Forms.ToolStripDropDownButton languageButton;
         private System.Windows.Forms.ToolStripMenuItem englishToolStripMenuItem;
+        private System.Windows.Forms.ToolStripButton toolUpdate;
 
 
     }
