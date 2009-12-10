@@ -505,7 +505,7 @@
         "ProductName" = "8:Ovulyashki"
         "ProductCode" = "8:{238EE538-42E8-49F9-94E7-3B8979ACD940}"
         "PackageCode" = "8:{D9C7ED2A-845B-4C7D-A39F-CD5B506C0753}"
-        "UpgradeCode" = "8:{B62E9A24-9E13-4A68-BB3A-82B44CE8C4F8}"
+        "UpgradeCode" = "8:{4524491D-FB85-4F0B-8513-552C390535EE}"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:FALSE"
@@ -525,7 +525,7 @@
         "SearchPath" = "8:"
         "UseSystemSearchPath" = "11:TRUE"
         "TargetPlatform" = "3:0"
-        "PreBuildEvent" = "8:$(ProjectDir)NewUpgradeCode.vbs $(ProjectDir)OvulyashkiInstall.vdproj"
+        "PreBuildEvent" = "8:if $(Configuration)==Release $(ProjectDir)NewUpgradeCode.vbs $(ProjectDir)OvulyashkiInstall.vdproj"
         "PostBuildEvent" = "8:"
         "RunPostBuildEvent" = "3:0"
         }
