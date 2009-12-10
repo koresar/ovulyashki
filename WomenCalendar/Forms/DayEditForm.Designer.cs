@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DayEditForm));
             this.sliderEgestaAmount = new MB.Controls.ColorSlider();
             this.txtBBT = new System.Windows.Forms.TextBox();
             this.lblBBT = new System.Windows.Forms.Label();
@@ -55,24 +54,15 @@
             this.grpBT = new System.Windows.Forms.GroupBox();
             this.grpHealth = new System.Windows.Forms.GroupBox();
             this.chkMentrustions = new System.Windows.Forms.CheckBox();
-            this.grpSchedule = new System.Windows.Forms.GroupBox();
-            this.btnEditCompleteSchedulesList = new System.Windows.Forms.Button();
-            this.lblSchedulesComplete = new System.Windows.Forms.Label();
-            this.lblSchedulesPlanned = new System.Windows.Forms.Label();
-            this.txtSchedulesComplete = new System.Windows.Forms.TextBox();
-            this.btnSchedulesEdit = new System.Windows.Forms.Button();
-            this.txtSchedulesPlanned = new System.Windows.Forms.TextBox();
             this.schedulesContextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.grpCF = new System.Windows.Forms.GroupBox();
             this.toolTipCF = new System.Windows.Forms.ToolTip(this.components);
-            this.chkSchedules = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.numMenstruationLength)).BeginInit();
             this.grpMenstr.SuspendLayout();
             this.pnlSurroundMentsLength.SuspendLayout();
             this.grpNote.SuspendLayout();
             this.grpBT.SuspendLayout();
             this.grpHealth.SuspendLayout();
-            this.grpSchedule.SuspendLayout();
             this.grpCF.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -244,7 +234,7 @@
             this.chkHadSex.AutoSize = true;
             this.chkHadSex.Location = new System.Drawing.Point(12, 202);
             this.chkHadSex.Name = "chkHadSex";
-            this.chkHadSex.Size = new System.Drawing.Size(184, 17);
+            this.chkHadSex.Size = new System.Drawing.Size(113, 17);
             this.chkHadSex.TabIndex = 0;
             this.chkHadSex.Text = "I had sex that day!";
             this.chkHadSex.UseVisualStyleBackColor = true;
@@ -291,7 +281,7 @@
             this.grpMenstr.Controls.Add(this.pnlSurroundMentsLength);
             this.grpMenstr.Controls.Add(this.verticalLabel1);
             this.grpMenstr.Controls.Add(this.sliderEgestaAmount);
-            this.grpMenstr.Location = new System.Drawing.Point(323, 42);
+            this.grpMenstr.Location = new System.Drawing.Point(327, 42);
             this.grpMenstr.Name = "grpMenstr";
             this.grpMenstr.Size = new System.Drawing.Size(90, 243);
             this.grpMenstr.TabIndex = 10008;
@@ -317,7 +307,7 @@
             this.lblMenstruationLength.BackColor = System.Drawing.Color.Transparent;
             this.lblMenstruationLength.Location = new System.Drawing.Point(41, 27);
             this.lblMenstruationLength.Name = "lblMenstruationLength";
-            this.lblMenstruationLength.Size = new System.Drawing.Size(31, 13);
+            this.lblMenstruationLength.Size = new System.Drawing.Size(29, 13);
             this.lblMenstruationLength.TabIndex = 10011;
             this.lblMenstruationLength.Text = "days";
             this.lblMenstruationLength.MouseLeave += new System.EventHandler(this.lblMenstruationLength_MouseLeave);
@@ -381,7 +371,7 @@
             this.chkMentrustions.Appearance = System.Windows.Forms.Appearance.Button;
             this.chkMentrustions.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.chkMentrustions.Image = global::WomenCalendar.Properties.Resources.drop_Image;
-            this.chkMentrustions.Location = new System.Drawing.Point(292, 126);
+            this.chkMentrustions.Location = new System.Drawing.Point(294, 126);
             this.chkMentrustions.Name = "chkMentrustions";
             this.chkMentrustions.Size = new System.Drawing.Size(27, 65);
             this.chkMentrustions.TabIndex = 10013;
@@ -390,91 +380,6 @@
             this.chkMentrustions.MouseLeave += new System.EventHandler(this.chkMentrustions_MouseLeave);
             this.chkMentrustions.MouseEnter += new System.EventHandler(this.chkMentrustions_MouseEnter);
             this.chkMentrustions.CheckedChanged += new System.EventHandler(this.chkMentrustions_CheckedChanged);
-            // 
-            // grpSchedule
-            // 
-            this.grpSchedule.Controls.Add(this.btnEditCompleteSchedulesList);
-            this.grpSchedule.Controls.Add(this.lblSchedulesComplete);
-            this.grpSchedule.Controls.Add(this.lblSchedulesPlanned);
-            this.grpSchedule.Controls.Add(this.txtSchedulesComplete);
-            this.grpSchedule.Controls.Add(this.btnSchedulesEdit);
-            this.grpSchedule.Controls.Add(this.txtSchedulesPlanned);
-            this.grpSchedule.Location = new System.Drawing.Point(5, 352);
-            this.grpSchedule.Name = "grpSchedule";
-            this.grpSchedule.Size = new System.Drawing.Size(314, 76);
-            this.grpSchedule.TabIndex = 10010;
-            this.grpSchedule.TabStop = false;
-            this.grpSchedule.Text = "Расписание этого дня";
-            this.grpSchedule.Visible = false;
-            // 
-            // btnEditCompleteSchedulesList
-            // 
-            this.btnEditCompleteSchedulesList.Location = new System.Drawing.Point(287, 46);
-            this.btnEditCompleteSchedulesList.Name = "btnEditCompleteSchedulesList";
-            this.btnEditCompleteSchedulesList.Size = new System.Drawing.Size(23, 23);
-            this.btnEditCompleteSchedulesList.TabIndex = 3;
-            this.btnEditCompleteSchedulesList.Text = ">";
-            this.btnEditCompleteSchedulesList.UseVisualStyleBackColor = true;
-            this.btnEditCompleteSchedulesList.MouseLeave += new System.EventHandler(this.btnEditSchedulesCompleteList_MouseLeave);
-            this.btnEditCompleteSchedulesList.Click += new System.EventHandler(this.btnEditCompleteSchedulesList_Click);
-            this.btnEditCompleteSchedulesList.MouseEnter += new System.EventHandler(this.btnEditSchedulesCompleteList_MouseEnter);
-            // 
-            // lblSchedulesComplete
-            // 
-            this.lblSchedulesComplete.Location = new System.Drawing.Point(5, 51);
-            this.lblSchedulesComplete.Name = "lblSchedulesComplete";
-            this.lblSchedulesComplete.Size = new System.Drawing.Size(91, 17);
-            this.lblSchedulesComplete.TabIndex = 2;
-            this.lblSchedulesComplete.Text = "Сделано:";
-            this.lblSchedulesComplete.MouseLeave += new System.EventHandler(this.txtSchedulesComplete_MouseLeave);
-            this.lblSchedulesComplete.MouseEnter += new System.EventHandler(this.txtSchedulesComplete_MouseEnter);
-            // 
-            // lblSchedulesPlanned
-            // 
-            this.lblSchedulesPlanned.Location = new System.Drawing.Point(5, 20);
-            this.lblSchedulesPlanned.Name = "lblSchedulesPlanned";
-            this.lblSchedulesPlanned.Size = new System.Drawing.Size(91, 17);
-            this.lblSchedulesPlanned.TabIndex = 2;
-            this.lblSchedulesPlanned.Text = "Запланировано:";
-            this.lblSchedulesPlanned.MouseLeave += new System.EventHandler(this.txtSchedulesPlanned_MouseLeave);
-            this.lblSchedulesPlanned.MouseEnter += new System.EventHandler(this.txtSchedulesPlanned_MouseEnter);
-            // 
-            // txtSchedulesComplete
-            // 
-            this.txtSchedulesComplete.CausesValidation = false;
-            this.txtSchedulesComplete.Location = new System.Drawing.Point(99, 48);
-            this.txtSchedulesComplete.MaxLength = 5;
-            this.txtSchedulesComplete.Name = "txtSchedulesComplete";
-            this.txtSchedulesComplete.ReadOnly = true;
-            this.txtSchedulesComplete.Size = new System.Drawing.Size(184, 20);
-            this.txtSchedulesComplete.TabIndex = 0;
-            this.txtSchedulesComplete.MouseLeave += new System.EventHandler(this.txtSchedulesComplete_MouseLeave);
-            this.txtSchedulesComplete.Leave += new System.EventHandler(this.txtBBT_Leave);
-            this.txtSchedulesComplete.MouseEnter += new System.EventHandler(this.txtSchedulesComplete_MouseEnter);
-            // 
-            // btnSchedulesEdit
-            // 
-            this.btnSchedulesEdit.Image = ((System.Drawing.Image)(resources.GetObject("btnSchedulesEdit.Image")));
-            this.btnSchedulesEdit.Location = new System.Drawing.Point(287, 15);
-            this.btnSchedulesEdit.Name = "btnSchedulesEdit";
-            this.btnSchedulesEdit.Size = new System.Drawing.Size(23, 23);
-            this.btnSchedulesEdit.TabIndex = 1;
-            this.btnSchedulesEdit.UseVisualStyleBackColor = true;
-            this.btnSchedulesEdit.MouseLeave += new System.EventHandler(this.btnSchedulesEdit_MouseLeave);
-            this.btnSchedulesEdit.Click += new System.EventHandler(this.btnSchedulesEdit_Click);
-            this.btnSchedulesEdit.MouseEnter += new System.EventHandler(this.btnSchedulesEdit_MouseEnter);
-            // 
-            // txtSchedulesPlanned
-            // 
-            this.txtSchedulesPlanned.CausesValidation = false;
-            this.txtSchedulesPlanned.Location = new System.Drawing.Point(99, 17);
-            this.txtSchedulesPlanned.MaxLength = 5;
-            this.txtSchedulesPlanned.Name = "txtSchedulesPlanned";
-            this.txtSchedulesPlanned.ReadOnly = true;
-            this.txtSchedulesPlanned.Size = new System.Drawing.Size(184, 20);
-            this.txtSchedulesPlanned.TabIndex = 0;
-            this.txtSchedulesPlanned.MouseLeave += new System.EventHandler(this.txtSchedulesPlanned_MouseLeave);
-            this.txtSchedulesPlanned.MouseEnter += new System.EventHandler(this.txtSchedulesPlanned_MouseEnter);
             // 
             // schedulesContextMenu
             // 
@@ -499,26 +404,13 @@
             // 
             this.toolTipCF.ToolTipTitle = "Цервикальная жидкость";
             // 
-            // chkSchedules
-            // 
-            this.chkSchedules.Appearance = System.Windows.Forms.Appearance.Button;
-            this.chkSchedules.Location = new System.Drawing.Point(5, 327);
-            this.chkSchedules.Name = "chkSchedules";
-            this.chkSchedules.Size = new System.Drawing.Size(314, 22);
-            this.chkSchedules.TabIndex = 10014;
-            this.chkSchedules.Text = "Показать/скрыть расписание на этот день";
-            this.chkSchedules.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.chkSchedules.UseVisualStyleBackColor = true;
-            this.chkSchedules.Visible = false;
-            // 
             // DayEditForm
             // 
             this.AcceptButton = null;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.ClientSize = new System.Drawing.Size(418, 360);
-            this.Controls.Add(this.chkSchedules);
+            this.ClientSize = new System.Drawing.Size(475, 360);
             this.Controls.Add(this.chkMentrustions);
             this.Controls.Add(this.btnNextDay);
             this.Controls.Add(this.chkHadSex);
@@ -526,7 +418,6 @@
             this.Controls.Add(this.lblBBT);
             this.Controls.Add(this.grpMenstr);
             this.Controls.Add(this.grpNote);
-            this.Controls.Add(this.grpSchedule);
             this.Controls.Add(this.grpCF);
             this.Controls.Add(this.grpBT);
             this.Controls.Add(this.grpHealth);
@@ -537,7 +428,6 @@
             this.Controls.SetChildIndex(this.grpHealth, 0);
             this.Controls.SetChildIndex(this.grpBT, 0);
             this.Controls.SetChildIndex(this.grpCF, 0);
-            this.Controls.SetChildIndex(this.grpSchedule, 0);
             this.Controls.SetChildIndex(this.grpNote, 0);
             this.Controls.SetChildIndex(this.grpMenstr, 0);
             this.Controls.SetChildIndex(this.lblBBT, 0);
@@ -545,7 +435,6 @@
             this.Controls.SetChildIndex(this.chkHadSex, 0);
             this.Controls.SetChildIndex(this.btnNextDay, 0);
             this.Controls.SetChildIndex(this.chkMentrustions, 0);
-            this.Controls.SetChildIndex(this.chkSchedules, 0);
             ((System.ComponentModel.ISupportInitialize)(this.numMenstruationLength)).EndInit();
             this.grpMenstr.ResumeLayout(false);
             this.pnlSurroundMentsLength.ResumeLayout(false);
@@ -555,8 +444,6 @@
             this.grpBT.ResumeLayout(false);
             this.grpBT.PerformLayout();
             this.grpHealth.ResumeLayout(false);
-            this.grpSchedule.ResumeLayout(false);
-            this.grpSchedule.PerformLayout();
             this.grpCF.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -586,13 +473,6 @@
         private System.Windows.Forms.Label lblMenstruationLength;
         private System.Windows.Forms.CheckBox chkMentrustions;
         private System.Windows.Forms.Panel pnlSurroundMentsLength;
-        private System.Windows.Forms.GroupBox grpSchedule;
-        private System.Windows.Forms.Button btnSchedulesEdit;
-        private System.Windows.Forms.TextBox txtSchedulesPlanned;
-        private System.Windows.Forms.Label lblSchedulesPlanned;
-        private System.Windows.Forms.Label lblSchedulesComplete;
-        private System.Windows.Forms.TextBox txtSchedulesComplete;
-        private System.Windows.Forms.Button btnEditCompleteSchedulesList;
         private System.Windows.Forms.ContextMenuStrip schedulesContextMenu;
         private System.Windows.Forms.GroupBox grpCF;
         private System.Windows.Forms.RadioButton rbtCF4;
@@ -600,7 +480,6 @@
         private System.Windows.Forms.RadioButton rbtCF2;
         private System.Windows.Forms.RadioButton rbtCF1;
         private System.Windows.Forms.ToolTip toolTipCF;
-        private System.Windows.Forms.CheckBox chkSchedules;
 
     }
 }

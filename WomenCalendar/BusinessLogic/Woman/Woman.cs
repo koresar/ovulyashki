@@ -401,7 +401,7 @@ namespace WomenCalendar
             {
                 sb.AppendLine();
                 sb.AppendLine(TEXT.Get.Format("This_is_N_menstr_day", (date - period.StartDay).Days + 1));
-                sb.Append(DayCellPopupControl.EgestasNames[period.Egestas[date]]);
+                sb.Append(EgestasCollection.EgestasNames[period.Egestas[date]]);
             }
 
             if (IsPregnancyDay(date))

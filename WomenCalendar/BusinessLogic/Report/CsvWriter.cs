@@ -44,7 +44,7 @@ namespace WomenCalendar
 
         public override void WriteHeader()
         {
-            WriteLine(OneDayInfo.Header);
+            WriteLine(OneDayInfo.Header.ToArray());
         }
 
         public override void WriteDay(OneDayInfo day)

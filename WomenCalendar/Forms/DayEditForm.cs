@@ -137,7 +137,7 @@ namespace WomenCalendar
 
         private void ShowEgestaTooltip()
         {
-            ShowTooltip(TEXT.Get["Excreta_amount"], DayCellPopupControl.EgestasNames[EgestaSliderValue], sliderEgestaAmount);
+            ShowTooltip(TEXT.Get["Excreta_amount"], EgestasCollection.EgestasNames[EgestaSliderValue], sliderEgestaAmount);
         }
 
         private void ShowMenstButtonToolTip(bool isMenstr)
@@ -149,30 +149,6 @@ namespace WomenCalendar
         private void ShowLengthTooltip()
         {
             ShowTooltip(TEXT.Get["Menses_length"], TEXT.Get["Please_set_menses_length"], numMenstruationLength);
-        }
-
-        private void ShowEditSchedulesTooltip()
-        {
-            ShowTooltip("Кнопка редактирования расписаний", 
-                "Здесь можно отредактировать список расписаний", 
-                btnSchedulesEdit);
-        }
-
-        private void ShowPlannedSchedulesTooltip()
-        {
-            ShowTooltip("Это те лекарства, которые надо принять", txtSchedulesPlanned.Text, txtSchedulesPlanned);
-        }
-
-        private void ShowTakenSchedulesTooltip()
-        {
-            ShowTooltip("Это лекарства, которые ты приняла в этот день", txtSchedulesComplete.Text, txtSchedulesComplete);
-        }
-
-        private void ShowEditTakenSchedulesListTooltip()
-        {
-            ShowTooltip("Кнопка редактирования списка принятых лекарств", 
-                "Нажми эту кнопку, чтобы добавить или удалить лекарство из списка.",
-                txtSchedulesComplete);
         }
 
         private void HideTooltip(IWin32Window control)
@@ -219,9 +195,6 @@ namespace WomenCalendar
             sliderHealth.Value = w.Health[date];
 
             initialData = CollectDayData();
-
-            UpdatePlannedSchedulesList();
-            UpdateCompleteSchedulesList();
         }
 
         private DayData CollectDayData()
@@ -471,108 +444,7 @@ namespace WomenCalendar
             HideTooltip(numMenstruationLength);
         }
 
-        private void btnSchedulesEdit_MouseEnter(object sender, EventArgs e)
-        {
-            ShowEditSchedulesTooltip();
-        }
-
-        private void btnSchedulesEdit_MouseLeave(object sender, EventArgs e)
-        {
-            HideTooltip(btnSchedulesEdit);
-        }
-
-        private void txtSchedulesPlanned_MouseEnter(object sender, EventArgs e)
-        {
-            ShowPlannedSchedulesTooltip();
-        }
-
-        private void txtSchedulesPlanned_MouseLeave(object sender, EventArgs e)
-        {
-            HideTooltip(txtSchedulesPlanned);
-        }
-
-        private void txtSchedulesComplete_MouseEnter(object sender, EventArgs e)
-        {
-            ShowTakenSchedulesTooltip();
-        }
-
-        private void txtSchedulesComplete_MouseLeave(object sender, EventArgs e)
-        {
-            HideTooltip(txtSchedulesComplete);
-        }
-
-        private void btnEditSchedulesCompleteList_MouseEnter(object sender, EventArgs e)
-        {
-            ShowEditTakenSchedulesListTooltip();
-        }
-
-        private void btnEditSchedulesCompleteList_MouseLeave(object sender, EventArgs e)
-        {
-            HideTooltip(btnEditCompleteSchedulesList);
-        }
-
         #endregion
-
-        private void btnSchedulesEdit_Click(object sender, EventArgs e)
-        {
-            if (new SchedulesEditForm(date).ShowDialog() == DialogResult.OK)
-            {
-                UpdatePlannedSchedulesList();
-            }
-        }
-
-        private void btnEditCompleteSchedulesList_Click(object sender, EventArgs e)
-        {
-            schedulesContextMenu.Items.Clear();
-            //foreach ()
-            {
-                //string itemText = drug.Name;
-                //bool isTaken = takenList.Contains(drug);
-                //bool isPlanned = plannedList.Contains(drug);
-                //if (isTaken && !isPlanned)
-                //{
-                //    itemText = itemText + "\nЭто лекарство: Принято";
-                //}
-                //else if (isPlanned && !isTaken)
-                //{
-                //    itemText = itemText + "\nЭто лекарство: Надо бы принять";
-                //}
-                //else if (isPlanned && isTaken)
-                //{
-                //    itemText = itemText + "\nЭто лекарство: Запланировано и принято";
-                //}
-
-                //var item = schedulesContextMenu.Items.Add(itemText, null, schedulesMenu_Click);
-                //item.Tag = drug;
-                //if (!string.IsNullOrEmpty(drug.Description)) item.ToolTipText = drug.Description;
-            }
-
-            schedulesContextMenu.Show(this, this.PointToClient(MousePosition));
-        }
-
-        private void schedulesMenu_Click(object sender, EventArgs e)
-        {
-            //Program.CurrentWoman.TakenDrugs.Switch(date, (sender as ToolStripItem).Tag as Drug);
-            UpdateCompleteSchedulesList();
-        }
-
-        private void UpdateCompleteSchedulesList()
-        {
-            //var list = Program.CurrentWoman.TakenDrugs.At(date);
-            //if (list.Count == 0) return;
-            //var sb = new StringBuilder();
-            //foreach (var drug in list) sb.Append((sb.Length == 0 ? string.Empty : ", ") + drug.Name);
-            //txtDrugsTaken.Text = sb.ToString();
-        }
-
-        private void UpdatePlannedSchedulesList()
-        {
-            //var list = Program.CurrentWoman.PlannedDrugs.At(date);
-            //if (list.Count == 0) return;
-            //var sb = new StringBuilder();
-            //foreach (var drug in list) sb.Append(drug.Name + (sb.Length == 0 ? string.Empty : ", "));
-            //txtDrugsPlanned.Text = sb.ToString();
-        }
 
         private void rbtCF_Click(object sender, EventArgs e)
         {

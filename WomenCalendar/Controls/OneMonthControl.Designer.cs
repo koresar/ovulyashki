@@ -36,17 +36,17 @@
             // btnDropDown
             // 
             this.btnDropDown.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.btnDropDown.BackColor = System.Drawing.Color.Transparent;
+            this.btnDropDown.BackColor = System.Drawing.Color.White;
             this.btnDropDown.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnDropDown.FlatAppearance.BorderSize = 0;
-            this.btnDropDown.Font = new System.Drawing.Font("Microsoft Sans Serif", 6F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.btnDropDown.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel, ((byte)(204)));
             this.btnDropDown.ForeColor = System.Drawing.Color.Black;
             this.btnDropDown.Image = global::WomenCalendar.Properties.Resources.month_dropdown;
             this.btnDropDown.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnDropDown.Location = new System.Drawing.Point(172, 3);
+            this.btnDropDown.Location = new System.Drawing.Point(171, 2);
             this.btnDropDown.Margin = new System.Windows.Forms.Padding(0);
             this.btnDropDown.Name = "btnDropDown";
-            this.btnDropDown.Size = new System.Drawing.Size(55, 16);
+            this.btnDropDown.Size = new System.Drawing.Size(57, 18);
             this.btnDropDown.TabIndex = 0;
             this.btnDropDown.TabStop = false;
             this.btnDropDown.Text = "Graphs";
@@ -61,6 +61,7 @@
             this.BackColor = System.Drawing.Color.White;
             this.Controls.Add(this.btnDropDown);
             this.DoubleBuffered = true;
+            this.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.ForeColor = System.Drawing.Color.Transparent;
             this.Margin = new System.Windows.Forms.Padding(0);
             this.Name = "OneMonthControl";

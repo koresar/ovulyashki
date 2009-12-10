@@ -43,7 +43,6 @@
             this.monthMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.ToolStripBBTGraph = new System.Windows.Forms.ToolStripMenuItem();
             this.ToolStripHealthGraph = new System.Windows.Forms.ToolStripMenuItem();
-            this.oneMonthControl = new WomenCalendar.OneMonthControl();
             this.ToolStripCycleLengthGraph = new System.Windows.Forms.ToolStripMenuItem();
             this.dayContextMenu.SuspendLayout();
             this.monthMenu.SuspendLayout();
@@ -63,13 +62,13 @@
             this.toolStripSeparator3,
             this.ediDayToolStripMenuItem});
             this.dayContextMenu.Name = "contextMenu";
-            this.dayContextMenu.Size = new System.Drawing.Size(321, 192);
+            this.dayContextMenu.Size = new System.Drawing.Size(283, 192);
             // 
             // setAsMenstruationDay
             // 
             this.setAsMenstruationDay.Image = global::WomenCalendar.Properties.Resources.drop_Image;
             this.setAsMenstruationDay.Name = "setAsMenstruationDay";
-            this.setAsMenstruationDay.Size = new System.Drawing.Size(320, 22);
+            this.setAsMenstruationDay.Size = new System.Drawing.Size(282, 22);
             this.setAsMenstruationDay.Text = "Set menses start";
             this.setAsMenstruationDay.Click += new System.EventHandler(this.setAsMenstruationDay_Click);
             // 
@@ -77,20 +76,20 @@
             // 
             this.removeMenstruationDay.Image = global::WomenCalendar.Properties.Resources.dropNot_Image;
             this.removeMenstruationDay.Name = "removeMenstruationDay";
-            this.removeMenstruationDay.Size = new System.Drawing.Size(320, 22);
+            this.removeMenstruationDay.Size = new System.Drawing.Size(282, 22);
             this.removeMenstruationDay.Text = "Cancel menses";
             this.removeMenstruationDay.Click += new System.EventHandler(this.removeMenstruationDay_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(317, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(279, 6);
             // 
             // setLastPregnancyDay
             // 
             this.setLastPregnancyDay.Image = global::WomenCalendar.Properties.Resources.baby_Image;
             this.setLastPregnancyDay.Name = "setLastPregnancyDay";
-            this.setLastPregnancyDay.Size = new System.Drawing.Size(320, 22);
+            this.setLastPregnancyDay.Size = new System.Drawing.Size(282, 22);
             this.setLastPregnancyDay.Text = "Set last pregnancy day";
             this.setLastPregnancyDay.Click += new System.EventHandler(this.setLastPregnancyDay_Click);
             // 
@@ -98,7 +97,7 @@
             // 
             this.setAsConceptionDay.Image = global::WomenCalendar.Properties.Resources.baby_Image;
             this.setAsConceptionDay.Name = "setAsConceptionDay";
-            this.setAsConceptionDay.Size = new System.Drawing.Size(320, 22);
+            this.setAsConceptionDay.Size = new System.Drawing.Size(282, 22);
             this.setAsConceptionDay.Text = "Set pregnancy";
             this.setAsConceptionDay.Click += new System.EventHandler(this.setAsConceptionDay_Click);
             // 
@@ -106,7 +105,7 @@
             // 
             this.removeConceptionDay.Image = global::WomenCalendar.Properties.Resources.babyNot_Image;
             this.removeConceptionDay.Name = "removeConceptionDay";
-            this.removeConceptionDay.Size = new System.Drawing.Size(320, 22);
+            this.removeConceptionDay.Size = new System.Drawing.Size(282, 22);
             this.removeConceptionDay.Text = "Cancel pregnancy";
             this.removeConceptionDay.Click += new System.EventHandler(this.removeConceptionDay_Click);
             // 
@@ -114,27 +113,27 @@
             // 
             this.calendarMenu.Image = global::WomenCalendar.Properties.Resources.babyQuestion_Image;
             this.calendarMenu.Name = "calendarMenu";
-            this.calendarMenu.Size = new System.Drawing.Size(320, 22);
+            this.calendarMenu.Size = new System.Drawing.Size(282, 22);
             this.calendarMenu.Text = "Help for {0} week pregnancy from site...";
             // 
             // showBirthDate
             // 
             this.showBirthDate.Image = global::WomenCalendar.Properties.Resources.babyFace_Image;
             this.showBirthDate.Name = "showBirthDate";
-            this.showBirthDate.Size = new System.Drawing.Size(320, 22);
+            this.showBirthDate.Size = new System.Drawing.Size(282, 22);
             this.showBirthDate.Text = "Show forecasted childbirth day";
             this.showBirthDate.Click += new System.EventHandler(this.showBirthDate_Click);
             // 
             // toolStripSeparator3
             // 
             this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(317, 6);
+            this.toolStripSeparator3.Size = new System.Drawing.Size(279, 6);
             // 
-            // редактироватьДеньToolStripMenuItem
+            // ediDayToolStripMenuItem
             // 
             this.ediDayToolStripMenuItem.Image = global::WomenCalendar.Properties.Resources.calendarEdit_Image;
-            this.ediDayToolStripMenuItem.Name = "editDayToolStripMenuItem";
-            this.ediDayToolStripMenuItem.Size = new System.Drawing.Size(320, 22);
+            this.ediDayToolStripMenuItem.Name = "ediDayToolStripMenuItem";
+            this.ediDayToolStripMenuItem.Size = new System.Drawing.Size(282, 22);
             this.ediDayToolStripMenuItem.Text = "Edit day";
             this.ediDayToolStripMenuItem.Click += new System.EventHandler(this.editDay_Click);
             // 
@@ -145,41 +144,26 @@
             this.ToolStripHealthGraph,
             this.ToolStripCycleLengthGraph});
             this.monthMenu.Name = "monthMenu";
-            this.monthMenu.Size = new System.Drawing.Size(334, 92);
+            this.monthMenu.Size = new System.Drawing.Size(269, 70);
             // 
             // ToolStripBBTGraph
             // 
             this.ToolStripBBTGraph.Name = "ToolStripBBTGraph";
-            this.ToolStripBBTGraph.Size = new System.Drawing.Size(333, 22);
+            this.ToolStripBBTGraph.Size = new System.Drawing.Size(268, 22);
             this.ToolStripBBTGraph.Text = "Show Basal Body Temperature graph";
             this.ToolStripBBTGraph.Click += new System.EventHandler(this.ToolStripBBTGraph_Click);
             // 
             // ToolStripHealthGraph
             // 
             this.ToolStripHealthGraph.Name = "ToolStripHealthGraph";
-            this.ToolStripHealthGraph.Size = new System.Drawing.Size(333, 22);
+            this.ToolStripHealthGraph.Size = new System.Drawing.Size(268, 22);
             this.ToolStripHealthGraph.Text = "Show wellbeing graph";
             this.ToolStripHealthGraph.Click += new System.EventHandler(this.ToolStripHealthesGraph_Click);
-            // 
-            // oneMonthControl
-            // 
-            this.oneMonthControl.BackColor = System.Drawing.Color.White;
-            this.oneMonthControl.Date = new System.DateTime(2008, 2, 1, 0, 0, 0, 0);
-            this.oneMonthControl.FocusDate = new System.DateTime(((long)(0)));
-            this.oneMonthControl.FocusDay = null;
-            this.oneMonthControl.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
-            this.oneMonthControl.ForeColor = System.Drawing.Color.Transparent;
-            this.oneMonthControl.Location = new System.Drawing.Point(0, 0);
-            this.oneMonthControl.Margin = new System.Windows.Forms.Padding(0);
-            this.oneMonthControl.Name = "oneMonthControl";
-            this.oneMonthControl.OwnerMonthsControl = null;
-            this.oneMonthControl.Size = new System.Drawing.Size(230, 230);
-            this.oneMonthControl.TabIndex = 0;
             // 
             // ToolStripCycleLengthGraph
             // 
             this.ToolStripCycleLengthGraph.Name = "ToolStripCycleLengthGraph";
-            this.ToolStripCycleLengthGraph.Size = new System.Drawing.Size(333, 22);
+            this.ToolStripCycleLengthGraph.Size = new System.Drawing.Size(268, 22);
             this.ToolStripCycleLengthGraph.Text = "Show cycle length graph";
             this.ToolStripCycleLengthGraph.Click += new System.EventHandler(this.ToolStripCycleLengthGraph_Click);
             // 
@@ -188,7 +172,6 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CausesValidation = false;
-            this.Controls.Add(this.oneMonthControl);
             this.DoubleBuffered = true;
             this.Name = "MonthsControl";
             this.Size = new System.Drawing.Size(501, 440);
@@ -203,7 +186,6 @@
 
         #endregion
 
-        private OneMonthControl oneMonthControl;
         private System.Windows.Forms.ContextMenuStrip dayContextMenu;
         private System.Windows.Forms.ToolStripMenuItem setAsMenstruationDay;
         private System.Windows.Forms.ToolStripMenuItem removeMenstruationDay;

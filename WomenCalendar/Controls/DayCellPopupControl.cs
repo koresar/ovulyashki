@@ -10,22 +10,6 @@ namespace WomenCalendar
 {
     public partial class DayCellPopupControl : UserControl
     {
-        public static string[] egestasNames;
-        public static string[] EgestasNames
-        {
-            get
-            {
-                if (egestasNames == null)
-                {
-                    var ids = new string[] { "Egesta_amount_0", "Egesta_amount_1", "Egesta_amount_2", "Egesta_amount_3", "Egesta_amount_4" };
-                    egestasNames = new string[ids.Length];
-                    for (int i = 0; i < ids.Length; i++)
-                        egestasNames[i] = TEXT.Get[ids[i]];
-                }
-                return egestasNames;
-            }
-        }
-
         private bool initializing;
 
         private DayCellControl DayCell;
@@ -150,7 +134,7 @@ namespace WomenCalendar
 
         private void ShowEgestaTooltip()
         {
-            ShowTooltip(TEXT.Get["Amount_of_bleeding"], EgestasNames[EgestaSliderValue]);
+            ShowTooltip(TEXT.Get["Amount_of_bleeding"], EgestasCollection.EgestasNames[EgestaSliderValue]);
         }
 
         private void ShowHasSexToolTip()

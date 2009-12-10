@@ -76,6 +76,7 @@
     <Compile Include="BusinessLogic\Report\ReportWriter.cs" />
     <Compile Include="BusinessLogic\Report\XlsWriter.cs" />
     <Compile Include="BusinessLogic\TEXT.cs" />
+    <Compile Include="BusinessLogic\TranslationsList.cs" />
     <Compile Include="BusinessLogic\Woman\Schedule.cs" />
     <Compile Include="BusinessLogic\Woman\SchedulesCollection.cs" />
     <Compile Include="BusinessLogic\Woman\OneDayInfo.cs" />

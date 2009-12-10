@@ -8,6 +8,11 @@ namespace WomenCalendar
     [XmlRoot("Egestas")]
     public class EgestasCollection : SerializableEventsCollection<int>
     {
+        public static TranslationsList EgestasNames = new TranslationsList()
+        { 
+            "Egesta_amount_0", "Egesta_amount_1", "Egesta_amount_2", "Egesta_amount_3", "Egesta_amount_4"
+        };
+
         public const int MaximumEgestaValue = 4;
 
         public EgestasCollection()

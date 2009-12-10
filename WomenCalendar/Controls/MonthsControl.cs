@@ -15,6 +15,7 @@ namespace WomenCalendar
     public partial class MonthsControl : UserControl, ITranslatable
     {
         private OneMonthControl lastDroppedMenuMonth;
+        private OneMonthControl firstMonthControl;
         private Dictionary<string, Dictionary<int, string>> calendars = new Dictionary<string, Dictionary<int, string>>();
 
         public List<OneMonthControl> singleMonths = new List<OneMonthControl>();
@@ -89,10 +90,10 @@ namespace WomenCalendar
 
         public DateTime StartMonth
         {
-            get { return oneMonthControl.Date; }
+            get { return firstMonthControl.Date; }
             set
             {
-                oneMonthControl.Date = value.Date;
+                firstMonthControl.Date = value.Date;
                 Invalidate();
                 for (int i = 0; i < singleMonths.Count; i++)
                 {
@@ -103,20 +104,8 @@ namespace WomenCalendar
             }
         }
 
-        private int _monthsMarginX = 0;
-        public int MonthsMarginX
-        {
-            get { return _monthsMarginX; }
-            set { _monthsMarginX = value; }
-        }
-
-        private int _monthsMarginY = 0;
-        public int MonthsMarginY
-        {
-            get { return _monthsMarginY; }
-            set { _monthsMarginY = value; }
-        }
-
+        readonly Point MonthesMargin = new Point(10, 10);
+        readonly Size OneMonthSize = new Size(230, 230);
 
         public ContextMenuStrip MonthMenu
         {
@@ -149,9 +138,13 @@ namespace WomenCalendar
 
             cellPopupControl = new DayCellPopupControl(this);
 
-            oneMonthControl.OwnerMonthsControl = this;
-            oneMonthControl.MonthDayClicked += new OneMonthControl.DayClicked(control_MonthDayClicked);
-            singleMonths.Add(oneMonthControl);
+            firstMonthControl = CreateNewDefaultOneMonth();
+            firstMonthControl.OwnerMonthsControl = this;
+            firstMonthControl.Visible = true;
+            firstMonthControl.MonthDayClicked += new OneMonthControl.DayClicked(control_MonthDayClicked);
+            singleMonths.Add(firstMonthControl);
+            Controls.Add(firstMonthControl);
+
             CreateAndAdjustMonthsAmount();
             InitializeContextPregnancySubmenu();
         }
@@ -200,8 +193,8 @@ namespace WomenCalendar
         private OneMonthControl CreateNewDefaultOneMonth()
         {
             OneMonthControl control = new OneMonthControl();
-            control.Location = oneMonthControl.Location;
-            control.Size = oneMonthControl.Size;
+            control.Location = new Point(MonthesMargin.X, MonthesMargin.Y);// oneMonthControl.Location;
+            control.Size = OneMonthSize;// oneMonthControl.Size;
             control.OwnerMonthsControl = this;
             control.MonthDayClicked += new OneMonthControl.DayClicked(control_MonthDayClicked);
             return control;
@@ -235,14 +228,14 @@ namespace WomenCalendar
         
         public void CreateAndAdjustMonthsAmount(bool force)
         { // adjust amount of month calendars in the control according to its size.
-            if (CellPopupControl == null || oneMonthControl == null || singleMonths == null || Controls == null || singleMonths.Count == 0)
+            if (CellPopupControl == null || singleMonths == null || Controls == null || singleMonths.Count == 0)
                 return;
 
             CellPopupControl.Visible = false;
 
-            int monthesX = Size.Width / (oneMonthControl.Width + MonthsMarginX);
+            int monthesX = Size.Width / (OneMonthSize.Width + MonthesMargin.X);
             if (monthesX == 0) monthesX = 1;
-            int monthesY = Size.Height / (oneMonthControl.Height + MonthsMarginY);
+            int monthesY = Size.Height / (OneMonthSize.Height + MonthesMargin.Y);
             if (monthesY == 0) monthesY = 1;
             int monthsAmount = monthesX*monthesY; // new amount of visible monthes
 
@@ -266,11 +259,11 @@ namespace WomenCalendar
                 if (singleMonths[i].Visible)
                 {
                     singleMonths[i].Location = new Point(
-                        (i % monthesX) * (oneMonthControl.Width) + MonthsMarginX * (i % monthesX + 1),
-                        (i / monthesX) * (oneMonthControl.Height) + MonthsMarginY * (i / monthesX + 1));
-                    if (oneMonthControl.Date != DateTime.MinValue)
+                        (i % monthesX) * (OneMonthSize.Width) + MonthesMargin.X * (i % monthesX + 1),
+                        (i / monthesX) * (OneMonthSize.Height) + MonthesMargin.Y * (i / monthesX + 1));
+                    if (firstMonthControl.Date != DateTime.MinValue)
                     {
-                        singleMonths[i].Date = oneMonthControl.Date.AddMonths(i);
+                        singleMonths[i].Date = firstMonthControl.Date.AddMonths(i);
                     }
                 }
             }
@@ -280,7 +273,7 @@ namespace WomenCalendar
         {
             DateTime prevFocusDate = FocusDate;
             FocusDay = null;
-            StartMonth = oneMonthControl.Date.AddMonths(p);
+            StartMonth = firstMonthControl.Date.AddMonths(p);
             if (IsDateVisible(prevFocusDate))
             {
                 FocusDate = prevFocusDate;
@@ -293,7 +286,7 @@ namespace WomenCalendar
 
         public OneMonthControl GetOneMonthByDate(DateTime date)
         {
-            int i = oneMonthControl.Date.Month - date.Month;
+            int i = firstMonthControl.Date.Month - date.Month;
             if (i >= 0 && i < VisibleMonthsCount)
             {
                 return singleMonths[i];
@@ -314,8 +307,17 @@ namespace WomenCalendar
         public void Redraw()
         {
             CellPopupControl.Visible = false;
-            Invalidate(true);
-            Update();
+            
+
+            // These lines are fix for Mono. The only way I found to readraw all calendar.
+            this.Visible = false;
+            this.Visible = true;
+            CellPopupControl.Visible = false;
+
+
+            // These two lines work under MS .Net only.
+            //Invalidate(true);
+            //Update();
         }
 
         public void DropMonthMenu(Point screenLocation, OneMonthControl control)

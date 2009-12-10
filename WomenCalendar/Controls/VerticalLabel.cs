@@ -20,7 +20,10 @@ namespace WomenCalendar
         /// </summary>
         public VerticalLabel()
         {
-            base.CreateControl();
+            // Original code had that line, but is cores under Mono.
+            // Looks redundant so I decided to commented it out. Still works fine.
+            //base.CreateControl(); 
+
             InitializeComponent();
         }
 

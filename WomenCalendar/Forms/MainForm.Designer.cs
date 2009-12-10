@@ -846,12 +846,13 @@
             // 
             // btnChangeWoman
             // 
+            this.btnChangeWoman.BackColor = System.Drawing.Color.White;
             this.btnChangeWoman.Location = new System.Drawing.Point(12, 124);
             this.btnChangeWoman.Name = "btnChangeWoman";
             this.btnChangeWoman.Size = new System.Drawing.Size(185, 23);
             this.btnChangeWoman.TabIndex = 9;
             this.btnChangeWoman.Text = "Change name and password";
-            this.btnChangeWoman.UseVisualStyleBackColor = true;
+            this.btnChangeWoman.UseVisualStyleBackColor = false;
             this.btnChangeWoman.Click += new System.EventHandler(this.btnChangeWoman_Click);
             // 
             // chbAskPassword
@@ -995,8 +996,6 @@
             this.monthControl.FocusDay = null;
             this.monthControl.FocusMonth = null;
             this.monthControl.Location = new System.Drawing.Point(0, 0);
-            this.monthControl.MonthsMarginX = 10;
-            this.monthControl.MonthsMarginY = 10;
             this.monthControl.Name = "monthControl";
             this.monthControl.Size = new System.Drawing.Size(493, 803);
             this.monthControl.StartMonth = new System.DateTime(2007, 2, 1, 0, 0, 0, 0);
