@@ -211,7 +211,7 @@ namespace WomenCalendar
 
             SaveFileDialog dialog = new SaveFileDialog();
             dialog.Filter = 
-                TEXT.Get["Excel files"] + " (*.xls)|*.xls|" + 
+                TEXT.Get["Excel_files"] + " (*.xls)|*.xls|" + 
                 TEXT.Get["CSV_files"] + " (*.csv)|*.csv";
             dialog.RestoreDirectory = true;
             dialog.CheckPathExists = true;
