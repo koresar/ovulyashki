@@ -26,13 +26,20 @@ namespace WomenCalendar
 
         public static ApplicationSettings Settings;
 
+        private static string settingsFileName;
         private static string SettingsFileName
         {
             get
             {
-                var dir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), @"Ovulyashki");
-                if (!Directory.Exists(dir)) Directory.CreateDirectory(dir);
-                return Path.Combine(dir, "Ovulyashki.settings");
+                if (string.IsNullOrEmpty(settingsFileName))
+                {
+                    var dir = HaveAccessToCurrentFolder() ?
+                        Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) :
+                        Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), @"Ovulyashki");
+                    if (!Directory.Exists(dir)) Directory.CreateDirectory(dir);
+                    settingsFileName = Path.Combine(dir, "Ovulyashki.settings");
+                }
+                return settingsFileName;
             }
         }
 
@@ -62,6 +69,21 @@ namespace WomenCalendar
                 ApplicationForm.SetWomanName(_currentWoman.Name);
                 ApplicationForm.ResumeLayout();
             }
+        }
+
+        private static bool HaveAccessToCurrentFolder()
+        {
+            var tmpFileName = Assembly.GetExecutingAssembly().Location + Guid.NewGuid().ToString();
+            try
+            {
+                File.Create(tmpFileName).Close();
+                File.Delete(tmpFileName);
+            }
+            catch
+            {
+                return false;
+            }
+            return true;
         }
 
         public static bool SaveCurrentWoman()
