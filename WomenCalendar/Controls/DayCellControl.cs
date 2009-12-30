@@ -117,8 +117,8 @@ namespace WomenCalendar
         {
             BackColor = IsConceptionDay ? Program.DayCellAppearance.BackConceptionDay :
                 IsPregnancyDay ? Program.DayCellAppearance.BackPregnancyDay :
-                (IsMenstruationDay && Date <= DateTime.Today) ? Program.DayCellAppearance.BackMenstruationDay :
-                (IsMenstruationDay && Date > DateTime.Today) ? Program.DayCellAppearance.BackPredictedMenstruationDay :
+                IsMenstruationDay ? Program.DayCellAppearance.BackMenstruationDay :
+                IsPredictedAsMenstruationDay ? Program.DayCellAppearance.BackPredictedMenstruationDay :
                 IsPredictedAsOvulationDay ? Program.DayCellAppearance.BackOvulationDay :
                 IsPredictedAsSafeSexDay ? Program.DayCellAppearance.BackSafeSex :
                 Program.DayCellAppearance.BackEmpty;

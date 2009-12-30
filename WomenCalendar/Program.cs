@@ -335,7 +335,7 @@ namespace WomenCalendar
             public static Color BackConceptionDay = Color.DeepSkyBlue;
             public static Color BackPregnancyDay = Color.LightCyan;
             public static Color BackMenstruationDay = Color.LightPink;
-            public static Color BackPredictedMenstruationDay = Color.LightGreen;
+            public static Color BackPredictedMenstruationDay = ControlPaint.LightLight(Color.LightPink);
             public static Color BackOvulationDay = Color.Gold;
             public static Color BackSafeSex = Color.LightGreen;
             public static Color BackEmpty = Color.White;
