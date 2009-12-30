@@ -185,27 +185,6 @@ namespace WomenCalendar
             return resultPeriod;
         }
 
-        public DateTime GetClosestOvulationDay(DateTime date)
-        {
-            if (Count < 2) throw new Exception("No menstruations. The method call prohibited.");
-            MenstruationPeriod resultPeriodBefore = null;
-            MenstruationPeriod resultPeriodAfter = null;
-            foreach (MenstruationPeriod period in this)
-            {
-                if (period.StartDay < date && (resultPeriodBefore == null || period.StartDay > resultPeriodBefore.StartDay))
-                {
-                    resultPeriodBefore = period;
-                }
-
-                if (period.StartDay >= date && (resultPeriodAfter == null || period.StartDay < resultPeriodAfter.StartDay))
-                {
-                    resultPeriodAfter = period;
-                }
-            }
-
-            return resultPeriodBefore.StartDay.AddDays(((resultPeriodAfter.StartDay - resultPeriodBefore.StartDay).Days / 2));
-        }
-
         public int CalculateAveragePeriodLength()
         {
             if (Count < 2)
@@ -230,6 +209,11 @@ namespace WomenCalendar
                 }
             }
             return sum == 0 ? 28 : (int)(sum / count + 0.5);
+        }
+
+        public void ResetOvulyationsDates()
+        {
+            this.ForEach(m => m.ResetOvulyationDay());
         }
     }
 }

@@ -11,9 +11,12 @@ namespace WomenCalendar
         public const int NormalMaximalPeriod = 35;
 
         public DateTime StartDay { get; set; }
-        public int length;
+        private int length;
         public EgestasCollection Egestas = new EgestasCollection();
         public bool HasPregnancy { get; set; }
+
+        [XmlIgnore]
+        private DateTime ovulationDate;
 
         public MenstruationPeriod()
         {
@@ -40,7 +43,7 @@ namespace WomenCalendar
                 {
                     for (int i = length; i < value; i++)
                     {
-                        Egestas[StartDay.AddDays(i)] = EgestasCollection.MaximumEgestaValue/2;
+                        Egestas[StartDay.AddDays(i)] = EgestasCollection.MaximumEgestaValue / 2;
                     }
                 }
                 length = value;
@@ -58,6 +61,22 @@ namespace WomenCalendar
         public bool IsDayInPeriod(DateTime day)
         {
             return StartDay <= day && day <= LastDay;
+        }
+
+        public DateTime GetOvulationDate(Woman w)
+        {
+            if (ovulationDate == default(DateTime))
+            {
+                var period2 = w.Menstruations.GetClosestPeriodAfterDay(StartDay.AddDays(1));
+                DateTime nextPeriodFirstDat = period2 == null ? StartDay.AddDays(w.ManualPeriodLength) : period2.StartDay;
+                ovulationDate = OvulationDetector.EstimateOvulationDate(w, nextPeriodFirstDat);
+            }
+            return ovulationDate;
+        }
+
+        public void ResetOvulyationDay()
+        {
+            ovulationDate = default(DateTime);
         }
     }
 }

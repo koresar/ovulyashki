@@ -71,12 +71,15 @@
   <ItemGroup>
     <Compile Include="BusinessLogic\ApplicationSettings.cs" />
     <Compile Include="BusinessLogic\AppUpdater.cs" />
+    <Compile Include="BusinessLogic\UtilityMethods.cs" />
     <Compile Include="BusinessLogic\Report\CsvWriter.cs" />
     <Compile Include="BusinessLogic\HoroscopeDatePair.cs" />
     <Compile Include="BusinessLogic\Report\ReportWriter.cs" />
     <Compile Include="BusinessLogic\Report\XlsWriter.cs" />
     <Compile Include="BusinessLogic\TEXT.cs" />
     <Compile Include="BusinessLogic\TranslationsList.cs" />
+    <Compile Include="BusinessLogic\Woman\CFCollection.cs" />
+    <Compile Include="BusinessLogic\Woman\OvulationDetector.cs" />
     <Compile Include="BusinessLogic\Woman\Schedule.cs" />
     <Compile Include="BusinessLogic\Woman\SchedulesCollection.cs" />
     <Compile Include="BusinessLogic\Woman\OneDayInfo.cs" />
@@ -259,7 +262,7 @@
     <None Include="Resources\prev.Image.bmp" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Controls\app.config" />
+    <None Include="app.config" />
     <None Include="Resources\drop.bmp" />
     <EmbeddedResource Include="Controls\ColorSlider.resx">
       <DependentUpon>ColorSlider.cs</DependentUpon>

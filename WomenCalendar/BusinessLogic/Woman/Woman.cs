@@ -22,9 +22,6 @@ namespace WomenCalendar
         public ConceptionsCollection Conceptions { get; set; }
 
         [XmlIgnore()]
-        public bool IsNew { get; set; }
-
-        [XmlIgnore()]
         public string AssociatedFile { get; set; }
 
         public bool UseManualPeriodLength { get; set; }
@@ -73,6 +70,8 @@ namespace WomenCalendar
 
         public HealthCollection Health { get; set; }
 
+        public CFCollection CFs { get; set; }
+
         public SchedulesCollection Schedules { get; set; }
 
         public Woman()
@@ -81,6 +80,7 @@ namespace WomenCalendar
             BBT = new BBTCollection();
             HadSexList = new HadSexCollection();
             Health = new HealthCollection();
+            CFs = new CFCollection();
             DefaultMenstruationLength = 5;
             Menstruations = new MenstruationsCollection();
             Conceptions = new ConceptionsCollection();
@@ -180,79 +180,69 @@ namespace WomenCalendar
 
         public bool IsPredictedAsOvulationDay(DateTime date)
         {
-            if (Menstruations.Count == 0)
+            if (Menstruations.Count == 0 ||
+                Menstruations.IsMenstruationDay(date) ||
+                date < Menstruations.First.StartDay)
             {
                 return false;
             }
 
+            return GetClosestOvulationDay(date) == date;
+        }
+
+        public DateTime GetClosestOvulationDay(DateTime date)
+        {
+            if (Menstruations.Count == 0) { throw new Exception("No menstruations. The method call prohibited."); }
             MenstruationPeriod lastPeriod = Menstruations.Last;
             MenstruationPeriod firstPeriod = Menstruations.First;
             if (Menstruations.Count != 1 && date < lastPeriod.StartDay && date > firstPeriod.StartDay)
-            {
-                DateTime ovDay = Menstruations.GetClosestOvulationDay(date);
-                return ovDay == date;
+            { // the ov. date is already calculated. Let's return it.
+                MenstruationPeriod resultPeriodBefore = null;
+                MenstruationPeriod resultPeriodAfter = null;
+                foreach (MenstruationPeriod period in Menstruations)
+                {
+                    if (period.StartDay < date && (resultPeriodBefore == null || period.StartDay > resultPeriodBefore.StartDay))
+                    {
+                        resultPeriodBefore = period;
+                    }
+
+                    if (period.StartDay >= date && (resultPeriodAfter == null || period.StartDay < resultPeriodAfter.StartDay))
+                    {
+                        resultPeriodAfter = period;
+                    }
+                }
+                return resultPeriodBefore.GetOvulationDate(this);
             }
 
-            int daysBetween = ((date - lastPeriod.StartDay).Days) % ManualPeriodLength;
-            return daysBetween == ManualPeriodLength / 2;
+            int cycles = (date - lastPeriod.StartDay).Days / ManualPeriodLength;
+            DateTime lastCycleFirstDay = lastPeriod.StartDay.AddDays((cycles + 1) * ManualPeriodLength);
+            return OvulationDetector.EstimateOvulationDate(this, lastCycleFirstDay);
         }
 
         public bool IsPredictedAsBoyDay(DateTime date)
         {
-            if (Menstruations.Count == 0)
+            if (Menstruations.Count == 0 || 
+                Menstruations.IsMenstruationDay(date) || 
+                date < Menstruations.First.StartDay)
             {
                 return false;
             }
 
-            MenstruationPeriod lastPeriod = Menstruations.Last;
-            MenstruationPeriod firstPeriod = Menstruations.First;
-            if (date > lastPeriod.StartDay)
-            {
-                int daysBetween = ((date - lastPeriod.StartDay).Days) % ManualPeriodLength;
-                if (daysBetween > ManualPeriodLength / 2 && daysBetween < ManualPeriodLength / 2 + 5)
-                {
-                    return true;
-                }
-            }
-            else if (date > firstPeriod.StartDay && date < lastPeriod.StartDay)
-            {
-                DateTime ovDate = Menstruations.GetClosestOvulationDay(date);
-                if (date > ovDate && (date - ovDate).Days < 5)
-                {
-                    return true;
-                }
-            }
-
-            return false;
+            int days = (date - GetClosestOvulationDay(date)).Days;
+            return 1 <= days && days <= 4;
         }
 
         public bool IsPredictedAsGirlDay(DateTime date)
         {
-            if (Menstruations.Count == 0 || Menstruations.IsMenstruationDay(date))
+            if (Menstruations.Count == 0 ||
+                Menstruations.IsMenstruationDay(date) ||
+                date < Menstruations.First.StartDay)
             {
                 return false;
             }
 
-            MenstruationPeriod lastPeriod = Menstruations.Last;
-            MenstruationPeriod firstPeriod = Menstruations.First;
-            if (date > lastPeriod.StartDay)
-            {
-                int daysBetween = ((date - lastPeriod.StartDay).Days) % ManualPeriodLength;
-                if ((daysBetween < ManualPeriodLength / 2) && (daysBetween > ManualPeriodLength / 2 - 5))
-                {
-                    return true;
-                }
-            }
-            else if (date > firstPeriod.StartDay && date < lastPeriod.StartDay)
-            {
-                DateTime ovDate = Menstruations.GetClosestOvulationDay(date);
-                if (date < ovDate && (ovDate - date).Days < 5)
-                {
-                    return true;
-                }
-            }
-
-            return false;
+            int days = (GetClosestOvulationDay(date) - date).Days;
+            return 1 <= days && days <= 4;
         }
 
         public bool IsConceptionDay(DateTime date)

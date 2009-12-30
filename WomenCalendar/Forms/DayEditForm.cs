@@ -22,7 +22,7 @@ namespace WomenCalendar
             public bool HasMenstr;
             public decimal MenstrLength;
             public int Egesta;
-            public int CF;
+            public CervicalFluid CF;
 
             public override bool Equals(object obj)
             {
@@ -43,7 +43,7 @@ namespace WomenCalendar
         private DateTime date;
         private DayEditFocus defaultFocus;
         private DayEditFocus lastFocus;
-        private int currentCF;
+        private CervicalFluid currentCF;
 
         public DayEditForm(DayCellControl dayCell)
             : this(dayCell, DayEditFocus.Note)
@@ -57,6 +57,9 @@ namespace WomenCalendar
             this.date = dayCell.Date;
             DayCell = dayCell;
             defaultFocus = focus;
+            rbtCF1.Tag = CervicalFluid.Tacky;
+            rbtCF2.Tag = CervicalFluid.Stretchy;
+            rbtCF3.Tag = CervicalFluid.Water;
         }
 
         #region ITranslatable interface impementation
@@ -130,6 +133,10 @@ namespace WomenCalendar
 
             w.Health[date] = sliderHealth.Value;
 
+            w.CFs[date] = currentCF;
+
+            w.Menstruations.ResetOvulyationsDates();
+
             DayCell.OwnerOneMonthControl.OwnerMonthsControl.Redraw(); // redraw whole calendar
         }
 
@@ -193,6 +200,11 @@ namespace WomenCalendar
             chkHadSex.Checked = w.HadSexList[date];
 
             sliderHealth.Value = w.Health[date];
+
+            currentCF = w.CFs[date];
+            rbtCF1.Checked = currentCF == CervicalFluid.Tacky;
+            rbtCF2.Checked = currentCF == CervicalFluid.Stretchy;
+            rbtCF3.Checked = currentCF == CervicalFluid.Water;
 
             initialData = CollectDayData();
         }
@@ -316,6 +328,21 @@ namespace WomenCalendar
             Rotate(1);
         }
 
+        private void rbtCF_Click(object sender, EventArgs e)
+        {
+            var rb = sender as RadioButton;
+            CervicalFluid newCF = (CervicalFluid)rb.Tag;
+            if (currentCF == newCF)
+            {
+                rb.Checked = false;
+                currentCF = CervicalFluid.Undefined;
+            }
+            else
+            {
+                currentCF = newCF;
+            }
+        }
+
         private void numMenstruationLength_ValueChanged(object sender, EventArgs e)
         {
             lblMenstruationLength.Text = TEXT.GetDaysString((int)numMenstruationLength.Value);
@@ -361,7 +388,7 @@ namespace WomenCalendar
 
             if (show)
             {
-                this.Width = 424;
+                this.Width = grpMenstr.Location.X + grpMenstr.Size.Width + 10;
                 chkMentrustions.Image = global::WomenCalendar.Properties.Resources.dropNot_Image;
                 chkMentrustions.Text = "<<          <<";
                 this.grpMenstr.Visible = true;
@@ -372,7 +399,7 @@ namespace WomenCalendar
             }
             else
             {
-                this.Width = 330;
+                this.Width = chkMentrustions.Location.X + chkMentrustions.Size.Width + 10;
                 chkMentrustions.Image = global::WomenCalendar.Properties.Resources.drop_Image;
                 chkMentrustions.Text = ">>          >>";
                 this.grpMenstr.Visible = false;
@@ -445,20 +472,5 @@ namespace WomenCalendar
         }
 
         #endregion
-
-        private void rbtCF_Click(object sender, EventArgs e)
-        {
-            var rb = sender as RadioButton;
-            int newCF = int.Parse(rb.Tag as string);
-            if (currentCF == newCF)
-            {
-                rb.Checked = false;
-                currentCF = 0;
-            }
-            else
-            {
-                currentCF = newCF;
-            }
-        }
     }
 }

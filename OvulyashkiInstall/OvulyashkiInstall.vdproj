@@ -505,7 +505,7 @@
         "ProductName" = "8:Ovulyashki"
         "ProductCode" = "8:{238EE538-42E8-49F9-94E7-3B8979ACD940}"
         "PackageCode" = "8:{D9C7ED2A-845B-4C7D-A39F-CD5B506C0753}"
-        "UpgradeCode" = "8:{6E73D4A8-8457-4E88-867C-21488E6852AC}"
+        "UpgradeCode" = "8:{528D2F2A-7B5D-4A24-BCD7-D174B923F321}"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:FALSE"

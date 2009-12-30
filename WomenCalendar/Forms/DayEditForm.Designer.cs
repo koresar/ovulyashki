@@ -29,15 +29,14 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            this.rbtCF3 = new System.Windows.Forms.RadioButton();
+            this.rbtCF2 = new System.Windows.Forms.RadioButton();
+            this.rbtCF1 = new System.Windows.Forms.RadioButton();
             this.sliderEgestaAmount = new MB.Controls.ColorSlider();
             this.txtBBT = new System.Windows.Forms.TextBox();
             this.lblBBT = new System.Windows.Forms.Label();
             this.txtNote = new System.Windows.Forms.TextBox();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
-            this.rbtCF4 = new System.Windows.Forms.RadioButton();
-            this.rbtCF3 = new System.Windows.Forms.RadioButton();
-            this.rbtCF2 = new System.Windows.Forms.RadioButton();
-            this.rbtCF1 = new System.Windows.Forms.RadioButton();
             this.numMenstruationLength = new System.Windows.Forms.NumericUpDown();
             this.btnPrevDay = new System.Windows.Forms.Button();
             this.btnNextDay = new System.Windows.Forms.Button();
@@ -65,6 +64,51 @@
             this.grpHealth.SuspendLayout();
             this.grpCF.SuspendLayout();
             this.SuspendLayout();
+            // 
+            // rbtCF3
+            // 
+            this.rbtCF3.Appearance = System.Windows.Forms.Appearance.Button;
+            this.rbtCF3.Location = new System.Drawing.Point(71, 13);
+            this.rbtCF3.Name = "rbtCF3";
+            this.rbtCF3.Size = new System.Drawing.Size(24, 24);
+            this.rbtCF3.TabIndex = 10014;
+            this.rbtCF3.TabStop = true;
+            this.rbtCF3.Tag = "";
+            this.rbtCF3.Text = "В";
+            this.rbtCF3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.toolTipCF.SetToolTip(this.rbtCF3, "Водянистая");
+            this.rbtCF3.UseVisualStyleBackColor = true;
+            this.rbtCF3.Click += new System.EventHandler(this.rbtCF_Click);
+            // 
+            // rbtCF2
+            // 
+            this.rbtCF2.Appearance = System.Windows.Forms.Appearance.Button;
+            this.rbtCF2.Location = new System.Drawing.Point(39, 13);
+            this.rbtCF2.Name = "rbtCF2";
+            this.rbtCF2.Size = new System.Drawing.Size(24, 24);
+            this.rbtCF2.TabIndex = 10014;
+            this.rbtCF2.TabStop = true;
+            this.rbtCF2.Tag = "";
+            this.rbtCF2.Text = "Я";
+            this.rbtCF2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.toolTipCF.SetToolTip(this.rbtCF2, "Яичный белок");
+            this.rbtCF2.UseVisualStyleBackColor = true;
+            this.rbtCF2.Click += new System.EventHandler(this.rbtCF_Click);
+            // 
+            // rbtCF1
+            // 
+            this.rbtCF1.Appearance = System.Windows.Forms.Appearance.Button;
+            this.rbtCF1.Location = new System.Drawing.Point(7, 13);
+            this.rbtCF1.Name = "rbtCF1";
+            this.rbtCF1.Size = new System.Drawing.Size(24, 24);
+            this.rbtCF1.TabIndex = 10014;
+            this.rbtCF1.TabStop = true;
+            this.rbtCF1.Tag = "";
+            this.rbtCF1.Text = "К";
+            this.rbtCF1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.toolTipCF.SetToolTip(this.rbtCF1, "Клейкая");
+            this.rbtCF1.UseVisualStyleBackColor = true;
+            this.rbtCF1.Click += new System.EventHandler(this.rbtCF_Click);
             // 
             // sliderEgestaAmount
             // 
@@ -125,66 +169,6 @@
             this.toolTip.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Info;
             this.toolTip.UseAnimation = false;
             this.toolTip.UseFading = false;
-            // 
-            // rbtCF4
-            // 
-            this.rbtCF4.Appearance = System.Windows.Forms.Appearance.Button;
-            this.rbtCF4.Location = new System.Drawing.Point(106, 13);
-            this.rbtCF4.Name = "rbtCF4";
-            this.rbtCF4.Size = new System.Drawing.Size(24, 24);
-            this.rbtCF4.TabIndex = 10014;
-            this.rbtCF4.TabStop = true;
-            this.rbtCF4.Tag = "4";
-            this.rbtCF4.Text = "В";
-            this.rbtCF4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.toolTipCF.SetToolTip(this.rbtCF4, "Водянистая");
-            this.rbtCF4.UseVisualStyleBackColor = true;
-            this.rbtCF4.Click += new System.EventHandler(this.rbtCF_Click);
-            // 
-            // rbtCF3
-            // 
-            this.rbtCF3.Appearance = System.Windows.Forms.Appearance.Button;
-            this.rbtCF3.Location = new System.Drawing.Point(74, 13);
-            this.rbtCF3.Name = "rbtCF3";
-            this.rbtCF3.Size = new System.Drawing.Size(24, 24);
-            this.rbtCF3.TabIndex = 10014;
-            this.rbtCF3.TabStop = true;
-            this.rbtCF3.Tag = "3";
-            this.rbtCF3.Text = "Я";
-            this.rbtCF3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.toolTipCF.SetToolTip(this.rbtCF3, "Яичный белок");
-            this.rbtCF3.UseVisualStyleBackColor = true;
-            this.rbtCF3.Click += new System.EventHandler(this.rbtCF_Click);
-            // 
-            // rbtCF2
-            // 
-            this.rbtCF2.Appearance = System.Windows.Forms.Appearance.Button;
-            this.rbtCF2.Location = new System.Drawing.Point(42, 13);
-            this.rbtCF2.Name = "rbtCF2";
-            this.rbtCF2.Size = new System.Drawing.Size(24, 24);
-            this.rbtCF2.TabIndex = 10014;
-            this.rbtCF2.TabStop = true;
-            this.rbtCF2.Tag = "2";
-            this.rbtCF2.Text = "К";
-            this.rbtCF2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.toolTipCF.SetToolTip(this.rbtCF2, "Клейкая");
-            this.rbtCF2.UseVisualStyleBackColor = true;
-            this.rbtCF2.Click += new System.EventHandler(this.rbtCF_Click);
-            // 
-            // rbtCF1
-            // 
-            this.rbtCF1.Appearance = System.Windows.Forms.Appearance.Button;
-            this.rbtCF1.Location = new System.Drawing.Point(10, 13);
-            this.rbtCF1.Name = "rbtCF1";
-            this.rbtCF1.Size = new System.Drawing.Size(24, 24);
-            this.rbtCF1.TabIndex = 10014;
-            this.rbtCF1.TabStop = true;
-            this.rbtCF1.Tag = "1";
-            this.rbtCF1.Text = "Л";
-            this.rbtCF1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.toolTipCF.SetToolTip(this.rbtCF1, "Липкая");
-            this.rbtCF1.UseVisualStyleBackColor = true;
-            this.rbtCF1.Click += new System.EventHandler(this.rbtCF_Click);
             // 
             // numMenstruationLength
             // 
@@ -376,6 +360,7 @@
             this.chkMentrustions.Size = new System.Drawing.Size(27, 65);
             this.chkMentrustions.TabIndex = 10013;
             this.chkMentrustions.Text = ">>          >>";
+            this.chkMentrustions.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.chkMentrustions.UseVisualStyleBackColor = true;
             this.chkMentrustions.MouseLeave += new System.EventHandler(this.chkMentrustions_MouseLeave);
             this.chkMentrustions.MouseEnter += new System.EventHandler(this.chkMentrustions_MouseEnter);
@@ -388,17 +373,15 @@
             // 
             // grpCF
             // 
-            this.grpCF.Controls.Add(this.rbtCF4);
             this.grpCF.Controls.Add(this.rbtCF3);
             this.grpCF.Controls.Add(this.rbtCF2);
             this.grpCF.Controls.Add(this.rbtCF1);
             this.grpCF.Location = new System.Drawing.Point(181, 277);
             this.grpCF.Name = "grpCF";
-            this.grpCF.Size = new System.Drawing.Size(138, 43);
+            this.grpCF.Size = new System.Drawing.Size(102, 43);
             this.grpCF.TabIndex = 10010;
             this.grpCF.TabStop = false;
             this.grpCF.Text = "ЦЖ";
-            this.grpCF.Visible = false;
             // 
             // toolTipCF
             // 
@@ -410,7 +393,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.ClientSize = new System.Drawing.Size(475, 360);
+            this.ClientSize = new System.Drawing.Size(427, 360);
             this.Controls.Add(this.chkMentrustions);
             this.Controls.Add(this.btnNextDay);
             this.Controls.Add(this.chkHadSex);
@@ -475,11 +458,10 @@
         private System.Windows.Forms.Panel pnlSurroundMentsLength;
         private System.Windows.Forms.ContextMenuStrip schedulesContextMenu;
         private System.Windows.Forms.GroupBox grpCF;
-        private System.Windows.Forms.RadioButton rbtCF4;
+        private System.Windows.Forms.ToolTip toolTipCF;
         private System.Windows.Forms.RadioButton rbtCF3;
         private System.Windows.Forms.RadioButton rbtCF2;
         private System.Windows.Forms.RadioButton rbtCF1;
-        private System.Windows.Forms.ToolTip toolTipCF;
 
     }
 }
