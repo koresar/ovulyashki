@@ -5,7 +5,7 @@ using System.Xml.Serialization;
 
 namespace WomenCalendar
 {
-    public class MenstruationPeriod
+    public class MenstruationPeriod : ICloneable
     {
         public const int NormalMinimalPeriod = 21;
         public const int NormalMaximalPeriod = 35;
@@ -77,6 +77,35 @@ namespace WomenCalendar
         public void ResetOvulyationDay()
         {
             ovulationDate = default(DateTime);
+        }
+
+        #region ICloneable Members
+
+        public object Clone()
+        {
+            var copy = new MenstruationPeriod()
+            {
+                Egestas = this.Egestas.Clone() as EgestasCollection,
+                HasPregnancy = this.HasPregnancy,
+                length = this.length,
+                ovulationDate = this.ovulationDate,
+                StartDay = this.StartDay
+            };
+            return copy;
+        }
+
+        #endregion
+
+        public override bool Equals(object obj)
+        {
+            var secondValue = obj as MenstruationPeriod;
+            return secondValue != null &&
+                secondValue.HasPregnancy.Equals(this.HasPregnancy) &&
+                secondValue.length.Equals(this.length) &&
+                secondValue.ovulationDate.Equals(this.ovulationDate) &&
+                secondValue.StartDay.Equals(this.StartDay) &&
+                secondValue.Egestas.Equals(this.Egestas);
+            
         }
     }
 }

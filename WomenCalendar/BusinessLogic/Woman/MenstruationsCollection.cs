@@ -5,7 +5,7 @@ using System.Windows.Forms;
 
 namespace WomenCalendar
 {
-    public class MenstruationsCollection : List<MenstruationPeriod>
+    public class MenstruationsCollection : List<MenstruationPeriod>, ICloneable
     {
         public delegate void CollectionChangedDelegate();
         public event CollectionChangedDelegate CollectionChanged;
@@ -214,6 +214,38 @@ namespace WomenCalendar
         public void ResetOvulyationsDates()
         {
             this.ForEach(m => m.ResetOvulyationDay());
+        }
+
+        #region ICloneable Members
+
+        public object Clone()
+        {
+            var copy = new MenstruationsCollection();
+            foreach (var item in this)
+            {
+                copy.Add(item.Clone() as MenstruationPeriod);
+            }
+            return copy;
+        }
+
+        #endregion
+
+        public override bool Equals(object obj)
+        {
+            if (!(obj is MenstruationsCollection)) { return false; }
+            var secondValue = obj as MenstruationsCollection;
+            if (secondValue.Count != this.Count)
+            {
+                return false;
+            }
+            for (int i = 0; i < this.Count; i++)
+            {
+                if (!this[i].Equals(secondValue[i]))
+                {
+                    return false;
+                }
+            }
+            return true;
         }
     }
 }

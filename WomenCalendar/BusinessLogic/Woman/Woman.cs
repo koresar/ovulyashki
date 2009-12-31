@@ -11,7 +11,7 @@ using ICSharpCode.SharpZipLib.BZip2;
 namespace WomenCalendar
 {
     [XmlRoot("Woman")]
-    public class Woman
+    public class Woman : ICloneable
     {
         public string Name { get; set; }
 
@@ -491,6 +491,57 @@ namespace WomenCalendar
             }
 
             return sb.ToString();
+        }
+
+        #region ICloneable Members
+
+        public object Clone()
+        {
+            var w = new Woman();
+            w.AllwaysAskPassword = this.AllwaysAskPassword;
+            w.AssociatedFile = this.AssociatedFile;
+            w.averagePeriodLength = this.averagePeriodLength;
+            w.BBT = this.BBT.Clone() as BBTCollection;
+            w.CFs = this.CFs.Clone() as CFCollection;
+            w.Conceptions = this.Conceptions.Clone() as ConceptionsCollection;
+            w.DefaultMenstruationLength = this.DefaultMenstruationLength;
+            w.HadSexList = this.HadSexList.Clone() as HadSexCollection;
+            w.Health = this.Health.Clone() as HealthCollection;
+            w.ManualPeriodLength = this.ManualPeriodLength;
+            w.Menstruations = this.Menstruations.Clone() as MenstruationsCollection;
+            w.Name = this.Name;
+            w.Notes = this.Notes.Clone() as NotesCollection;
+            w.Password = this.Password;
+            w.UseManualPeriodLength = this.UseManualPeriodLength;
+            // w.Schedules = this.Schedules.Clone(); TODO!!! CLONING NOT IMPLEMENTED!!!!!!
+            return w;
+        }
+
+        #endregion
+
+        public override bool Equals(object obj)
+        {
+            if (!(obj is Woman)) return false;
+            Woman w = obj as Woman;
+
+            bool equal = true;
+            equal &= w.AllwaysAskPassword.Equals(this.AllwaysAskPassword);
+            equal &= w.AssociatedFile.Equals(this.AssociatedFile);
+            equal &= w.averagePeriodLength.Equals(this.averagePeriodLength);
+            equal &= w.BBT.Equals(this.BBT);
+            equal &= w.CFs.Equals(this.CFs);
+            equal &= w.Conceptions.Equals(this.Conceptions);
+            equal &= w.DefaultMenstruationLength.Equals(this.DefaultMenstruationLength);
+            equal &= w.HadSexList.Equals(this.HadSexList);
+            equal &= w.Health.Equals(this.Health);
+            equal &= w.ManualPeriodLength.Equals(this.ManualPeriodLength);
+            equal &= w.Menstruations.Equals(this.Menstruations);
+            equal &= w.Name.Equals(this.Name);
+            equal &= w.Notes.Equals(this.Notes);
+            equal &= w.Password.Equals(this.Password);
+            equal &= w.UseManualPeriodLength.Equals(this.UseManualPeriodLength);
+
+            return equal;
         }
     }
 }

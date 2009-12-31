@@ -4,7 +4,7 @@ using System.Text;
 
 namespace WomenCalendar
 {
-    public class ConceptionsCollection : List<ConceptionPeriod>
+    public class ConceptionsCollection : List<ConceptionPeriod>, ICloneable
     {
         public delegate void CollectionChangedDelegate();
         public event CollectionChangedDelegate CollectionChanged;
@@ -119,6 +119,38 @@ namespace WomenCalendar
             {
                 CollectionChanged();
             }
+        }
+
+        #region ICloneable Members
+
+        public object Clone()
+        {
+            var copy = new ConceptionsCollection();
+            foreach (var item in this)
+            {
+                copy.Add(item.Clone() as ConceptionPeriod);
+            }
+            return copy;
+        }
+
+        #endregion
+
+        public override bool Equals(object obj)
+        {
+            if (!(obj is ConceptionsCollection)) { return false; }
+            var secondValue = obj as ConceptionsCollection;
+            if (secondValue.Count != this.Count)
+            {
+                return false;
+            }
+            for (int i = 0; i < this.Count; i++)
+            {
+                if (!this[i].Equals(secondValue[i]))
+                {
+                    return false;
+                }
+            }
+            return true;
         }
     }
 }

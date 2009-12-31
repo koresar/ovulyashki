@@ -39,6 +39,7 @@ namespace WomenCalendar
             }
         }
 
+        public static Woman _currentWomanClone;
         public static Woman _currentWoman;
         public static Woman CurrentWoman
         {
@@ -54,6 +55,7 @@ namespace WomenCalendar
                     _currentWoman.Conceptions.CollectionChanged -= ApplicationForm.RedrawCalendar;
                 }
                 _currentWoman = value;
+                _currentWomanClone = _currentWoman.Clone() as Woman;
                 if (_currentWoman != null)
                 {
                     _currentWoman.AveragePeriodLengthChanged += ApplicationForm.UpdateWomanInformation;
@@ -130,6 +132,11 @@ namespace WomenCalendar
         
         public static bool AskAndSaveCurrentWoman()
         {
+            if (!string.IsNullOrEmpty(_currentWomanClone.AssociatedFile) && _currentWoman.Equals(_currentWomanClone))
+            { // no changes were done to current woman, thus just allow procceding.
+                return true;
+            }
+
             DialogResult res = MessageBox.Show(TEXT.Get["Save_woman_question"], ApplicationForm.Text,
                                 MessageBoxButtons.YesNoCancel);
             switch (res)

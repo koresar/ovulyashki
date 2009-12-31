@@ -5,7 +5,7 @@ using System.Xml.Serialization;
 
 namespace WomenCalendar
 {
-    public class SerializableEventsCollection<DataT> : Dictionary<DateTime, DataT>, IXmlSerializable
+    public abstract class SerializableEventsCollection<DataT> : Dictionary<DateTime, DataT>, IXmlSerializable, ICloneable
     {
         private string OneNodeName;
         public SerializableEventsCollection(string oneNodeName)
@@ -53,5 +53,40 @@ namespace WomenCalendar
             }
         }
         #endregion
+
+        #region ICloneable Members
+
+        public virtual object Clone()
+        {
+            var copy = Activator.CreateInstance(this.GetType()) as SerializableEventsCollection<DataT>;
+            foreach (var item in this)
+            {
+                copy.Add(item.Key, item.Value);
+            }
+            return copy;
+        }
+
+        #endregion
+
+        public override bool Equals(object obj)
+        {
+            if (obj.GetType() != this.GetType())
+            {
+                return false;
+            }
+            SerializableEventsCollection<DataT> secondValue = obj as SerializableEventsCollection<DataT>;
+            if (secondValue.Count != this.Count)
+            {
+                return false;
+            }
+            foreach (var item in secondValue)
+            {
+                if (!this.ContainsKey(item.Key) || !this[item.Key].Equals(item.Value))
+                { // a key is absent or value is not equal
+                    return false;
+                }
+            }
+            return true;
+        }
     }
 }
