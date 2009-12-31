@@ -89,17 +89,6 @@ namespace WomenCalendar
             Name = Environment.UserName;
         }
 
-        public static bool SaveTo(Woman w, string path)
-        {
-            var s = new BZip2OutputStream(new FileStream(path, FileMode.Create), 9);
-            new XmlSerializer(w.GetType()).Serialize(s, w);
-            s.Close();
-
-            w.AssociatedFile = path;
-
-            return true;
-        }
-
         public static Woman ReadFrom(string path)
         {
             Woman w = null;

@@ -15,6 +15,8 @@ using System.Xml;
 using System.Text;
 using System.Net;
 using System.Threading;
+using ICSharpCode.SharpZipLib.BZip2;
+using System.Xml.Serialization;
 
 namespace WomenCalendar
 {
@@ -79,7 +81,7 @@ namespace WomenCalendar
                 dialog.DefaultExt = ".woman";
                 if (dialog.ShowDialog(ApplicationForm) == DialogResult.OK)
                 {
-                    Woman.SaveTo(CurrentWoman, dialog.FileName);
+                    SaveCurrentWomanTo(dialog.FileName);
                 }
                 else
                 {
@@ -88,8 +90,21 @@ namespace WomenCalendar
             }
             else
             {
-                Woman.SaveTo(CurrentWoman, CurrentWoman.AssociatedFile);
+                SaveCurrentWomanTo(CurrentWoman.AssociatedFile);
             }
+            return true;
+        }
+
+        public static bool SaveCurrentWomanTo(string path)
+        {
+            var s = new BZip2OutputStream(new FileStream(path, FileMode.Create), 9);
+            new XmlSerializer(_currentWoman.GetType()).Serialize(s, _currentWoman);
+            s.Close();
+
+            _currentWoman.AssociatedFile = path;
+
+            _currentWomanClone = _currentWoman.Clone() as Woman;
+
             return true;
         }
 
