@@ -46,6 +46,7 @@
             // 
             // btnCopyToClipboard
             // 
+            this.btnCopyToClipboard.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.btnCopyToClipboard.Location = new System.Drawing.Point(89, 230);
             this.btnCopyToClipboard.Name = "btnCopyToClipboard";
             this.btnCopyToClipboard.Size = new System.Drawing.Size(275, 23);
