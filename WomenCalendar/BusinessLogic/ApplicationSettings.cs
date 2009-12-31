@@ -4,6 +4,7 @@ using System.Drawing;
 using System.IO;
 using System.Text;
 using System.Xml.Serialization;
+using System.Reflection;
 
 namespace WomenCalendar
 {
@@ -59,6 +60,51 @@ namespace WomenCalendar
                 settings = new ApplicationSettings();
             }
             return settings;
+        }
+
+        public static readonly string settingsFileName = "Ovulyashki.settings";
+
+        public static string GetApplicationSettingsFile()
+        {
+            var appDataPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), @"Ovulyashki");
+            var appDataFile = Path.Combine(appDataPath, settingsFileName);
+            var localPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+            var localFile = Path.Combine(localPath, settingsFileName);
+            if (HaveAccessToCurrentFolder())
+            { // we have access to own folder.
+                if (!File.Exists(localFile) && File.Exists(appDataFile))
+                { // we have previous settings in appData. Let's copy to own folder.
+                    File.Copy(appDataFile, localFile);
+                }
+                return localFile;
+            }
+            else
+            { // we do not have access to own folder.
+                if (!File.Exists(appDataFile) && File.Exists(localFile))
+                { // but suddenly we have settings in own folder, so let's use it.
+                    if (!Directory.Exists(appDataPath))
+                    {
+                        Directory.CreateDirectory(appDataPath);
+                    }
+                    File.Copy(localFile, appDataFile);
+                }
+                return appDataFile;
+            }
+        }
+
+        private static bool HaveAccessToCurrentFolder()
+        {
+            var tmpFileName = Assembly.GetExecutingAssembly().Location + Guid.NewGuid().ToString();
+            try
+            {
+                File.Create(tmpFileName).Close();
+                File.Delete(tmpFileName);
+            }
+            catch
+            {
+                return false;
+            }
+            return true;
         }
 
         public bool Write(string fileName)
