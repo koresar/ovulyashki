@@ -147,7 +147,8 @@ namespace WomenCalendar
         
         public static bool AskAndSaveCurrentWoman()
         {
-            if (!string.IsNullOrEmpty(_currentWomanClone.AssociatedFile) && _currentWoman.Equals(_currentWomanClone))
+            if (!string.IsNullOrEmpty(_currentWoman.AssociatedFile) && 
+                _currentWoman.Equals(_currentWomanClone))
             { // no changes were done to current woman, thus just allow procceding.
                 return true;
             }

@@ -101,11 +101,9 @@ namespace WomenCalendar
             var secondValue = obj as MenstruationPeriod;
             return secondValue != null &&
                 secondValue.HasPregnancy.Equals(this.HasPregnancy) &&
-                secondValue.length.Equals(this.length) &&
-                secondValue.ovulationDate.Equals(this.ovulationDate) &&
+                secondValue.Length.Equals(this.Length) &&
                 secondValue.StartDay.Equals(this.StartDay) &&
                 secondValue.Egestas.Equals(this.Egestas);
-            
         }
     }
 }

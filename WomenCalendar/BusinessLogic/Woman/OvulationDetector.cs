@@ -30,7 +30,7 @@ namespace WomenCalendar
             var someCFs = new Dictionary<DateTime, CervicalFluid>(numberOfDaysToLookIn);
             DateTime lastEggLikeCFDay = NoDate;
             DateTime ovCF = NoDate;
-            for (int i = 0; i < numberOfDaysToLookIn; i++)
+            for (int i = 0; i < 2 * numberOfDaysToLookIn; i++)
             {
                 DateTime day = ovCalend.AddDays(-1 * numberOfDaysToLookIn + i);
                 CervicalFluid cf = w.CFs[day];
@@ -54,7 +54,7 @@ namespace WomenCalendar
             var someBBTs = new Dictionary<DateTime, double>(numberOfDaysToLookIn);
             DateTime lastLowestBBTDay = NoDate;
             DateTime firstHighestBBTDay = NoDate;
-            for (int i = 0; i < numberOfDaysToLookIn; i++)
+            for (int i = 0; i < 2 * numberOfDaysToLookIn; i++)
             {
                 DateTime day = ovCalend.AddDays(-1 * numberOfDaysToLookIn + i);
                 double bbt = w.BBT.GetBBT(day);
@@ -81,7 +81,7 @@ namespace WomenCalendar
                         return ovCF;
                     }
                 }
-                if (UtilityMethods.Within(ovCF, lastLowestBBTDay, firstHighestBBTDay))
+                if (UtilityMethods.Within(ovCalend, lastLowestBBTDay, firstHighestBBTDay))
                 { // the calendar date is in the BBT pick range then it is our date.
                     return ovCalend;
                 }

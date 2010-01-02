@@ -33,12 +33,6 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_430BB2CA70F7CEB5A7D03535C4BB1286"
-        "OwnerKey" = "8:_9C763F4F87CE4EB8AEB574D0A518B8A2"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_5D3457C50E0B46958AA7DD0BB1BE2C56"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -46,6 +40,12 @@
         "Entry"
         {
         "MsmKey" = "8:_63368D27CE984644F49CD7E2A7A643AE"
+        "OwnerKey" = "8:_9C763F4F87CE4EB8AEB574D0A518B8A2"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_7ABB837E9766E528E5C8C7B5096FFE79"
         "OwnerKey" = "8:_9C763F4F87CE4EB8AEB574D0A518B8A2"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -82,7 +82,7 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_430BB2CA70F7CEB5A7D03535C4BB1286"
+        "OwnerKey" = "8:_7ABB837E9766E528E5C8C7B5096FFE79"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -260,37 +260,6 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_430BB2CA70F7CEB5A7D03535C4BB1286"
-            {
-            "AssemblyRegister" = "3:1"
-            "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:ZedGraph, Version=5.1.4.38964, Culture=neutral, PublicKeyToken=02a83cbd123fcd60, processorArchitecture=MSIL"
-                "ScatterAssemblies"
-                {
-                    "_430BB2CA70F7CEB5A7D03535C4BB1286"
-                    {
-                    "Name" = "8:ZedGraph.dll"
-                    "Attributes" = "3:512"
-                    }
-                }
-            "SourcePath" = "8:ZedGraph.dll"
-            "TargetName" = "8:"
-            "Tag" = "8:"
-            "Folder" = "8:_0C363D3A242941509ED0851336DD9D80"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:TRUE"
-            "IsolateTo" = "8:"
-            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_5D3457C50E0B46958AA7DD0BB1BE2C56"
             {
             "SourcePath" = "8:..\\WomenCalendar\\en_lang.xml"
@@ -325,6 +294,37 @@
                     }
                 }
             "SourcePath" = "8:CarlosAg.ExcelXmlWriter.dll"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_0C363D3A242941509ED0851336DD9D80"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_7ABB837E9766E528E5C8C7B5096FFE79"
+            {
+            "AssemblyRegister" = "3:1"
+            "AssemblyIsInGAC" = "11:FALSE"
+            "AssemblyAsmDisplayName" = "8:ZedGraph, Version=5.1.4.41688, Culture=neutral, PublicKeyToken=02a83cbd123fcd60, processorArchitecture=MSIL"
+                "ScatterAssemblies"
+                {
+                    "_7ABB837E9766E528E5C8C7B5096FFE79"
+                    {
+                    "Name" = "8:ZedGraph.dll"
+                    "Attributes" = "3:512"
+                    }
+                }
+            "SourcePath" = "8:ZedGraph.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_0C363D3A242941509ED0851336DD9D80"
@@ -503,14 +503,14 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:Ovulyashki"
-        "ProductCode" = "8:{238EE538-42E8-49F9-94E7-3B8979ACD940}"
+        "ProductCode" = "8:{703F808B-60BC-4F04-B7EE-0ABB7BA5F909}"
         "PackageCode" = "8:{D9C7ED2A-845B-4C7D-A39F-CD5B506C0753}"
-        "UpgradeCode" = "8:{887EA0EA-452D-4AA8-9D78-E3ACEE9E0DE9}"
+        "UpgradeCode" = "8:{9EA182BD-F0AB-4D11-8DDE-5211EEA59E36}"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:FALSE"
         "InstallAllUsers" = "11:TRUE"
-        "ProductVersion" = "8:1.6.2"
+        "ProductVersion" = "8:1.6.3"
         "Manufacturer" = "8:RulezDev"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:http://ovulyashki.dp.ua/"

@@ -87,6 +87,8 @@ namespace WomenCalendar
             ManualPeriodLength = 28;
             averagePeriodLength = 28;
             Name = Environment.UserName;
+            Password = string.Empty;
+            AssociatedFile = string.Empty;
         }
 
         public static Woman ReadFrom(string path)
@@ -515,8 +517,7 @@ namespace WomenCalendar
 
             bool equal = true;
             equal &= w.AllwaysAskPassword.Equals(this.AllwaysAskPassword);
-            equal &= w.AssociatedFile.Equals(this.AssociatedFile);
-            equal &= w.averagePeriodLength.Equals(this.averagePeriodLength);
+            equal &= w.AveragePeriodLength.Equals(this.AveragePeriodLength);
             equal &= w.BBT.Equals(this.BBT);
             equal &= w.CFs.Equals(this.CFs);
             equal &= w.Conceptions.Equals(this.Conceptions);

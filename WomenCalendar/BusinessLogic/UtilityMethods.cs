@@ -20,7 +20,7 @@ namespace WomenCalendar
             {
                 total += day - first;
             }
-            return first.AddTicks(total.Ticks / days.Length).AddHours(12).Date;
+            return first.AddTicks(total.Ticks / days.Length).Date;
         }
     }
 }
