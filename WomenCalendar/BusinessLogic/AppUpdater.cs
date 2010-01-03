@@ -71,7 +71,7 @@ namespace WomenCalendar
             {
                 Program.ApplicationForm.BeginInvoke(new MethodInvoker(() =>
                 {
-                    MessageBox.Show(TEXT.Get.Format("Unable_to_update", ex.Message), TEXT.Get["Error"], MessageBoxButtons.YesNo);
+                    MessageBox.Show(TEXT.Get.Format("Unable_to_update", ex.Message), TEXT.Get["Error"]);
                 }));
             }
         }
@@ -130,7 +130,7 @@ namespace WomenCalendar
             public string GetFormattedText()
             {
                 return TEXT.Get.Format("Update_found_text", Version, Assembly.GetEntryAssembly().GetName().Version.ToString(),
-                    Date, SizeInMB(), Downloads);
+                    Date, SizeInMB(), Downloads, ChangeLog);
 
             }
         }

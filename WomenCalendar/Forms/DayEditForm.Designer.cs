@@ -74,9 +74,9 @@
             this.rbtCF3.TabIndex = 10014;
             this.rbtCF3.TabStop = true;
             this.rbtCF3.Tag = "";
-            this.rbtCF3.Text = "В";
+            this.rbtCF3.Text = "W";
             this.rbtCF3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.toolTipCF.SetToolTip(this.rbtCF3, "Водянистая");
+            this.toolTipCF.SetToolTip(this.rbtCF3, "Water");
             this.rbtCF3.UseVisualStyleBackColor = true;
             this.rbtCF3.Click += new System.EventHandler(this.rbtCF_Click);
             // 
@@ -89,9 +89,9 @@
             this.rbtCF2.TabIndex = 10014;
             this.rbtCF2.TabStop = true;
             this.rbtCF2.Tag = "";
-            this.rbtCF2.Text = "Я";
+            this.rbtCF2.Text = "S";
             this.rbtCF2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.toolTipCF.SetToolTip(this.rbtCF2, "Яичный белок");
+            this.toolTipCF.SetToolTip(this.rbtCF2, "Stretchy");
             this.rbtCF2.UseVisualStyleBackColor = true;
             this.rbtCF2.Click += new System.EventHandler(this.rbtCF_Click);
             // 
@@ -104,9 +104,9 @@
             this.rbtCF1.TabIndex = 10014;
             this.rbtCF1.TabStop = true;
             this.rbtCF1.Tag = "";
-            this.rbtCF1.Text = "К";
+            this.rbtCF1.Text = "T";
             this.rbtCF1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.toolTipCF.SetToolTip(this.rbtCF1, "Клейкая");
+            this.toolTipCF.SetToolTip(this.rbtCF1, "Tacky");
             this.rbtCF1.UseVisualStyleBackColor = true;
             this.rbtCF1.Click += new System.EventHandler(this.rbtCF_Click);
             // 
@@ -314,7 +314,7 @@
             this.verticalLabel1.Name = "verticalLabel1";
             this.verticalLabel1.Size = new System.Drawing.Size(16, 83);
             this.verticalLabel1.TabIndex = 10008;
-            this.verticalLabel1.Text = "Интенсивность";
+            this.verticalLabel1.Text = "Intensity";
             this.verticalLabel1.TextDrawMode = WomenCalendar.DrawMode.BottomUp;
             // 
             // grpNote
@@ -381,11 +381,11 @@
             this.grpCF.Size = new System.Drawing.Size(102, 43);
             this.grpCF.TabIndex = 10010;
             this.grpCF.TabStop = false;
-            this.grpCF.Text = "ЦЖ";
+            this.grpCF.Text = "CF";
             // 
             // toolTipCF
             // 
-            this.toolTipCF.ToolTipTitle = "Цервикальная жидкость";
+            this.toolTipCF.ToolTipTitle = "Cervial fuild";
             // 
             // DayEditForm
             // 

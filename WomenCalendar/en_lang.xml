@@ -200,9 +200,19 @@ Thanks Mike Krueger, John Reilly for SharpZipLib: http://icsharpcode.net/
 It was released {2}.
 Its size only {3} MBytes.
 And it was already downloaded {4} times.
+Change log:
+{5}
 
 Would you like to download it now?</item>
   <item id="Latest_application">You are already useing latest Ovulyashki. Be happy!</item>
   <item id="Unable_to_update">Unable to update. Here is the error from the system: {0}</item>
+  <item id="CF">CF</item>
+  <item id="CF_tacky">T</item>
+  <item id="CF_stretchy">S</item>
+  <item id="CF_water">W</item>
+  <item id="CF_full">Cervial fuild</item>
+  <item id="CF_full_tacky">Tacky</item>
+  <item id="CF_full_stretchy">Stretchy</item>
+  <item id="CF_full_water">Water</item>
   <item id="Unknown">Unknown</item>
 </translation>

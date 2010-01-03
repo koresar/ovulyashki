@@ -201,9 +201,19 @@
 Она была выпущена {2}.
 Её размер всего лишь {3} МБайт.
 И её уже скачали {4} раз.
+Изменения в программе:
+{5}
 
 Хочешь обновиться прямо сейчас?</item>
   <item id="Latest_application">У тебя уже и так самая последняя версия овуляшек. Будь счастлива!</item>
   <item id="Unable_to_update">Не могу обновиться. Вот такую ошибку нам выдаёт система: {0}</item>
-  <item id="Unknown">Unknown</item>
+  <item id="CF">ЦЖ</item>
+  <item id="CF_tacky">К</item>
+  <item id="CF_stretchy">Я</item>
+  <item id="CF_water">В</item>
+  <item id="CF_full">Цeрвикальная жидкость</item>
+  <item id="CF_full_tacky">Клейкая</item>
+  <item id="CF_full_stretchy">Яичный белок</item>
+  <item id="CF_full_water">Водянистая</item>
+  <item id="Unknown">Черт его знает!</item>
 </translation>

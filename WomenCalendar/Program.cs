@@ -45,7 +45,15 @@ namespace WomenCalendar
         public static Woman _currentWoman;
         public static Woman CurrentWoman
         {
-            get { return _currentWoman ?? (_currentWoman = new Woman()); }
+            get
+            {
+                if (_currentWoman == null)
+                {
+                    _currentWoman = new Woman();
+                    _currentWomanClone = _currentWoman.Clone() as Woman;
+                }
+                return _currentWoman;
+            }
             set
             {
                 ApplicationForm.SuspendLayout();
@@ -147,8 +155,7 @@ namespace WomenCalendar
         
         public static bool AskAndSaveCurrentWoman()
         {
-            if (!string.IsNullOrEmpty(_currentWoman.AssociatedFile) && 
-                _currentWoman.Equals(_currentWomanClone))
+            if (_currentWoman.Equals(_currentWomanClone))
             { // no changes were done to current woman, thus just allow procceding.
                 return true;
             }

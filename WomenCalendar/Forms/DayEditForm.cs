@@ -79,6 +79,14 @@ namespace WomenCalendar
             this.grpBT.Text = TEXT.Get["BBT_full"];
             this.grpHealth.Text = TEXT.Get["Wellbeing"];
             this.Text = TEXT.Get["Change_day"];
+            this.grpCF.Text = TEXT.Get["CF"];
+            this.rbtCF1.Text = TEXT.Get["CF_tacky"];
+            this.rbtCF2.Text = TEXT.Get["CF_stretchy"];
+            this.rbtCF3.Text = TEXT.Get["CF_water"];
+            this.toolTipCF.ToolTipTitle = TEXT.Get["CF_full"];
+            this.toolTipCF.SetToolTip(this.rbtCF1, TEXT.Get["CF_full_tacky"]);
+            this.toolTipCF.SetToolTip(this.rbtCF2, TEXT.Get["CF_full_stretchy"]);
+            this.toolTipCF.SetToolTip(this.rbtCF3, TEXT.Get["CF_full_water"]);
         }
 
         #endregion

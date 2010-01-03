@@ -74,6 +74,9 @@ namespace WomenCalendar
 
         public SchedulesCollection Schedules { get; set; }
 
+        [XmlIgnore]
+        public OvulationDetector OvDetector { get; private set; }
+
         public Woman()
         {
             Notes = new NotesCollection();
@@ -89,6 +92,7 @@ namespace WomenCalendar
             Name = Environment.UserName;
             Password = string.Empty;
             AssociatedFile = string.Empty;
+            OvDetector = new OvulationDetector(this);
         }
 
         public static Woman ReadFrom(string path)
@@ -207,7 +211,7 @@ namespace WomenCalendar
 
             int cycles = (date - lastPeriod.StartDay).Days / ManualPeriodLength;
             DateTime lastCycleFirstDay = lastPeriod.StartDay.AddDays((cycles + 1) * ManualPeriodLength);
-            return OvulationDetector.EstimateOvulationDate(this, lastCycleFirstDay);
+            return OvDetector.EstimateOvulationDate(lastCycleFirstDay);
         }
 
         public bool IsPredictedAsBoyDay(DateTime date)
@@ -460,7 +464,7 @@ namespace WomenCalendar
                 else if (IsPredictedAsGirlDay(date))
                 {
                     sb.AppendLine();
-                    sb.Append(TEXT.Get["Boy_conception_day"]);
+                    sb.Append(TEXT.Get["Girl_conception_day"]);
                 }
 
                 if (HadSexList.ContainsKey(date))

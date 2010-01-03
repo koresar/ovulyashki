@@ -71,6 +71,7 @@
   <ItemGroup>
     <Compile Include="BusinessLogic\ApplicationSettings.cs" />
     <Compile Include="BusinessLogic\AppUpdater.cs" />
+    <Compile Include="BusinessLogic\LinqBridge.cs" />
     <Compile Include="BusinessLogic\UtilityMethods.cs" />
     <Compile Include="BusinessLogic\Report\CsvWriter.cs" />
     <Compile Include="BusinessLogic\HoroscopeDatePair.cs" />

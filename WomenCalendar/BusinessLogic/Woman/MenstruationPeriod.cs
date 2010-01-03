@@ -69,7 +69,7 @@ namespace WomenCalendar
             {
                 var period2 = w.Menstruations.GetClosestPeriodAfterDay(StartDay.AddDays(1));
                 DateTime nextPeriodFirstDat = period2 == null ? StartDay.AddDays(w.ManualPeriodLength) : period2.StartDay;
-                ovulationDate = OvulationDetector.EstimateOvulationDate(w, nextPeriodFirstDat);
+                ovulationDate = w.OvDetector.EstimateOvulationDate(nextPeriodFirstDat);
             }
             return ovulationDate;
         }

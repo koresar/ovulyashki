@@ -7,6 +7,7 @@ using System.Text;
 using System.Windows.Forms;
 using System.Globalization;
 using System.Reflection;
+using System.IO;
 
 namespace WomenCalendar
 {
@@ -283,14 +284,20 @@ namespace WomenCalendar
 
         public void SetWomanName(string name)
         {
+            string text;
             if (string.IsNullOrEmpty(name))
             {
-                this.Text = TEXT.Get["Ovulyashki"];
+                text = TEXT.Get["Ovulyashki"];
             }
             else
             {
-                this.Text = TEXT.Get.Format("Ovulyashki_of", name);
+                text = TEXT.Get.Format("Ovulyashki_of", name);
             }
+            if (!string.IsNullOrEmpty(Program.CurrentWoman.AssociatedFile))
+            {
+                text += " - " + Path.GetFileNameWithoutExtension(Program.CurrentWoman.AssociatedFile);
+            }
+            this.Text = text;
         }
 
         private void languageButton_Click(object sender, EventArgs e)

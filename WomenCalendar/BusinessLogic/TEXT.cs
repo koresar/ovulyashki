@@ -154,7 +154,7 @@ namespace WomenCalendar
             }
 
             needLang = needLang.ToLower();
-            if (langFiles.Count == 0) throw new Exception("No language files files in the allication folder " + LocalPath);
+            if (langFiles.Count == 0) throw new TranslationException("No language files files in the allication folder " + LocalPath);
 
             Dictionary<string, string> defaultTexts;
             Dictionary<string, string> translations;
@@ -163,14 +163,14 @@ namespace WomenCalendar
             // loading default language file. It must be always present and loaded.
             if (!langFiles.ContainsKey(defaultLang))
             {
-                throw new Exception("Default language file " + defaultLang + langFileEnd +
+                throw new TranslationException("Default language file " + defaultLang + langFileEnd +
                     " was not found in the folder " + LocalPath);
             }
             else
             {
                 if (!LoadLanguageFile(langFiles[defaultLang], out defaultTexts))
                 {
-                    throw new Exception("Unable to load default language file " + defaultLang + langFileEnd +
+                    throw new TranslationException("Unable to load default language file " + defaultLang + langFileEnd +
                         " from the folder " + LocalPath);
                 }
                 // language file loaded normally.
@@ -218,5 +218,17 @@ namespace WomenCalendar
                 return false;
             }
         }
+    }
+
+    [global::System.Serializable]
+    public class TranslationException : Exception
+    {
+        public TranslationException() { }
+        public TranslationException(string message) : base(message) { }
+        public TranslationException(string message, Exception inner) : base(message, inner) { }
+        protected TranslationException(
+          System.Runtime.Serialization.SerializationInfo info,
+          System.Runtime.Serialization.StreamingContext context)
+            : base(info, context) { }
     }
 }
