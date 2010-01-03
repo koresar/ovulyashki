@@ -64,6 +64,20 @@ namespace WomenCalendar
             this.lblAverageCycle.Text = GenerateWomanInformation();
             this.xDay.CaptionText = TEXT.Get["Day_description"];
             this.Text = TEXT.Get["Ovulyashki"];
+
+            var textLegend = TEXT.Get["Click_to_edit_color"];
+            this.toolTipLegend.SetToolTip(this.dayLegendMenstruations, textLegend);
+            this.toolTipLegend.SetToolTip(this.dayCellControl1, textLegend);
+            this.toolTipLegend.SetToolTip(this.dayCellControl2, textLegend);
+            this.toolTipLegend.SetToolTip(this.dayCellControl3, textLegend);
+            this.toolTipLegend.SetToolTip(this.dayCellControl4, textLegend);
+            this.toolTipLegend.SetToolTip(this.dayCellControl5, textLegend);
+            this.toolTipLegend.SetToolTip(this.dayCellControl6, textLegend);
+            this.toolTipLegend.SetToolTip(this.dayCellControl7, textLegend);
+            this.toolTipLegend.SetToolTip(this.dayCellControl8, textLegend);
+            this.toolTipLegend.SetToolTip(this.dayCellControl9, textLegend);
+            this.toolTipLegend.SetToolTip(this.dayCellControl10, textLegend);
+            this.toolTipLegend.SetToolTip(this.dayCellControl11, textLegend);
         }
 
         #endregion
@@ -339,6 +353,19 @@ namespace WomenCalendar
         private void toolUpdate_Click(object sender, EventArgs e)
         {
             AppUpdater.TryUpdate();
+        }
+
+        private void dayLegendMenstruations_Click(object sender, EventArgs e)
+        {
+            var dialog = new ColorDialog();
+            if (dialog.ShowDialog(this) == DialogResult.OK)
+            {
+                var colorID = (sender as DayCellControl).BackColorIdAppearance;
+                Program.Settings.DayCellAppearance.SetColor(colorID, dialog.Color);
+                xLegend.Collapse();
+                RedrawCalendar();
+                xLegend.Expand();
+            }
         }
 
         public void DisableUpdate()

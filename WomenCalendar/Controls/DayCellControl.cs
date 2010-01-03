@@ -53,6 +53,8 @@ namespace WomenCalendar
             }
         }
 
+        public string BackColorIdAppearance { get; set; }
+
         /// <summary>
         /// When true indicates that we should not automaticaly 
         /// calculate pregnancy, menstruation, etc. parameters.
@@ -109,33 +111,35 @@ namespace WomenCalendar
         private void DrawDisabled(PaintEventArgs pe)
         {
             pe.Graphics.FillRectangle(Brushes.White, 0, 0, Size.Width - 1, Size.Height - 1);
-            pe.Graphics.DrawRectangle(Program.DayCellAppearance.EdgePen, 0, 0, Size.Width - 1, Size.Height - 1);
+            pe.Graphics.DrawRectangle(DayCellAppearance.EdgePen, 0, 0, Size.Width - 1, Size.Height - 1);
             pe.Graphics.DrawString(Date.Day.ToString(), Font, Brushes.Gray, 0, 0);
         }
 
         private void DrawEnabled(PaintEventArgs pe)
         {
-            BackColor = IsConceptionDay ? Program.DayCellAppearance.BackConceptionDay :
-                IsPregnancyDay ? Program.DayCellAppearance.BackPregnancyDay :
-                IsMenstruationDay ? Program.DayCellAppearance.BackMenstruationDay :
-                IsPredictedAsMenstruationDay ? Program.DayCellAppearance.BackPredictedMenstruationDay :
-                IsPredictedAsOvulationDay ? Program.DayCellAppearance.BackOvulationDay :
-                IsPredictedAsSafeSexDay ? Program.DayCellAppearance.BackSafeSex :
-                Program.DayCellAppearance.BackEmpty;
+            var appearance = Program.Settings == null || Program.Settings.DayCellAppearance == null ? 
+                new DayCellAppearance() : Program.Settings.DayCellAppearance;
+            BackColor = IsConceptionDay ? appearance.BackConceptionDay :
+                IsPregnancyDay ? appearance.BackPregnancyDay :
+                IsMenstruationDay ? appearance.BackMenstruationDay :
+                IsPredictedAsMenstruationDay ? appearance.BackPredictedMenstruationDay :
+                IsPredictedAsOvulationDay ? appearance.BackOvulationDay :
+                IsPredictedAsSafeSexDay ? appearance.BackSafeSex :
+                appearance.BackEmpty;
 
             pe.Graphics.FillRectangle(GetMainBrush(BackColor), 0, 0, Size.Width - 1, Size.Height - 1);
 
             if (IsFocusDay)
             {
-                pe.Graphics.DrawRectangle(Program.DayCellAppearance.FocusEdgePen, 1, 1, Size.Width - 2, Size.Height - 2);
+                pe.Graphics.DrawRectangle(DayCellAppearance.FocusEdgePen, 1, 1, Size.Width - 2, Size.Height - 2);
             }
             else if (IsTodayDay)
             {
-                pe.Graphics.DrawRectangle(Program.DayCellAppearance.TodayEdgePen, 1, 1, Size.Width - 2, Size.Height - 2);
+                pe.Graphics.DrawRectangle(DayCellAppearance.TodayEdgePen, 1, 1, Size.Width - 2, Size.Height - 2);
             }
             else
             {
-                pe.Graphics.DrawRectangle(Program.DayCellAppearance.EdgePen, 0, 0, Size.Width - 1, Size.Height - 1);
+                pe.Graphics.DrawRectangle(DayCellAppearance.EdgePen, 0, 0, Size.Width - 1, Size.Height - 1);
             }
 
             if (IsMenstruationDay)
@@ -165,7 +169,7 @@ namespace WomenCalendar
             {
                 if (PregnancyWeek > 0)
                 {
-                    pe.Graphics.DrawString(PregnancyWeek.ToString(), Font, Program.DayCellAppearance.PregnancyWeekNumberBrush, 0, 19);
+                    pe.Graphics.DrawString(PregnancyWeek.ToString(), Font, DayCellAppearance.PregnancyWeekNumberBrush, 0, 19);
                 }
             }
             else if (IsPredictedAsGirlDay)
@@ -196,15 +200,15 @@ namespace WomenCalendar
 
             if (IsPredictedAsMenstruationDay)
             {
-                pe.Graphics.DrawString("?", Font, Program.DayCellAppearance.MenstruationPredictionBrush, 0, 18);
+                pe.Graphics.DrawString("?", Font, DayCellAppearance.MenstruationPredictionBrush, 0, 18);
             }
 
             if (IsHadSex)
             {
-                pe.Graphics.DrawString("S", Font, Program.DayCellAppearance.HadSexBrush, 22, 19);
+                pe.Graphics.DrawString("S", Font, DayCellAppearance.HadSexBrush, 22, 19);
             }
 
-            pe.Graphics.DrawString(Date.Day.ToString(), Font, Program.DayCellAppearance.DayNumberBrush, 0, 0);
+            pe.Graphics.DrawString(Date.Day.ToString(), Font, DayCellAppearance.DayNumberBrush, 0, 0);
         }
 
         protected override void OnPaint(PaintEventArgs pe)

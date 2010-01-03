@@ -46,6 +46,13 @@ namespace WomenCalendar
             set { applicationLanguage = value; }
         }
 
+        private DayCellAppearance dayCellAppearance;
+        public DayCellAppearance DayCellAppearance
+        {
+            get { return dayCellAppearance ?? (dayCellAppearance = new DayCellAppearance()); }
+            set { dayCellAppearance = value; }
+        }
+
         public static ApplicationSettings Read(string fileName)
         {
             ApplicationSettings settings;

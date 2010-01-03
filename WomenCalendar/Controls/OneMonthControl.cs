@@ -168,11 +168,11 @@ namespace WomenCalendar
             {
                 Rectangle monthNameRect = new Rectangle(EdgeWidth, EdgeWidth, 
                     DayCellControl.DefaultCellWidth*7, DayCellControl.DefaultCellHeight / 2);
-                pe.Graphics.FillRectangle(Program.MonthAppearance.MonthHeaderBrush, monthNameRect);
+                pe.Graphics.FillRectangle(MonthAppearance.MonthHeaderBrush, monthNameRect);
 
                 string monthNameAndYear = MonthNames[Date.Month - 1] + " " + Date.Year;
                 SizeF textSize = pe.Graphics.MeasureString(monthNameAndYear, Font, Size.Width);
-                pe.Graphics.DrawString(monthNameAndYear, Font, Program.MonthAppearance.MonthNameBrush,
+                pe.Graphics.DrawString(monthNameAndYear, Font, MonthAppearance.MonthNameBrush,
                     EdgeWidth + (Size.Width - textSize.Width) / 2, EdgeWidth);
 
                 for (int i = 0; i < 7; i++)
@@ -182,17 +182,17 @@ namespace WomenCalendar
 
                     Rectangle rect = new Rectangle(EdgeWidth + DayCellControl.DefaultCellWidth * i, EdgeWidth + DayCellControl.DefaultCellHeight / 2,
                         DayCellControl.DefaultCellWidth - 1, DayCellControl.DefaultCellHeight / 2 - 1);
-                    pe.Graphics.FillRectangle(Program.MonthAppearance.WeekDayHeaderBrush, rect);
-                    pe.Graphics.DrawRectangle(Program.MonthAppearance.WeekDayEdgePen, rect);
+                    pe.Graphics.FillRectangle(MonthAppearance.WeekDayHeaderBrush, rect);
+                    pe.Graphics.DrawRectangle(MonthAppearance.WeekDayEdgePen, rect);
 
                     pe.Graphics.DrawString(aDay, Font,
-                        i < 5 ? Program.MonthAppearance.WeekDayTextBrush : Program.MonthAppearance.WeekDayHolidayTextBrush,
+                        i < 5 ? MonthAppearance.WeekDayTextBrush : MonthAppearance.WeekDayHolidayTextBrush,
                         EdgeWidth + DayCellControl.DefaultCellWidth * i + (DayCellControl.DefaultCellWidth - textSize.Width) / 2,
                         EdgeWidth + DayCellControl.DefaultCellHeight - textSize.Height);
                 }
 
                 pe.Graphics.DrawRectangle((DateTime.Today.Month == Date.Month && DateTime.Today.Year == Date.Year) ?
-                    Program.MonthAppearance.TodayEdgePen : Program.MonthAppearance.MonthEdgePen, ClientRectangle);
+                    MonthAppearance.TodayEdgePen : MonthAppearance.MonthEdgePen, ClientRectangle);
             }
         }
 

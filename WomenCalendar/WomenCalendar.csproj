@@ -69,6 +69,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BusinessLogic\Appearance.cs" />
     <Compile Include="BusinessLogic\ApplicationSettings.cs" />
     <Compile Include="BusinessLogic\AppUpdater.cs" />
     <Compile Include="BusinessLogic\LinqBridge.cs" />

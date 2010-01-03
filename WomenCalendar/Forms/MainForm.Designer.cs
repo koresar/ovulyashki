@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.newToolStripButton = new System.Windows.Forms.ToolStripButton();
@@ -59,6 +60,18 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
+            this.xWoman = new XPanderControl.XPander();
+            this.btnChangeWoman = new System.Windows.Forms.Button();
+            this.chbAskPassword = new System.Windows.Forms.CheckBox();
+            this.chbDefaultWoman = new System.Windows.Forms.CheckBox();
+            this.lblMyCycle2 = new System.Windows.Forms.Label();
+            this.numMenstruationPeriod = new System.Windows.Forms.NumericUpDown();
+            this.lblMyCycle = new System.Windows.Forms.Label();
+            this.rbManual = new System.Windows.Forms.RadioButton();
+            this.rbAuto = new System.Windows.Forms.RadioButton();
+            this.lblAverageCycle = new System.Windows.Forms.Label();
+            this.xDay = new XPanderControl.XPander();
+            this.lblDayDescription = new System.Windows.Forms.Label();
             this.dayCellControl4 = new WomenCalendar.DayCellControl();
             this.dayCellControl6 = new WomenCalendar.DayCellControl();
             this.dayCellControl8 = new WomenCalendar.DayCellControl();
@@ -72,19 +85,8 @@
             this.dayCellControl11 = new WomenCalendar.DayCellControl();
             this.dayCellControl1 = new WomenCalendar.DayCellControl();
             this.dayLegendMenstruations = new WomenCalendar.DayCellControl();
-            this.xWoman = new XPanderControl.XPander();
-            this.btnChangeWoman = new System.Windows.Forms.Button();
-            this.chbAskPassword = new System.Windows.Forms.CheckBox();
-            this.chbDefaultWoman = new System.Windows.Forms.CheckBox();
-            this.lblMyCycle2 = new System.Windows.Forms.Label();
-            this.numMenstruationPeriod = new System.Windows.Forms.NumericUpDown();
-            this.lblMyCycle = new System.Windows.Forms.Label();
-            this.rbManual = new System.Windows.Forms.RadioButton();
-            this.rbAuto = new System.Windows.Forms.RadioButton();
-            this.lblAverageCycle = new System.Windows.Forms.Label();
-            this.xDay = new XPanderControl.XPander();
-            this.lblDayDescription = new System.Windows.Forms.Label();
             this.monthControl = new WomenCalendar.MonthsControl();
+            this.toolTipLegend = new System.Windows.Forms.ToolTip(this.components);
             this.toolStrip1.SuspendLayout();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -324,7 +326,7 @@
             this.xLegend.Padding = new System.Windows.Forms.Padding(0, 25, 0, 0);
             this.xLegend.Size = new System.Drawing.Size(234, 520);
             this.xLegend.TabIndex = 2;
-            this.xLegend.Tag = 0;
+            this.xLegend.Tag = 18;
             this.xLegend.TooltipText = null;
             // 
             // label13
@@ -470,344 +472,6 @@
             this.label1.Text = "Today";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // dayCellControl4
-            // 
-            this.dayCellControl4.BackColor = System.Drawing.Color.LightGreen;
-            this.dayCellControl4.Date = new System.DateTime(((long)(0)));
-            this.dayCellControl4.Egesta = 5;
-            this.dayCellControl4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
-            this.dayCellControl4.IsConceptionDay = false;
-            this.dayCellControl4.IsFocusDay = false;
-            this.dayCellControl4.IsHadSex = false;
-            this.dayCellControl4.IsHaveNote = false;
-            this.dayCellControl4.IsMenstruationDay = false;
-            this.dayCellControl4.IsPredictedAsBoyDay = false;
-            this.dayCellControl4.IsPredictedAsGirlDay = false;
-            this.dayCellControl4.IsPredictedAsMenstruationDay = true;
-            this.dayCellControl4.IsPredictedAsOvulationDay = false;
-            this.dayCellControl4.IsPredictedAsSafeSexDay = true;
-            this.dayCellControl4.IsPregnancyDay = false;
-            this.dayCellControl4.IsTodayDay = false;
-            this.dayCellControl4.Location = new System.Drawing.Point(8, 332);
-            this.dayCellControl4.ManualDrawOptions = true;
-            this.dayCellControl4.Name = "dayCellControl4";
-            this.dayCellControl4.OwnerOneMonthControl = null;
-            this.dayCellControl4.PregnancyWeek = 0;
-            this.dayCellControl4.Size = new System.Drawing.Size(32, 32);
-            this.dayCellControl4.TabIndex = 1;
-            // 
-            // dayCellControl6
-            // 
-            this.dayCellControl6.BackColor = System.Drawing.Color.White;
-            this.dayCellControl6.Date = new System.DateTime(((long)(0)));
-            this.dayCellControl6.Egesta = 5;
-            this.dayCellControl6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
-            this.dayCellControl6.IsConceptionDay = false;
-            this.dayCellControl6.IsFocusDay = false;
-            this.dayCellControl6.IsHadSex = true;
-            this.dayCellControl6.IsHaveNote = false;
-            this.dayCellControl6.IsMenstruationDay = false;
-            this.dayCellControl6.IsPredictedAsBoyDay = false;
-            this.dayCellControl6.IsPredictedAsGirlDay = false;
-            this.dayCellControl6.IsPredictedAsMenstruationDay = false;
-            this.dayCellControl6.IsPredictedAsOvulationDay = false;
-            this.dayCellControl6.IsPredictedAsSafeSexDay = false;
-            this.dayCellControl6.IsPregnancyDay = false;
-            this.dayCellControl6.IsTodayDay = false;
-            this.dayCellControl6.Location = new System.Drawing.Point(8, 143);
-            this.dayCellControl6.ManualDrawOptions = true;
-            this.dayCellControl6.Name = "dayCellControl6";
-            this.dayCellControl6.OwnerOneMonthControl = null;
-            this.dayCellControl6.PregnancyWeek = 0;
-            this.dayCellControl6.Size = new System.Drawing.Size(32, 32);
-            this.dayCellControl6.TabIndex = 1;
-            // 
-            // dayCellControl8
-            // 
-            this.dayCellControl8.BackColor = System.Drawing.Color.White;
-            this.dayCellControl8.Date = new System.DateTime(((long)(0)));
-            this.dayCellControl8.Egesta = 5;
-            this.dayCellControl8.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
-            this.dayCellControl8.IsConceptionDay = false;
-            this.dayCellControl8.IsFocusDay = false;
-            this.dayCellControl8.IsHadSex = false;
-            this.dayCellControl8.IsHaveNote = false;
-            this.dayCellControl8.IsMenstruationDay = false;
-            this.dayCellControl8.IsPredictedAsBoyDay = false;
-            this.dayCellControl8.IsPredictedAsGirlDay = true;
-            this.dayCellControl8.IsPredictedAsMenstruationDay = false;
-            this.dayCellControl8.IsPredictedAsOvulationDay = false;
-            this.dayCellControl8.IsPredictedAsSafeSexDay = false;
-            this.dayCellControl8.IsPregnancyDay = false;
-            this.dayCellControl8.IsTodayDay = false;
-            this.dayCellControl8.Location = new System.Drawing.Point(8, 219);
-            this.dayCellControl8.ManualDrawOptions = true;
-            this.dayCellControl8.Name = "dayCellControl8";
-            this.dayCellControl8.OwnerOneMonthControl = null;
-            this.dayCellControl8.PregnancyWeek = 0;
-            this.dayCellControl8.Size = new System.Drawing.Size(32, 32);
-            this.dayCellControl8.TabIndex = 1;
-            // 
-            // dayCellControl7
-            // 
-            this.dayCellControl7.BackColor = System.Drawing.Color.White;
-            this.dayCellControl7.Date = new System.DateTime(((long)(0)));
-            this.dayCellControl7.Egesta = 5;
-            this.dayCellControl7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
-            this.dayCellControl7.IsConceptionDay = false;
-            this.dayCellControl7.IsFocusDay = false;
-            this.dayCellControl7.IsHadSex = false;
-            this.dayCellControl7.IsHaveNote = false;
-            this.dayCellControl7.IsMenstruationDay = false;
-            this.dayCellControl7.IsPredictedAsBoyDay = true;
-            this.dayCellControl7.IsPredictedAsGirlDay = false;
-            this.dayCellControl7.IsPredictedAsMenstruationDay = false;
-            this.dayCellControl7.IsPredictedAsOvulationDay = false;
-            this.dayCellControl7.IsPredictedAsSafeSexDay = false;
-            this.dayCellControl7.IsPregnancyDay = false;
-            this.dayCellControl7.IsTodayDay = false;
-            this.dayCellControl7.Location = new System.Drawing.Point(8, 181);
-            this.dayCellControl7.ManualDrawOptions = true;
-            this.dayCellControl7.Name = "dayCellControl7";
-            this.dayCellControl7.OwnerOneMonthControl = null;
-            this.dayCellControl7.PregnancyWeek = 0;
-            this.dayCellControl7.Size = new System.Drawing.Size(32, 32);
-            this.dayCellControl7.TabIndex = 1;
-            // 
-            // dayCellControl12
-            // 
-            this.dayCellControl12.BackColor = System.Drawing.Color.LightCyan;
-            this.dayCellControl12.Date = new System.DateTime(((long)(0)));
-            this.dayCellControl12.Egesta = 5;
-            this.dayCellControl12.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
-            this.dayCellControl12.IsConceptionDay = false;
-            this.dayCellControl12.IsFocusDay = false;
-            this.dayCellControl12.IsHadSex = false;
-            this.dayCellControl12.IsHaveNote = false;
-            this.dayCellControl12.IsMenstruationDay = false;
-            this.dayCellControl12.IsPredictedAsBoyDay = false;
-            this.dayCellControl12.IsPredictedAsGirlDay = false;
-            this.dayCellControl12.IsPredictedAsMenstruationDay = false;
-            this.dayCellControl12.IsPredictedAsOvulationDay = false;
-            this.dayCellControl12.IsPredictedAsSafeSexDay = false;
-            this.dayCellControl12.IsPregnancyDay = true;
-            this.dayCellControl12.IsTodayDay = false;
-            this.dayCellControl12.Location = new System.Drawing.Point(8, 485);
-            this.dayCellControl12.ManualDrawOptions = true;
-            this.dayCellControl12.Name = "dayCellControl12";
-            this.dayCellControl12.OwnerOneMonthControl = null;
-            this.dayCellControl12.PregnancyWeek = 35;
-            this.dayCellControl12.Size = new System.Drawing.Size(32, 32);
-            this.dayCellControl12.TabIndex = 1;
-            // 
-            // dayCellControl10
-            // 
-            this.dayCellControl10.BackColor = System.Drawing.Color.DeepSkyBlue;
-            this.dayCellControl10.Date = new System.DateTime(((long)(0)));
-            this.dayCellControl10.Egesta = 5;
-            this.dayCellControl10.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
-            this.dayCellControl10.IsConceptionDay = true;
-            this.dayCellControl10.IsFocusDay = false;
-            this.dayCellControl10.IsHadSex = false;
-            this.dayCellControl10.IsHaveNote = false;
-            this.dayCellControl10.IsMenstruationDay = false;
-            this.dayCellControl10.IsPredictedAsBoyDay = false;
-            this.dayCellControl10.IsPredictedAsGirlDay = false;
-            this.dayCellControl10.IsPredictedAsMenstruationDay = false;
-            this.dayCellControl10.IsPredictedAsOvulationDay = false;
-            this.dayCellControl10.IsPredictedAsSafeSexDay = false;
-            this.dayCellControl10.IsPregnancyDay = true;
-            this.dayCellControl10.IsTodayDay = false;
-            this.dayCellControl10.Location = new System.Drawing.Point(8, 447);
-            this.dayCellControl10.ManualDrawOptions = true;
-            this.dayCellControl10.Name = "dayCellControl10";
-            this.dayCellControl10.OwnerOneMonthControl = null;
-            this.dayCellControl10.PregnancyWeek = 0;
-            this.dayCellControl10.Size = new System.Drawing.Size(32, 32);
-            this.dayCellControl10.TabIndex = 1;
-            // 
-            // dayCellControl9
-            // 
-            this.dayCellControl9.BackColor = System.Drawing.Color.LightCyan;
-            this.dayCellControl9.Date = new System.DateTime(((long)(0)));
-            this.dayCellControl9.Egesta = 5;
-            this.dayCellControl9.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
-            this.dayCellControl9.IsConceptionDay = false;
-            this.dayCellControl9.IsFocusDay = false;
-            this.dayCellControl9.IsHadSex = false;
-            this.dayCellControl9.IsHaveNote = false;
-            this.dayCellControl9.IsMenstruationDay = false;
-            this.dayCellControl9.IsPredictedAsBoyDay = false;
-            this.dayCellControl9.IsPredictedAsGirlDay = false;
-            this.dayCellControl9.IsPredictedAsMenstruationDay = false;
-            this.dayCellControl9.IsPredictedAsOvulationDay = false;
-            this.dayCellControl9.IsPredictedAsSafeSexDay = false;
-            this.dayCellControl9.IsPregnancyDay = true;
-            this.dayCellControl9.IsTodayDay = false;
-            this.dayCellControl9.Location = new System.Drawing.Point(8, 409);
-            this.dayCellControl9.ManualDrawOptions = true;
-            this.dayCellControl9.Name = "dayCellControl9";
-            this.dayCellControl9.OwnerOneMonthControl = null;
-            this.dayCellControl9.PregnancyWeek = 0;
-            this.dayCellControl9.Size = new System.Drawing.Size(32, 32);
-            this.dayCellControl9.TabIndex = 1;
-            // 
-            // dayCellControl5
-            // 
-            this.dayCellControl5.BackColor = System.Drawing.Color.LightGreen;
-            this.dayCellControl5.Date = new System.DateTime(((long)(0)));
-            this.dayCellControl5.Egesta = 5;
-            this.dayCellControl5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
-            this.dayCellControl5.IsConceptionDay = false;
-            this.dayCellControl5.IsFocusDay = false;
-            this.dayCellControl5.IsHadSex = false;
-            this.dayCellControl5.IsHaveNote = false;
-            this.dayCellControl5.IsMenstruationDay = false;
-            this.dayCellControl5.IsPredictedAsBoyDay = false;
-            this.dayCellControl5.IsPredictedAsGirlDay = false;
-            this.dayCellControl5.IsPredictedAsMenstruationDay = false;
-            this.dayCellControl5.IsPredictedAsOvulationDay = false;
-            this.dayCellControl5.IsPredictedAsSafeSexDay = true;
-            this.dayCellControl5.IsPregnancyDay = false;
-            this.dayCellControl5.IsTodayDay = false;
-            this.dayCellControl5.Location = new System.Drawing.Point(8, 295);
-            this.dayCellControl5.ManualDrawOptions = true;
-            this.dayCellControl5.Name = "dayCellControl5";
-            this.dayCellControl5.OwnerOneMonthControl = null;
-            this.dayCellControl5.PregnancyWeek = 0;
-            this.dayCellControl5.Size = new System.Drawing.Size(32, 32);
-            this.dayCellControl5.TabIndex = 1;
-            // 
-            // dayCellControl3
-            // 
-            this.dayCellControl3.BackColor = System.Drawing.Color.Gold;
-            this.dayCellControl3.Date = new System.DateTime(((long)(0)));
-            this.dayCellControl3.Egesta = 5;
-            this.dayCellControl3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
-            this.dayCellControl3.IsConceptionDay = false;
-            this.dayCellControl3.IsFocusDay = false;
-            this.dayCellControl3.IsHadSex = false;
-            this.dayCellControl3.IsHaveNote = false;
-            this.dayCellControl3.IsMenstruationDay = false;
-            this.dayCellControl3.IsPredictedAsBoyDay = false;
-            this.dayCellControl3.IsPredictedAsGirlDay = false;
-            this.dayCellControl3.IsPredictedAsMenstruationDay = false;
-            this.dayCellControl3.IsPredictedAsOvulationDay = true;
-            this.dayCellControl3.IsPredictedAsSafeSexDay = false;
-            this.dayCellControl3.IsPregnancyDay = false;
-            this.dayCellControl3.IsTodayDay = false;
-            this.dayCellControl3.Location = new System.Drawing.Point(8, 371);
-            this.dayCellControl3.ManualDrawOptions = true;
-            this.dayCellControl3.Name = "dayCellControl3";
-            this.dayCellControl3.OwnerOneMonthControl = null;
-            this.dayCellControl3.PregnancyWeek = 0;
-            this.dayCellControl3.Size = new System.Drawing.Size(32, 32);
-            this.dayCellControl3.TabIndex = 1;
-            // 
-            // dayCellControl2
-            // 
-            this.dayCellControl2.BackColor = System.Drawing.Color.LightPink;
-            this.dayCellControl2.Date = new System.DateTime(((long)(0)));
-            this.dayCellControl2.Egesta = 4;
-            this.dayCellControl2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
-            this.dayCellControl2.IsConceptionDay = false;
-            this.dayCellControl2.IsFocusDay = false;
-            this.dayCellControl2.IsHadSex = false;
-            this.dayCellControl2.IsHaveNote = false;
-            this.dayCellControl2.IsMenstruationDay = true;
-            this.dayCellControl2.IsPredictedAsBoyDay = false;
-            this.dayCellControl2.IsPredictedAsGirlDay = false;
-            this.dayCellControl2.IsPredictedAsMenstruationDay = false;
-            this.dayCellControl2.IsPredictedAsOvulationDay = false;
-            this.dayCellControl2.IsPredictedAsSafeSexDay = false;
-            this.dayCellControl2.IsPregnancyDay = false;
-            this.dayCellControl2.IsTodayDay = false;
-            this.dayCellControl2.Location = new System.Drawing.Point(8, 257);
-            this.dayCellControl2.ManualDrawOptions = true;
-            this.dayCellControl2.Name = "dayCellControl2";
-            this.dayCellControl2.OwnerOneMonthControl = null;
-            this.dayCellControl2.PregnancyWeek = 0;
-            this.dayCellControl2.Size = new System.Drawing.Size(32, 32);
-            this.dayCellControl2.TabIndex = 1;
-            // 
-            // dayCellControl11
-            // 
-            this.dayCellControl11.BackColor = System.Drawing.Color.White;
-            this.dayCellControl11.Date = new System.DateTime(((long)(0)));
-            this.dayCellControl11.Egesta = 5;
-            this.dayCellControl11.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
-            this.dayCellControl11.IsConceptionDay = false;
-            this.dayCellControl11.IsFocusDay = true;
-            this.dayCellControl11.IsHadSex = false;
-            this.dayCellControl11.IsHaveNote = false;
-            this.dayCellControl11.IsMenstruationDay = false;
-            this.dayCellControl11.IsPredictedAsBoyDay = false;
-            this.dayCellControl11.IsPredictedAsGirlDay = false;
-            this.dayCellControl11.IsPredictedAsMenstruationDay = false;
-            this.dayCellControl11.IsPredictedAsOvulationDay = false;
-            this.dayCellControl11.IsPredictedAsSafeSexDay = false;
-            this.dayCellControl11.IsPregnancyDay = false;
-            this.dayCellControl11.IsTodayDay = false;
-            this.dayCellControl11.Location = new System.Drawing.Point(8, 67);
-            this.dayCellControl11.ManualDrawOptions = true;
-            this.dayCellControl11.Name = "dayCellControl11";
-            this.dayCellControl11.OwnerOneMonthControl = null;
-            this.dayCellControl11.PregnancyWeek = 0;
-            this.dayCellControl11.Size = new System.Drawing.Size(32, 32);
-            this.dayCellControl11.TabIndex = 1;
-            // 
-            // dayCellControl1
-            // 
-            this.dayCellControl1.BackColor = System.Drawing.Color.White;
-            this.dayCellControl1.Date = new System.DateTime(((long)(0)));
-            this.dayCellControl1.Egesta = 5;
-            this.dayCellControl1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
-            this.dayCellControl1.IsConceptionDay = false;
-            this.dayCellControl1.IsFocusDay = false;
-            this.dayCellControl1.IsHadSex = false;
-            this.dayCellControl1.IsHaveNote = true;
-            this.dayCellControl1.IsMenstruationDay = false;
-            this.dayCellControl1.IsPredictedAsBoyDay = false;
-            this.dayCellControl1.IsPredictedAsGirlDay = false;
-            this.dayCellControl1.IsPredictedAsMenstruationDay = false;
-            this.dayCellControl1.IsPredictedAsOvulationDay = false;
-            this.dayCellControl1.IsPredictedAsSafeSexDay = false;
-            this.dayCellControl1.IsPregnancyDay = false;
-            this.dayCellControl1.IsTodayDay = false;
-            this.dayCellControl1.Location = new System.Drawing.Point(8, 105);
-            this.dayCellControl1.ManualDrawOptions = true;
-            this.dayCellControl1.Name = "dayCellControl1";
-            this.dayCellControl1.OwnerOneMonthControl = null;
-            this.dayCellControl1.PregnancyWeek = 0;
-            this.dayCellControl1.Size = new System.Drawing.Size(32, 32);
-            this.dayCellControl1.TabIndex = 1;
-            // 
-            // dayLegendMenstruations
-            // 
-            this.dayLegendMenstruations.BackColor = System.Drawing.Color.White;
-            this.dayLegendMenstruations.Date = new System.DateTime(((long)(0)));
-            this.dayLegendMenstruations.Egesta = 5;
-            this.dayLegendMenstruations.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
-            this.dayLegendMenstruations.IsConceptionDay = false;
-            this.dayLegendMenstruations.IsFocusDay = false;
-            this.dayLegendMenstruations.IsHadSex = false;
-            this.dayLegendMenstruations.IsHaveNote = false;
-            this.dayLegendMenstruations.IsMenstruationDay = false;
-            this.dayLegendMenstruations.IsPredictedAsBoyDay = false;
-            this.dayLegendMenstruations.IsPredictedAsGirlDay = false;
-            this.dayLegendMenstruations.IsPredictedAsMenstruationDay = false;
-            this.dayLegendMenstruations.IsPredictedAsOvulationDay = false;
-            this.dayLegendMenstruations.IsPredictedAsSafeSexDay = false;
-            this.dayLegendMenstruations.IsPregnancyDay = false;
-            this.dayLegendMenstruations.IsTodayDay = true;
-            this.dayLegendMenstruations.Location = new System.Drawing.Point(8, 29);
-            this.dayLegendMenstruations.ManualDrawOptions = true;
-            this.dayLegendMenstruations.Name = "dayLegendMenstruations";
-            this.dayLegendMenstruations.OwnerOneMonthControl = null;
-            this.dayLegendMenstruations.PregnancyWeek = 0;
-            this.dayLegendMenstruations.Size = new System.Drawing.Size(32, 32);
-            this.dayLegendMenstruations.TabIndex = 0;
-            // 
             // xWoman
             // 
             this.xWoman.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
@@ -841,7 +505,7 @@
             this.xWoman.Padding = new System.Windows.Forms.Padding(0, 25, 0, 0);
             this.xWoman.Size = new System.Drawing.Size(234, 155);
             this.xWoman.TabIndex = 0;
-            this.xWoman.Tag = 1;
+            this.xWoman.Tag = 19;
             this.xWoman.TooltipText = null;
             // 
             // btnChangeWoman
@@ -974,7 +638,7 @@
             this.xDay.Padding = new System.Windows.Forms.Padding(0, 25, 0, 0);
             this.xDay.Size = new System.Drawing.Size(234, 61);
             this.xDay.TabIndex = 1;
-            this.xDay.Tag = 2;
+            this.xDay.Tag = 20;
             this.xDay.TooltipText = null;
             // 
             // lblDayDescription
@@ -986,6 +650,383 @@
             this.lblDayDescription.Size = new System.Drawing.Size(42, 13);
             this.lblDayDescription.TabIndex = 0;
             this.lblDayDescription.Text = "...day...";
+            // 
+            // dayCellControl4
+            // 
+            this.dayCellControl4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(219)))), ((int)(((byte)(224)))));
+            this.dayCellControl4.BackColorIdAppearance = "BackPredictedMenstruationDay";
+            this.dayCellControl4.Date = new System.DateTime(((long)(0)));
+            this.dayCellControl4.Egesta = 5;
+            this.dayCellControl4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
+            this.dayCellControl4.IsConceptionDay = false;
+            this.dayCellControl4.IsFocusDay = false;
+            this.dayCellControl4.IsHadSex = false;
+            this.dayCellControl4.IsHaveNote = false;
+            this.dayCellControl4.IsMenstruationDay = false;
+            this.dayCellControl4.IsPredictedAsBoyDay = false;
+            this.dayCellControl4.IsPredictedAsGirlDay = false;
+            this.dayCellControl4.IsPredictedAsMenstruationDay = true;
+            this.dayCellControl4.IsPredictedAsOvulationDay = false;
+            this.dayCellControl4.IsPredictedAsSafeSexDay = true;
+            this.dayCellControl4.IsPregnancyDay = false;
+            this.dayCellControl4.IsTodayDay = false;
+            this.dayCellControl4.Location = new System.Drawing.Point(8, 332);
+            this.dayCellControl4.ManualDrawOptions = true;
+            this.dayCellControl4.Name = "dayCellControl4";
+            this.dayCellControl4.OwnerOneMonthControl = null;
+            this.dayCellControl4.PregnancyWeek = 0;
+            this.dayCellControl4.Size = new System.Drawing.Size(32, 32);
+            this.dayCellControl4.TabIndex = 1;
+            this.toolTipLegend.SetToolTip(this.dayCellControl4, "Click to edit color...");
+            this.dayCellControl4.Click += new System.EventHandler(this.dayLegendMenstruations_Click);
+            // 
+            // dayCellControl6
+            // 
+            this.dayCellControl6.BackColor = System.Drawing.Color.White;
+            this.dayCellControl6.BackColorIdAppearance = "BackEmpty";
+            this.dayCellControl6.Date = new System.DateTime(((long)(0)));
+            this.dayCellControl6.Egesta = 5;
+            this.dayCellControl6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
+            this.dayCellControl6.IsConceptionDay = false;
+            this.dayCellControl6.IsFocusDay = false;
+            this.dayCellControl6.IsHadSex = true;
+            this.dayCellControl6.IsHaveNote = false;
+            this.dayCellControl6.IsMenstruationDay = false;
+            this.dayCellControl6.IsPredictedAsBoyDay = false;
+            this.dayCellControl6.IsPredictedAsGirlDay = false;
+            this.dayCellControl6.IsPredictedAsMenstruationDay = false;
+            this.dayCellControl6.IsPredictedAsOvulationDay = false;
+            this.dayCellControl6.IsPredictedAsSafeSexDay = false;
+            this.dayCellControl6.IsPregnancyDay = false;
+            this.dayCellControl6.IsTodayDay = false;
+            this.dayCellControl6.Location = new System.Drawing.Point(8, 143);
+            this.dayCellControl6.ManualDrawOptions = true;
+            this.dayCellControl6.Name = "dayCellControl6";
+            this.dayCellControl6.OwnerOneMonthControl = null;
+            this.dayCellControl6.PregnancyWeek = 0;
+            this.dayCellControl6.Size = new System.Drawing.Size(32, 32);
+            this.dayCellControl6.TabIndex = 1;
+            this.toolTipLegend.SetToolTip(this.dayCellControl6, "Click to edit color...");
+            this.dayCellControl6.Click += new System.EventHandler(this.dayLegendMenstruations_Click);
+            // 
+            // dayCellControl8
+            // 
+            this.dayCellControl8.BackColor = System.Drawing.Color.White;
+            this.dayCellControl8.BackColorIdAppearance = "BackEmpty";
+            this.dayCellControl8.Date = new System.DateTime(((long)(0)));
+            this.dayCellControl8.Egesta = 5;
+            this.dayCellControl8.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
+            this.dayCellControl8.IsConceptionDay = false;
+            this.dayCellControl8.IsFocusDay = false;
+            this.dayCellControl8.IsHadSex = false;
+            this.dayCellControl8.IsHaveNote = false;
+            this.dayCellControl8.IsMenstruationDay = false;
+            this.dayCellControl8.IsPredictedAsBoyDay = false;
+            this.dayCellControl8.IsPredictedAsGirlDay = true;
+            this.dayCellControl8.IsPredictedAsMenstruationDay = false;
+            this.dayCellControl8.IsPredictedAsOvulationDay = false;
+            this.dayCellControl8.IsPredictedAsSafeSexDay = false;
+            this.dayCellControl8.IsPregnancyDay = false;
+            this.dayCellControl8.IsTodayDay = false;
+            this.dayCellControl8.Location = new System.Drawing.Point(8, 219);
+            this.dayCellControl8.ManualDrawOptions = true;
+            this.dayCellControl8.Name = "dayCellControl8";
+            this.dayCellControl8.OwnerOneMonthControl = null;
+            this.dayCellControl8.PregnancyWeek = 0;
+            this.dayCellControl8.Size = new System.Drawing.Size(32, 32);
+            this.dayCellControl8.TabIndex = 1;
+            this.toolTipLegend.SetToolTip(this.dayCellControl8, "Click to edit color...");
+            this.dayCellControl8.Click += new System.EventHandler(this.dayLegendMenstruations_Click);
+            // 
+            // dayCellControl7
+            // 
+            this.dayCellControl7.BackColor = System.Drawing.Color.White;
+            this.dayCellControl7.BackColorIdAppearance = "BackEmpty";
+            this.dayCellControl7.Date = new System.DateTime(((long)(0)));
+            this.dayCellControl7.Egesta = 5;
+            this.dayCellControl7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
+            this.dayCellControl7.IsConceptionDay = false;
+            this.dayCellControl7.IsFocusDay = false;
+            this.dayCellControl7.IsHadSex = false;
+            this.dayCellControl7.IsHaveNote = false;
+            this.dayCellControl7.IsMenstruationDay = false;
+            this.dayCellControl7.IsPredictedAsBoyDay = true;
+            this.dayCellControl7.IsPredictedAsGirlDay = false;
+            this.dayCellControl7.IsPredictedAsMenstruationDay = false;
+            this.dayCellControl7.IsPredictedAsOvulationDay = false;
+            this.dayCellControl7.IsPredictedAsSafeSexDay = false;
+            this.dayCellControl7.IsPregnancyDay = false;
+            this.dayCellControl7.IsTodayDay = false;
+            this.dayCellControl7.Location = new System.Drawing.Point(8, 181);
+            this.dayCellControl7.ManualDrawOptions = true;
+            this.dayCellControl7.Name = "dayCellControl7";
+            this.dayCellControl7.OwnerOneMonthControl = null;
+            this.dayCellControl7.PregnancyWeek = 0;
+            this.dayCellControl7.Size = new System.Drawing.Size(32, 32);
+            this.dayCellControl7.TabIndex = 1;
+            this.toolTipLegend.SetToolTip(this.dayCellControl7, "Click to edit color...");
+            this.dayCellControl7.Click += new System.EventHandler(this.dayLegendMenstruations_Click);
+            // 
+            // dayCellControl12
+            // 
+            this.dayCellControl12.BackColor = System.Drawing.Color.LightCyan;
+            this.dayCellControl12.BackColorIdAppearance = "BackPregnancyDay";
+            this.dayCellControl12.Date = new System.DateTime(((long)(0)));
+            this.dayCellControl12.Egesta = 5;
+            this.dayCellControl12.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
+            this.dayCellControl12.IsConceptionDay = false;
+            this.dayCellControl12.IsFocusDay = false;
+            this.dayCellControl12.IsHadSex = false;
+            this.dayCellControl12.IsHaveNote = false;
+            this.dayCellControl12.IsMenstruationDay = false;
+            this.dayCellControl12.IsPredictedAsBoyDay = false;
+            this.dayCellControl12.IsPredictedAsGirlDay = false;
+            this.dayCellControl12.IsPredictedAsMenstruationDay = false;
+            this.dayCellControl12.IsPredictedAsOvulationDay = false;
+            this.dayCellControl12.IsPredictedAsSafeSexDay = false;
+            this.dayCellControl12.IsPregnancyDay = true;
+            this.dayCellControl12.IsTodayDay = false;
+            this.dayCellControl12.Location = new System.Drawing.Point(8, 485);
+            this.dayCellControl12.ManualDrawOptions = true;
+            this.dayCellControl12.Name = "dayCellControl12";
+            this.dayCellControl12.OwnerOneMonthControl = null;
+            this.dayCellControl12.PregnancyWeek = 35;
+            this.dayCellControl12.Size = new System.Drawing.Size(32, 32);
+            this.dayCellControl12.TabIndex = 1;
+            this.toolTipLegend.SetToolTip(this.dayCellControl12, "Click to edit color...");
+            this.dayCellControl12.Click += new System.EventHandler(this.dayLegendMenstruations_Click);
+            // 
+            // dayCellControl10
+            // 
+            this.dayCellControl10.BackColor = System.Drawing.Color.DeepSkyBlue;
+            this.dayCellControl10.BackColorIdAppearance = "BackConceptionDay";
+            this.dayCellControl10.Date = new System.DateTime(((long)(0)));
+            this.dayCellControl10.Egesta = 5;
+            this.dayCellControl10.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
+            this.dayCellControl10.IsConceptionDay = true;
+            this.dayCellControl10.IsFocusDay = false;
+            this.dayCellControl10.IsHadSex = false;
+            this.dayCellControl10.IsHaveNote = false;
+            this.dayCellControl10.IsMenstruationDay = false;
+            this.dayCellControl10.IsPredictedAsBoyDay = false;
+            this.dayCellControl10.IsPredictedAsGirlDay = false;
+            this.dayCellControl10.IsPredictedAsMenstruationDay = false;
+            this.dayCellControl10.IsPredictedAsOvulationDay = false;
+            this.dayCellControl10.IsPredictedAsSafeSexDay = false;
+            this.dayCellControl10.IsPregnancyDay = true;
+            this.dayCellControl10.IsTodayDay = false;
+            this.dayCellControl10.Location = new System.Drawing.Point(8, 447);
+            this.dayCellControl10.ManualDrawOptions = true;
+            this.dayCellControl10.Name = "dayCellControl10";
+            this.dayCellControl10.OwnerOneMonthControl = null;
+            this.dayCellControl10.PregnancyWeek = 0;
+            this.dayCellControl10.Size = new System.Drawing.Size(32, 32);
+            this.dayCellControl10.TabIndex = 1;
+            this.toolTipLegend.SetToolTip(this.dayCellControl10, "Click to edit color...");
+            this.dayCellControl10.Click += new System.EventHandler(this.dayLegendMenstruations_Click);
+            // 
+            // dayCellControl9
+            // 
+            this.dayCellControl9.BackColor = System.Drawing.Color.LightCyan;
+            this.dayCellControl9.BackColorIdAppearance = "BackPregnancyDay";
+            this.dayCellControl9.Date = new System.DateTime(((long)(0)));
+            this.dayCellControl9.Egesta = 5;
+            this.dayCellControl9.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
+            this.dayCellControl9.IsConceptionDay = false;
+            this.dayCellControl9.IsFocusDay = false;
+            this.dayCellControl9.IsHadSex = false;
+            this.dayCellControl9.IsHaveNote = false;
+            this.dayCellControl9.IsMenstruationDay = false;
+            this.dayCellControl9.IsPredictedAsBoyDay = false;
+            this.dayCellControl9.IsPredictedAsGirlDay = false;
+            this.dayCellControl9.IsPredictedAsMenstruationDay = false;
+            this.dayCellControl9.IsPredictedAsOvulationDay = false;
+            this.dayCellControl9.IsPredictedAsSafeSexDay = false;
+            this.dayCellControl9.IsPregnancyDay = true;
+            this.dayCellControl9.IsTodayDay = false;
+            this.dayCellControl9.Location = new System.Drawing.Point(8, 409);
+            this.dayCellControl9.ManualDrawOptions = true;
+            this.dayCellControl9.Name = "dayCellControl9";
+            this.dayCellControl9.OwnerOneMonthControl = null;
+            this.dayCellControl9.PregnancyWeek = 0;
+            this.dayCellControl9.Size = new System.Drawing.Size(32, 32);
+            this.dayCellControl9.TabIndex = 1;
+            this.toolTipLegend.SetToolTip(this.dayCellControl9, "Click to edit color...");
+            this.dayCellControl9.Click += new System.EventHandler(this.dayLegendMenstruations_Click);
+            // 
+            // dayCellControl5
+            // 
+            this.dayCellControl5.BackColor = System.Drawing.Color.LightGreen;
+            this.dayCellControl5.BackColorIdAppearance = "BackSafeSex";
+            this.dayCellControl5.Date = new System.DateTime(((long)(0)));
+            this.dayCellControl5.Egesta = 5;
+            this.dayCellControl5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
+            this.dayCellControl5.IsConceptionDay = false;
+            this.dayCellControl5.IsFocusDay = false;
+            this.dayCellControl5.IsHadSex = false;
+            this.dayCellControl5.IsHaveNote = false;
+            this.dayCellControl5.IsMenstruationDay = false;
+            this.dayCellControl5.IsPredictedAsBoyDay = false;
+            this.dayCellControl5.IsPredictedAsGirlDay = false;
+            this.dayCellControl5.IsPredictedAsMenstruationDay = false;
+            this.dayCellControl5.IsPredictedAsOvulationDay = false;
+            this.dayCellControl5.IsPredictedAsSafeSexDay = true;
+            this.dayCellControl5.IsPregnancyDay = false;
+            this.dayCellControl5.IsTodayDay = false;
+            this.dayCellControl5.Location = new System.Drawing.Point(8, 295);
+            this.dayCellControl5.ManualDrawOptions = true;
+            this.dayCellControl5.Name = "dayCellControl5";
+            this.dayCellControl5.OwnerOneMonthControl = null;
+            this.dayCellControl5.PregnancyWeek = 0;
+            this.dayCellControl5.Size = new System.Drawing.Size(32, 32);
+            this.dayCellControl5.TabIndex = 1;
+            this.toolTipLegend.SetToolTip(this.dayCellControl5, "Click to edit color...");
+            this.dayCellControl5.Click += new System.EventHandler(this.dayLegendMenstruations_Click);
+            // 
+            // dayCellControl3
+            // 
+            this.dayCellControl3.BackColor = System.Drawing.Color.Gold;
+            this.dayCellControl3.BackColorIdAppearance = "BackOvulationDay";
+            this.dayCellControl3.Date = new System.DateTime(((long)(0)));
+            this.dayCellControl3.Egesta = 5;
+            this.dayCellControl3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
+            this.dayCellControl3.IsConceptionDay = false;
+            this.dayCellControl3.IsFocusDay = false;
+            this.dayCellControl3.IsHadSex = false;
+            this.dayCellControl3.IsHaveNote = false;
+            this.dayCellControl3.IsMenstruationDay = false;
+            this.dayCellControl3.IsPredictedAsBoyDay = false;
+            this.dayCellControl3.IsPredictedAsGirlDay = false;
+            this.dayCellControl3.IsPredictedAsMenstruationDay = false;
+            this.dayCellControl3.IsPredictedAsOvulationDay = true;
+            this.dayCellControl3.IsPredictedAsSafeSexDay = false;
+            this.dayCellControl3.IsPregnancyDay = false;
+            this.dayCellControl3.IsTodayDay = false;
+            this.dayCellControl3.Location = new System.Drawing.Point(8, 371);
+            this.dayCellControl3.ManualDrawOptions = true;
+            this.dayCellControl3.Name = "dayCellControl3";
+            this.dayCellControl3.OwnerOneMonthControl = null;
+            this.dayCellControl3.PregnancyWeek = 0;
+            this.dayCellControl3.Size = new System.Drawing.Size(32, 32);
+            this.dayCellControl3.TabIndex = 1;
+            this.toolTipLegend.SetToolTip(this.dayCellControl3, "Click to edit color...");
+            this.dayCellControl3.Click += new System.EventHandler(this.dayLegendMenstruations_Click);
+            // 
+            // dayCellControl2
+            // 
+            this.dayCellControl2.BackColor = System.Drawing.Color.LightPink;
+            this.dayCellControl2.BackColorIdAppearance = "BackMenstruationDay";
+            this.dayCellControl2.Date = new System.DateTime(((long)(0)));
+            this.dayCellControl2.Egesta = 4;
+            this.dayCellControl2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
+            this.dayCellControl2.IsConceptionDay = false;
+            this.dayCellControl2.IsFocusDay = false;
+            this.dayCellControl2.IsHadSex = false;
+            this.dayCellControl2.IsHaveNote = false;
+            this.dayCellControl2.IsMenstruationDay = true;
+            this.dayCellControl2.IsPredictedAsBoyDay = false;
+            this.dayCellControl2.IsPredictedAsGirlDay = false;
+            this.dayCellControl2.IsPredictedAsMenstruationDay = false;
+            this.dayCellControl2.IsPredictedAsOvulationDay = false;
+            this.dayCellControl2.IsPredictedAsSafeSexDay = false;
+            this.dayCellControl2.IsPregnancyDay = false;
+            this.dayCellControl2.IsTodayDay = false;
+            this.dayCellControl2.Location = new System.Drawing.Point(8, 257);
+            this.dayCellControl2.ManualDrawOptions = true;
+            this.dayCellControl2.Name = "dayCellControl2";
+            this.dayCellControl2.OwnerOneMonthControl = null;
+            this.dayCellControl2.PregnancyWeek = 0;
+            this.dayCellControl2.Size = new System.Drawing.Size(32, 32);
+            this.dayCellControl2.TabIndex = 1;
+            this.toolTipLegend.SetToolTip(this.dayCellControl2, "Click to edit color...");
+            this.dayCellControl2.Click += new System.EventHandler(this.dayLegendMenstruations_Click);
+            // 
+            // dayCellControl11
+            // 
+            this.dayCellControl11.BackColor = System.Drawing.Color.White;
+            this.dayCellControl11.BackColorIdAppearance = "BackEmpty";
+            this.dayCellControl11.Date = new System.DateTime(((long)(0)));
+            this.dayCellControl11.Egesta = 5;
+            this.dayCellControl11.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
+            this.dayCellControl11.IsConceptionDay = false;
+            this.dayCellControl11.IsFocusDay = true;
+            this.dayCellControl11.IsHadSex = false;
+            this.dayCellControl11.IsHaveNote = false;
+            this.dayCellControl11.IsMenstruationDay = false;
+            this.dayCellControl11.IsPredictedAsBoyDay = false;
+            this.dayCellControl11.IsPredictedAsGirlDay = false;
+            this.dayCellControl11.IsPredictedAsMenstruationDay = false;
+            this.dayCellControl11.IsPredictedAsOvulationDay = false;
+            this.dayCellControl11.IsPredictedAsSafeSexDay = false;
+            this.dayCellControl11.IsPregnancyDay = false;
+            this.dayCellControl11.IsTodayDay = false;
+            this.dayCellControl11.Location = new System.Drawing.Point(8, 67);
+            this.dayCellControl11.ManualDrawOptions = true;
+            this.dayCellControl11.Name = "dayCellControl11";
+            this.dayCellControl11.OwnerOneMonthControl = null;
+            this.dayCellControl11.PregnancyWeek = 0;
+            this.dayCellControl11.Size = new System.Drawing.Size(32, 32);
+            this.dayCellControl11.TabIndex = 1;
+            this.toolTipLegend.SetToolTip(this.dayCellControl11, "Click to edit color...");
+            this.dayCellControl11.Click += new System.EventHandler(this.dayLegendMenstruations_Click);
+            // 
+            // dayCellControl1
+            // 
+            this.dayCellControl1.BackColor = System.Drawing.Color.White;
+            this.dayCellControl1.BackColorIdAppearance = "BackEmpty";
+            this.dayCellControl1.Date = new System.DateTime(((long)(0)));
+            this.dayCellControl1.Egesta = 5;
+            this.dayCellControl1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
+            this.dayCellControl1.IsConceptionDay = false;
+            this.dayCellControl1.IsFocusDay = false;
+            this.dayCellControl1.IsHadSex = false;
+            this.dayCellControl1.IsHaveNote = true;
+            this.dayCellControl1.IsMenstruationDay = false;
+            this.dayCellControl1.IsPredictedAsBoyDay = false;
+            this.dayCellControl1.IsPredictedAsGirlDay = false;
+            this.dayCellControl1.IsPredictedAsMenstruationDay = false;
+            this.dayCellControl1.IsPredictedAsOvulationDay = false;
+            this.dayCellControl1.IsPredictedAsSafeSexDay = false;
+            this.dayCellControl1.IsPregnancyDay = false;
+            this.dayCellControl1.IsTodayDay = false;
+            this.dayCellControl1.Location = new System.Drawing.Point(8, 105);
+            this.dayCellControl1.ManualDrawOptions = true;
+            this.dayCellControl1.Name = "dayCellControl1";
+            this.dayCellControl1.OwnerOneMonthControl = null;
+            this.dayCellControl1.PregnancyWeek = 0;
+            this.dayCellControl1.Size = new System.Drawing.Size(32, 32);
+            this.dayCellControl1.TabIndex = 1;
+            this.toolTipLegend.SetToolTip(this.dayCellControl1, "Click to edit color...");
+            this.dayCellControl1.Click += new System.EventHandler(this.dayLegendMenstruations_Click);
+            // 
+            // dayLegendMenstruations
+            // 
+            this.dayLegendMenstruations.BackColor = System.Drawing.Color.White;
+            this.dayLegendMenstruations.BackColorIdAppearance = "BackEmpty";
+            this.dayLegendMenstruations.Date = new System.DateTime(((long)(0)));
+            this.dayLegendMenstruations.Egesta = 5;
+            this.dayLegendMenstruations.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
+            this.dayLegendMenstruations.IsConceptionDay = false;
+            this.dayLegendMenstruations.IsFocusDay = false;
+            this.dayLegendMenstruations.IsHadSex = false;
+            this.dayLegendMenstruations.IsHaveNote = false;
+            this.dayLegendMenstruations.IsMenstruationDay = false;
+            this.dayLegendMenstruations.IsPredictedAsBoyDay = false;
+            this.dayLegendMenstruations.IsPredictedAsGirlDay = false;
+            this.dayLegendMenstruations.IsPredictedAsMenstruationDay = false;
+            this.dayLegendMenstruations.IsPredictedAsOvulationDay = false;
+            this.dayLegendMenstruations.IsPredictedAsSafeSexDay = false;
+            this.dayLegendMenstruations.IsPregnancyDay = false;
+            this.dayLegendMenstruations.IsTodayDay = true;
+            this.dayLegendMenstruations.Location = new System.Drawing.Point(8, 29);
+            this.dayLegendMenstruations.ManualDrawOptions = true;
+            this.dayLegendMenstruations.Name = "dayLegendMenstruations";
+            this.dayLegendMenstruations.OwnerOneMonthControl = null;
+            this.dayLegendMenstruations.PregnancyWeek = 0;
+            this.dayLegendMenstruations.Size = new System.Drawing.Size(32, 32);
+            this.dayLegendMenstruations.TabIndex = 0;
+            this.toolTipLegend.SetToolTip(this.dayLegendMenstruations, "Click to edit color...");
+            this.dayLegendMenstruations.Click += new System.EventHandler(this.dayLegendMenstruations_Click);
             // 
             // monthControl
             // 
@@ -1094,6 +1135,7 @@
         private System.Windows.Forms.ToolStripDropDownButton languageButton;
         private System.Windows.Forms.ToolStripMenuItem englishToolStripMenuItem;
         private System.Windows.Forms.ToolStripButton toolUpdate;
+        private System.Windows.Forms.ToolTip toolTipLegend;
 
 
     }
