@@ -19,6 +19,18 @@ namespace WomenCalendar
         private static Font FontNormal;
         private static Font FontBold;
 
+        private static Dictionary<string, Image> imageCache = new Dictionary<string, Image>();
+        private static Image GetImageFromCache(string id)
+        {
+            Image image;
+            if (!imageCache.TryGetValue(id, out image))
+            {
+                image = Resources.ResourceManager.GetObject(id) as Image;
+                imageCache[id] = image;
+            }
+            return image;
+        }
+
         public delegate void DayCellClick(object sender, DayCellClickEventArgs e);
         public event DayCellClick CellClick;
 
@@ -89,9 +101,15 @@ namespace WomenCalendar
 
         private PathGradientBrush _backBrush;
         private Color _backColor = Color.White;
+        private static Dictionary<Color, Brush> brushesCache = new Dictionary<Color, Brush>();
         private Brush GetMainBrush(Color color)
         {
             if (color == Color.White) return Brushes.White;
+            Brush brush;
+            if (brushesCache.TryGetValue(color, out brush))
+            {
+                return brush;
+            }
             if (_backBrush == null || color != _backColor)
             {
                 Rectangle rectBrush = new Rectangle(0, 0, 32, 32);
@@ -105,6 +123,7 @@ namespace WomenCalendar
                 _backBrush.CenterPoint = new PointF(rectBrush.Left, rectBrush.Top);
                 _backBrush.SurroundColors = new Color[1] { color };
             }
+            brushesCache[color] = _backBrush;
             return _backBrush;
         }
 
@@ -146,7 +165,7 @@ namespace WomenCalendar
             {
                 if (Egesta > 0)
                 {
-                    Image image = (Image)Resources.ResourceManager.GetObject("drop_Image");
+                    Image image = GetImageFromCache("drop_Image");
                     ImageAttributes attr = new ImageAttributes();
                     ColorMatrix cMatrix = new ColorMatrix();
                     // alpha
@@ -162,7 +181,7 @@ namespace WomenCalendar
 
             if (IsConceptionDay)
             {
-                Image image = (Image)Resources.ResourceManager.GetObject("baby_Image");
+                Image image = GetImageFromCache("baby_Image");
                 pe.Graphics.DrawImage(image, new Rectangle(2, 20, 10, 10), 0, 0, 48, 48, GraphicsUnit.Pixel);
             }
             else if (IsPregnancyDay)
@@ -174,22 +193,22 @@ namespace WomenCalendar
             }
             else if (IsPredictedAsGirlDay)
             {
-                Image image = (Image)Resources.ResourceManager.GetObject("girl_Image");
+                Image image = GetImageFromCache("girl_Image");
                 pe.Graphics.DrawImage(image, new Rectangle(2, 20, 10, 10), 0, 0, 48, 48, GraphicsUnit.Pixel);
             }
             else if (IsPredictedAsBoyDay)
             {
-                Image image = (Image)Resources.ResourceManager.GetObject("boy_Image");
+                Image image = GetImageFromCache("boy_Image");
                 pe.Graphics.DrawImage(image, new Rectangle(2, 20, 10, 10), 0, 0, 48, 48, GraphicsUnit.Pixel);
             }
 
             if (IsHaveNote)
             {
-                pe.Graphics.DrawImage((Image)Resources.ResourceManager.GetObject("note_Image"), 23, 2);
+                pe.Graphics.DrawImage(GetImageFromCache("note_Image"), 23, 2);
             }
             else
             {
-                Image image = (Image)Resources.ResourceManager.GetObject("note_Image");
+                Image image = GetImageFromCache("note_Image");
                 ImageAttributes attr = new ImageAttributes();
                 ColorMatrix cMatrix = new ColorMatrix();
                 // alpha
