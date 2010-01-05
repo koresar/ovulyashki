@@ -23,7 +23,7 @@ namespace WomenCalendar
             floatStyle.NumberFormat = "Fixed";
             WorksheetStyle Default = wb.Styles.Add("Default");
             Default.Name = "Normal";
-            Default.Font.FontName = "Arial Cyr";
+            Default.Font.FontName = "Arial";
             Default.Alignment.Vertical = StyleVerticalAlignment.Bottom;
 
             foreach (string cell in OneDayInfo.Header)
@@ -35,9 +35,9 @@ namespace WomenCalendar
         public override void WriteHeader()
         {
             WorksheetRow wr = ws.Table.Rows.Add();
-            foreach (string col in OneDayInfo.Header)
+            for (int i = 0; i < OneDayInfo.Header.Count; i++)
             {
-                wr.Cells.Add(col);
+                wr.Cells.Add(OneDayInfo.Header[i]);
             }
         }
 
@@ -47,9 +47,11 @@ namespace WomenCalendar
             wr.Cells.Add(new WorksheetCell(D(day.Date), DataType.String, "dateStyle"));
             wr.Cells.Add(new WorksheetCell(B(day.IsMentruation), DataType.String));
             wr.Cells.Add(new WorksheetCell(I(day.Egesta, day.IsMentruation), day.IsMentruation ? DataType.Number : DataType.String));
+            wr.Cells.Add(new WorksheetCell(B(day.IsOvulation), DataType.String));
             wr.Cells.Add(new WorksheetCell(B(day.HadSex), DataType.String));
             wr.Cells.Add(new WorksheetCell(D(day.BBT), day.BBT != 0 ? DataType.Number : DataType.String, day.BBT != 0 ? "floatStyle" : "Default"));
             wr.Cells.Add(new WorksheetCell(I(day.Health), DataType.Number));
+            wr.Cells.Add(new WorksheetCell(CF(day.CF), DataType.String));
             wr.Cells.Add(new WorksheetCell(day.Note, DataType.String));
         }
 

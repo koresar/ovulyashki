@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using System.IO;
+using System.Linq;
 
 namespace WomenCalendar
 {
@@ -44,18 +45,20 @@ namespace WomenCalendar
 
         public override void WriteHeader()
         {
-            WriteLine(OneDayInfo.Header.ToArray());
+            WriteLine(OneDayInfo.Header.Select(str => TEXT.Get[str]).ToArray());
         }
 
         public override void WriteDay(OneDayInfo day)
         {
             WriteLine(
                 D(day.Date), 
-                B(day.IsMentruation), 
-                I(day.Egesta, day.IsMentruation), 
+                B(day.IsMentruation),
+                I(day.Egesta, day.IsMentruation),
+                B(day.IsOvulation),
                 B(day.HadSex), 
                 D(day.BBT),
                 I(day.Health),
+                CF(day.CF),
                 day.Note.Replace('\n', ' ')
                 );
         }

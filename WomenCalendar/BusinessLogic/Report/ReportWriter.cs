@@ -41,5 +41,13 @@ namespace WomenCalendar
         {
             return i.ToString();
         }
+        public static string CF(CervicalFluid cf)
+        {
+            if (cf == CervicalFluid.Undefined) { return string.Empty; }
+            if (cf == CervicalFluid.Tacky) { return TEXT.Get["CF_tacky"]; }
+            if (cf == CervicalFluid.Stretchy) { return TEXT.Get["CF_stretchy"]; }
+            if (cf == CervicalFluid.Water) { return TEXT.Get["CF_water"]; }
+            return string.Empty;
+        }
     }
 }
