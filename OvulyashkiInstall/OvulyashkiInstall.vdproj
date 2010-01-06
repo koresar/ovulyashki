@@ -444,7 +444,7 @@
         {
             "{3C67513D-01DD-4637-8A68-80971EB9504F}:_0C363D3A242941509ED0851336DD9D80"
             {
-            "DefaultLocation" = "8:[ProgramFilesFolder][Manufacturer]\\[ProductName]"
+            "DefaultLocation" = "8:[ProgramFilesFolder]\\[ProductName]"
             "Name" = "8:#1925"
             "AlwaysCreate" = "11:FALSE"
             "Condition" = "8:"
@@ -503,14 +503,14 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:Ovulyashki"
-        "ProductCode" = "8:{703F808B-60BC-4F04-B7EE-0ABB7BA5F909}"
-        "PackageCode" = "8:{A9C7ED2A-145B-2C7D-339F-CD5B506C0753}"
+        "ProductCode" = "8:{9DFEA721-9D3B-4C33-90D2-C8723747B5F7}"
+        "PackageCode" = "8:{24C9F9FA-1910-4557-993C-56445B788169}"
         "UpgradeCode" = "8:{482BFF03-47BE-4DA1-AA44-E102C604F5DC}"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:FALSE"
         "InstallAllUsers" = "11:TRUE"
-        "ProductVersion" = "8:1.6.4"
+        "ProductVersion" = "8:1.6.5"
         "Manufacturer" = "8:RulezDev"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:http://ovulyashki.dp.ua/"
@@ -639,8 +639,8 @@
             }
             "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_34DAFD4999304F69BAE34D4D01C36265"
             {
-            "Name" = "8:Uninstall"
-            "Arguments" = "8:"
+            "Name" = "8:Uninstall Ovulyashki"
+            "Arguments" = "8:[ProductCode]"
             "Description" = "8:"
             "ShowCmd" = "3:1"
             "IconIndex" = "3:32512"

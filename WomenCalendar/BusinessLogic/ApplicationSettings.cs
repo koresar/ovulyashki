@@ -87,12 +87,12 @@ namespace WomenCalendar
             }
             else
             { // we do not have access to own folder.
+                if (!Directory.Exists(appDataPath))
+                {
+                    Directory.CreateDirectory(appDataPath);
+                }
                 if (!File.Exists(appDataFile) && File.Exists(localFile))
                 { // but suddenly we have settings in own folder, so let's use it.
-                    if (!Directory.Exists(appDataPath))
-                    {
-                        Directory.CreateDirectory(appDataPath);
-                    }
                     File.Copy(localFile, appDataFile);
                 }
                 return appDataFile;

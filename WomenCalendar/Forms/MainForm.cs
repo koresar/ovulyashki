@@ -50,7 +50,7 @@ namespace WomenCalendar
             this.label8.Text = TEXT.Get["Legend_min_conception_probapility"];
             this.label7.Text = TEXT.Get["Legend_menses"];
             this.label6.Text = TEXT.Get["Legend_conceive_girl_day"];
-            this.label5.Text = TEXT.Get["Legend_conceive_girl_day"];
+            this.label5.Text = TEXT.Get["Legend_conceive_boy_day"];
             this.label4.Text = TEXT.Get["Legend_had_sex"];
             this.label3.Text = TEXT.Get["Legend_note"];
             this.label2.Text = TEXT.Get["Legend_selected_day"];
