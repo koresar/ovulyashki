@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
+using System.Reflection;
 
 namespace WomenCalendar.Forms
 {
@@ -26,8 +27,10 @@ namespace WomenCalendar.Forms
         public static void Show(Exception ex)
         {
             var form = new ErrorForm();
-            form.txtError.Text = ex.Message + Environment.NewLine + ex.StackTrace +
-                Environment.NewLine + (ex.InnerException == null ? "" : ex.InnerException.Message);
+            form.txtError.Text = Assembly.GetEntryAssembly().GetName().Version.ToString() + Environment.NewLine + 
+                ex.Message + Environment.NewLine + 
+                ex.StackTrace + Environment.NewLine + 
+                (ex.InnerException == null ? "" : ex.InnerException.Message);
             form.ShowDialog();
         }
 
