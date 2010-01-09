@@ -53,7 +53,6 @@
             this.grpBT = new System.Windows.Forms.GroupBox();
             this.grpHealth = new System.Windows.Forms.GroupBox();
             this.chkMentrustions = new System.Windows.Forms.CheckBox();
-            this.schedulesContextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.grpCF = new System.Windows.Forms.GroupBox();
             this.toolTipCF = new System.Windows.Forms.ToolTip(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.numMenstruationLength)).BeginInit();
@@ -366,11 +365,6 @@
             this.chkMentrustions.MouseEnter += new System.EventHandler(this.chkMentrustions_MouseEnter);
             this.chkMentrustions.CheckedChanged += new System.EventHandler(this.chkMentrustions_CheckedChanged);
             // 
-            // schedulesContextMenu
-            // 
-            this.schedulesContextMenu.Name = "schedulesContextMenu";
-            this.schedulesContextMenu.Size = new System.Drawing.Size(61, 4);
-            // 
             // grpCF
             // 
             this.grpCF.Controls.Add(this.rbtCF3);
@@ -456,7 +450,6 @@
         private System.Windows.Forms.Label lblMenstruationLength;
         private System.Windows.Forms.CheckBox chkMentrustions;
         private System.Windows.Forms.Panel pnlSurroundMentsLength;
-        private System.Windows.Forms.ContextMenuStrip schedulesContextMenu;
         private System.Windows.Forms.GroupBox grpCF;
         private System.Windows.Forms.ToolTip toolTipCF;
         private System.Windows.Forms.RadioButton rbtCF3;

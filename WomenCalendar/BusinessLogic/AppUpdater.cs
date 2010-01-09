@@ -85,7 +85,7 @@ namespace WomenCalendar
 
         private static MemoryStream GetFileStream(string url)
         {
-            byte[] buffer = new byte[4097];
+            byte[] buffer = new byte[4096];
 
             Stream responseStream = WebRequest.Create(url).GetResponse().GetResponseStream();
             MemoryStream memoryStream = new MemoryStream();

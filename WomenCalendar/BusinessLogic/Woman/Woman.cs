@@ -72,8 +72,6 @@ namespace WomenCalendar
 
         public CFCollection CFs { get; set; }
 
-        public SchedulesCollection Schedules { get; set; }
-
         [XmlIgnore]
         public OvulationDetector OvDetector { get; private set; }
 
@@ -508,7 +506,6 @@ namespace WomenCalendar
             w.Notes = this.Notes.Clone() as NotesCollection;
             w.Password = this.Password;
             w.UseManualPeriodLength = this.UseManualPeriodLength;
-            // w.Schedules = this.Schedules.Clone(); TODO!!! CLONING NOT IMPLEMENTED!!!!!!
             return w;
         }
 

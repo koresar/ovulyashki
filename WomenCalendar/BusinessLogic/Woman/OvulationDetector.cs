@@ -36,7 +36,7 @@ namespace WomenCalendar
             // second level - CF:
             DateTime ovCF = TryUnderstandOvulationByCF(ovCalend);
 
-            // third level - BBT: drop of the temperature 1 before Ov., and rise on the Ov. day.
+            // third level - BBT: drop of the temperature 1 day before Ov., and rise on the Ov. day.
             var rises = GetBBTRises(ovCalend);
             
             // At this point we found all dates we need.
