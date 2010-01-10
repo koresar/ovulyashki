@@ -104,6 +104,12 @@
     <Compile Include="Controls\DayCellPopupControl.Designer.cs">
       <DependentUpon>DayCellPopupControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\DayEditControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\DayEditControl.Designer.cs">
+      <DependentUpon>DayEditControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\ITranslatable.cs" />
     <Compile Include="Controls\FocusDateChangedEventArgs.cs" />
     <Compile Include="Controls\MensesEditControl.cs">
@@ -260,6 +266,10 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\DayCellPopupControl.resx">
       <DependentUpon>DayCellPopupControl.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\DayEditControl.resx">
+      <DependentUpon>DayEditControl.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\MensesEditControl.resx">

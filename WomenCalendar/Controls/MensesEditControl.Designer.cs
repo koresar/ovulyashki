@@ -1,4 +1,4 @@
-﻿namespace WomenCalendar.Controls
+﻿namespace WomenCalendar
 {
     partial class MensesEditControl
     {

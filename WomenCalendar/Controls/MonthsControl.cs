@@ -366,7 +366,7 @@ namespace WomenCalendar
                 ((MainForm)ParentForm).UpdateWomanInformation();
                 ((MainForm)ParentForm).UpdateDayInformation(FocusDate);
                 Redraw();
-                new DayEditForm(FocusDay, DayEditFocus.Length).ShowDialog(this);
+                new DayEditForm(FocusDay.Date, DayEditFocus.Length).ShowDialog(this);
             }
         }
 
@@ -423,8 +423,7 @@ namespace WomenCalendar
         private void editDay_Click(object sender, EventArgs e)
         {
             CellPopupControl.Visible = false;
-            new DayEditForm(FocusDay).ShowDialog(this);
-            RedrawFocusDay();
+            new DayEditForm(FocusDay.Date).ShowDialog(this);
         }
 
         private void setLastPregnancyDay_Click(object sender, EventArgs e)

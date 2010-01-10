@@ -39,27 +39,20 @@ namespace WomenCalendar
         }
 
         private DayData initialData;
-        private DayCellControl DayCell;
         private DateTime date;
         private DayEditFocus defaultFocus;
-        private DayEditFocus lastFocus;
-        private CervicalFluid currentCF;
 
-        public DayEditForm(DayCellControl dayCell)
-            : this(dayCell, DayEditFocus.Note)
+        public DayEditForm(DateTime day)
+            : this(day, DayEditFocus.Note)
         {
         }
 
-        public DayEditForm(DayCellControl dayCell, DayEditFocus focus)
+        public DayEditForm(DateTime day, DayEditFocus focus)
         {
             InitializeComponent();
             if (TEXT.Get != null) ReReadTranslations();
-            this.date = dayCell.Date;
-            DayCell = dayCell;
+            this.date = day;
             defaultFocus = focus;
-            rbtCF1.Tag = CervicalFluid.Tacky;
-            rbtCF2.Tag = CervicalFluid.Stretchy;
-            rbtCF3.Tag = CervicalFluid.Water;
         }
 
         #region ITranslatable interface impementation
@@ -67,23 +60,13 @@ namespace WomenCalendar
         public new void ReReadTranslations()
         {
             base.ReReadTranslations();
+            this.Text = TEXT.Get["Change_day"];
             this.btnPrevDay.Text = "<< " + TEXT.Get["Previous_day"];
             this.btnNextDay.Text = TEXT.Get["Next_day"] + " >>";
-            this.chkHadSex.Text = TEXT.Get["Sex_was"];
-            this.label2.Text = TEXT.Get["Bad_wellbeing"];
-            this.label3.Text = TEXT.Get["Good_wellbeing"];
-            this.grpNote.Text = TEXT.Get["Note_for_day"];
-            this.grpBT.Text = TEXT.Get["BBT_full"];
-            this.grpHealth.Text = TEXT.Get["Wellbeing"];
-            this.Text = TEXT.Get["Change_day"];
-            this.grpCF.Text = TEXT.Get["CF"];
-            this.rbtCF1.Text = TEXT.Get["CF_tacky"];
-            this.rbtCF2.Text = TEXT.Get["CF_stretchy"];
-            this.rbtCF3.Text = TEXT.Get["CF_water"];
-            this.toolTipCF.ToolTipTitle = TEXT.Get["CF_full"];
-            this.toolTipCF.SetToolTip(this.rbtCF1, TEXT.Get["CF_full_tacky"]);
-            this.toolTipCF.SetToolTip(this.rbtCF2, TEXT.Get["CF_full_stretchy"]);
-            this.toolTipCF.SetToolTip(this.rbtCF3, TEXT.Get["CF_full_water"]);
+            this.ttButton.ToolTipTitle = TEXT.Get["On_off_menses_button"];
+            this.ttButton.SetToolTip(chkMentrustions,
+                chkMentrustions.Checked ? TEXT.Get["Cancel_these_menses"] : TEXT.Get["Set_day_as_menses_start"]);
+            this.dayEditControl.ReReadTranslations();
             this.mensesEditControl.ReReadTranslations();
         }
 
@@ -94,22 +77,28 @@ namespace WomenCalendar
             if (DataChanged)
             {
                 if (!ValidateData()) return;
-                SaveData();
-                Program.ApplicationForm.UpdateDayInformationIfFocused(date);
+                if (!SaveData()) return;
             }
 
             DialogResult = DialogResult.OK;
         }
 
-        private void SaveData()
+        private bool SaveData()
         {
             Woman w = Program.CurrentWoman;
-            w.BBT.SetBBT(date, txtBBT.Text);
 
             if (chkMentrustions.Checked)
             {
                 MenstruationPeriod period = w.Menstruations.GetPeriodByDate(date);
-                if (period != null)
+                if (period == null)
+                { // this is new period user want to add
+                    if (!Program.CurrentWoman.Menstruations.Add(date, mensesEditControl.Length))
+                    { // nothing was saved for now, let's quit.
+                        return false;
+                    }
+                    Program.CurrentWoman.Menstruations.SetEgesta(date, mensesEditControl.EgestaSliderValue);
+                }
+                else
                 {
                     w.Menstruations.SetPeriodLength(period, mensesEditControl.Length);
                     period.Egestas[date] = mensesEditControl.EgestaSliderValue;
@@ -120,39 +109,23 @@ namespace WomenCalendar
                 w.Menstruations.Remove(date);
             }
 
-            w.Notes[date] = txtNote.Text;
+            w.BBT.SetBBT(date, dayEditControl.BBT);
 
-            w.HadSexList[date] = chkHadSex.Checked;
+            w.Notes[date] = dayEditControl.Note;
 
-            w.Health[date] = sliderHealth.Value;
+            w.HadSexList[date] = dayEditControl.HadSex;
 
-            w.CFs[date] = currentCF;
+            w.Health[date] = dayEditControl.Health;
+
+            w.CFs[date] = dayEditControl.CurrentCF;
 
             w.Menstruations.ResetOvulyationsDates();
 
-            DayCell.OwnerOneMonthControl.OwnerMonthsControl.Redraw(); // redraw whole calendar
+            Program.ApplicationForm.UpdateDayInformationIfFocused(date);
+            Program.ApplicationForm.RedrawCalendar(); // redraw whole calendar
+
+            return true;
         }
-
-        #region Tooltip functions
-
-        private void ShowMenstButtonToolTip(bool isMenstr)
-        {
-            ShowTooltip(TEXT.Get["On_off_menses_button"], 
-                !isMenstr ? TEXT.Get["Set_day_as_menses_start"] : TEXT.Get["Cancel_these_menses"], chkMentrustions);
-        }
-
-        private void HideTooltip(IWin32Window control)
-        {
-            toolTip.Hide(control);
-        }
-
-        private void ShowTooltip(string caption, string text, Control control)
-        {
-            toolTip.ToolTipTitle = caption;
-            toolTip.Show(text, control, control.Width, control.Height);
-        }
-
-        #endregion
 
         private void LoadForm()
         {
@@ -166,28 +139,25 @@ namespace WomenCalendar
                 mensesEditControl.Length = period.Length;
                 int egesta = period.Egestas[date];
                 mensesEditControl.EgestaSliderValue = egesta;
-                ShowOv(true);
+                ShowMenses(true);
                 chkMentrustions.Enabled = period.StartDay == date;
             }
             else
             {
-                ShowOv(false);
+                ShowMenses(false);
                 chkMentrustions.Enabled = true;
             }
 
-            txtBBT.Text = w.BBT.GetBBTString(date);
+            dayEditControl.BBT = w.BBT.GetBBTString(date);
 
             string note = w.Notes[date];
-            txtNote.Text = (!note.Contains("\r\n")) ? note.Replace("\n", "\r\n") : note;
+            dayEditControl.Note = (!note.Contains("\r\n")) ? note.Replace("\n", "\r\n") : note;
 
-            chkHadSex.Checked = w.HadSexList[date];
+            dayEditControl.HadSex = w.HadSexList[date];
 
-            sliderHealth.Value = w.Health[date];
+            dayEditControl.Health = w.Health[date];
 
-            currentCF = w.CFs[date];
-            rbtCF1.Checked = currentCF == CervicalFluid.Tacky;
-            rbtCF2.Checked = currentCF == CervicalFluid.Stretchy;
-            rbtCF3.Checked = currentCF == CervicalFluid.Water;
+            dayEditControl.CurrentCF = w.CFs[date];
 
             initialData = CollectDayData();
         }
@@ -196,74 +166,21 @@ namespace WomenCalendar
         {
             return new DayData()
             {
-                BBT = txtBBT.Text,
-                HadSex = chkHadSex.Checked,
-                Health = sliderHealth.Value,
-                Note = txtNote.Text,
+                BBT = dayEditControl.BBT,
+                HadSex = dayEditControl.HadSex,
+                Health = dayEditControl.Health,
+                Note = dayEditControl.Note,
+                CF = dayEditControl.CurrentCF,
+
                 HasMenstr = chkMentrustions.Checked,
                 MenstrLength = mensesEditControl.Length,
                 Egesta = mensesEditControl.EgestaSliderValue,
-                CF = currentCF,
             };
         }
 
         private bool ValidateData()
         {
-            HideTooltip(txtBBT);
-            if (!string.IsNullOrEmpty(txtBBT.Text))
-            {
-                double res;
-                string bbt = txtBBT.Text.Trim();
-                if (double.TryParse(bbt, out res))
-                {
-                    txtBBT.Text = bbt;
-                }
-                else
-                {
-                    bbt = txtBBT.Text.Trim().Replace(',', '.');
-                    if (double.TryParse(bbt, out res))
-                    {
-                        txtBBT.Text = bbt;
-                    }
-                    else
-                    {
-                        bbt = txtBBT.Text.Trim().Replace('.', ',');
-                        if (double.TryParse(bbt, out res))
-                        {
-                            txtBBT.Text = bbt;
-                        }
-                    }
-                }
-
-                if (double.TryParse(txtBBT.Text, out res))
-                {
-                    if (!BBTCollection.IsBBTInCorrectRange(res))
-                    {
-                        ShowTooltip(TEXT.Get["BBT_full"], TEXT.Get["Wrong_temperature"], txtBBT);
-                        return false;
-                    }
-                }
-                else
-                {
-                    ShowTooltip(TEXT.Get["BBT_full"], TEXT.Get["Wrong_temperature_entered"], txtBBT);
-                    return false;
-                }
-            }
-
-            if (chkMentrustions.Checked)
-            {
-                MenstruationPeriod period = Program.CurrentWoman.Menstruations.GetPeriodByDate(date);
-                if (period == null)
-                { // this is new period user want to add
-                    if (!Program.CurrentWoman.Menstruations.Add(date, mensesEditControl.Length))
-                    {
-                        return false;
-                    }
-                    Program.CurrentWoman.Menstruations.SetEgesta(date, mensesEditControl.EgestaSliderValue);
-                }
-            }
-
-            return true;
+            return dayEditControl.ValidateBBT();
         }
 
         /// <summary>
@@ -275,25 +192,18 @@ namespace WomenCalendar
             if (DataChanged)
             {
                 if (!ValidateData()) return;
-                SaveData();
+                if (!SaveData()) return;
                 Program.ApplicationForm.UpdateDayInformationIfFocused(date);
             }
 
             date = date.AddDays(days);
             LoadForm();
-            SetFocusTo(lastFocus);
-            lastFocus = txtBBT.Focused ? DayEditFocus.BBT : DayEditFocus.Note;
+            dayEditControl.SetFocusTo(dayEditControl.LastFocus);
         }
 
         private void DayEditForm_Load(object sender, EventArgs e)
         {
             LoadForm();
-        }
-
-        private void txtBBT_Leave(object sender, EventArgs e)
-        {
-            HideTooltip(txtBBT);
-            lastFocus = DayEditFocus.BBT;
         }
 
         private void btnPrevDay_Click(object sender, EventArgs e)
@@ -306,21 +216,6 @@ namespace WomenCalendar
             Rotate(1);
         }
 
-        private void rbtCF_Click(object sender, EventArgs e)
-        {
-            var rb = sender as RadioButton;
-            CervicalFluid newCF = (CervicalFluid)rb.Tag;
-            if (currentCF == newCF)
-            {
-                rb.Checked = false;
-                currentCF = CervicalFluid.Undefined;
-            }
-            else
-            {
-                currentCF = newCF;
-            }
-        }
-
         private void DayEditForm_Shown(object sender, EventArgs e)
         {
             SetFocusTo(defaultFocus);
@@ -330,27 +225,26 @@ namespace WomenCalendar
         {
             switch (focusTo)
             {
-                case DayEditFocus.Note:
-                    txtNote.Focus();
-                    mensesEditControl.UnHighlight();
-                    break;
-                case DayEditFocus.BBT:
-                    txtBBT.Focus();
-                    mensesEditControl.UnHighlight();
-                    break;
                 case DayEditFocus.Length:
                     mensesEditControl.Highlight();
+                    break;
+                default:
+                    mensesEditControl.UnHighlight();
+                    dayEditControl.SetFocusTo(focusTo);
                     break;
             }
         }
 
         private void chkMentrustions_CheckedChanged(object sender, EventArgs e)
         {
-            HideTooltip(chkMentrustions);
-            ShowOv(chkMentrustions.Checked);
+            ttButton.Hide(chkMentrustions);
+            ttButton.SetToolTip(chkMentrustions, 
+                chkMentrustions.Checked ? TEXT.Get["Cancel_these_menses"] : TEXT.Get["Set_day_as_menses_start"]);
+
+            ShowMenses(chkMentrustions.Checked);
         }
 
-        private void ShowOv(bool show)
+        private void ShowMenses(bool show)
         {
             if (chkMentrustions.Checked != show)
             {
@@ -360,7 +254,7 @@ namespace WomenCalendar
             if (show)
             {
                 this.Width = mensesEditControl.Location.X + mensesEditControl.Size.Width + 10;
-                chkMentrustions.Image = global::WomenCalendar.Properties.Resources.dropNot_Image;
+                chkMentrustions.Image = WomenCalendar.Properties.Resources.dropNot_Image;
                 chkMentrustions.Text = "<<          <<";
                 this.mensesEditControl.Visible = true;
                 if (initialData != null && initialData.HasMenstr != true)
@@ -371,15 +265,10 @@ namespace WomenCalendar
             else
             {
                 this.Width = chkMentrustions.Location.X + chkMentrustions.Size.Width + 10;
-                chkMentrustions.Image = global::WomenCalendar.Properties.Resources.drop_Image;
+                chkMentrustions.Image = WomenCalendar.Properties.Resources.drop_Image;
                 chkMentrustions.Text = ">>          >>";
                 this.mensesEditControl.Visible = false;
             }
-        }
-
-        private void txtNote_Leave(object sender, EventArgs e)
-        {
-            lastFocus = DayEditFocus.Note;
         }
 
         private bool DataChanged
@@ -389,19 +278,5 @@ namespace WomenCalendar
                 return !initialData.Equals(CollectDayData());
             }
         }
-
-        #region MouseEnter and MouseLeave event handlers
-
-        private void chkMentrustions_MouseEnter(object sender, EventArgs e)
-        {
-            ShowMenstButtonToolTip(chkMentrustions.Checked);
-        }
-
-        private void chkMentrustions_MouseLeave(object sender, EventArgs e)
-        {
-            HideTooltip(chkMentrustions);
-        }
-
-        #endregion
     }
 }

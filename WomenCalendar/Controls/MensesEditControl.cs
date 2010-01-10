@@ -6,7 +6,7 @@ using System.Data;
 using System.Text;
 using System.Windows.Forms;
 
-namespace WomenCalendar.Controls
+namespace WomenCalendar
 {
     public partial class MensesEditControl : UserControl, ITranslatable
     {

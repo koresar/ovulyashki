@@ -123,8 +123,7 @@ namespace WomenCalendar
         private void ShowDayEditForm(DayEditFocus focus)
         {
             Visible = false;
-            new DayEditForm(DayCell, focus).ShowDialog(this);
-            OwnerMonthsControl.Redraw();
+            new DayEditForm(DayCell.Date, focus).ShowDialog(this);
         }
 
         private void HideTooltip()
