@@ -67,6 +67,8 @@ namespace WomenCalendar
                 chkMentrustions.Checked ? TEXT.Get["Cancel_these_menses"] : TEXT.Get["Set_day_as_menses_start"]);
             this.dayEditControl.ReReadTranslations();
             this.mensesEditControl.ReReadTranslations();
+            this.btnCancel.Text = TEXT.Get["Cancel_this"];
+            this.btnOK.Text = TEXT.Get["OK_this"];
         }
 
         #endregion
