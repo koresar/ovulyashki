@@ -36,6 +36,16 @@
             this.chkMentrustions = new System.Windows.Forms.CheckBox();
             this.mensesEditControl = new WomenCalendar.MensesEditControl();
             this.dayEditControl = new WomenCalendar.DayEditControl();
+            this.flowLayoutPanel = new System.Windows.Forms.FlowLayoutPanel();
+            this.tableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
+            this.pnlRotation = new System.Windows.Forms.Panel();
+            this.pnlOkCancel = new System.Windows.Forms.Panel();
+            this.btnCancel = new System.Windows.Forms.Button();
+            this.btnOK = new System.Windows.Forms.Button();
+            this.flowLayoutPanel.SuspendLayout();
+            this.tableLayoutPanel.SuspendLayout();
+            this.pnlRotation.SuspendLayout();
+            this.pnlOkCancel.SuspendLayout();
             this.SuspendLayout();
             // 
             // lblBBT
@@ -60,7 +70,7 @@
             // btnPrevDay
             // 
             this.btnPrevDay.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btnPrevDay.Location = new System.Drawing.Point(5, 13);
+            this.btnPrevDay.Location = new System.Drawing.Point(1, 3);
             this.btnPrevDay.Name = "btnPrevDay";
             this.btnPrevDay.Size = new System.Drawing.Size(124, 23);
             this.btnPrevDay.TabIndex = 0;
@@ -71,7 +81,7 @@
             // btnNextDay
             // 
             this.btnNextDay.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btnNextDay.Location = new System.Drawing.Point(128, 13);
+            this.btnNextDay.Location = new System.Drawing.Point(125, 3);
             this.btnNextDay.Name = "btnNextDay";
             this.btnNextDay.Size = new System.Drawing.Size(119, 23);
             this.btnNextDay.TabIndex = 1;
@@ -84,7 +94,7 @@
             this.chkMentrustions.Appearance = System.Windows.Forms.Appearance.Button;
             this.chkMentrustions.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.chkMentrustions.Image = global::WomenCalendar.Properties.Resources.drop_Image;
-            this.chkMentrustions.Location = new System.Drawing.Point(247, 126);
+            this.chkMentrustions.Location = new System.Drawing.Point(253, 3);
             this.chkMentrustions.Name = "chkMentrustions";
             this.chkMentrustions.Size = new System.Drawing.Size(27, 65);
             this.chkMentrustions.TabIndex = 10013;
@@ -97,7 +107,7 @@
             // 
             this.mensesEditControl.EgestaSliderValue = 4;
             this.mensesEditControl.Length = 5;
-            this.mensesEditControl.Location = new System.Drawing.Point(275, 42);
+            this.mensesEditControl.Location = new System.Drawing.Point(286, 3);
             this.mensesEditControl.Name = "mensesEditControl";
             this.mensesEditControl.Size = new System.Drawing.Size(96, 249);
             this.mensesEditControl.TabIndex = 10014;
@@ -109,35 +119,103 @@
             this.dayEditControl.HadSex = false;
             this.dayEditControl.Health = 5;
             this.dayEditControl.LastFocus = WomenCalendar.DayEditFocus.Note;
-            this.dayEditControl.Location = new System.Drawing.Point(3, 42);
+            this.dayEditControl.Location = new System.Drawing.Point(3, 3);
             this.dayEditControl.Name = "dayEditControl";
             this.dayEditControl.Note = "";
-            this.dayEditControl.Size = new System.Drawing.Size(244, 333);
+            this.dayEditControl.Size = new System.Drawing.Size(244, 330);
             this.dayEditControl.TabIndex = 10015;
+            // 
+            // flowLayoutPanel
+            // 
+            this.flowLayoutPanel.AutoSize = true;
+            this.flowLayoutPanel.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.flowLayoutPanel.BackColor = System.Drawing.Color.Transparent;
+            this.flowLayoutPanel.Controls.Add(this.dayEditControl);
+            this.flowLayoutPanel.Controls.Add(this.chkMentrustions);
+            this.flowLayoutPanel.Controls.Add(this.mensesEditControl);
+            this.flowLayoutPanel.Location = new System.Drawing.Point(3, 35);
+            this.flowLayoutPanel.Name = "flowLayoutPanel";
+            this.flowLayoutPanel.Size = new System.Drawing.Size(385, 336);
+            this.flowLayoutPanel.TabIndex = 10016;
+            // 
+            // tableLayoutPanel
+            // 
+            this.tableLayoutPanel.AutoSize = true;
+            this.tableLayoutPanel.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.tableLayoutPanel.ColumnCount = 1;
+            this.tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanel.Controls.Add(this.pnlRotation, 0, 0);
+            this.tableLayoutPanel.Controls.Add(this.flowLayoutPanel, 0, 1);
+            this.tableLayoutPanel.Controls.Add(this.pnlOkCancel, 0, 2);
+            this.tableLayoutPanel.Location = new System.Drawing.Point(0, 0);
+            this.tableLayoutPanel.Name = "tableLayoutPanel";
+            this.tableLayoutPanel.RowCount = 3;
+            this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 32F));
+            this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 32F));
+            this.tableLayoutPanel.Size = new System.Drawing.Size(391, 406);
+            this.tableLayoutPanel.TabIndex = 10017;
+            // 
+            // pnlRotation
+            // 
+            this.pnlRotation.Controls.Add(this.btnPrevDay);
+            this.pnlRotation.Controls.Add(this.btnNextDay);
+            this.pnlRotation.Location = new System.Drawing.Point(3, 3);
+            this.pnlRotation.Name = "pnlRotation";
+            this.pnlRotation.Size = new System.Drawing.Size(245, 26);
+            this.pnlRotation.TabIndex = 2;
+            // 
+            // pnlOkCancel
+            // 
+            this.pnlOkCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.pnlOkCancel.Controls.Add(this.btnCancel);
+            this.pnlOkCancel.Controls.Add(this.btnOK);
+            this.pnlOkCancel.Location = new System.Drawing.Point(3, 377);
+            this.pnlOkCancel.Name = "pnlOkCancel";
+            this.pnlOkCancel.Size = new System.Drawing.Size(244, 26);
+            this.pnlOkCancel.TabIndex = 3;
+            // 
+            // btnCancel
+            // 
+            this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.btnCancel.Location = new System.Drawing.Point(163, 3);
+            this.btnCancel.Name = "btnCancel";
+            this.btnCancel.Size = new System.Drawing.Size(75, 23);
+            this.btnCancel.TabIndex = 1;
+            this.btnCancel.Text = "Cancel";
+            this.btnCancel.UseVisualStyleBackColor = true;
+            // 
+            // btnOK
+            // 
+            this.btnOK.Location = new System.Drawing.Point(5, 3);
+            this.btnOK.Name = "btnOK";
+            this.btnOK.Size = new System.Drawing.Size(75, 23);
+            this.btnOK.TabIndex = 0;
+            this.btnOK.Text = "OK";
+            this.btnOK.UseVisualStyleBackColor = true;
+            this.btnOK.Click += new System.EventHandler(this.btnOK_Click);
             // 
             // DayEditForm
             // 
-            this.AcceptButton = null;
+            this.AcceptButton = this.btnOK;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoSize = true;
+            this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.ClientSize = new System.Drawing.Size(375, 409);
-            this.Controls.Add(this.dayEditControl);
-            this.Controls.Add(this.mensesEditControl);
-            this.Controls.Add(this.chkMentrustions);
-            this.Controls.Add(this.btnNextDay);
-            this.Controls.Add(this.btnPrevDay);
+            this.CancelButton = this.btnCancel;
+            this.ClientSize = new System.Drawing.Size(396, 410);
+            this.Controls.Add(this.tableLayoutPanel);
             this.Controls.Add(this.lblBBT);
             this.Name = "DayEditForm";
             this.Text = "Edit this day";
             this.Load += new System.EventHandler(this.DayEditForm_Load);
             this.Shown += new System.EventHandler(this.DayEditForm_Shown);
-            this.Controls.SetChildIndex(this.lblBBT, 0);
-            this.Controls.SetChildIndex(this.btnPrevDay, 0);
-            this.Controls.SetChildIndex(this.btnNextDay, 0);
-            this.Controls.SetChildIndex(this.chkMentrustions, 0);
-            this.Controls.SetChildIndex(this.mensesEditControl, 0);
-            this.Controls.SetChildIndex(this.dayEditControl, 0);
+            this.flowLayoutPanel.ResumeLayout(false);
+            this.tableLayoutPanel.ResumeLayout(false);
+            this.tableLayoutPanel.PerformLayout();
+            this.pnlRotation.ResumeLayout(false);
+            this.pnlOkCancel.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -152,6 +230,12 @@
         private System.Windows.Forms.CheckBox chkMentrustions;
         private WomenCalendar.MensesEditControl mensesEditControl;
         private DayEditControl dayEditControl;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel;
+        private System.Windows.Forms.Panel pnlRotation;
+        private System.Windows.Forms.Panel pnlOkCancel;
+        private System.Windows.Forms.Button btnCancel;
+        private System.Windows.Forms.Button btnOK;
 
     }
 }

@@ -11,7 +11,7 @@ namespace WomenCalendar
 {
     public enum DayEditFocus { Note, BBT, Length };
 
-    public partial class DayEditForm : ModalBaseForm
+    public partial class DayEditForm : BaseForm, ITranslatable
     {
         class DayData
         {
@@ -57,9 +57,8 @@ namespace WomenCalendar
 
         #region ITranslatable interface impementation
 
-        public new void ReReadTranslations()
+        public void ReReadTranslations()
         {
-            base.ReReadTranslations();
             this.Text = TEXT.Get["Change_day"];
             this.btnPrevDay.Text = "<< " + TEXT.Get["Previous_day"];
             this.btnNextDay.Text = TEXT.Get["Next_day"] + " >>";
@@ -72,7 +71,7 @@ namespace WomenCalendar
 
         #endregion
 
-        public override void AcceptAction()
+        public void AcceptAction()
         {
             if (DataChanged)
             {
@@ -201,6 +200,66 @@ namespace WomenCalendar
             dayEditControl.SetFocusTo(dayEditControl.LastFocus);
         }
 
+        private void SetFocusTo(DayEditFocus focusTo)
+        {
+            switch (focusTo)
+            {
+                case DayEditFocus.Length:
+                    mensesEditControl.Highlight();
+                    break;
+                default:
+                    mensesEditControl.UnHighlight();
+                    dayEditControl.SetFocusTo(focusTo);
+                    break;
+            }
+        }
+
+        private void ShowMenses(bool show)
+        {
+            if (chkMentrustions.Checked != show)
+            {
+                chkMentrustions.Checked = show;
+            }
+
+            if (show)
+            {
+                //this.Width = mensesEditControl.Location.X + mensesEditControl.Size.Width + 10;
+                this.flowLayoutPanel.Controls.Add(this.mensesEditControl);
+                chkMentrustions.Image = WomenCalendar.Properties.Resources.dropNot_Image;
+                chkMentrustions.Text = "<<          <<";
+                this.mensesEditControl.Visible = true;
+                if (initialData != null && initialData.HasMenstr != true)
+                { // this is first time we expand the dialog, this means user want to add new menstr. day.
+                    SetFocusTo(DayEditFocus.Length);
+                }
+            }
+            else
+            {
+                //this.Width = chkMentrustions.Location.X + chkMentrustions.Size.Width + 10;
+                this.flowLayoutPanel.Controls.Remove(this.mensesEditControl);
+                chkMentrustions.Image = WomenCalendar.Properties.Resources.drop_Image;
+                chkMentrustions.Text = ">>          >>";
+                this.mensesEditControl.Visible = false;
+            }
+        }
+
+        private bool DataChanged
+        {
+            get
+            {
+                return !initialData.Equals(CollectDayData());
+            }
+        }
+
+        private void chkMentrustions_CheckedChanged(object sender, EventArgs e)
+        {
+            ttButton.Hide(chkMentrustions);
+            ttButton.SetToolTip(chkMentrustions,
+                chkMentrustions.Checked ? TEXT.Get["Cancel_these_menses"] : TEXT.Get["Set_day_as_menses_start"]);
+
+            ShowMenses(chkMentrustions.Checked);
+        }
+
         private void DayEditForm_Load(object sender, EventArgs e)
         {
             LoadForm();
@@ -221,62 +280,9 @@ namespace WomenCalendar
             SetFocusTo(defaultFocus);
         }
 
-        private void SetFocusTo(DayEditFocus focusTo)
+        private void btnOK_Click(object sender, EventArgs e)
         {
-            switch (focusTo)
-            {
-                case DayEditFocus.Length:
-                    mensesEditControl.Highlight();
-                    break;
-                default:
-                    mensesEditControl.UnHighlight();
-                    dayEditControl.SetFocusTo(focusTo);
-                    break;
-            }
-        }
-
-        private void chkMentrustions_CheckedChanged(object sender, EventArgs e)
-        {
-            ttButton.Hide(chkMentrustions);
-            ttButton.SetToolTip(chkMentrustions, 
-                chkMentrustions.Checked ? TEXT.Get["Cancel_these_menses"] : TEXT.Get["Set_day_as_menses_start"]);
-
-            ShowMenses(chkMentrustions.Checked);
-        }
-
-        private void ShowMenses(bool show)
-        {
-            if (chkMentrustions.Checked != show)
-            {
-                chkMentrustions.Checked = show;
-            }
-
-            if (show)
-            {
-                this.Width = mensesEditControl.Location.X + mensesEditControl.Size.Width + 10;
-                chkMentrustions.Image = WomenCalendar.Properties.Resources.dropNot_Image;
-                chkMentrustions.Text = "<<          <<";
-                this.mensesEditControl.Visible = true;
-                if (initialData != null && initialData.HasMenstr != true)
-                { // this is first time we expand the dialog, this means user want to add new menstr. day.
-                    SetFocusTo(DayEditFocus.Length);
-                }
-            }
-            else
-            {
-                this.Width = chkMentrustions.Location.X + chkMentrustions.Size.Width + 10;
-                chkMentrustions.Image = WomenCalendar.Properties.Resources.drop_Image;
-                chkMentrustions.Text = ">>          >>";
-                this.mensesEditControl.Visible = false;
-            }
-        }
-
-        private bool DataChanged
-        {
-            get
-            {
-                return !initialData.Equals(CollectDayData());
-            }
+            AcceptAction();
         }
     }
 }
