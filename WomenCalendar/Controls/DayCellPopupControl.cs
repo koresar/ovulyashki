@@ -222,15 +222,6 @@ namespace WomenCalendar
             }
         }
 
-        private void sliderEgestaAmount_Scroll(object sender, ScrollEventArgs e)
-        {
-            if (!initializing)
-            {
-                Program.CurrentWoman.Menstruations.SetEgesta(DayCell.Date, EgestaSliderValue);
-                ShowEgestaTooltip();
-            }
-        }
-
         private void sliderEgestaAmount_MouseEnter(object sender, EventArgs e)
         {
             ShowEgestaTooltip();
@@ -294,15 +285,6 @@ namespace WomenCalendar
             Update();
         }
 
-        private void sliderHealth_Scroll(object sender, ScrollEventArgs e)
-        {
-            if (!initializing)
-            {
-                Program.CurrentWoman.Health[DayCell.Date] = sliderHealth.Value;
-                ShowHealthTooltip();
-            }
-        }
-
         private void sliderHealth_MouseClick(object sender, MouseEventArgs e)
         {
             OwnerMonthsControl.FocusDate = DayCell.Date;
@@ -345,6 +327,24 @@ namespace WomenCalendar
         private void lblDay_MouseLeave(object sender, EventArgs e)
         {
             HideTooltip();
+        }
+
+        private void sliderEgestaAmount_ValueChanged(object sender, EventArgs e)
+        {
+            if (!initializing)
+            {
+                Program.CurrentWoman.Menstruations.SetEgesta(DayCell.Date, EgestaSliderValue);
+                ShowEgestaTooltip();
+            }
+        }
+
+        private void sliderHealth_ValueChanged(object sender, EventArgs e)
+        {
+            if (!initializing)
+            {
+                Program.CurrentWoman.Health[DayCell.Date] = sliderHealth.Value;
+                ShowHealthTooltip();
+            }
         }
     }
 }

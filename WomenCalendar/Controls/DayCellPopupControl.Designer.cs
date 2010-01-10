@@ -125,7 +125,7 @@
             this.sliderHealth.ThumbRoundRectSize = new System.Drawing.Size(8, 8);
             this.sliderHealth.Value = 5;
             this.sliderHealth.MouseLeave += new System.EventHandler(this.sliderHealth_MouseLeave);
-            this.sliderHealth.Scroll += new System.Windows.Forms.ScrollEventHandler(this.sliderHealth_Scroll);
+            this.sliderHealth.ValueChanged += new System.EventHandler(this.sliderHealth_ValueChanged);
             this.sliderHealth.MouseClick += new System.Windows.Forms.MouseEventHandler(this.sliderHealth_MouseClick);
             this.sliderHealth.MouseEnter += new System.EventHandler(this.sliderHealth_MouseEnter);
             // 
@@ -155,7 +155,7 @@
             this.sliderEgestaAmount.ThumbRoundRectSize = new System.Drawing.Size(8, 8);
             this.sliderEgestaAmount.Value = 0;
             this.sliderEgestaAmount.MouseLeave += new System.EventHandler(this.sliderEgestaAmount_MouseLeave);
-            this.sliderEgestaAmount.Scroll += new System.Windows.Forms.ScrollEventHandler(this.sliderEgestaAmount_Scroll);
+            this.sliderEgestaAmount.ValueChanged += new System.EventHandler(this.sliderEgestaAmount_ValueChanged);
             this.sliderEgestaAmount.MouseDown += new System.Windows.Forms.MouseEventHandler(this.sliderEgestaAmount_MouseDown);
             this.sliderEgestaAmount.MouseEnter += new System.EventHandler(this.sliderEgestaAmount_MouseEnter);
             // 

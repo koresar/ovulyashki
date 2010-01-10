@@ -32,32 +32,23 @@
             this.rbtCF3 = new System.Windows.Forms.RadioButton();
             this.rbtCF2 = new System.Windows.Forms.RadioButton();
             this.rbtCF1 = new System.Windows.Forms.RadioButton();
-            this.sliderEgestaAmount = new MB.Controls.ColorSlider();
             this.txtBBT = new System.Windows.Forms.TextBox();
             this.lblBBT = new System.Windows.Forms.Label();
             this.txtNote = new System.Windows.Forms.TextBox();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
-            this.numMenstruationLength = new System.Windows.Forms.NumericUpDown();
             this.btnPrevDay = new System.Windows.Forms.Button();
             this.btnNextDay = new System.Windows.Forms.Button();
             this.chkHadSex = new System.Windows.Forms.CheckBox();
             this.sliderHealth = new MB.Controls.ColorSlider();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.grpMenstr = new System.Windows.Forms.GroupBox();
-            this.pnlSurroundMentsLength = new System.Windows.Forms.Panel();
-            this.lblMenstruationLength = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
-            this.verticalLabel1 = new WomenCalendar.VerticalLabel();
             this.grpNote = new System.Windows.Forms.GroupBox();
             this.grpBT = new System.Windows.Forms.GroupBox();
             this.grpHealth = new System.Windows.Forms.GroupBox();
             this.chkMentrustions = new System.Windows.Forms.CheckBox();
             this.grpCF = new System.Windows.Forms.GroupBox();
             this.toolTipCF = new System.Windows.Forms.ToolTip(this.components);
-            ((System.ComponentModel.ISupportInitialize)(this.numMenstruationLength)).BeginInit();
-            this.grpMenstr.SuspendLayout();
-            this.pnlSurroundMentsLength.SuspendLayout();
+            this.mensesEditControl = new WomenCalendar.Controls.MensesEditControl();
             this.grpNote.SuspendLayout();
             this.grpBT.SuspendLayout();
             this.grpHealth.SuspendLayout();
@@ -109,32 +100,6 @@
             this.rbtCF1.UseVisualStyleBackColor = true;
             this.rbtCF1.Click += new System.EventHandler(this.rbtCF_Click);
             // 
-            // sliderEgestaAmount
-            // 
-            this.sliderEgestaAmount.BackColor = System.Drawing.Color.Transparent;
-            this.sliderEgestaAmount.BarInnerColor = System.Drawing.Color.Pink;
-            this.sliderEgestaAmount.BarOuterColor = System.Drawing.Color.DeepPink;
-            this.sliderEgestaAmount.BorderRoundRectSize = new System.Drawing.Size(8, 8);
-            this.sliderEgestaAmount.DarkenBarIfLess = false;
-            this.sliderEgestaAmount.ElapsedInnerColor = System.Drawing.Color.Pink;
-            this.sliderEgestaAmount.ElapsedOuterColor = System.Drawing.Color.DeepPink;
-            this.sliderEgestaAmount.LargeChange = ((uint)(5u));
-            this.sliderEgestaAmount.Location = new System.Drawing.Point(32, 19);
-            this.sliderEgestaAmount.Maximum = 4;
-            this.sliderEgestaAmount.Name = "sliderEgestaAmount";
-            this.sliderEgestaAmount.Orientation = System.Windows.Forms.Orientation.Vertical;
-            this.sliderEgestaAmount.Size = new System.Drawing.Size(30, 167);
-            this.sliderEgestaAmount.SmallChange = ((uint)(1u));
-            this.sliderEgestaAmount.TabIndex = 0;
-            this.sliderEgestaAmount.Text = "colorSlider1";
-            this.sliderEgestaAmount.ThumbInnerColor = System.Drawing.Color.White;
-            this.sliderEgestaAmount.ThumbOuterColor = System.Drawing.Color.Pink;
-            this.sliderEgestaAmount.ThumbRoundRectSize = new System.Drawing.Size(8, 8);
-            this.sliderEgestaAmount.Value = 0;
-            this.sliderEgestaAmount.MouseLeave += new System.EventHandler(this.sliderEgestaAmount_MouseLeave);
-            this.sliderEgestaAmount.Scroll += new System.Windows.Forms.ScrollEventHandler(this.sliderEgestaAmount_Scroll);
-            this.sliderEgestaAmount.MouseEnter += new System.EventHandler(this.sliderEgestaAmount_MouseEnter);
-            // 
             // txtBBT
             // 
             this.txtBBT.CausesValidation = false;
@@ -168,29 +133,6 @@
             this.toolTip.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Info;
             this.toolTip.UseAnimation = false;
             this.toolTip.UseFading = false;
-            // 
-            // numMenstruationLength
-            // 
-            this.numMenstruationLength.Location = new System.Drawing.Point(3, 25);
-            this.numMenstruationLength.Maximum = new decimal(new int[] {
-            9,
-            0,
-            0,
-            0});
-            this.numMenstruationLength.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.numMenstruationLength.Name = "numMenstruationLength";
-            this.numMenstruationLength.Size = new System.Drawing.Size(32, 20);
-            this.numMenstruationLength.TabIndex = 1;
-            this.numMenstruationLength.Value = new decimal(new int[] {
-            5,
-            0,
-            0,
-            0});
-            this.numMenstruationLength.ValueChanged += new System.EventHandler(this.numMenstruationLength_ValueChanged);
             // 
             // btnPrevDay
             // 
@@ -259,63 +201,6 @@
             this.label3.TabIndex = 10007;
             this.label3.Text = "Good";
             // 
-            // grpMenstr
-            // 
-            this.grpMenstr.Controls.Add(this.pnlSurroundMentsLength);
-            this.grpMenstr.Controls.Add(this.verticalLabel1);
-            this.grpMenstr.Controls.Add(this.sliderEgestaAmount);
-            this.grpMenstr.Location = new System.Drawing.Point(327, 42);
-            this.grpMenstr.Name = "grpMenstr";
-            this.grpMenstr.Size = new System.Drawing.Size(90, 243);
-            this.grpMenstr.TabIndex = 10008;
-            this.grpMenstr.TabStop = false;
-            this.grpMenstr.Text = "Menses";
-            // 
-            // pnlSurroundMentsLength
-            // 
-            this.pnlSurroundMentsLength.BackColor = System.Drawing.Color.Transparent;
-            this.pnlSurroundMentsLength.Controls.Add(this.lblMenstruationLength);
-            this.pnlSurroundMentsLength.Controls.Add(this.numMenstruationLength);
-            this.pnlSurroundMentsLength.Controls.Add(this.label1);
-            this.pnlSurroundMentsLength.Location = new System.Drawing.Point(2, 192);
-            this.pnlSurroundMentsLength.Name = "pnlSurroundMentsLength";
-            this.pnlSurroundMentsLength.Size = new System.Drawing.Size(86, 48);
-            this.pnlSurroundMentsLength.TabIndex = 10014;
-            this.pnlSurroundMentsLength.MouseLeave += new System.EventHandler(this.pnlSurroundMentsLength_MouseLeave);
-            this.pnlSurroundMentsLength.MouseEnter += new System.EventHandler(this.pnlSurroundMentsLength_MouseEnter);
-            // 
-            // lblMenstruationLength
-            // 
-            this.lblMenstruationLength.AutoSize = true;
-            this.lblMenstruationLength.BackColor = System.Drawing.Color.Transparent;
-            this.lblMenstruationLength.Location = new System.Drawing.Point(41, 27);
-            this.lblMenstruationLength.Name = "lblMenstruationLength";
-            this.lblMenstruationLength.Size = new System.Drawing.Size(29, 13);
-            this.lblMenstruationLength.TabIndex = 10011;
-            this.lblMenstruationLength.Text = "days";
-            this.lblMenstruationLength.MouseLeave += new System.EventHandler(this.lblMenstruationLength_MouseLeave);
-            this.lblMenstruationLength.MouseEnter += new System.EventHandler(this.lblMenstruationLength_MouseEnter);
-            // 
-            // label1
-            // 
-            this.label1.BackColor = System.Drawing.Color.Transparent;
-            this.label1.Location = new System.Drawing.Point(2, 5);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(82, 17);
-            this.label1.TabIndex = 10009;
-            this.label1.Text = "Length";
-            this.label1.MouseLeave += new System.EventHandler(this.label1_MouseLeave);
-            this.label1.MouseEnter += new System.EventHandler(this.label1_MouseEnter);
-            // 
-            // verticalLabel1
-            // 
-            this.verticalLabel1.Location = new System.Drawing.Point(7, 61);
-            this.verticalLabel1.Name = "verticalLabel1";
-            this.verticalLabel1.Size = new System.Drawing.Size(16, 83);
-            this.verticalLabel1.TabIndex = 10008;
-            this.verticalLabel1.Text = "Intensity";
-            this.verticalLabel1.TextDrawMode = WomenCalendar.DrawMode.BottomUp;
-            // 
             // grpNote
             // 
             this.grpNote.Controls.Add(this.txtNote);
@@ -381,19 +266,26 @@
             // 
             this.toolTipCF.ToolTipTitle = "Cervial fuild";
             // 
+            // mensesEditControl
+            // 
+            this.mensesEditControl.Location = new System.Drawing.Point(327, 42);
+            this.mensesEditControl.Name = "mensesEditControl";
+            this.mensesEditControl.Size = new System.Drawing.Size(96, 249);
+            this.mensesEditControl.TabIndex = 10014;
+            // 
             // DayEditForm
             // 
             this.AcceptButton = null;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.ClientSize = new System.Drawing.Size(427, 360);
+            this.ClientSize = new System.Drawing.Size(427, 356);
+            this.Controls.Add(this.mensesEditControl);
             this.Controls.Add(this.chkMentrustions);
             this.Controls.Add(this.btnNextDay);
             this.Controls.Add(this.chkHadSex);
             this.Controls.Add(this.btnPrevDay);
             this.Controls.Add(this.lblBBT);
-            this.Controls.Add(this.grpMenstr);
             this.Controls.Add(this.grpNote);
             this.Controls.Add(this.grpCF);
             this.Controls.Add(this.grpBT);
@@ -406,16 +298,12 @@
             this.Controls.SetChildIndex(this.grpBT, 0);
             this.Controls.SetChildIndex(this.grpCF, 0);
             this.Controls.SetChildIndex(this.grpNote, 0);
-            this.Controls.SetChildIndex(this.grpMenstr, 0);
             this.Controls.SetChildIndex(this.lblBBT, 0);
             this.Controls.SetChildIndex(this.btnPrevDay, 0);
             this.Controls.SetChildIndex(this.chkHadSex, 0);
             this.Controls.SetChildIndex(this.btnNextDay, 0);
             this.Controls.SetChildIndex(this.chkMentrustions, 0);
-            ((System.ComponentModel.ISupportInitialize)(this.numMenstruationLength)).EndInit();
-            this.grpMenstr.ResumeLayout(false);
-            this.pnlSurroundMentsLength.ResumeLayout(false);
-            this.pnlSurroundMentsLength.PerformLayout();
+            this.Controls.SetChildIndex(this.mensesEditControl, 0);
             this.grpNote.ResumeLayout(false);
             this.grpNote.PerformLayout();
             this.grpBT.ResumeLayout(false);
@@ -429,7 +317,6 @@
 
         #endregion
 
-        private MB.Controls.ColorSlider sliderEgestaAmount;
         private System.Windows.Forms.TextBox txtBBT;
         private System.Windows.Forms.Label lblBBT;
         private System.Windows.Forms.TextBox txtNote;
@@ -440,21 +327,16 @@
         private MB.Controls.ColorSlider sliderHealth;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.GroupBox grpMenstr;
         private System.Windows.Forms.GroupBox grpNote;
         private System.Windows.Forms.GroupBox grpBT;
         private System.Windows.Forms.GroupBox grpHealth;
-        private VerticalLabel verticalLabel1;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.NumericUpDown numMenstruationLength;
-        private System.Windows.Forms.Label lblMenstruationLength;
         private System.Windows.Forms.CheckBox chkMentrustions;
-        private System.Windows.Forms.Panel pnlSurroundMentsLength;
         private System.Windows.Forms.GroupBox grpCF;
         private System.Windows.Forms.ToolTip toolTipCF;
         private System.Windows.Forms.RadioButton rbtCF3;
         private System.Windows.Forms.RadioButton rbtCF2;
         private System.Windows.Forms.RadioButton rbtCF1;
+        private WomenCalendar.Controls.MensesEditControl mensesEditControl;
 
     }
 }

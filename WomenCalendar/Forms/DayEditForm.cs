@@ -72,9 +72,6 @@ namespace WomenCalendar
             this.chkHadSex.Text = TEXT.Get["Sex_was"];
             this.label2.Text = TEXT.Get["Bad_wellbeing"];
             this.label3.Text = TEXT.Get["Good_wellbeing"];
-            this.grpMenstr.Text = TEXT.Get["Menses"];
-            this.label1.Text = TEXT.Get["Length_cycle"];
-            this.verticalLabel1.Text = TEXT.Get["Intensity"];
             this.grpNote.Text = TEXT.Get["Note_for_day"];
             this.grpBT.Text = TEXT.Get["BBT_full"];
             this.grpHealth.Text = TEXT.Get["Wellbeing"];
@@ -87,22 +84,10 @@ namespace WomenCalendar
             this.toolTipCF.SetToolTip(this.rbtCF1, TEXT.Get["CF_full_tacky"]);
             this.toolTipCF.SetToolTip(this.rbtCF2, TEXT.Get["CF_full_stretchy"]);
             this.toolTipCF.SetToolTip(this.rbtCF3, TEXT.Get["CF_full_water"]);
+            this.mensesEditControl.ReReadTranslations();
         }
 
         #endregion
-
-        private int EgestaSliderValue
-        {
-            get
-            {
-                return 4 - sliderEgestaAmount.Value;
-            }
-            set
-            {
-                if (value < sliderEgestaAmount.Minimum || value > sliderEgestaAmount.Maximum) return;
-                sliderEgestaAmount.Value = 4 - value;
-            }
-        }
 
         public override void AcceptAction()
         {
@@ -126,8 +111,8 @@ namespace WomenCalendar
                 MenstruationPeriod period = w.Menstruations.GetPeriodByDate(date);
                 if (period != null)
                 {
-                    w.Menstruations.SetPeriodLength(period, (int)numMenstruationLength.Value);
-                    period.Egestas[date] = EgestaSliderValue;
+                    w.Menstruations.SetPeriodLength(period, mensesEditControl.Length);
+                    period.Egestas[date] = mensesEditControl.EgestaSliderValue;
                 }
             }
             else
@@ -150,20 +135,10 @@ namespace WomenCalendar
 
         #region Tooltip functions
 
-        private void ShowEgestaTooltip()
-        {
-            ShowTooltip(TEXT.Get["Excreta_amount"], EgestasCollection.EgestasNames[EgestaSliderValue], sliderEgestaAmount);
-        }
-
         private void ShowMenstButtonToolTip(bool isMenstr)
         {
             ShowTooltip(TEXT.Get["On_off_menses_button"], 
                 !isMenstr ? TEXT.Get["Set_day_as_menses_start"] : TEXT.Get["Cancel_these_menses"], chkMentrustions);
-        }
-
-        private void ShowLengthTooltip()
-        {
-            ShowTooltip(TEXT.Get["Menses_length"], TEXT.Get["Please_set_menses_length"], numMenstruationLength);
         }
 
         private void HideTooltip(IWin32Window control)
@@ -188,9 +163,9 @@ namespace WomenCalendar
             MenstruationPeriod period = w.Menstruations.GetPeriodByDate(date);
             if (period != null)
             {
-                numMenstruationLength.Value = period.Length;
+                mensesEditControl.Length = period.Length;
                 int egesta = period.Egestas[date];
-                EgestaSliderValue = egesta;
+                mensesEditControl.EgestaSliderValue = egesta;
                 ShowOv(true);
                 chkMentrustions.Enabled = period.StartDay == date;
             }
@@ -226,8 +201,8 @@ namespace WomenCalendar
                 Health = sliderHealth.Value,
                 Note = txtNote.Text,
                 HasMenstr = chkMentrustions.Checked,
-                MenstrLength = numMenstruationLength.Value,
-                Egesta = EgestaSliderValue,
+                MenstrLength = mensesEditControl.Length,
+                Egesta = mensesEditControl.EgestaSliderValue,
                 CF = currentCF,
             };
         }
@@ -280,11 +255,11 @@ namespace WomenCalendar
                 MenstruationPeriod period = Program.CurrentWoman.Menstruations.GetPeriodByDate(date);
                 if (period == null)
                 { // this is new period user want to add
-                    if (!Program.CurrentWoman.Menstruations.Add(date, (int)numMenstruationLength.Value))
+                    if (!Program.CurrentWoman.Menstruations.Add(date, mensesEditControl.Length))
                     {
                         return false;
                     }
-                    Program.CurrentWoman.Menstruations.SetEgesta(date, EgestaSliderValue);
+                    Program.CurrentWoman.Menstruations.SetEgesta(date, mensesEditControl.EgestaSliderValue);
                 }
             }
 
@@ -313,11 +288,6 @@ namespace WomenCalendar
         private void DayEditForm_Load(object sender, EventArgs e)
         {
             LoadForm();
-        }
-
-        private void sliderEgestaAmount_Scroll(object sender, ScrollEventArgs e)
-        {
-            ShowEgestaTooltip();
         }
 
         private void txtBBT_Leave(object sender, EventArgs e)
@@ -351,11 +321,6 @@ namespace WomenCalendar
             }
         }
 
-        private void numMenstruationLength_ValueChanged(object sender, EventArgs e)
-        {
-            lblMenstruationLength.Text = TEXT.GetDaysString((int)numMenstruationLength.Value);
-        }
-
         private void DayEditForm_Shown(object sender, EventArgs e)
         {
             SetFocusTo(defaultFocus);
@@ -367,16 +332,14 @@ namespace WomenCalendar
             {
                 case DayEditFocus.Note:
                     txtNote.Focus();
-                    pnlSurroundMentsLength.BackColor = Color.Transparent;
+                    mensesEditControl.UnHighlight();
                     break;
                 case DayEditFocus.BBT:
                     txtBBT.Focus();
-                    pnlSurroundMentsLength.BackColor = Color.Transparent;
+                    mensesEditControl.UnHighlight();
                     break;
                 case DayEditFocus.Length:
-                    numMenstruationLength.Focus();
-                    pnlSurroundMentsLength.BackColor = Color.Red;
-                    ShowLengthTooltip();
+                    mensesEditControl.Highlight();
                     break;
             }
         }
@@ -396,10 +359,10 @@ namespace WomenCalendar
 
             if (show)
             {
-                this.Width = grpMenstr.Location.X + grpMenstr.Size.Width + 10;
+                this.Width = mensesEditControl.Location.X + mensesEditControl.Size.Width + 10;
                 chkMentrustions.Image = global::WomenCalendar.Properties.Resources.dropNot_Image;
                 chkMentrustions.Text = "<<          <<";
-                this.grpMenstr.Visible = true;
+                this.mensesEditControl.Visible = true;
                 if (initialData != null && initialData.HasMenstr != true)
                 { // this is first time we expand the dialog, this means user want to add new menstr. day.
                     SetFocusTo(DayEditFocus.Length);
@@ -410,7 +373,7 @@ namespace WomenCalendar
                 this.Width = chkMentrustions.Location.X + chkMentrustions.Size.Width + 10;
                 chkMentrustions.Image = global::WomenCalendar.Properties.Resources.drop_Image;
                 chkMentrustions.Text = ">>          >>";
-                this.grpMenstr.Visible = false;
+                this.mensesEditControl.Visible = false;
             }
         }
 
@@ -429,16 +392,6 @@ namespace WomenCalendar
 
         #region MouseEnter and MouseLeave event handlers
 
-        private void sliderEgestaAmount_MouseEnter(object sender, EventArgs e)
-        {
-            ShowEgestaTooltip();
-        }
-
-        private void sliderEgestaAmount_MouseLeave(object sender, EventArgs e)
-        {
-            HideTooltip(sliderEgestaAmount);
-        }
-
         private void chkMentrustions_MouseEnter(object sender, EventArgs e)
         {
             ShowMenstButtonToolTip(chkMentrustions.Checked);
@@ -447,36 +400,6 @@ namespace WomenCalendar
         private void chkMentrustions_MouseLeave(object sender, EventArgs e)
         {
             HideTooltip(chkMentrustions);
-        }
-
-        private void lblMenstruationLength_MouseEnter(object sender, EventArgs e)
-        {
-            ShowLengthTooltip();
-        }
-
-        private void label1_MouseEnter(object sender, EventArgs e)
-        {
-            ShowLengthTooltip();
-        }
-
-        private void pnlSurroundMentsLength_MouseEnter(object sender, EventArgs e)
-        {
-            ShowLengthTooltip();
-        }
-
-        private void lblMenstruationLength_MouseLeave(object sender, EventArgs e)
-        {
-            HideTooltip(numMenstruationLength);
-        }
-
-        private void label1_MouseLeave(object sender, EventArgs e)
-        {
-            HideTooltip(numMenstruationLength);
-        }
-
-        private void pnlSurroundMentsLength_MouseLeave(object sender, EventArgs e)
-        {
-            HideTooltip(numMenstruationLength);
         }
 
         #endregion

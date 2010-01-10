@@ -182,9 +182,13 @@ namespace MB.Controls
             {
                 if (value >= barMinimum & value <= barMaximum)
                 {
-                    trackerValue = value;
-                    if (ValueChanged != null) ValueChanged(this, new EventArgs());
-                    Invalidate();
+                    int prevValue = trackerValue;
+                    if (prevValue != value)
+                    {
+                        trackerValue = value;
+                        if (ValueChanged != null) ValueChanged(this, new EventArgs());
+                        Invalidate();
+                    }
                 }
                 else throw new ArgumentOutOfRangeException("Value is outside appropriate range (min, max)");
             }
@@ -208,10 +212,9 @@ namespace MB.Controls
                 if (value < barMaximum)
                 {
                     barMinimum = value;
-                    if (trackerValue < barMinimum)
+                    if (Value < barMinimum)
                     {
-                        trackerValue = barMinimum;
-                        if (ValueChanged != null) ValueChanged(this, new EventArgs());
+                        Value = barMinimum;
                     }
                     Invalidate();
                 }
@@ -239,8 +242,7 @@ namespace MB.Controls
                     barMaximum = value;
                     if (trackerValue > barMaximum)
                     {
-                        trackerValue = barMaximum;
-                        if (ValueChanged != null) ValueChanged(this, new EventArgs());
+                        Value = barMaximum;
                     }
                     Invalidate();
                 }
@@ -674,12 +676,12 @@ namespace MB.Controls
                 //set up thumbRect aproprietly
                 if (barOrientation == Orientation.Horizontal)
                 {
-                    int TrackX = (((trackerValue - barMinimum) * (ClientRectangle.Width - thumbSize)) / (barMaximum - barMinimum));
+                    int TrackX = (((Value - barMinimum) * (ClientRectangle.Width - thumbSize)) / (barMaximum - barMinimum));
                     thumbRect = new Rectangle(TrackX, 1, thumbSize - 1, ClientRectangle.Height - 3);
                 }
                 else
                 {
-                    int TrackY = (((trackerValue - barMinimum) * (ClientRectangle.Height - thumbSize)) / (barMaximum - barMinimum));
+                    int TrackY = (((Value - barMinimum) * (ClientRectangle.Height - thumbSize)) / (barMaximum - barMinimum));
                     thumbRect = new Rectangle(1, TrackY, ClientRectangle.Width - 3, thumbSize - 1);
                 }
 
@@ -856,8 +858,7 @@ namespace MB.Controls
             if (e.Button == MouseButtons.Left)
             {
                 Capture = true;
-                if (Scroll != null) Scroll(this, new ScrollEventArgs(ScrollEventType.ThumbTrack, trackerValue));
-                if (ValueChanged != null) ValueChanged(this, new EventArgs());
+                if (Scroll != null) Scroll(this, new ScrollEventArgs(ScrollEventType.ThumbTrack, Value));
                 OnMouseMove(e);
             }
         }
@@ -883,21 +884,24 @@ namespace MB.Controls
                              (float)
                              ((barOrientation == Orientation.Horizontal ? ClientSize.Width : ClientSize.Height) -
                               2 * margin);
-                trackerValue = (int)(p * coef + barMinimum + 0.5);
+                int tmpTrackerValue = (int)(p * coef + barMinimum + 0.5);
 
-                if (trackerValue <= barMinimum)
+                if (tmpTrackerValue <= barMinimum)
                 {
-                    trackerValue = barMinimum;
+                    Value = barMinimum;
                     set = ScrollEventType.First;
                 }
-                else if (trackerValue >= barMaximum)
+                else if (tmpTrackerValue >= barMaximum)
                 {
-                    trackerValue = barMaximum;
+                    Value = barMaximum;
                     set = ScrollEventType.Last;
                 }
+                else
+                {
+                    Value = tmpTrackerValue;
+                }
 
-                if (Scroll != null) Scroll(this, new ScrollEventArgs(set, trackerValue));
-                if (ValueChanged != null) ValueChanged(this, new EventArgs());
+                if (Scroll != null) Scroll(this, new ScrollEventArgs(set, Value));
             }
             Invalidate();
         }
@@ -911,8 +915,7 @@ namespace MB.Controls
             base.OnMouseUp(e);
             Capture = false;
             mouseInThumbRegion = IsPointInRect(e.Location, thumbRect);
-            if (Scroll != null) Scroll(this, new ScrollEventArgs(ScrollEventType.EndScroll, trackerValue));
-            if (ValueChanged != null) ValueChanged(this, new EventArgs());
+            if (Scroll != null) Scroll(this, new ScrollEventArgs(ScrollEventType.EndScroll, Value));
             Invalidate();
         }
 
