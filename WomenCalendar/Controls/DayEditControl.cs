@@ -5,6 +5,7 @@ using System.Drawing;
 using System.Data;
 using System.Text;
 using System.Windows.Forms;
+using System.Globalization;
 
 namespace WomenCalendar
 {
@@ -109,19 +110,17 @@ namespace WomenCalendar
 
             double res;
             string bbt = txtBBT.Text.Trim();
+            var currentSeparator = CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator;
+            if (!bbt.Contains(currentSeparator))
+            {
+                bbt = bbt.Replace(",", currentSeparator).Replace(".", currentSeparator);
+            }
+            
             if (!double.TryParse(bbt, out res))
             {
-                bbt = txtBBT.Text.Trim().Replace(',', '.');
-                if (!double.TryParse(bbt, out res))
-                {
-                    bbt = txtBBT.Text.Trim().Replace('.', ',');
-                    if (!double.TryParse(bbt, out res))
-                    {
-                        ttBBT.Show(TEXT.Get["Wrong_temperature_entered"], txtBBT, txtBBT.Width, txtBBT.Height);
-                        currentBBT = string.Empty;
-                        return false;
-                    }
-                }
+                ttBBT.Show(TEXT.Get["Wrong_temperature_entered"], txtBBT, txtBBT.Width, txtBBT.Height);
+                currentBBT = string.Empty;
+                return false;
             }
 
             if (!BBTCollection.IsBBTInCorrectRange(res))
