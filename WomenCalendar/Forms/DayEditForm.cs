@@ -140,12 +140,14 @@ namespace WomenCalendar
                 mensesEditControl.Length = period.Length;
                 int egesta = period.Egestas[date];
                 mensesEditControl.EgestaSliderValue = egesta;
-                ShowMenses(true);
+                chkMentrustions.Checked = true;
+                chkSchedules.Checked = true;
                 chkMentrustions.Enabled = period.StartDay == date;
             }
             else
             {
-                ShowMenses(false);
+                chkMentrustions.Checked = false;
+                chkSchedules.Checked = false;
                 chkMentrustions.Enabled = true;
             }
 
@@ -159,6 +161,8 @@ namespace WomenCalendar
             dayEditControl.Health = w.Health[date];
 
             dayEditControl.CurrentCF = w.CFs[date];
+
+            editScheduleControl.InitialDate = date;
 
             initialData = CollectDayData();
         }
@@ -218,11 +222,6 @@ namespace WomenCalendar
 
         private void ShowMenses(bool show)
         {
-            if (chkMentrustions.Checked != show)
-            {
-                chkMentrustions.Checked = show;
-            }
-
             if (show)
             {
                 //this.Width = mensesEditControl.Location.X + mensesEditControl.Size.Width + 10;
@@ -242,6 +241,35 @@ namespace WomenCalendar
                 chkMentrustions.Image = WomenCalendar.Properties.Resources.drop_Image;
                 chkMentrustions.Text = ">>          >>";
                 this.mensesEditControl.Visible = false;
+            }
+        }
+
+        private void ShowSchedules(bool show)
+        {
+            if (show)
+            {
+                this.Visible = false;
+                //this.Width = mensesEditControl.Location.X + mensesEditControl.Size.Width + 10;
+                this.flowLayoutPanel.Controls.Add(this.editScheduleControl);
+                this.flowLayoutPanel.Controls.SetChildIndex(this.editScheduleControl, 0);
+                chkSchedules.Image = WomenCalendar.Properties.Resources.dropNot_Image;
+                chkSchedules.Text = "<<          <<";
+                this.editScheduleControl.Visible = true;
+                var loc = this.Location;
+                this.Location = new Point(loc.X - this.editScheduleControl.Width, loc.Y);
+                this.Visible = true;
+            }
+            else
+            {
+                this.Visible = false;
+                //this.Width = chkMentrustions.Location.X + chkMentrustions.Size.Width + 10;
+                this.flowLayoutPanel.Controls.Remove(this.editScheduleControl);
+                chkSchedules.Image = WomenCalendar.Properties.Resources.drop_Image;
+                chkSchedules.Text = ">>          >>";
+                this.editScheduleControl.Visible = false;
+                var loc = this.Location;
+                this.Location = new Point(loc.X + this.editScheduleControl.Width, loc.Y);
+                this.Visible = true;
             }
         }
 
@@ -285,6 +313,11 @@ namespace WomenCalendar
         private void btnOK_Click(object sender, EventArgs e)
         {
             AcceptAction();
+        }
+
+        private void chkSchedules_CheckedChanged(object sender, EventArgs e)
+        {
+            ShowSchedules(chkSchedules.Checked);
         }
     }
 }
