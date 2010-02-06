@@ -27,25 +27,13 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_33744DD0FB7E1FD26FB8D2EB565E44E8"
-        "OwnerKey" = "8:_9C763F4F87CE4EB8AEB574D0A518B8A2"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_430BB2CA70F7CEB5A7D03535C4BB1286"
-        "OwnerKey" = "8:_9C763F4F87CE4EB8AEB574D0A518B8A2"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_5D3457C50E0B46958AA7DD0BB1BE2C56"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_63368D27CE984644F49CD7E2A7A643AE"
+        "MsmKey" = "8:_71B9ACB6442C215DFD2F5A8EAC12B078"
         "OwnerKey" = "8:_9C763F4F87CE4EB8AEB574D0A518B8A2"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -57,8 +45,26 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_8ABDE4BE58387AA50FC2D6DC10294FC1"
+        "OwnerKey" = "8:_9C763F4F87CE4EB8AEB574D0A518B8A2"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_938CFAD1DFE42CA4E577A1B26A8358D3"
+        "OwnerKey" = "8:_9C763F4F87CE4EB8AEB574D0A518B8A2"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_9C763F4F87CE4EB8AEB574D0A518B8A2"
         "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_D093630C9F98F13AA91E81BEF8CC7084"
+        "OwnerKey" = "8:_9C763F4F87CE4EB8AEB574D0A518B8A2"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -69,12 +75,6 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_F9427C259BDC6520234FAC6AFEB4BD1D"
-        "OwnerKey" = "8:_9C763F4F87CE4EB8AEB574D0A518B8A2"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_9C763F4F87CE4EB8AEB574D0A518B8A2"
         "MsmSig" = "8:_UNDEFINED"
@@ -82,25 +82,25 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_430BB2CA70F7CEB5A7D03535C4BB1286"
+        "OwnerKey" = "8:_938CFAD1DFE42CA4E577A1B26A8358D3"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_F9427C259BDC6520234FAC6AFEB4BD1D"
+        "OwnerKey" = "8:_8ABDE4BE58387AA50FC2D6DC10294FC1"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_33744DD0FB7E1FD26FB8D2EB565E44E8"
+        "OwnerKey" = "8:_71B9ACB6442C215DFD2F5A8EAC12B078"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_63368D27CE984644F49CD7E2A7A643AE"
+        "OwnerKey" = "8:_D093630C9F98F13AA91E81BEF8CC7084"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -229,68 +229,6 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_33744DD0FB7E1FD26FB8D2EB565E44E8"
-            {
-            "AssemblyRegister" = "3:1"
-            "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:ICSharpCode.SharpZipLib, Version=0.85.5.452, Culture=neutral, PublicKeyToken=1b03e6acf1164f73, processorArchitecture=MSIL"
-                "ScatterAssemblies"
-                {
-                    "_33744DD0FB7E1FD26FB8D2EB565E44E8"
-                    {
-                    "Name" = "8:ICSharpCode.SharpZipLib.dll"
-                    "Attributes" = "3:512"
-                    }
-                }
-            "SourcePath" = "8:ICSharpCode.SharpZipLib.dll"
-            "TargetName" = "8:"
-            "Tag" = "8:"
-            "Folder" = "8:_0C363D3A242941509ED0851336DD9D80"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:TRUE"
-            "IsolateTo" = "8:"
-            }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_430BB2CA70F7CEB5A7D03535C4BB1286"
-            {
-            "AssemblyRegister" = "3:1"
-            "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:ZedGraph, Version=5.1.4.0, Culture=neutral, PublicKeyToken=02a83cbd123fcd60, processorArchitecture=MSIL"
-                "ScatterAssemblies"
-                {
-                    "_430BB2CA70F7CEB5A7D03535C4BB1286"
-                    {
-                    "Name" = "8:ZedGraph.dll"
-                    "Attributes" = "3:512"
-                    }
-                }
-            "SourcePath" = "8:ZedGraph.dll"
-            "TargetName" = "8:"
-            "Tag" = "8:"
-            "Folder" = "8:_0C363D3A242941509ED0851336DD9D80"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:TRUE"
-            "IsolateTo" = "8:"
-            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_5D3457C50E0B46958AA7DD0BB1BE2C56"
             {
             "SourcePath" = "8:..\\WomenCalendar\\en_lang.xml"
@@ -311,20 +249,20 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_63368D27CE984644F49CD7E2A7A643AE"
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_71B9ACB6442C215DFD2F5A8EAC12B078"
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:CarlosAg.ExcelXmlWriter, Version=1.0.0.6, Culture=neutral"
+            "AssemblyAsmDisplayName" = "8:ICSharpCode.SharpZipLib, Version=0.85.5.452, Culture=neutral, PublicKeyToken=1b03e6acf1164f73, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_63368D27CE984644F49CD7E2A7A643AE"
+                    "_71B9ACB6442C215DFD2F5A8EAC12B078"
                     {
-                    "Name" = "8:CarlosAg.ExcelXmlWriter.dll"
+                    "Name" = "8:ICSharpCode.SharpZipLib.dll"
                     "Attributes" = "3:512"
                     }
                 }
-            "SourcePath" = "8:CarlosAg.ExcelXmlWriter.dll"
+            "SourcePath" = "8:ICSharpCode.SharpZipLib.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_0C363D3A242941509ED0851336DD9D80"
@@ -362,34 +300,14 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_F13BCCE6D3FD48C0B15437A52443DF53"
-            {
-            "SourcePath" = "8:..\\WomenCalendar\\Resources\\ovulashki_logo.ico"
-            "TargetName" = "8:ovulashki_logo.ico"
-            "Tag" = "8:"
-            "Folder" = "8:_0C363D3A242941509ED0851336DD9D80"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_F9427C259BDC6520234FAC6AFEB4BD1D"
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_8ABDE4BE58387AA50FC2D6DC10294FC1"
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
             "AssemblyAsmDisplayName" = "8:XPanderControl, Version=1.2.0.0, Culture=neutral"
                 "ScatterAssemblies"
                 {
-                    "_F9427C259BDC6520234FAC6AFEB4BD1D"
+                    "_8ABDE4BE58387AA50FC2D6DC10294FC1"
                     {
                     "Name" = "8:XPanderControl.dll"
                     "Attributes" = "3:512"
@@ -411,6 +329,88 @@
             "Register" = "3:1"
             "Exclude" = "11:FALSE"
             "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_938CFAD1DFE42CA4E577A1B26A8358D3"
+            {
+            "AssemblyRegister" = "3:1"
+            "AssemblyIsInGAC" = "11:FALSE"
+            "AssemblyAsmDisplayName" = "8:ZedGraph, Version=5.1.4.0, Culture=neutral, processorArchitecture=MSIL"
+                "ScatterAssemblies"
+                {
+                    "_938CFAD1DFE42CA4E577A1B26A8358D3"
+                    {
+                    "Name" = "8:ZedGraph.dll"
+                    "Attributes" = "3:512"
+                    }
+                }
+            "SourcePath" = "8:ZedGraph.dll"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_0C363D3A242941509ED0851336DD9D80"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_D093630C9F98F13AA91E81BEF8CC7084"
+            {
+            "AssemblyRegister" = "3:1"
+            "AssemblyIsInGAC" = "11:FALSE"
+            "AssemblyAsmDisplayName" = "8:CarlosAg.ExcelXmlWriter, Version=1.0.0.6, Culture=neutral"
+                "ScatterAssemblies"
+                {
+                    "_D093630C9F98F13AA91E81BEF8CC7084"
+                    {
+                    "Name" = "8:CarlosAg.ExcelXmlWriter.dll"
+                    "Attributes" = "3:512"
+                    }
+                }
+            "SourcePath" = "8:CarlosAg.ExcelXmlWriter.dll"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_0C363D3A242941509ED0851336DD9D80"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_F13BCCE6D3FD48C0B15437A52443DF53"
+            {
+            "SourcePath" = "8:..\\WomenCalendar\\Resources\\ovulashki_logo.ico"
+            "TargetName" = "8:ovulashki_logo.ico"
+            "Tag" = "8:"
+            "Folder" = "8:_0C363D3A242941509ED0851336DD9D80"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
         }
@@ -503,14 +503,14 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:Ovulyashki"
-        "ProductCode" = "8:{9DFEA721-9D3B-4C33-90D2-C8723747B5F7}"
-        "PackageCode" = "8:{24C9F9FA-1910-4557-993C-56445B788169}"
+        "ProductCode" = "8:{A51E1A12-88F6-4E2B-8135-967722026D3D}"
+        "PackageCode" = "8:{F370AE30-4D5D-4FA6-AA10-1179F6E29BAA}"
         "UpgradeCode" = "8:{482BFF03-47BE-4DA1-AA44-E102C604F5DC}"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:FALSE"
         "InstallAllUsers" = "11:TRUE"
-        "ProductVersion" = "8:1.6.5"
+        "ProductVersion" = "8:1.6.6"
         "Manufacturer" = "8:RulezDev"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:http://ovulyashki.dp.ua/"
