@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Linq;
 
 namespace WomenCalendar
 {
@@ -151,6 +152,11 @@ namespace WomenCalendar
                 }
             }
             return true;
+        }
+
+        public override int GetHashCode()
+        {
+            return this.Aggregate(0, (seed, period) => seed ^ period.GetHashCode());
         }
     }
 }

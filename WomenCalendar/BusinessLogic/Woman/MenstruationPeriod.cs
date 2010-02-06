@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Xml.Serialization;
+using System.Linq;
 
 namespace WomenCalendar
 {
@@ -10,9 +11,16 @@ namespace WomenCalendar
         public const int NormalMinimalPeriod = 21;
         public const int NormalMaximalPeriod = 35;
 
+        public int Length
+        {
+            get
+            {
+                return Egestas.Count;
+            }
+        }
+
         public DateTime StartDay { get; set; }
-        private int length;
-        public EgestasCollection Egestas = new EgestasCollection();
+        public EgestasCollection Egestas { get; set; }
         public bool HasPregnancy { get; set; }
 
         [XmlIgnore]
@@ -20,34 +28,13 @@ namespace WomenCalendar
 
         public MenstruationPeriod()
         {
+            Egestas = new EgestasCollection();
         }
 
         public MenstruationPeriod(DateTime startDay, int length)
         {
             StartDay = startDay;
-            Length = length;
-
             Egestas = new EgestasCollection(startDay, length);
-        }
-
-        public int Length
-        {
-            get
-            {
-                return length;
-            }
-            set
-            {
-                if (length == value) return;
-                if (value > length)
-                {
-                    for (int i = length; i < value; i++)
-                    {
-                        Egestas[StartDay.AddDays(i)] = EgestasCollection.MaximumEgestaValue / 2;
-                    }
-                }
-                length = value;
-            }
         }
 
         public DateTime LastDay
@@ -87,7 +74,6 @@ namespace WomenCalendar
             {
                 Egestas = this.Egestas.Clone() as EgestasCollection,
                 HasPregnancy = this.HasPregnancy,
-                length = this.length,
                 ovulationDate = this.ovulationDate,
                 StartDay = this.StartDay
             };
@@ -101,9 +87,25 @@ namespace WomenCalendar
             var secondValue = obj as MenstruationPeriod;
             return secondValue != null &&
                 secondValue.HasPregnancy.Equals(this.HasPregnancy) &&
-                secondValue.Length.Equals(this.Length) &&
                 secondValue.StartDay.Equals(this.StartDay) &&
                 secondValue.Egestas.Equals(this.Egestas);
+        }
+
+        public override int GetHashCode()
+        {
+            return HasPregnancy.GetHashCode() ^ StartDay.GetHashCode() ^ Egestas.GetHashCode();
+        }
+
+        public void SetLength(int value)
+        {
+            if (Length == value) return;
+            if (value > Length)
+            {
+                for (int i = Length; i < value; i++)
+                {
+                    Egestas[StartDay.AddDays(i)] = EgestasCollection.MaximumEgestaValue / 2;
+                }
+            }
         }
     }
 }

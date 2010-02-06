@@ -32,7 +32,11 @@ namespace WomenCalendar
             return secondValue != null &&
                 secondValue.StartDay.Equals(this.StartDay) &&
                 secondValue.LastDay.Equals(this.LastDay);
+        }
 
+        public override int GetHashCode()
+        {
+            return StartDay.GetHashCode() ^ LastDay.GetHashCode();
         }
     }
 }

@@ -1,37 +1,37 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <translation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <item id="Ovulyashki">Ovulyashki</item>
-  <item id="Ovulyashki_of">Ovulations of princess named {0}</item>
-  <item id="What_a_cicle">What a cicle!</item>
+  <item id="Ovulyashki_of">Ovulations of the princess named {0}</item>
+  <item id="What_a_cicle">What a cycle!</item>
   <item id="Cycle_more_than">Are you sure you want set a cycle length more than {0} days?</item>
   <item id="Days_plural">1:day,*:days</item>
   <item id="My_auto_cycle">My automatic cycle: </item>
   <item id="What_a_situation">Wow! What a weird situation!</item>
-  <item id="Future_pregnancy_day">This is future day! There are some doubts you will get pregnant exactly that day.</item>
+  <item id="Future_pregnancy_day">This is the future day! You probably won't get pregnant exactly on this day.</item>
   <item id="No_no_no">No-no-no!</item>
-  <item id="Already_pregnant_after">You already have pregnancy just {0} days after that one.</item>
+  <item id="Already_pregnant_after">You set your pregnancy day {0} days ago.</item>
   <item id="Date_double_colon">Date: </item>
   <item id="Today_parentheses"> (today)</item>
-  <item id="This_is_N_menstr_day">Menses day #{0}</item>
+  <item id="This_is_N_menstr_day">Red tide day #{0}</item>
   <item id="Preg_week_number_N">Pregnancy week #{0}</item>
-  <item id="Conception_day">This is conception day! Hooray!</item>
+  <item id="Conception_day">This is the conception day! Hooray!</item>
   <item id="Probable_birth_date">Probable birth day is 
 {0}.</item>
-  <item id="Zodiac_will_be">Zodiac sign will be {0}</item>
+  <item id="Zodiac_will_be">The Zodiac sign will be {0}</item>
   <item id="Boy">boy</item>
   <item id="Girl">girl</item>
-  <item id="Child_gender_will_be">and its gender will be {0}</item>
+  <item id="Child_gender_will_be">and its gender will be a {0}</item>
   <item id="Cycle_day_number_N">Cycle day #{0}.</item>
   <item id="Cycle_length_days">This cycle lasted {0} {1}</item>
-  <item id="Possible_menst">Menses are possible</item>
-  <item id="Estimated_ovulation_day">This is estimated day of ovulation</item>
-  <item id="Boy_conception_day">More chances to conceive boy</item>
-  <item id="Girl_conception_day">More chances to conceive girl</item>
+  <item id="Possible_menst">Red tide is possible</item>
+  <item id="Estimated_ovulation_day">This is the estimated day of ovulation</item>
+  <item id="Boy_conception_day">Better chances to conceive a boy</item>
+  <item id="Girl_conception_day">Better chances to conceive a girl</item>
   <item id="If_conceive_info">If you conceive this day
-it will be born about {0}.
+it will be born approximately {0}.
 Zodiac sign will be {1}.</item>
   <item id="Note_semicolon">Note: </item>
-  <item id="Aries">Овен</item>
+  <item id="Aries">Aries</item>
   <item id="Taurus">Taurus</item>
   <item id="Gemini">Gemini</item>
   <item id="Cancer">Cancer</item>
@@ -44,29 +44,29 @@ Zodiac sign will be {1}.</item>
   <item id="Aquarius">Aquarius</item>
   <item id="Pisces">Pisces</item>
   <item id="Woman_files">Woman files</item>
-  <item id="Save_woman_question">Would you like to save this woman before proceed?</item>
+  <item id="Save_woman_question">Would you like to save this woman before proceeding?</item>
   <item id="Error">Error!</item>
   <item id="Wrong_password_question">Wrong password! Try again?
 
-If you click 'No' then we will create new woman.</item>
+If you click 'No' then we will create a new woman.</item>
   <item id="Edit_woman">Edit woman</item>
   <item id="Excel_files">Excel files</item>
   <item id="CSV_files">Comma Separated Values files</item>
-  <item id="Point_the_file">Point the file</item>
+  <item id="Point_the_file">Name the file</item>
   <item id="File_ext_must_to_be">File extention must be either .xls or .csv!</item>
   <item id="Cant_export">Can't export the file. Error message states:</item>
   <item id="Pregn_week_help">Help for {0} week pregnancy from site...</item>
   <item id="Are_you_sure">Are you sure?</item>
-  <item id="Shorten_pregn_question">If you click 'Yes' it will be impossible to shorten pregnancy term. Are you sure you want to shorten pregnancy term?</item>
-  <item id="Menstr_after_day">After this day you already have menses.</item>
+  <item id="Shorten_pregn_question">If you click 'Yes' it will be impossible to enlarge pregnancy term. Are you sure you want to shorten pregnancy term?</item>
+  <item id="Menstr_after_day">After this day you already have red tides.</item>
   <item id="Are_you_crazy">Are you crazy?</item>
-  <item id="Msg_short_menstr_period">It is less than {0} {1} between menses! Such a small cycle we will not consider while forecasting.</item>
-  <item id="Msg_large_menstr_period">It is more than {0} {1} between menses! Such a tremendous cycle we will not consider while forecasting.</item>
-  <item id="Future_day_question">This is future day! It had not yet arrived. Are you kind of Nostradamus?</item>
+  <item id="Msg_short_menstr_period">It has been less than {0} {1} between red tides! Such an itsy bitsy cycle! We will not consider this while forecasting.</item>
+  <item id="Msg_large_menstr_period">It has been more than {0} {1} between red tides! Such a tremendous cycle! We will not consider this while forecasting.</item>
+  <item id="Future_day_question">This is the future day! It hasn't arrived yet. Are you Nostradamus?</item>
   <item id="Are_you_sure_capital">
 ARE YOU SURE ABOUT THIS?</item>
   <item id="Date">Date</item>
-  <item id="Menses">Menses</item>
+  <item id="Menses">Red tides</item>
   <item id="Intensity">Intensity</item>
   <item id="Had_sex">Had sex</item>
   <item id="BBT">BBT</item>
@@ -74,11 +74,11 @@ ARE YOU SURE ABOUT THIS?</item>
   <item id="Note">Note</item>
   <item id="Yes">Yes</item>
   <item id="No">No</item>
-  <item id="Egesta_amount_0">Day without excreta</item>
-  <item id="Egesta_amount_1">Few excreta</item>
-  <item id="Egesta_amount_2">So-so excreta</item>
-  <item id="Egesta_amount_3">Medium excreta</item>
-  <item id="Egesta_amount_4">Much excreta</item>
+  <item id="Egesta_amount_0">Day without excretion</item>
+  <item id="Egesta_amount_1">A little excretion</item>
+  <item id="Egesta_amount_2">So-so excretion</item>
+  <item id="Egesta_amount_3">Average excretion</item>
+  <item id="Egesta_amount_4">A lot of excretion</item>
   <item id="Amount_of_bleeding">Amount of bleeding</item>
   <item id="Sex">Sex</item>
   <item id="Sex_was">I had sex that day!</item>
@@ -89,7 +89,7 @@ ARE YOU SURE ABOUT THIS?</item>
   <item id="Not_set_f">Not set</item>
   <item id="Click_to_edit">Click to edit</item>
   <item id="Special_button_title">Additional functions button</item>
-  <item id="Special_button_descr">You can see some different graphs by this button.</item>
+  <item id="Special_button_descr">You can see some different graphs with this button.</item>
   <item id="Copy_to_clipboard">Copy to clipboard</item>
   <item id="Print_setup">Print setup...</item>
   <item id="Print_dialog">Print...</item>
@@ -102,22 +102,22 @@ ARE YOU SURE ABOUT THIS?</item>
   <item id="Cycle_length_graph">Cycle length graph</item>
   <item id="Wellbeing_graph">Wellbeing graph</item>
   <item id="Thanks_to_components">
-Thanks Michal Brylka for ColorSlider: http://www.codeproject.com/KB/selection/ColorSlider.aspx
+Thanks to Michal Brylka for ColorSlider: http://www.codeproject.com/KB/selection/ColorSlider.aspx
 
-Thanks randz for VerticalLabel: http://www.codeproject.com/KB/miscctrl/Vertical_Label_Control.aspx
+Thanks to randz for VerticalLabel: http://www.codeproject.com/KB/miscctrl/Vertical_Label_Control.aspx
 
-Thanks BobK, Darren Martz, John Champion, Jerry Vos, Chris Champoin, Brian Chappell, Ronan O Sullivan, Benjamin Mayrargue for ZegGraph: https://sourceforge.net/projects/zedgraph/ , http://zedgraph.org
+Thanks to BobK, Darren Martz, John Champion, Jerry Vos, Chris Champoin, Brian Chappell, Ronan O Sullivan, Benjamin Mayrargue for ZegGraph: https://sourceforge.net/projects/zedgraph/ , http://zedgraph.org
 
-Thanks mkg for XPanderControl: http://www.codeproject.com/KB/cpp/XPander.aspx
+Thanks to mkg for XPanderControl: http://www.codeproject.com/KB/cpp/XPander.aspx
 
-Thanks Carlos Aguilar Mares for ExcelXmlWriter: http://www.carlosag.net/Tools/ExcelXmlWriter/
+Thanks to Carlos Aguilar Mares for ExcelXmlWriter: http://www.carlosag.net/Tools/ExcelXmlWriter/
 
-Thanks Mike Krueger, John Reilly for SharpZipLib: http://icsharpcode.net/
+Thanks to Mike Krueger, John Reilly for SharpZipLib: http://icsharpcode.net/
   </item>
-  <item id="Wrong_temperature">A human being can't have such temperature. Or may be you are lizard?</item>
-  <item id="Wrong_temperature_entered">What garbage you have entered? This is not a temperature!</item>
-  <item id="Set_menses_start">Set menses start</item>
-  <item id="Cancel_menses">Cancel menses</item>
+  <item id="Wrong_temperature">A human being can't have this temperature. Maybe you are a lizard?</item>
+  <item id="Wrong_temperature_entered">What garbage have you entered? This is not a temperature!</item>
+  <item id="Set_menses_start">Set red tides start</item>
+  <item id="Cancel_menses">Cancel red tides</item>
   <item id="Set_last_pregn_day">Set last pregnancy day</item>
   <item id="Set_pregnancy">Set pregnancy</item>
   <item id="Cancel_pregnancy">Cancel pregnancy</item>
@@ -135,10 +135,10 @@ Thanks Mike Krueger, John Reilly for SharpZipLib: http://icsharpcode.net/
   <item id="To_dates">To</item>
   <item id="Show_from">Show from</item>
   <item id="Visit_site">Visit Ovulyashki site</item>
-  <item id="Leave_thanks">Leave some thanks words</item>
+  <item id="Leave_thanks">Say thanks</item>
   <item id="Tell_about_bug">Tell us about a bug</item>
   <item id="Ask_feature_request">Request a feature</item>
-  <item id="Ask_question">Ask us question</item>
+  <item id="Ask_question">Ask us a question</item>
   <item id="Thanks_to">Thanks to...</item>
   <item id="About_application">About application</item>
   <item id="Export_this">Export</item>
@@ -169,11 +169,11 @@ Thanks Mike Krueger, John Reilly for SharpZipLib: http://icsharpcode.net/
   <item id="Legend_conception_day">Conception day</item>
   <item id="Legend_pregnancy">Pregnancy</item>
   <item id="Legend_ovulation_day">Ovulation day</item>
-  <item id="Legend_future_menses">Forecasted menses day</item>
-  <item id="Legend_min_conception_probapility">Minimal conception brobability day</item>
-  <item id="Legend_menses">Menses</item>
-  <item id="Legend_conceive_girl_day">More chances to conceive girl</item>
-  <item id="Legend_conceive_boy_day">More chances to conceive boy</item>
+  <item id="Legend_future_menses">Forecasted red tide day</item>
+  <item id="Legend_min_conception_probapility">Minimal conception probability day</item>
+  <item id="Legend_menses">Red tide</item>
+  <item id="Legend_conceive_girl_day">Better chances to conceive a girl</item>
+  <item id="Legend_conceive_boy_day">Better chances to conceive a boy</item>
   <item id="Legend_had_sex">Had sex that day</item>
   <item id="Legend_note">There is note</item>
   <item id="Legend_selected_day">Selected (focused) day</item>
@@ -187,16 +187,16 @@ Thanks Mike Krueger, John Reilly for SharpZipLib: http://icsharpcode.net/
   <item id="What_is_your_name">What is your name?</item>
   <item id="Enter_your_pwd">Enter your password (if need to be protected)</item>
   <item id="Creating_new_woman">Creating new woman</item>
-  <item id="Excreta_amount">Excreta amount</item>
-  <item id="On_off_menses_button">On/Off menses button</item>
-  <item id="Set_day_as_menses_start">Set this day as menses start</item>
-  <item id="Cancel_these_menses">Cancel these menses</item>
-  <item id="Menses_length">Menses length</item>
-  <item id="Please_set_menses_length">Please set menses length!</item>
-  <item id="Have_menses_after_pregn">Hey! You have menses after that day! This is very-very weird to set pregnancy here.</item>
-  <item id="Pregn_on_menses">There is very low possibility to conceive at the menses day!</item>
+  <item id="Excreta_amount">Amount of excretion</item>
+  <item id="On_off_menses_button">On/Off red tide button</item>
+  <item id="Set_day_as_menses_start">Set this day as red tide start</item>
+  <item id="Cancel_these_menses">Cancel this red tide</item>
+  <item id="Menses_length">Red tide length</item>
+  <item id="Please_set_menses_length">Please set red tide length!</item>
+  <item id="Have_menses_after_pregn">Hey! You have red tide after that day! It is very-very weird to set a pregnancy here.</item>
+  <item id="Pregn_on_menses">There is a very low possibility to conceive at the red tide day!</item>
   <item id="Update_application">Update Application</item>
-  <item id="Update_found_text">There is newer Ovulyashki version {0} (you have {1} now).
+  <item id="Update_found_text">There is a newer Ovulyashki version {0} (you have {1} now).
 It was released {2}.
 Its size only {3} MBytes.
 And it was already downloaded {4} times.
@@ -204,13 +204,13 @@ Change log:
 {5}
 
 Would you like to download it now?</item>
-  <item id="Latest_application">You are already useing latest Ovulyashki. Be happy!</item>
+  <item id="Latest_application">You are already using the latest version of Ovulyashki. Be happy!</item>
   <item id="Unable_to_update">Unable to update. Here is the error from the system: {0}</item>
   <item id="CF">CF</item>
   <item id="CF_tacky">T</item>
   <item id="CF_stretchy">S</item>
   <item id="CF_water">W</item>
-  <item id="CF_full">Cervial fuild</item>
+  <item id="CF_full">Cervical fluid</item>
   <item id="CF_full_tacky">Tacky</item>
   <item id="CF_full_stretchy">Stretchy</item>
   <item id="CF_full_water">Water</item>

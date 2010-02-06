@@ -319,8 +319,9 @@ namespace WomenCalendar
                     prevMenses = Menstruations.GetClosestPeriodBeforeDay(date);
                 }
 
-                if (prevMenses != null)
-                {
+                if (prevMenses != null && Math.Abs((date - prevMenses.LastDay).Days) <= ManualPeriodLength)
+                { // The pregnancy must start from last cycle start.
+                  // Also we must be sure is was not so long time ago since last cycle.
                     prevMenses.HasPregnancy = true;
                     return Conceptions.Add(prevMenses.StartDay);
                 }

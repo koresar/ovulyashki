@@ -307,13 +307,11 @@ namespace WomenCalendar
         public void Redraw()
         {
             CellPopupControl.Visible = false;
-            
+            CellPopupControl.Forbidden = true;
 
             // These lines are fix for Mono. The only way I found to readraw all calendar.
             this.Visible = false;
             this.Visible = true;
-            CellPopupControl.Visible = false;
-
 
             // These two lines work under MS .Net only.
             //Invalidate(true);
@@ -452,6 +450,12 @@ namespace WomenCalendar
         private void ToolStripCycleLengthGraph_Click(object sender, EventArgs e)
         {
             new CycleLengthForm().Show();
+        }
+
+        protected override void OnPaint(PaintEventArgs e)
+        {
+            base.OnPaint(e);
+            CellPopupControl.Forbidden = false;
         }
     }
 }

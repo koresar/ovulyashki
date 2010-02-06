@@ -163,26 +163,14 @@ namespace WomenCalendar
 
             if (IsMenstruationDay)
             {
-                if (Egesta > 0)
-                {
-                    Image image = GetImageFromCache("drop_Image");
-                    ImageAttributes attr = new ImageAttributes();
-                    ColorMatrix cMatrix = new ColorMatrix();
-                    // alpha
-                    cMatrix.Matrix33 = ((float)Egesta) / (EgestasCollection.MaximumEgestaValue);
-                    attr.SetColorMatrix(cMatrix);
-                    pe.Graphics.DrawImage(image, new Rectangle(2, 20, 10, 10), 0, 0, 14, 14, GraphicsUnit.Pixel, attr);
-                }
-                else if (Egesta == 0)
-                {
-                    pe.Graphics.DrawEllipse(Pens.Red, 3, 24, 5, 5);
-                }
+                Image image = GetImageFromCache("egestaDrop" + Egesta);
+                pe.Graphics.DrawImage(image, new Rectangle(2, 18, 10, 13), 0, 0, 13, 17, GraphicsUnit.Pixel);
             }
 
             if (IsConceptionDay)
             {
                 Image image = GetImageFromCache("baby_Image");
-                pe.Graphics.DrawImage(image, new Rectangle(2, 20, 10, 10), 0, 0, 48, 48, GraphicsUnit.Pixel);
+                pe.Graphics.DrawImage(image, 1, 20, image.Width, image.Height);
             }
             else if (IsPregnancyDay)
             {
@@ -194,27 +182,17 @@ namespace WomenCalendar
             else if (IsPredictedAsGirlDay)
             {
                 Image image = GetImageFromCache("girl_Image");
-                pe.Graphics.DrawImage(image, new Rectangle(2, 20, 10, 10), 0, 0, 48, 48, GraphicsUnit.Pixel);
+                pe.Graphics.DrawImage(image, 1, 20, image.Width, image.Height);
             }
             else if (IsPredictedAsBoyDay)
             {
                 Image image = GetImageFromCache("boy_Image");
-                pe.Graphics.DrawImage(image, new Rectangle(2, 20, 10, 10), 0, 0, 48, 48, GraphicsUnit.Pixel);
+                pe.Graphics.DrawImage(image, 1, 20, image.Width, image.Height);
             }
 
             if (IsHaveNote)
             {
                 pe.Graphics.DrawImage(GetImageFromCache("note_Image"), 23, 2);
-            }
-            else
-            {
-                Image image = GetImageFromCache("note_Image");
-                ImageAttributes attr = new ImageAttributes();
-                ColorMatrix cMatrix = new ColorMatrix();
-                // alpha
-                cMatrix.Matrix33 = 0.1F;
-                attr.SetColorMatrix(cMatrix);
-                pe.Graphics.DrawImage(image, new Rectangle(23, 2, 7, 7), 0, 0, 7, 7, GraphicsUnit.Pixel, attr);
             }
 
             if (IsPredictedAsMenstruationDay)

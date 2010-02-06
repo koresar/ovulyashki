@@ -160,6 +160,7 @@ namespace WomenCalendar
             {
                 chbDefaultWoman.Checked = false;
                 monthControl.Redraw();
+                UpdateDayInformationIfFocused(monthControl.FocusDate);
             }
         }
 

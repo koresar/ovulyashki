@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Xml.Serialization;
+using System.Linq;
 
 namespace WomenCalendar
 {
@@ -87,6 +88,11 @@ namespace WomenCalendar
                 }
             }
             return true;
+        }
+
+        public override int GetHashCode()
+        {
+            return this.Count ^ this.Aggregate(0, (seed, pair) => seed ^ pair.Key.GetHashCode() ^ pair.Value.GetHashCode());
         }
     }
 }

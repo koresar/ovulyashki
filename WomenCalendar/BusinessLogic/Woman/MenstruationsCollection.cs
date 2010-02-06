@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Windows.Forms;
+using System.Linq;
 
 namespace WomenCalendar
 {
@@ -41,7 +42,7 @@ namespace WomenCalendar
                 int distance = (closestPeriod.StartDay - date).Days;
                 if (distance < length)
                 {
-                    newPeriod.Length = distance;
+                    newPeriod.SetLength(distance);
                 }
 
                 Insert(IndexOf(closestPeriod), newPeriod); // we must always keep the collection sorted.
@@ -119,7 +120,7 @@ namespace WomenCalendar
         {
             if (period != null && period.Length != length)
             {
-                period.Length = length;
+                period.SetLength(length);
                 FireCollectionChangedEvent();
                 return period;
             }
@@ -246,6 +247,11 @@ namespace WomenCalendar
                 }
             }
             return true;
+        }
+
+        public override int GetHashCode()
+        {
+            return this.Count.GetHashCode() ^ this.Aggregate(0, (seed, period) => seed ^ period.GetHashCode());
         }
     }
 }

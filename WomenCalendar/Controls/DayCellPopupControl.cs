@@ -40,6 +40,8 @@ namespace WomenCalendar
             }
         }
 
+        public bool Forbidden { get; set; }
+
         public DayCellPopupControl()
         {
             InitializeComponent();
@@ -55,6 +57,8 @@ namespace WomenCalendar
 
         public void ShowAbove(DayCellControl dayCell)
         {
+            if (Forbidden) return;
+
             initializing = true;
 
             HideTooltip();
