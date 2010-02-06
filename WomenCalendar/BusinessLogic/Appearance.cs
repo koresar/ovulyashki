@@ -47,6 +47,14 @@ namespace WomenCalendar
         public Color BackSafeSex = Color.LightGreen;
         [XmlIgnore]
         public Color BackEmpty = Color.White;
+        [XmlIgnore]
+        public Color BackHadSex = Color.White;
+        [XmlIgnore]
+        public Color BackHaveNote = Color.White;
+        [XmlIgnore]
+        public Color BackBoyDay = Color.White;
+        [XmlIgnore]
+        public Color BackGirlDay = Color.White;
 
         [XmlElement("BackConceptionDay")]
         public string ConceptionDay
@@ -90,6 +98,31 @@ namespace WomenCalendar
             get { return ColorTranslator.ToHtml(BackEmpty); }
             set { BackEmpty = ColorTranslator.FromHtml(value); }
         }
+        [XmlElement("BackHadSex")]
+        public string HadSex
+        {
+            get { return ColorTranslator.ToHtml(BackHadSex); }
+            set { BackHadSex = ColorTranslator.FromHtml(value); }
+        }
+        [XmlElement("BackHaveNote")]
+        public string HaveNote
+        {
+            get { return ColorTranslator.ToHtml(BackHaveNote); }
+            set { BackHaveNote = ColorTranslator.FromHtml(value); }
+        }
+        [XmlElement("BackBoyDay")]
+        public string BoyDay
+        {
+            get { return ColorTranslator.ToHtml(BackBoyDay); }
+            set { BackBoyDay = ColorTranslator.FromHtml(value); }
+        }
+        [XmlElement("BackGirlDay")]
+        public string GirlDay
+        {
+            get { return ColorTranslator.ToHtml(BackGirlDay); }
+            set { BackGirlDay = ColorTranslator.FromHtml(value); }
+        }
+
 
         public bool SetColor(string colorID, Color color)
         {

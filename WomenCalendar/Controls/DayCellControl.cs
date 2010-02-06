@@ -138,7 +138,12 @@ namespace WomenCalendar
         {
             var appearance = Program.Settings == null || Program.Settings.DayCellAppearance == null ? 
                 new DayCellAppearance() : Program.Settings.DayCellAppearance;
-            BackColor = IsConceptionDay ? appearance.BackConceptionDay :
+            BackColor = 
+                IsHadSex ? appearance.BackHadSex :
+                IsHaveNote ? appearance.BackHaveNote :
+                IsPredictedAsBoyDay ? appearance.BackBoyDay :
+                IsPredictedAsGirlDay ? appearance.BackGirlDay :
+                IsConceptionDay ? appearance.BackConceptionDay :
                 IsPregnancyDay ? appearance.BackPregnancyDay :
                 IsMenstruationDay ? appearance.BackMenstruationDay :
                 IsPredictedAsMenstruationDay ? appearance.BackPredictedMenstruationDay :
