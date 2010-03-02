@@ -50,10 +50,8 @@ namespace WomenCalendar
             { // CF is not infomative. Use BBT method only.
                 return PredictByBBTOnly(rises, ovCalend);
             }
-            else
-            {
-                return PredictByCFAndBBT(rises, ovCF, ovCalend);
-            }
+
+            return PredictByCFAndBBT(rises, ovCF, ovCalend);
         }
 
         private DateTime PredictByCFAndBBT(List<Rise> rises, DateTime ovCF, DateTime ovCalend)
@@ -201,13 +199,6 @@ namespace WomenCalendar
 
         private List<Rise> GetBBTRises(DateTime ovCalend)
         {
-            //t
-            //e           *********
-            //m *********
-            //p          *
-            //e
-            //r days->   O
-            //a          v
             var rises = new List<Rise>();
             double previousBBT = 0;
             DateTime previousDate = NoDate;
@@ -241,7 +232,7 @@ namespace WomenCalendar
                     isRecordingRise = true;
                     continue;
                 }
-                else // if (move == TemperatureMove.Down)
+                else
                 {
                     if (isRecordingRise)
                     {

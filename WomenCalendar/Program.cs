@@ -24,8 +24,6 @@ namespace WomenCalendar
     {
         public static MainForm ApplicationForm;
 
-        public static ResourceManager IconResource;
-
         public static ApplicationSettings Settings;
 
         private static string settingsFileName;
@@ -318,8 +316,6 @@ namespace WomenCalendar
                     ApplicationForm.WindowState = FormWindowState.Maximized;
                 }
 
-                IconResource = Resources.ResourceManager;
-                //new System.Resources.ResourceManager(System.Reflection.Assembly.GetExecutingAssembly());
                 Application.Run(ApplicationForm);
             }
             catch (Exception ex)

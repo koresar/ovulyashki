@@ -19,6 +19,8 @@ namespace WomenCalendar
 
         public MenstruationsCollection Menstruations { get; set; }
 
+        public SchedulesCollection Schedules { get; set; }
+
         public ConceptionsCollection Conceptions { get; set; }
 
         [XmlIgnore()]

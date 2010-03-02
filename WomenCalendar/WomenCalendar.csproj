@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>9.0.30729</ProductVersion>
+    <ProductVersion>9.0.21022</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{4CE98859-074E-4D90-A377-F15A404EDE09}</ProjectGuid>
     <OutputType>WinExe</OutputType>
@@ -85,6 +85,8 @@
     <Compile Include="BusinessLogic\Woman\CFCollection.cs" />
     <Compile Include="BusinessLogic\Woman\OvulationDetector.cs" />
     <Compile Include="BusinessLogic\Woman\OneDayInfo.cs" />
+    <Compile Include="BusinessLogic\Woman\Schedule.cs" />
+    <Compile Include="BusinessLogic\Woman\SchedulesCollection.cs" />
     <Compile Include="Controls\ColoredSchedulerCalendarControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -129,6 +131,18 @@
     </Compile>
     <Compile Include="Controls\MensesEditControl.Designer.cs">
       <DependentUpon>MensesEditControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ScheduleControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\ScheduleControl.Designer.cs">
+      <DependentUpon>ScheduleControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\SchedulesListControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\SchedulesListControl.Designer.cs">
+      <DependentUpon>SchedulesListControl.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\VerticalLabel.cs">
       <SubType>Component</SubType>
@@ -296,6 +310,14 @@
       <DependentUpon>MensesEditControl.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="Controls\ScheduleControl.resx">
+      <DependentUpon>ScheduleControl.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\SchedulesListControl.resx">
+      <DependentUpon>SchedulesListControl.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\AboutForm.resx">
       <DependentUpon>AboutForm.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -344,7 +366,6 @@
     <None Include="Resources\drop.Image.ico" />
     <None Include="Resources\drop.Image1.ico" />
     <None Include="Resources\drop.Image11.ico" />
-    <None Include="Resources\BOY_iMAGE.bmp" />
     <None Include="Resources\baby_Image.bmp" />
     <None Include="Resources\calendar.xml" />
     <None Include="Resources\baby_Image1.bmp" />
@@ -353,18 +374,14 @@
     <None Include="Resources\calendarEdit_Image.gif" />
     <None Include="Resources\drop.Image.gif" />
     <None Include="Resources\about.png" />
-    <None Include="Resources\drop1.png" />
     <None Include="Resources\Boy.png" />
     <None Include="Resources\baby.png" />
+    <None Include="Resources\Checkmark-32.png" />
     <Content Include="Resources\drop16.bmp" />
     <Content Include="en_lang.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <None Include="Resources\updateGreen.png" />
-    <None Include="Resources\drop2.png" />
-    <None Include="Resources\drop3.png" />
-    <None Include="Resources\drop4.png" />
-    <None Include="Resources\drop5.png" />
     <None Include="Resources\egestaDrop0.png" />
     <None Include="Resources\egestaDrop1.png" />
     <None Include="Resources\egestaDrop2.png" />
@@ -393,7 +410,6 @@
     <None Include="Resources\drop_Image1.bmp" />
     <None Include="Resources\note_Image1.bmp" />
     <None Include="Resources\ovulashki_logo.ico" />
-    <None Include="Resources\girl_Image.bmp" />
     <None Include="Resources\month_dropdown.bmp" />
     <None Include="Resources\note_Image.bmp" />
     <None Include="Resources\drop_Image.bmp" />

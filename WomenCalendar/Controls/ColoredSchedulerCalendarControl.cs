@@ -6,6 +6,7 @@ using System.Data;
 using System.Text;
 using System.Windows.Forms;
 using System.Globalization;
+using WomenCalendar.Properties;
 
 namespace WomenCalendar.Controls
 {
@@ -14,6 +15,7 @@ namespace WomenCalendar.Controls
         private const int CellSize = 10;
 
         private Woman w = Program.CurrentWoman;
+        private Schedule currentSchedule;
         public DateTime StartMonth { get; set; }
 
         public Font monthFont;
@@ -28,41 +30,29 @@ namespace WomenCalendar.Controls
         public ColoredSchedulerCalendarControl()
         {
             InitializeComponent();
-            SetStyle(ControlStyles.AllPaintingInWmPaint | ControlStyles.Opaque | ControlStyles.DoubleBuffer | ControlStyles.UserPaint, true);
+            SetStyle(ControlStyles.AllPaintingInWmPaint | ControlStyles.UserPaint, true);
         }
 
         protected override void OnPaint(PaintEventArgs pe)
         {
             var appearance = Program.Settings == null ? new DayCellAppearance() : Program.Settings.DayCellAppearance;
-
-            var backEmptyBrush = new SolidBrush(appearance.BackEmpty);
-            pe.Graphics.FillRectangle(backEmptyBrush, 0, 0, Size.Width, Size.Height);
+            var checkmark = Resources.ResourceManager.GetObject("Checkmark_32") as Image;
 
             var monthNames = CultureInfo.CurrentUICulture.DateTimeFormat.AbbreviatedMonthNames;
             var month = StartMonth;
             var leftSpace = this.Width - 31 * CellSize;
             var xOffset = leftSpace > 0 ? leftSpace - 1 : 0;
-            var yOffset = CellSize;
-            for (int m = 0; m <= 12; m++)
+            var yOffset = CellSize + 2;
+            for (int m = 0; m < 12; m++)
             {
-                pe.Graphics.DrawLine(Pens.Black, 
-                    new PointF(xOffset, m * CellSize + yOffset),
-                    new PointF(xOffset + 31 * CellSize, m * CellSize + yOffset));
-
-                if (m < 12)
-                {
                     var s = monthNames[month.Month - 1];
                     pe.Graphics.DrawString(s, MonthFont, Brushes.Black, 
-                        new Point(0, m * CellSize + yOffset));
+                        new Point(0, m * CellSize + yOffset - 2));
                     month = month.AddMonths(1);
-                }
+                
             }
-            for (int d = 0; d <= 31; d++)
+            for (int d = 1; d <= 31; d++)
             {
-                pe.Graphics.DrawLine(Pens.Black,
-                    new PointF(xOffset + d * CellSize, yOffset),
-                    new PointF(xOffset + d * CellSize, 12 * CellSize + yOffset));
-
                 if (d % 2 == 1 && d > 0)
                 {
                     var s = d.ToString();
@@ -79,31 +69,40 @@ namespace WomenCalendar.Controls
             var backPredictedMensesBrush = new SolidBrush(appearance.BackPredictedMenstruationDay);
             var backPredictedOvBrush = new SolidBrush(appearance.BackOvulationDay);
             var backBrush = new SolidBrush(this.BackColor);
-            int rectSize = CellSize - 1;
+            var backEmptyBrush = new SolidBrush(appearance.BackEmpty);
             while (day < final)
             {
-                var x = xOffset + CellSize * (day.Day - 1) + 1;
-                var y = yOffset + CellSize * ((12 + day.Month - StartMonth.Month) % 12) + 1;
-                if (w.Menstruations.IsMenstruationDay(day))
+                var x = xOffset + CellSize * (day.Day - 1);
+                var y = yOffset + CellSize * ((12 + day.Month - StartMonth.Month) % 12);
+                var usedBackColor = 
+                    w.Menstruations.IsMenstruationDay(day) ? backMensesBrush :
+                    w.IsPredictedAsMenstruationDay(day) ? backPredictedMensesBrush :
+                    w.IsPredictedAsOvulationDay(day) ? backPredictedOvBrush :
+                    backEmptyBrush;
+
+                pe.Graphics.FillRectangle(usedBackColor, x, y, CellSize, CellSize);
+
+                pe.Graphics.DrawRectangle(Pens.Black, x - 1, y - 1, CellSize, CellSize);
+
+                if (currentSchedule != null && currentSchedule.AlarmAtDay(day))
                 {
-                    pe.Graphics.FillRectangle(backMensesBrush, x, y, rectSize, rectSize);
-                }
-                else if (w.IsPredictedAsMenstruationDay(day))
-                {
-                    pe.Graphics.FillRectangle(backPredictedMensesBrush, x, y, rectSize, rectSize);
-                }
-                else if (w.IsPredictedAsOvulationDay(day))
-                {
-                    pe.Graphics.FillRectangle(backPredictedOvBrush, x, y, rectSize, rectSize);
+                    pe.Graphics.DrawImage(checkmark, new Rectangle(x, y, CellSize - 1, CellSize - 1));
                 }
 
-                var nextDay = day.AddDays(1);
-                if (nextDay.Month != day.Month && day.Day < 31)
-                {
-                    pe.Graphics.FillRectangle(backBrush, x, y, this.Size.Width, rectSize);
-                }
-                day = nextDay;
+                day = day.AddDays(1);
             }
+        }
+
+        public void ApplySchedule(Schedule schedule)
+        {
+            currentSchedule = schedule;
+            Redraw();
+        }
+
+        public void Redraw()
+        {
+            Invalidate();
+            Refresh();
         }
     }
 }
