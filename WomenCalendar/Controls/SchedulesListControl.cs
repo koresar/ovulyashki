@@ -5,12 +5,13 @@ using System.Drawing;
 using System.Data;
 using System.Text;
 using System.Windows.Forms;
+using System.Linq;
 
 namespace WomenCalendar.Controls
 {
     public partial class SchedulesListControl : UserControl
     {
-        public event Action<Schedule> SelectedScheduleChanged;
+        public event Action<List<Schedule>> SelectedScheduleChanged;
 
         public SchedulesListControl()
         {
@@ -25,17 +26,22 @@ namespace WomenCalendar.Controls
                 schedule.DisplayTypeName,
                 schedule.ToString()}, -1) { Tag = schedule };
             listView.Items.Add(listViewItem1);
+            this.columnName.Width = -1;
+            this.columnStart.Width = -1;
+            this.columnType.Width = -1;
+            this.columnParameters.Width = -1;
         }
 
         private void listView_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (listView.SelectedItems.Count == 1)
-            {
-                OnSelectedScheduleChanged(listView.SelectedItems[0].Tag as Schedule);
-            }
+            OnSelectedScheduleChanged(
+                listView.SelectedItems.
+                Cast<ListViewItem>().
+                Select(item => item.Tag as Schedule).
+                ToList());
         }
 
-        private void OnSelectedScheduleChanged(Schedule schedule)
+        private void OnSelectedScheduleChanged(List<Schedule> schedule)
         {
             if (SelectedScheduleChanged != null)
             {

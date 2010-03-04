@@ -30,10 +30,10 @@
         {
             this.components = new System.ComponentModel.Container();
             this.listView = new System.Windows.Forms.ListView();
-            this.columnType = new System.Windows.Forms.ColumnHeader();
-            this.columnParameters = new System.Windows.Forms.ColumnHeader();
             this.columnName = new System.Windows.Forms.ColumnHeader();
             this.columnStart = new System.Windows.Forms.ColumnHeader();
+            this.columnType = new System.Windows.Forms.ColumnHeader();
+            this.columnParameters = new System.Windows.Forms.ColumnHeader();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.SuspendLayout();
             // 
@@ -50,7 +50,6 @@
             this.listView.GridLines = true;
             this.listView.HideSelection = false;
             this.listView.Location = new System.Drawing.Point(0, 0);
-            this.listView.MultiSelect = false;
             this.listView.Name = "listView";
             this.listView.ShowGroups = false;
             this.listView.ShowItemToolTips = true;
@@ -61,23 +60,25 @@
             this.listView.View = System.Windows.Forms.View.Details;
             this.listView.SelectedIndexChanged += new System.EventHandler(this.listView_SelectedIndexChanged);
             // 
-            // columnType
-            // 
-            this.columnType.Text = "Type";
-            this.columnType.Width = 71;
-            // 
-            // columnParameters
-            // 
-            this.columnParameters.Text = "Parameters";
-            this.columnParameters.Width = 100;
-            // 
             // columnName
             // 
             this.columnName.Text = "Name";
+            this.columnName.Width = 50;
             // 
             // columnStart
             // 
             this.columnStart.Text = "Start";
+            this.columnStart.Width = 50;
+            // 
+            // columnType
+            // 
+            this.columnType.Text = "Type";
+            this.columnType.Width = 50;
+            // 
+            // columnParameters
+            // 
+            this.columnParameters.Text = "Parameters";
+            this.columnParameters.Width = 158;
             // 
             // SchedulesListControl
             // 

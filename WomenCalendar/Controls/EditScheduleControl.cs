@@ -33,7 +33,7 @@ namespace WomenCalendar.Controls
 
         private void TieEvents()
         {
-            schedulesListControl1.SelectedScheduleChanged += coloredSchedulerCalendarControl1.ApplySchedule;
+            schedulesListControl1.SelectedScheduleChanged += coloredSchedulerCalendarControl1.ApplySchedules;
         }
 
         private void InitializeScheduleTypes()
@@ -59,11 +59,13 @@ namespace WomenCalendar.Controls
 
             txtScheduleText.Text = string.Empty;
             RemoveScheduleEditControl();
+            EnableEdition(false);
         }
 
         private void btnAddSchedule_Click(object sender, EventArgs e)
         {
             AddScheduleEditControl();
+            EnableEdition(true);
         }
 
         private void txtScheduleText_TextChanged(object sender, EventArgs e)
@@ -74,6 +76,7 @@ namespace WomenCalendar.Controls
         private void btnCancel_Click(object sender, EventArgs e)
         {
             RemoveScheduleEditControl();
+            EnableEdition(false);
         }
 
         private void AddScheduleEditControl()
@@ -88,7 +91,6 @@ namespace WomenCalendar.Controls
             this.Controls.Add(currentScheduleControl);
             currentScheduleControl.BringToFront();
             currentScheduleControl.Visible = true;
-            EnableEdition(true);
         }
 
         private void RemoveScheduleEditControl()
@@ -97,7 +99,6 @@ namespace WomenCalendar.Controls
             this.Controls.Remove(currentScheduleControl);
             currentScheduleControl.Dispose();
             currentScheduleControl = null;
-            EnableEdition(false);
         }
 
         private void ApplyNewShedule()

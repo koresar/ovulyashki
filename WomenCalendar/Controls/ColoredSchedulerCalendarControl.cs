@@ -7,6 +7,7 @@ using System.Text;
 using System.Windows.Forms;
 using System.Globalization;
 using WomenCalendar.Properties;
+using System.Linq;
 
 namespace WomenCalendar.Controls
 {
@@ -15,8 +16,31 @@ namespace WomenCalendar.Controls
         private const int CellSize = 10;
 
         private Woman w = Program.CurrentWoman;
-        private Schedule currentSchedule;
-        public DateTime StartMonth { get; set; }
+        private List<Schedule> currentSchedules;
+        private Dictionary<DateTime, bool> marks = new Dictionary<DateTime, bool>();
+        private List<Schedule> CurrentSchedules
+        {
+            get
+            {
+                return currentSchedules;
+            }
+            set
+            {
+                currentSchedules = value;
+                ReinitMarks();
+            }
+        }
+
+        public DateTime startMonth;
+        public DateTime StartMonth
+        {
+            get { return startMonth; }
+            set
+            {
+                startMonth = value;
+                ReinitMarks();
+            }
+        }
 
         public Font monthFont;
         public Font MonthFont
@@ -31,6 +55,24 @@ namespace WomenCalendar.Controls
         {
             InitializeComponent();
             SetStyle(ControlStyles.AllPaintingInWmPaint | ControlStyles.UserPaint, true);
+        }
+
+        private void ReinitMarks()
+        {
+            marks = new Dictionary<DateTime, bool>();
+            if (currentSchedules != null && currentSchedules.Count > 0)
+            {
+                var day = new DateTime(StartMonth.Year, StartMonth.Month, 1);
+                var final = day.AddYears(1);
+                while (day < final)
+                {
+                    if (currentSchedules.Any(s => s.AlarmAtDay(day)))
+                    {
+                        marks[day] = true;
+                    }
+                    day = day.AddDays(1);
+                }
+            }
         }
 
         protected override void OnPaint(PaintEventArgs pe)
@@ -84,7 +126,7 @@ namespace WomenCalendar.Controls
 
                 pe.Graphics.DrawRectangle(Pens.Black, x - 1, y - 1, CellSize, CellSize);
 
-                if (currentSchedule != null && currentSchedule.AlarmAtDay(day))
+                if (marks.Count > 0 && marks.ContainsKey(day))
                 {
                     pe.Graphics.DrawImage(checkmark, new Rectangle(x, y, CellSize - 1, CellSize - 1));
                 }
@@ -93,9 +135,15 @@ namespace WomenCalendar.Controls
             }
         }
 
+        public void ApplySchedules(List<Schedule> schedule)
+        {
+            CurrentSchedules = schedule;
+            Redraw();
+        }
+
         public void ApplySchedule(Schedule schedule)
         {
-            currentSchedule = schedule;
+            CurrentSchedules = new List<Schedule>(1) { schedule };
             Redraw();
         }
 
