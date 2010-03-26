@@ -31,7 +31,7 @@ namespace WomenCalendar
             };
         }
 
-        public override bool AlarmAtDay(DateTime day)
+        public override bool IsAlarmAtDay(DateTime day)
         {
             if (day < Start || day > End) return false;
 
@@ -41,6 +41,11 @@ namespace WomenCalendar
             int dayNumberInCyle = dayNumber % (TakeDays + PauseDays);
 
             return dayNumberInCyle < TakeDays;
+        }
+
+        public override string ToString()
+        {
+            return string.Format("Do {0} days, pause {1} days. From {2} to {3}", TakeDays, PauseDays, Start.ToShortDateString(), End.ToShortDateString());
         }
     }
 
@@ -63,7 +68,7 @@ namespace WomenCalendar
         public abstract string DisplayTypeName { get; }
 
         public abstract Schedule CreateDefault(DateTime day);
-        public abstract bool AlarmAtDay(DateTime day);
+        public abstract bool IsAlarmAtDay(DateTime day);
 
 
         public override bool Equals(object obj)

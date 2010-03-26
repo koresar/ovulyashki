@@ -13,32 +13,69 @@ namespace WomenCalendar.Controls
         public event Action<Schedule> Changed;
 
         public string ScheduleText { get; set; }
+        protected bool subscribed;
+        protected Schedule currentSchedule;
 
         public ScheduleControl()
         {
             InitializeComponent();
 
-            ApplyDefaultData();
+            SubscribeEvents();
         }
 
-        protected virtual void ApplyDefaultData()
+        protected virtual void SubscribeEvents()
         {
-            OnceAPeriod defaultData = new OnceAPeriod().CreateDefault(DateTime.Today) as OnceAPeriod;
-            dateStart.Value = defaultData.Start;
-            dateEnd.Value = defaultData.End;
-            numTake.Value = defaultData.TakeDays;
-            numPause.Value = defaultData.PauseDays;
+            if (!subscribed)
+            {
+                this.dateStart.ValueChanged += new System.EventHandler(this.controls_ValueChanged);
+                this.dateEnd.ValueChanged += new System.EventHandler(this.controls_ValueChanged);
+                this.numTake.ValueChanged += new System.EventHandler(this.controls_ValueChanged);
+                this.numPause.ValueChanged += new System.EventHandler(this.controls_ValueChanged);
+                subscribed = true;
+            }
+        }
+
+        protected virtual void UnSubscribeEvents()
+        {
+            if (subscribed)
+            {
+                this.dateStart.ValueChanged -= new System.EventHandler(this.controls_ValueChanged);
+                this.dateEnd.ValueChanged -= new System.EventHandler(this.controls_ValueChanged);
+                this.numTake.ValueChanged -= new System.EventHandler(this.controls_ValueChanged);
+                this.numPause.ValueChanged -= new System.EventHandler(this.controls_ValueChanged);
+                subscribed = false;
+            }
+        }
+
+        public virtual void ApplyDefaultData(DateTime defaultDate)
+        {
+            OnceAPeriod defaultData = new OnceAPeriod().CreateDefault(defaultDate) as OnceAPeriod;
+            ApplyData(defaultData);
+        }
+
+        public virtual void ApplyData(Schedule schedule)
+        {
+            UnSubscribeEvents();
+
+            currentSchedule = schedule;
+            OnceAPeriod data = schedule as OnceAPeriod;
+            dateStart.Value = data.Start;
+            dateEnd.Value = data.End;
+            numTake.Value = data.TakeDays;
+            numPause.Value = data.PauseDays;
+
+            SubscribeEvents();
+            OnChanged();
         }
 
         public virtual Schedule GetSchedule()
         {
-            return new OnceAPeriod(ScheduleText)
-            {
-                Start = dateStart.Value,
-                End = dateEnd.Value,
-                TakeDays = (int)numTake.Value,
-                PauseDays = (int)numPause.Value,
-            };
+            OnceAPeriod data = currentSchedule as OnceAPeriod;
+            data.Start = dateStart.Value;
+            data.End = dateEnd.Value;
+            data.TakeDays = (int)numTake.Value;
+            data.PauseDays = (int)numPause.Value;
+            return data;
         }
 
         private void controls_ValueChanged(object sender, EventArgs e)
@@ -52,11 +89,6 @@ namespace WomenCalendar.Controls
             {
                 Changed(GetSchedule());
             }
-        }
-
-        private void ScheduleControl_Load(object sender, EventArgs e)
-        {
-            OnChanged();
         }
     }
 }

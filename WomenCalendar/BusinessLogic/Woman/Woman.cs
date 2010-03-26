@@ -87,6 +87,7 @@ namespace WomenCalendar
             DefaultMenstruationLength = 5;
             Menstruations = new MenstruationsCollection();
             Conceptions = new ConceptionsCollection();
+            Schedules = new SchedulesCollection();
             ManualPeriodLength = 28;
             averagePeriodLength = 28;
             Name = Environment.UserName;

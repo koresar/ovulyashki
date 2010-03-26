@@ -1,67 +1,82 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using System.IO;
 using System.Linq;
+using System.Text;
 
 namespace WomenCalendar
 {
+    /// <summary>
+    /// Implements report to .csv file.
+    /// </summary>
     public class CsvWriter : ReportWriter
     {
-        public char Separator { get; set; }
-
         private StreamWriter fileStream;
-        public CsvWriter(string fileName) : base(fileName)
+
+        /// <summary>
+        /// Creates report writer to the given file.
+        /// </summary>
+        /// <param name="fileName">File to write ro.</param>
+        public CsvWriter(string fileName)
         {
-            Separator = ';';
-            fileStream = new StreamWriter(fileName, false, Encoding.Default);
+            this.Separator = ';';
+            this.fileStream = new StreamWriter(fileName, false, Encoding.Default);
         }
 
-        public void WriteLine(params object[] cells)
-        {
-            StringBuilder sb = new StringBuilder();
-            foreach (var cel in cells)
-            {
-                sb.Append(cel.ToString()).Append(Separator);
-            }
-            sb.AppendLine();
-            fileStream.Write(sb.ToString());
-        }
-
-        public void Close()
-        {
-            fileStream.Close();
-        }
+        /// <summary>
+        /// The separator to use for fields split.
+        /// </summary>
+        private char Separator { get; set; }
 
         #region IDisposable Members
 
+        /// <summary>
+        /// Closes the opened file.
+        /// </summary>
         public override void Dispose()
         {
-            fileStream.Close();
-            fileStream.Dispose();
+            this.fileStream.Close();
+            this.fileStream.Dispose();
         }
 
         #endregion
 
+        /// <summary>
+        /// Write the report header.
+        /// </summary>
         public override void WriteHeader()
         {
-            WriteLine(OneDayInfo.Header.Select(str => TEXT.Get[str]).ToArray());
+            this.WriteLine(OneDayInfo.Header.Select(str => TEXT.Get[str]).ToArray());
         }
 
+        /// <summary>
+        /// Write the report item (row).
+        /// </summary>
+        /// <param name="day">One day info.</param>
         public override void WriteDay(OneDayInfo day)
         {
-            WriteLine(
-                D(day.Date), 
-                B(day.IsMentruation),
-                I(day.Egesta, day.IsMentruation),
-                B(day.IsOvulation),
-                B(day.HadSex), 
-                D(day.BBT),
-                I(day.Health),
-                CF(day.CF),
-                day.Note.Replace('\n', ' ')
-                );
+            this.WriteLine(
+                this.D(day.Date),
+                this.B(day.IsMentruation),
+                this.I(day.Egesta, day.IsMentruation),
+                this.B(day.IsOvulation),
+                this.B(day.HadSex),
+                this.D(day.BBT),
+                this.I(day.Health),
+                this.CF(day.CF),
+                day.Note.Replace('\n', ' '));
         }
 
+        private void WriteLine(params object[] cells)
+        {
+            StringBuilder sb = new StringBuilder();
+            foreach (var cel in cells)
+            {
+                sb.Append(cel.ToString()).Append(this.Separator);
+            }
+
+            sb.AppendLine();
+            this.fileStream.Write(sb.ToString());
+        }
     }
 }

@@ -31,9 +31,37 @@ namespace WomenCalendar.Controls
             InitializeScheduleTypes();
         }
 
+        public List<Schedule> GetSchedules()
+        {
+            return schedulesListControl1.GetSchedules();
+        }
+
+        public void SetSchedules(List<Schedule> schedules)
+        {
+            schedulesListControl1.SetSchedules(schedules);
+        }
+
         private void TieEvents()
         {
-            schedulesListControl1.SelectedScheduleChanged += coloredSchedulerCalendarControl1.ApplySchedules;
+            schedulesListControl1.SelectedScheduleChanged +=schedulesListControl1_SelectedScheduleChanged;
+        }
+
+        void schedulesListControl1_SelectedScheduleChanged(List<Schedule> schedules)
+        {
+            if (schedules.Count == 0)
+            {
+                coloredSchedulerCalendarControl1.ApplySchedules(Program.CurrentWoman.Schedules.GetFiredSchedulesForDay(initialDate));
+            }
+            else if (schedules.Count == 1)
+            {
+                AddScheduleEditControl();
+                EnableEdition(true);
+                currentScheduleControl.ApplyData(schedules[0]);
+            }
+            else
+            {
+                coloredSchedulerCalendarControl1.ApplySchedules(schedules);
+            }
         }
 
         private void InitializeScheduleTypes()
@@ -65,7 +93,9 @@ namespace WomenCalendar.Controls
         private void btnAddSchedule_Click(object sender, EventArgs e)
         {
             AddScheduleEditControl();
+            currentScheduleControl.ApplyDefaultData(initialDate);
             EnableEdition(true);
+            coloredSchedulerCalendarControl1.ApplySchedule(currentScheduleControl.GetSchedule());
         }
 
         private void txtScheduleText_TextChanged(object sender, EventArgs e)
@@ -83,7 +113,7 @@ namespace WomenCalendar.Controls
         {
             currentScheduleControl = new WomenCalendar.Controls.ScheduleControl();
             currentScheduleControl.Visible = false;
-            currentScheduleControl.Location = new System.Drawing.Point(0, 175);
+            currentScheduleControl.Location = new System.Drawing.Point(0, 150);
             currentScheduleControl.Size = new System.Drawing.Size(353, 62);
             currentScheduleControl.TabIndex = 10018;
             currentScheduleControl.ScheduleText = txtScheduleText.Text;

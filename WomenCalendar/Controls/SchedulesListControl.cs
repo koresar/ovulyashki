@@ -12,10 +12,57 @@ namespace WomenCalendar.Controls
     public partial class SchedulesListControl : UserControl
     {
         public event Action<List<Schedule>> SelectedScheduleChanged;
+        private Timer changeDelayTimer = null;
 
         public SchedulesListControl()
         {
             InitializeComponent();
+        }
+
+        /// <summary>
+        /// Make sure to properly dispose of the timer
+        /// </summary>
+        ~SchedulesListControl()
+        {
+            if (changeDelayTimer != null)
+            {
+                changeDelayTimer.Tick -= ChangeDelayTimerTick;
+                changeDelayTimer.Dispose();
+            }
+        }
+
+        private void listView_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (changeDelayTimer == null)
+            {
+                changeDelayTimer = new Timer();
+                changeDelayTimer.Tick += ChangeDelayTimerTick;
+                changeDelayTimer.Interval = 40;
+            }
+            changeDelayTimer.Enabled = false;
+            changeDelayTimer.Enabled = true;
+        }
+
+        private void ChangeDelayTimerTick(object sender, EventArgs e)
+        {
+            changeDelayTimer.Enabled = false;
+            changeDelayTimer.Dispose();
+            changeDelayTimer = null;
+
+            OnSelectedScheduleChanged(GetSchedules());
+        }
+
+        public List<Schedule> GetSchedules()
+        {
+            return listView.SelectedItems.
+                Cast<ListViewItem>().
+                Select(item => item.Tag as Schedule).
+                ToList();
+        }
+
+        public void SetSchedules(List<Schedule> schedules)
+        {
+            schedules.ForEach(s => AddSchedule(s));
         }
 
         public void AddSchedule(Schedule schedule)
@@ -30,15 +77,6 @@ namespace WomenCalendar.Controls
             this.columnStart.Width = -1;
             this.columnType.Width = -1;
             this.columnParameters.Width = -1;
-        }
-
-        private void listView_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            OnSelectedScheduleChanged(
-                listView.SelectedItems.
-                Cast<ListViewItem>().
-                Select(item => item.Tag as Schedule).
-                ToList());
         }
 
         private void OnSelectedScheduleChanged(List<Schedule> schedule)

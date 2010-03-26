@@ -49,7 +49,6 @@
             this.dateStart.Name = "dateStart";
             this.dateStart.Size = new System.Drawing.Size(109, 20);
             this.dateStart.TabIndex = 0;
-            this.dateStart.ValueChanged += new System.EventHandler(this.controls_ValueChanged);
             // 
             // dateEnd
             // 
@@ -59,8 +58,7 @@
             this.dateEnd.Location = new System.Drawing.Point(241, 4);
             this.dateEnd.Name = "dateEnd";
             this.dateEnd.Size = new System.Drawing.Size(109, 20);
-            this.dateEnd.TabIndex = 0;
-            this.dateEnd.ValueChanged += new System.EventHandler(this.controls_ValueChanged);
+            this.dateEnd.TabIndex = 1;
             // 
             // label1
             // 
@@ -116,15 +114,13 @@
             0,
             0,
             0});
-            this.numTake.ValueChanged += new System.EventHandler(this.controls_ValueChanged);
             // 
             // numPause
             // 
             this.numPause.Location = new System.Drawing.Point(283, 36);
             this.numPause.Name = "numPause";
             this.numPause.Size = new System.Drawing.Size(67, 20);
-            this.numPause.TabIndex = 2;
-            this.numPause.ValueChanged += new System.EventHandler(this.controls_ValueChanged);
+            this.numPause.TabIndex = 3;
             // 
             // ScheduleControl
             // 
@@ -140,7 +136,6 @@
             this.Controls.Add(this.dateStart);
             this.Name = "ScheduleControl";
             this.Size = new System.Drawing.Size(353, 62);
-            this.Load += new System.EventHandler(this.ScheduleControl_Load);
             ((System.ComponentModel.ISupportInitialize)(this.numTake)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numPause)).EndInit();
             this.ResumeLayout(false);

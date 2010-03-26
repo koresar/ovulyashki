@@ -34,6 +34,7 @@
             this.txtScheduleText = new System.Windows.Forms.TextBox();
             this.lblScheduleText = new System.Windows.Forms.Label();
             this.btnCancel = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
             this.schedulesListControl1 = new WomenCalendar.Controls.SchedulesListControl();
             this.coloredSchedulerCalendarControl1 = new WomenCalendar.Controls.ColoredSchedulerCalendarControl();
             this.SuspendLayout();
@@ -42,14 +43,14 @@
             // 
             this.cmbScheduleType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbScheduleType.FormattingEnabled = true;
-            this.cmbScheduleType.Location = new System.Drawing.Point(3, 152);
+            this.cmbScheduleType.Location = new System.Drawing.Point(9, 124);
             this.cmbScheduleType.Name = "cmbScheduleType";
-            this.cmbScheduleType.Size = new System.Drawing.Size(227, 21);
+            this.cmbScheduleType.Size = new System.Drawing.Size(339, 21);
             this.cmbScheduleType.TabIndex = 10020;
             // 
             // btnApplySchedule
             // 
-            this.btnApplySchedule.Location = new System.Drawing.Point(236, 151);
+            this.btnApplySchedule.Location = new System.Drawing.Point(237, 214);
             this.btnApplySchedule.Name = "btnApplySchedule";
             this.btnApplySchedule.Size = new System.Drawing.Size(53, 23);
             this.btnApplySchedule.TabIndex = 10021;
@@ -61,17 +62,17 @@
             // btnAddSchedule
             // 
             this.btnAddSchedule.Enabled = false;
-            this.btnAddSchedule.Location = new System.Drawing.Point(15, 205);
+            this.btnAddSchedule.Location = new System.Drawing.Point(15, 181);
             this.btnAddSchedule.Name = "btnAddSchedule";
             this.btnAddSchedule.Size = new System.Drawing.Size(323, 23);
             this.btnAddSchedule.TabIndex = 10022;
-            this.btnAddSchedule.Text = "Add one more schedule";
+            this.btnAddSchedule.Text = "Click this button when you are ready to proceed";
             this.btnAddSchedule.UseVisualStyleBackColor = true;
             this.btnAddSchedule.Click += new System.EventHandler(this.btnAddSchedule_Click);
             // 
             // txtScheduleText
             // 
-            this.txtScheduleText.Location = new System.Drawing.Point(133, 179);
+            this.txtScheduleText.Location = new System.Drawing.Point(145, 155);
             this.txtScheduleText.Name = "txtScheduleText";
             this.txtScheduleText.Size = new System.Drawing.Size(205, 20);
             this.txtScheduleText.TabIndex = 10023;
@@ -79,16 +80,16 @@
             // 
             // lblScheduleText
             // 
-            this.lblScheduleText.Location = new System.Drawing.Point(3, 179);
+            this.lblScheduleText.Location = new System.Drawing.Point(3, 154);
             this.lblScheduleText.Name = "lblScheduleText";
-            this.lblScheduleText.Size = new System.Drawing.Size(124, 20);
+            this.lblScheduleText.Size = new System.Drawing.Size(136, 20);
             this.lblScheduleText.TabIndex = 10024;
-            this.lblScheduleText.Text = "New schedule name";
+            this.lblScheduleText.Text = "Type here its name:";
             this.lblScheduleText.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // btnCancel
             // 
-            this.btnCancel.Location = new System.Drawing.Point(295, 151);
+            this.btnCancel.Location = new System.Drawing.Point(296, 214);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(53, 23);
             this.btnCancel.TabIndex = 10021;
@@ -97,13 +98,22 @@
             this.btnCancel.Visible = false;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(6, 105);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(188, 13);
+            this.label1.TabIndex = 10025;
+            this.label1.Text = "To add a schedule item select its type:";
+            // 
             // schedulesListControl1
             // 
             this.schedulesListControl1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.schedulesListControl1.Location = new System.Drawing.Point(0, 0);
             this.schedulesListControl1.Name = "schedulesListControl1";
-            this.schedulesListControl1.Size = new System.Drawing.Size(353, 151);
+            this.schedulesListControl1.Size = new System.Drawing.Size(353, 98);
             this.schedulesListControl1.TabIndex = 10019;
             // 
             // coloredSchedulerCalendarControl1
@@ -119,6 +129,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.lblScheduleText);
             this.Controls.Add(this.txtScheduleText);
             this.Controls.Add(this.btnAddSchedule);
@@ -144,5 +155,6 @@
         private System.Windows.Forms.TextBox txtScheduleText;
         private System.Windows.Forms.Label lblScheduleText;
         private System.Windows.Forms.Button btnCancel;
+        private System.Windows.Forms.Label label1;
     }
 }

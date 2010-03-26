@@ -1,0 +1,13 @@
+This is the quick guide on how to work with the solution.
+
+How to code same style as the current code?
+1) Download and install StyleCop from the Microsoft site.
+2) Right click on any file/folder/project and select "Run StyleCop".
+3) Follow the warning instructions if any and change the code accordingly.
+
+How to change application version?
+1) Change Version of OvulyashkiInstall. It should be digit #1, #2, or #3. Because #4 is not relevant.
+2) Change ProductCode.
+3) Do NOT change upgrade code. Never ever change UpgradeCode!!! It's {482BFF03-47BE-4DA1-AA44-E102C604F5DC} now and should be forever!
+4) Change Versions of main executable assembly.
+

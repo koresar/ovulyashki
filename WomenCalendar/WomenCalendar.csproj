@@ -82,6 +82,7 @@
     <Compile Include="BusinessLogic\Report\XlsWriter.cs" />
     <Compile Include="BusinessLogic\TEXT.cs" />
     <Compile Include="BusinessLogic\TranslationsList.cs" />
+    <Compile Include="BusinessLogic\Woman\CervicalFluid.cs" />
     <Compile Include="BusinessLogic\Woman\CFCollection.cs" />
     <Compile Include="BusinessLogic\Woman\OvulationDetector.cs" />
     <Compile Include="BusinessLogic\Woman\OneDayInfo.cs" />

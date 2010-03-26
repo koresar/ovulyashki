@@ -4,32 +4,24 @@ using System.Text;
 
 namespace WomenCalendar
 {
-    public enum CervicalFluid
-    {
-        Undefined = 0,
-        /// <summary>
-        /// 1. Glue like.
-        /// </summary>
-        Tacky = 1,
-        /// <summary>
-        /// 2. Egg like.
-        /// </summary>
-        Stretchy = 2,
-        /// <summary>
-        /// 3. Water like.
-        /// </summary>
-        Water = 3
-    }
-
+    /// <summary>
+    /// The serializable list of cervical fluids (CF).
+    /// </summary>
     public class CFCollection : SerializableEventsCollection<CervicalFluid>
     {
-        public const int DefaultHealthValue = 5;
-
+        /// <summary>
+        /// The constructor of the list.
+        /// </summary>
         public CFCollection()
             : base("CervicalFluid")
         {
         }
 
+        /// <summary>
+        /// Return the CF for the specific day.
+        /// </summary>
+        /// <param name="date">Day value.</param>
+        /// <returns>The CF of the day; if not found - return CervicalFluid.Undefined.</returns>
         public new CervicalFluid this[DateTime date]
         {
             get
@@ -37,10 +29,17 @@ namespace WomenCalendar
                 CervicalFluid ret;
                 return TryGetValue(date, out ret) ? ret : CervicalFluid.Undefined;
             }
+
             set
             {
-                if (value == CervicalFluid.Undefined) Remove(date);
-                else base[date] = value;
+                if (value == CervicalFluid.Undefined)
+                {
+                    Remove(date);
+                }
+                else
+                {
+                    base[date] = value;
+                }
             }
         }
     }

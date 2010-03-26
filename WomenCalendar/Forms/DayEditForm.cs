@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Globalization;
 using System.Text;
 using System.Windows.Forms;
+using System.Linq;
 
 namespace WomenCalendar
 {
@@ -23,18 +24,25 @@ namespace WomenCalendar
             public decimal MenstrLength;
             public int Egesta;
             public CervicalFluid CF;
+            public List<Schedule> Schedules;
 
             public override bool Equals(object obj)
             {
                 DayData d = obj as DayData;
                 return d.BBT == BBT && d.HadSex == HadSex && d.Health == Health && d.Note == Note && 
-                    d.HasMenstr == HasMenstr && d.MenstrLength == MenstrLength && d.Egesta == Egesta && d.CF == CF;
+                    d.HasMenstr == HasMenstr && d.MenstrLength == MenstrLength && d.Egesta == Egesta && d.CF == CF &&
+                    SchedulesEqual(d.Schedules);
             }
 
             public override int GetHashCode()
             {
                 return BBT.GetHashCode() ^ HadSex.GetHashCode() ^ Health.GetHashCode() ^ Note.GetHashCode() ^
                     HasMenstr.GetHashCode() ^ MenstrLength.GetHashCode() ^ Egesta.GetHashCode() ^ CF.GetHashCode();
+            }
+
+            private bool SchedulesEqual(List<Schedule> d)
+            {
+                return this.Schedules.SequenceEqual(d);
             }
         }
 
@@ -122,6 +130,8 @@ namespace WomenCalendar
 
             w.Menstruations.ResetOvulyationsDates();
 
+            w.Schedules.UpdateData(editScheduleControl.GetSchedules());
+
             Program.ApplicationForm.UpdateDayInformationIfFocused(date);
             Program.ApplicationForm.RedrawCalendar(); // redraw whole calendar
 
@@ -141,14 +151,23 @@ namespace WomenCalendar
                 int egesta = period.Egestas[date];
                 mensesEditControl.EgestaSliderValue = egesta;
                 chkMentrustions.Checked = true;
-                chkSchedules.Checked = true;
                 chkMentrustions.Enabled = period.StartDay == date;
             }
             else
             {
                 chkMentrustions.Checked = false;
-                chkSchedules.Checked = false;
                 chkMentrustions.Enabled = true;
+            }
+
+            var schedules = w.Schedules.GetFiredSchedulesForDay(date);
+            if (schedules.Count > 0)
+            {
+                chkSchedules.Checked = true;
+                editScheduleControl.SetSchedules(schedules);
+            }
+            else
+            {
+                chkSchedules.Checked = false;
             }
 
             dayEditControl.BBT = w.BBT.GetBBTString(date);
@@ -180,6 +199,8 @@ namespace WomenCalendar
                 HasMenstr = chkMentrustions.Checked,
                 MenstrLength = mensesEditControl.Length,
                 Egesta = mensesEditControl.EgestaSliderValue,
+
+                Schedules = editScheduleControl.GetSchedules(),
             };
         }
 
@@ -252,8 +273,8 @@ namespace WomenCalendar
                 //this.Width = mensesEditControl.Location.X + mensesEditControl.Size.Width + 10;
                 this.flowLayoutPanel.Controls.Add(this.editScheduleControl);
                 this.flowLayoutPanel.Controls.SetChildIndex(this.editScheduleControl, 0);
-                chkSchedules.Image = WomenCalendar.Properties.Resources.dropNot_Image;
-                chkSchedules.Text = "<<          <<";
+                chkSchedules.Image = WomenCalendar.Properties.Resources.calendarEdit_Image;
+                chkSchedules.Text = ">>          >>";
                 this.editScheduleControl.Visible = true;
                 var loc = this.Location;
                 this.Location = new Point(loc.X - this.editScheduleControl.Width, loc.Y);
@@ -264,8 +285,8 @@ namespace WomenCalendar
                 this.Visible = false;
                 //this.Width = chkMentrustions.Location.X + chkMentrustions.Size.Width + 10;
                 this.flowLayoutPanel.Controls.Remove(this.editScheduleControl);
-                chkSchedules.Image = WomenCalendar.Properties.Resources.drop_Image;
-                chkSchedules.Text = ">>          >>";
+                chkSchedules.Image = WomenCalendar.Properties.Resources.calendarEdit_Image;
+                chkSchedules.Text = "<<          <<";
                 this.editScheduleControl.Visible = false;
                 var loc = this.Location;
                 this.Location = new Point(loc.X + this.editScheduleControl.Width, loc.Y);

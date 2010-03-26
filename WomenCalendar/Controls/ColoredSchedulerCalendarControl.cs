@@ -66,7 +66,7 @@ namespace WomenCalendar.Controls
                 var final = day.AddYears(1);
                 while (day < final)
                 {
-                    if (currentSchedules.Any(s => s.AlarmAtDay(day)))
+                    if (currentSchedules.Any(s => s.IsAlarmAtDay(day)))
                     {
                         marks[day] = true;
                     }
