@@ -83,11 +83,12 @@
     <Compile Include="BusinessLogic\TEXT.cs" />
     <Compile Include="BusinessLogic\TranslationsList.cs" />
     <Compile Include="BusinessLogic\Woman\CervicalFluid.cs" />
-    <Compile Include="BusinessLogic\Woman\CFCollection.cs" />
+    <Compile Include="BusinessLogic\Woman\DataCollections\CFCollection.cs" />
     <Compile Include="BusinessLogic\Woman\OvulationDetector.cs" />
     <Compile Include="BusinessLogic\Woman\OneDayInfo.cs" />
-    <Compile Include="BusinessLogic\Woman\Schedule.cs" />
-    <Compile Include="BusinessLogic\Woman\SchedulesCollection.cs" />
+    <Compile Include="BusinessLogic\Woman\Schedules\OnceAPeriod.cs" />
+    <Compile Include="BusinessLogic\Woman\Schedules\Schedule.cs" />
+    <Compile Include="BusinessLogic\Woman\DataCollections\SchedulesCollection.cs" />
     <Compile Include="Controls\ColoredSchedulerCalendarControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -214,14 +215,14 @@
     <Compile Include="Forms\NewEditWomanForm.Designer.cs">
       <DependentUpon>NewEditWomanForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="BusinessLogic\Woman\BBTCollection.cs" />
+    <Compile Include="BusinessLogic\Woman\DataCollections\BBTCollection.cs" />
     <Compile Include="BusinessLogic\Woman\ConceptionPeriod.cs" />
-    <Compile Include="BusinessLogic\Woman\ConceptionsCollection.cs" />
-    <Compile Include="BusinessLogic\Woman\EgestasCollection.cs" />
-    <Compile Include="BusinessLogic\Woman\HadSexCollection.cs" />
-    <Compile Include="BusinessLogic\Woman\HealthCollection.cs" />
+    <Compile Include="BusinessLogic\Woman\DataCollections\ConceptionsCollection.cs" />
+    <Compile Include="BusinessLogic\Woman\DataCollections\EgestasCollection.cs" />
+    <Compile Include="BusinessLogic\Woman\DataCollections\HadSexCollection.cs" />
+    <Compile Include="BusinessLogic\Woman\DataCollections\HealthCollection.cs" />
     <Compile Include="BusinessLogic\Woman\MenstruationPeriod.cs" />
-    <Compile Include="BusinessLogic\Woman\MenstruationsCollection.cs" />
+    <Compile Include="BusinessLogic\Woman\DataCollections\MenstruationsCollection.cs" />
     <Compile Include="Controls\MonthsControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -271,8 +272,8 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="BusinessLogic\Woman\NotesCollection.cs" />
-    <Compile Include="BusinessLogic\Woman\SerializableEventsCollection.cs" />
+    <Compile Include="BusinessLogic\Woman\DataCollections\NotesCollection.cs" />
+    <Compile Include="BusinessLogic\Woman\DataCollections\SerializableEventsCollection.cs" />
     <Compile Include="BusinessLogic\Woman\Woman.cs" />
   </ItemGroup>
   <ItemGroup>

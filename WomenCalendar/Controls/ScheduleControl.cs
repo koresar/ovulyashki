@@ -49,7 +49,7 @@ namespace WomenCalendar.Controls
 
         public virtual void ApplyDefaultData(DateTime defaultDate)
         {
-            OnceAPeriod defaultData = new OnceAPeriod().CreateDefault(defaultDate) as OnceAPeriod;
+            OnceAPeriod defaultData = new OnceAPeriod(string.Empty).CreateDefault(defaultDate) as OnceAPeriod;
             ApplyData(defaultData);
         }
 

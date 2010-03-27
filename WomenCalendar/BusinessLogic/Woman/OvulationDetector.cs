@@ -4,24 +4,44 @@ using System.Text;
 
 namespace WomenCalendar
 {
+    /// <summary>
+    /// Complicated logic of ovulation detection is here.
+    /// </summary>
     public class OvulationDetector
     {
-        private const int numberOfDaysToLookIn = 3;
-
-        public const int OvulationCalendarMethod = 14;
-        public static readonly DateTime NoDate = default(DateTime);
-
+        private const int OvulationCalendarMethod = 14;
+        private const int NumberOfDaysToLookIn = 3;
+        private static readonly DateTime NoDate = default(DateTime);
         private Woman woman;
 
+        /// <summary>
+        /// Create the object.
+        /// </summary>
+        /// <param name="w">The data to use.</param>
         public OvulationDetector(Woman w)
         {
             if (w == null)
             {
                 throw new ArgumentNullException("Woman must be specified.", "w");
             }
-            woman = w;
+
+            this.woman = w;
         }
 
+        /// <summary>
+        /// The temperature move indicator.
+        /// </summary>
+        internal enum TemperatureMove
+        {
+            Unknown, Down, Up, Same
+        }
+
+        /// <summary>
+        /// Run the business logic.
+        /// </summary>
+        /// <param name="nextCycleFirstDay">This parameter is the one which is widely used thru all the logic. 
+        /// Without it the prediction is impossible.</param>
+        /// <returns>The probable ovulation date.</returns>
         public DateTime EstimateOvulationDate(DateTime nextCycleFirstDay)
         {
             if (nextCycleFirstDay == NoDate)
@@ -31,79 +51,79 @@ namespace WomenCalendar
 
             // first level of undertanding - Calendar: the 14 days before the end.
             // This variable MUST be initialized. NoDate is not acceptable at all.
-            DateTime ovCalend = nextCycleFirstDay.AddDays(-1 * (OvulationCalendarMethod));
+            DateTime ovulCalend = nextCycleFirstDay.AddDays(-1 * OvulationCalendarMethod);
 
             // second level - CF:
-            DateTime ovCF = TryUnderstandOvulationByCF(ovCalend);
+            DateTime ovulCF = this.TryUnderstandOvulationByCF(ovulCalend);
 
             // third level - BBT: drop of the temperature 1 day before Ov., and rise on the Ov. day.
-            var rises = GetBBTRises(ovCalend);
+            var rises = this.GetBBTRises(ovulCalend);
             
             // At this point we found all dates we need.
-
             if (rises.Count == 0)
             { // BBT is not infomative. Do not use it for prediction.
-                return PredictByCFOnly(ovCF, ovCalend);
+                return this.PredictByCFOnly(ovulCF, ovulCalend);
             }
 
-            if (ovCF == NoDate)
+            if (ovulCF == NoDate)
             { // CF is not infomative. Use BBT method only.
-                return PredictByBBTOnly(rises, ovCalend);
+                return this.PredictByBBTOnly(rises, ovulCalend);
             }
 
-            return PredictByCFAndBBT(rises, ovCF, ovCalend);
+            return this.PredictByCFAndBBT(rises, ovulCF, ovulCalend);
         }
 
-        private DateTime PredictByCFAndBBT(List<Rise> rises, DateTime ovCF, DateTime ovCalend)
+        private DateTime PredictByCFAndBBT(List<Rise> rises, DateTime ovulCF, DateTime ovulCalend)
         {
             if (rises.Count == 1)
             { // the only rise 
-                return PredictByOneRiseAndCF(rises[0], ovCF);
+                return this.PredictByOneRiseAndCF(rises[0], ovulCF);
             }
 
-            List<Rise> significantRises = FilterNonSignificantRises(rises);
+            List<Rise> significantRises = this.FilterNonSignificantRises(rises);
             if (significantRises.Count == 1)
             { // highest rise exists. Then it is our BBT rise we are searching for.
-                return PredictByOneRiseAndCF(significantRises[0], ovCF);
+                return this.PredictByOneRiseAndCF(significantRises[0], ovulCF);
             }
 
-            List<Rise> closesRises = FilterClosestRises(significantRises, ovCF);
+            List<Rise> closesRises = this.FilterClosestRises(significantRises, ovulCF);
             if (closesRises.Count == 1)
             { // between several rises we found the only closes one. Assume it is our rise.
-                return PredictByOneRiseAndCF(closesRises[0], ovCF);
+                return this.PredictByOneRiseAndCF(closesRises[0], ovulCF);
             }
 
             // At this point we understand that Ov. CF day is equally points to several rises.
             // So CF is not informative. Avoid using it for predictions.
-            return PredictByBBTOnly(rises, ovCalend);
+            return this.PredictByBBTOnly(rises, ovulCalend);
         }
 
-        private DateTime PredictByOneRiseAndCF(Rise rise, DateTime ovCF)
+        private DateTime PredictByOneRiseAndCF(Rise rise, DateTime ovulCF)
         {
-            if (rise.ContainsDate(ovCF))
+            if (rise.ContainsDate(ovulCF))
             { // Ov. CF day inside it. This means it is definitely our rise.
                 // We assume that Ov. CF day points us exactly the Ov. day.
-                return ovCF;
+                return ovulCF;
             }
+
             // at this point we understand that CF is out of our rise.
             // Thus CF is not informative at all. Use the rise as Ov. day.
             return rise.Start;
         }
 
-        private DateTime PredictByBBTOnly(List<Rise> rises, DateTime ovCalend)
+        private DateTime PredictByBBTOnly(List<Rise> rises, DateTime ovulCalend)
         {
             if (rises.Count == 1)
             {
                 return rises[0].Start;
             }
 
-            List<Rise> significantRises = FilterNonSignificantRises(rises);
+            List<Rise> significantRises = this.FilterNonSignificantRises(rises);
             if (significantRises.Count == 1)
             { // highest rise exists. Then it is our BBT rise we are searching for.
                 return significantRises[0].Start;
             }
 
-            List<Rise> closesRises = FilterClosestRises(significantRises, ovCalend);
+            List<Rise> closesRises = this.FilterClosestRises(significantRises, ovulCalend);
             if (closesRises.Count == 1)
             { // between several rises we found the only closes one. Assume it is our ovulation date.
                 return closesRises[0].Start;
@@ -128,7 +148,11 @@ namespace WomenCalendar
             int minimalDistance = int.MaxValue;
             foreach (var rise in rises)
             {
-                if (rise.ContainsDate(date)) { return new List<Rise>() { rise }; }
+                if (rise.ContainsDate(date))
+                {
+                    return new List<Rise>() { rise };
+                }
+
                 int distance = Math.Abs((rise.Start - date).Days);
                 if (minimalDistance == int.MaxValue || distance == minimalDistance)
                 { // it's a first element of the list or it is also close date.
@@ -143,6 +167,7 @@ namespace WomenCalendar
                     minimalDistance = distance;
                 }
             }
+
             return closestRises;
         }
 
@@ -156,11 +181,12 @@ namespace WomenCalendar
                     maxRise = rise;
                 }
             }
+
             List<Rise> significantRises = new List<Rise>();
             foreach (var rise in rises)
             {
                 if (!rise.SignificantlyDifferentSize(maxRise))
-                {// this is huge rise. Use it.
+                { // this is huge rise. Use it.
                     significantRises.Add(rise);
                 }
             }
@@ -168,47 +194,51 @@ namespace WomenCalendar
             return significantRises;
         }
 
-        private DateTime PredictByCFOnly(DateTime ovCF, DateTime ovCalend)
+        private DateTime PredictByCFOnly(DateTime ovulCF, DateTime ovulCalend)
         {
-            if (ovCF != NoDate)
+            if (ovulCF != NoDate)
             { // at this point we have only ovCF method. Just use it as it is more prioritive than calendar.
-                return ovCF;
+                return ovulCF;
             }
             else
             { // no good BBT and no good CF information was found. Then just use calendar method.
-                return ovCalend;
+                return ovulCalend;
             }
         }
 
-        private DateTime TryUnderstandOvulationByCF(DateTime ovCalend)
+        private DateTime TryUnderstandOvulationByCF(DateTime ovulCalend)
         {
             DateTime lastEggLikeCFDay = NoDate;
-            for (int i = 0; i < 2 * numberOfDaysToLookIn; i++)
+            for (int i = 0; i < 2 * NumberOfDaysToLookIn; i++)
             {
-                DateTime day = ovCalend.AddDays(-1 * numberOfDaysToLookIn + i);
-                CervicalFluid cf = woman.CFs[day];
+                DateTime day = ovulCalend.AddDays((-1 * NumberOfDaysToLookIn) + i);
+                CervicalFluid cf = this.woman.CFs[day];
 
-                if (cf == CervicalFluid.Stretchy) lastEggLikeCFDay = day;
+                if (cf == CervicalFluid.Stretchy)
+                {
+                    lastEggLikeCFDay = day;
+                }
             }
+
             if (lastEggLikeCFDay != NoDate)
             {
                 return lastEggLikeCFDay;
             }
+
             return NoDate; // CFs are not informative enough to understand the Ov. day.
         }
 
-        private List<Rise> GetBBTRises(DateTime ovCalend)
+        private List<Rise> GetBBTRises(DateTime ovylCalend)
         {
             var rises = new List<Rise>();
             double previousBBT = 0;
             DateTime previousDate = NoDate;
-            //TemperatureMove previousMove = TemperatureMove.Unknown;
             bool isRecordingRise = false;
             DateTime recordingRiseStart = NoDate;
             double recordingRiseStartBBT = 0;
             DateTime currentDay = NoDate;
             double currentBBT = 0;
-            for (int i = 0; i <= 2 * numberOfDaysToLookIn; i++)
+            for (int i = 0; i <= 2 * NumberOfDaysToLookIn; i++)
             {
                 if (currentBBT != 0)
                 {
@@ -216,16 +246,26 @@ namespace WomenCalendar
                     previousDate = currentDay;
                 }
 
-                currentDay = ovCalend.AddDays(-1 * numberOfDaysToLookIn + i);
-                currentBBT = woman.BBT.GetBBT(currentDay);
-                if (currentBBT == 0) continue; // no BBT found for this day.
-                if (previousBBT == 0) continue; // this is first element. Wait for second one.
+                currentDay = ovylCalend.AddDays((-1 * NumberOfDaysToLookIn) + i);
+                currentBBT = this.woman.BBT.GetBBT(currentDay);
+                if (currentBBT == 0)
+                {
+                    continue; // no BBT found for this day.
+                }
 
-                var move = GetMove(previousBBT, currentBBT);
+                if (previousBBT == 0)
+                {
+                    continue; // this is first element. Wait for second one.
+                }
+
+                var move = this.GetMove(previousBBT, currentBBT);
 
                 if (move == TemperatureMove.Up)
                 {
-                    if (isRecordingRise) { continue; }
+                    if (isRecordingRise)
+                    {
+                        continue;
+                    }
 
                     recordingRiseStart = previousDate;
                     recordingRiseStartBBT = previousBBT;
@@ -269,26 +309,69 @@ namespace WomenCalendar
                 TemperatureMove.Down;
         }
 
-        enum TemperatureMove { Unknown, Down, Up, Same };
-
-        class Rise
+        /// <summary>
+        /// Represents temperature rise.
+        /// </summary>
+        internal class Rise
         {
-            public static readonly double SignificantCoefficient = 2;
+            /// <summary>
+            /// The coefficient of the difference. 
+            /// The temperature increment value should be higher this much times to be counted as significant.
+            /// </summary>
+            internal static readonly double SignificantCoefficient = 2;
 
-            public DateTime Start { get; set; }
-            public DateTime Stop { get; set; }
-            public int DaysLength { get { return (Stop - Start).Days; } }
+            /// <summary>
+            /// Rise start day.
+            /// </summary>
+            internal DateTime Start { get; set; }
 
-            public double BbtLow { get; set; }
-            public double BbtHigh { get; set; }
-            public double RiseSize { get { return BbtHigh - BbtLow; } }
+            /// <summary>
+            /// Rise end day.
+            /// </summary>
+            internal DateTime Stop { get; set; }
 
-            public bool ContainsDate(DateTime date)
+            /// <summary>
+            /// Length of the rise.
+            /// </summary>
+            internal int DaysLength
             {
-                return Start <= date && date <= Stop;
+                get { return (this.Stop - this.Start).Days; }
             }
 
-            public bool SignificantlyDifferentSize(Rise rise)
+            /// <summary>
+            /// The rise stat temperature.
+            /// </summary>
+            internal double BbtLow { get; set; }
+
+            /// <summary>
+            /// The rise finish temperature.
+            /// </summary>
+            internal double BbtHigh { get; set; }
+            
+            /// <summary>
+            /// The temperature increment value.
+            /// </summary>
+            internal double RiseSize
+            {
+                get { return this.BbtHigh - this.BbtLow; }
+            }
+
+            /// <summary>
+            /// Check if day is within the rise.
+            /// </summary>
+            /// <param name="date">Day to check</param>
+            /// <returns>True if it is a rise day.</returns>
+            internal bool ContainsDate(DateTime date)
+            {
+                return this.Start <= date && date <= this.Stop;
+            }
+
+            /// <summary>
+            /// Compare to another rise.
+            /// </summary>
+            /// <param name="rise">Object to comparw with.</param>
+            /// <returns>True if this object and the given one are have much different increments.</returns>
+            internal bool SignificantlyDifferentSize(Rise rise)
             {
                 double diffenece = rise.RiseSize > this.RiseSize ?
                     rise.RiseSize / this.RiseSize :
