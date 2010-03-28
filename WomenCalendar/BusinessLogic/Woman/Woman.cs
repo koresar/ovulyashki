@@ -1,101 +1,162 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
-using System.Xml;
-using System.Reflection;
-using System.Xml.Serialization;
 using System.IO;
+using System.Reflection;
+using System.Text;
 using System.Windows.Forms;
+using System.Xml;
+using System.Xml.Serialization;
 using ICSharpCode.SharpZipLib.BZip2;
 
 namespace WomenCalendar
 {
+    /// <summary>
+    /// The application main class. Contains all the info about a woman and application business logic. 
+    /// Used widely everywhere. Application can operate with only one woman - SDI.
+    /// It is also the root of XML serializable woman data file.
+    /// </summary>
     [XmlRoot("Woman")]
     public class Woman : ICloneable
     {
+        [XmlIgnore()]
+        private int averagePeriodLength;
+
+        /// <summary>
+        /// The only constructor. Initializes all data with default values.
+        /// </summary>
+        public Woman()
+        {
+            this.Notes = new NotesCollection();
+            this.BBT = new BBTCollection();
+            this.HadSexList = new HadSexCollection();
+            this.Health = new HealthCollection();
+            this.CFs = new CFCollection();
+            this.DefaultMenstruationLength = 5;
+            this.Menstruations = new MenstruationsCollection();
+            this.Conceptions = new ConceptionsCollection();
+            this.Schedules = new SchedulesCollection();
+            this.ManualPeriodLength = 28;
+            this.averagePeriodLength = 28;
+            this.Name = Environment.UserName;
+            this.Password = string.Empty;
+            this.AssociatedFile = string.Empty;
+            this.OvDetector = new OvulationDetector(this);
+        }
+
+        /// <summary>
+        /// Fired when user changes period between menstructions.
+        /// </summary>
+        public event Action AveragePeriodLengthChanged;
+
+        /// <summary>
+        /// The woman name.
+        /// </summary>
         public string Name { get; set; }
 
+        /// <summary>
+        /// Her password.
+        /// </summary>
         public string Password { get; set; }
 
+        /// <summary>
+        /// The major data we are operating with - menstructions.
+        /// </summary>
         public MenstruationsCollection Menstruations { get; set; }
 
+        /// <summary>
+        /// The scheduled actvities.
+        /// </summary>
         public SchedulesCollection Schedules { get; set; }
 
+        /// <summary>
+        /// The pregnancy data.
+        /// </summary>
         public ConceptionsCollection Conceptions { get; set; }
 
+        /// <summary>
+        /// The woman file name which was opened.
+        /// </summary>
         [XmlIgnore()]
         public string AssociatedFile { get; set; }
 
+        /// <summary>
+        /// Indicates if woman want to set period length herself.
+        /// </summary>
         public bool UseManualPeriodLength { get; set; }
 
+        /// <summary>
+        /// Should we protect the data with password?
+        /// </summary>
         public bool AllwaysAskPassword { get; set; }
 
-        [XmlIgnore()]
-        private int averagePeriodLength;
         /// <summary>
         /// This is what we calculate. This is average amount of days between menstruations. Usual from 21 to 35 days.
         /// </summary>
         [XmlElement("AveragePeriodLength")]
         public int AveragePeriodLength
         {
-            get { return averagePeriodLength; }
+            get
+            {
+                return this.averagePeriodLength;
+            }
+
             set
             {
-                int prevLength = averagePeriodLength;
-                averagePeriodLength = value;
-                if (prevLength != averagePeriodLength && AveragePeriodLengthChanged != null)
+                int prevLength = this.averagePeriodLength;
+                this.averagePeriodLength = value;
+                if (prevLength != this.averagePeriodLength && this.AveragePeriodLengthChanged != null)
                 {
-                    AveragePeriodLengthChanged();
+                    this.AveragePeriodLengthChanged();
                 }
             }
         }
 
         /// <summary>
-        /// This is what user choose to use as period for egesting between menstruation. Usual 21 - 35 days.
+        /// This is what user choose to use as period between menstruation. Usual 21 - 35 days.
         /// </summary>
         public int ManualPeriodLength { get; set; }
 
-        public delegate void AveragePeriodLengthChangedDelegate();
-        public event AveragePeriodLengthChangedDelegate AveragePeriodLengthChanged;
-
         /// <summary>
-        /// This is the default length of woman egesting. Usual 3-5 days. It is set on the left side of the window
-        /// by the user.
+        /// This is the default length of woman egesting. Usual 5 days.
         /// </summary>
         public int DefaultMenstruationLength { get; set; }
 
+        /// <summary>
+        /// Eery day notes.
+        /// </summary>
         public NotesCollection Notes { get; set; }
 
+        /// <summary>
+        /// The daily Basal Body Temperatures.
+        /// </summary>
         public BBTCollection BBT { get; set; }
 
+        /// <summary>
+        /// Indicates if there was sex that day.
+        /// </summary>
         public HadSexCollection HadSexList { get; set; }
 
+        /// <summary>
+        /// The woman daily wellbeing.
+        /// </summary>
         public HealthCollection Health { get; set; }
 
+        /// <summary>
+        /// The Cervical Fluid type for each day.
+        /// </summary>
         public CFCollection CFs { get; set; }
 
+        /// <summary>
+        /// The business logic object which predicts the day of the ovulation using different data and methods.
+        /// </summary>
         [XmlIgnore]
         public OvulationDetector OvDetector { get; private set; }
 
-        public Woman()
-        {
-            Notes = new NotesCollection();
-            BBT = new BBTCollection();
-            HadSexList = new HadSexCollection();
-            Health = new HealthCollection();
-            CFs = new CFCollection();
-            DefaultMenstruationLength = 5;
-            Menstruations = new MenstruationsCollection();
-            Conceptions = new ConceptionsCollection();
-            Schedules = new SchedulesCollection();
-            ManualPeriodLength = 28;
-            averagePeriodLength = 28;
-            Name = Environment.UserName;
-            Password = string.Empty;
-            AssociatedFile = string.Empty;
-            OvDetector = new OvulationDetector(this);
-        }
-
+        /// <summary>
+        /// Read the woman from a file and creates the woman object.
+        /// </summary>
+        /// <param name="path">Path to the woman file.</param>
+        /// <returns>Newly loaded woman object.</returns>
         public static Woman ReadFrom(string path)
         {
             Woman w = null;
@@ -103,13 +164,13 @@ namespace WomenCalendar
             try
             {
                 var s = new BZip2InputStream(fs);
-                w = (Woman)(new XmlSerializer(typeof(Woman)).Deserialize(s));
+                w = (Woman)new XmlSerializer(typeof(Woman)).Deserialize(s);
                 s.Close();
             }
             catch (BZip2Exception)
             { // old file type support
                 fs.Seek(0, SeekOrigin.Begin);
-                w = (Woman)(new XmlSerializer(typeof(Woman)).Deserialize(fs));
+                w = (Woman)new XmlSerializer(typeof(Woman)).Deserialize(fs);
             }
             finally
             {
@@ -125,77 +186,107 @@ namespace WomenCalendar
             return w;
         }
 
+        /// <summary>
+        /// Add one more menstruation to the collection with default egestion length.
+        /// </summary>
+        /// <param name="date">The bleeding start day.</param>
+        /// <returns>True if was added.</returns>
         public bool AddMenstruationDay(DateTime date)
         {
-            if (Menstruations.IsMenstruationDay(date))
+            if (this.Menstruations.IsMenstruationDay(date))
             {
                 return false;
             }
 
-            if (Menstruations.Add(date, DefaultMenstruationLength))
+            if (this.Menstruations.Add(date, this.DefaultMenstruationLength))
             {
-                AveragePeriodLength = Menstruations.CalculateAveragePeriodLength();
+                this.AveragePeriodLength = this.Menstruations.CalculateAveragePeriodLength();
                 return true;
             }
+
             return false;
         }
 
+        /// <summary>
+        /// Check if ше is more probable to bleed that day.
+        /// </summary>
+        /// <param name="date">Day to check.</param>
+        /// <returns>True if predicted as bleeding day; otherwise - false.</returns>
         public bool IsPredictedAsMenstruationDay(DateTime date)
         {
-            if (Menstruations.Count == 0)
+            if (this.Menstruations.Count == 0)
             {
                 return false;
             }
 
-            MenstruationPeriod lastPeriod = Menstruations.Last;
-            if (date <= lastPeriod.StartDay.AddDays(DefaultMenstruationLength))
+            MenstruationPeriod lastPeriod = this.Menstruations.Last;
+            if (date <= lastPeriod.StartDay.AddDays(this.DefaultMenstruationLength))
             {
                 return false;
             }
 
-            int daysBetween = ((date - lastPeriod.StartDay).Days) % ManualPeriodLength;
-            return daysBetween < DefaultMenstruationLength;
+            int daysBetween = (date - lastPeriod.StartDay).Days % this.ManualPeriodLength;
+            return daysBetween < this.DefaultMenstruationLength;
         }
 
+        /// <summary>
+        /// Check if the day is predicted as no-conceive day.
+        /// </summary>
+        /// <param name="date">Day to check.</param>
+        /// <returns>True if it is safe to have sex that day.</returns>
         public bool IsPredictedAsSafeSexDay(DateTime date)
         {
-            if (Menstruations.Count == 0)
+            if (this.Menstruations.Count == 0)
             {
                 return false;
             }
 
-            MenstruationPeriod lastPeriod = Menstruations.Last;
-            if (date <= lastPeriod.StartDay.AddDays(DefaultMenstruationLength))
+            MenstruationPeriod lastPeriod = this.Menstruations.Last;
+            if (date <= lastPeriod.StartDay.AddDays(this.DefaultMenstruationLength))
             {
                 return false;
             }
 
-            int daysBetween = ((date - lastPeriod.StartDay).Days) % ManualPeriodLength;
-            return (daysBetween >= (ManualPeriodLength - 5) && daysBetween <= (ManualPeriodLength + 4)) || (daysBetween <= 4);
+            int daysBetween = (date - lastPeriod.StartDay).Days % this.ManualPeriodLength;
+            return (daysBetween >= (this.ManualPeriodLength - 5) && daysBetween <= (this.ManualPeriodLength + 4)) || (daysBetween <= 4);
         }
 
+        /// <summary>
+        /// Check if the day is the ovulation day.
+        /// </summary>
+        /// <param name="date">Day to check.</param>
+        /// <returns>True if ovulation is gonna be that day (probably).</returns>
         public bool IsPredictedAsOvulationDay(DateTime date)
         {
-            if (Menstruations.Count == 0 ||
-                Menstruations.IsMenstruationDay(date) ||
-                date < Menstruations.First.StartDay)
+            if (this.Menstruations.Count == 0 ||
+                this.Menstruations.IsMenstruationDay(date) ||
+                date < this.Menstruations.First.StartDay)
             {
                 return false;
             }
 
-            return GetClosestOvulationDay(date) == date;
+            return this.GetClosestOvulationDay(date) == date;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="date"></param>
+        /// <returns></returns>
         public DateTime GetClosestOvulationDay(DateTime date)
         {
-            if (Menstruations.Count == 0) { throw new Exception("No menstruations. The method call prohibited."); }
-            MenstruationPeriod lastPeriod = Menstruations.Last;
-            MenstruationPeriod firstPeriod = Menstruations.First;
-            if (Menstruations.Count != 1 && date < lastPeriod.StartDay && date > firstPeriod.StartDay)
+            if (this.Menstruations.Count == 0)
+            {
+                throw new Exception("No menstruations. The method call prohibited.");
+            }
+
+            MenstruationPeriod lastPeriod = this.Menstruations.Last;
+            MenstruationPeriod firstPeriod = this.Menstruations.First;
+            if (this.Menstruations.Count != 1 && date < lastPeriod.StartDay && date > firstPeriod.StartDay)
             { // the ov. date is already calculated. Let's return it.
                 MenstruationPeriod resultPeriodBefore = null;
                 MenstruationPeriod resultPeriodAfter = null;
-                foreach (MenstruationPeriod period in Menstruations)
+                foreach (MenstruationPeriod period in this.Menstruations)
                 {
                     if (period.StartDay < date && (resultPeriodBefore == null || period.StartDay > resultPeriodBefore.StartDay))
                     {
@@ -207,89 +298,94 @@ namespace WomenCalendar
                         resultPeriodAfter = period;
                     }
                 }
+
                 return resultPeriodBefore.GetOvulationDate(this);
             }
 
-            int cycles = (date - lastPeriod.StartDay).Days / ManualPeriodLength;
-            DateTime lastCycleFirstDay = lastPeriod.StartDay.AddDays((cycles + 1) * ManualPeriodLength);
-            return OvDetector.EstimateOvulationDate(lastCycleFirstDay);
+            int cycles = (date - lastPeriod.StartDay).Days / this.ManualPeriodLength;
+            DateTime lastCycleFirstDay = lastPeriod.StartDay.AddDays((cycles + 1) * this.ManualPeriodLength);
+            return this.OvDetector.EstimateOvulationDate(lastCycleFirstDay);
         }
 
         public bool IsPredictedAsBoyDay(DateTime date)
         {
-            if (Menstruations.Count == 0 || 
-                Menstruations.IsMenstruationDay(date) || 
-                date < Menstruations.First.StartDay)
+            if (this.Menstruations.Count == 0 ||
+                this.Menstruations.IsMenstruationDay(date) ||
+                date < this.Menstruations.First.StartDay)
             {
                 return false;
             }
 
-            int days = (date - GetClosestOvulationDay(date)).Days;
+            int days = (date - this.GetClosestOvulationDay(date)).Days;
             return 1 <= days && days <= 4;
         }
 
         public bool IsPredictedAsGirlDay(DateTime date)
         {
-            if (Menstruations.Count == 0 ||
-                Menstruations.IsMenstruationDay(date) ||
-                date < Menstruations.First.StartDay)
+            if (this.Menstruations.Count == 0 ||
+                this.Menstruations.IsMenstruationDay(date) ||
+                date < this.Menstruations.First.StartDay)
             {
                 return false;
             }
 
-            int days = (GetClosestOvulationDay(date) - date).Days;
+            int days = (this.GetClosestOvulationDay(date) - date).Days;
             return 1 <= days && days <= 4;
         }
 
         public bool IsConceptionDay(DateTime date)
         {
-            return Conceptions.IsConceptionDay(date);
+            return this.Conceptions.IsConceptionDay(date);
         }
 
         public bool IsPregnancyDay(DateTime date)
         {
-            ConceptionPeriod period = Conceptions.GetConceptionByDate(date);
+            ConceptionPeriod period = this.Conceptions.GetConceptionByDate(date);
             return period != null;
         }
 
         public bool RemoveMenstruationDay(DateTime date)
         {
-            if (!Menstruations.IsMenstruationDay(date))
+            if (!this.Menstruations.IsMenstruationDay(date))
             {
                 return false;
             }
 
-            MenstruationPeriod removedPeriod = Menstruations.GetPeriodByDate(date);
-            if (Menstruations.Remove(date))
+            MenstruationPeriod removedPeriod = this.Menstruations.GetPeriodByDate(date);
+            if (this.Menstruations.Remove(date))
             {
                 if (removedPeriod.HasPregnancy)
                 {
-                    MenstruationPeriod period = Menstruations.GetClosestPeriodBeforeDay(date);
+                    MenstruationPeriod period = this.Menstruations.GetClosestPeriodBeforeDay(date);
                     if (period != null)
                     {
                         period.HasPregnancy = true;
                     }
                 }
-                AveragePeriodLength = Menstruations.CalculateAveragePeriodLength();
+
+                this.AveragePeriodLength = this.Menstruations.CalculateAveragePeriodLength();
                 return true;
             }
+
             return false;
         }
 
         public bool AddConceptionDay(DateTime date)
         {
-            if (!Conceptions.IsPregnancyDay(date))
+            if (!this.Conceptions.IsPregnancyDay(date))
             {
                 if (date > DateTime.Today)
                 {
-                    if (MessageBox.Show(TEXT.Get["Future_pregnancy_day"] + TEXT.Get["Are_you_sure_capital"],
-                        TEXT.Get["What_a_situation"], MessageBoxButtons.YesNo) != DialogResult.Yes)
+                    if (MessageBox.Show(
+                        TEXT.Get["Future_pregnancy_day"] + TEXT.Get["Are_you_sure_capital"],
+                        TEXT.Get["What_a_situation"], 
+                        MessageBoxButtons.YesNo) != DialogResult.Yes)
                     {
                         return false;
                     }
                 }
 
-                ConceptionPeriod concPeriod = Conceptions.GetConceptionAfterDate(date);
+                ConceptionPeriod concPeriod = this.Conceptions.GetConceptionAfterDate(date);
                 if (concPeriod != null && (concPeriod.StartDay - date).Days <= ConceptionPeriod.StandardLength)
                 {
                     MessageBox.Show(
@@ -298,73 +394,58 @@ namespace WomenCalendar
                     return false;
                 }
 
-                MenstruationPeriod nextMenses = Menstruations.GetClosestPeriodAfterDay(date);
+                MenstruationPeriod nextMenses = this.Menstruations.GetClosestPeriodAfterDay(date);
                 if (nextMenses != null)
                 {
-                    if (MessageBox.Show(TEXT.Get["Have_menses_after_pregn"] + TEXT.Get["Are_you_sure_capital"],
-                        TEXT.Get["What_a_situation"], MessageBoxButtons.YesNo) != DialogResult.Yes)
+                    if (MessageBox.Show(
+                        TEXT.Get["Have_menses_after_pregn"] + TEXT.Get["Are_you_sure_capital"],
+                        TEXT.Get["What_a_situation"], 
+                        MessageBoxButtons.YesNo) != DialogResult.Yes)
                     {
                         return false;
                     }
                 }
 
-                MenstruationPeriod prevMenses = Menstruations.GetPeriodByDate(date);
+                MenstruationPeriod prevMenses = this.Menstruations.GetPeriodByDate(date);
                 if (prevMenses != null)
                 {
-                    if (MessageBox.Show(TEXT.Get["Pregn_on_menses"] + TEXT.Get["Are_you_sure_capital"],
-                        TEXT.Get["What_a_situation"], MessageBoxButtons.YesNo) != DialogResult.Yes)
+                    if (MessageBox.Show(
+                        TEXT.Get["Pregn_on_menses"] + TEXT.Get["Are_you_sure_capital"],
+                        TEXT.Get["What_a_situation"], 
+                        MessageBoxButtons.YesNo) != DialogResult.Yes)
                     {
                         return false;
                     }
                 }
                 else
                 {
-                    prevMenses = Menstruations.GetClosestPeriodBeforeDay(date);
+                    prevMenses = this.Menstruations.GetClosestPeriodBeforeDay(date);
                 }
 
-                if (prevMenses != null && Math.Abs((date - prevMenses.LastDay).Days) <= ManualPeriodLength)
+                if (prevMenses != null && Math.Abs((date - prevMenses.LastDay).Days) <= this.ManualPeriodLength)
                 { // The pregnancy must start from last cycle start.
                   // Also we must be sure is was not so long time ago since last cycle.
                     prevMenses.HasPregnancy = true;
-                    return Conceptions.Add(prevMenses.StartDay);
+                    return this.Conceptions.Add(prevMenses.StartDay);
                 }
                 else
                 {
-                    return Conceptions.Add(date);
+                    return this.Conceptions.Add(date);
                 }
             }
-            return false;
-        }
 
-        public bool RemoveConceptionDay(DateTime date)
-        {
-            MenstruationPeriod period = Menstruations.GetClosestPeriodBeforeDay(date);
-            if (period != null)
-            {
-                period.HasPregnancy = false;
-            }
-            return Conceptions.Remove(date);
+            return false;
         }
 
         public bool RemovePregnancy(DateTime date)
         {
-            MenstruationPeriod period = Menstruations.GetClosestPeriodBeforeDay(date);
+            MenstruationPeriod period = this.Menstruations.GetClosestPeriodBeforeDay(date);
             if (period != null)
             {
                 period.HasPregnancy = false;
             }
-            return Conceptions.RemoveByDate(date);
-        }
 
-        public bool AddNote(DateTime date, string text)
-        {
-            Notes[date] = text;
-            return true;
-        }
-
-        public bool RemoveNote(DateTime date)
-        {
-            return Notes.Remove(date);
+            return this.Conceptions.RemoveByDate(date);
         }
 
         public OneDayInfo GetOneDayInfo(DateTime day)
@@ -383,7 +464,7 @@ namespace WomenCalendar
                 sb.Append(TEXT.Get["Today_parentheses"]);
             }
 
-            MenstruationPeriod period = Menstruations.GetPeriodByDate(date);
+            MenstruationPeriod period = this.Menstruations.GetPeriodByDate(date);
             if (period != null)
             {
                 sb.AppendLine();
@@ -391,36 +472,37 @@ namespace WomenCalendar
                 sb.Append(EgestasCollection.EgestasNames[period.Egestas[date]]);
             }
 
-            if (IsPregnancyDay(date))
+            if (this.IsPregnancyDay(date))
             {
                 sb.AppendLine();
 
-                int week = Conceptions.GetPregnancyWeekNumber(date);
+                int week = this.Conceptions.GetPregnancyWeekNumber(date);
                 if (week > 0)
                 {
                     sb.AppendLine(TEXT.Get.Format("Preg_week_number_N", week));
                 }
 
-                if (IsConceptionDay(date))
+                if (this.IsConceptionDay(date))
                 {
                     sb.AppendLine(TEXT.Get["Conception_day"]);
                 }
 
-                var concPeriod = Conceptions.GetConceptionByDate(date);
+                var concPeriod = this.Conceptions.GetConceptionByDate(date);
                 DateTime conceptionDate = concPeriod.StartDay;
                 DateTime dateOfBirth = conceptionDate.AddDays(ConceptionPeriod.StandardLength);
                 sb.AppendLine(TEXT.Get.Format("Probable_birth_date", dateOfBirth.ToLongDateString()));
                 sb.Append(TEXT.Get.Format("Zodiac_will_be", HoroscopDatePair.GetZodiacSignName(dateOfBirth)));
 
                 string gender = string.Empty;
-                if (IsPredictedAsBoyDay(concPeriod.StartDay))
+                if (this.IsPredictedAsBoyDay(concPeriod.StartDay))
                 {
                     gender = TEXT.Get["Boy"];
                 }
-                else if (IsPredictedAsGirlDay(concPeriod.StartDay))
+                else if (this.IsPredictedAsGirlDay(concPeriod.StartDay))
                 {
                     gender = TEXT.Get["Girl"];
                 }
+
                 if (!string.IsNullOrEmpty(gender))
                 {
                     sb.AppendLine();
@@ -429,15 +511,15 @@ namespace WomenCalendar
             }
             else
             {
-                var closestBefore = Menstruations.GetClosestPeriodBeforeDay(date);
+                var closestBefore = this.Menstruations.GetClosestPeriodBeforeDay(date);
                 if (closestBefore != null && period == null)
                 {
                     sb.AppendLine();
                     sb.Append(TEXT.Get.Format("Cycle_day_number_N", ((date - closestBefore.StartDay).Days + 1).ToString()));
                 }
 
-                var closestAfter = Menstruations.GetClosestPeriodAfterDay(date);
-                closestBefore = Menstruations.GetClosestPeriodBeforeDay(date.AddDays(1));
+                var closestAfter = this.Menstruations.GetClosestPeriodAfterDay(date);
+                closestBefore = this.Menstruations.GetClosestPeriodBeforeDay(date.AddDays(1));
                 if (closestBefore != null && closestAfter != null)
                 {
                     int days = (closestAfter.StartDay - closestBefore.StartDay).Days;
@@ -445,42 +527,44 @@ namespace WomenCalendar
                     sb.Append(TEXT.Get.Format("Cycle_length_days", days.ToString(), TEXT.GetDaysString(days)));
                 }
 
-                if (IsPredictedAsMenstruationDay(date))
+                if (this.IsPredictedAsMenstruationDay(date))
                 {
                     sb.AppendLine();
                     sb.Append(TEXT.Get["Possible_menst"]);
                 }
 
-                if (IsPredictedAsOvulationDay(date))
+                if (this.IsPredictedAsOvulationDay(date))
                 {
                     sb.AppendLine();
                     sb.Append(TEXT.Get["Estimated_ovulation_day"]);
                 }
 
                 string gender = string.Empty;
-                if (IsPredictedAsBoyDay(date))
+                if (this.IsPredictedAsBoyDay(date))
                 {
                     sb.AppendLine();
                     sb.Append(TEXT.Get["Boy_conception_day"]);
                 }
-                else if (IsPredictedAsGirlDay(date))
+                else if (this.IsPredictedAsGirlDay(date))
                 {
                     sb.AppendLine();
                     sb.Append(TEXT.Get["Girl_conception_day"]);
                 }
 
-                if (HadSexList.ContainsKey(date))
+                if (this.HadSexList.ContainsKey(date))
                 {
                     DateTime dateOfBirth = date.AddDays(ConceptionPeriod.StandardLength);
                     sb.AppendLine();
-                    sb.Append(TEXT.Get.Format("If_conceive_info", 
-                        dateOfBirth.ToLongDateString(), HoroscopDatePair.GetZodiacSignName(dateOfBirth)));
+                    sb.Append(TEXT.Get.Format(
+                        "If_conceive_info", 
+                        dateOfBirth.ToLongDateString(), 
+                        HoroscopDatePair.GetZodiacSignName(dateOfBirth)));
                 }
             }
 
             // got to be last
             string text;
-            if (Notes.TryGetValue(date, out text))
+            if (this.Notes.TryGetValue(date, out text))
             {
                 sb.AppendLine();
                 sb.Append(TEXT.Get["Note_semicolon"]);
@@ -517,7 +601,11 @@ namespace WomenCalendar
 
         public override bool Equals(object obj)
         {
-            if (!(obj is Woman)) return false;
+            if (!(obj is Woman))
+            {
+                return false;
+            }
+
             Woman w = obj as Woman;
 
             bool equal = true;
@@ -537,6 +625,11 @@ namespace WomenCalendar
             equal &= w.UseManualPeriodLength.Equals(this.UseManualPeriodLength);
 
             return equal;
+        }
+
+        public override int GetHashCode()
+        { // the function is useless, but created to remove compilation warning message.
+            return 0;
         }
     }
 }
