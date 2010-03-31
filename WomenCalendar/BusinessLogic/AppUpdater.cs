@@ -1,33 +1,40 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
-using System.IO;
-using System.Xml;
 using System.ComponentModel;
-using System.Reflection;
-using System.Windows.Forms;
-using System.Net;
 using System.Diagnostics;
+using System.IO;
+using System.Net;
+using System.Reflection;
+using System.Text;
+using System.Windows.Forms;
+using System.Xml;
 
 namespace WomenCalendar
 {
+    /// <summary>
+    /// The class tries to download and run new application installer.
+    /// </summary>
     public class AppUpdater
     {
+        /// <summary>
+        /// On the backgound checks if new application release is available. Interacts with user asking question.
+        /// Download and run installtion package.
+        /// </summary>
         public static void TryUpdate()
         {
             Program.ApplicationForm.BeginInvoke(new MethodInvoker(() => Program.ApplicationForm.DisableUpdate()));
             var bw = new BackgroundWorker();
-            bw.DoWork += new DoWorkEventHandler(bw_DoWork);
-            bw.RunWorkerCompleted += new RunWorkerCompletedEventHandler(bw_RunWorkerCompleted);
+            bw.DoWork += new DoWorkEventHandler(CallbackDoWork);
+            bw.RunWorkerCompleted += new RunWorkerCompletedEventHandler(CallbackRunWorkerCompleted);
             bw.RunWorkerAsync();
         }
 
-        private static void bw_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        private static void CallbackRunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             Program.ApplicationForm.BeginInvoke(new MethodInvoker(() => Program.ApplicationForm.EnableUpdate()));
         }
 
-        private static void bw_DoWork(object sender, DoWorkEventArgs e)
+        private static void CallbackDoWork(object sender, DoWorkEventArgs e)
         {
             try
             {
@@ -104,34 +111,48 @@ namespace WomenCalendar
             return memoryStream;
         }
 
-        class Release
+        /// <summary>
+        /// Represents the application release information.
+        /// </summary>
+        private class Release
         {
-            public string Date { get; set; }
-            public string FileName { get; set; }
-            public string Version { get; set; }
-            public string ChangeLog { get; set; }
-            public string FileSize { get; set; }
-            public string Downloads { get; set; }
-            public string Url { get; set; }
+            internal string Date { get; set; }
 
-            public bool IsItNewVersion()
+            internal string FileName { get; set; }
+
+            internal string Version { get; set; }
+
+            internal string ChangeLog { get; set; }
+
+            internal string FileSize { get; set; }
+
+            internal string Downloads { get; set; }
+
+            internal string Url { get; set; }
+
+            internal bool IsItNewVersion()
             {
-                var newVer = new Version(Version);
+                var newVer = new Version(this.Version);
                 var oldVer = Assembly.GetEntryAssembly().GetName().Version;
                 return newVer > oldVer;
             }
 
-            public string SizeInMB()
+            internal string SizeInMB()
             {
                 int size;
-                return int.TryParse(FileSize, out size) ? Math.Round(size / (1024.0 * 1024.0), 2).ToString() : TEXT.Get["Unknown"];
+                return int.TryParse(this.FileSize, out size) ? Math.Round(size / (1024.0 * 1024.0), 2).ToString() : TEXT.Get["Unknown"];
             }
 
-            public string GetFormattedText()
+            internal string GetFormattedText()
             {
-                return TEXT.Get.Format("Update_found_text", Version, Assembly.GetEntryAssembly().GetName().Version.ToString(),
-                    Date, SizeInMB(), Downloads, ChangeLog);
-
+                return TEXT.Get.Format(
+                    "Update_found_text", 
+                    this.Version, 
+                    Assembly.GetEntryAssembly().GetName().Version.ToString(),
+                    this.Date, 
+                    this.SizeInMB(), 
+                    this.Downloads, 
+                    this.ChangeLog);
             }
         }
     }

@@ -71,10 +71,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BusinessLogic\Appearance.cs" />
+    <Compile Include="BusinessLogic\DayCellAppearance.cs" />
     <Compile Include="BusinessLogic\ApplicationSettings.cs" />
     <Compile Include="BusinessLogic\AppUpdater.cs" />
     <Compile Include="BusinessLogic\LinqBridge.cs" />
+    <Compile Include="BusinessLogic\MonthAppearance.cs" />
+    <Compile Include="BusinessLogic\TranslationException.cs" />
     <Compile Include="BusinessLogic\UtilityMethods.cs" />
     <Compile Include="BusinessLogic\Report\CsvWriter.cs" />
     <Compile Include="BusinessLogic\HoroscopeDatePair.cs" />

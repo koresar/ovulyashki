@@ -269,15 +269,16 @@ namespace WomenCalendar
         }
 
         /// <summary>
-        /// 
+        /// Finds the nearest (before or after) ovulation date. This function is necessary to find boy/girl
+        /// conception days.
         /// </summary>
-        /// <param name="date"></param>
-        /// <returns></returns>
+        /// <param name="date">Day to search near.</param>
+        /// <returns>The ovulation date vlosest to the givem date.</returns>
         public DateTime GetClosestOvulationDay(DateTime date)
         {
             if (this.Menstruations.Count == 0)
             {
-                throw new Exception("No menstruations. The method call prohibited.");
+                throw new InvalidOperationException("No menstruations. The method call prohibited.");
             }
 
             MenstruationPeriod lastPeriod = this.Menstruations.Last;
@@ -302,11 +303,17 @@ namespace WomenCalendar
                 return resultPeriodBefore.GetOvulationDate(this);
             }
 
+            // We are trying to get ovulation of the day without any menstruation near.
             int cycles = (date - lastPeriod.StartDay).Days / this.ManualPeriodLength;
             DateTime lastCycleFirstDay = lastPeriod.StartDay.AddDays((cycles + 1) * this.ManualPeriodLength);
             return this.OvDetector.EstimateOvulationDate(lastCycleFirstDay);
         }
 
+        /// <summary>
+        /// Check if the date is good to conceive a boy.
+        /// </summary>
+        /// <param name="date">Day to evaluate.</param>
+        /// <returns>True if it is more likely to conceive a boy that day.</returns>
         public bool IsPredictedAsBoyDay(DateTime date)
         {
             if (this.Menstruations.Count == 0 ||
@@ -320,6 +327,11 @@ namespace WomenCalendar
             return 1 <= days && days <= 4;
         }
 
+        /// <summary>
+        /// Check if the date is good to conceive a girl.
+        /// </summary>
+        /// <param name="date">Day to evaluate.</param>
+        /// <returns>True if it is more likely to conceive a girl that day.</returns>
         public bool IsPredictedAsGirlDay(DateTime date)
         {
             if (this.Menstruations.Count == 0 ||
@@ -333,17 +345,32 @@ namespace WomenCalendar
             return 1 <= days && days <= 4;
         }
 
+        /// <summary>
+        /// Check if it is a start day of pregnancy.
+        /// </summary>
+        /// <param name="date">Date to check.</param>
+        /// <returns>True if the pregnancy start here.</returns>
         public bool IsConceptionDay(DateTime date)
         {
             return this.Conceptions.IsConceptionDay(date);
         }
 
+        /// <summary>
+        /// Check if the baby is carried by woman that day.
+        /// </summary>
+        /// <param name="date">Date to check.</param>
+        /// <returns>True if the baby is in the woman's stomak at the day.</returns>
         public bool IsPregnancyDay(DateTime date)
         {
             ConceptionPeriod period = this.Conceptions.GetConceptionByDate(date);
             return period != null;
         }
 
+        /// <summary>
+        /// Remove the menstruation by any of it egestion day.
+        /// </summary>
+        /// <param name="date">Day of egestion.</param>
+        /// <returns>True if successfully removed the menstruation cycle.</returns>
         public bool RemoveMenstruationDay(DateTime date)
         {
             if (!this.Menstruations.IsMenstruationDay(date))
@@ -370,6 +397,11 @@ namespace WomenCalendar
             return false;
         }
 
+        /// <summary>
+        /// Try to add pregnancy. Asks user any questions he has to be asked.
+        /// </summary>
+        /// <param name="date">The clicked day.</param>
+        /// <returns>True if added. Otherwise false.</returns>
         public bool AddConceptionDay(DateTime date)
         {
             if (!this.Conceptions.IsPregnancyDay(date))
@@ -437,6 +469,11 @@ namespace WomenCalendar
             return false;
         }
 
+        /// <summary>
+        /// Remove a pregnancy by its any date.
+        /// </summary>
+        /// <param name="date">Date of pregnancy period.</param>
+        /// <returns>True if remover; otherwise false.</returns>
         public bool RemovePregnancy(DateTime date)
         {
             MenstruationPeriod period = this.Menstruations.GetClosestPeriodBeforeDay(date);
@@ -448,11 +485,21 @@ namespace WomenCalendar
             return this.Conceptions.RemoveByDate(date);
         }
 
+        /// <summary>
+        /// Create the information data about one day.
+        /// </summary>
+        /// <param name="day">Day to obtain data for.</param>
+        /// <returns>A day information structure.</returns>
         public OneDayInfo GetOneDayInfo(DateTime day)
         {
             return OneDayInfo.GetByDate(this, day);
         }
 
+        /// <summary>
+        /// Create the string which is shown to user as the full day description. May have lots of text.
+        /// </summary>
+        /// <param name="date">The day to describe.</param>
+        /// <returns>The day descruption.</returns>
         public string GenerateDayInfo(DateTime date)
         {
             StringBuilder sb = new StringBuilder();
@@ -576,6 +623,10 @@ namespace WomenCalendar
 
         #region ICloneable Members
 
+        /// <summary>
+        /// Create the full copy of the woman object.
+        /// </summary>
+        /// <returns>Fully copied woman.</returns>
         public object Clone()
         {
             var w = new Woman();
@@ -599,6 +650,11 @@ namespace WomenCalendar
 
         #endregion
 
+        /// <summary>
+        /// Check if two women data is the same. Used to determine if any changes were done to woman data.
+        /// </summary>
+        /// <param name="obj">Object to compare with.</param>
+        /// <returns>True if women data are same.</returns>
         public override bool Equals(object obj)
         {
             if (!(obj is Woman))
@@ -627,6 +683,10 @@ namespace WomenCalendar
             return equal;
         }
 
+        /// <summary>
+        /// Does nothing.
+        /// </summary>
+        /// <returns>Returns zero.</returns>
         public override int GetHashCode()
         { // the function is useless, but created to remove compilation warning message.
             return 0;

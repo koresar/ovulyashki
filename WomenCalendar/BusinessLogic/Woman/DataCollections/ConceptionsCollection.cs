@@ -82,7 +82,7 @@ namespace WomenCalendar
         }
 
         /// <summary>
-        /// Echk if it is a conception day.
+        /// Check if it is a conception day.
         /// </summary>
         /// <param name="date">Day to check.</param>
         /// <returns>True if it is a conception day.</returns>
