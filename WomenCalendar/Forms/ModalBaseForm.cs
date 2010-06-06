@@ -8,16 +8,28 @@ using System.Windows.Forms;
 
 namespace WomenCalendar
 {
+    /// <summary>
+    /// The base class for modal windows. Adds OK and Cancel buttons.
+    /// </summary>
     public partial class ModalBaseForm : BaseForm, ITranslatable
     {
+        /// <summary>
+        /// The default contructor for the dialog.
+        /// </summary>
         public ModalBaseForm()
         {
-            InitializeComponent();
-            if (TEXT.Get != null) ReReadTranslations();
+            this.InitializeComponent();
+            if (TEXT.Get != null)
+            {
+                this.ReReadTranslations();
+            }
         }
 
         #region ITranslatable interface impementation
 
+        /// <summary>
+        /// Refresh the localizations strings.
+        /// </summary>
         public void ReReadTranslations()
         {
             this.btnCancel.Text = TEXT.Get["Cancel_this"];
@@ -26,24 +38,30 @@ namespace WomenCalendar
 
         #endregion
 
+        /// <summary>
+        /// The function which executed on OK click.
+        /// </summary>
         public virtual void AcceptAction()
         {
-            DialogResult = DialogResult.OK;
+            this.DialogResult = DialogResult.OK;
         }
 
+        /// <summary>
+        /// The function which executed on Cancel click.
+        /// </summary>
         public virtual void CancelAction()
         {
-            DialogResult = DialogResult.Cancel;
+            this.DialogResult = DialogResult.Cancel;
         }
 
-        private void btnOK_Click(object sender, EventArgs e)
+        private void OK_Click(object sender, EventArgs e)
         {
-            AcceptAction();
+            this.AcceptAction();
         }
 
-        private void btnCancel_Click(object sender, EventArgs e)
+        private void Cancel_Click(object sender, EventArgs e)
         {
-            CancelAction();
+            this.CancelAction();
         }
     }
 }

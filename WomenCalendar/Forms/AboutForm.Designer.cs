@@ -49,7 +49,7 @@
             this.btnSite.TabIndex = 2;
             this.btnSite.Text = "Visit Ovulyashki site";
             this.btnSite.UseVisualStyleBackColor = true;
-            this.btnSite.Click += new System.EventHandler(this.btnSite_Click);
+            this.btnSite.Click += new System.EventHandler(this.Site_Click);
             // 
             // btnFeedback
             // 
@@ -60,7 +60,7 @@
             this.btnFeedback.TabIndex = 3;
             this.btnFeedback.Text = "Leave some thanks words";
             this.btnFeedback.UseVisualStyleBackColor = true;
-            this.btnFeedback.Click += new System.EventHandler(this.btnFeedback_Click);
+            this.btnFeedback.Click += new System.EventHandler(this.Feedback_Click);
             // 
             // btnBug
             // 
@@ -71,7 +71,7 @@
             this.btnBug.TabIndex = 4;
             this.btnBug.Text = "Tell us about a bug";
             this.btnBug.UseVisualStyleBackColor = true;
-            this.btnBug.Click += new System.EventHandler(this.btnBug_Click);
+            this.btnBug.Click += new System.EventHandler(this.Bug_Click);
             // 
             // btnNewFeature
             // 
@@ -82,7 +82,7 @@
             this.btnNewFeature.TabIndex = 5;
             this.btnNewFeature.Text = "Request a feature";
             this.btnNewFeature.UseVisualStyleBackColor = true;
-            this.btnNewFeature.Click += new System.EventHandler(this.btnNewFeature_Click);
+            this.btnNewFeature.Click += new System.EventHandler(this.NewFeature_Click);
             // 
             // btnAskQuestion
             // 
@@ -93,7 +93,7 @@
             this.btnAskQuestion.TabIndex = 6;
             this.btnAskQuestion.Text = "Ask us question";
             this.btnAskQuestion.UseVisualStyleBackColor = true;
-            this.btnAskQuestion.Click += new System.EventHandler(this.btnAskQuestion_Click);
+            this.btnAskQuestion.Click += new System.EventHandler(this.AskQuestion_Click);
             // 
             // lblVersion
             // 
@@ -112,7 +112,7 @@
             this.btnThanks.TabIndex = 1;
             this.btnThanks.Text = "Thanks to...";
             this.btnThanks.UseVisualStyleBackColor = true;
-            this.btnThanks.Click += new System.EventHandler(this.btnThanks_Click);
+            this.btnThanks.Click += new System.EventHandler(this.Thanks_Click);
             // 
             // txtThanks
             // 

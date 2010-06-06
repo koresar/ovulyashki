@@ -8,18 +8,48 @@ using System.Windows.Forms;
 
 namespace WomenCalendar
 {
+    /// <summary>
+    /// The form to create or edit the woman.
+    /// </summary>
     public partial class NewEditWomanForm : ModalBaseForm, ITranslatable
     {
+        /// <summary>
+        /// Create the dialog.
+        /// </summary>
         public NewEditWomanForm()
         {
-            InitializeComponent();
-            if (TEXT.Get != null) ReReadTranslations();
-            txtName.Text = Environment.UserName;
+            this.InitializeComponent();
+            if (TEXT.Get != null)
+            {
+                this.ReReadTranslations();
+            }
+
+            this.txtName.Text = Environment.UserName;
         }
 
+        /// <summary>
+        /// Get or set a woman login/name.
+        /// </summary>
+        public string WomanName
+        {
+            get { return this.txtName.Text; }
+            set { this.txtName.Text = value; }
+        }
+
+        /// <summary>
+        /// The password of the file.
+        /// </summary>
+        public string WomanPassword
+        {
+            get { return this.txtPassword.Text; }
+            set { this.txtPassword.Text = value; }
+        }
 
         #region ITranslatable interface impementation
 
+        /// <summary>
+        /// Refresh the localizations strings.
+        /// </summary>
         public new void ReReadTranslations()
         {
             base.ReReadTranslations();
@@ -28,18 +58,6 @@ namespace WomenCalendar
             this.Text = TEXT.Get["Creating_new_woman"];
         }
 
-        #endregion
-        
-        public string WomanName
-        {
-            get { return txtName.Text; }
-            set { txtName.Text = value; }
-        }
-
-        public string WomanPassword
-        {
-            get { return txtPassword.Text; }
-            set { txtPassword.Text = value; }
-        }
+        #endregion        
     }
 }

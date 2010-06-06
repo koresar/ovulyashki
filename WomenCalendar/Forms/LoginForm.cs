@@ -8,16 +8,39 @@ using System.Windows.Forms;
 
 namespace WomenCalendar
 {
+    /// <summary>
+    /// The dialog to enter woman credentials.
+    /// </summary>
     public partial class LoginForm : ModalBaseForm, ITranslatable
     {
+        /// <summary>
+        /// The dialog default constructor.
+        /// </summary>
         public LoginForm()
         {
-            InitializeComponent();
-            if (TEXT.Get != null) ReReadTranslations();
+            this.InitializeComponent();
+            if (TEXT.Get != null)
+            {
+                this.ReReadTranslations();
+            }
+        }
+
+        /// <summary>
+        /// The text entered by user.
+        /// </summary>
+        public string Password
+        {
+            get
+            {
+                return this.txtPassword.Text;
+            }
         }
 
         #region ITranslatable interface impementation
 
+        /// <summary>
+        /// Refresh the localizations strings.
+        /// </summary>
         public new void ReReadTranslations()
         {
             this.lblPass.Text = TEXT.Get["Please_enter_password"];
@@ -26,17 +49,9 @@ namespace WomenCalendar
 
         #endregion
 
-        public string Password
-        {
-            get
-            {
-                return txtPassword.Text;
-            }
-        }
-
         private void LoginForm_Shown(object sender, EventArgs e)
         {
-            txtPassword.Focus();
+            this.txtPassword.Focus();
         }
     }
 }

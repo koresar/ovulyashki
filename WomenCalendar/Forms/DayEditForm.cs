@@ -10,42 +10,11 @@ using System.Linq;
 
 namespace WomenCalendar
 {
-    public enum DayEditFocus { Note, BBT, Length, Schedules };
-
+    /// <summary>
+    /// Important part of the application - the window to customize any day data.
+    /// </summary>
     public partial class DayEditForm : BaseForm, ITranslatable
     {
-        class DayData
-        {
-            public string BBT;
-            public bool HadSex;
-            public int Health;
-            public string Note;
-            public bool HasMenstr;
-            public decimal MenstrLength;
-            public int Egesta;
-            public CervicalFluid CF;
-            public List<Schedule> Schedules;
-
-            public override bool Equals(object obj)
-            {
-                DayData d = obj as DayData;
-                return d.BBT == BBT && d.HadSex == HadSex && d.Health == Health && d.Note == Note && 
-                    d.HasMenstr == HasMenstr && d.MenstrLength == MenstrLength && d.Egesta == Egesta && d.CF == CF &&
-                    SchedulesEqual(d.Schedules);
-            }
-
-            public override int GetHashCode()
-            {
-                return BBT.GetHashCode() ^ HadSex.GetHashCode() ^ Health.GetHashCode() ^ Note.GetHashCode() ^
-                    HasMenstr.GetHashCode() ^ MenstrLength.GetHashCode() ^ Egesta.GetHashCode() ^ CF.GetHashCode();
-            }
-
-            private bool SchedulesEqual(List<Schedule> d)
-            {
-                return this.Schedules.SequenceEqual(d);
-            }
-        }
-
         private DayData initialData;
         private DateTime date;
         private DayEditFocus defaultFocus;
@@ -339,6 +308,38 @@ namespace WomenCalendar
         private void chkSchedules_CheckedChanged(object sender, EventArgs e)
         {
             ShowSchedules(chkSchedules.Checked);
+        }
+
+        private class DayData
+        {
+            public string BBT;
+            public bool HadSex;
+            public int Health;
+            public string Note;
+            public bool HasMenstr;
+            public decimal MenstrLength;
+            public int Egesta;
+            public CervicalFluid CF;
+            public List<Schedule> Schedules;
+
+            public override bool Equals(object obj)
+            {
+                DayData d = obj as DayData;
+                return d.BBT == BBT && d.HadSex == HadSex && d.Health == Health && d.Note == Note &&
+                    d.HasMenstr == HasMenstr && d.MenstrLength == MenstrLength && d.Egesta == Egesta && d.CF == CF &&
+                    SchedulesEqual(d.Schedules);
+            }
+
+            public override int GetHashCode()
+            {
+                return BBT.GetHashCode() ^ HadSex.GetHashCode() ^ Health.GetHashCode() ^ Note.GetHashCode() ^
+                    HasMenstr.GetHashCode() ^ MenstrLength.GetHashCode() ^ Egesta.GetHashCode() ^ CF.GetHashCode();
+            }
+
+            private bool SchedulesEqual(List<Schedule> d)
+            {
+                return this.Schedules.SequenceEqual(d);
+            }
         }
     }
 }

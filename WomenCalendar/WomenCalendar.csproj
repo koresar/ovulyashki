@@ -10,7 +10,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>WomenCalendar</RootNamespace>
     <AssemblyName>WomenCalendar</AssemblyName>
-    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ApplicationIcon>Resources\ovulashki_logo.ico</ApplicationIcon>
     <IsWebBootstrapper>false</IsWebBootstrapper>
@@ -59,6 +59,9 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
     <Reference Include="System.Design" />
     <Reference Include="System.Data" />
     <Reference Include="System.Deployment" />
@@ -74,7 +77,6 @@
     <Compile Include="BusinessLogic\DayCellAppearance.cs" />
     <Compile Include="BusinessLogic\ApplicationSettings.cs" />
     <Compile Include="BusinessLogic\AppUpdater.cs" />
-    <Compile Include="BusinessLogic\LinqBridge.cs" />
     <Compile Include="BusinessLogic\MonthAppearance.cs" />
     <Compile Include="BusinessLogic\TranslationException.cs" />
     <Compile Include="BusinessLogic\UtilityMethods.cs" />
@@ -160,6 +162,7 @@
     <Compile Include="Forms\BaseForm.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Forms\DayEditFocus.cs" />
     <Compile Include="Forms\ErrorForm.cs">
       <SubType>Form</SubType>
     </Compile>

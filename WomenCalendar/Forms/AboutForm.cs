@@ -2,35 +2,51 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
+using System.Reflection;
 using System.Text;
 using System.Windows.Forms;
-using System.Diagnostics;
-using System.Reflection;
 
 namespace WomenCalendar
 {
+    /// <summary>
+    /// Shows information about the application.
+    /// </summary>
     public partial class AboutForm : BaseForm, ITranslatable
     {
-        private const int minWidth = 300;
-        private const int maxWidth = 640;
+        private const int MinWidth = 300;
+        private const int MaxWidth = 640;
 
+        /// <summary>
+        /// The default window constructor.
+        /// </summary>
         public AboutForm()
         {
-            InitializeComponent();
-            if (TEXT.Get != null) ReReadTranslations();
+            this.InitializeComponent();
+            if (TEXT.Get != null)
+            {
+                this.ReReadTranslations();
+            }
 
-            this.Width = minWidth;
-            txtThanks.Text = TEXT.Get["Thanks_to_components"];
+            this.Width = MinWidth;
+            this.txtThanks.Text = TEXT.Get["Thanks_to_components"];
             int verLen = 4;
             var ver = Assembly.GetEntryAssembly().GetName().Version;
             var verText = ver.ToString(verLen);
-            while (verText.EndsWith(".0")) verText = ver.ToString(--verLen);
-            lblVersion.Text = TEXT.Get["Ovulyashki"] + " " + verText;
+            while (verText.EndsWith(".0"))
+            {
+                verText = ver.ToString(--verLen);
+            }
+
+            this.lblVersion.Text = TEXT.Get["Ovulyashki"] + " " + verText;
         }
 
         #region ITranslatable interface impementation
 
+        /// <summary>
+        /// Refresh localizations strings.
+        /// </summary>
         public void ReReadTranslations()
         {
             this.btnSite.Text = TEXT.Get["Visit_site"];
@@ -44,34 +60,34 @@ namespace WomenCalendar
 
         #endregion
 
-        private void btnBug_Click(object sender, EventArgs e)
+        private void Bug_Click(object sender, EventArgs e)
         {
             Process.Start(@"http://ovulyashki.dp.ua/bugtrack/bugs/add/");
         }
 
-        private void btnNewFeature_Click(object sender, EventArgs e)
+        private void NewFeature_Click(object sender, EventArgs e)
         {
             Process.Start(@"http://ovulyashki.dp.ua/bugtrack/features/add/");
         }
 
-        private void btnFeedback_Click(object sender, EventArgs e)
+        private void Feedback_Click(object sender, EventArgs e)
         {
             Process.Start(@"http://ovulyashki.dp.ua/feedback/");
         }
 
-        private void btnAskQuestion_Click(object sender, EventArgs e)
+        private void AskQuestion_Click(object sender, EventArgs e)
         {
             Process.Start(@"http://ovulyashki.dp.ua/questions/");
         }
 
-        private void btnSite_Click(object sender, EventArgs e)
+        private void Site_Click(object sender, EventArgs e)
         {
             Process.Start(@"http://ovulyashki.dp.ua");
         }
 
-        private void btnThanks_Click(object sender, EventArgs e)
+        private void Thanks_Click(object sender, EventArgs e)
         {
-            this.Width = this.Width == maxWidth ? minWidth : maxWidth;
+            this.Width = this.Width == MaxWidth ? MinWidth : MaxWidth;
         }
     }
 }

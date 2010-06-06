@@ -8,16 +8,44 @@ using System.Windows.Forms;
 
 namespace WomenCalendar
 {
+    /// <summary>
+    /// The form to select a start and stop dates.
+    /// </summary>
     public partial class DateRangeForm : BaseForm, ITranslatable
     {
+        /// <summary>
+        /// The defacult constructor of the window.
+        /// </summary>
         public DateRangeForm()
         {
-            InitializeComponent();
-            if (TEXT.Get != null) ReReadTranslations();
+            this.InitializeComponent();
+            if (TEXT.Get != null)
+            {
+                this.ReReadTranslations();
+            }
+        }
+
+        /// <summary>
+        /// The start date entered.
+        /// </summary>
+        public DateTime From
+        {
+            get { return this.dateFrom.Value; }
+        }
+
+        /// <summary>
+        /// The end date entered.
+        /// </summary>
+        public DateTime To
+        {
+            get { return this.dateTo.Value; }
         }
 
         #region ITranslatable interface impementation
 
+        /// <summary>
+        /// Refresh localizations strings.
+        /// </summary>
         public void ReReadTranslations()
         {
             this.label1.Text = TEXT.Get["From_dates"];
@@ -33,12 +61,9 @@ namespace WomenCalendar
         {
             if (Program.CurrentWoman.Menstruations.Count > 0)
             {
-                dateFrom.Value = Program.CurrentWoman.Menstruations.First.StartDay;
-                dateTo.Value = Program.CurrentWoman.Menstruations.Last.LastDay;
+                this.dateFrom.Value = Program.CurrentWoman.Menstruations.First.StartDay;
+                this.dateTo.Value = Program.CurrentWoman.Menstruations.Last.LastDay;
             }
         }
-
-        public DateTime From { get { return dateFrom.Value; } }
-        public DateTime To { get { return dateTo.Value; } }
     }
 }

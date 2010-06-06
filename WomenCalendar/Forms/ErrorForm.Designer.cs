@@ -53,7 +53,7 @@
             this.btnCopyToClipboard.TabIndex = 1;
             this.btnCopyToClipboard.Text = "Copy to clipboard";
             this.btnCopyToClipboard.UseVisualStyleBackColor = true;
-            this.btnCopyToClipboard.Click += new System.EventHandler(this.btnCopyToClipboard_Click);
+            this.btnCopyToClipboard.Click += new System.EventHandler(this.CopyToClipboard_Click);
             // 
             // ErrorForm
             // 
