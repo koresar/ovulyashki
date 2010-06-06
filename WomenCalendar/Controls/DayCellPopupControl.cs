@@ -65,8 +65,37 @@ namespace WomenCalendar
             DayCell = dayCell;
             BringToFront();
 
-            Woman w = Program.CurrentWoman;
-            int egesta = w.Menstruations.GetEgestaAmount(dayCell.Date);
+            PaintEgesta();
+
+            sliderHealth.Value = Program.CurrentWoman.Health[DayCell.Date];
+
+            pictureNote.Visible = Program.CurrentWoman.Notes.ContainsKey(DayCell.Date);
+
+            lblDay.Text = DayCell.Date.Day.ToString();
+
+            BackColor = DayCell.BackColor;
+
+            Point newLocation = DayCell.Location;
+            newLocation.Offset(-DayCell.Size.Width / 2, -DayCell.Size.Height / 2);
+            Location = OwnerMonthsControl.PointToClient(DayCell.OwnerOneMonthControl.PointToScreen(newLocation));
+
+            PaintBBT();
+
+            PaintHadSex();
+
+            this.pictureAlarm.Visible = Program.CurrentWoman.Schedules.HasAFiredSchedule(DayCell.Date);
+
+            if (Visible == false)
+            {
+                Visible = true;
+            }
+
+            initializing = false;
+        }
+
+        private void PaintEgesta()
+        {
+            int egesta = Program.CurrentWoman.Menstruations.GetEgestaAmount(DayCell.Date);
             if (egesta >= 0)
             {
                 EgestaSliderValue = egesta;
@@ -76,18 +105,11 @@ namespace WomenCalendar
             {
                 sliderEgestaAmount.Visible = false;
             }
+        }
 
-            sliderHealth.Value = Program.CurrentWoman.Health[DayCell.Date];
-
-            pictureNote.Visible = w.Notes.ContainsKey(dayCell.Date);
-
-            lblDay.Text = dayCell.Date.Day.ToString();
-            BackColor = dayCell.BackColor;
-            Point newLocation = dayCell.Location;
-            newLocation.Offset(-dayCell.Size.Width/2, -dayCell.Size.Height/2);
-            Location = OwnerMonthsControl.PointToClient(dayCell.OwnerOneMonthControl.PointToScreen(newLocation));
-
-            double bbt = w.BBT.GetBBT(dayCell.Date);
+        private void PaintBBT()
+        {
+            double bbt = Program.CurrentWoman.BBT.GetBBT(DayCell.Date);
             lblBBT.Visible = true;
             if (bbt != 0)
             {
@@ -100,15 +122,6 @@ namespace WomenCalendar
                 lblBBT.ForeColor = c;
                 lblBBT.Text = "t°36.6";
             }
-
-            PaintHadSex();
-
-            if (Visible == false)
-            {
-                Visible = true;
-            }
-
-            initializing = false;
         }
 
         private void PaintHadSex()
@@ -173,6 +186,12 @@ namespace WomenCalendar
         {
             toolTip.ToolTipTitle = caption;
             toolTip.Show(text, this, Width, Height);
+        }
+
+        private void ShowSchedulesTooltip()
+        {
+            string text = Program.CurrentWoman.Schedules.GetFormattedSchedulesText(DayCell.Date);
+            // TODO
         }
 
         private void DayCellPopupControl_MouseClick(object sender, MouseEventArgs e)
@@ -348,6 +367,26 @@ namespace WomenCalendar
                 Program.CurrentWoman.Health[DayCell.Date] = sliderHealth.Value;
                 ShowHealthTooltip();
             }
+        }
+
+        private void pictureAlarm_MouseClick(object sender, MouseEventArgs e)
+        {
+            DayCellPopupControl_MouseClick(sender, e);
+        }
+
+        private void pictureAlarm_DoubleClick(object sender, EventArgs e)
+        {
+            ShowDayEditForm(DayEditFocus.Schedules);
+        }
+
+        private void pictureAlarm_MouseEnter(object sender, EventArgs e)
+        {
+            ShowSchedulesTooltip();
+        }
+
+        private void pictureAlarm_MouseLeave(object sender, EventArgs e)
+        {
+            HideTooltip();
         }
     }
 }

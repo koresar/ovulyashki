@@ -19,6 +19,11 @@ namespace WomenCalendar
         {
         }
 
+        public OnceAPeriod()
+            : base()
+        {
+        }
+
         /// <summary>
         /// Fired for that number of days.
         /// </summary>

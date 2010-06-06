@@ -21,6 +21,16 @@ namespace WomenCalendar
         }
 
         /// <summary>
+        /// Quickly checks if anything is being fired that day.
+        /// </summary>
+        /// <param name="fireDate">Scheduled date.</param>
+        /// <returns>True if any schedule is fired that day.</returns>
+        public bool HasAFiredSchedule(DateTime fireDate)
+        {
+            return this.Where(s => s.IsAlarmAtDay(fireDate)).Any();
+        }
+
+        /// <summary>
         /// Add some more schedules to the colletion (if was not already added).
         /// </summary>
         /// <param name="schedules">The items wich we should try to add.</param>
@@ -33,6 +43,11 @@ namespace WomenCalendar
                     Add(s);
                 }
             }
+        }
+
+        public string GetFormattedSchedulesText(DateTime date)
+        {
+            return "TODO";
         }
     }
 }

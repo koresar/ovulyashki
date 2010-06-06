@@ -31,9 +31,9 @@ namespace WomenCalendar.Controls
             InitializeScheduleTypes();
         }
 
-        public List<Schedule> GetSchedules()
+        public List<Schedule> GetAllSchedules()
         {
-            return schedulesListControl1.GetSchedules();
+            return schedulesListControl1.GetAllSchedules();
         }
 
         public void SetSchedules(List<Schedule> schedules)
@@ -54,7 +54,7 @@ namespace WomenCalendar.Controls
             }
             else if (schedules.Count == 1)
             {
-                AddScheduleEditControl();
+                ShowScheduleEditControl();
                 EnableEdition(true);
                 currentScheduleControl.ApplyData(schedules[0]);
             }
@@ -70,7 +70,7 @@ namespace WomenCalendar.Controls
             var items =
                 scheduleType.Assembly.GetTypes().
                 Where(t => t.IsSubclassOf(scheduleType)).
-                Select(t => (Activator.CreateInstance(t) as Schedule).DisplayTypeName).
+                Select(t => (Activator.CreateInstance(t, string.Empty) as Schedule).DisplayTypeName).
                 ToArray();
             cmbScheduleType.Items.AddRange(items);
             cmbScheduleType.SelectedIndex = 0;
@@ -86,14 +86,14 @@ namespace WomenCalendar.Controls
             ApplyNewShedule();
 
             txtScheduleText.Text = string.Empty;
-            RemoveScheduleEditControl();
+            HideScheduleEditControl();
             EnableEdition(false);
         }
 
         private void btnAddSchedule_Click(object sender, EventArgs e)
         {
-            AddScheduleEditControl();
-            currentScheduleControl.ApplyDefaultData(initialDate);
+            ShowScheduleEditControl();
+            currentScheduleControl.ApplyDefaultData(txtScheduleText.Text, initialDate);
             EnableEdition(true);
             coloredSchedulerCalendarControl1.ApplySchedule(currentScheduleControl.GetSchedule());
         }
@@ -105,11 +105,16 @@ namespace WomenCalendar.Controls
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
-            RemoveScheduleEditControl();
+            HideScheduleEditControl();
             EnableEdition(false);
         }
 
-        private void AddScheduleEditControl()
+        private void btnRemoveSchedule_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void ShowScheduleEditControl()
         {
             currentScheduleControl = new WomenCalendar.Controls.ScheduleControl();
             currentScheduleControl.Visible = false;
@@ -123,7 +128,7 @@ namespace WomenCalendar.Controls
             currentScheduleControl.Visible = true;
         }
 
-        private void RemoveScheduleEditControl()
+        private void HideScheduleEditControl()
         {
             currentScheduleControl.Visible = false;
             this.Controls.Remove(currentScheduleControl);
@@ -141,7 +146,7 @@ namespace WomenCalendar.Controls
         private void EnableEdition(bool enable)
         {
             btnAddSchedule.Visible = txtScheduleText.Visible = lblScheduleText.Visible = !enable;
-            btnApplySchedule.Visible = btnCancel.Visible = enable;
+            btnApplySchedule.Visible = btnCancel.Visible = btnRemoveSchedule.Visible = enable;
         }
     }
 }

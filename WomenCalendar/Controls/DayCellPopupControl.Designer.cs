@@ -34,9 +34,11 @@
             this.pictureNote = new System.Windows.Forms.PictureBox();
             this.lblBBT = new System.Windows.Forms.Label();
             this.lblHadSex = new System.Windows.Forms.Label();
+            this.pictureAlarm = new System.Windows.Forms.PictureBox();
             this.sliderHealth = new MB.Controls.ColorSlider();
             this.sliderEgestaAmount = new MB.Controls.ColorSlider();
             ((System.ComponentModel.ISupportInitialize)(this.pictureNote)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureAlarm)).BeginInit();
             this.SuspendLayout();
             // 
             // lblDay
@@ -81,7 +83,7 @@
             // 
             // lblBBT
             // 
-            this.lblBBT.Location = new System.Drawing.Point(0, 31);
+            this.lblBBT.Location = new System.Drawing.Point(0, 34);
             this.lblBBT.Name = "lblBBT";
             this.lblBBT.Size = new System.Drawing.Size(44, 14);
             this.lblBBT.TabIndex = 4;
@@ -104,6 +106,20 @@
             this.lblHadSex.DoubleClick += new System.EventHandler(this.lblHadSex_DoubleClick);
             this.lblHadSex.MouseClick += new System.Windows.Forms.MouseEventHandler(this.lblHadSex_MouseClick);
             this.lblHadSex.MouseEnter += new System.EventHandler(this.lblHadSex_MouseEnter);
+            // 
+            // pictureAlarm
+            // 
+            this.pictureAlarm.Image = global::WomenCalendar.Properties.Resources.alarm;
+            this.pictureAlarm.Location = new System.Drawing.Point(17, 20);
+            this.pictureAlarm.Name = "pictureAlarm";
+            this.pictureAlarm.Size = new System.Drawing.Size(16, 16);
+            this.pictureAlarm.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+            this.pictureAlarm.TabIndex = 7;
+            this.pictureAlarm.TabStop = false;
+            this.pictureAlarm.DoubleClick += new System.EventHandler(this.pictureAlarm_DoubleClick);
+            this.pictureAlarm.MouseLeave += new System.EventHandler(this.pictureAlarm_MouseLeave);
+            this.pictureAlarm.MouseClick += new System.Windows.Forms.MouseEventHandler(this.pictureAlarm_MouseClick);
+            this.pictureAlarm.MouseEnter += new System.EventHandler(this.pictureAlarm_MouseEnter);
             // 
             // sliderHealth
             // 
@@ -163,6 +179,7 @@
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.Controls.Add(this.pictureAlarm);
             this.Controls.Add(this.sliderHealth);
             this.Controls.Add(this.lblHadSex);
             this.Controls.Add(this.lblBBT);
@@ -176,7 +193,9 @@
             this.MouseLeave += new System.EventHandler(this.DayCellPopupControl_MouseLeave);
             this.MouseClick += new System.Windows.Forms.MouseEventHandler(this.DayCellPopupControl_MouseClick);
             ((System.ComponentModel.ISupportInitialize)(this.pictureNote)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureAlarm)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -189,5 +208,6 @@
         private System.Windows.Forms.Label lblBBT;
         private System.Windows.Forms.Label lblHadSex;
         private MB.Controls.ColorSlider sliderHealth;
+        private System.Windows.Forms.PictureBox pictureAlarm;
     }
 }

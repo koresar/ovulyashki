@@ -381,6 +381,10 @@
     <None Include="Resources\Boy.png" />
     <None Include="Resources\baby.png" />
     <None Include="Resources\Checkmark-32.png" />
+    <None Include="Resources\alarm.png" />
+    <Content Include="be_lang.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\drop16.bmp" />
     <Content Include="en_lang.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

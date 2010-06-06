@@ -49,12 +49,12 @@ namespace WomenCalendar.Controls
             changeDelayTimer.Dispose();
             changeDelayTimer = null;
 
-            OnSelectedScheduleChanged(GetSchedules());
+            OnSelectedScheduleChanged(GetAllSchedules());
         }
 
-        public List<Schedule> GetSchedules()
+        public List<Schedule> GetAllSchedules()
         {
-            return listView.SelectedItems.
+            return listView.Items.
                 Cast<ListViewItem>().
                 Select(item => item.Tag as Schedule).
                 ToList();

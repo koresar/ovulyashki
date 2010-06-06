@@ -87,6 +87,7 @@ namespace WomenCalendar
         public bool IsPredictedAsMenstruationDay { get; set; }
         public bool IsConceptionDay { get; set; }
         public bool IsHadSex { get; set; }
+        public bool IsAScheduleFired { get; set; }
 
         public DayCellControl()
         {
@@ -139,16 +140,16 @@ namespace WomenCalendar
             var appearance = Program.Settings == null || Program.Settings.DayCellAppearance == null ? 
                 new DayCellAppearance() : Program.Settings.DayCellAppearance;
             BackColor = 
-                IsHadSex ? appearance.BackHadSex :
-                IsHaveNote ? appearance.BackHaveNote :
-                IsPredictedAsBoyDay ? appearance.BackBoyDay :
-                IsPredictedAsGirlDay ? appearance.BackGirlDay :
                 IsConceptionDay ? appearance.BackConceptionDay :
                 IsPregnancyDay ? appearance.BackPregnancyDay :
                 IsMenstruationDay ? appearance.BackMenstruationDay :
                 IsPredictedAsMenstruationDay ? appearance.BackPredictedMenstruationDay :
                 IsPredictedAsOvulationDay ? appearance.BackOvulationDay :
                 IsPredictedAsSafeSexDay ? appearance.BackSafeSex :
+                IsHadSex ? appearance.BackHadSex :
+                IsHaveNote ? appearance.BackHaveNote :
+                IsPredictedAsBoyDay ? appearance.BackBoyDay :
+                IsPredictedAsGirlDay ? appearance.BackGirlDay :
                 appearance.BackEmpty;
 
             pe.Graphics.FillRectangle(GetMainBrush(BackColor), 0, 0, Size.Width - 1, Size.Height - 1);
@@ -210,6 +211,12 @@ namespace WomenCalendar
                 pe.Graphics.DrawString("S", Font, DayCellAppearance.HadSexBrush, 22, 19);
             }
 
+            if (IsAScheduleFired)
+            {
+                Image image = GetImageFromCache("alarm");
+                pe.Graphics.DrawImage(image, 12, 12, 8, 8);
+            }
+
             pe.Graphics.DrawString(Date.Day.ToString(), Font, DayCellAppearance.DayNumberBrush, 0, 0);
         }
 
@@ -240,6 +247,7 @@ namespace WomenCalendar
                     IsPredictedAsMenstruationDay = !IsPregnancyDay && w.IsPredictedAsMenstruationDay(Date);
                     IsConceptionDay = w.IsConceptionDay(Date);
                     IsHadSex = w.HadSexList.ContainsKey(Date);
+                    IsAScheduleFired = w.Schedules.HasAFiredSchedule(Date);
                 }
 
                 DrawEnabled(pe);

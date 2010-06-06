@@ -10,7 +10,7 @@ using System.Linq;
 
 namespace WomenCalendar
 {
-    public enum DayEditFocus { Note, BBT, Length };
+    public enum DayEditFocus { Note, BBT, Length, Schedules };
 
     public partial class DayEditForm : BaseForm, ITranslatable
     {
@@ -130,7 +130,7 @@ namespace WomenCalendar
 
             w.Menstruations.ResetOvulyationsDates();
 
-            w.Schedules.UpdateData(editScheduleControl.GetSchedules());
+            w.Schedules.UpdateData(editScheduleControl.GetAllSchedules());
 
             Program.ApplicationForm.UpdateDayInformationIfFocused(date);
             Program.ApplicationForm.RedrawCalendar(); // redraw whole calendar
@@ -200,7 +200,7 @@ namespace WomenCalendar
                 MenstrLength = mensesEditControl.Length,
                 Egesta = mensesEditControl.EgestaSliderValue,
 
-                Schedules = editScheduleControl.GetSchedules(),
+                Schedules = editScheduleControl.GetAllSchedules(),
             };
         }
 

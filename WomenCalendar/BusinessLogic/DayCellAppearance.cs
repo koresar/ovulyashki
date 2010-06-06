@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
+using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using System.Xml.Serialization;
@@ -328,11 +329,12 @@ namespace WomenCalendar
         /// <returns>True if was set; otherwise false.</returns>
         public bool SetColor(string colorID, Color color)
         {
-            foreach (var prop in this.GetType().GetFields())
+            foreach (var prop in this.GetType().GetProperties())
             {
-                if (prop.Name == colorID)
+                var attribute = prop.GetCustomAttributes(typeof(XmlElementAttribute), false).FirstOrDefault() as XmlElementAttribute;
+                if (attribute != null && attribute.ElementName == colorID)
                 {
-                    prop.SetValue(this, color);
+                    prop.SetValue(this, ColorTranslator.ToHtml(color), null);
                     return true;
                 }
             }

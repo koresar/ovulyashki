@@ -1,0 +1,223 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<translation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <item id="Ovulyashki">Авуляшкi</item>
+  <item id="Ovulyashki_of">Авуляшкi прыгажуні па імі {0}</item>
+  <item id="What_a_cycle">Вось гэта цыкл!</item>
+  <item id="Cycle_more_than">Ты хочаш, каб цыкл быў больш {0} дзён?</item>
+  <item id="Days_plural">1: дзень, 2: дня, 3: дня, 4: дня, 21: дзень, 22: дня, 23: дня, 24: дня, 31: дзень, 32: дня, 33: дня, 34: дня, 41: дзень, 42: дня, 43: дня, 44: дня, 51: дзень, 52: дня, 53: дня, 54: дня, *: дзён</item>
+  <item id="My_auto_cycle">Мой аўтаматычны цыкл: </item>
+  <item id="What_a_situation">Ух-ты, якая незвычайная сытуацыя!</item>
+  <item id="Future_pregnancy_day">Гэты дзень яшчэ не наступіў! Наўрад ці ты магла зацяжарыць менавіта ў гэты дзень.</item>
+  <item id="No_no_no">Не-не-не!</item>
+  <item id="Already_pregnant_after">У вас ужо ёсць цяжарнасць праз {0} дзён пасля гэтага."</item>
+  <item id="Date_double_colon">Дата: </item>
+  <item id="Today_parentheses"> (сёння)</item>
+  <item id="This_is_N_menstr_day">Гэта {0}-ы дзень менструашек</item>
+  <item id="Preg_week_number_N">{0}-я тыдзень цяжарнасці</item>
+  <item id="Conception_day">Гэта дзень зачацця! Ура!</item>
+  <item id="Probable_birth_date">Дзіця народзіцца прыкладна 
+{0}.</item>
+  <item id="Zodiac_will_be">Знак задыяка будзе {0}</item>
+  <item id="Boy">хлопчык</item>
+  <item id="Girl">дзяўчынка</item>
+  <item id="Child_gender_will_be">і меркавана гэта будзе {0}</item>
+  <item id="Cycle_day_number_N">Гэта {0}-ы дзень цыкла.</item>
+  <item id="Cycle_length_days">Гэты цыкл доўжыўся {0} {1}</item>
+  <item id="Possible_menst">Верагодныя менструашки</item>
+  <item id="Estimated_ovulation_day">Гэта прыкладны дзень авуляцыi</item>
+  <item id="Boy_conception_day">Больш верагодна зачацце хлопчыка</item>
+  <item id="Girl_conception_day"></item>
+  <item id="If_conceive_info">Калі ты ў гэты дзень зачала дзіцяці,
+то ён народзіцца прыкладна {0}.
+Знак задыяка будзе {1}.</item>
+  <item id="Note_semicolon">Нататка: </item>
+  <item id="Aries">Авен</item>
+  <item id="Taurus">Цялё</item>
+  <item id="Gemini">Двайняты</item>
+  <item id="Cancer">Рак</item>
+  <item id="Leo">Леў</item>
+  <item id="Virgo">Дева</item>
+  <item id="Libra">Весы</item>
+  <item id="Scorpio">Скарпіён</item>
+  <item id="Sagittarius">Стралец</item>
+  <item id="Capricorn">Казярог</item>
+  <item id="Aquarius">Вадаліў</item>
+  <item id="Pisces">Рыбы</item>
+  <item id="Woman_files">Файлы жанчын</item>
+  <item id="Save_woman_question">Захаваць гэтую жанчыну, перш чым працягваць?</item>
+  <item id="Error">Памылка!</item>
+  <item id="Wrong_password_question">Няправільны пароль! Паспрабуем яшчэ раз?
+
+Калі нажмешь 'Няма', то створым новую жанчыну.</item>
+  <item id="Edit_woman">Змяняе жанчыну</item>
+  <item id="Excel_files">Файлы Excel</item>
+  <item id="CSV_files">Файлы CSV</item>
+  <item id="Point_the_file">Азначце файл</item>
+  <item id="File_ext_must_to_be">Пашырэнне файла павінна быць .xls ці .csv!</item>
+  <item id="Cant_export">Не магу экспартаваць у файл. Паведамленне пра памылку:</item>
+  <item id="Pregn_week_help">Падказка цяжарным на {0}-й тыдні з сайта...</item>
+  <item id="Are_you_sure">Ты ўпэўненая?</item>
+  <item id="Shorten_pregn_question">Калі зараз нажмешь 'Так', то потым нельга будзе падаўжаючы тэрмін цяжарнасці. Упэўненая, што хочаш пакарацее тэрмін гэтай цяжарнасці?</item>
+  <item id="Menstr_after_day">Пасля гэтых менструашек ў цябе былі іншыя!</item>
+  <item id="Are_you_crazy">Ты з розуму сышла?</item>
+  <item id="Msg_short_menstr_period">Між менструашкамi менш {0} {1}! Такі маленькі цыкл мы не будзем ўлічваць пры прагназаванні.</item>
+  <item id="Msg_large_menstr_period">Між менструашкамi больш {0} {1}! Такі вялікі цыкл мы не будзем ўлічваць пры прагназаванні</item>
+  <item id="Future_day_question">Гэта ж дзень з будучыні! Ён яшчэ не настаў. Запісалася ў Настрадамуса?</item>
+  <item id="Are_you_sure_capital">
+ТЫ УПЭЎНЕНЫ Ў  ТЫМ ШТО РАБІЦЬ?</item>
+  <item id="Date">Дата</item>
+  <item id="Menses">Менструацыi</item>
+  <item id="Intensity">Інтэнсіўнасць</item>
+  <item id="Had_sex">Быў сэкс</item>
+  <item id="BBT">БTЦ</item>
+  <item id="Wellbeing_1_10">Самаадчуванне (0-10)</item>
+  <item id="Note">Нататка</item>
+  <item id="Yes">Так</item>
+  <item id="No">Няма</item>
+  <item id="Egesta_amount_0">Дзень без менструашек</item>
+  <item id="Egesta_amount_1">Мала менструашек</item>
+  <item id="Egesta_amount_2">Пасярэднія менструашкi</item>
+  <item id="Egesta_amount_3">Сярэдняя інтэнсіўнасць менструашек</item>
+  <item id="Egesta_amount_4">Шмат менструашек</item>
+  <item id="Amount_of_bleeding">Колькасць менструашек</item>
+  <item id="Sex">Сэкс</item>
+  <item id="Sex_was">А ў гэты дзень у мяне быў сэкс!</item>
+  <item id="Sex_was_not">У гэты дзень у мяне не было сэксу.</item>
+  <item id="Wellbeing">Самаадчуванне</item>
+  <item id="N_of_10">{0} з 10</item>
+  <item id="BBT_full">Базальная тэмпература цела</item>
+  <item id="Not_set_f">Не ўстаноўлена</item>
+  <item id="Click_to_edit">Клікні для рэдагавання</item>
+  <item id="Special_button_title">Кнопка дадатковых магчымасцяў</item>
+  <item id="Special_button_descr">З дапамогай гэтай кнопкі можна пабудаваць усялякія графікі.</item>
+  <item id="Copy_to_clipboard">Скапіяваць ў буфер</item>
+  <item id="Print_setup">Настройка друку...</item>
+  <item id="Print_dialog">Друкаваць...</item>
+  <item id="Save_picture_as">Захаваць малюнак як...</item>
+  <item id="Set_scale_to_default">Аднавіць графік ў нармальны выгляд</item>
+  <item id="Show_point_values">Паказваць кропкавыя значэння</item>
+  <item id="Undo_all_zoom">Адмяніць усе зробленыя набліжэнне/вярчэнне</item>
+  <item id="Undo_last_zoom">Адмяніць апошняе дзеянне</item>
+  <item id="BBT_graph">Графік Базальной Тэмпературы Цела</item>
+  <item id="Cycle_length_graph">Графік Даўжыня Цыклаў</item>
+  <item id="Wellbeing_graph">Графік Самаадчування</item>
+  <item id="Thanks_to_components">
+Дзякуй Michal Brylka за ColorSlider: http://www.codeproject.com/KB/selection/ColorSlider.aspx
+
+Дзякуй randz за VerticalLabel: http://www.codeproject.com/KB/miscctrl/Vertical_Label_Control.aspx
+
+Дзякуй BobK, Darren Martz, John Champion, Jerry Vos, Chris Champoin, Brian Chappell, Ronan O Sullivan, Benjamin Mayrargue за ZegGraph: https://sourceforge.net/projects/zedgraph/ , http://zedgraph.org
+
+Дзякуй mkg за XPanderControl: http://www.codeproject.com/KB/cpp/XPander.aspx
+
+Дзякуй Carlos Aguilar Mares за ExcelXmlWriter: http://www.carlosag.net/Tools/ExcelXmlWriter/
+
+Дзякуй Mike Krueger, John Reilly за SharpZipLib: http://icsharpcode.net/
+
+Дзякуй sONdza за пераклад праграмы на некалькі моў.
+  </item>
+  <item id="Wrong_temperature">У чалавека не можа быць такой тэмпературы. Ці ты яшчарка?</item>
+  <item id="Wrong_temperature_entered">Што гэта за фігня ты сюды ўвяла? Гэта не тэмпература!</item>
+  <item id="Set_menses_start">Ўсталяваць пачатак менструашек</item>
+  <item id="Cancel_menses">Адмяніць менструашкi</item>
+  <item id="Set_last_pregn_day">Ўсталяваць апошні дзень цяжарнасці</item>
+  <item id="Set_pregnancy">Ўсталяваць цяжарнасць</item>
+  <item id="Cancel_pregnancy">Адмяніць цяжарнасць</item>
+  <item id="Show_childbirth_day">Паказаць меркаваны дзень родаў</item>
+  <item id="Edit_day">Рэдагаваць дзень</item>
+  <item id="Show_BBT_graph">Пабудаваць графік Базальной Тэмпературы Цела</item>
+  <item id="Show_wellbeing_graph">Пабудаваць графік Самаадчування</item>
+  <item id="Show_cycle_length_graph">Пабудаваць графік Даўжыня Цыклаў</item>
+  <item id="Graphs">Графікі</item>
+  <item id="Graph">Графік</item>
+  <item id="Show_cycle_number">Паказаць цыкл №</item>
+  <item id="Print_preview">Прагледзець перад друкам</item>
+  <item id="Print_graph">Раздрукаваць гэты графік</item>
+  <item id="From_dates">Ад</item>
+  <item id="To_dates">Да</item>
+  <item id="Show_from">Паказаць пачынаючы з</item>
+  <item id="Visit_site">Наведаць сайт Авуляшек</item>
+  <item id="Leave_thanks">Напісаць словы падзякі аўтару</item>
+  <item id="Tell_about_bug">Расказаць пра памылку ў праграме</item>
+  <item id="Ask_feature_request">Папрасіць аўтара дадаць новую фішку</item>
+  <item id="Ask_question">Задаць пытанне</item>
+  <item id="Thanks_to">Падзякі</item>
+  <item id="About_application">Усё ж розна аб праграме</item>
+  <item id="Export_this">Экспартаваць</item>
+  <item id="Cancel_this">Адмяніць</item>
+  <item id="Enter_dates">Калі ласка, увядзіце даты</item>
+  <item id="OK_this">ОК</item>
+  <item id="Previous_day">Папярэдні дзень</item>
+  <item id="Next_day">Наступны дзень</item>
+  <item id="Bad_wellbeing">Дрэнны</item>
+  <item id="Good_wellbeing">Добрае</item>
+  <item id="Length_cycle">Працягласць</item>
+  <item id="Note_for_day">Нататка да гэтага дню</item>
+  <item id="Change_day">Змяніць дзень</item>
+  <item id="FFFUUUUUUUUUUUUUU">ААА! ПАМЫЛКА! Пайшлі гэты тэкст распрацоўнікам!</item>
+  <item id="Please_enter_password">Калі ласка, увядзіце пароль</item>
+  <item id="Create_new_woman">Стварыць новую жанчыну</item>
+  <item id="Open_woman">Адкрыць жанчыну</item>
+  <item id="Save_woman">Захаваць жанчыну</item>
+  <item id="Export_woman_to_excel">Экспартаваць жанчыну ў Excel</item>
+  <item id="Jump_to_colon">Скокнуць:</item>
+  <item id="Selected_date">Абраная дата</item>
+  <item id="Shift_one_month_back">Зрушыць на месяц таму</item>
+  <item id="Shift_one_month_forward">Зрушыць на месяц наперад</item>
+  <item id="Help">Дапамога</item>
+  <item id="Language">Мова</item>
+  <item id="Legend">Апісанне пазначэньняў</item>
+  <item id="Legend_pregn_week">Нумар тыдня цяжарнасці</item>
+  <item id="Legend_conception_day">Дзень зачацця</item>
+  <item id="Legend_pregnancy">Цяжарнасць</item>
+  <item id="Legend_ovulation_day">Дзень овуляцыi</item>
+  <item id="Legend_future_menses">Дзень будучых менструацый</item>
+  <item id="Legend_min_conception_probapility">Дні з найменшай верагоднасцю зачацця</item>
+  <item id="Legend_menses">Менструацыi</item>
+  <item id="Legend_conceive_girl_day">Верагодна зачацце дзяўчынкі</item>
+  <item id="Legend_conceive_boy_day">Верагодна зачацце хлопчыка</item>
+  <item id="Legend_had_sex">Дзень сэксу</item>
+  <item id="Legend_note">Нататка</item>
+  <item id="Legend_selected_day">Выбраных дзень (у фокусе)</item>
+  <item id="Ledend_today_day">Сённяшні дзень</item>
+  <item id="About_woman">Аб жанчыне</item>
+  <item id="Change_woman">Змяніць імя і пароль</item>
+  <item id="Always_ask_my_pwd">Заўсёды пытацца мой пароль</item>
+  <item id="Set_as_default_woman">Пры запуску праграмы адкрываць мяне па змоўчванні</item>
+  <item id="Special_cycle">Спецыяльны цыкл</item>
+  <item id="Day_description">Апісанне дня</item>
+  <item id="What_is_your_name">Як цябе завуць?</item>
+  <item id="Enter_your_pwd">Ўвядзі пароль (калі трэба абараніць)</item>
+  <item id="Creating_new_woman">Ствараем новую жанчыну</item>
+  <item id="Excreta_amount">Колькасць выдзеленага</item>
+  <item id="On_off_menses_button">Кнопка ўключэння/выключэння менструашек</item>
+  <item id="Set_day_as_menses_start">Ўсталяваць гэты дзень як пачатак менструашек</item>
+  <item id="Cancel_these_menses">Адмяніць гэтыя менструашкi</item>
+  <item id="Menses_length">Працягласць менструашек</item>
+  <item id="Please_set_menses_length">Укажыце, колькі дзён яны ішлі!</item>
+  <item id="Have_menses_after_pregn">АЛЕ! Пасля гэтага дня ў цябе ёсць менструашкi! Гэта вельмі-вельмі дзіўна ўсталёўваць гэты дзень як дзень зачацця.</item>
+  <item id="Pregn_on_menses">Ёсць вельмі малая верагоднасць зацяжарыць у дзень менструашек!</item>
+  <item id="Update_application">Праверыць абнаўлення</item>
+  <item id="Update_found_text">
+Выйшла новая версія Авуляшек {0} (у цябе зараз {1}).
+Яна была выпушчаная {2}.
+Яе памер усяго толькі {3} МБайт.
+І яе ўжо спампавалі {4} раз.
+Змены ў праграме:
+{5}
+
+Хочаш аднавіцца прама зараз?</item>
+  <item id="Latest_application">У цябе ўжо і так самая апошняя версія авуляшек. Будзь шчаслівая!</item>
+  <item id="Unable_to_update">Не магу аднавіцца. Вось такую памылку нам выдае сістэма: {0}</item>
+  <item id="CF">ЦВ</item>
+  <item id="CF_tacky">К</item>
+  <item id="CF_stretchy">Я</item>
+  <item id="CF_water">В</item>
+  <item id="CF_full">Цярвiкальная вадкасць</item>
+  <item id="CF_full_tacky">Клейкая</item>
+  <item id="CF_full_stretchy">Яечны бялок</item>
+  <item id="CF_full_water">Вадзяністай</item>
+  <item id="Unknown">Чорт яго ведае!</item>
+  <item id="Click_to_edit_color">Клікні мышкай, каб змяніць колер ...</item>
+  <item id="Ovulation">Авуляцыя</item>
+</translation>

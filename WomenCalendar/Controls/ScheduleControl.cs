@@ -47,9 +47,10 @@ namespace WomenCalendar.Controls
             }
         }
 
-        public virtual void ApplyDefaultData(DateTime defaultDate)
+        public virtual void ApplyDefaultData(string scheduleText, DateTime defaultDate)
         {
-            OnceAPeriod defaultData = new OnceAPeriod(string.Empty).CreateDefault(defaultDate) as OnceAPeriod;
+            OnceAPeriod defaultData = new OnceAPeriod(scheduleText).CreateDefault(defaultDate) as OnceAPeriod;
+            defaultData.Text = scheduleText;
             ApplyData(defaultData);
         }
 

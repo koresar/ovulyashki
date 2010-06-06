@@ -37,6 +37,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.schedulesListControl1 = new WomenCalendar.Controls.SchedulesListControl();
             this.coloredSchedulerCalendarControl1 = new WomenCalendar.Controls.ColoredSchedulerCalendarControl();
+            this.btnRemoveSchedule = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // cmbScheduleType
@@ -125,6 +126,17 @@
             this.coloredSchedulerCalendarControl1.StartMonth = new System.DateTime(((long)(0)));
             this.coloredSchedulerCalendarControl1.TabIndex = 10017;
             // 
+            // btnRemoveSchedule
+            // 
+            this.btnRemoveSchedule.Location = new System.Drawing.Point(15, 214);
+            this.btnRemoveSchedule.Name = "btnRemoveSchedule";
+            this.btnRemoveSchedule.Size = new System.Drawing.Size(124, 23);
+            this.btnRemoveSchedule.TabIndex = 10021;
+            this.btnRemoveSchedule.Text = "Remove Schedule";
+            this.btnRemoveSchedule.UseVisualStyleBackColor = true;
+            this.btnRemoveSchedule.Visible = false;
+            this.btnRemoveSchedule.Click += new System.EventHandler(this.btnRemoveSchedule_Click);
+            // 
             // EditScheduleControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -134,6 +146,7 @@
             this.Controls.Add(this.txtScheduleText);
             this.Controls.Add(this.btnAddSchedule);
             this.Controls.Add(this.btnCancel);
+            this.Controls.Add(this.btnRemoveSchedule);
             this.Controls.Add(this.btnApplySchedule);
             this.Controls.Add(this.cmbScheduleType);
             this.Controls.Add(this.schedulesListControl1);
@@ -156,5 +169,6 @@
         private System.Windows.Forms.Label lblScheduleText;
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button btnRemoveSchedule;
     }
 }

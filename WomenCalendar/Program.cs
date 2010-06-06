@@ -184,7 +184,10 @@ namespace WomenCalendar
         public static bool LoadWoman(string path)
         {
             Woman w = Woman.ReadFrom(path);
-            if (w.AllwaysAskPassword && !AskPassword(w)) return false;
+            if (w == null || (w.AllwaysAskPassword && !AskPassword(w)))
+            {
+                return false;
+            }
 
             CurrentWoman = w;
             return true;

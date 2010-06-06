@@ -3,11 +3,11 @@
   <item id="Ovulyashki">Овуляшки</item>
   <item id="Ovulyashki_of">Овуляшки красавицы по имени {0}</item>
   <item id="What_a_cycle">Вот это цикл!</item>
-  <item id="Cycle_more_than">Ты хочешь чтобы цикл был больше {0} дней?</item>
+  <item id="Cycle_more_than">Ты хочешь, чтобы цикл был больше {0} дней?</item>
   <item id="Days_plural">1:день,2:дня,3:дня,4:дня,21:день,22:дня,23:дня,24:дня,31:день,32:дня,33:дня,34:дня,41:день,42:дня,43:дня,44:дня,51:день,52:дня,53:дня,54:дня,*:дней</item>
   <item id="My_auto_cycle">Мой автоматический цикл: </item>
-  <item id="What_a_situation">Ухты, какая необычная ситуация!</item>
-  <item id="Future_pregnancy_day">Этот день еще не наступил! Врядли ты забеременеешь именно в этот день.</item>
+  <item id="What_a_situation">Ух-ты, какая необычная ситуация!</item>
+  <item id="Future_pregnancy_day">Этот день ещё не наступил! Вряд ли ты можешь забеременеть именно в этот день.</item>
   <item id="No_no_no">Не-не-не!</item>
   <item id="Already_pregnant_after">У вас уже есть беременность через {0} дней после этого.</item>
   <item id="Date_double_colon">Дата: </item>
@@ -46,7 +46,7 @@
   <item id="Woman_files">Файлы женщин</item>
   <item id="Save_woman_question">Сохранить эту женщину, прежде чем продолжить?</item>
   <item id="Error">Ошибка!</item>
-  <item id="Wrong_password_question">Неправильный пароль! Попытаемся еще раз?
+  <item id="Wrong_password_question">Неправильный пароль! Попытаемся ещё раз?
 
 Если нажмёшь 'Нет', то создадим новую женщину.</item>
   <item id="Edit_woman">Изменяем женщину</item>
@@ -57,7 +57,7 @@
   <item id="Cant_export">Не могу экспортировать в файл. Сообщение об ошибке:</item>
   <item id="Pregn_week_help">Подсказка беременным на {0}-й неделе с сайта...</item>
   <item id="Are_you_sure">Ты уверена?</item>
-  <item id="Shorten_pregn_question">Если сейчас нажмёшь 'Да', то потом нельзя будет удлиннить срок беременности. Уверена, что хочешь укоротить срок этой беременности?</item>
+  <item id="Shorten_pregn_question">Если сейчас нажмёшь 'Да', то потом нельзя будет удлинить срок беременности. Уверена, что хочешь укоротить срок этой беременности?</item>
   <item id="Menstr_after_day">После этих менструашек у тебя были другие!</item>
   <item id="Are_you_crazy">Ты с ума сошла?</item>
   <item id="Msg_short_menstr_period">Между менструашками меньше {0} {1}! Такой маленький цикл мы не будем учитывать при прогнозировании.</item>
@@ -192,7 +192,7 @@
   <item id="Set_day_as_menses_start">Установить этот день как начало менструашек</item>
   <item id="Cancel_these_menses">Отменить эти менструашки</item>
   <item id="Menses_length">Длительность менструашек</item>
-  <item id="Please_set_menses_length">Укажи сколько дней они шли!</item>
+  <item id="Please_set_menses_length">Укажи, сколько дней они шли!</item>
   <item id="Have_menses_after_pregn">АЛЁ! После этого дня у тебя есть менструашки! Это очень-очень странно устанавливать этот день как день зачатия.</item>
   <item id="Pregn_on_menses">Есть очень малая вероятность забеременеть в день менструашек!</item>
   <item id="Update_application">Проверить обновления</item>
@@ -215,7 +215,7 @@
   <item id="CF_full_tacky">Клейкая</item>
   <item id="CF_full_stretchy">Яичный белок</item>
   <item id="CF_full_water">Водянистая</item>
-  <item id="Unknown">Черт его знает!</item>
-  <item id="Click_to_edit_color">Кликни мышкой чтобы изменить цвет...</item>
+  <item id="Unknown">Чёрт его знает!</item>
+  <item id="Click_to_edit_color">Кликни мышкой, чтобы изменить цвет...</item>
   <item id="Ovulation">Овуляция</item>
 </translation>

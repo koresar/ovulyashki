@@ -15,8 +15,17 @@ namespace WomenCalendar
         /// </summary>
         /// <param name="text">Text description of the schedule instance.</param>
         public Schedule(string text)
+            : this()
         {
             this.Text = text;
+        }
+
+        /// <summary>
+        /// Default contructor.
+        /// </summary>
+        public Schedule()
+        {
+            this.Text = string.Empty;
             this.GUID = System.Guid.NewGuid();
         }
 
