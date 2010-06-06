@@ -130,7 +130,7 @@
             this.verticalLabel1.Size = new System.Drawing.Size(16, 83);
             this.verticalLabel1.TabIndex = 10008;
             this.verticalLabel1.Text = "Intensity";
-            this.verticalLabel1.TextDrawMode = WomenCalendar.DrawMode.BottomUp;
+            this.verticalLabel1.TextDrawMode = WomenCalendar.VerticalLabel.DrawMode.BottomUp;
             // 
             // sliderEgestaAmount
             // 
