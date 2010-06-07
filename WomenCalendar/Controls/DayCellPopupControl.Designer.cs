@@ -53,9 +53,9 @@
             this.lblDay.TabIndex = 1;
             this.lblDay.Text = "32";
             this.lblDay.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.lblDay.MouseLeave += new System.EventHandler(this.lblDay_MouseLeave);
-            this.lblDay.MouseClick += new System.Windows.Forms.MouseEventHandler(this.lblDay_MouseClick);
-            this.lblDay.MouseEnter += new System.EventHandler(this.lblDay_MouseEnter);
+            this.lblDay.MouseLeave += new System.EventHandler(this.Day_MouseLeave);
+            this.lblDay.MouseClick += new System.Windows.Forms.MouseEventHandler(this.Day_MouseClick);
+            this.lblDay.MouseEnter += new System.EventHandler(this.Day_MouseEnter);
             // 
             // toolTip
             // 
@@ -76,10 +76,10 @@
             this.pictureNote.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureNote.TabIndex = 2;
             this.pictureNote.TabStop = false;
-            this.pictureNote.DoubleClick += new System.EventHandler(this.pictureNote_DoubleClick);
-            this.pictureNote.MouseLeave += new System.EventHandler(this.pictureNote_MouseLeave);
-            this.pictureNote.MouseClick += new System.Windows.Forms.MouseEventHandler(this.pictureNote_MouseClick);
-            this.pictureNote.MouseEnter += new System.EventHandler(this.pictureNote_MouseEnter);
+            this.pictureNote.DoubleClick += new System.EventHandler(this.PictureNote_DoubleClick);
+            this.pictureNote.MouseLeave += new System.EventHandler(this.PictureNote_MouseLeave);
+            this.pictureNote.MouseClick += new System.Windows.Forms.MouseEventHandler(this.PictureNote_MouseClick);
+            this.pictureNote.MouseEnter += new System.EventHandler(this.PictureNote_MouseEnter);
             // 
             // lblBBT
             // 
@@ -87,10 +87,10 @@
             this.lblBBT.Name = "lblBBT";
             this.lblBBT.Size = new System.Drawing.Size(44, 14);
             this.lblBBT.TabIndex = 4;
-            this.lblBBT.MouseLeave += new System.EventHandler(this.lblBBT_MouseLeave);
-            this.lblBBT.DoubleClick += new System.EventHandler(this.lblBBT_DoubleClick);
-            this.lblBBT.MouseClick += new System.Windows.Forms.MouseEventHandler(this.lblBBT_MouseClick);
-            this.lblBBT.MouseEnter += new System.EventHandler(this.lblBBT_MouseEnter);
+            this.lblBBT.MouseLeave += new System.EventHandler(this.BBT_MouseLeave);
+            this.lblBBT.DoubleClick += new System.EventHandler(this.BBT_DoubleClick);
+            this.lblBBT.MouseClick += new System.Windows.Forms.MouseEventHandler(this.BBT_MouseClick);
+            this.lblBBT.MouseEnter += new System.EventHandler(this.BBT_MouseEnter);
             // 
             // lblHadSex
             // 
@@ -102,10 +102,10 @@
             this.lblHadSex.Size = new System.Drawing.Size(13, 11);
             this.lblHadSex.TabIndex = 5;
             this.lblHadSex.Text = "S";
-            this.lblHadSex.MouseLeave += new System.EventHandler(this.lblHadSex_MouseLeave);
-            this.lblHadSex.DoubleClick += new System.EventHandler(this.lblHadSex_DoubleClick);
-            this.lblHadSex.MouseClick += new System.Windows.Forms.MouseEventHandler(this.lblHadSex_MouseClick);
-            this.lblHadSex.MouseEnter += new System.EventHandler(this.lblHadSex_MouseEnter);
+            this.lblHadSex.MouseLeave += new System.EventHandler(this.HadSex_MouseLeave);
+            this.lblHadSex.DoubleClick += new System.EventHandler(this.HadSex_DoubleClick);
+            this.lblHadSex.MouseClick += new System.Windows.Forms.MouseEventHandler(this.HadSex_MouseClick);
+            this.lblHadSex.MouseEnter += new System.EventHandler(this.HadSex_MouseEnter);
             // 
             // pictureAlarm
             // 
@@ -116,10 +116,10 @@
             this.pictureAlarm.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
             this.pictureAlarm.TabIndex = 7;
             this.pictureAlarm.TabStop = false;
-            this.pictureAlarm.DoubleClick += new System.EventHandler(this.pictureAlarm_DoubleClick);
-            this.pictureAlarm.MouseLeave += new System.EventHandler(this.pictureAlarm_MouseLeave);
-            this.pictureAlarm.MouseClick += new System.Windows.Forms.MouseEventHandler(this.pictureAlarm_MouseClick);
-            this.pictureAlarm.MouseEnter += new System.EventHandler(this.pictureAlarm_MouseEnter);
+            this.pictureAlarm.DoubleClick += new System.EventHandler(this.PictureAlarm_DoubleClick);
+            this.pictureAlarm.MouseLeave += new System.EventHandler(this.PictureAlarm_MouseLeave);
+            this.pictureAlarm.MouseClick += new System.Windows.Forms.MouseEventHandler(this.PictureAlarm_MouseClick);
+            this.pictureAlarm.MouseEnter += new System.EventHandler(this.PictureAlarm_MouseEnter);
             // 
             // sliderHealth
             // 
@@ -140,10 +140,10 @@
             this.sliderHealth.Text = "colorSlider1";
             this.sliderHealth.ThumbRoundRectSize = new System.Drawing.Size(8, 8);
             this.sliderHealth.Value = 5;
-            this.sliderHealth.MouseLeave += new System.EventHandler(this.sliderHealth_MouseLeave);
-            this.sliderHealth.ValueChanged += new System.EventHandler(this.sliderHealth_ValueChanged);
-            this.sliderHealth.MouseClick += new System.Windows.Forms.MouseEventHandler(this.sliderHealth_MouseClick);
-            this.sliderHealth.MouseEnter += new System.EventHandler(this.sliderHealth_MouseEnter);
+            this.sliderHealth.MouseLeave += new System.EventHandler(this.SliderHealth_MouseLeave);
+            this.sliderHealth.ValueChanged += new System.EventHandler(this.SliderHealth_ValueChanged);
+            this.sliderHealth.MouseClick += new System.Windows.Forms.MouseEventHandler(this.SliderHealth_MouseClick);
+            this.sliderHealth.MouseEnter += new System.EventHandler(this.SliderHealth_MouseEnter);
             // 
             // sliderEgestaAmount
             // 
@@ -170,10 +170,10 @@
             this.sliderEgestaAmount.ThumbOuterColor = System.Drawing.Color.Pink;
             this.sliderEgestaAmount.ThumbRoundRectSize = new System.Drawing.Size(8, 8);
             this.sliderEgestaAmount.Value = 0;
-            this.sliderEgestaAmount.MouseLeave += new System.EventHandler(this.sliderEgestaAmount_MouseLeave);
-            this.sliderEgestaAmount.ValueChanged += new System.EventHandler(this.sliderEgestaAmount_ValueChanged);
-            this.sliderEgestaAmount.MouseDown += new System.Windows.Forms.MouseEventHandler(this.sliderEgestaAmount_MouseDown);
-            this.sliderEgestaAmount.MouseEnter += new System.EventHandler(this.sliderEgestaAmount_MouseEnter);
+            this.sliderEgestaAmount.MouseLeave += new System.EventHandler(this.SliderEgestaAmount_MouseLeave);
+            this.sliderEgestaAmount.ValueChanged += new System.EventHandler(this.SliderEgestaAmount_ValueChanged);
+            this.sliderEgestaAmount.MouseDown += new System.Windows.Forms.MouseEventHandler(this.SliderEgestaAmount_MouseDown);
+            this.sliderEgestaAmount.MouseEnter += new System.EventHandler(this.SliderEgestaAmount_MouseEnter);
             // 
             // DayCellPopupControl
             // 

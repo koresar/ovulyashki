@@ -19,6 +19,9 @@ namespace WomenCalendar
         {
         }
 
+        /// <summary>
+        /// The default constructor.
+        /// </summary>
         public OnceAPeriod()
             : base()
         {

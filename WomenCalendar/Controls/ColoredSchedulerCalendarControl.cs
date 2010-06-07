@@ -1,98 +1,135 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Drawing;
 using System.Data;
+using System.Drawing;
+using System.Globalization;
+using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using System.Globalization;
 using WomenCalendar.Properties;
-using System.Linq;
 
 namespace WomenCalendar.Controls
 {
+    /// <summary>
+    /// The control displays the smallest possible calendar with scheduled days mark.
+    /// </summary>
     public partial class ColoredSchedulerCalendarControl : UserControl
     {
         private const int CellSize = 10;
 
-        private Woman w = Program.CurrentWoman;
+        private DateTime startMonth;
+        private Font monthFont;
+
+        private Woman woman = Program.CurrentWoman;
         private List<Schedule> currentSchedules;
         private Dictionary<DateTime, bool> marks = new Dictionary<DateTime, bool>();
-        private List<Schedule> CurrentSchedules
+
+        /// <summary>
+        /// Creates the control.
+        /// </summary>
+        public ColoredSchedulerCalendarControl()
+        {
+            this.InitializeComponent();
+            this.SetStyle(ControlStyles.AllPaintingInWmPaint | ControlStyles.UserPaint, true);
+        }
+
+        /// <summary>
+        /// The month to start view from.
+        /// </summary>
+        public DateTime StartMonth
         {
             get
             {
-                return currentSchedules;
+                return this.startMonth;
             }
+
             set
             {
-                currentSchedules = value;
-                ReinitMarks();
+                this.startMonth = value;
+                this.ReinitMarks();
             }
         }
 
-        public DateTime startMonth;
-        public DateTime StartMonth
-        {
-            get { return startMonth; }
-            set
-            {
-                startMonth = value;
-                ReinitMarks();
-            }
-        }
-
-        public Font monthFont;
+        /// <summary>
+        /// The font to draw month names.
+        /// </summary>
         public Font MonthFont
         {
             get
             {
-                return monthFont ?? (monthFont = new Font("Microsoft Sans Serif", 8F));
+                return this.monthFont ?? (this.monthFont = new Font("Microsoft Sans Serif", 8F));
             }
         }
 
-        public ColoredSchedulerCalendarControl()
+        private List<Schedule> CurrentSchedules
         {
-            InitializeComponent();
-            SetStyle(ControlStyles.AllPaintingInWmPaint | ControlStyles.UserPaint, true);
-        }
-
-        private void ReinitMarks()
-        {
-            marks = new Dictionary<DateTime, bool>();
-            if (currentSchedules != null && currentSchedules.Count > 0)
+            get
             {
-                var day = new DateTime(StartMonth.Year, StartMonth.Month, 1);
-                var final = day.AddYears(1);
-                while (day < final)
-                {
-                    if (currentSchedules.Any(s => s.IsAlarmAtDay(day)))
-                    {
-                        marks[day] = true;
-                    }
-                    day = day.AddDays(1);
-                }
+                return this.currentSchedules;
+            }
+
+            set
+            {
+                this.currentSchedules = value;
+                this.ReinitMarks();
             }
         }
 
+        /// <summary>
+        /// Apply several new schedules to this control.
+        /// </summary>
+        /// <param name="schedule">List of schedules to show.</param>
+        public void ApplySchedules(List<Schedule> schedule)
+        {
+            this.CurrentSchedules = schedule;
+            this.Redraw();
+        }
+
+        /// <summary>
+        /// Apply new schedule to this control.
+        /// </summary>
+        /// <param name="schedule">New schedule,</param>
+        public void ApplySchedule(Schedule schedule)
+        {
+            this.CurrentSchedules = new List<Schedule>(1) { schedule };
+            this.Redraw();
+        }
+
+        /// <summary>
+        /// Repaint control.
+        /// </summary>
+        public void Redraw()
+        {
+            this.Invalidate();
+            this.Refresh();
+        }
+
+        /// <summary>
+        /// Repaint the control.
+        /// </summary>
+        /// <param name="pe">Paint event arguments.</param>
         protected override void OnPaint(PaintEventArgs pe)
         {
             var appearance = Program.Settings == null ? new DayCellAppearance() : Program.Settings.DayCellAppearance;
             var checkmark = Resources.ResourceManager.GetObject("Checkmark_32") as Image;
 
             var monthNames = CultureInfo.CurrentUICulture.DateTimeFormat.AbbreviatedMonthNames;
-            var month = StartMonth;
-            var leftSpace = this.Width - 31 * CellSize;
+            var month = this.StartMonth;
+            var leftSpace = this.Width - (31 * CellSize);
             var xOffset = leftSpace > 0 ? leftSpace - 1 : 0;
             var yOffset = CellSize + 2;
             for (int m = 0; m < 12; m++)
             {
-                    var s = monthNames[month.Month - 1];
-                    pe.Graphics.DrawString(s, MonthFont, Brushes.Black, 
-                        new Point(0, m * CellSize + yOffset - 2));
-                    month = month.AddMonths(1);
-                
+                var s = monthNames[month.Month - 1];
+                pe.Graphics.DrawString(
+                    s,
+                    this.MonthFont, 
+                    Brushes.Black,
+                    new Point(0, (m * CellSize) + yOffset - 2));
+                month = month.AddMonths(1);
             }
+
             for (int d = 1; d <= 31; d++)
             {
                 if (d % 2 == 1 && d > 0)
@@ -100,12 +137,16 @@ namespace WomenCalendar.Controls
                     var s = d.ToString();
 
                     SizeF textSize = pe.Graphics.MeasureString(s, Font);
-                    pe.Graphics.DrawString(s, MonthFont, Brushes.Black,
-                        xOffset - CellSize + d * CellSize + (CellSize - textSize.Width) / 2, -1);
+                    pe.Graphics.DrawString(
+                        s,
+                        this.MonthFont, 
+                        Brushes.Black,
+                        xOffset - CellSize + (d * CellSize) + ((CellSize - textSize.Width) / 2), 
+                        -1);
                 }
             }
 
-            var day = new DateTime(StartMonth.Year, StartMonth.Month, 1);
+            var day = new DateTime(this.StartMonth.Year, this.StartMonth.Month, 1);
             var final = day.AddYears(1);
             var backMensesBrush = new SolidBrush(appearance.BackMenstruationDay);
             var backPredictedMensesBrush = new SolidBrush(appearance.BackPredictedMenstruationDay);
@@ -114,19 +155,19 @@ namespace WomenCalendar.Controls
             var backEmptyBrush = new SolidBrush(appearance.BackEmpty);
             while (day < final)
             {
-                var x = xOffset + CellSize * (day.Day - 1);
-                var y = yOffset + CellSize * ((12 + day.Month - StartMonth.Month) % 12);
-                var usedBackColor = 
-                    w.Menstruations.IsMenstruationDay(day) ? backMensesBrush :
-                    w.IsPredictedAsMenstruationDay(day) ? backPredictedMensesBrush :
-                    w.IsPredictedAsOvulationDay(day) ? backPredictedOvBrush :
+                var x = xOffset + (CellSize * (day.Day - 1));
+                var y = yOffset + (CellSize * ((12 + day.Month - this.StartMonth.Month) % 12));
+                var usedBackColor =
+                    this.woman.Menstruations.IsMenstruationDay(day) ? backMensesBrush :
+                    this.woman.IsPredictedAsMenstruationDay(day) ? backPredictedMensesBrush :
+                    this.woman.IsPredictedAsOvulationDay(day) ? backPredictedOvBrush :
                     backEmptyBrush;
 
                 pe.Graphics.FillRectangle(usedBackColor, x, y, CellSize, CellSize);
 
                 pe.Graphics.DrawRectangle(Pens.Black, x - 1, y - 1, CellSize, CellSize);
 
-                if (marks.Count > 0 && marks.ContainsKey(day))
+                if (this.marks.Count > 0 && this.marks.ContainsKey(day))
                 {
                     pe.Graphics.DrawImage(checkmark, new Rectangle(x, y, CellSize - 1, CellSize - 1));
                 }
@@ -135,22 +176,23 @@ namespace WomenCalendar.Controls
             }
         }
 
-        public void ApplySchedules(List<Schedule> schedule)
+        private void ReinitMarks()
         {
-            CurrentSchedules = schedule;
-            Redraw();
-        }
+            this.marks = new Dictionary<DateTime, bool>();
+            if (this.currentSchedules != null && this.currentSchedules.Count > 0)
+            {
+                var day = new DateTime(this.StartMonth.Year, this.StartMonth.Month, 1);
+                var final = day.AddYears(1);
+                while (day < final)
+                {
+                    if (this.currentSchedules.Any(s => s.IsAlarmAtDay(day)))
+                    {
+                        this.marks[day] = true;
+                    }
 
-        public void ApplySchedule(Schedule schedule)
-        {
-            CurrentSchedules = new List<Schedule>(1) { schedule };
-            Redraw();
-        }
-
-        public void Redraw()
-        {
-            Invalidate();
-            Refresh();
+                    day = day.AddDays(1);
+                }
+            }
         }
     }
 }

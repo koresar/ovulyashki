@@ -45,6 +45,11 @@ namespace WomenCalendar
             }
         }
 
+        /// <summary>
+        /// Retrund the text which is being shown to the used about the schedules on the provided day.
+        /// </summary>
+        /// <param name="date">Day to provide schedules info for.</param>
+        /// <returns>Nice looking text for the day. Null in case nothing to show.</returns>
         public string GetFormattedSchedulesText(DateTime date)
         {
             return "TODO";

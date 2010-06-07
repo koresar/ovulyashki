@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Drawing;
 using System.Data;
+using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 
@@ -10,176 +10,187 @@ namespace WomenCalendar
 {
     public partial class DayCellPopupControl : UserControl
     {
+        private MonthsControl ownerMonthsControl;
+
         private bool initializing;
 
-        private DayCellControl DayCell;
-        public MonthsControl OwnerMonthsControl;
+        private DayCellControl dayCell;
+
+        public DayCellPopupControl()
+        {
+            this.InitializeComponent();
+            this.Visible = false;
+            this.BorderStyle = BorderStyle.FixedSingle;
+        }
+
+        public DayCellPopupControl(MonthsControl ownerMonthsControl)
+            : this()
+        {
+            this.ownerMonthsControl = ownerMonthsControl;
+            this.Parent = this.ownerMonthsControl;
+        }
 
         public new bool Visible
         {
-            set
-            {
-                base.Visible = value;
-                HideTooltip();
-            }
             get
             {
                 return base.Visible;
             }
-        }
 
-        private int EgestaSliderValue
-        {
-            get
-            {
-                return 4 - sliderEgestaAmount.Value;
-            }
             set
             {
-                sliderEgestaAmount.Value = 4 - value;
+                base.Visible = value;
+                this.HideTooltip();
             }
         }
 
         public bool Forbidden { get; set; }
 
-        public DayCellPopupControl()
+        private int EgestaSliderValue
         {
-            InitializeComponent();
-            Visible = false;
-            BorderStyle = BorderStyle.FixedSingle;
-        }
-
-        public DayCellPopupControl(MonthsControl ownerMonthsControl) : this()
-        {
-            OwnerMonthsControl = ownerMonthsControl;
-            Parent = OwnerMonthsControl;
-        }
-
-        public void ShowAbove(DayCellControl dayCell)
-        {
-            if (Forbidden) return;
-
-            initializing = true;
-
-            HideTooltip();
-            DayCell = dayCell;
-            BringToFront();
-
-            PaintEgesta();
-
-            sliderHealth.Value = Program.CurrentWoman.Health[DayCell.Date];
-
-            pictureNote.Visible = Program.CurrentWoman.Notes.ContainsKey(DayCell.Date);
-
-            lblDay.Text = DayCell.Date.Day.ToString();
-
-            BackColor = DayCell.BackColor;
-
-            Point newLocation = DayCell.Location;
-            newLocation.Offset(-DayCell.Size.Width / 2, -DayCell.Size.Height / 2);
-            Location = OwnerMonthsControl.PointToClient(DayCell.OwnerOneMonthControl.PointToScreen(newLocation));
-
-            PaintBBT();
-
-            PaintHadSex();
-
-            this.pictureAlarm.Visible = Program.CurrentWoman.Schedules.HasAFiredSchedule(DayCell.Date);
-
-            if (Visible == false)
+            get
             {
-                Visible = true;
+                return 4 - this.sliderEgestaAmount.Value;
             }
 
-            initializing = false;
+            set
+            {
+                this.sliderEgestaAmount.Value = 4 - value;
+            }
+        }
+
+        /// <summary>
+        /// Popup the control above the given control.
+        /// </summary>
+        /// <param name="dayCell">The control to popup above.</param>
+        public void ShowAbove(DayCellControl dayCell)
+        {
+            if (this.Forbidden)
+            {
+                return;
+            }
+
+            this.initializing = true;
+
+            this.HideTooltip();
+            this.dayCell = dayCell;
+            this.BringToFront();
+
+            this.PaintEgesta();
+
+            this.sliderHealth.Value = Program.CurrentWoman.Health[this.dayCell.Date];
+
+            this.pictureNote.Visible = Program.CurrentWoman.Notes.ContainsKey(this.dayCell.Date);
+
+            this.lblDay.Text = this.dayCell.Date.Day.ToString();
+
+            this.BackColor = this.dayCell.BackColor;
+
+            Point newLocation = this.dayCell.Location;
+            newLocation.Offset(-this.dayCell.Size.Width / 2, -this.dayCell.Size.Height / 2);
+            this.Location = this.ownerMonthsControl.PointToClient(this.dayCell.OwnerOneMonthControl.PointToScreen(newLocation));
+
+            this.PaintBBT();
+
+            this.PaintHadSex();
+
+            this.pictureAlarm.Visible = Program.CurrentWoman.Schedules.HasAFiredSchedule(this.dayCell.Date);
+
+            if (this.Visible == false)
+            {
+                this.Visible = true;
+            }
+
+            this.initializing = false;
         }
 
         private void PaintEgesta()
         {
-            int egesta = Program.CurrentWoman.Menstruations.GetEgestaAmount(DayCell.Date);
+            int egesta = Program.CurrentWoman.Menstruations.GetEgestaAmount(this.dayCell.Date);
             if (egesta >= 0)
             {
-                EgestaSliderValue = egesta;
-                sliderEgestaAmount.Visible = true;
+                this.EgestaSliderValue = egesta;
+                this.sliderEgestaAmount.Visible = true;
             }
             else
             {
-                sliderEgestaAmount.Visible = false;
+                this.sliderEgestaAmount.Visible = false;
             }
         }
 
         private void PaintBBT()
         {
-            double bbt = Program.CurrentWoman.BBT.GetBBT(DayCell.Date);
-            lblBBT.Visible = true;
+            double bbt = Program.CurrentWoman.BBT.GetBBT(this.dayCell.Date);
+            this.lblBBT.Visible = true;
             if (bbt != 0)
             {
-                lblBBT.ForeColor = SystemColors.ControlText;
-                lblBBT.Text = "t°" + bbt.ToString("##.##");
+                this.lblBBT.ForeColor = SystemColors.ControlText;
+                this.lblBBT.Text = "t°" + bbt.ToString("##.##");
             }
             else
             {
-                Color c = Color.FromArgb((int)(BackColor.R * 0.9), (int)(BackColor.G * 0.9), (int)(BackColor.B * 0.9));
-                lblBBT.ForeColor = c;
-                lblBBT.Text = "t°36.6";
+                Color c = Color.FromArgb((int)(this.BackColor.R * 0.9), (int)(this.BackColor.G * 0.9), (int)(this.BackColor.B * 0.9));
+                this.lblBBT.ForeColor = c;
+                this.lblBBT.Text = "t°36.6";
             }
         }
 
         private void PaintHadSex()
         {
-            if (Program.CurrentWoman.HadSexList[DayCell.Date])
+            if (Program.CurrentWoman.HadSexList[this.dayCell.Date])
             {
-                lblHadSex.ForeColor = Color.Red;
+                this.lblHadSex.ForeColor = Color.Red;
             }
             else
             {
-                Color c = Color.FromArgb((int)(BackColor.R * 0.9), (int)(BackColor.G * 0.9), (int)(BackColor.B * 0.9));
-                lblHadSex.ForeColor = c;
+                Color c = Color.FromArgb((int)(this.BackColor.R * 0.9), (int)(this.BackColor.G * 0.9), (int)(this.BackColor.B * 0.9));
+                this.lblHadSex.ForeColor = c;
             }
         }
 
         private void ShowDayEditForm(DayEditFocus focus)
         {
-            Visible = false;
-            new DayEditForm(DayCell.Date, focus).ShowDialog(this);
+            this.Visible = false;
+            new DayEditForm(this.dayCell.Date, focus).ShowDialog(this);
         }
 
         private void HideTooltip()
         {
-            toolTip.Hide(this);
+            this.toolTip.Hide(this);
         }
 
         private void ShowEgestaTooltip()
         {
-            ShowTooltip(TEXT.Get["Amount_of_bleeding"], EgestasCollection.EgestasNames[EgestaSliderValue]);
+            this.ShowTooltip(TEXT.Get["Amount_of_bleeding"], EgestasCollection.EgestasNames[this.EgestaSliderValue]);
         }
 
         private void ShowHasSexToolTip()
         {
-            ShowTooltip(TEXT.Get["Sex"], Program.CurrentWoman.HadSexList[DayCell.Date] ? 
-                TEXT.Get["Sex_was"] : 
-                TEXT.Get["Sex_was_not"]);
+            this.ShowTooltip(
+                TEXT.Get["Sex"],
+                TEXT.Get[Program.CurrentWoman.HadSexList[this.dayCell.Date] ? "Sex_was" : "Sex_was_not"]);
         }
 
         private void ShowNoteToolTip()
         {
-            ShowTooltip(TEXT.Get["Note"], Program.CurrentWoman.Notes[DayCell.Date]);
+            this.ShowTooltip(TEXT.Get["Note"], Program.CurrentWoman.Notes[this.dayCell.Date]);
         }
 
         private void ShowHealthTooltip()
         {
-            ShowTooltip(TEXT.Get["Wellbeing"], TEXT.Get.Format("N_of_10", sliderHealth.Value.ToString()));
+            this.ShowTooltip(TEXT.Get["Wellbeing"], TEXT.Get.Format("N_of_10", this.sliderHealth.Value.ToString()));
         }
 
         private void ShowBBTTooltip()
         {
-            var bbt = Program.CurrentWoman.BBT.GetBBT(DayCell.Date);
-            ShowTooltip(TEXT.Get["BBT_full"], bbt == 0 ? TEXT.Get["Not_set_f"] : bbt.ToString());
+            var bbt = Program.CurrentWoman.BBT.GetBBT(this.dayCell.Date);
+            this.ShowTooltip(TEXT.Get["BBT_full"], bbt == 0 ? TEXT.Get["Not_set_f"] : bbt.ToString());
         }
 
         private void ShowDayInfoTooltip()
         {
-            var info = Program.CurrentWoman.GenerateDayInfo(DayCell.Date);
-            ShowTooltip(TEXT.Get["Click_to_edit"], info);
+            var info = Program.CurrentWoman.GenerateDayInfo(this.dayCell.Date);
+            this.ShowTooltip(TEXT.Get["Click_to_edit"], info);
         }        
 
         private void ShowTooltip(string caption, string text)
@@ -190,203 +201,197 @@ namespace WomenCalendar
 
         private void ShowSchedulesTooltip()
         {
-            string text = Program.CurrentWoman.Schedules.GetFormattedSchedulesText(DayCell.Date);
+            string text = Program.CurrentWoman.Schedules.GetFormattedSchedulesText(this.dayCell.Date);
             // TODO
         }
 
         private void DayCellPopupControl_MouseClick(object sender, MouseEventArgs e)
         {
-            OwnerMonthsControl.FocusDate = DayCell.Date;
+            this.ownerMonthsControl.FocusDate = this.dayCell.Date;
             if (e.Button == MouseButtons.Right)
             {
-                OwnerMonthsControl.ShowDayContextMenu();
+                this.ownerMonthsControl.ShowDayContextMenu();
             }
         }
 
         private void DayCellPopupControl_DoubleClick(object sender, EventArgs e)
         {
-            ShowDayEditForm(DayEditFocus.Note);
+            this.ShowDayEditForm(DayEditFocus.Note);
         }
 
-        private void lblDay_MouseClick(object sender, MouseEventArgs e)
+        private void Day_MouseClick(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Left)
             {
-                OwnerMonthsControl.FocusDate = DayCell.Date;
-                ShowDayEditForm(DayEditFocus.Note);
+                this.ownerMonthsControl.FocusDate = this.dayCell.Date;
+                this.ShowDayEditForm(DayEditFocus.Note);
             }
             else
             {
-                DayCellPopupControl_MouseClick(sender, e);
+                this.DayCellPopupControl_MouseClick(sender, e);
             }
         }
 
-        private void pictureNote_MouseClick(object sender, MouseEventArgs e)
+        private void PictureNote_MouseClick(object sender, MouseEventArgs e)
         {
-            DayCellPopupControl_MouseClick(sender, e);
+            this.DayCellPopupControl_MouseClick(sender, e);
         }
 
-        private void pictureNote_MouseEnter(object sender, EventArgs e)
+        private void PictureNote_MouseEnter(object sender, EventArgs e)
         {
-            ShowNoteToolTip();
+            this.ShowNoteToolTip();
         }
 
-        private void pictureNote_MouseLeave(object sender, EventArgs e)
+        private void PictureNote_MouseLeave(object sender, EventArgs e)
         {
-            HideTooltip();
+            this.HideTooltip();
         }
 
         private void DayCellPopupControl_MouseLeave(object sender, EventArgs e)
         {
-            if (!ClientRectangle.Contains(PointToClient(MousePosition)))
+            if (!this.ClientRectangle.Contains(this.PointToClient(MousePosition)))
             {
-                Visible = false;
+                this.Visible = false;
             }
         }
 
-        private void sliderEgestaAmount_MouseEnter(object sender, EventArgs e)
+        private void SliderEgestaAmount_MouseEnter(object sender, EventArgs e)
         {
-            ShowEgestaTooltip();
+            this.ShowEgestaTooltip();
         }
 
-        private void sliderEgestaAmount_MouseLeave(object sender, EventArgs e)
+        private void SliderEgestaAmount_MouseLeave(object sender, EventArgs e)
         {
-            HideTooltip();
+            this.HideTooltip();
         }
 
-        private void sliderHealth_MouseEnter(object sender, EventArgs e)
+        private void SliderHealth_MouseEnter(object sender, EventArgs e)
         {
-            ShowHealthTooltip();
+            this.ShowHealthTooltip();
         }
 
-        private void sliderHealth_MouseLeave(object sender, EventArgs e)
+        private void SliderHealth_MouseLeave(object sender, EventArgs e)
         {
-            HideTooltip();
+            this.HideTooltip();
         }
 
-        private void sliderEgestaAmount_MouseDown(object sender, MouseEventArgs e)
+        private void SliderEgestaAmount_MouseDown(object sender, MouseEventArgs e)
         {
-            OwnerMonthsControl.FocusDate = DayCell.Date;
+            this.ownerMonthsControl.FocusDate = this.dayCell.Date;
             if (e.Button == MouseButtons.Right)
             {
-                DayCellPopupControl_MouseClick(sender, e);
+                this.DayCellPopupControl_MouseClick(sender, e);
             }
         }
 
-        private void lblHadSex_MouseEnter(object sender, EventArgs e)
+        private void HadSex_MouseEnter(object sender, EventArgs e)
         {
-            ShowHasSexToolTip();
+            this.ShowHasSexToolTip();
         }
 
-        private void lblHadSex_MouseLeave(object sender, EventArgs e)
+        private void HadSex_MouseLeave(object sender, EventArgs e)
         {
-            HideTooltip();
+            this.HideTooltip();
         }
 
-        private void lblHadSex_MouseClick(object sender, MouseEventArgs e)
+        private void HadSex_MouseClick(object sender, MouseEventArgs e)
         {
-            OwnerMonthsControl.FocusDate = DayCell.Date;
+            this.ownerMonthsControl.FocusDate = this.dayCell.Date;
             if (e.Button == MouseButtons.Right)
             {
-                OwnerMonthsControl.ShowDayContextMenu();
+                this.ownerMonthsControl.ShowDayContextMenu();
             }
         }
 
-        private void lblBBT_MouseClick(object sender, MouseEventArgs e)
+        private void BBT_MouseClick(object sender, MouseEventArgs e)
         {
-            OwnerMonthsControl.FocusDate = DayCell.Date;
+            this.ownerMonthsControl.FocusDate = this.dayCell.Date;
             if (e.Button == MouseButtons.Right)
             {
-                OwnerMonthsControl.ShowDayContextMenu();
+                this.ownerMonthsControl.ShowDayContextMenu();
             }
         }
 
-        public void Redraw()
+        private void SliderHealth_MouseClick(object sender, MouseEventArgs e)
         {
-            Invalidate(true);
-            Update();
-        }
-
-        private void sliderHealth_MouseClick(object sender, MouseEventArgs e)
-        {
-            OwnerMonthsControl.FocusDate = DayCell.Date;
+            this.ownerMonthsControl.FocusDate = this.dayCell.Date;
             if (e.Button == MouseButtons.Right)
             {
-                OwnerMonthsControl.ShowDayContextMenu();
+                this.ownerMonthsControl.ShowDayContextMenu();
             }
         }
 
-        private void lblBBT_DoubleClick(object sender, EventArgs e)
+        private void BBT_DoubleClick(object sender, EventArgs e)
         {
-            ShowDayEditForm(DayEditFocus.BBT);
+            this.ShowDayEditForm(DayEditFocus.BBT);
         }
 
-        private void lblHadSex_DoubleClick(object sender, EventArgs e)
+        private void HadSex_DoubleClick(object sender, EventArgs e)
         {
-            ShowDayEditForm(DayEditFocus.Note);
+            this.ShowDayEditForm(DayEditFocus.Note);
         }
 
-        private void lblBBT_MouseEnter(object sender, EventArgs e)
+        private void BBT_MouseEnter(object sender, EventArgs e)
         {
-            ShowBBTTooltip();
+            this.ShowBBTTooltip();
         }
 
-        private void lblBBT_MouseLeave(object sender, EventArgs e)
+        private void BBT_MouseLeave(object sender, EventArgs e)
         {
-            HideTooltip();
+            this.HideTooltip();
         }
 
-        private void pictureNote_DoubleClick(object sender, EventArgs e)
+        private void PictureNote_DoubleClick(object sender, EventArgs e)
         {
-            ShowDayEditForm(DayEditFocus.Note);
+            this.ShowDayEditForm(DayEditFocus.Note);
         }
 
-        private void lblDay_MouseEnter(object sender, EventArgs e)
+        private void Day_MouseEnter(object sender, EventArgs e)
         {
-            ShowDayInfoTooltip();
+            this.ShowDayInfoTooltip();
         }
 
-        private void lblDay_MouseLeave(object sender, EventArgs e)
+        private void Day_MouseLeave(object sender, EventArgs e)
         {
-            HideTooltip();
+            this.HideTooltip();
         }
 
-        private void sliderEgestaAmount_ValueChanged(object sender, EventArgs e)
+        private void SliderEgestaAmount_ValueChanged(object sender, EventArgs e)
         {
-            if (!initializing)
+            if (!this.initializing)
             {
-                Program.CurrentWoman.Menstruations.SetEgesta(DayCell.Date, EgestaSliderValue);
-                ShowEgestaTooltip();
+                Program.CurrentWoman.Menstruations.SetEgesta(this.dayCell.Date, this.EgestaSliderValue);
+                this.ShowEgestaTooltip();
             }
         }
 
-        private void sliderHealth_ValueChanged(object sender, EventArgs e)
+        private void SliderHealth_ValueChanged(object sender, EventArgs e)
         {
-            if (!initializing)
+            if (!this.initializing)
             {
-                Program.CurrentWoman.Health[DayCell.Date] = sliderHealth.Value;
-                ShowHealthTooltip();
+                Program.CurrentWoman.Health[this.dayCell.Date] = this.sliderHealth.Value;
+                this.ShowHealthTooltip();
             }
         }
 
-        private void pictureAlarm_MouseClick(object sender, MouseEventArgs e)
+        private void PictureAlarm_MouseClick(object sender, MouseEventArgs e)
         {
-            DayCellPopupControl_MouseClick(sender, e);
+            this.DayCellPopupControl_MouseClick(sender, e);
         }
 
-        private void pictureAlarm_DoubleClick(object sender, EventArgs e)
+        private void PictureAlarm_DoubleClick(object sender, EventArgs e)
         {
-            ShowDayEditForm(DayEditFocus.Schedules);
+            this.ShowDayEditForm(DayEditFocus.Schedules);
         }
 
-        private void pictureAlarm_MouseEnter(object sender, EventArgs e)
+        private void PictureAlarm_MouseEnter(object sender, EventArgs e)
         {
-            ShowSchedulesTooltip();
+            this.ShowSchedulesTooltip();
         }
 
-        private void pictureAlarm_MouseLeave(object sender, EventArgs e)
+        private void PictureAlarm_MouseLeave(object sender, EventArgs e)
         {
-            HideTooltip();
+            this.HideTooltip();
         }
     }
 }
