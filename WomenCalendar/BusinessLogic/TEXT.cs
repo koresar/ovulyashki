@@ -46,7 +46,7 @@ namespace WomenCalendar
 
         private static string LocalPath
         {
-            get { return Path.GetDirectoryName(Application.ExecutablePath); }
+            get { return Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location); }
         }
 
         /// <summary>

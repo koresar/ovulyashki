@@ -2,7 +2,7 @@ This is the quick guide on how to work with the solution.
 
 How to code same style as the current code?
 1) Download and install StyleCop from the Microsoft site.
-2) Right click on any file/folder/project and select "Run StyleCop".
+2) Right click on any file/folder/project in Solution Explorer and select "Run StyleCop".
 3) Follow the warning instructions if any and change the code accordingly.
 
 How to change application version?
@@ -11,3 +11,6 @@ How to change application version?
 3) Do NOT change upgrade code. Never ever change UpgradeCode!!! It's {482BFF03-47BE-4DA1-AA44-E102C604F5DC} now and should be forever!
 4) Change Versions of main executable assembly.
 
+How to run unit tests?
+1) You need to have Visual Studio with MSTest embeded.
+2) Click in main menu Test->Run->All Unit Test in Solution. Or simply type Ctrl+R, A.

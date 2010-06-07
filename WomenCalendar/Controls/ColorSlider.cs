@@ -13,664 +13,54 @@ namespace MB.Controls
     [DefaultEvent("Scroll"), DefaultProperty("BarInnerColor")]
     public partial class ColorSlider : Control
     {
-        #region Events
-
-        /// <summary>
-        /// Fires when Slider position has changed
-        /// </summary>
-        [Description("Event fires when the Value property changes")]
-        [Category("Action")]
-        public event EventHandler ValueChanged;
-
-        /// <summary>
-        /// Fires when user scrolls the Slider
-        /// </summary>
-        [Description("Event fires when the Slider position is changed")]
-        [Category("Behavior")]
-        public event ScrollEventHandler Scroll;
-
-        #endregion
-
-        #region Properties
-
         /// <summary>
         /// Bounding rectangle of thumb area.
         /// </summary>
         private Rectangle thumbRect;
 
         /// <summary>
-        /// Gets the thumb rect. Usefull to determine bounding rectangle when creating custom thumb shape.
+        /// Bounding rectangle of bar area.
         /// </summary>
-        /// <value>The thumb rect.</value>
-        [Browsable(false)]
-        public Rectangle ThumbRect
-        {
-            get { return thumbRect; }
-        }
+        private Rectangle barRect;
 
-        private Rectangle barRect; //bounding rectangle of bar area
+        /// <summary>
+        /// Bounding rectangle of elapsed area.
+        /// </summary>
         private Rectangle barHalfRect;
+
         private Rectangle thumbHalfRect;
-        private Rectangle elapsedRect; //bounding rectangle of elapsed area
-
+        private Rectangle elapsedRect;
         private int thumbSize = 15;
-
-        /// <summary>
-        /// Gets or sets the size of the thumb.
-        /// </summary>
-        /// <value>The size of the thumb.</value>
-        /// <exception cref="T:System.ArgumentOutOfRangeException">
-        /// Exception thrown when value is lower than zero or grather than half of appropiate dimension
-        /// </exception>
-        [Description("Set Slider thumb size")]
-        [Category("ColorSlider")]
-        [DefaultValue(15)]
-        public int ThumbSize
-        {
-            get
-            {
-                return this.thumbSize;
-            }
-
-            set
-            {
-                if (value > 0 &
-                    value < (barOrientation == Orientation.Horizontal ? ClientRectangle.Width : ClientRectangle.Height))
-                {
-                    this.thumbSize = value;
-                }
-                else
-                {
-                    throw new ArgumentOutOfRangeException(
-                        "TrackSize has to be greather than zero and lower than half of Slider width");
-                }
-
-                this.Invalidate();
-            }
-        }
-
         private GraphicsPath thumbCustomShape = null;
-
-        /// <summary>
-        /// Gets or sets the thumb custom shape. Use ThumbRect property to determine bounding rectangle.
-        /// </summary>
-        /// <value>The thumb custom shape. null means default shape</value>
-        [Description("Set Slider's thumb's custom shape")]
-        [Category("ColorSlider")]
-        [Browsable(false)]
-        [DefaultValue(typeof(GraphicsPath), "null")]
-        public GraphicsPath ThumbCustomShape
-        {
-            get
-            {
-                return this.thumbCustomShape;
-            }
-
-            set
-            {
-                this.thumbCustomShape = value;
-                this.thumbSize = (int)(barOrientation == Orientation.Horizontal ? value.GetBounds().Width : value.GetBounds().Height) + 1;
-                this.Invalidate();
-            }
-        }
-
-        private Size thumbRoundRectSize = new Size(8, 8);
-
-        /// <summary>
-        /// Gets or sets the size of the thumb round rectangle edges.
-        /// </summary>
-        /// <value>The size of the thumb round rectangle edges.</value>
-        [Description("Set Slider's thumb round rect size")]
-        [Category("ColorSlider")]
-        [DefaultValue(typeof(Size), "8; 8")]
-        public Size ThumbRoundRectSize
-        {
-            get
-            {
-                return this.thumbRoundRectSize;
-            }
-
-            set
-            {
-                int h = value.Height, w = value.Width;
-                if (h <= 0)
-                {
-                    h = 1;
-                }
-
-                if (w <= 0)
-                {
-                    w = 1;
-                }
-
-                this.thumbRoundRectSize = new Size(w, h);
-                this.Invalidate();
-            }
-        }
-
-        private Size borderRoundRectSize = new Size(8, 8);
-
-        /// <summary>
-        /// Gets or sets the size of the border round rect.
-        /// </summary>
-        /// <value>The size of the border round rect.</value>
-        [Description("Set Slider's border round rect size")]
-        [Category("ColorSlider")]
-        [DefaultValue(typeof(Size), "8; 8")]
-        public Size BorderRoundRectSize
-        {
-            get
-            {
-                return this.borderRoundRectSize;
-            }
-
-            set
-            {
-                int h = value.Height, w = value.Width;
-                if (h <= 0)
-                {
-                    h = 1;
-                }
-
-                if (w <= 0)
-                {
-                    w = 1;
-                }
-
-                this.borderRoundRectSize = new Size(w, h);
-                this.Invalidate();
-            }
-        }
-
-        private Orientation barOrientation = Orientation.Horizontal;
-
-        /// <summary>
-        /// Gets or sets the orientation of Slider.
-        /// </summary>
-        /// <value>The orientation.</value>
-        [Description("Set Slider orientation")]
-        [Category("ColorSlider")]
-        [DefaultValue(Orientation.Horizontal)]
-        public Orientation Orientation
-        {
-            get
-            {
-                return this.barOrientation;
-            }
-
-            set
-            {
-                if (this.barOrientation != value)
-                {
-                    this.barOrientation = value;
-                    int temp = this.Width;
-                    this.Width = this.Height;
-                    this.Height = temp;
-                    if (this.thumbCustomShape != null)
-                    {
-                        this.thumbSize = (int)(this.barOrientation == Orientation.Horizontal ?
-                            this.thumbCustomShape.GetBounds().Width :
-                            this.thumbCustomShape.GetBounds().Height) + 1;
-                    }
-
-                    this.Invalidate();
-                }
-            }
-        }
-
-        private int trackerValue = 50;
-
-        /// <summary>
-        /// Gets or sets the value of Slider.
-        /// </summary>
-        /// <value>The value.</value>
-        /// <exception cref="T:System.ArgumentOutOfRangeException">exception thrown when value is outside appropriate range (min, max)</exception>
-        [Description("Set Slider value")]
-        [Category("ColorSlider")]
-        [DefaultValue(50)]
-        public int Value
-        {
-            get
-            {
-                return this.trackerValue;
-            }
-
-            set
-            {
-                if (value >= barMinimum & value <= barMaximum)
-                {
-                    int prevValue = this.trackerValue;
-                    if (prevValue != value)
-                    {
-                        this.trackerValue = value;
-                        if (this.ValueChanged != null)
-                        {
-                            this.ValueChanged(this, new EventArgs());
-                        }
-
-                        this.Invalidate();
-                    }
-                }
-                else
-                {
-                    throw new ArgumentOutOfRangeException("Value is outside appropriate range (min, max)");
-                }
-            }
-        }
-
-        private int barMinimum = 0;
-
-        /// <summary>
-        /// Gets or sets the minimum value.
-        /// </summary>
-        /// <value>The minimum value.</value>
-        /// <exception cref="T:System.ArgumentOutOfRangeException">exception thrown when minimal value is greather than maximal one</exception>
-        [Description("Set Slider minimal point")]
-        [Category("ColorSlider")]
-        [DefaultValue(0)]
-        public int Minimum
-        {
-            get
-            {
-                return this.barMinimum;
-            }
-
-            set
-            {
-                if (value < this.barMaximum)
-                {
-                    this.barMinimum = value;
-                    if (this.Value < this.barMinimum)
-                    {
-                        this.Value = this.barMinimum;
-                    }
-
-                    this.Invalidate();
-                }
-                else
-                {
-                    throw new ArgumentOutOfRangeException("Minimal value is greather than maximal one");
-                }
-            }
-        }
-
-        private int barMaximum = 100;
-
-        /// <summary>
-        /// Gets or sets the maximum value.
-        /// </summary>
-        /// <value>The maximum value.</value>
-        /// <exception cref="T:System.ArgumentOutOfRangeException">exception thrown when maximal value is lower than minimal one</exception>
-        [Description("Set Slider maximal point")]
-        [Category("ColorSlider")]
-        [DefaultValue(100)]
-        public int Maximum
-        {
-            get
-            {
-                return this.barMaximum;
-            }
-
-            set
-            {
-                if (value > this.barMinimum)
-                {
-                    this.barMaximum = value;
-                    if (this.trackerValue > this.barMaximum)
-                    {
-                        this.Value = this.barMaximum;
-                    }
-
-                    this.Invalidate();
-                }
-                else
-                {
-                    throw new ArgumentOutOfRangeException("Maximal value is lower than minimal one");
-                }
-            }
-        }
-
-        private uint smallChange = 1;
-
-        /// <summary>
-        /// Gets or sets trackbar's small change. It affects how to behave when directional keys are pressed
-        /// </summary>
-        /// <value>The small change value.</value>
-        [Description("Set trackbar's small change")]
-        [Category("ColorSlider")]
-        [DefaultValue(1)]
-        public uint SmallChange
-        {
-            get { return this.smallChange; }
-            set { this.smallChange = value; }
-        }
-
-        private uint largeChange = 5;
-
-        /// <summary>
-        /// Gets or sets trackbar's large change. It affects how to behave when PageUp/PageDown keys are pressed
-        /// </summary>
-        /// <value>The large change value.</value>
-        [Description("Set trackbar's large change")]
-        [Category("ColorSlider")]
-        [DefaultValue(5)]
-        public uint LargeChange
-        {
-            get { return this.largeChange; }
-            set { this.largeChange = value; }
-        }
-
-        private bool drawFocusRectangle = true;
-
-        /// <summary>
-        /// Gets or sets a value indicating whether to draw focus rectangle.
-        /// </summary>
-        /// <value><c>true</c> if focus rectangle should be drawn; otherwise, <c>false</c>.</value>
-        [Description("Set whether to draw focus rectangle")]
-        [Category("ColorSlider")]
-        [DefaultValue(true)]
-        public bool DrawFocusRectangle
-        {
-            get
-            {
-                return this.drawFocusRectangle;
-            }
-
-            set
-            {
-                this.drawFocusRectangle = value;
-                this.Invalidate();
-            }
-        }
-
-        private bool darkenBarIfLess = true;
-
-        /// <summary>
-        /// Gets or sets a value indicating whether to darken bar when the value is lower.
-        /// </summary>
-        /// <value><c>true</c> if darken bar should be drawn; otherwise, <c>false</c>.</value>
-        [Description("Set whether to darken bar when the value is lower")]
-        [Category("ColorSlider")]
-        [DefaultValue(true)]
-        public bool DarkenBarIfLess
-        {
-            get
-            {
-                return this.darkenBarIfLess;
-            }
-
-            set
-            {
-                this.darkenBarIfLess = value;
-                this.Invalidate();
-            }
-        }
-
-        private bool drawSemitransparentThumb = true;
-
-        /// <summary>
-        /// Gets or sets a value indicating whether to draw semitransparent thumb.
-        /// </summary>
-        /// <value><c>true</c> if semitransparent thumb should be drawn; otherwise, <c>false</c>.</value>
-        [Description("Set whether to draw semitransparent thumb")]
-        [Category("ColorSlider")]
-        [DefaultValue(true)]
-        public bool DrawSemitransparentThumb
-        {
-            get
-            {
-                return this.drawSemitransparentThumb;
-            }
-
-            set
-            {
-                this.drawSemitransparentThumb = value;
-                this.Invalidate();
-            }
-        }
-
-        private bool mouseEffects = true;
-
-        /// <summary>
-        /// Gets or sets whether mouse entry and exit actions have impact on how control look.
-        /// </summary>
-        /// <value><c>true</c> if mouse entry and exit actions have impact on how control look; otherwise, <c>false</c>.</value>
-        [Description("Set whether mouse entry and exit actions have impact on how control look")]
-        [Category("ColorSlider")]
-        [DefaultValue(true)]
-        public bool MouseEffects
-        {
-            get
-            {
-                return this.mouseEffects;
-            }
-
-            set
-            {
-                this.mouseEffects = value;
-                this.Invalidate();
-            }
-        }
-
-        private int mouseWheelBarPartitions = 10;
-
-        /// <summary>
-        /// Gets or sets the mouse wheel bar partitions.
-        /// </summary>
-        /// <value>The mouse wheel bar partitions.</value>
-        /// <exception cref="T:System.ArgumentOutOfRangeException">exception thrown when value isn't greather than zero</exception>
-        [Description("Set to how many parts is bar divided when using mouse wheel")]
-        [Category("ColorSlider")]
-        [DefaultValue(10)]
-        public int MouseWheelBarPartitions
-        {
-            get
-            {
-                return this.mouseWheelBarPartitions;
-            }
-
-            set
-            {
-                if (value > 0)
-                {
-                    this.mouseWheelBarPartitions = value;
-                }
-                else
-                {
-                    throw new ArgumentOutOfRangeException("MouseWheelBarPartitions has to be greather than zero");
-                }
-            }
-        }
-
-        private Color thumbOuterColor = Color.White;
-
-        /// <summary>
-        /// Gets or sets the thumb outer color .
-        /// </summary>
-        /// <value>The thumb outer color.</value>
-        [Description("Set Slider thumb outer color")]
-        [Category("ColorSlider")]
-        [DefaultValue(typeof(Color), "White")]
-        public Color ThumbOuterColor
-        {
-            get
-            {
-                return this.thumbOuterColor;
-            }
-
-            set
-            {
-                this.thumbOuterColor = value;
-                this.Invalidate();
-            }
-        }
-
-        private Color thumbInnerColor = Color.Gainsboro;
-
-        /// <summary>
-        /// Gets or sets the inner color of the thumb.
-        /// </summary>
-        /// <value>The inner color of the thumb.</value>
-        [Description("Set Slider thumb inner color")]
-        [Category("ColorSlider")]
-        [DefaultValue(typeof(Color), "Gainsboro")]
-        public Color ThumbInnerColor
-        {
-            get
-            {
-                return this.thumbInnerColor;
-            }
-
-            set
-            {
-                this.thumbInnerColor = value;
-                this.Invalidate();
-            }
-        }
-        
-        private Color thumbPenColor = Color.Silver;
-
-        /// <summary>
-        /// Gets or sets the color of the thumb pen.
-        /// </summary>
-        /// <value>The color of the thumb pen.</value>
-        [Description("Set Slider thumb pen color")]
-        [Category("ColorSlider")]
-        [DefaultValue(typeof(Color), "Silver")]
-        public Color ThumbPenColor
-        {
-            get
-            {
-                return this.thumbPenColor;
-            }
-
-            set
-            {
-                this.thumbPenColor = value;
-                this.Invalidate();
-            }
-        }
-        
-        private Color barOuterColor = Color.SkyBlue;
-
-        /// <summary>
-        /// Gets or sets the outer color of the bar.
-        /// </summary>
-        /// <value>The outer color of the bar.</value>
-        [Description("Set Slider bar outer color")]
-        [Category("ColorSlider")]
-        [DefaultValue(typeof(Color), "SkyBlue")]
-        public Color BarOuterColor
-        {
-            get
-            {
-                return this.barOuterColor;
-            }
-
-            set
-            {
-                this.barOuterColor = value;
-                this.Invalidate();
-            }
-        }
-        
-        private Color barInnerColor = Color.DarkSlateBlue;
-
-        /// <summary>
-        /// Gets or sets the inner color of the bar.
-        /// </summary>
-        /// <value>The inner color of the bar.</value>
-        [Description("Set Slider bar inner color")]
-        [Category("ColorSlider")]
-        [DefaultValue(typeof(Color), "DarkSlateBlue")]
-        public Color BarInnerColor
-        {
-            get
-            {
-                return this.barInnerColor;
-            }
-
-            set
-            {
-                this.barInnerColor = value;
-                this.Invalidate();
-            }
-        }
-        
-        private Color barPenColor = Color.Gainsboro;
-
-        /// <summary>
-        /// Gets or sets the color of the bar pen.
-        /// </summary>
-        /// <value>The color of the bar pen.</value>
-        [Description("Set Slider bar pen color")]
-        [Category("ColorSlider")]
-        [DefaultValue(typeof(Color), "Gainsboro")]
-        public Color BarPenColor
-        {
-            get
-            {
-                return this.barPenColor;
-            }
-
-            set
-            {
-                this.barPenColor = value;
-                this.Invalidate();
-            }
-        }
-
         private Color elapsedOuterColor = Color.DarkGreen;
-
-        /// <summary>
-        /// Gets or sets the outer color of the elapsed.
-        /// </summary>
-        /// <value>The outer color of the elapsed.</value>
-        [Description("Set Slider's elapsed part outer color")]
-        [Category("ColorSlider")]
-        [DefaultValue(typeof(Color), "DarkGreen")]
-        public Color ElapsedOuterColor
-        {
-            get
-            {
-                return this.elapsedOuterColor;
-            }
-
-            set
-            {
-                this.elapsedOuterColor = value;
-                this.Invalidate();
-            }
-        }
-
+        private Color barPenColor = Color.Gainsboro;
+        private Color barInnerColor = Color.DarkSlateBlue;
+        private Color barOuterColor = Color.SkyBlue;
+        private Color thumbPenColor = Color.Silver;
+        private Color thumbInnerColor = Color.Gainsboro;
+        private Color thumbOuterColor = Color.White;
+        private int mouseWheelBarPartitions = 10;
+        private bool mouseEffects = true;
+        private bool drawSemitransparentThumb = true;
+        private bool darkenBarIfLess = true;
+        private bool drawFocusRectangle = true;
+        private uint largeChange = 5;
+        private uint smallChange = 1;
+        private int barMaximum = 100;
+        private int barMinimum = 0;
+        private int trackerValue = 50;
+        private Size thumbRoundRectSize = new Size(8, 8);
+        private Size borderRoundRectSize = new Size(8, 8);
+        private Orientation barOrientation = Orientation.Horizontal;
         private Color elapsedInnerColor = Color.Chartreuse;
+        private bool mouseInRegion = false;
+        private bool mouseInThumbRegion = false;
+
+        private ColorSchemas colorSchema = ColorSchemas.PerlBlueGreen;
 
         /// <summary>
-        /// Gets or sets the inner color of the elapsed.
+        /// Define own color schemas.
         /// </summary>
-        /// <value>The inner color of the elapsed.</value>
-        [Description("Set Slider's elapsed part inner color")]
-        [Category("ColorSlider")]
-        [DefaultValue(typeof(Color), "Chartreuse")]
-        public Color ElapsedInnerColor
-        {
-            get
-            {
-                return this.elapsedInnerColor;
-            }
-
-            set
-            {
-                this.elapsedInnerColor = value;
-                this.Invalidate();
-            }
-        }
-
-        #endregion
-
-        #region Color schemas
-
-        //define own color schemas
         private Color[,] predefinedColorSchemas = new Color[,]
             {
                 {
@@ -715,6 +105,58 @@ namespace MB.Controls
                 }
             };
 
+        #region Constructors
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ColorSlider"/> class.
+        /// </summary>
+        /// <param name="min">The minimum value.</param>
+        /// <param name="max">The maximum value.</param>
+        /// <param name="value">The current value.</param>
+        public ColorSlider(int min, int max, int value)
+        {
+            this.InitializeComponent();
+            this.SetStyle(
+                ControlStyles.AllPaintingInWmPaint | ControlStyles.OptimizedDoubleBuffer | 
+                    ControlStyles.ResizeRedraw | ControlStyles.Selectable | 
+                    ControlStyles.SupportsTransparentBackColor | ControlStyles.UserMouse | 
+                    ControlStyles.UserPaint, 
+                true);
+            this.BackColor = Color.Transparent;
+
+            this.Minimum = min;
+            this.Maximum = max;
+            this.Value = value;
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ColorSlider"/> class.
+        /// </summary>
+        public ColorSlider()
+            : this(0, 100, 50)
+        {
+        }
+
+        #endregion
+
+        #region Events
+
+        /// <summary>
+        /// Fires when Slider position has changed
+        /// </summary>
+        [Description("Event fires when the Value property changes")]
+        [Category("Action")]
+        public event EventHandler ValueChanged;
+
+        /// <summary>
+        /// Fires when user scrolls the Slider
+        /// </summary>
+        [Description("Event fires when the Slider position is changed")]
+        [Category("Behavior")]
+        public event ScrollEventHandler Scroll;
+
+        #endregion
+
         /// <summary>
         /// Predefined coloring.
         /// </summary>
@@ -741,7 +183,588 @@ namespace MB.Controls
             PerlRoyalColors
         }
 
-        private ColorSchemas colorSchema = ColorSchemas.PerlBlueGreen;
+        #region Properties
+
+        /// <summary>
+        /// Gets the thumb rect. Usefull to determine bounding rectangle when creating custom thumb shape.
+        /// </summary>
+        /// <value>The thumb rect.</value>
+        [Browsable(false)]
+        public Rectangle ThumbRect
+        {
+            get { return this.thumbRect; }
+        }
+
+        /// <summary>
+        /// Gets or sets the size of the thumb.
+        /// </summary>
+        /// <value>The size of the thumb.</value>
+        /// <exception cref="T:System.ArgumentOutOfRangeException">
+        /// Exception thrown when value is lower than zero or grather than half of appropiate dimension
+        /// </exception>
+        [Description("Set Slider thumb size")]
+        [Category("ColorSlider")]
+        [DefaultValue(15)]
+        public int ThumbSize
+        {
+            get
+            {
+                return this.thumbSize;
+            }
+
+            set
+            {
+                if (value > 0 &
+                    value < (this.barOrientation == Orientation.Horizontal ? this.ClientRectangle.Width : this.ClientRectangle.Height))
+                {
+                    this.thumbSize = value;
+                }
+                else
+                {
+                    throw new ArgumentOutOfRangeException(
+                        "TrackSize has to be greather than zero and lower than half of Slider width");
+                }
+
+                this.Invalidate();
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets the thumb custom shape. Use ThumbRect property to determine bounding rectangle.
+        /// </summary>
+        /// <value>The thumb custom shape. null means default shape</value>
+        [Description("Set Slider's thumb's custom shape")]
+        [Category("ColorSlider")]
+        [Browsable(false)]
+        [DefaultValue(typeof(GraphicsPath), "null")]
+        public GraphicsPath ThumbCustomShape
+        {
+            get
+            {
+                return this.thumbCustomShape;
+            }
+
+            set
+            {
+                this.thumbCustomShape = value;
+                this.thumbSize = (int)(this.barOrientation == Orientation.Horizontal ? value.GetBounds().Width : value.GetBounds().Height) + 1;
+                this.Invalidate();
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets the size of the thumb round rectangle edges.
+        /// </summary>
+        /// <value>The size of the thumb round rectangle edges.</value>
+        [Description("Set Slider's thumb round rect size")]
+        [Category("ColorSlider")]
+        [DefaultValue(typeof(Size), "8; 8")]
+        public Size ThumbRoundRectSize
+        {
+            get
+            {
+                return this.thumbRoundRectSize;
+            }
+
+            set
+            {
+                int h = value.Height, w = value.Width;
+                if (h <= 0)
+                {
+                    h = 1;
+                }
+
+                if (w <= 0)
+                {
+                    w = 1;
+                }
+
+                this.thumbRoundRectSize = new Size(w, h);
+                this.Invalidate();
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets the size of the border round rect.
+        /// </summary>
+        /// <value>The size of the border round rect.</value>
+        [Description("Set Slider's border round rect size")]
+        [Category("ColorSlider")]
+        [DefaultValue(typeof(Size), "8; 8")]
+        public Size BorderRoundRectSize
+        {
+            get
+            {
+                return this.borderRoundRectSize;
+            }
+
+            set
+            {
+                int h = value.Height, w = value.Width;
+                if (h <= 0)
+                {
+                    h = 1;
+                }
+
+                if (w <= 0)
+                {
+                    w = 1;
+                }
+
+                this.borderRoundRectSize = new Size(w, h);
+                this.Invalidate();
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets the orientation of Slider.
+        /// </summary>
+        /// <value>The orientation.</value>
+        [Description("Set Slider orientation")]
+        [Category("ColorSlider")]
+        [DefaultValue(Orientation.Horizontal)]
+        public Orientation Orientation
+        {
+            get
+            {
+                return this.barOrientation;
+            }
+
+            set
+            {
+                if (this.barOrientation != value)
+                {
+                    this.barOrientation = value;
+                    int temp = this.Width;
+                    this.Width = this.Height;
+                    this.Height = temp;
+                    if (this.thumbCustomShape != null)
+                    {
+                        this.thumbSize = (int)(this.barOrientation == Orientation.Horizontal ?
+                            this.thumbCustomShape.GetBounds().Width :
+                            this.thumbCustomShape.GetBounds().Height) + 1;
+                    }
+
+                    this.Invalidate();
+                }
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets the value of Slider.
+        /// </summary>
+        /// <value>The value.</value>
+        /// <exception cref="T:System.ArgumentOutOfRangeException">exception thrown when value is outside appropriate range (min, max)</exception>
+        [Description("Set Slider value")]
+        [Category("ColorSlider")]
+        [DefaultValue(50)]
+        public int Value
+        {
+            get
+            {
+                return this.trackerValue;
+            }
+
+            set
+            {
+                if (value >= this.barMinimum & value <= this.barMaximum)
+                {
+                    int prevValue = this.trackerValue;
+                    if (prevValue != value)
+                    {
+                        this.trackerValue = value;
+                        if (this.ValueChanged != null)
+                        {
+                            this.ValueChanged(this, new EventArgs());
+                        }
+
+                        this.Invalidate();
+                    }
+                }
+                else
+                {
+                    throw new ArgumentOutOfRangeException("Value is outside appropriate range (min, max)");
+                }
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets the minimum value.
+        /// </summary>
+        /// <value>The minimum value.</value>
+        /// <exception cref="T:System.ArgumentOutOfRangeException">exception thrown when minimal value is greather than maximal one</exception>
+        [Description("Set Slider minimal point")]
+        [Category("ColorSlider")]
+        [DefaultValue(0)]
+        public int Minimum
+        {
+            get
+            {
+                return this.barMinimum;
+            }
+
+            set
+            {
+                if (value < this.barMaximum)
+                {
+                    this.barMinimum = value;
+                    if (this.Value < this.barMinimum)
+                    {
+                        this.Value = this.barMinimum;
+                    }
+
+                    this.Invalidate();
+                }
+                else
+                {
+                    throw new ArgumentOutOfRangeException("Minimal value is greather than maximal one");
+                }
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets the maximum value.
+        /// </summary>
+        /// <value>The maximum value.</value>
+        /// <exception cref="T:System.ArgumentOutOfRangeException">exception thrown when maximal value is lower than minimal one</exception>
+        [Description("Set Slider maximal point")]
+        [Category("ColorSlider")]
+        [DefaultValue(100)]
+        public int Maximum
+        {
+            get
+            {
+                return this.barMaximum;
+            }
+
+            set
+            {
+                if (value > this.barMinimum)
+                {
+                    this.barMaximum = value;
+                    if (this.trackerValue > this.barMaximum)
+                    {
+                        this.Value = this.barMaximum;
+                    }
+
+                    this.Invalidate();
+                }
+                else
+                {
+                    throw new ArgumentOutOfRangeException("Maximal value is lower than minimal one");
+                }
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets trackbar's small change. It affects how to behave when directional keys are pressed
+        /// </summary>
+        /// <value>The small change value.</value>
+        [Description("Set trackbar's small change")]
+        [Category("ColorSlider")]
+        [DefaultValue(1)]
+        public uint SmallChange
+        {
+            get { return this.smallChange; }
+            set { this.smallChange = value; }
+        }
+
+        /// <summary>
+        /// Gets or sets trackbar's large change. It affects how to behave when PageUp/PageDown keys are pressed
+        /// </summary>
+        /// <value>The large change value.</value>
+        [Description("Set trackbar's large change")]
+        [Category("ColorSlider")]
+        [DefaultValue(5)]
+        public uint LargeChange
+        {
+            get { return this.largeChange; }
+            set { this.largeChange = value; }
+        }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether to draw focus rectangle.
+        /// </summary>
+        /// <value><c>true</c> if focus rectangle should be drawn; otherwise, <c>false</c>.</value>
+        [Description("Set whether to draw focus rectangle")]
+        [Category("ColorSlider")]
+        [DefaultValue(true)]
+        public bool DrawFocusRectangle
+        {
+            get
+            {
+                return this.drawFocusRectangle;
+            }
+
+            set
+            {
+                this.drawFocusRectangle = value;
+                this.Invalidate();
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether to darken bar when the value is lower.
+        /// </summary>
+        /// <value><c>true</c> if darken bar should be drawn; otherwise, <c>false</c>.</value>
+        [Description("Set whether to darken bar when the value is lower")]
+        [Category("ColorSlider")]
+        [DefaultValue(true)]
+        public bool DarkenBarIfLess
+        {
+            get
+            {
+                return this.darkenBarIfLess;
+            }
+
+            set
+            {
+                this.darkenBarIfLess = value;
+                this.Invalidate();
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether to draw semitransparent thumb.
+        /// </summary>
+        /// <value><c>true</c> if semitransparent thumb should be drawn; otherwise, <c>false</c>.</value>
+        [Description("Set whether to draw semitransparent thumb")]
+        [Category("ColorSlider")]
+        [DefaultValue(true)]
+        public bool DrawSemitransparentThumb
+        {
+            get
+            {
+                return this.drawSemitransparentThumb;
+            }
+
+            set
+            {
+                this.drawSemitransparentThumb = value;
+                this.Invalidate();
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets whether mouse entry and exit actions have impact on how control look.
+        /// </summary>
+        /// <value><c>true</c> if mouse entry and exit actions have impact on how control look; otherwise, <c>false</c>.</value>
+        [Description("Set whether mouse entry and exit actions have impact on how control look")]
+        [Category("ColorSlider")]
+        [DefaultValue(true)]
+        public bool MouseEffects
+        {
+            get
+            {
+                return this.mouseEffects;
+            }
+
+            set
+            {
+                this.mouseEffects = value;
+                this.Invalidate();
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets the mouse wheel bar partitions.
+        /// </summary>
+        /// <value>The mouse wheel bar partitions.</value>
+        /// <exception cref="T:System.ArgumentOutOfRangeException">exception thrown when value isn't greather than zero</exception>
+        [Description("Set to how many parts is bar divided when using mouse wheel")]
+        [Category("ColorSlider")]
+        [DefaultValue(10)]
+        public int MouseWheelBarPartitions
+        {
+            get
+            {
+                return this.mouseWheelBarPartitions;
+            }
+
+            set
+            {
+                if (value > 0)
+                {
+                    this.mouseWheelBarPartitions = value;
+                }
+                else
+                {
+                    throw new ArgumentOutOfRangeException("MouseWheelBarPartitions has to be greather than zero");
+                }
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets the thumb outer color .
+        /// </summary>
+        /// <value>The thumb outer color.</value>
+        [Description("Set Slider thumb outer color")]
+        [Category("ColorSlider")]
+        [DefaultValue(typeof(Color), "White")]
+        public Color ThumbOuterColor
+        {
+            get
+            {
+                return this.thumbOuterColor;
+            }
+
+            set
+            {
+                this.thumbOuterColor = value;
+                this.Invalidate();
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets the inner color of the thumb.
+        /// </summary>
+        /// <value>The inner color of the thumb.</value>
+        [Description("Set Slider thumb inner color")]
+        [Category("ColorSlider")]
+        [DefaultValue(typeof(Color), "Gainsboro")]
+        public Color ThumbInnerColor
+        {
+            get
+            {
+                return this.thumbInnerColor;
+            }
+
+            set
+            {
+                this.thumbInnerColor = value;
+                this.Invalidate();
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the color of the thumb pen.
+        /// </summary>
+        /// <value>The color of the thumb pen.</value>
+        [Description("Set Slider thumb pen color")]
+        [Category("ColorSlider")]
+        [DefaultValue(typeof(Color), "Silver")]
+        public Color ThumbPenColor
+        {
+            get
+            {
+                return this.thumbPenColor;
+            }
+
+            set
+            {
+                this.thumbPenColor = value;
+                this.Invalidate();
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the outer color of the bar.
+        /// </summary>
+        /// <value>The outer color of the bar.</value>
+        [Description("Set Slider bar outer color")]
+        [Category("ColorSlider")]
+        [DefaultValue(typeof(Color), "SkyBlue")]
+        public Color BarOuterColor
+        {
+            get
+            {
+                return this.barOuterColor;
+            }
+
+            set
+            {
+                this.barOuterColor = value;
+                this.Invalidate();
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the inner color of the bar.
+        /// </summary>
+        /// <value>The inner color of the bar.</value>
+        [Description("Set Slider bar inner color")]
+        [Category("ColorSlider")]
+        [DefaultValue(typeof(Color), "DarkSlateBlue")]
+        public Color BarInnerColor
+        {
+            get
+            {
+                return this.barInnerColor;
+            }
+
+            set
+            {
+                this.barInnerColor = value;
+                this.Invalidate();
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the color of the bar pen.
+        /// </summary>
+        /// <value>The color of the bar pen.</value>
+        [Description("Set Slider bar pen color")]
+        [Category("ColorSlider")]
+        [DefaultValue(typeof(Color), "Gainsboro")]
+        public Color BarPenColor
+        {
+            get
+            {
+                return this.barPenColor;
+            }
+
+            set
+            {
+                this.barPenColor = value;
+                this.Invalidate();
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets the outer color of the elapsed.
+        /// </summary>
+        /// <value>The outer color of the elapsed.</value>
+        [Description("Set Slider's elapsed part outer color")]
+        [Category("ColorSlider")]
+        [DefaultValue(typeof(Color), "DarkGreen")]
+        public Color ElapsedOuterColor
+        {
+            get
+            {
+                return this.elapsedOuterColor;
+            }
+
+            set
+            {
+                this.elapsedOuterColor = value;
+                this.Invalidate();
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets the inner color of the elapsed.
+        /// </summary>
+        /// <value>The inner color of the elapsed.</value>
+        [Description("Set Slider's elapsed part inner color")]
+        [Category("ColorSlider")]
+        [DefaultValue(typeof(Color), "Chartreuse")]
+        public Color ElapsedInnerColor
+        {
+            get
+            {
+                return this.elapsedInnerColor;
+            }
+
+            set
+            {
+                this.elapsedInnerColor = value;
+                this.Invalidate();
+            }
+        }
+
+        #endregion
+
+        #region Color schemas
 
         /// <summary>
         /// Sets color schema. Color generalization / fast color changing. Has no effect when slider colors are changed manually after schema was applied. 
@@ -771,488 +794,6 @@ namespace MB.Controls
                 this.elapsedInnerColor = this.predefinedColorSchemas[sn, 7];
 
                 this.Invalidate();
-            }
-        }
-
-        #endregion
-
-        #region Constructors
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="ColorSlider"/> class.
-        /// </summary>
-        /// <param name="min">The minimum value.</param>
-        /// <param name="max">The maximum value.</param>
-        /// <param name="value">The current value.</param>
-        public ColorSlider(int min, int max, int value)
-        {
-            this.InitializeComponent();
-            this.SetStyle(ControlStyles.AllPaintingInWmPaint | ControlStyles.OptimizedDoubleBuffer |
-                     ControlStyles.ResizeRedraw | ControlStyles.Selectable |
-                     ControlStyles.SupportsTransparentBackColor | ControlStyles.UserMouse |
-                     ControlStyles.UserPaint, true);
-            this.BackColor = Color.Transparent;
-
-            this.Minimum = min;
-            this.Maximum = max;
-            this.Value = value;
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="ColorSlider"/> class.
-        /// </summary>
-        public ColorSlider()
-            : this(0, 100, 50)
-        {
-        }
-
-        #endregion
-
-        #region Paint
-
-        /// <summary>
-        /// Raises the <see cref="E:System.Windows.Forms.Control.Paint"></see> event.
-        /// </summary>
-        /// <param name="e">A <see cref="T:System.Windows.Forms.PaintEventArgs"></see> that contains the event data.</param>
-        protected override void OnPaint(PaintEventArgs e)
-        {
-            Color[] usedColors = new Color[]
-            { 
-                thumbOuterColor, thumbInnerColor, thumbPenColor,
-                barOuterColor, barInnerColor, barPenColor,
-                elapsedOuterColor, elapsedInnerColor 
-            };
-
-            if (DarkenBarIfLess)
-            {
-                usedColors = DarkenColors(usedColors);
-            }
-
-            if (!Enabled)
-            {
-                Color[] desaturatedColors = DesaturateColors(usedColors);
-                DrawColorSlider(e, desaturatedColors[0], desaturatedColors[1], desaturatedColors[2],
-                                desaturatedColors[3],
-                                desaturatedColors[4], desaturatedColors[5], desaturatedColors[6], desaturatedColors[7]);
-            }
-            else
-            {
-                if (mouseEffects && mouseInRegion)
-                {
-                    Color[] lightenedColors = LightenColors(usedColors);
-                    DrawColorSlider(e, lightenedColors[0], lightenedColors[1], lightenedColors[2], lightenedColors[3],
-                                    lightenedColors[4], lightenedColors[5], lightenedColors[6], lightenedColors[7]);
-                }
-                else
-                {
-                    DrawColorSlider(e, usedColors[0], usedColors[1], usedColors[2], usedColors[3],
-                                    usedColors[4], usedColors[5], usedColors[6], usedColors[7]);
-                }
-            }
-        }
-
-        /// <summary>
-        /// Draws the colorslider control using passed colors.
-        /// </summary>
-        /// <param name="e">The <see cref="T:System.Windows.Forms.PaintEventArgs"/> instance containing the event data.</param>
-        /// <param name="thumbOuterColorPaint">The thumb outer color paint.</param>
-        /// <param name="thumbInnerColorPaint">The thumb inner color paint.</param>
-        /// <param name="thumbPenColorPaint">The thumb pen color paint.</param>
-        /// <param name="barOuterColorPaint">The bar outer color paint.</param>
-        /// <param name="barInnerColorPaint">The bar inner color paint.</param>
-        /// <param name="barPenColorPaint">The bar pen color paint.</param>
-        /// <param name="elapsedOuterColorPaint">The elapsed outer color paint.</param>
-        /// <param name="elapsedInnerColorPaint">The elapsed inner color paint.</param>
-        private void DrawColorSlider(
-            PaintEventArgs e, 
-            Color thumbOuterColorPaint, 
-            Color thumbInnerColorPaint,
-            Color thumbPenColorPaint, 
-            Color barOuterColorPaint, 
-            Color barInnerColorPaint,
-            Color barPenColorPaint, 
-            Color elapsedOuterColorPaint, 
-            Color elapsedInnerColorPaint)
-        {
-            try
-            {
-                //set up thumbRect aproprietly
-                if (barOrientation == Orientation.Horizontal)
-                {
-                    int trackX = ((this.Value - this.barMinimum) * (this.ClientRectangle.Width - this.thumbSize)) / (this.barMaximum - this.barMinimum);
-                    this.thumbRect = new Rectangle(trackX, 1, this.thumbSize - 1, this.ClientRectangle.Height - 3);
-                }
-                else
-                {
-                    int trackY = ((this.Value - this.barMinimum) * (this.ClientRectangle.Height - this.thumbSize)) / (this.barMaximum - this.barMinimum);
-                    this.thumbRect = new Rectangle(1, trackY, this.ClientRectangle.Width - 3, this.thumbSize - 1);
-                }
-
-                // adjust drawing rects
-                this.barRect = this.ClientRectangle;
-                this.thumbHalfRect = this.thumbRect;
-                LinearGradientMode gradientOrientation;
-                if (this.barOrientation == Orientation.Horizontal)
-                {
-                    this.barRect.Inflate(-1, -barRect.Height / 3);
-                    this.barHalfRect = barRect;
-                    this.barHalfRect.Height /= 2;
-                    gradientOrientation = LinearGradientMode.Vertical;
-                    this.thumbHalfRect.Height /= 2;
-                    this.elapsedRect = barRect;
-                    this.elapsedRect.Width = thumbRect.Left + (thumbSize / 2);
-                }
-                else
-                {
-                    this.barRect.Inflate(-barRect.Width / 3, -1);
-                    this.barHalfRect = barRect;
-                    this.barHalfRect.Width /= 2;
-                    gradientOrientation = LinearGradientMode.Horizontal;
-                    this.thumbHalfRect.Width /= 2;
-                    this.elapsedRect = barRect;
-                    this.elapsedRect.Height = thumbRect.Top + (thumbSize / 2);
-                }
-
-                // get thumb shape path 
-                GraphicsPath thumbPath;
-                if (this.thumbCustomShape == null)
-                {
-                    thumbPath = CreateRoundRectPath(thumbRect, thumbRoundRectSize);
-                }
-                else
-                {
-                    thumbPath = this.thumbCustomShape;
-                    Matrix m = new Matrix();
-                    m.Translate(this.thumbRect.Left - thumbPath.GetBounds().Left, this.thumbRect.Top - thumbPath.GetBounds().Top);
-                    thumbPath.Transform(m);
-                }
-
-                // draw bar
-                using (LinearGradientBrush lgbBar =
-                    new LinearGradientBrush(barHalfRect, barOuterColorPaint, barInnerColorPaint, gradientOrientation))
-                {
-                    lgbBar.WrapMode = WrapMode.TileFlipXY;
-                    e.Graphics.FillRectangle(lgbBar, barRect);
-
-                    // draw elapsed bar
-                    using (LinearGradientBrush lgbElapsed =
-                        new LinearGradientBrush(barHalfRect, elapsedOuterColorPaint, elapsedInnerColorPaint, gradientOrientation))
-                    {
-                        lgbElapsed.WrapMode = WrapMode.TileFlipXY;
-                        if (Capture && drawSemitransparentThumb)
-                        {
-                            Region elapsedReg = new Region(elapsedRect);
-                            elapsedReg.Exclude(thumbPath);
-                            e.Graphics.FillRegion(lgbElapsed, elapsedReg);
-                        }
-                        else
-                        {
-                            e.Graphics.FillRectangle(lgbElapsed, elapsedRect);
-                        }
-                    }
-
-                    // draw bar band                    
-                    using (Pen barPen = new Pen(barPenColorPaint, 0.5f))
-                    {
-                        e.Graphics.DrawRectangle(barPen, barRect);
-                    }
-                }
-
-                // draw thumb
-                Color newthumbOuterColorPaint = thumbOuterColorPaint, newthumbInnerColorPaint = thumbInnerColorPaint;
-                if (Capture && drawSemitransparentThumb)
-                {
-                    newthumbOuterColorPaint = Color.FromArgb(175, thumbOuterColorPaint);
-                    newthumbInnerColorPaint = Color.FromArgb(175, thumbInnerColorPaint);
-                }
-
-                using (LinearGradientBrush lgbThumb =
-                    new LinearGradientBrush(thumbHalfRect, newthumbOuterColorPaint, newthumbInnerColorPaint, gradientOrientation))
-                {
-                    lgbThumb.WrapMode = WrapMode.TileFlipXY;
-                    e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
-                    e.Graphics.FillPath(lgbThumb, thumbPath);
-
-                    // draw thumb band
-                    Color newThumbPenColor = thumbPenColorPaint;
-                    if (mouseEffects && (Capture || mouseInThumbRegion))
-                    {
-                        newThumbPenColor = ControlPaint.Dark(newThumbPenColor);
-                    }
-
-                    using (Pen thumbPen = new Pen(newThumbPenColor))
-                    {
-                        e.Graphics.DrawPath(thumbPen, thumbPath);
-                    }
-
-                    // gp.Dispose();                    
-                    /* if (Capture || mouseInThumbRegion)
-                        using (LinearGradientBrush lgbThumb2 = new LinearGradientBrush(thumbHalfRect, Color.FromArgb(150, Color.Blue), Color.Transparent, gradientOrientation))
-                        {
-                            lgbThumb2.WrapMode = WrapMode.TileFlipXY;
-                            e.Graphics.FillPath(lgbThumb2, gp);
-                        }*/
-                }
-
-                // draw focusing rectangle
-                if (Focused & drawFocusRectangle)
-                {
-                    using (Pen p = new Pen(Color.FromArgb(200, barPenColorPaint)))
-                    {
-                        p.DashStyle = DashStyle.Dot;
-                        Rectangle r = ClientRectangle;
-                        r.Width -= 2;
-                        r.Height--;
-                        r.X++;
-
-                        // ControlPaint.DrawFocusRectangle(e.Graphics, r);                        
-                        using (GraphicsPath graphPathBorder = CreateRoundRectPath(r, borderRoundRectSize))
-                        {
-                            e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
-                            e.Graphics.DrawPath(p, graphPathBorder);
-                        }
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine("DrawBackGround Error in " + this.Name + ":" + ex.Message);
-            }
-        }
-
-        #endregion
-
-        #region Overided events
-
-        private bool mouseInRegion = false;
-
-        /// <summary>
-        /// Raises the <see cref="E:System.Windows.Forms.Control.EnabledChanged"></see> event.
-        /// </summary>
-        /// <param name="e">An <see cref="T:System.EventArgs"></see> that contains the event data.</param>
-        protected override void OnEnabledChanged(EventArgs e)
-        {
-            base.OnEnabledChanged(e);
-            this.Invalidate();
-        }
-
-        /// <summary>
-        /// Raises the <see cref="E:System.Windows.Forms.Control.MouseEnter"></see> event.
-        /// </summary>
-        /// <param name="e">An <see cref="T:System.EventArgs"></see> that contains the event data.</param>
-        protected override void OnMouseEnter(EventArgs e)
-        {
-            base.OnMouseEnter(e);
-            this.mouseInRegion = true;
-            this.Invalidate();
-        }
-
-        /// <summary>
-        /// Raises the <see cref="E:System.Windows.Forms.Control.MouseLeave"></see> event.
-        /// </summary>
-        /// <param name="e">An <see cref="T:System.EventArgs"></see> that contains the event data.</param>
-        protected override void OnMouseLeave(EventArgs e)
-        {
-            base.OnMouseLeave(e);
-            this.mouseInRegion = false;
-            this.mouseInThumbRegion = false;
-            this.Invalidate();
-        }
-
-        /// <summary>
-        /// Raises the <see cref="E:System.Windows.Forms.Control.MouseDown"></see> event.
-        /// </summary>
-        /// <param name="e">A <see cref="T:System.Windows.Forms.MouseEventArgs"></see> that contains the event data.</param>
-        protected override void OnMouseDown(MouseEventArgs e)
-        {
-            base.OnMouseDown(e);
-            if (e.Button == MouseButtons.Left)
-            {
-                this.Capture = true;
-                if (this.Scroll != null)
-                {
-                    this.Scroll(this, new ScrollEventArgs(ScrollEventType.ThumbTrack, this.Value));
-                }
-
-                this.OnMouseMove(e);
-            }
-        }
-
-        private bool mouseInThumbRegion = false;
-
-        /// <summary>
-        /// Raises the <see cref="E:System.Windows.Forms.Control.MouseMove"></see> event.
-        /// </summary>
-        /// <param name="e">A <see cref="T:System.Windows.Forms.MouseEventArgs"></see> that contains the event data.</param>
-        protected override void OnMouseMove(MouseEventArgs e)
-        {
-            base.OnMouseMove(e);
-            this.mouseInThumbRegion = IsPointInRect(e.Location, thumbRect);
-            if (this.Capture & e.Button == MouseButtons.Left)
-            {
-                ScrollEventType set = ScrollEventType.ThumbPosition;
-                Point pt = e.Location;
-                int p = barOrientation == Orientation.Horizontal ? pt.X : pt.Y;
-                int margin = thumbSize >> 1;
-                p -= margin;
-                float coef = (float)(barMaximum - barMinimum) /
-                             (float)((barOrientation == Orientation.Horizontal ? ClientSize.Width : ClientSize.Height) - (2 * margin));
-                int tmpTrackerValue = (int)((p * coef) + barMinimum + 0.5);
-
-                if (tmpTrackerValue <= barMinimum)
-                {
-                    this.Value = barMinimum;
-                    set = ScrollEventType.First;
-                }
-                else if (tmpTrackerValue >= barMaximum)
-                {
-                    this.Value = barMaximum;
-                    set = ScrollEventType.Last;
-                }
-                else
-                {
-                    this.Value = tmpTrackerValue;
-                }
-
-                if (Scroll != null)
-                {
-                    this.Scroll(this, new ScrollEventArgs(set, Value));
-                }
-            }
-
-            this.Invalidate();
-        }
-
-        /// <summary>
-        /// Raises the <see cref="E:System.Windows.Forms.Control.MouseUp"></see> event.
-        /// </summary>
-        /// <param name="e">A <see cref="T:System.Windows.Forms.MouseEventArgs"></see> that contains the event data.</param>
-        protected override void OnMouseUp(MouseEventArgs e)
-        {
-            base.OnMouseUp(e);
-            this.Capture = false;
-            this.mouseInThumbRegion = IsPointInRect(e.Location, thumbRect);
-            if (this.Scroll != null)
-            {
-                this.Scroll(this, new ScrollEventArgs(ScrollEventType.EndScroll, this.Value));
-            }
-
-            this.Invalidate();
-        }
-
-        /// <summary>
-        /// Raises the <see cref="E:System.Windows.Forms.Control.MouseWheel"></see> event.
-        /// </summary>
-        /// <param name="e">A <see cref="T:System.Windows.Forms.MouseEventArgs"></see> that contains the event data.</param>
-        protected override void OnMouseWheel(MouseEventArgs e)
-        {
-            base.OnMouseWheel(e);
-            int v = e.Delta / 120 * (this.barMaximum - this.barMinimum) / this.mouseWheelBarPartitions;
-            this.SetProperValue(Value + v);
-        }
-
-        /// <summary>
-        /// Raises the <see cref="E:System.Windows.Forms.Control.GotFocus"></see> event.
-        /// </summary>
-        /// <param name="e">An <see cref="T:System.EventArgs"></see> that contains the event data.</param>
-        protected override void OnGotFocus(EventArgs e)
-        {
-            base.OnGotFocus(e);
-            this.Invalidate();
-        }
-
-        /// <summary>
-        /// Raises the <see cref="E:System.Windows.Forms.Control.LostFocus"></see> event.
-        /// </summary>
-        /// <param name="e">An <see cref="T:System.EventArgs"></see> that contains the event data.</param>
-        protected override void OnLostFocus(EventArgs e)
-        {
-            base.OnLostFocus(e);
-            this.Invalidate();
-        }
-
-        /// <summary>
-        /// Raises the <see cref="E:System.Windows.Forms.Control.KeyUp"></see> event.
-        /// </summary>
-        /// <param name="e">A <see cref="T:System.Windows.Forms.KeyEventArgs"></see> that contains the event data.</param>
-        protected override void OnKeyUp(KeyEventArgs e)
-        {
-            base.OnKeyUp(e);
-            switch (e.KeyCode)
-            {
-                case Keys.Down:
-                case Keys.Left:
-                    this.SetProperValue(this.Value - (int)this.smallChange);
-                    if (this.Scroll != null)
-                    {
-                        this.Scroll(this, new ScrollEventArgs(ScrollEventType.SmallDecrement, this.Value));
-                    }
-
-                    break;
-                case Keys.Up:
-                case Keys.Right:
-                    this.SetProperValue(this.Value + (int)this.smallChange);
-                    if (this.Scroll != null)
-                    {
-                        this.Scroll(this, new ScrollEventArgs(ScrollEventType.SmallIncrement, this.Value));
-                    }
-
-                    break;
-                case Keys.Home:
-                    this.Value = this.barMinimum;
-                    break;
-                case Keys.End:
-                    this.Value = this.barMaximum;
-                    break;
-                case Keys.PageDown:
-                    this.SetProperValue(this.Value - (int)this.largeChange);
-                    if (this.Scroll != null)
-                    {
-                        Scroll(this, new ScrollEventArgs(ScrollEventType.LargeDecrement, this.Value));
-                    }
-
-                    break;
-                case Keys.PageUp:
-                    this.SetProperValue(this.Value + (int)this.largeChange);
-                    if (this.Scroll != null)
-                    {
-                        this.Scroll(this, new ScrollEventArgs(ScrollEventType.LargeIncrement, this.Value));
-                    }
-
-                    break;
-            }
-
-            if (this.Scroll != null && this.Value == this.barMinimum)
-            {
-                this.Scroll(this, new ScrollEventArgs(ScrollEventType.First, this.Value));
-            }
-
-            if (this.Scroll != null && this.Value == this.barMaximum)
-            {
-                this.Scroll(this, new ScrollEventArgs(ScrollEventType.Last, this.Value));
-            }
-
-            Point pt = this.PointToClient(Cursor.Position);
-            this.OnMouseMove(new MouseEventArgs(MouseButtons.None, 0, pt.X, pt.Y, 0));
-        }
-
-        /// <summary>
-        /// Processes a dialog key.
-        /// </summary>
-        /// <param name="keyData">One of the <see cref="T:System.Windows.Forms.Keys"></see> values that represents the key to process.</param>
-        /// <returns>
-        /// true if the key was processed by the control; otherwise, false.
-        /// </returns>
-        protected override bool ProcessDialogKey(Keys keyData)
-        {
-            if (keyData == Keys.Tab | ModifierKeys == Keys.Shift)
-            {
-                return base.ProcessDialogKey(keyData);
-            }
-            else
-            {
-                this.OnKeyDown(new KeyEventArgs(keyData));
-                return true;
             }
         }
 
@@ -1329,10 +870,328 @@ namespace MB.Controls
             {
                 colorsToReturn[i] = ControlPaint.Dark(
                     colorsToDarken[i],
-                    1 - (float)Math.Log(((float)Value - Minimum + 2) / 2, Maximum / 2));
+                    1 - (float)Math.Log(((float)this.Value - this.Minimum + 2) / 2, this.Maximum / 2));
             }
 
             return colorsToReturn;
+        }
+
+        #region Paint
+
+        /// <summary>
+        /// Raises the <see cref="E:System.Windows.Forms.Control.Paint"></see> event.
+        /// </summary>
+        /// <param name="e">A <see cref="T:System.Windows.Forms.PaintEventArgs"></see> that contains the event data.</param>
+        protected override void OnPaint(PaintEventArgs e)
+        {
+            Color[] usedColors = new Color[]
+            { 
+                this.thumbOuterColor, 
+                this.thumbInnerColor, 
+                this.thumbPenColor,
+                this.barOuterColor, 
+                this.barInnerColor, 
+                this.barPenColor,
+                this.elapsedOuterColor, 
+                this.elapsedInnerColor 
+            };
+
+            if (this.DarkenBarIfLess)
+            {
+                usedColors = this.DarkenColors(usedColors);
+            }
+
+            if (!this.Enabled)
+            {
+                Color[] desaturatedColors = DesaturateColors(usedColors);
+                this.DrawColorSlider(
+                    e, 
+                    desaturatedColors[0], 
+                    desaturatedColors[1], 
+                    desaturatedColors[2],
+                    desaturatedColors[3],
+                    desaturatedColors[4], 
+                    desaturatedColors[5], 
+                    desaturatedColors[6], 
+                    desaturatedColors[7]);
+            }
+            else
+            {
+                if (this.mouseEffects && this.mouseInRegion)
+                {
+                    Color[] lightenedColors = LightenColors(usedColors);
+                    this.DrawColorSlider(
+                        e, 
+                        lightenedColors[0], 
+                        lightenedColors[1], 
+                        lightenedColors[2], 
+                        lightenedColors[3],
+                        lightenedColors[4], 
+                        lightenedColors[5], 
+                        lightenedColors[6], 
+                        lightenedColors[7]);
+                }
+                else
+                {
+                    this.DrawColorSlider(
+                        e, 
+                        usedColors[0], 
+                        usedColors[1], 
+                        usedColors[2], 
+                        usedColors[3],
+                        usedColors[4], 
+                        usedColors[5], 
+                        usedColors[6], 
+                        usedColors[7]);
+                }
+            }
+        }
+
+        #endregion
+
+        #region Overided events
+
+        /// <summary>
+        /// Raises the <see cref="E:System.Windows.Forms.Control.EnabledChanged"></see> event.
+        /// </summary>
+        /// <param name="e">An <see cref="T:System.EventArgs"></see> that contains the event data.</param>
+        protected override void OnEnabledChanged(EventArgs e)
+        {
+            base.OnEnabledChanged(e);
+            this.Invalidate();
+        }
+
+        /// <summary>
+        /// Raises the <see cref="E:System.Windows.Forms.Control.MouseEnter"></see> event.
+        /// </summary>
+        /// <param name="e">An <see cref="T:System.EventArgs"></see> that contains the event data.</param>
+        protected override void OnMouseEnter(EventArgs e)
+        {
+            base.OnMouseEnter(e);
+            this.mouseInRegion = true;
+            this.Invalidate();
+        }
+
+        /// <summary>
+        /// Raises the <see cref="E:System.Windows.Forms.Control.MouseLeave"></see> event.
+        /// </summary>
+        /// <param name="e">An <see cref="T:System.EventArgs"></see> that contains the event data.</param>
+        protected override void OnMouseLeave(EventArgs e)
+        {
+            base.OnMouseLeave(e);
+            this.mouseInRegion = false;
+            this.mouseInThumbRegion = false;
+            this.Invalidate();
+        }
+
+        /// <summary>
+        /// Raises the <see cref="E:System.Windows.Forms.Control.MouseDown"></see> event.
+        /// </summary>
+        /// <param name="e">A <see cref="T:System.Windows.Forms.MouseEventArgs"></see> that contains the event data.</param>
+        protected override void OnMouseDown(MouseEventArgs e)
+        {
+            base.OnMouseDown(e);
+            if (e.Button == MouseButtons.Left)
+            {
+                this.Capture = true;
+                if (this.Scroll != null)
+                {
+                    this.Scroll(this, new ScrollEventArgs(ScrollEventType.ThumbTrack, this.Value));
+                }
+
+                this.OnMouseMove(e);
+            }
+        }
+
+        /// <summary>
+        /// Raises the <see cref="E:System.Windows.Forms.Control.MouseMove"></see> event.
+        /// </summary>
+        /// <param name="e">A <see cref="T:System.Windows.Forms.MouseEventArgs"></see> that contains the event data.</param>
+        protected override void OnMouseMove(MouseEventArgs e)
+        {
+            base.OnMouseMove(e);
+            this.mouseInThumbRegion = IsPointInRect(e.Location, this.thumbRect);
+            if (this.Capture & e.Button == MouseButtons.Left)
+            {
+                ScrollEventType set = ScrollEventType.ThumbPosition;
+                Point pt = e.Location;
+                int p = this.barOrientation == Orientation.Horizontal ? pt.X : pt.Y;
+                int margin = this.thumbSize >> 1;
+                p -= margin;
+                float coef = (float)(this.barMaximum - this.barMinimum) /
+                             (float)((this.barOrientation == Orientation.Horizontal ? this.ClientSize.Width : this.ClientSize.Height) - (2 * margin));
+                int tmpTrackerValue = (int)((p * coef) + this.barMinimum + 0.5);
+
+                if (tmpTrackerValue <= this.barMinimum)
+                {
+                    this.Value = this.barMinimum;
+                    set = ScrollEventType.First;
+                }
+                else if (tmpTrackerValue >= this.barMaximum)
+                {
+                    this.Value = this.barMaximum;
+                    set = ScrollEventType.Last;
+                }
+                else
+                {
+                    this.Value = tmpTrackerValue;
+                }
+
+                if (this.Scroll != null)
+                {
+                    this.Scroll(this, new ScrollEventArgs(set, this.Value));
+                }
+            }
+
+            this.Invalidate();
+        }
+
+        /// <summary>
+        /// Raises the <see cref="E:System.Windows.Forms.Control.MouseUp"></see> event.
+        /// </summary>
+        /// <param name="e">A <see cref="T:System.Windows.Forms.MouseEventArgs"></see> that contains the event data.</param>
+        protected override void OnMouseUp(MouseEventArgs e)
+        {
+            base.OnMouseUp(e);
+            this.Capture = false;
+            this.mouseInThumbRegion = IsPointInRect(e.Location, this.thumbRect);
+            if (this.Scroll != null)
+            {
+                this.Scroll(this, new ScrollEventArgs(ScrollEventType.EndScroll, this.Value));
+            }
+
+            this.Invalidate();
+        }
+
+        /// <summary>
+        /// Raises the <see cref="E:System.Windows.Forms.Control.MouseWheel"></see> event.
+        /// </summary>
+        /// <param name="e">A <see cref="T:System.Windows.Forms.MouseEventArgs"></see> that contains the event data.</param>
+        protected override void OnMouseWheel(MouseEventArgs e)
+        {
+            base.OnMouseWheel(e);
+            int v = e.Delta / 120 * (this.barMaximum - this.barMinimum) / this.mouseWheelBarPartitions;
+            this.SetProperValue(this.Value + v);
+        }
+
+        /// <summary>
+        /// Raises the <see cref="E:System.Windows.Forms.Control.GotFocus"></see> event.
+        /// </summary>
+        /// <param name="e">An <see cref="T:System.EventArgs"></see> that contains the event data.</param>
+        protected override void OnGotFocus(EventArgs e)
+        {
+            base.OnGotFocus(e);
+            this.Invalidate();
+        }
+
+        /// <summary>
+        /// Raises the <see cref="E:System.Windows.Forms.Control.LostFocus"></see> event.
+        /// </summary>
+        /// <param name="e">An <see cref="T:System.EventArgs"></see> that contains the event data.</param>
+        protected override void OnLostFocus(EventArgs e)
+        {
+            base.OnLostFocus(e);
+            this.Invalidate();
+        }
+
+        /// <summary>
+        /// Raises the <see cref="E:System.Windows.Forms.Control.KeyUp"></see> event.
+        /// </summary>
+        /// <param name="e">A <see cref="T:System.Windows.Forms.KeyEventArgs"></see> that contains the event data.</param>
+        protected override void OnKeyUp(KeyEventArgs e)
+        {
+            base.OnKeyUp(e);
+            switch (e.KeyCode)
+            {
+                case Keys.Down:
+                case Keys.Left:
+                    this.SetProperValue(this.Value - (int)this.smallChange);
+                    if (this.Scroll != null)
+                    {
+                        this.Scroll(this, new ScrollEventArgs(ScrollEventType.SmallDecrement, this.Value));
+                    }
+
+                    break;
+                case Keys.Up:
+                case Keys.Right:
+                    this.SetProperValue(this.Value + (int)this.smallChange);
+                    if (this.Scroll != null)
+                    {
+                        this.Scroll(this, new ScrollEventArgs(ScrollEventType.SmallIncrement, this.Value));
+                    }
+
+                    break;
+                case Keys.Home:
+                    this.Value = this.barMinimum;
+                    break;
+                case Keys.End:
+                    this.Value = this.barMaximum;
+                    break;
+                case Keys.PageDown:
+                    this.SetProperValue(this.Value - (int)this.largeChange);
+                    if (this.Scroll != null)
+                    {
+                        this.Scroll(this, new ScrollEventArgs(ScrollEventType.LargeDecrement, this.Value));
+                    }
+
+                    break;
+                case Keys.PageUp:
+                    this.SetProperValue(this.Value + (int)this.largeChange);
+                    if (this.Scroll != null)
+                    {
+                        this.Scroll(this, new ScrollEventArgs(ScrollEventType.LargeIncrement, this.Value));
+                    }
+
+                    break;
+            }
+
+            if (this.Scroll != null && this.Value == this.barMinimum)
+            {
+                this.Scroll(this, new ScrollEventArgs(ScrollEventType.First, this.Value));
+            }
+
+            if (this.Scroll != null && this.Value == this.barMaximum)
+            {
+                this.Scroll(this, new ScrollEventArgs(ScrollEventType.Last, this.Value));
+            }
+
+            Point pt = this.PointToClient(Cursor.Position);
+            this.OnMouseMove(new MouseEventArgs(MouseButtons.None, 0, pt.X, pt.Y, 0));
+        }
+
+        /// <summary>
+        /// Processes a dialog key.
+        /// </summary>
+        /// <param name="keyData">One of the <see cref="T:System.Windows.Forms.Keys"></see> values that represents the key to process.</param>
+        /// <returns>
+        /// true if the key was processed by the control; otherwise, false.
+        /// </returns>
+        protected override bool ProcessDialogKey(Keys keyData)
+        {
+            if (keyData == Keys.Tab | ModifierKeys == Keys.Shift)
+            {
+                return base.ProcessDialogKey(keyData);
+            }
+            else
+            {
+                this.OnKeyDown(new KeyEventArgs(keyData));
+                return true;
+            }
+        }
+
+        #endregion
+
+        /// <summary>
+        /// Determines whether rectangle contains given point.
+        /// </summary>
+        /// <param name="pt">The point to test.</param>
+        /// <param name="rect">The base rectangle.</param>
+        /// <returns>
+        /// <c>true</c> if rectangle contains given point; otherwise, <c>false</c>.
+        /// </returns>
+        private static bool IsPointInRect(Point pt, Rectangle rect)
+        {
+            return pt.X > rect.Left & pt.X < rect.Right & pt.Y > rect.Top & pt.Y < rect.Bottom;
         }
 
         /// <summary>
@@ -1356,16 +1215,172 @@ namespace MB.Controls
         }
 
         /// <summary>
-        /// Determines whether rectangle contains given point.
+        /// Draws the colorslider control using passed colors.
         /// </summary>
-        /// <param name="pt">The point to test.</param>
-        /// <param name="rect">The base rectangle.</param>
-        /// <returns>
-        /// <c>true</c> if rectangle contains given point; otherwise, <c>false</c>.
-        /// </returns>
-        private static bool IsPointInRect(Point pt, Rectangle rect)
+        /// <param name="e">The <see cref="T:System.Windows.Forms.PaintEventArgs"/> instance containing the event data.</param>
+        /// <param name="thumbOuterColorPaint">The thumb outer color paint.</param>
+        /// <param name="thumbInnerColorPaint">The thumb inner color paint.</param>
+        /// <param name="thumbPenColorPaint">The thumb pen color paint.</param>
+        /// <param name="barOuterColorPaint">The bar outer color paint.</param>
+        /// <param name="barInnerColorPaint">The bar inner color paint.</param>
+        /// <param name="barPenColorPaint">The bar pen color paint.</param>
+        /// <param name="elapsedOuterColorPaint">The elapsed outer color paint.</param>
+        /// <param name="elapsedInnerColorPaint">The elapsed inner color paint.</param>
+        private void DrawColorSlider(
+            PaintEventArgs e,
+            Color thumbOuterColorPaint,
+            Color thumbInnerColorPaint,
+            Color thumbPenColorPaint,
+            Color barOuterColorPaint,
+            Color barInnerColorPaint,
+            Color barPenColorPaint,
+            Color elapsedOuterColorPaint,
+            Color elapsedInnerColorPaint)
         {
-            return pt.X > rect.Left & pt.X < rect.Right & pt.Y > rect.Top & pt.Y < rect.Bottom;
+            try
+            {
+                // set up thumbRect aproprietly
+                if (this.barOrientation == Orientation.Horizontal)
+                {
+                    int trackX = ((this.Value - this.barMinimum) * (this.ClientRectangle.Width - this.thumbSize)) / (this.barMaximum - this.barMinimum);
+                    this.thumbRect = new Rectangle(trackX, 1, this.thumbSize - 1, this.ClientRectangle.Height - 3);
+                }
+                else
+                {
+                    int trackY = ((this.Value - this.barMinimum) * (this.ClientRectangle.Height - this.thumbSize)) / (this.barMaximum - this.barMinimum);
+                    this.thumbRect = new Rectangle(1, trackY, this.ClientRectangle.Width - 3, this.thumbSize - 1);
+                }
+
+                // adjust drawing rects
+                this.barRect = this.ClientRectangle;
+                this.thumbHalfRect = this.thumbRect;
+                LinearGradientMode gradientOrientation;
+                if (this.barOrientation == Orientation.Horizontal)
+                {
+                    this.barRect.Inflate(-1, -this.barRect.Height / 3);
+                    this.barHalfRect = this.barRect;
+                    this.barHalfRect.Height /= 2;
+                    gradientOrientation = LinearGradientMode.Vertical;
+                    this.thumbHalfRect.Height /= 2;
+                    this.elapsedRect = this.barRect;
+                    this.elapsedRect.Width = this.thumbRect.Left + (this.thumbSize / 2);
+                }
+                else
+                {
+                    this.barRect.Inflate(-this.barRect.Width / 3, -1);
+                    this.barHalfRect = this.barRect;
+                    this.barHalfRect.Width /= 2;
+                    gradientOrientation = LinearGradientMode.Horizontal;
+                    this.thumbHalfRect.Width /= 2;
+                    this.elapsedRect = this.barRect;
+                    this.elapsedRect.Height = this.thumbRect.Top + (this.thumbSize / 2);
+                }
+
+                // get thumb shape path 
+                GraphicsPath thumbPath;
+                if (this.thumbCustomShape == null)
+                {
+                    thumbPath = CreateRoundRectPath(this.thumbRect, this.thumbRoundRectSize);
+                }
+                else
+                {
+                    thumbPath = this.thumbCustomShape;
+                    Matrix m = new Matrix();
+                    m.Translate(this.thumbRect.Left - thumbPath.GetBounds().Left, this.thumbRect.Top - thumbPath.GetBounds().Top);
+                    thumbPath.Transform(m);
+                }
+
+                // draw bar
+                using (LinearGradientBrush lgbBar =
+                    new LinearGradientBrush(this.barHalfRect, barOuterColorPaint, barInnerColorPaint, gradientOrientation))
+                {
+                    lgbBar.WrapMode = WrapMode.TileFlipXY;
+                    e.Graphics.FillRectangle(lgbBar, this.barRect);
+
+                    // draw elapsed bar
+                    using (LinearGradientBrush lgbElapsed =
+                        new LinearGradientBrush(this.barHalfRect, elapsedOuterColorPaint, elapsedInnerColorPaint, gradientOrientation))
+                    {
+                        lgbElapsed.WrapMode = WrapMode.TileFlipXY;
+                        if (this.Capture && this.drawSemitransparentThumb)
+                        {
+                            Region elapsedReg = new Region(this.elapsedRect);
+                            elapsedReg.Exclude(thumbPath);
+                            e.Graphics.FillRegion(lgbElapsed, elapsedReg);
+                        }
+                        else
+                        {
+                            e.Graphics.FillRectangle(lgbElapsed, this.elapsedRect);
+                        }
+                    }
+
+                    // draw bar band                    
+                    using (Pen barPen = new Pen(barPenColorPaint, 0.5f))
+                    {
+                        e.Graphics.DrawRectangle(barPen, this.barRect);
+                    }
+                }
+
+                // draw thumb
+                Color newthumbOuterColorPaint = thumbOuterColorPaint, newthumbInnerColorPaint = thumbInnerColorPaint;
+                if (this.Capture && this.drawSemitransparentThumb)
+                {
+                    newthumbOuterColorPaint = Color.FromArgb(175, thumbOuterColorPaint);
+                    newthumbInnerColorPaint = Color.FromArgb(175, thumbInnerColorPaint);
+                }
+
+                using (LinearGradientBrush lgbThumb =
+                    new LinearGradientBrush(this.thumbHalfRect, newthumbOuterColorPaint, newthumbInnerColorPaint, gradientOrientation))
+                {
+                    lgbThumb.WrapMode = WrapMode.TileFlipXY;
+                    e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
+                    e.Graphics.FillPath(lgbThumb, thumbPath);
+
+                    // draw thumb band
+                    Color newThumbPenColor = thumbPenColorPaint;
+                    if (this.mouseEffects && (this.Capture || this.mouseInThumbRegion))
+                    {
+                        newThumbPenColor = ControlPaint.Dark(newThumbPenColor);
+                    }
+
+                    using (Pen thumbPen = new Pen(newThumbPenColor))
+                    {
+                        e.Graphics.DrawPath(thumbPen, thumbPath);
+                    }
+
+                    // gp.Dispose();                    
+                    /* if (Capture || mouseInThumbRegion)
+                        using (LinearGradientBrush lgbThumb2 = new LinearGradientBrush(thumbHalfRect, Color.FromArgb(150, Color.Blue), Color.Transparent, gradientOrientation))
+                        {
+                            lgbThumb2.WrapMode = WrapMode.TileFlipXY;
+                            e.Graphics.FillPath(lgbThumb2, gp);
+                        }*/
+                }
+
+                // draw focusing rectangle
+                if (this.Focused && this.drawFocusRectangle)
+                {
+                    using (Pen p = new Pen(Color.FromArgb(200, barPenColorPaint)))
+                    {
+                        p.DashStyle = DashStyle.Dot;
+                        Rectangle r = ClientRectangle;
+                        r.Width -= 2;
+                        r.Height--;
+                        r.X++;
+
+                        // ControlPaint.DrawFocusRectangle(e.Graphics, r);                        
+                        using (GraphicsPath graphPathBorder = CreateRoundRectPath(r, this.borderRoundRectSize))
+                        {
+                            e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
+                            e.Graphics.DrawPath(p, graphPathBorder);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("DrawBackGround Error in " + this.Name + ":" + ex.Message);
+            }
         }
 
         #endregion

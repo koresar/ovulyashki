@@ -218,4 +218,5 @@
   <item id="Unknown">Чёрт его знает!</item>
   <item id="Click_to_edit_color">Кликни мышкой, чтобы изменить цвет...</item>
   <item id="Ovulation">Овуляция</item>
+  <item id="Unable_to_save_file">Не могу сохранить файл. Причина: </item>
 </translation>

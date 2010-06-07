@@ -1,32 +1,83 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Windows.Forms;
-using System.Drawing;
-using WomenCalendar.Properties;
 using System.ComponentModel;
-using System.Resources;
-using CarlosAg.ExcelXmlWriter;
+using System.Drawing;
 using System.Drawing.Drawing2D;
-using WomenCalendar.Forms;
-using System.Reflection;
 using System.Globalization;
-using System.Xml;
-using System.Text;
+using System.IO;
 using System.Net;
+using System.Reflection;
+using System.Resources;
+using System.Text;
 using System.Threading;
-using ICSharpCode.SharpZipLib.BZip2;
+using System.Windows.Forms;
+using System.Xml;
 using System.Xml.Serialization;
+using CarlosAg.ExcelXmlWriter;
+using ICSharpCode.SharpZipLib.BZip2;
+using WomenCalendar.Forms;
+using WomenCalendar.Properties;
 
 namespace WomenCalendar
 {
-    static class Program
+    /// <summary>
+    /// The main application entrance class.
+    /// </summary>
+    public static class Program
     {
-        public static MainForm ApplicationForm;
+        private static Woman currentWomanClone;
 
-        public static ApplicationSettings Settings;
+        private static Woman currentWoman;
 
         private static string settingsFileName;
+
+        public static MainForm ApplicationForm { get; set; }
+
+        public static ApplicationSettings Settings { get; set; }
+
+        /// <summary>
+        /// Currently opened woman.
+        /// </summary>
+        public static Woman CurrentWoman
+        {
+            get
+            {
+                if (currentWoman == null)
+                {
+                    currentWoman = new Woman();
+                    currentWomanClone = currentWoman.Clone() as Woman;
+                }
+
+                return currentWoman;
+            }
+
+            set
+            {
+                ApplicationForm.SuspendLayout();
+                if (currentWoman != null)
+                {
+                    currentWoman.AveragePeriodLengthChanged -= ApplicationForm.UpdateWomanInformation;
+                    currentWoman.Menstruations.CollectionChanged -= ApplicationForm.UpdateWomanInformation;
+                    currentWoman.Menstruations.CollectionChanged -= ApplicationForm.RedrawCalendar;
+                    currentWoman.Conceptions.CollectionChanged -= ApplicationForm.RedrawCalendar;
+                }
+
+                currentWoman = value;
+                currentWomanClone = currentWoman.Clone() as Woman;
+                if (currentWoman != null)
+                {
+                    currentWoman.AveragePeriodLengthChanged += ApplicationForm.UpdateWomanInformation;
+                    currentWoman.Menstruations.CollectionChanged += ApplicationForm.UpdateWomanInformation;
+                    currentWoman.Menstruations.CollectionChanged += ApplicationForm.RedrawCalendar;
+                    currentWoman.Conceptions.CollectionChanged += ApplicationForm.RedrawCalendar;
+                }
+
+                ApplicationForm.UpdateWomanInformation();
+                ApplicationForm.SetWomanName(currentWoman.Name);
+                ApplicationForm.ResumeLayout();
+            }
+        }
+
         private static string SettingsFileName
         {
             get
@@ -35,45 +86,8 @@ namespace WomenCalendar
                 {
                     settingsFileName = ApplicationSettings.GetApplicationSettingsFile();
                 }
-                return settingsFileName;
-            }
-        }
 
-        public static Woman _currentWomanClone;
-        public static Woman _currentWoman;
-        public static Woman CurrentWoman
-        {
-            get
-            {
-                if (_currentWoman == null)
-                {
-                    _currentWoman = new Woman();
-                    _currentWomanClone = _currentWoman.Clone() as Woman;
-                }
-                return _currentWoman;
-            }
-            set
-            {
-                ApplicationForm.SuspendLayout();
-                if (_currentWoman != null)
-                {
-                    _currentWoman.AveragePeriodLengthChanged -= ApplicationForm.UpdateWomanInformation;
-                    _currentWoman.Menstruations.CollectionChanged -= ApplicationForm.UpdateWomanInformation;
-                    _currentWoman.Menstruations.CollectionChanged -= ApplicationForm.RedrawCalendar;
-                    _currentWoman.Conceptions.CollectionChanged -= ApplicationForm.RedrawCalendar;
-                }
-                _currentWoman = value;
-                _currentWomanClone = _currentWoman.Clone() as Woman;
-                if (_currentWoman != null)
-                {
-                    _currentWoman.AveragePeriodLengthChanged += ApplicationForm.UpdateWomanInformation;
-                    _currentWoman.Menstruations.CollectionChanged += ApplicationForm.UpdateWomanInformation;
-                    _currentWoman.Menstruations.CollectionChanged += ApplicationForm.RedrawCalendar;
-                    _currentWoman.Conceptions.CollectionChanged += ApplicationForm.RedrawCalendar;
-                }
-                ApplicationForm.UpdateWomanInformation();
-                ApplicationForm.SetWomanName(_currentWoman.Name);
-                ApplicationForm.ResumeLayout();
+                return settingsFileName;
             }
         }
 
@@ -98,22 +112,42 @@ namespace WomenCalendar
             {
                 SaveCurrentWomanTo(CurrentWoman.AssociatedFile);
             }
+
             return true;
         }
 
+        /// <summary>
+        /// Saves current woman to the given file path.
+        /// </summary>
+        /// <param name="path">Path to the new/overwritten file.</param>
+        /// <returns>True if file successfully saved.</returns>
         public static bool SaveCurrentWomanTo(string path)
         {
-            var s = new BZip2OutputStream(new FileStream(path, FileMode.Create), 9);
-            new XmlSerializer(_currentWoman.GetType()).Serialize(s, _currentWoman);
-            s.Close();
+            BZip2OutputStream stream;
+            try
+            {
+                stream = new BZip2OutputStream(new FileStream(path, FileMode.Create), 9);
+            }
+            catch (IOException ex)
+            {
+                MessageBox.Show(TEXT.Get["Unable_to_save_file"] + ex.Message, TEXT.Get["Error"]);
+                return false;
+            }
 
-            _currentWoman.AssociatedFile = path;
+            new XmlSerializer(currentWoman.GetType()).Serialize(stream, currentWoman);
+            stream.Close();
 
-            _currentWomanClone = _currentWoman.Clone() as Woman;
+            currentWoman.AssociatedFile = path;
+
+            currentWomanClone = currentWoman.Clone() as Woman;
 
             return true;
         }
 
+        /// <summary>
+        /// Ask the user and try to load a woman file.
+        /// </summary>
+        /// <returns>True if successfully loaded.</returns>
         public static bool OpenWoman()
         {
             if (!AskAndSaveCurrentWoman())
@@ -127,9 +161,14 @@ namespace WomenCalendar
             {
                 return LoadWoman(dialog.FileName);
             }
+
             return false;
         }
 
+        /// <summary>
+        /// Make an attempt to leave current woman and create a new one.
+        /// </summary>
+        /// <returns>Truye if new woman was created and applied.</returns>
         public static bool NewWoman()
         {
             if (AskAndSaveCurrentWoman())
@@ -144,43 +183,63 @@ namespace WomenCalendar
                     {
                         w.AllwaysAskPassword = true;
                     }
+
                     CurrentWoman = w;
                     return true;
                 }
             }
+
             return false;
         }
         
+        /// <summary>
+        /// Make an attempt to save the current woman. Ask the user the file placement if necessary.
+        /// </summary>
+        /// <returns>True if file was successfully saved.</returns>
         public static bool AskAndSaveCurrentWoman()
         {
-            if (_currentWoman.Equals(_currentWomanClone))
+            if (currentWoman.Equals(currentWomanClone))
             { // no changes were done to current woman, thus just allow procceding.
                 return true;
             }
 
-            DialogResult res = MessageBox.Show(TEXT.Get["Save_woman_question"], ApplicationForm.Text,
-                                MessageBoxButtons.YesNoCancel);
+            DialogResult res = MessageBox.Show(
+                TEXT.Get["Save_woman_question"], 
+                ApplicationForm.Text,
+                MessageBoxButtons.YesNoCancel);
             switch (res)
             {
                 case DialogResult.Yes:
-                    if (!SaveCurrentWoman()) // save the woman
+                    // save the woman
+                    if (!SaveCurrentWoman())
                     {
                         return false; // saving aborted. do nothing in this case.
                     }
+
                     break;
                 case DialogResult.No: // proceed without saving
                     break;
                 default:
                     return false; // do nothing.
             }
+
             return true;
         }
 
+        /// <summary>
+        /// Save the settings woman amde during the usage.
+        /// </summary>
+        /// <returns>True if file successfully saved.</returns>
         public static bool SaveSettings()
         {
             return Settings.Write(SettingsFileName);
         }
 
+        /// <summary>
+        /// Loads woman from the given file. Interfacts with user if needed. Set the current woman to the data just read.
+        /// </summary>
+        /// <param name="path">The path to the owman file.</param>
+        /// <returns>False if the file was not loaded.</returns>
         public static bool LoadWoman(string path)
         {
             Woman w = Woman.ReadFrom(path);
@@ -193,13 +252,22 @@ namespace WomenCalendar
             return true;
         }
 
+        /// <summary>
+        /// Ask the woman for her password.
+        /// </summary>
+        /// <param name="woman">The woman to ask. Also stores credentials.</param>
+        /// <returns>True if authetification succeded.</returns>
         public static bool AskPassword(Woman woman)
         {
             LoginForm form = new LoginForm();
             form.Text = woman.Name + ", " + form.Text;
             while (true)
             {
-                if (form.ShowDialog() != DialogResult.OK) break;
+                if (form.ShowDialog() != DialogResult.OK)
+                {
+                    break;
+                }
+
                 if (form.Password != woman.Password)
                 {
                     if (MessageBox.Show(TEXT.Get["Wrong_password_question"], TEXT.Get["Error"], MessageBoxButtons.YesNo) != DialogResult.Yes)
@@ -212,9 +280,14 @@ namespace WomenCalendar
                     return true;
                 }
             }
+
             return false;
         }
         
+        /// <summary>
+        /// Show the window to enter some winfo about woman (login, password, etc.)
+        /// </summary>
+        /// <returns>True if all went till the end.</returns>
         public static bool EditWoman()
         {
             NewEditWomanForm form = new NewEditWomanForm();
@@ -229,12 +302,18 @@ namespace WomenCalendar
                 {
                     CurrentWoman.AllwaysAskPassword = true;
                 }
+
                 ApplicationForm.SetWomanName(CurrentWoman.Name);
                 return true;
             }
+
             return false;            
         }
 
+        /// <summary>
+        /// Ask user and save an Excel sheet or something he's selected.
+        /// </summary>
+        /// <returns>True if exporting gone till the end.</returns>
         public static bool ExportWoman()
         {
             DateRangeForm form = new DateRangeForm();
@@ -255,12 +334,13 @@ namespace WomenCalendar
             {
                 return false;
             }
+
             string fileName = dialog.FileName;
             if (!fileName.EndsWith(".csv", StringComparison.OrdinalIgnoreCase) && 
                 !fileName.EndsWith(".xls", StringComparison.OrdinalIgnoreCase))
             {
                 MessageBox.Show(TEXT.Get["File_ext_must_to_be"], TEXT.Get["Error"]);
-                    return false;
+                return false;
             }
 
             try
@@ -280,14 +360,23 @@ namespace WomenCalendar
                 MessageBox.Show(TEXT.Get["Cant_export"] + "\n" + ex.Message, TEXT.Get["Error"]);
                 return false;
             }
+
             return true;
+        }
+
+        public static void InitializeEnvironmentStuff()
+        {
+            Settings = ApplicationSettings.Read(SettingsFileName);
+
+            TEXT.InitializeLanguage(Settings.ApplicationLanguage);
         }
 
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
+        /// <param name="args">Command line arguments.</param>
         [STAThread]
-        static void Main(String[] args)
+        private static void Main(string[] args)
         {
             AppDomain.CurrentDomain.UnhandledException += new UnhandledExceptionEventHandler(CurrentDomain_UnhandledException);
             Application.ThreadException += new System.Threading.ThreadExceptionEventHandler(Application_ThreadException);
@@ -296,13 +385,12 @@ namespace WomenCalendar
                 Application.EnableVisualStyles();
                 Application.SetCompatibleTextRenderingDefault(false);
 
-                Settings = ApplicationSettings.Read(SettingsFileName);
-
-                TEXT.InitializeLanguage(Settings.ApplicationLanguage);
+                InitializeEnvironmentStuff();
 
                 ApplicationForm = new MainForm();
 
-                if (args.Length == 0 || !File.Exists(args[0]) || !LoadWoman(args[0])) // command line
+                // command line
+                if (args.Length == 0 || !File.Exists(args[0]) || !LoadWoman(args[0]))
                 {
                     if (string.IsNullOrEmpty(Settings.DefaultWomanPath) ||
                         !File.Exists(Settings.DefaultWomanPath) || !LoadWoman(Settings.DefaultWomanPath))
@@ -327,13 +415,13 @@ namespace WomenCalendar
             }
         }
 
-        static void Application_ThreadException(object sender, System.Threading.ThreadExceptionEventArgs e)
+        private static void Application_ThreadException(object sender, System.Threading.ThreadExceptionEventArgs e)
         {
             var ex = e.Exception;
             ErrorForm.Show(ex);
         }
 
-        static void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
+        private static void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
         {
             var ex = e.ExceptionObject as Exception;
             ErrorForm.Show(ex);
