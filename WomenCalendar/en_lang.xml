@@ -2,7 +2,7 @@
 <translation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <item id="Ovulyashki">Ovulyashki</item>
   <item id="Ovulyashki_of">Red tides of the princess named {0}</item>
-  <item id="What_a_cicle">What a cycle!</item>
+  <item id="What_a_cycle">What a cycle!</item>
   <item id="Cycle_more_than">Are you sure you want set a cycle length more than {0} days?</item>
   <item id="Days_plural">1:day,*:days</item>
   <item id="My_auto_cycle">My automatic cycle: </item>

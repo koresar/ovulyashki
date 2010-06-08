@@ -15,9 +15,10 @@ namespace WomenCalendar
     /// </summary>
     public class TEXT
     {
-        private const string DefaultLang = "en";
+        public const string DefaultLang = "en";
+        public const string NoValueText = "[ERROR! NO TEXT]";
+
         private const string LangFileEnd = "_lang.xml";
-        private const string NoValueText = "[ERROR! NO TEXT]";
 
         private Dictionary<string, string> translations;
         private Dictionary<string, string> defaultText;
@@ -28,7 +29,7 @@ namespace WomenCalendar
         /// <param name="defaultText">The list of translations which must have all of the possible items. 
         /// Used when main language file did not found the item key.</param>
         /// <param name="translations">The main translation items. Used for the application interface.</param>
-        public TEXT(Dictionary<string, string> defaultText, Dictionary<string, string> translations)
+        private TEXT(Dictionary<string, string> defaultText, Dictionary<string, string> translations)
         {
             this.defaultText = defaultText;
             this.translations = translations;
@@ -169,7 +170,7 @@ namespace WomenCalendar
             needLang = needLang.ToLower();
             if (langFiles.Count == 0)
             {
-                throw new TranslationException("No language files files in the allication folder " + LocalPath);
+                throw new TranslationException("No language files files in the application folder " + LocalPath);
             }
 
             Dictionary<string, string> defaultTexts;
@@ -220,6 +221,24 @@ namespace WomenCalendar
                 Get.translations.TryGetValue(id, out val) ? string.Format(val, parameters) : // search in translations
                 Get.defaultText.TryGetValue(id, out val) ? string.Format(val, parameters) : // search in default
                 NoValueText + id; // return ERROR text
+        }
+
+        /// <summary>
+        /// Return the list of all the text translated.
+        /// </summary>
+        /// <returns>List of translations "Key"->"Translated Text".</returns>
+        public Dictionary<string, string> AllTranslations()
+        {
+            return this.translations;
+        }
+
+        /// <summary>
+        /// Return the list of all the text which is used in case translation key (item) is not found.
+        /// </summary>
+        /// <returns>List of translations "Key"->"Translated Text".</returns>
+        public Dictionary<string, string> AllDefaults()
+        {
+            return this.defaultText;
         }
 
         private static bool LoadLanguageFile(string fileToLoad, out Dictionary<string, string> texts)

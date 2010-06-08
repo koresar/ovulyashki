@@ -14,3 +14,12 @@ How to change application version?
 How to run unit tests?
 1) You need to have Visual Studio with MSTest embeded.
 2) Click in main menu Test->Run->All Unit Test in Solution. Or simply type Ctrl+R, A.
+
+How to add one more translation?
+1) Add it to the main executable project to the root.
+2) Set it's property "Copy to Output Directory" to "Copy if newer".
+3) Make sure it appeared in the installation project file listing (see the Solution Explorer).
+4) IMPORTANT! Double click on Solution Items file "LocalTestRun.testrunconfig". Go to "Deployment" and add the file to the list.
+
+How to make sure all text of all lang files are translated?
+1) Run unit test named AllTextIsTranslated.

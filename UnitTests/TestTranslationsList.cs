@@ -61,9 +61,12 @@ namespace WomenCalendar.UnitTests
         #endregion
 
         [TestMethod]
-        public void TestBrackets()
+        public void Brackets()
         {
             Program.InitializeEnvironmentStuff();
+            var langFilePath = TEXT.FindAllLangFiles()["en"];
+            TEXT.ApplyLanguageFile("en", langFilePath);
+
             var list = new TranslationsList()
             {
                 "Ovulyashki_of"
