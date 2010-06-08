@@ -74,6 +74,8 @@ namespace WomenCalendar.UnitTests
         [TestMethod]
         public void AllTextIsTranslated()
         {
+            var problems = new List<string>();
+
             Program.InitializeEnvironmentStuff();
 
             var langFiles = TEXT.FindAllLangFiles();
@@ -84,7 +86,7 @@ namespace WomenCalendar.UnitTests
             var emptyDefaultValues = defaults.Where(item => string.IsNullOrEmpty(item.Key)).Select(item => item.Value).ToList();
             if (emptyDefaultValues.Any())
             {
-                Assert.Fail(string.Format(
+                problems.Add(string.Format(
                     "In default language '{0}' there is no key for translation(s): {1}.",
                     TEXT.DefaultLang,
                     emptyDefaultValues.Aggregate((s1, s2) => s1 + ", " + s2)));
@@ -93,7 +95,7 @@ namespace WomenCalendar.UnitTests
             var emptyDefaultKeys = defaults.Where(item => string.IsNullOrEmpty(item.Value)).Select(item => item.Key).ToList();
             if (emptyDefaultKeys.Any())
             {
-                Assert.Fail(string.Format(
+                problems.Add(string.Format(
                     "In default language '{0}' there is no translation for key(s): {1}.",
                     TEXT.DefaultLang,
                     emptyDefaultKeys.Aggregate((s1, s2) => s1 + ", " + s2)));
@@ -109,7 +111,7 @@ namespace WomenCalendar.UnitTests
                 var emptyValues = translations.Where(item => string.IsNullOrEmpty(item.Key)).Select(item => item.Value).ToList();
                 if (emptyValues.Any())
                 {
-                    Assert.Fail(string.Format(
+                    problems.Add(string.Format(
                         "In language '{0}' there is no key for translation(s): {1}.",
                         langFileName,
                         emptyValues.Aggregate((s1, s2) => s1 + ", " + s2)));
@@ -118,7 +120,7 @@ namespace WomenCalendar.UnitTests
                 var emptyKeys = translations.Where(item => string.IsNullOrEmpty(item.Value)).Select(item => item.Key).ToList();
                 if (emptyKeys.Any())
                 {
-                    Assert.Fail(string.Format(
+                    problems.Add(string.Format(
                         "In language '{0}' there is no translation for key(s): {1}.",
                         langFileName,
                         emptyKeys.Aggregate((s1, s2) => s1 + ", " + s2)));
@@ -129,7 +131,7 @@ namespace WomenCalendar.UnitTests
                     var mismatchKeys = translations.Keys.Count > defaults.Keys.Count ?
                         translations.Keys.Except(defaults.Keys) :
                         defaults.Keys.Except(translations.Keys);
-                    Assert.Fail(string.Format(
+                    problems.Add(string.Format(
                         "Number of translation keys of '{0}' ({3}) mismatch with default language '{1}' ({4}). Mismatch key(s) are: {2}.",
                         langFileName,
                         TEXT.DefaultLang,
@@ -141,7 +143,7 @@ namespace WomenCalendar.UnitTests
                 var absentKeys = defaults.Keys.Except(translations.Keys).ToList();
                 if (absentKeys.Any())
                 {
-                    Assert.Fail(string.Format(
+                    problems.Add(string.Format(
                         "In file '{0}' there is no translation for key(s): {1}.",
                         langFileName,
                         absentKeys.Aggregate((s1, s2) => s1 + ", " + s2)));
@@ -151,12 +153,17 @@ namespace WomenCalendar.UnitTests
                 if (redundantKeys.Any())
                 {
                     var redundantKeysString = absentKeys.Aggregate((s1, s2) => s1 + ", " + s2);
-                    Assert.Fail(string.Format(
+                    problems.Add(string.Format(
                         "In file '{0}' there is redundant translation for key(s): {1}.",
                         Path.GetFileName(langItem.Value),
                         redundantKeysString));
                 }
-            }            
+            }
+
+            if (problems.Count > 0)
+            {
+                Assert.Fail("We found problems in language file(s):" + Environment.NewLine + problems.Aggregate((s1, s2) => s1 + Environment.NewLine + s2));
+            }
         }
     }
 }

@@ -1,0 +1,2735 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FxCopProject Version="1.36" Name="My FxCop Project">
+ <ProjectOptions>
+  <SharedProject>True</SharedProject>
+  <Stylesheet Apply="False">c:\program files (x86)\microsoft fxcop 1.36\Xml\FxCopReport.xsl</Stylesheet>
+  <SaveMessages>
+   <Project Status="Active, Excluded" NewOnly="False" />
+   <Report Status="Active" NewOnly="False" />
+  </SaveMessages>
+  <ProjectFile Compress="True" DefaultTargetCheck="True" DefaultRuleCheck="True" SaveByRuleGroup="" Deterministic="True" />
+  <EnableMultithreadedLoad>True</EnableMultithreadedLoad>
+  <EnableMultithreadedAnalysis>True</EnableMultithreadedAnalysis>
+  <SourceLookup>True</SourceLookup>
+  <AnalysisExceptionsThreshold>10</AnalysisExceptionsThreshold>
+  <RuleExceptionsThreshold>1</RuleExceptionsThreshold>
+  <Spelling Locale="ru-RU" />
+  <OverrideRuleVisibilities>False</OverrideRuleVisibilities>
+  <CustomDictionaries SearchFxCopDir="True" SearchUserProfile="True" SearchProjectDir="True" />
+  <SearchGlobalAssemblyCache>False</SearchGlobalAssemblyCache>
+  <DeadlockDetectionTimeout>120</DeadlockDetectionTimeout>
+  <IgnoreGeneratedCode>False</IgnoreGeneratedCode>
+ </ProjectOptions>
+ <Targets>
+  <Target Name="$(ProjectDir)/WomenCalendar/bin/Debug/WomenCalendar.exe" Analyze="True" AnalyzeAllChildren="True" />
+ </Targets>
+ <Rules>
+  <RuleFiles>
+   <RuleFile Name="$(FxCopDir)\Rules\DesignRules.dll" Enabled="True" AllRulesEnabled="True" />
+   <RuleFile Name="$(FxCopDir)\Rules\GlobalizationRules.dll" Enabled="True" AllRulesEnabled="True" />
+   <RuleFile Name="$(FxCopDir)\Rules\InteroperabilityRules.dll" Enabled="True" AllRulesEnabled="True" />
+   <RuleFile Name="$(FxCopDir)\Rules\MobilityRules.dll" Enabled="True" AllRulesEnabled="True" />
+   <RuleFile Name="$(FxCopDir)\Rules\NamingRules.dll" Enabled="True" AllRulesEnabled="True" />
+   <RuleFile Name="$(FxCopDir)\Rules\PerformanceRules.dll" Enabled="True" AllRulesEnabled="True" />
+   <RuleFile Name="$(FxCopDir)\Rules\PortabilityRules.dll" Enabled="True" AllRulesEnabled="True" />
+   <RuleFile Name="$(FxCopDir)\Rules\SecurityRules.dll" Enabled="True" AllRulesEnabled="True" />
+   <RuleFile Name="$(FxCopDir)\Rules\UsageRules.dll" Enabled="True" AllRulesEnabled="True" />
+  </RuleFiles>
+  <Groups />
+  <Settings />
+ </Rules>
+ <FxCopReport Version="1.36">
+  <Targets>
+   <Target Name="$(ProjectDir)/WomenCalendar/bin/Debug/WomenCalendar.exe">
+    <Modules>
+     <Module Name="womencalendar.exe">
+      <Messages>
+       <Message TypeName="AssembliesShouldHaveValidStrongNames" Category="Microsoft.Design" CheckId="CA2210" Created="2010-03-27 21:48:43Z">
+        <Issue Name="NoStrongName">
+         <Item>'WomenCalendar.exe'</Item>
+        </Issue>
+       </Message>
+       <Message TypeName="MarkAssembliesWithClsCompliant" Category="Microsoft.Design" CheckId="CA1014" Created="2010-03-27 21:48:43Z">
+        <Issue>
+         <Item>'WomenCalendar.exe'</Item>
+        </Issue>
+       </Message>
+       <Message TypeName="MarkAssembliesWithNeutralResourcesLanguage" Category="Microsoft.Performance" CheckId="CA1824" Created="2010-03-27 21:48:43Z">
+        <Issue>
+         <Item>'WomenCalendar.exe'</Item>
+        </Issue>
+       </Message>
+      </Messages>
+      <Namespaces>
+       <Namespace Name="MB.Controls">
+        <Types>
+         <Type Name="ColorSlider">
+          <Members>
+           <Member Name="#.ctor(System.Int32,System.Int32,System.Int32)">
+            <Messages>
+             <Message TypeName="DoNotInitializeUnnecessarily" Category="Microsoft.Performance" CheckId="CA1805" Created="2010-06-08 20:50:45Z">
+              <Issue>
+               <Item>'ColorSlider.ColorSlider(int, int, int)'</Item>
+               <Item>'ColorSlider.barMinimum'</Item>
+               <Item>'int'</Item>
+               <Item>0</Item>
+              </Issue>
+              <Issue>
+               <Item>'ColorSlider.ColorSlider(int, int, int)'</Item>
+               <Item>'ColorSlider.mouseInRegion'</Item>
+               <Item>'bool'</Item>
+               <Item>false</Item>
+              </Issue>
+              <Issue>
+               <Item>'ColorSlider.ColorSlider(int, int, int)'</Item>
+               <Item>'ColorSlider.mouseInThumbRegion'</Item>
+               <Item>'bool'</Item>
+               <Item>false</Item>
+              </Issue>
+              <Issue>
+               <Item>'ColorSlider.ColorSlider(int, int, int)'</Item>
+               <Item>'ColorSlider.thumbCustomShape'</Item>
+               <Item>'GraphicsPath'</Item>
+               <Item>null</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#DrawColorSlider(System.Windows.Forms.PaintEventArgs,System.Drawing.Color,System.Drawing.Color,System.Drawing.Color,System.Drawing.Color,System.Drawing.Color,System.Drawing.Color,System.Drawing.Color,System.Drawing.Color)">
+            <Messages>
+             <Message TypeName="DoNotCatchGeneralExceptionTypes" Category="Microsoft.Design" CheckId="CA1031" Created="2010-06-08 20:50:45Z">
+              <Issue>
+               <Item>'ColorSlider.DrawColorSlider(PaintEventArgs, Color, Color, Color, Color, Color, Color, Color, Color)'</Item>
+               <Item>'Exception'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#Maximum">
+            <Accessors>
+             <Accessor Name="#set_Maximum(System.Int32)">
+              <Messages>
+               <Message TypeName="InstantiateArgumentExceptionsCorrectly" Category="Microsoft.Usage" CheckId="CA2208" Created="2010-06-08 20:50:45Z">
+                <Issue Name="IncorrectParameterName">
+                 <Item>'ColorSlider.Maximum.set(int)'</Item>
+                 <Item>Maximal value is lower than minimal one</Item>
+                 <Item>'paramName'</Item>
+                 <Item>'ArgumentOutOfRangeException'</Item>
+                </Issue>
+               </Message>
+              </Messages>
+             </Accessor>
+            </Accessors>
+           </Member>
+           <Member Name="#Minimum">
+            <Accessors>
+             <Accessor Name="#set_Minimum(System.Int32)">
+              <Messages>
+               <Message TypeName="InstantiateArgumentExceptionsCorrectly" Category="Microsoft.Usage" CheckId="CA2208" Created="2010-06-08 20:50:45Z">
+                <Issue Name="IncorrectParameterName">
+                 <Item>'ColorSlider.Minimum.set(int)'</Item>
+                 <Item>Minimal value is greather than maximal one</Item>
+                 <Item>'paramName'</Item>
+                 <Item>'ArgumentOutOfRangeException'</Item>
+                </Issue>
+               </Message>
+              </Messages>
+             </Accessor>
+            </Accessors>
+           </Member>
+           <Member Name="#MouseWheelBarPartitions">
+            <Accessors>
+             <Accessor Name="#set_MouseWheelBarPartitions(System.Int32)">
+              <Messages>
+               <Message TypeName="InstantiateArgumentExceptionsCorrectly" Category="Microsoft.Usage" CheckId="CA2208" Created="2010-06-08 20:50:45Z">
+                <Issue Name="IncorrectParameterName">
+                 <Item>'ColorSlider.MouseWheelBarPartitions.set(int)'</Item>
+                 <Item>MouseWheelBarPartitions has to be greather than zero</Item>
+                 <Item>'paramName'</Item>
+                 <Item>'ArgumentOutOfRangeException'</Item>
+                </Issue>
+               </Message>
+              </Messages>
+             </Accessor>
+            </Accessors>
+           </Member>
+           <Member Name="#predefinedColorSchemas">
+            <Messages>
+             <Message Id="Member" TypeName="PreferJaggedArraysOverMultidimensional" Category="Microsoft.Performance" CheckId="CA1814" Created="2010-06-08 20:50:45Z">
+              <Issue>
+               <Item>'ColorSlider.predefinedColorSchemas'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#ProcessDialogKey(System.Windows.Forms.Keys)">
+            <Messages>
+             <Message TypeName="DoNotIndirectlyExposeMethodsWithLinkDemands" Category="Microsoft.Security" CheckId="CA2122" Created="2010-06-08 20:50:45Z">
+              <Issue>
+               <Item>'ColorSlider.ProcessDialogKey(Keys)'</Item>
+               <Item>'Control.ProcessDialogKey(Keys)'</Item>
+               <Item>&#xD;&#xA;   -&gt;'ColorSlider.ProcessDialogKey(Keys)'&#xD;&#xA;   -&gt;'ColorSlider.ProcessDialogKey(Keys)'</Item>
+              </Issue>
+             </Message>
+             <Message TypeName="OverrideLinkDemandsShouldBeIdenticalToBase" Category="Microsoft.Security" CheckId="CA2123" Created="2010-06-08 20:50:45Z">
+              <Issue Name="BaseOnly">
+               <Item>'ColorSlider.ProcessDialogKey(Keys)'</Item>
+               <Item>'Control.ProcessDialogKey(Keys)'</Item>
+               <Item>[UIPermission(SecurityAction.LinkDemand, Window = UIPermissionWindow.AllWindows)]</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#ThumbSize">
+            <Accessors>
+             <Accessor Name="#set_ThumbSize(System.Int32)">
+              <Messages>
+               <Message TypeName="InstantiateArgumentExceptionsCorrectly" Category="Microsoft.Usage" CheckId="CA2208" Created="2010-06-08 20:50:45Z">
+                <Issue Name="IncorrectParameterName">
+                 <Item>'ColorSlider.ThumbSize.set(int)'</Item>
+                 <Item>TrackSize has to be greather than zero and lower than half of Slider width</Item>
+                 <Item>'paramName'</Item>
+                 <Item>'ArgumentOutOfRangeException'</Item>
+                </Issue>
+               </Message>
+              </Messages>
+             </Accessor>
+            </Accessors>
+           </Member>
+           <Member Name="#Value">
+            <Accessors>
+             <Accessor Name="#set_Value(System.Int32)">
+              <Messages>
+               <Message TypeName="InstantiateArgumentExceptionsCorrectly" Category="Microsoft.Usage" CheckId="CA2208" Created="2010-06-08 20:50:45Z">
+                <Issue Name="IncorrectParameterName">
+                 <Item>'ColorSlider.Value.set(int)'</Item>
+                 <Item>Value is outside appropriate range (min, max)</Item>
+                 <Item>'paramName'</Item>
+                 <Item>'ArgumentOutOfRangeException'</Item>
+                </Issue>
+               </Message>
+              </Messages>
+             </Accessor>
+            </Accessors>
+           </Member>
+          </Members>
+         </Type>
+         <Type Name="ColorSlider+ColorSchemas">
+          <Messages>
+           <Message TypeName="NestedTypesShouldNotBeVisible" Category="Microsoft.Design" CheckId="CA1034" Created="2010-06-08 20:50:45Z">
+            <Issue>
+             <Item>'ColorSlider.ColorSchemas'</Item>
+            </Issue>
+           </Message>
+          </Messages>
+         </Type>
+        </Types>
+       </Namespace>
+       <Namespace Name="WomenCalendar">
+        <Types>
+         <Type Name="AboutForm">
+          <Members>
+           <Member Name="#.ctor()">
+            <Messages>
+             <Message Id="System.String.EndsWith(System.String)" TypeName="SpecifyStringComparison" Category="Microsoft.Globalization" CheckId="CA1307" Created="2010-03-27 21:48:43Z">
+              <Issue>
+               <Item>'AboutForm.AboutForm()'</Item>
+               <Item>'string.EndsWith(string)'</Item>
+               <Item>'string.EndsWith(string, StringComparison)'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+          </Members>
+         </Type>
+         <Type Name="ApplicationSettings">
+          <Members>
+           <Member Name="#GetApplicationSettingsFile()">
+            <Messages>
+             <Message TypeName="UsePropertiesWhereAppropriate" Category="Microsoft.Design" CheckId="CA1024" Created="2010-03-27 21:48:43Z">
+              <Issue Certainty="50">
+               <Item>'ApplicationSettings.GetApplicationSettingsFile()'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#HaveAccessToCurrentFolder()">
+            <Messages>
+             <Message TypeName="DoNotCatchGeneralExceptionTypes" Category="Microsoft.Design" CheckId="CA1031" Created="2010-03-27 21:48:43Z">
+              <Issue>
+               <Item>'ApplicationSettings.HaveAccessToCurrentFolder()'</Item>
+               <Item>'object'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#SettingsFileName">
+            <Messages>
+             <Message TypeName="UseLiteralsWhereAppropriate" Category="Microsoft.Performance" CheckId="CA1802" Created="2010-06-08 20:50:45Z">
+              <Issue>
+               <Item>'ApplicationSettings.SettingsFileName'</Item>
+               <Item>Ovulyashki.settings</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+          </Members>
+         </Type>
+         <Type Name="AppUpdater">
+          <Messages>
+           <Message TypeName="StaticHolderTypesShouldNotHaveConstructors" Category="Microsoft.Design" CheckId="CA1053" Created="2010-03-27 21:48:43Z">
+            <Issue>
+             <Item>'AppUpdater'</Item>
+            </Issue>
+           </Message>
+          </Messages>
+          <Members>
+           <Member Name="#CallbackDoWork(System.Object,System.ComponentModel.DoWorkEventArgs)">
+            <Messages>
+             <Message TypeName="DoNotCatchGeneralExceptionTypes" Category="Microsoft.Design" CheckId="CA1031" Created="2010-06-08 20:50:45Z">
+              <Issue>
+               <Item>'AppUpdater.CallbackDoWork(object, DoWorkEventArgs)'</Item>
+               <Item>'Exception'</Item>
+              </Issue>
+             </Message>
+             <Message TypeName="SpecifyMessageBoxOptions" Category="Microsoft.Globalization" CheckId="CA1300" Created="2010-06-08 20:50:45Z">
+              <Issue>
+               <Item>'AppUpdater.CallbackDoWork(object, DoWorkEventArgs)'</Item>
+              </Issue>
+              <Issue>
+               <Item>'AppUpdater.CallbackDoWork(object, DoWorkEventArgs)'</Item>
+              </Issue>
+              <Issue>
+               <Item>'AppUpdater.CallbackDoWork(object, DoWorkEventArgs)'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+          </Members>
+         </Type>
+         <Type Name="AppUpdater+Release">
+          <Members>
+           <Member Name="#SizeInMB()">
+            <Messages>
+             <Message Id="System.Double.ToString" TypeName="SpecifyIFormatProvider" Category="Microsoft.Globalization" CheckId="CA1305" Created="2010-03-27 21:48:43Z">
+              <Issue>
+               <Item>'double.ToString()'</Item>
+               <Item>'AppUpdater.Release.SizeInMB()'</Item>
+               <Item>'double.ToString(IFormatProvider)'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+          </Members>
+         </Type>
+         <Type Name="BBTCollection">
+          <Messages>
+           <Message Id="BBT" TypeName="IdentifiersShouldBeCasedCorrectly" Category="Microsoft.Naming" CheckId="CA1709" Created="2010-03-27 21:48:43Z">
+            <Issue Name="Type">
+             <Item>BBT</Item>
+             <Item>'BBTCollection'</Item>
+             <Item>Bbt</Item>
+            </Issue>
+           </Message>
+          </Messages>
+          <Members>
+           <Member Name="#GetBBT(System.DateTime)">
+            <Messages>
+             <Message Id="BBT" TypeName="IdentifiersShouldBeCasedCorrectly" Category="Microsoft.Naming" CheckId="CA1709" Created="2010-03-27 21:48:43Z">
+              <Issue Name="Member">
+               <Item>BBT</Item>
+               <Item>'BBTCollection.GetBBT(DateTime)'</Item>
+               <Item>Bbt</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#GetBBTString(System.DateTime)">
+            <Messages>
+             <Message Id="BBT" TypeName="IdentifiersShouldBeCasedCorrectly" Category="Microsoft.Naming" CheckId="CA1709" Created="2010-03-27 21:48:43Z">
+              <Issue Name="Member">
+               <Item>BBT</Item>
+               <Item>'BBTCollection.GetBBTString(DateTime)'</Item>
+               <Item>Bbt</Item>
+              </Issue>
+             </Message>
+             <Message Id="System.Double.ToString" TypeName="SpecifyIFormatProvider" Category="Microsoft.Globalization" CheckId="CA1305" Created="2010-03-27 21:48:43Z">
+              <Issue>
+               <Item>'double.ToString()'</Item>
+               <Item>'BBTCollection.GetBBTString(DateTime)'</Item>
+               <Item>'double.ToString(IFormatProvider)'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#IsBBTInCorrectRange(System.Double)">
+            <Messages>
+             <Message Id="BBT" TypeName="IdentifiersShouldBeCasedCorrectly" Category="Microsoft.Naming" CheckId="CA1709" Created="2010-03-27 21:48:43Z">
+              <Issue Name="Member">
+               <Item>BBT</Item>
+               <Item>'BBTCollection.IsBBTInCorrectRange(double)'</Item>
+               <Item>Bbt</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#SetBBT(System.DateTime,System.String)">
+            <Messages>
+             <Message Id="BBT" TypeName="IdentifiersShouldBeCasedCorrectly" Category="Microsoft.Naming" CheckId="CA1709" Created="2010-03-27 21:48:43Z">
+              <Issue Name="Member">
+               <Item>BBT</Item>
+               <Item>'BBTCollection.SetBBT(DateTime, string)'</Item>
+               <Item>Bbt</Item>
+              </Issue>
+             </Message>
+             <Message Id="System.Convert.ToDouble(System.String)" TypeName="SpecifyIFormatProvider" Category="Microsoft.Globalization" CheckId="CA1305" Created="2010-03-27 21:48:43Z">
+              <Issue>
+               <Item>'Convert.ToDouble(string)'</Item>
+               <Item>'BBTCollection.SetBBT(DateTime, string)'</Item>
+               <Item>'Convert.ToDouble(string, IFormatProvider)'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+          </Members>
+         </Type>
+         <Type Name="BBTForm">
+          <Messages>
+           <Message Id="BBT" TypeName="IdentifiersShouldBeCasedCorrectly" Category="Microsoft.Naming" CheckId="CA1709" Created="2010-03-27 21:48:43Z">
+            <Issue Name="Type">
+             <Item>BBT</Item>
+             <Item>'BBTForm'</Item>
+             <Item>Bbt</Item>
+            </Issue>
+           </Message>
+          </Messages>
+         </Type>
+         <Type Name="CFCollection">
+          <Members>
+           <Member Name="#Item[System.DateTime]">
+            <Messages>
+             <Message TypeName="UseIntegralOrStringArgumentForIndexers" Category="Microsoft.Design" CheckId="CA1043" Created="2010-03-27 21:48:43Z">
+              <Issue>
+               <Item>'CFCollection.this[DateTime]'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+          </Members>
+         </Type>
+         <Type Name="ConceptionsCollection">
+          <Members>
+           <Member Name="#Equals(System.Object)">
+            <Messages>
+             <Message TypeName="DoNotCastUnnecessarily" Category="Microsoft.Performance" CheckId="CA1800" Created="2010-03-27 21:48:43Z">
+              <Issue Name="Parameter">
+               <Item>'obj'</Item>
+               <Item>'ConceptionsCollection'</Item>
+               <Item>'ConceptionsCollection.Equals(object)'</Item>
+               <Item>isint</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#CollectionChanged" Kind="Event">
+            <Messages>
+             <Message TypeName="DeclareEventHandlersCorrectly" Category="Microsoft.Design" CheckId="CA1009" Created="2010-03-27 21:48:43Z">
+              <Issue Name="First">
+               <Item>'Action'</Item>
+              </Issue>
+              <Issue Name="Second">
+               <Item>'Action'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+          </Members>
+         </Type>
+         <Type Name="CsvWriter">
+          <Members>
+           <Member Name="#Dispose()">
+            <Messages>
+             <Message TypeName="CallGCSuppressFinalizeCorrectly" Category="Microsoft.Usage" CheckId="CA1816" Created="2010-03-27 21:48:43Z">
+              <Issue Name="NotCalled">
+               <Item>'CsvWriter.Dispose()'</Item>
+               <Item>'GC.SuppressFinalize(object)'</Item>
+              </Issue>
+             </Message>
+             <Message TypeName="ImplementIDisposableCorrectly" Category="Microsoft.Design" CheckId="CA1063" Created="2010-03-27 21:48:43Z">
+              <Issue Name="DisposeImplementation">
+               <Item>'CsvWriter.Dispose()'</Item>
+              </Issue>
+              <Issue Name="DisposeSignature">
+               <Item>'CsvWriter.Dispose()'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+          </Members>
+         </Type>
+         <Type Name="DayCellAppearance">
+          <Members>
+           <Member Name="#SetColor(System.String,System.Drawing.Color)">
+            <Messages>
+             <Message Id="ID" TypeName="IdentifiersShouldBeCasedCorrectly" Category="Microsoft.Naming" CheckId="CA1709" Created="2010-03-27 21:48:43Z">
+              <Issue Name="MemberParameterAbbreviation">
+               <Item>'DayCellAppearance.SetColor(string, Color)'</Item>
+               <Item>ID</Item>
+               <Item>'colorID'</Item>
+               <Item>Id</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+          </Members>
+         </Type>
+         <Type Name="DayCellControl">
+          <Members>
+           <Member Name="#Dispose(System.Boolean)">
+            <Messages>
+             <Message Id="backBrush" TypeName="DisposableFieldsShouldBeDisposed" Category="Microsoft.Usage" CheckId="CA2213" Created="2010-06-08 20:50:45Z">
+              <Issue>
+               <Item>'DayCellControl'</Item>
+               <Item>'DayCellControl.backBrush'</Item>
+               <Item>'PathGradientBrush'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#DrawDisabled(System.Windows.Forms.PaintEventArgs)">
+            <Messages>
+             <Message Id="System.Int32.ToString" TypeName="SpecifyIFormatProvider" Category="Microsoft.Globalization" CheckId="CA1305" Created="2010-03-27 21:48:43Z">
+              <Issue>
+               <Item>'int.ToString()'</Item>
+               <Item>'DayCellControl.DrawDisabled(PaintEventArgs)'</Item>
+               <Item>'int.ToString(IFormatProvider)'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#DrawEnabled(System.Windows.Forms.PaintEventArgs)">
+            <Messages>
+             <Message Id="System.Int32.ToString" TypeName="SpecifyIFormatProvider" Category="Microsoft.Globalization" CheckId="CA1305" Created="2010-03-27 21:48:43Z">
+              <Issue>
+               <Item>'int.ToString()'</Item>
+               <Item>'DayCellControl.DrawEnabled(PaintEventArgs)'</Item>
+               <Item>'int.ToString(IFormatProvider)'</Item>
+              </Issue>
+              <Issue>
+               <Item>'int.ToString()'</Item>
+               <Item>'DayCellControl.DrawEnabled(PaintEventArgs)'</Item>
+               <Item>'int.ToString(IFormatProvider)'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#OnPaint(System.Windows.Forms.PaintEventArgs)">
+            <Messages>
+             <Message Id="0#" TypeName="ParameterNamesShouldMatchBaseDeclaration" Category="Microsoft.Naming" CheckId="CA1725" Created="2010-03-27 21:48:43Z">
+              <Issue>
+               <Item>'DayCellControl.OnPaint(PaintEventArgs)'</Item>
+               <Item>'pe'</Item>
+               <Item>'e'</Item>
+               <Item>'Control.OnPaint(PaintEventArgs)'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#Redraw()">
+            <Messages>
+             <Message TypeName="AvoidUncalledPrivateCode" Category="Microsoft.Performance" CheckId="CA1811" Created="2010-06-08 20:50:45Z">
+              <Issue>
+               <Item>'DayCellControl.Redraw()'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+          </Members>
+         </Type>
+         <Type Name="DayCellControl+DayCellClick">
+          <Messages>
+           <Message TypeName="NestedTypesShouldNotBeVisible" Category="Microsoft.Design" CheckId="CA1034" Created="2010-03-27 21:48:43Z">
+            <Issue>
+             <Item>'DayCellControl.DayCellClick'</Item>
+            </Issue>
+           </Message>
+           <Message TypeName="UseGenericEventHandlerInstances" Category="Microsoft.Design" CheckId="CA1003" Created="2010-03-27 21:48:43Z">
+            <Issue>
+             <Item>'DayCellControl.DayCellClick'</Item>
+            </Issue>
+           </Message>
+          </Messages>
+         </Type>
+         <Type Name="DayCellPopupControl">
+          <Members>
+           <Member Name="#PaintBBT()">
+            <Messages>
+             <Message Id="System.Double.ToString(System.String)" TypeName="SpecifyIFormatProvider" Category="Microsoft.Globalization" CheckId="CA1305" Created="2010-06-08 20:50:45Z">
+              <Issue>
+               <Item>'double.ToString(string)'</Item>
+               <Item>'DayCellPopupControl.PaintBBT()'</Item>
+               <Item>'double.ToString(string, IFormatProvider)'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#ShowAbove(WomenCalendar.DayCellControl)">
+            <Messages>
+             <Message Id="System.Int32.ToString" TypeName="SpecifyIFormatProvider" Category="Microsoft.Globalization" CheckId="CA1305" Created="2010-03-27 21:48:43Z">
+              <Issue>
+               <Item>'int.ToString()'</Item>
+               <Item>'DayCellPopupControl.ShowAbove(DayCellControl)'</Item>
+               <Item>'int.ToString(IFormatProvider)'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#ShowBBTTooltip()">
+            <Messages>
+             <Message Id="System.Double.ToString" TypeName="SpecifyIFormatProvider" Category="Microsoft.Globalization" CheckId="CA1305" Created="2010-03-27 21:48:43Z">
+              <Issue>
+               <Item>'double.ToString()'</Item>
+               <Item>'DayCellPopupControl.ShowBBTTooltip()'</Item>
+               <Item>'double.ToString(IFormatProvider)'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#ShowHealthTooltip()">
+            <Messages>
+             <Message Id="System.Int32.ToString" TypeName="SpecifyIFormatProvider" Category="Microsoft.Globalization" CheckId="CA1305" Created="2010-03-27 21:48:43Z">
+              <Issue>
+               <Item>'int.ToString()'</Item>
+               <Item>'DayCellPopupControl.ShowHealthTooltip()'</Item>
+               <Item>'int.ToString(IFormatProvider)'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#ShowSchedulesTooltip()">
+            <Messages>
+             <Message Id="text" TypeName="RemoveUnusedLocals" Category="Microsoft.Performance" CheckId="CA1804" Created="2010-06-08 20:50:45Z">
+              <Issue>
+               <Item>'DayCellPopupControl.ShowSchedulesTooltip()'</Item>
+               <Item>'text'</Item>
+               <Item>'string'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+          </Members>
+         </Type>
+         <Type Name="DayEditControl">
+          <Members>
+           <Member Name="#BBT">
+            <Messages>
+             <Message Id="BBT" TypeName="IdentifiersShouldBeCasedCorrectly" Category="Microsoft.Naming" CheckId="CA1709" Created="2010-03-27 21:48:43Z">
+              <Issue Name="Member">
+               <Item>BBT</Item>
+               <Item>'DayEditControl.BBT'</Item>
+               <Item>Bbt</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#ValidateBBT()">
+            <Messages>
+             <Message Id="BBT" TypeName="IdentifiersShouldBeCasedCorrectly" Category="Microsoft.Naming" CheckId="CA1709" Created="2010-03-27 21:48:43Z">
+              <Issue Name="Member">
+               <Item>BBT</Item>
+               <Item>'DayEditControl.ValidateBBT()'</Item>
+               <Item>Bbt</Item>
+              </Issue>
+             </Message>
+             <Message Id="System.Double.ToString" TypeName="SpecifyIFormatProvider" Category="Microsoft.Globalization" CheckId="CA1305" Created="2010-03-27 21:48:43Z">
+              <Issue>
+               <Item>'double.ToString()'</Item>
+               <Item>'DayEditControl.ValidateBBT()'</Item>
+               <Item>'double.ToString(IFormatProvider)'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+          </Members>
+         </Type>
+         <Type Name="DayEditFocus">
+          <Members>
+           <Member Name="#BBT">
+            <Messages>
+             <Message Id="BBT" TypeName="IdentifiersShouldBeCasedCorrectly" Category="Microsoft.Naming" CheckId="CA1709" Created="2010-03-27 21:48:43Z">
+              <Issue Name="Member">
+               <Item>BBT</Item>
+               <Item>'DayEditFocus.BBT'</Item>
+               <Item>Bbt</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+          </Members>
+         </Type>
+         <Type Name="EgestasCollection">
+          <Members>
+           <Member Name="#EgestasNames">
+            <Messages>
+             <Message TypeName="CollectionPropertiesShouldBeReadOnly" Category="Microsoft.Usage" CheckId="CA2227" Created="2010-03-27 21:48:43Z">
+              <Issue>
+               <Item>'EgestasCollection.EgestasNames'</Item>
+              </Issue>
+             </Message>
+             <Message TypeName="DoNotExposeGenericLists" Category="Microsoft.Design" CheckId="CA1002" Created="2010-03-27 21:48:43Z">
+              <Issue>
+               <Item>'TranslationsList'</Item>
+               <Item>'EgestasCollection.EgestasNames'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+          </Members>
+         </Type>
+         <Type Name="GraphForm">
+          <Members>
+           <Member Name="#_labels">
+            <Messages>
+             <Message TypeName="NonConstantFieldsShouldNotBeVisible" Category="Microsoft.Usage" CheckId="CA2211" Created="2010-03-27 21:48:43Z">
+              <Issue>
+               <Item>'GraphForm._labels'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#components">
+            <Messages>
+             <Message TypeName="AvoidUnusedPrivateFields" Category="Microsoft.Performance" CheckId="CA1823" Created="2010-03-27 21:48:43Z">
+              <Issue>
+               <Item>'GraphForm.components'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#CreateChart()">
+            <Messages>
+             <Message TypeName="DoNotRaiseReservedExceptionTypes" Category="Microsoft.Usage" CheckId="CA2201" Created="2010-03-27 21:48:43Z">
+              <Issue Name="TooGeneric">
+               <Item>'GraphForm.CreateChart()'</Item>
+               <Item>'Exception'</Item>
+              </Issue>
+             </Message>
+             <Message Id="System.Double.ToString" TypeName="SpecifyIFormatProvider" Category="Microsoft.Globalization" CheckId="CA1305" Created="2010-03-27 21:48:43Z">
+              <Issue>
+               <Item>'double.ToString()'</Item>
+               <Item>'GraphForm.CreateChart()'</Item>
+               <Item>'double.ToString(IFormatProvider)'</Item>
+              </Issue>
+             </Message>
+             <Message Id="System.Int32.ToString" TypeName="SpecifyIFormatProvider" Category="Microsoft.Globalization" CheckId="CA1305" Created="2010-03-27 21:48:43Z">
+              <Issue>
+               <Item>'int.ToString()'</Item>
+               <Item>'GraphForm.CreateChart()'</Item>
+               <Item>'int.ToString(IFormatProvider)'</Item>
+              </Issue>
+              <Issue>
+               <Item>'int.ToString()'</Item>
+               <Item>'GraphForm.CreateChart()'</Item>
+               <Item>'int.ToString(IFormatProvider)'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#dateFrom">
+            <Messages>
+             <Message TypeName="DoNotDeclareVisibleInstanceFields" Category="Microsoft.Design" CheckId="CA1051" Created="2010-03-27 21:48:43Z">
+              <Issue>
+               <Item>'GraphForm.dateFrom'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#dateFrom_ValueChanged(System.Object,System.EventArgs)">
+            <Messages>
+             <Message Id="date" TypeName="IdentifiersShouldBeCasedCorrectly" Category="Microsoft.Naming" CheckId="CA1709" Created="2010-03-27 21:48:43Z">
+              <Issue Name="Member">
+               <Item>date</Item>
+               <Item>'GraphForm.dateFrom_ValueChanged(object, EventArgs)'</Item>
+               <Item>Date</Item>
+              </Issue>
+             </Message>
+             <Message TypeName="IdentifiersShouldNotContainUnderscores" Category="Microsoft.Naming" CheckId="CA1707" Created="2010-03-27 21:48:43Z">
+              <Issue Name="Member">
+               <Item>'GraphForm.dateFrom_ValueChanged(object, EventArgs)'</Item>
+              </Issue>
+             </Message>
+             <Message TypeName="ReviewVisibleEventHandlers" Category="Microsoft.Security" CheckId="CA2109" Created="2010-03-27 21:48:43Z">
+              <Issue>
+               <Item>'GraphForm.dateFrom_ValueChanged(object, EventArgs)'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#dateTo">
+            <Messages>
+             <Message TypeName="DoNotDeclareVisibleInstanceFields" Category="Microsoft.Design" CheckId="CA1051" Created="2010-03-27 21:48:43Z">
+              <Issue>
+               <Item>'GraphForm.dateTo'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#dateTo_ValueChanged(System.Object,System.EventArgs)">
+            <Messages>
+             <Message Id="date" TypeName="IdentifiersShouldBeCasedCorrectly" Category="Microsoft.Naming" CheckId="CA1709" Created="2010-03-27 21:48:43Z">
+              <Issue Name="Member">
+               <Item>date</Item>
+               <Item>'GraphForm.dateTo_ValueChanged(object, EventArgs)'</Item>
+               <Item>Date</Item>
+              </Issue>
+             </Message>
+             <Message TypeName="IdentifiersShouldNotContainUnderscores" Category="Microsoft.Naming" CheckId="CA1707" Created="2010-03-27 21:48:43Z">
+              <Issue Name="Member">
+               <Item>'GraphForm.dateTo_ValueChanged(object, EventArgs)'</Item>
+              </Issue>
+             </Message>
+             <Message TypeName="ReviewVisibleEventHandlers" Category="Microsoft.Security" CheckId="CA2109" Created="2010-03-27 21:48:43Z">
+              <Issue>
+               <Item>'GraphForm.dateTo_ValueChanged(object, EventArgs)'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#GraphForm_Resize(System.Object,System.EventArgs)">
+            <Messages>
+             <Message TypeName="IdentifiersShouldNotContainUnderscores" Category="Microsoft.Naming" CheckId="CA1707" Created="2010-03-27 21:48:43Z">
+              <Issue Name="Member">
+               <Item>'GraphForm.GraphForm_Resize(object, EventArgs)'</Item>
+              </Issue>
+             </Message>
+             <Message TypeName="ReviewVisibleEventHandlers" Category="Microsoft.Security" CheckId="CA2109" Created="2010-03-27 21:48:43Z">
+              <Issue>
+               <Item>'GraphForm.GraphForm_Resize(object, EventArgs)'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#initialMonth">
+            <Messages>
+             <Message TypeName="DoNotDeclareVisibleInstanceFields" Category="Microsoft.Design" CheckId="CA1051" Created="2010-03-27 21:48:43Z">
+              <Issue>
+               <Item>'GraphForm.initialMonth'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#lbl1">
+            <Messages>
+             <Message TypeName="DoNotDeclareVisibleInstanceFields" Category="Microsoft.Design" CheckId="CA1051" Created="2010-03-27 21:48:43Z">
+              <Issue>
+               <Item>'GraphForm.lbl1'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#lbl2">
+            <Messages>
+             <Message TypeName="DoNotDeclareVisibleInstanceFields" Category="Microsoft.Design" CheckId="CA1051" Created="2010-03-27 21:48:43Z">
+              <Issue>
+               <Item>'GraphForm.lbl2'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#MaxXValue">
+            <Messages>
+             <Message TypeName="DoNotDeclareVisibleInstanceFields" Category="Microsoft.Design" CheckId="CA1051" Created="2010-03-27 21:48:43Z">
+              <Issue>
+               <Item>'GraphForm.MaxXValue'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#MaxYValue">
+            <Messages>
+             <Message TypeName="DoNotDeclareVisibleInstanceFields" Category="Microsoft.Design" CheckId="CA1051" Created="2010-03-27 21:48:43Z">
+              <Issue>
+               <Item>'GraphForm.MaxYValue'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#MinXValue">
+            <Messages>
+             <Message TypeName="DoNotDeclareVisibleInstanceFields" Category="Microsoft.Design" CheckId="CA1051" Created="2010-03-27 21:48:43Z">
+              <Issue>
+               <Item>'GraphForm.MinXValue'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#MinYValue">
+            <Messages>
+             <Message TypeName="DoNotDeclareVisibleInstanceFields" Category="Microsoft.Design" CheckId="CA1051" Created="2010-03-27 21:48:43Z">
+              <Issue>
+               <Item>'GraphForm.MinYValue'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#splitContainer">
+            <Messages>
+             <Message TypeName="DoNotDeclareVisibleInstanceFields" Category="Microsoft.Design" CheckId="CA1051" Created="2010-03-27 21:48:43Z">
+              <Issue>
+               <Item>'GraphForm.splitContainer'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#toolStrip1">
+            <Messages>
+             <Message TypeName="DoNotDeclareVisibleInstanceFields" Category="Microsoft.Design" CheckId="CA1051" Created="2010-03-27 21:48:43Z">
+              <Issue>
+               <Item>'GraphForm.toolStrip1'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#toolStripButton1">
+            <Messages>
+             <Message TypeName="DoNotDeclareVisibleInstanceFields" Category="Microsoft.Design" CheckId="CA1051" Created="2010-03-27 21:48:43Z">
+              <Issue>
+               <Item>'GraphForm.toolStripButton1'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#toolStripButton1_Click(System.Object,System.EventArgs)">
+            <Messages>
+             <Message Id="tool" TypeName="IdentifiersShouldBeCasedCorrectly" Category="Microsoft.Naming" CheckId="CA1709" Created="2010-03-27 21:48:43Z">
+              <Issue Name="Member">
+               <Item>tool</Item>
+               <Item>'GraphForm.toolStripButton1_Click(object, EventArgs)'</Item>
+               <Item>Tool</Item>
+              </Issue>
+             </Message>
+             <Message TypeName="IdentifiersShouldNotContainUnderscores" Category="Microsoft.Naming" CheckId="CA1707" Created="2010-03-27 21:48:43Z">
+              <Issue Name="Member">
+               <Item>'GraphForm.toolStripButton1_Click(object, EventArgs)'</Item>
+              </Issue>
+             </Message>
+             <Message TypeName="ReviewVisibleEventHandlers" Category="Microsoft.Security" CheckId="CA2109" Created="2010-03-27 21:48:43Z">
+              <Issue>
+               <Item>'GraphForm.toolStripButton1_Click(object, EventArgs)'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#toolStripButton2">
+            <Messages>
+             <Message TypeName="DoNotDeclareVisibleInstanceFields" Category="Microsoft.Design" CheckId="CA1051" Created="2010-03-27 21:48:43Z">
+              <Issue>
+               <Item>'GraphForm.toolStripButton2'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#toolStripButton2_Click(System.Object,System.EventArgs)">
+            <Messages>
+             <Message Id="tool" TypeName="IdentifiersShouldBeCasedCorrectly" Category="Microsoft.Naming" CheckId="CA1709" Created="2010-03-27 21:48:43Z">
+              <Issue Name="Member">
+               <Item>tool</Item>
+               <Item>'GraphForm.toolStripButton2_Click(object, EventArgs)'</Item>
+               <Item>Tool</Item>
+              </Issue>
+             </Message>
+             <Message TypeName="IdentifiersShouldNotContainUnderscores" Category="Microsoft.Naming" CheckId="CA1707" Created="2010-03-27 21:48:43Z">
+              <Issue Name="Member">
+               <Item>'GraphForm.toolStripButton2_Click(object, EventArgs)'</Item>
+              </Issue>
+             </Message>
+             <Message TypeName="ReviewVisibleEventHandlers" Category="Microsoft.Security" CheckId="CA2109" Created="2010-03-27 21:48:43Z">
+              <Issue>
+               <Item>'GraphForm.toolStripButton2_Click(object, EventArgs)'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#zgc">
+            <Messages>
+             <Message TypeName="DoNotDeclareVisibleInstanceFields" Category="Microsoft.Design" CheckId="CA1051" Created="2010-03-27 21:48:43Z">
+              <Issue>
+               <Item>'GraphForm.zgc'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#zgc_ContextMenuBuilder(ZedGraph.ZedGraphControl,System.Windows.Forms.ContextMenuStrip,System.Drawing.Point,ZedGraph.ZedGraphControl+ContextMenuObjectState)">
+            <Messages>
+             <Message TypeName="ConsiderPassingBaseTypesAsParameters" Category="Microsoft.Design" CheckId="CA1011" Created="2010-03-27 21:48:43Z">
+              <Issue>
+               <Item>'menuStrip'</Item>
+               <Item>'GraphForm.zgc_ContextMenuBuilder(ZedGraphControl, ContextMenuStrip, Point, ZedGraphControl.ContextMenuObjectState)'</Item>
+               <Item>'ContextMenuStrip'</Item>
+               <Item>'ToolStrip'</Item>
+              </Issue>
+             </Message>
+             <Message Id="Pt" TypeName="IdentifiersShouldBeCasedCorrectly" Category="Microsoft.Naming" CheckId="CA1709" Created="2010-03-27 21:48:43Z">
+              <Issue Name="MemberParameter">
+               <Item>'GraphForm.zgc_ContextMenuBuilder(ZedGraphControl, ContextMenuStrip, Point, ZedGraphControl.ContextMenuObjectState)'</Item>
+               <Item>Pt</Item>
+               <Item>'mousePt'</Item>
+               <Item>PT</Item>
+              </Issue>
+             </Message>
+             <Message Id="zgc" TypeName="IdentifiersShouldBeCasedCorrectly" Category="Microsoft.Naming" CheckId="CA1709" Created="2010-03-27 21:48:43Z">
+              <Issue Name="Member">
+               <Item>zgc</Item>
+               <Item>'GraphForm.zgc_ContextMenuBuilder(ZedGraphControl, ContextMenuStrip, Point, ZedGraphControl.ContextMenuObjectState)'</Item>
+               <Item>Zgc</Item>
+              </Issue>
+             </Message>
+             <Message TypeName="IdentifiersShouldNotContainUnderscores" Category="Microsoft.Naming" CheckId="CA1707" Created="2010-03-27 21:48:43Z">
+              <Issue Name="Member">
+               <Item>'GraphForm.zgc_ContextMenuBuilder(ZedGraphControl, ContextMenuStrip, Point, ZedGraphControl.ContextMenuObjectState)'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+          </Members>
+         </Type>
+         <Type Name="HadSexCollection">
+          <Members>
+           <Member Name="#Item[System.DateTime]">
+            <Messages>
+             <Message TypeName="UseIntegralOrStringArgumentForIndexers" Category="Microsoft.Design" CheckId="CA1043" Created="2010-03-27 21:48:43Z">
+              <Issue>
+               <Item>'HadSexCollection.this[DateTime]'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+          </Members>
+         </Type>
+         <Type Name="HealthCollection">
+          <Members>
+           <Member Name="#Item[System.DateTime]">
+            <Messages>
+             <Message TypeName="UseIntegralOrStringArgumentForIndexers" Category="Microsoft.Design" CheckId="CA1043" Created="2010-03-27 21:48:43Z">
+              <Issue>
+               <Item>'HealthCollection.this[DateTime]'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+          </Members>
+         </Type>
+         <Type Name="HoroscopDatePair">
+          <Members>
+           <Member Name="#.ctor(System.Int32,System.Int32,System.Int32,System.Int32)">
+            <Messages>
+             <Message Id="toMonth-1" TypeName="OperationsShouldNotOverflow" Category="Microsoft.Usage" CheckId="CA2233" Created="2010-03-27 21:48:43Z">
+              <Issue>
+               <Item>toMonth-1</Item>
+               <Item>'HoroscopDatePair.HoroscopDatePair(int, int, int, int)'</Item>
+              </Issue>
+              <Issue>
+               <Item>toMonth-1</Item>
+               <Item>'HoroscopDatePair.HoroscopDatePair(int, int, int, int)'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#GetZodiacSignName(System.DateTime)">
+            <Messages>
+             <Message TypeName="DoNotRaiseReservedExceptionTypes" Category="Microsoft.Usage" CheckId="CA2201" Created="2010-03-27 21:48:43Z">
+              <Issue Name="TooGeneric">
+               <Item>'HoroscopDatePair.GetZodiacSignName(DateTime)'</Item>
+               <Item>'Exception'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+          </Members>
+         </Type>
+         <Type Name="ITranslatable">
+          <Members>
+           <Member Name="#ReReadTranslations()">
+            <Messages>
+             <Message Id="Re" TypeName="IdentifiersShouldBeCasedCorrectly" Category="Microsoft.Naming" CheckId="CA1709" Created="2010-03-27 21:48:43Z">
+              <Issue Name="Member">
+               <Item>Re</Item>
+               <Item>'ITranslatable.ReReadTranslations()'</Item>
+               <Item>RE</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+          </Members>
+         </Type>
+         <Type Name="LoginForm">
+          <Messages>
+           <Message Id="Login" TypeName="UsePreferredTerms" Category="Microsoft.Naming" CheckId="CA1726" Created="2010-03-27 21:48:43Z">
+            <Issue Name="Type">
+             <Item>Login</Item>
+             <Item>'LoginForm'</Item>
+             <Item>LogOn</Item>
+            </Issue>
+           </Message>
+          </Messages>
+         </Type>
+         <Type Name="MainForm">
+          <Members>
+           <Member Name="#GenerateWomanInformation()">
+            <Messages>
+             <Message TypeName="MarkMembersAsStatic" Category="Microsoft.Performance" CheckId="CA1822" Created="2010-03-27 21:48:43Z" FixCategory="DependsOnFix">
+              <Issue>
+               <Item>'MainForm.GenerateWomanInformation()'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#languageButton_Click(System.Object,System.EventArgs)">
+            <Messages>
+             <Message TypeName="DoNotCatchGeneralExceptionTypes" Category="Microsoft.Design" CheckId="CA1031" Created="2010-03-27 21:48:43Z">
+              <Issue>
+               <Item>'MainForm.languageButton_Click(object, EventArgs)'</Item>
+               <Item>'object'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#numMenstruationPeriod_ValueChanged(System.Object,System.EventArgs)">
+            <Messages>
+             <Message TypeName="SpecifyMessageBoxOptions" Category="Microsoft.Globalization" CheckId="CA1300" Created="2010-03-27 21:48:43Z">
+              <Issue>
+               <Item>'MainForm.numMenstruationPeriod_ValueChanged(object, EventArgs)'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+          </Members>
+         </Type>
+         <Type Name="MensesEditControl">
+          <Members>
+           <Member Name="#UnHighlight()">
+            <Messages>
+             <Message Id="Un" TypeName="IdentifiersShouldBeCasedCorrectly" Category="Microsoft.Naming" CheckId="CA1709" Created="2010-03-27 21:48:43Z">
+              <Issue Name="Member">
+               <Item>Un</Item>
+               <Item>'MensesEditControl.UnHighlight()'</Item>
+               <Item>UN</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+          </Members>
+         </Type>
+         <Type Name="MenstruationPeriod">
+          <Members>
+           <Member Name="#Egestas">
+            <Messages>
+             <Message TypeName="CollectionPropertiesShouldBeReadOnly" Category="Microsoft.Usage" CheckId="CA2227" Created="2010-03-27 21:48:43Z">
+              <Issue>
+               <Item>'MenstruationPeriod.Egestas'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#GetOvulationDate(WomenCalendar.Woman)">
+            <Messages>
+             <Message Id="w" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Created="2010-03-27 21:48:43Z">
+              <Issue Name="MemberParameterMoreMeaningfulName">
+               <Item>'MenstruationPeriod.GetOvulationDate(Woman)'</Item>
+               <Item>'w'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+          </Members>
+         </Type>
+         <Type Name="MenstruationsCollection">
+          <Members>
+           <Member Name="#Add(System.DateTime,System.Int32)">
+            <Messages>
+             <Message TypeName="SpecifyMessageBoxOptions" Category="Microsoft.Globalization" CheckId="CA1300" Created="2010-03-27 21:48:43Z">
+              <Issue>
+               <Item>'MenstruationsCollection.Add(DateTime, int)'</Item>
+              </Issue>
+              <Issue>
+               <Item>'MenstruationsCollection.Add(DateTime, int)'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#Add(WomenCalendar.MenstruationPeriod)">
+            <Messages>
+             <Message TypeName="DoNotDecreaseInheritedMemberVisibility" Category="Microsoft.Usage" CheckId="CA2222" Created="2010-03-27 21:48:43Z">
+              <Issue>
+               <Item>'MenstruationsCollection.Add(MenstruationPeriod)'</Item>
+               <Item>'List&lt;MenstruationPeriod&gt;'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#Equals(System.Object)">
+            <Messages>
+             <Message TypeName="DoNotCastUnnecessarily" Category="Microsoft.Performance" CheckId="CA1800" Created="2010-03-27 21:48:43Z">
+              <Issue Name="Parameter">
+               <Item>'obj'</Item>
+               <Item>'MenstruationsCollection'</Item>
+               <Item>'MenstruationsCollection.Equals(object)'</Item>
+               <Item>isint</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#CollectionChanged" Kind="Event">
+            <Messages>
+             <Message TypeName="DeclareEventHandlersCorrectly" Category="Microsoft.Design" CheckId="CA1009" Created="2010-03-27 21:48:43Z">
+              <Issue Name="First">
+               <Item>'Action'</Item>
+              </Issue>
+              <Issue Name="Second">
+               <Item>'Action'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+          </Members>
+         </Type>
+         <Type Name="MonthlyGraphForm">
+          <Members>
+           <Member Name="#btnNextPeriod">
+            <Messages>
+             <Message TypeName="DoNotDeclareVisibleInstanceFields" Category="Microsoft.Design" CheckId="CA1051" Created="2010-03-27 21:48:43Z">
+              <Issue>
+               <Item>'MonthlyGraphForm.btnNextPeriod'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#btnPrevPeriod">
+            <Messages>
+             <Message TypeName="DoNotDeclareVisibleInstanceFields" Category="Microsoft.Design" CheckId="CA1051" Created="2010-03-27 21:48:43Z">
+              <Issue>
+               <Item>'MonthlyGraphForm.btnPrevPeriod'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#cmbPeriods">
+            <Messages>
+             <Message TypeName="DoNotDeclareVisibleInstanceFields" Category="Microsoft.Design" CheckId="CA1051" Created="2010-03-27 21:48:43Z">
+              <Issue>
+               <Item>'MonthlyGraphForm.cmbPeriods'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#label1">
+            <Messages>
+             <Message TypeName="DoNotDeclareVisibleInstanceFields" Category="Microsoft.Design" CheckId="CA1051" Created="2010-03-27 21:48:43Z">
+              <Issue>
+               <Item>'MonthlyGraphForm.label1'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+          </Members>
+         </Type>
+         <Type Name="MonthlyGraphForm+PeriodDisplayItem">
+          <Messages>
+           <Message TypeName="NestedTypesShouldNotBeVisible" Category="Microsoft.Design" CheckId="CA1034" Created="2010-03-27 21:48:43Z">
+            <Issue>
+             <Item>'MonthlyGraphForm.PeriodDisplayItem'</Item>
+            </Issue>
+           </Message>
+          </Messages>
+          <Members>
+           <Member Name="#ToString()">
+            <Messages>
+             <Message Id="System.DateTime.ToString(System.String)" TypeName="SpecifyIFormatProvider" Category="Microsoft.Globalization" CheckId="CA1305" Created="2010-03-27 21:48:43Z">
+              <Issue>
+               <Item>'DateTime.ToString(string)'</Item>
+               <Item>'MonthlyGraphForm.PeriodDisplayItem.ToString()'</Item>
+               <Item>'DateTime.ToString(string, IFormatProvider)'</Item>
+              </Issue>
+              <Issue>
+               <Item>'DateTime.ToString(string)'</Item>
+               <Item>'MonthlyGraphForm.PeriodDisplayItem.ToString()'</Item>
+               <Item>'DateTime.ToString(string, IFormatProvider)'</Item>
+              </Issue>
+             </Message>
+             <Message Id="System.String.Format(System.String,System.Object[])" TypeName="SpecifyIFormatProvider" Category="Microsoft.Globalization" CheckId="CA1305" Created="2010-03-27 21:48:43Z">
+              <Issue>
+               <Item>'string.Format(string, params object[])'</Item>
+               <Item>'MonthlyGraphForm.PeriodDisplayItem.ToString()'</Item>
+               <Item>'string.Format(IFormatProvider, string, params object[])'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+          </Members>
+         </Type>
+         <Type Name="MonthsControl">
+          <Members>
+           <Member Name="#InitializeContextPregnancySubmenu()">
+            <Messages>
+             <Message Id="System.Int32.Parse(System.String)" TypeName="SpecifyIFormatProvider" Category="Microsoft.Globalization" CheckId="CA1305" Created="2010-03-27 21:48:43Z">
+              <Issue>
+               <Item>'int.Parse(string)'</Item>
+               <Item>'MonthsControl.InitializeContextPregnancySubmenu()'</Item>
+               <Item>'int.Parse(string, IFormatProvider)'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#setLastPregnancyDay_Click(System.Object,System.EventArgs)">
+            <Messages>
+             <Message TypeName="SpecifyMessageBoxOptions" Category="Microsoft.Globalization" CheckId="CA1300" Created="2010-03-27 21:48:43Z">
+              <Issue>
+               <Item>'MonthsControl.setLastPregnancyDay_Click(object, EventArgs)'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#singleMonths">
+            <Messages>
+             <Message TypeName="DoNotDeclareVisibleInstanceFields" Category="Microsoft.Design" CheckId="CA1051" Created="2010-03-27 21:48:43Z">
+              <Issue>
+               <Item>'MonthsControl.singleMonths'</Item>
+              </Issue>
+             </Message>
+             <Message TypeName="DoNotExposeGenericLists" Category="Microsoft.Design" CheckId="CA1002" Created="2010-03-27 21:48:43Z">
+              <Issue>
+               <Item>'List&lt;OneMonthControl&gt;'</Item>
+               <Item>'MonthsControl.singleMonths'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#VisibleMonthsCount">
+            <Messages>
+             <Message TypeName="DoNotDeclareVisibleInstanceFields" Category="Microsoft.Design" CheckId="CA1051" Created="2010-03-27 21:48:43Z">
+              <Issue>
+               <Item>'MonthsControl.VisibleMonthsCount'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+          </Members>
+         </Type>
+         <Type Name="MonthsControl+FocusDateChangedDelegate">
+          <Messages>
+           <Message TypeName="NestedTypesShouldNotBeVisible" Category="Microsoft.Design" CheckId="CA1034" Created="2010-03-27 21:48:43Z">
+            <Issue>
+             <Item>'MonthsControl.FocusDateChangedDelegate'</Item>
+            </Issue>
+           </Message>
+           <Message TypeName="UseGenericEventHandlerInstances" Category="Microsoft.Design" CheckId="CA1003" Created="2010-03-27 21:48:43Z">
+            <Issue>
+             <Item>'MonthsControl.FocusDateChangedDelegate'</Item>
+            </Issue>
+           </Message>
+          </Messages>
+         </Type>
+         <Type Name="NotesCollection">
+          <Members>
+           <Member Name="#Item[System.DateTime]">
+            <Messages>
+             <Message TypeName="UseIntegralOrStringArgumentForIndexers" Category="Microsoft.Design" CheckId="CA1043" Created="2010-03-27 21:48:43Z">
+              <Issue>
+               <Item>'NotesCollection.this[DateTime]'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+          </Members>
+         </Type>
+         <Type Name="OnceAPeriod">
+          <Members>
+           <Member Name="#IsAlarmAtDay(System.DateTime)">
+            <Messages>
+             <Message Id="daysInOneCycle" TypeName="RemoveUnusedLocals" Category="Microsoft.Performance" CheckId="CA1804" Created="2010-03-27 21:48:43Z">
+              <Issue>
+               <Item>'OnceAPeriod.IsAlarmAtDay(DateTime)'</Item>
+               <Item>'daysInOneCycle'</Item>
+               <Item>'int'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#ToString()">
+            <Messages>
+             <Message Id="System.String.Format(System.String,System.Object[])" TypeName="SpecifyIFormatProvider" Category="Microsoft.Globalization" CheckId="CA1305" Created="2010-03-27 21:48:43Z">
+              <Issue>
+               <Item>'string.Format(string, params object[])'</Item>
+               <Item>'OnceAPeriod.ToString()'</Item>
+               <Item>'string.Format(IFormatProvider, string, params object[])'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+          </Members>
+         </Type>
+         <Type Name="OneDayInfo">
+          <Members>
+           <Member Name="#BBT">
+            <Messages>
+             <Message Id="BBT" TypeName="IdentifiersShouldBeCasedCorrectly" Category="Microsoft.Naming" CheckId="CA1709" Created="2010-03-27 21:48:43Z">
+              <Issue Name="Member">
+               <Item>BBT</Item>
+               <Item>'OneDayInfo.BBT'</Item>
+               <Item>Bbt</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#GetByDate(WomenCalendar.Woman,System.DateTime)">
+            <Messages>
+             <Message Id="w" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Created="2010-03-27 21:48:43Z">
+              <Issue Name="MemberParameterMoreMeaningfulName">
+               <Item>'OneDayInfo.GetByDate(Woman, DateTime)'</Item>
+               <Item>'w'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#Header">
+            <Messages>
+             <Message TypeName="DoNotExposeGenericLists" Category="Microsoft.Design" CheckId="CA1002" Created="2010-03-27 21:48:43Z">
+              <Issue>
+               <Item>'TranslationsList'</Item>
+               <Item>'OneDayInfo.Header'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+          </Members>
+         </Type>
+         <Type Name="OneMonthControl">
+          <Members>
+           <Member Name="#CreateNewDefaultCellControl(System.Int32)">
+            <Messages>
+             <Message Id="number+1" TypeName="OperationsShouldNotOverflow" Category="Microsoft.Usage" CheckId="CA2233" Created="2010-03-27 21:48:43Z">
+              <Issue>
+               <Item>number+1</Item>
+               <Item>'OneMonthControl.CreateNewDefaultCellControl(int)'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#OnPaint(System.Windows.Forms.PaintEventArgs)">
+            <Messages>
+             <Message Id="0#" TypeName="ParameterNamesShouldMatchBaseDeclaration" Category="Microsoft.Naming" CheckId="CA1725" Created="2010-03-27 21:48:43Z">
+              <Issue>
+               <Item>'OneMonthControl.OnPaint(PaintEventArgs)'</Item>
+               <Item>'pe'</Item>
+               <Item>'e'</Item>
+               <Item>'Control.OnPaint(PaintEventArgs)'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+          </Members>
+         </Type>
+         <Type Name="OneMonthControl+DayClicked">
+          <Messages>
+           <Message TypeName="NestedTypesShouldNotBeVisible" Category="Microsoft.Design" CheckId="CA1034" Created="2010-03-27 21:48:43Z">
+            <Issue>
+             <Item>'OneMonthControl.DayClicked'</Item>
+            </Issue>
+           </Message>
+           <Message TypeName="UseGenericEventHandlerInstances" Category="Microsoft.Design" CheckId="CA1003" Created="2010-03-27 21:48:43Z">
+            <Issue>
+             <Item>'OneMonthControl.DayClicked'</Item>
+            </Issue>
+           </Message>
+          </Messages>
+         </Type>
+         <Type Name="OvulationDetector">
+          <Members>
+           <Member Name="#.ctor(WomenCalendar.Woman)">
+            <Messages>
+             <Message Id="w" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Created="2010-03-27 21:48:43Z">
+              <Issue Name="MemberParameterMoreMeaningfulName">
+               <Item>'OvulationDetector.OvulationDetector(Woman)'</Item>
+               <Item>'w'</Item>
+              </Issue>
+             </Message>
+             <Message TypeName="InstantiateArgumentExceptionsCorrectly" Category="Microsoft.Usage" CheckId="CA2208" Created="2010-03-27 21:48:43Z">
+              <Issue Name="IncorrectMessage">
+               <Item>'OvulationDetector.OvulationDetector(Woman)'</Item>
+               <Item>w</Item>
+               <Item>'message'</Item>
+               <Item>'ArgumentNullException'</Item>
+              </Issue>
+              <Issue Name="IncorrectParameterName">
+               <Item>'OvulationDetector.OvulationDetector(Woman)'</Item>
+               <Item>Woman must be specified.</Item>
+               <Item>'paramName'</Item>
+               <Item>'ArgumentNullException'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#EstimateOvulationDate(System.DateTime)">
+            <Messages>
+             <Message TypeName="InstantiateArgumentExceptionsCorrectly" Category="Microsoft.Usage" CheckId="CA2208" Created="2010-03-27 21:48:43Z">
+              <Issue Name="IncorrectParameterName">
+               <Item>'OvulationDetector.EstimateOvulationDate(DateTime)'</Item>
+               <Item>lastCycleDay</Item>
+               <Item>'paramName'</Item>
+               <Item>'ArgumentException'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#FilterClosestRises(System.Collections.Generic.List`1&lt;WomenCalendar.OvulationDetector+Rise&gt;,System.DateTime)">
+            <Messages>
+             <Message TypeName="MarkMembersAsStatic" Category="Microsoft.Performance" CheckId="CA1822" Created="2010-03-27 21:48:43Z" FixCategory="NonBreaking">
+              <Issue>
+               <Item>'OvulationDetector.FilterClosestRises(List&lt;OvulationDetector.Rise&gt;, DateTime)'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#FilterNonSignificantRises(System.Collections.Generic.List`1&lt;WomenCalendar.OvulationDetector+Rise&gt;)">
+            <Messages>
+             <Message TypeName="MarkMembersAsStatic" Category="Microsoft.Performance" CheckId="CA1822" Created="2010-03-27 21:48:43Z" FixCategory="NonBreaking">
+              <Issue>
+               <Item>'OvulationDetector.FilterNonSignificantRises(List&lt;OvulationDetector.Rise&gt;)'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#GetMove(System.Double,System.Double)">
+            <Messages>
+             <Message TypeName="MarkMembersAsStatic" Category="Microsoft.Performance" CheckId="CA1822" Created="2010-03-27 21:48:43Z" FixCategory="NonBreaking">
+              <Issue>
+               <Item>'OvulationDetector.GetMove(double, double)'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#PredictByCFOnly(System.DateTime,System.DateTime)">
+            <Messages>
+             <Message TypeName="MarkMembersAsStatic" Category="Microsoft.Performance" CheckId="CA1822" Created="2010-03-27 21:48:43Z" FixCategory="NonBreaking">
+              <Issue>
+               <Item>'OvulationDetector.PredictByCFOnly(DateTime, DateTime)'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#PredictByOneRiseAndCF(WomenCalendar.OvulationDetector+Rise,System.DateTime)">
+            <Messages>
+             <Message TypeName="MarkMembersAsStatic" Category="Microsoft.Performance" CheckId="CA1822" Created="2010-03-27 21:48:43Z" FixCategory="NonBreaking">
+              <Issue>
+               <Item>'OvulationDetector.PredictByOneRiseAndCF(OvulationDetector.Rise, DateTime)'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+          </Members>
+         </Type>
+         <Type Name="OvulationDetector+Rise">
+          <Members>
+           <Member Name="#DaysLength">
+            <Accessors>
+             <Accessor Name="#get_DaysLength()">
+              <Messages>
+               <Message TypeName="AvoidUncalledPrivateCode" Category="Microsoft.Performance" CheckId="CA1811" Created="2010-03-27 21:48:43Z">
+                <Issue>
+                 <Item>'OvulationDetector.Rise.DaysLength.get()'</Item>
+                </Issue>
+               </Message>
+              </Messages>
+             </Accessor>
+            </Accessors>
+           </Member>
+           <Member Name="#SignificantCoefficient">
+            <Messages>
+             <Message TypeName="UseLiteralsWhereAppropriate" Category="Microsoft.Performance" CheckId="CA1802" Created="2010-03-27 21:48:43Z">
+              <Issue>
+               <Item>'OvulationDetector.Rise.SignificantCoefficient'</Item>
+               <Item>2</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+          </Members>
+         </Type>
+         <Type Name="Program">
+          <Members>
+           <Member Name="#AskAndSaveCurrentWoman()">
+            <Messages>
+             <Message TypeName="SpecifyMessageBoxOptions" Category="Microsoft.Globalization" CheckId="CA1300" Created="2010-03-27 21:48:43Z">
+              <Issue>
+               <Item>'Program.AskAndSaveCurrentWoman()'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#AskPassword(WomenCalendar.Woman)">
+            <Messages>
+             <Message TypeName="SpecifyMessageBoxOptions" Category="Microsoft.Globalization" CheckId="CA1300" Created="2010-03-27 21:48:43Z">
+              <Issue>
+               <Item>'Program.AskPassword(Woman)'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#ExportWoman()">
+            <Messages>
+             <Message TypeName="DoNotCatchGeneralExceptionTypes" Category="Microsoft.Design" CheckId="CA1031" Created="2010-03-27 21:48:43Z">
+              <Issue>
+               <Item>'Program.ExportWoman()'</Item>
+               <Item>'Exception'</Item>
+              </Issue>
+             </Message>
+             <Message TypeName="SpecifyMessageBoxOptions" Category="Microsoft.Globalization" CheckId="CA1300" Created="2010-03-27 21:48:43Z">
+              <Issue>
+               <Item>'Program.ExportWoman()'</Item>
+              </Issue>
+              <Issue>
+               <Item>'Program.ExportWoman()'</Item>
+              </Issue>
+             </Message>
+             <Message Id="System.String.EndsWith(System.String)" TypeName="SpecifyStringComparison" Category="Microsoft.Globalization" CheckId="CA1307" Created="2010-03-27 21:48:43Z">
+              <Issue>
+               <Item>'Program.ExportWoman()'</Item>
+               <Item>'string.EndsWith(string)'</Item>
+               <Item>'string.EndsWith(string, StringComparison)'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#SaveCurrentWomanTo(System.String)">
+            <Messages>
+             <Message TypeName="SpecifyMessageBoxOptions" Category="Microsoft.Globalization" CheckId="CA1300" Created="2010-06-08 20:50:45Z">
+              <Issue>
+               <Item>'Program.SaveCurrentWomanTo(string)'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+          </Members>
+         </Type>
+         <Type Name="ReportWriter">
+          <Members>
+           <Member Name="#B(System.Boolean)">
+            <Messages>
+             <Message Id="B" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Created="2010-03-27 21:48:43Z">
+              <Issue Name="MemberMoreMeaningfulName">
+               <Item>'ReportWriter.B(bool)'</Item>
+              </Issue>
+             </Message>
+             <Message Id="b" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Created="2010-03-27 21:48:43Z">
+              <Issue Name="MemberParameterMoreMeaningfulName">
+               <Item>'ReportWriter.B(bool)'</Item>
+               <Item>'b'</Item>
+              </Issue>
+             </Message>
+             <Message TypeName="MarkMembersAsStatic" Category="Microsoft.Performance" CheckId="CA1822" Created="2010-03-27 21:48:43Z" FixCategory="DependsOnFix">
+              <Issue>
+               <Item>'ReportWriter.B(bool)'</Item>
+              </Issue>
+             </Message>
+             <Message Id="0#" TypeName="ParameterNamesShouldNotMatchMemberNames" Category="Microsoft.Naming" CheckId="CA1719" Created="2010-03-27 21:48:43Z">
+              <Issue>
+               <Item>'b'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#CF(WomenCalendar.CervicalFluid)">
+            <Messages>
+             <Message TypeName="MarkMembersAsStatic" Category="Microsoft.Performance" CheckId="CA1822" Created="2010-03-27 21:48:43Z" FixCategory="DependsOnFix">
+              <Issue>
+               <Item>'ReportWriter.CF(CervicalFluid)'</Item>
+              </Issue>
+             </Message>
+             <Message Id="0#" TypeName="ParameterNamesShouldNotMatchMemberNames" Category="Microsoft.Naming" CheckId="CA1719" Created="2010-03-27 21:48:43Z">
+              <Issue>
+               <Item>'cf'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#D(System.DateTime)">
+            <Messages>
+             <Message Id="D" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Created="2010-03-27 21:48:43Z">
+              <Issue Name="MemberMoreMeaningfulName">
+               <Item>'ReportWriter.D(DateTime)'</Item>
+              </Issue>
+             </Message>
+             <Message Id="d" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Created="2010-03-27 21:48:43Z">
+              <Issue Name="MemberParameterMoreMeaningfulName">
+               <Item>'ReportWriter.D(DateTime)'</Item>
+               <Item>'d'</Item>
+              </Issue>
+             </Message>
+             <Message TypeName="MarkMembersAsStatic" Category="Microsoft.Performance" CheckId="CA1822" Created="2010-03-27 21:48:43Z" FixCategory="DependsOnFix">
+              <Issue>
+               <Item>'ReportWriter.D(DateTime)'</Item>
+              </Issue>
+             </Message>
+             <Message Id="0#" TypeName="ParameterNamesShouldNotMatchMemberNames" Category="Microsoft.Naming" CheckId="CA1719" Created="2010-03-27 21:48:43Z">
+              <Issue>
+               <Item>'d'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#D(System.Double)">
+            <Messages>
+             <Message Id="D" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Created="2010-03-27 21:48:43Z">
+              <Issue Name="MemberMoreMeaningfulName">
+               <Item>'ReportWriter.D(double)'</Item>
+              </Issue>
+             </Message>
+             <Message Id="d" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Created="2010-03-27 21:48:43Z">
+              <Issue Name="MemberParameterMoreMeaningfulName">
+               <Item>'ReportWriter.D(double)'</Item>
+               <Item>'d'</Item>
+              </Issue>
+             </Message>
+             <Message TypeName="MarkMembersAsStatic" Category="Microsoft.Performance" CheckId="CA1822" Created="2010-03-27 21:48:43Z" FixCategory="DependsOnFix">
+              <Issue>
+               <Item>'ReportWriter.D(double)'</Item>
+              </Issue>
+             </Message>
+             <Message Id="0#" TypeName="ParameterNamesShouldNotMatchMemberNames" Category="Microsoft.Naming" CheckId="CA1719" Created="2010-03-27 21:48:43Z">
+              <Issue>
+               <Item>'d'</Item>
+              </Issue>
+             </Message>
+             <Message Id="System.Double.ToString" TypeName="SpecifyIFormatProvider" Category="Microsoft.Globalization" CheckId="CA1305" Created="2010-03-27 21:48:43Z">
+              <Issue>
+               <Item>'double.ToString()'</Item>
+               <Item>'ReportWriter.D(double)'</Item>
+               <Item>'double.ToString(IFormatProvider)'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#Dispose()">
+            <Messages>
+             <Message TypeName="ImplementIDisposableCorrectly" Category="Microsoft.Design" CheckId="CA1063" Created="2010-03-27 21:48:43Z">
+              <Issue Name="DisposeImplementation">
+               <Item>'ReportWriter.Dispose()'</Item>
+              </Issue>
+              <Issue Name="DisposeSignature">
+               <Item>'ReportWriter.Dispose()'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#I(System.Int32)">
+            <Messages>
+             <Message Id="I" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Created="2010-03-27 21:48:43Z">
+              <Issue Name="MemberMoreMeaningfulName">
+               <Item>'ReportWriter.I(int)'</Item>
+              </Issue>
+             </Message>
+             <Message Id="i" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Created="2010-03-27 21:48:43Z">
+              <Issue Name="MemberParameterMoreMeaningfulName">
+               <Item>'ReportWriter.I(int)'</Item>
+               <Item>'i'</Item>
+              </Issue>
+             </Message>
+             <Message TypeName="MarkMembersAsStatic" Category="Microsoft.Performance" CheckId="CA1822" Created="2010-03-27 21:48:43Z" FixCategory="DependsOnFix">
+              <Issue>
+               <Item>'ReportWriter.I(int)'</Item>
+              </Issue>
+             </Message>
+             <Message Id="0#" TypeName="ParameterNamesShouldNotMatchMemberNames" Category="Microsoft.Naming" CheckId="CA1719" Created="2010-03-27 21:48:43Z">
+              <Issue>
+               <Item>'i'</Item>
+              </Issue>
+             </Message>
+             <Message Id="System.Int32.ToString" TypeName="SpecifyIFormatProvider" Category="Microsoft.Globalization" CheckId="CA1305" Created="2010-03-27 21:48:43Z">
+              <Issue>
+               <Item>'int.ToString()'</Item>
+               <Item>'ReportWriter.I(int)'</Item>
+               <Item>'int.ToString(IFormatProvider)'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#I(System.Int32,System.Boolean)">
+            <Messages>
+             <Message Id="I" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Created="2010-03-27 21:48:43Z">
+              <Issue Name="MemberMoreMeaningfulName">
+               <Item>'ReportWriter.I(int, bool)'</Item>
+              </Issue>
+             </Message>
+             <Message Id="i" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Created="2010-03-27 21:48:43Z">
+              <Issue Name="MemberParameterMoreMeaningfulName">
+               <Item>'ReportWriter.I(int, bool)'</Item>
+               <Item>'i'</Item>
+              </Issue>
+             </Message>
+             <Message TypeName="MarkMembersAsStatic" Category="Microsoft.Performance" CheckId="CA1822" Created="2010-03-27 21:48:43Z" FixCategory="DependsOnFix">
+              <Issue>
+               <Item>'ReportWriter.I(int, bool)'</Item>
+              </Issue>
+             </Message>
+             <Message Id="0#" TypeName="ParameterNamesShouldNotMatchMemberNames" Category="Microsoft.Naming" CheckId="CA1719" Created="2010-03-27 21:48:43Z">
+              <Issue>
+               <Item>'i'</Item>
+              </Issue>
+             </Message>
+             <Message Id="System.Int32.ToString" TypeName="SpecifyIFormatProvider" Category="Microsoft.Globalization" CheckId="CA1305" Created="2010-03-27 21:48:43Z">
+              <Issue>
+               <Item>'int.ToString()'</Item>
+               <Item>'ReportWriter.I(int, bool)'</Item>
+               <Item>'int.ToString(IFormatProvider)'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+          </Members>
+         </Type>
+         <Type Name="Schedule">
+          <Messages>
+           <Message TypeName="AbstractTypesShouldNotHaveConstructors" Category="Microsoft.Design" CheckId="CA1012" Created="2010-03-27 21:48:43Z">
+            <Issue>
+             <Item>'Schedule'</Item>
+            </Issue>
+           </Message>
+          </Messages>
+          <Members>
+           <Member Name="#.ctor()">
+            <Messages>
+             <Message TypeName="DoNotCallOverridableMethodsInConstructors" Category="Microsoft.Usage" CheckId="CA2214" Created="2010-06-08 20:50:45Z">
+              <Issue>
+               <Item>'Schedule.Schedule()'</Item>
+               <Item>&#xD;&#xA;&#xD;&#xA;Schedule..ctor()&#xD;&#xA;Schedule.set_Text(String):Void</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#.ctor(System.String)">
+            <Messages>
+             <Message TypeName="DoNotCallOverridableMethodsInConstructors" Category="Microsoft.Usage" CheckId="CA2214" Created="2010-03-27 21:48:43Z">
+              <Issue>
+               <Item>'Schedule.Schedule(string)'</Item>
+               <Item>&#xD;&#xA;&#xD;&#xA;Schedule..ctor(String)&#xD;&#xA;Schedule.set_Text(String):Void</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#End">
+            <Messages>
+             <Message Id="End" TypeName="IdentifiersShouldNotMatchKeywords" Category="Microsoft.Naming" CheckId="CA1716" Created="2010-03-27 21:48:43Z">
+              <Issue Name="Member">
+               <Item>'Schedule.End'</Item>
+               <Item>End</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+          </Members>
+         </Type>
+         <Type Name="SchedulesCollection">
+          <Members>
+           <Member Name="#GetFiredSchedulesForDay(System.DateTime)">
+            <Messages>
+             <Message TypeName="DoNotExposeGenericLists" Category="Microsoft.Design" CheckId="CA1002" Created="2010-03-27 21:48:43Z">
+              <Issue>
+               <Item>'List&lt;Schedule&gt;'</Item>
+               <Item>'SchedulesCollection.GetFiredSchedulesForDay(DateTime)'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#GetFormattedSchedulesText(System.DateTime)">
+            <Messages>
+             <Message TypeName="MarkMembersAsStatic" Category="Microsoft.Performance" CheckId="CA1822" Created="2010-06-08 20:50:45Z" FixCategory="DependsOnFix">
+              <Issue>
+               <Item>'SchedulesCollection.GetFormattedSchedulesText(DateTime)'</Item>
+              </Issue>
+             </Message>
+             <Message Id="date" TypeName="ReviewUnusedParameters" Category="Microsoft.Usage" CheckId="CA1801" Created="2010-06-08 20:50:45Z" FixCategory="DependsOnFix">
+              <Issue>
+               <Item>'date'</Item>
+               <Item>'SchedulesCollection.GetFormattedSchedulesText(DateTime)'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#UpdateData(System.Collections.Generic.List`1&lt;WomenCalendar.Schedule&gt;)">
+            <Messages>
+             <Message TypeName="DoNotExposeGenericLists" Category="Microsoft.Design" CheckId="CA1002" Created="2010-03-27 21:48:43Z">
+              <Issue>
+               <Item>'List&lt;Schedule&gt;'</Item>
+               <Item>'SchedulesCollection.UpdateData(List&lt;Schedule&gt;)'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+          </Members>
+         </Type>
+         <Type Name="SerializableEventsCollection`1">
+          <Messages>
+           <Message TypeName="AbstractTypesShouldNotHaveConstructors" Category="Microsoft.Design" CheckId="CA1012" Created="2010-03-27 21:48:43Z">
+            <Issue>
+             <Item>'SerializableEventsCollection&lt;DataT&gt;'</Item>
+            </Issue>
+           </Message>
+           <Message Id="T" TypeName="IdentifiersShouldHaveCorrectPrefix" Category="Microsoft.Naming" CheckId="CA1715" Created="2010-03-27 21:48:43Z" FixCategory="NonBreaking">
+            <Issue Name="TypeTypeParameter">
+             <Item>'SerializableEventsCollection&lt;DataT&gt;'</Item>
+             <Item>'DataT'</Item>
+            </Issue>
+           </Message>
+           <Message TypeName="MarkISerializableTypesWithSerializable" Category="Microsoft.Usage" CheckId="CA2237" Created="2010-03-27 21:48:43Z">
+            <Issue>
+             <Item>'SerializableEventsCollection&lt;DataT&gt;'</Item>
+            </Issue>
+           </Message>
+          </Messages>
+         </Type>
+         <Type Name="TEXT">
+          <Messages>
+           <Message Id="TEXT" TypeName="IdentifiersShouldBeCasedCorrectly" Category="Microsoft.Naming" CheckId="CA1709" Created="2010-03-27 21:48:43Z">
+            <Issue Name="Type">
+             <Item>TEXT</Item>
+             <Item>'TEXT'</Item>
+             <Item>Text</Item>
+            </Issue>
+           </Message>
+           <Message TypeName="TypeNamesShouldNotMatchNamespaces" Category="Microsoft.Naming" CheckId="CA1724" Created="2010-03-27 21:48:43Z">
+            <Issue Name="System">
+             <Item>'TEXT'</Item>
+             <Item>System.Drawing.Text</Item>
+            </Issue>
+           </Message>
+          </Messages>
+          <Members>
+           <Member Name="#ApplyDictionaries(System.Collections.Generic.Dictionary`2&lt;System.String,System.String&gt;,System.Collections.Generic.Dictionary`2&lt;System.String,System.String&gt;,System.String)">
+            <Messages>
+             <Message TypeName="DoNotCatchGeneralExceptionTypes" Category="Microsoft.Design" CheckId="CA1031" Created="2010-03-27 21:48:43Z">
+              <Issue>
+               <Item>'TEXT.ApplyDictionaries(Dictionary&lt;string, string&gt;, Dictionary&lt;string, string&gt;, string)'</Item>
+               <Item>'object'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#FindAllLangFiles()">
+            <Messages>
+             <Message Id="System.String.ToLower" TypeName="SpecifyCultureInfo" Category="Microsoft.Globalization" CheckId="CA1304" Created="2010-03-27 21:48:43Z">
+              <Issue>
+               <Item>'string.ToLower()'</Item>
+               <Item>'TEXT.FindAllLangFiles()'</Item>
+               <Item>'string.ToLower(CultureInfo)'</Item>
+              </Issue>
+              <Issue>
+               <Item>'string.ToLower()'</Item>
+               <Item>'TEXT.FindAllLangFiles()'</Item>
+               <Item>'string.ToLower(CultureInfo)'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#Format(System.String,System.Object[])">
+            <Messages>
+             <Message TypeName="MarkMembersAsStatic" Category="Microsoft.Performance" CheckId="CA1822" Created="2010-03-27 21:48:43Z" FixCategory="DependsOnFix">
+              <Issue>
+               <Item>'TEXT.Format(string, params object[])'</Item>
+              </Issue>
+             </Message>
+             <Message Id="System.String.Format(System.String,System.Object[])" TypeName="SpecifyIFormatProvider" Category="Microsoft.Globalization" CheckId="CA1305" Created="2010-03-27 21:48:43Z">
+              <Issue>
+               <Item>'string.Format(string, params object[])'</Item>
+               <Item>'TEXT.Format(string, params object[])'</Item>
+               <Item>'string.Format(IFormatProvider, string, params object[])'</Item>
+              </Issue>
+              <Issue>
+               <Item>'string.Format(string, params object[])'</Item>
+               <Item>'TEXT.Format(string, params object[])'</Item>
+               <Item>'string.Format(IFormatProvider, string, params object[])'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#GetDaysString(System.Int32)">
+            <Messages>
+             <Message TypeName="DoNotCatchGeneralExceptionTypes" Category="Microsoft.Design" CheckId="CA1031" Created="2010-03-27 21:48:43Z">
+              <Issue>
+               <Item>'TEXT.GetDaysString(int)'</Item>
+               <Item>'object'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#InitializeLanguage(System.String)">
+            <Messages>
+             <Message Id="System.String.ToLower" TypeName="SpecifyCultureInfo" Category="Microsoft.Globalization" CheckId="CA1304" Created="2010-03-27 21:48:43Z">
+              <Issue>
+               <Item>'string.ToLower()'</Item>
+               <Item>'TEXT.InitializeLanguage(string)'</Item>
+               <Item>'string.ToLower(CultureInfo)'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#Item[System.String]">
+            <Messages>
+             <Message TypeName="MarkMembersAsStatic" Category="Microsoft.Performance" CheckId="CA1822" Created="2010-03-27 21:48:43Z" FixCategory="DependsOnFix">
+              <Issue>
+               <Item>'TEXT.this[string]'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#LoadLanguageFile(System.String,System.Collections.Generic.Dictionary`2&lt;System.String,System.String&gt;&amp;)">
+            <Messages>
+             <Message TypeName="DoNotCatchGeneralExceptionTypes" Category="Microsoft.Design" CheckId="CA1031" Created="2010-03-27 21:48:43Z">
+              <Issue>
+               <Item>'TEXT.LoadLanguageFile(string, out Dictionary&lt;string, string&gt;)'</Item>
+               <Item>'Exception'</Item>
+              </Issue>
+             </Message>
+             <Message TypeName="SpecifyMessageBoxOptions" Category="Microsoft.Globalization" CheckId="CA1300" Created="2010-03-27 21:48:43Z">
+              <Issue>
+               <Item>'TEXT.LoadLanguageFile(string, out Dictionary&lt;string, string&gt;)'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#SystemLang">
+            <Accessors>
+             <Accessor Name="#get_SystemLang()">
+              <Messages>
+               <Message Id="System.String.ToLower" TypeName="SpecifyCultureInfo" Category="Microsoft.Globalization" CheckId="CA1304" Created="2010-03-27 21:48:43Z">
+                <Issue>
+                 <Item>'string.ToLower()'</Item>
+                 <Item>'TEXT.SystemLang.get()'</Item>
+                 <Item>'string.ToLower(CultureInfo)'</Item>
+                </Issue>
+               </Message>
+              </Messages>
+             </Accessor>
+            </Accessors>
+           </Member>
+          </Members>
+         </Type>
+         <Type Name="TranslationException">
+          <Messages>
+           <Message TypeName="ImplementStandardExceptionConstructors" Category="Microsoft.Design" CheckId="CA1032" Created="2010-06-08 20:50:45Z">
+            <Issue Name="MissingConstructor">
+             <Item>'TranslationException'</Item>
+             <Item>protected TranslationException(SerializationInfo, StreamingContext)</Item>
+            </Issue>
+            <Issue Name="MissingConstructor">
+             <Item>'TranslationException'</Item>
+             <Item>public TranslationException()</Item>
+            </Issue>
+            <Issue Name="MissingConstructor">
+             <Item>'TranslationException'</Item>
+             <Item>public TranslationException(String, Exception)</Item>
+            </Issue>
+           </Message>
+          </Messages>
+         </Type>
+         <Type Name="TranslationsList">
+          <Members>
+           <Member Name="#Item[System.Int32]">
+            <Messages>
+             <Message Id="i" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Created="2010-03-27 21:48:43Z">
+              <Issue Name="MemberParameterMoreMeaningfulName">
+               <Item>'TranslationsList.this[int]'</Item>
+               <Item>'i'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+          </Members>
+         </Type>
+         <Type Name="VerticalLabel">
+          <Members>
+           <Member Name="#VerticalTextBox_Resize(System.Object,System.EventArgs)">
+            <Messages>
+             <Message TypeName="AvoidUncalledPrivateCode" Category="Microsoft.Performance" CheckId="CA1811" Created="2010-03-27 21:48:43Z">
+              <Issue>
+               <Item>'VerticalLabel.VerticalTextBox_Resize(object, EventArgs)'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+          </Members>
+         </Type>
+         <Type Name="VerticalLabel+DrawMode">
+          <Messages>
+           <Message TypeName="EnumsShouldHaveZeroValue" Category="Microsoft.Design" CheckId="CA1008" Created="2010-06-08 20:50:45Z" FixCategory="NonBreaking">
+            <Issue Name="NotFlagsNoZeroValue">
+             <Item>'VerticalLabel.DrawMode'</Item>
+            </Issue>
+           </Message>
+           <Message TypeName="NestedTypesShouldNotBeVisible" Category="Microsoft.Design" CheckId="CA1034" Created="2010-06-08 20:50:45Z">
+            <Issue>
+             <Item>'VerticalLabel.DrawMode'</Item>
+            </Issue>
+           </Message>
+          </Messages>
+         </Type>
+         <Type Name="Woman">
+          <Members>
+           <Member Name="#AddConceptionDay(System.DateTime)">
+            <Messages>
+             <Message Id="System.Int32.ToString" TypeName="SpecifyIFormatProvider" Category="Microsoft.Globalization" CheckId="CA1305" Created="2010-03-27 21:48:43Z">
+              <Issue>
+               <Item>'int.ToString()'</Item>
+               <Item>'Woman.AddConceptionDay(DateTime)'</Item>
+               <Item>'int.ToString(IFormatProvider)'</Item>
+              </Issue>
+             </Message>
+             <Message TypeName="SpecifyMessageBoxOptions" Category="Microsoft.Globalization" CheckId="CA1300" Created="2010-03-27 21:48:43Z">
+              <Issue>
+               <Item>'Woman.AddConceptionDay(DateTime)'</Item>
+              </Issue>
+              <Issue>
+               <Item>'Woman.AddConceptionDay(DateTime)'</Item>
+              </Issue>
+              <Issue>
+               <Item>'Woman.AddConceptionDay(DateTime)'</Item>
+              </Issue>
+              <Issue>
+               <Item>'Woman.AddConceptionDay(DateTime)'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#BBT">
+            <Messages>
+             <Message TypeName="CollectionPropertiesShouldBeReadOnly" Category="Microsoft.Usage" CheckId="CA2227" Created="2010-03-27 21:48:43Z">
+              <Issue>
+               <Item>'Woman.BBT'</Item>
+              </Issue>
+             </Message>
+             <Message Id="BBT" TypeName="IdentifiersShouldBeCasedCorrectly" Category="Microsoft.Naming" CheckId="CA1709" Created="2010-03-27 21:48:43Z">
+              <Issue Name="Member">
+               <Item>BBT</Item>
+               <Item>'Woman.BBT'</Item>
+               <Item>Bbt</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#CFs">
+            <Messages>
+             <Message TypeName="CollectionPropertiesShouldBeReadOnly" Category="Microsoft.Usage" CheckId="CA2227" Created="2010-03-27 21:48:43Z">
+              <Issue>
+               <Item>'Woman.CFs'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#Conceptions">
+            <Messages>
+             <Message TypeName="CollectionPropertiesShouldBeReadOnly" Category="Microsoft.Usage" CheckId="CA2227" Created="2010-03-27 21:48:43Z">
+              <Issue>
+               <Item>'Woman.Conceptions'</Item>
+              </Issue>
+             </Message>
+             <Message TypeName="DoNotExposeGenericLists" Category="Microsoft.Design" CheckId="CA1002" Created="2010-03-27 21:48:43Z">
+              <Issue>
+               <Item>'ConceptionsCollection'</Item>
+               <Item>'Woman.Conceptions'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#Equals(System.Object)">
+            <Messages>
+             <Message TypeName="DoNotCastUnnecessarily" Category="Microsoft.Performance" CheckId="CA1800" Created="2010-03-27 21:48:43Z">
+              <Issue Name="Parameter">
+               <Item>'obj'</Item>
+               <Item>'Woman'</Item>
+               <Item>'Woman.Equals(object)'</Item>
+               <Item>isint</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#GenerateDayInfo(System.DateTime)">
+            <Messages>
+             <Message Id="System.Int32.ToString" TypeName="SpecifyIFormatProvider" Category="Microsoft.Globalization" CheckId="CA1305" Created="2010-03-27 21:48:43Z">
+              <Issue>
+               <Item>'int.ToString()'</Item>
+               <Item>'Woman.GenerateDayInfo(DateTime)'</Item>
+               <Item>'int.ToString(IFormatProvider)'</Item>
+              </Issue>
+              <Issue>
+               <Item>'int.ToString()'</Item>
+               <Item>'Woman.GenerateDayInfo(DateTime)'</Item>
+               <Item>'int.ToString(IFormatProvider)'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#HadSexList">
+            <Messages>
+             <Message TypeName="CollectionPropertiesShouldBeReadOnly" Category="Microsoft.Usage" CheckId="CA2227" Created="2010-03-27 21:48:43Z">
+              <Issue>
+               <Item>'Woman.HadSexList'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#Health">
+            <Messages>
+             <Message TypeName="CollectionPropertiesShouldBeReadOnly" Category="Microsoft.Usage" CheckId="CA2227" Created="2010-03-27 21:48:43Z">
+              <Issue>
+               <Item>'Woman.Health'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#Menstruations">
+            <Messages>
+             <Message TypeName="CollectionPropertiesShouldBeReadOnly" Category="Microsoft.Usage" CheckId="CA2227" Created="2010-03-27 21:48:43Z">
+              <Issue>
+               <Item>'Woman.Menstruations'</Item>
+              </Issue>
+             </Message>
+             <Message TypeName="DoNotExposeGenericLists" Category="Microsoft.Design" CheckId="CA1002" Created="2010-03-27 21:48:43Z">
+              <Issue>
+               <Item>'MenstruationsCollection'</Item>
+               <Item>'Woman.Menstruations'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#Notes">
+            <Messages>
+             <Message TypeName="CollectionPropertiesShouldBeReadOnly" Category="Microsoft.Usage" CheckId="CA2227" Created="2010-03-27 21:48:43Z">
+              <Issue>
+               <Item>'Woman.Notes'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#OvDetector">
+            <Messages>
+             <Message Id="Ov" TypeName="IdentifiersShouldBeCasedCorrectly" Category="Microsoft.Naming" CheckId="CA1709" Created="2010-03-27 21:48:43Z">
+              <Issue Name="Member">
+               <Item>Ov</Item>
+               <Item>'Woman.OvDetector'</Item>
+               <Item>OV</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#ReadFrom(System.String)">
+            <Messages>
+             <Message TypeName="DoNotCatchGeneralExceptionTypes" Category="Microsoft.Design" CheckId="CA1031" Created="2010-06-08 20:50:45Z">
+              <Issue>
+               <Item>'Woman.ReadFrom(string)'</Item>
+               <Item>'Exception'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#Schedules">
+            <Messages>
+             <Message TypeName="CollectionPropertiesShouldBeReadOnly" Category="Microsoft.Usage" CheckId="CA2227" Created="2010-03-27 21:48:43Z">
+              <Issue>
+               <Item>'Woman.Schedules'</Item>
+              </Issue>
+             </Message>
+             <Message TypeName="DoNotExposeGenericLists" Category="Microsoft.Design" CheckId="CA1002" Created="2010-03-27 21:48:43Z">
+              <Issue>
+               <Item>'SchedulesCollection'</Item>
+               <Item>'Woman.Schedules'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#AveragePeriodLengthChanged" Kind="Event">
+            <Messages>
+             <Message TypeName="DeclareEventHandlersCorrectly" Category="Microsoft.Design" CheckId="CA1009" Created="2010-03-27 21:48:43Z">
+              <Issue Name="First">
+               <Item>'Action'</Item>
+              </Issue>
+              <Issue Name="Second">
+               <Item>'Action'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+          </Members>
+         </Type>
+         <Type Name="XlsWriter">
+          <Members>
+           <Member Name="#.ctor(System.String)">
+            <Messages>
+             <Message Id="cell" TypeName="RemoveUnusedLocals" Category="Microsoft.Performance" CheckId="CA1804" Created="2010-03-27 21:48:43Z">
+              <Issue>
+               <Item>'XlsWriter.XlsWriter(string)'</Item>
+               <Item>'cell'</Item>
+               <Item>'string'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#Dispose()">
+            <Messages>
+             <Message TypeName="CallGCSuppressFinalizeCorrectly" Category="Microsoft.Usage" CheckId="CA1816" Created="2010-03-27 21:48:43Z">
+              <Issue Name="NotCalled">
+               <Item>'XlsWriter.Dispose()'</Item>
+               <Item>'GC.SuppressFinalize(object)'</Item>
+              </Issue>
+             </Message>
+             <Message TypeName="ImplementIDisposableCorrectly" Category="Microsoft.Design" CheckId="CA1063" Created="2010-03-27 21:48:43Z">
+              <Issue Name="DisposeImplementation">
+               <Item>'XlsWriter.Dispose()'</Item>
+              </Issue>
+              <Issue Name="DisposeSignature">
+               <Item>'XlsWriter.Dispose()'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+          </Members>
+         </Type>
+        </Types>
+       </Namespace>
+       <Namespace Name="WomenCalendar.Controls">
+        <Types>
+         <Type Name="ColoredSchedulerCalendarControl">
+          <Members>
+           <Member Name="#ApplySchedules(System.Collections.Generic.List`1&lt;WomenCalendar.Schedule&gt;)">
+            <Messages>
+             <Message TypeName="DoNotExposeGenericLists" Category="Microsoft.Design" CheckId="CA1002" Created="2010-03-27 21:48:43Z">
+              <Issue>
+               <Item>'List&lt;Schedule&gt;'</Item>
+               <Item>'ColoredSchedulerCalendarControl.ApplySchedules(List&lt;Schedule&gt;)'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#CurrentSchedules">
+            <Accessors>
+             <Accessor Name="#get_CurrentSchedules()">
+              <Messages>
+               <Message TypeName="AvoidUncalledPrivateCode" Category="Microsoft.Performance" CheckId="CA1811" Created="2010-03-27 21:48:43Z">
+                <Issue>
+                 <Item>'ColoredSchedulerCalendarControl.CurrentSchedules.get()'</Item>
+                </Issue>
+               </Message>
+              </Messages>
+             </Accessor>
+            </Accessors>
+           </Member>
+           <Member Name="#OnPaint(System.Windows.Forms.PaintEventArgs)">
+            <Messages>
+             <Message Id="0#" TypeName="ParameterNamesShouldMatchBaseDeclaration" Category="Microsoft.Naming" CheckId="CA1725" Created="2010-03-27 21:48:43Z">
+              <Issue>
+               <Item>'ColoredSchedulerCalendarControl.OnPaint(PaintEventArgs)'</Item>
+               <Item>'pe'</Item>
+               <Item>'e'</Item>
+               <Item>'Control.OnPaint(PaintEventArgs)'</Item>
+              </Issue>
+             </Message>
+             <Message Id="backBrush" TypeName="RemoveUnusedLocals" Category="Microsoft.Performance" CheckId="CA1804" Created="2010-03-27 21:48:43Z">
+              <Issue>
+               <Item>'ColoredSchedulerCalendarControl.OnPaint(PaintEventArgs)'</Item>
+               <Item>'backBrush'</Item>
+               <Item>'SolidBrush'</Item>
+              </Issue>
+             </Message>
+             <Message Id="System.Int32.ToString" TypeName="SpecifyIFormatProvider" Category="Microsoft.Globalization" CheckId="CA1305" Created="2010-03-27 21:48:43Z">
+              <Issue>
+               <Item>'int.ToString()'</Item>
+               <Item>'ColoredSchedulerCalendarControl.OnPaint(PaintEventArgs)'</Item>
+               <Item>'int.ToString(IFormatProvider)'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+          </Members>
+         </Type>
+         <Type Name="EditScheduleControl">
+          <Messages>
+           <Message TypeName="IdentifiersShouldDifferByMoreThanCase" Category="Microsoft.Naming" CheckId="CA1708" Created="2010-03-27 21:48:43Z">
+            <Issue Name="Member">
+             <Item>'InitialDate'</Item>
+             <Item>initialDate</Item>
+            </Issue>
+           </Message>
+          </Messages>
+          <Members>
+           <Member Name="#GetAllSchedules()">
+            <Messages>
+             <Message TypeName="DoNotExposeGenericLists" Category="Microsoft.Design" CheckId="CA1002" Created="2010-06-08 20:50:45Z">
+              <Issue>
+               <Item>'List&lt;Schedule&gt;'</Item>
+               <Item>'EditScheduleControl.GetAllSchedules()'</Item>
+              </Issue>
+             </Message>
+             <Message TypeName="UsePropertiesWhereAppropriate" Category="Microsoft.Design" CheckId="CA1024" Created="2010-06-08 20:50:45Z">
+              <Issue Certainty="50">
+               <Item>'EditScheduleControl.GetAllSchedules()'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#initialDate">
+            <Messages>
+             <Message TypeName="DoNotDeclareVisibleInstanceFields" Category="Microsoft.Design" CheckId="CA1051" Created="2010-03-27 21:48:43Z">
+              <Issue>
+               <Item>'EditScheduleControl.initialDate'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#SetSchedules(System.Collections.Generic.List`1&lt;WomenCalendar.Schedule&gt;)">
+            <Messages>
+             <Message TypeName="DoNotExposeGenericLists" Category="Microsoft.Design" CheckId="CA1002" Created="2010-03-27 21:48:43Z">
+              <Issue>
+               <Item>'List&lt;Schedule&gt;'</Item>
+               <Item>'EditScheduleControl.SetSchedules(List&lt;Schedule&gt;)'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+          </Members>
+         </Type>
+         <Type Name="ScheduleControl">
+          <Members>
+           <Member Name="#currentSchedule">
+            <Messages>
+             <Message TypeName="DoNotDeclareVisibleInstanceFields" Category="Microsoft.Design" CheckId="CA1051" Created="2010-03-27 21:48:43Z">
+              <Issue>
+               <Item>'ScheduleControl.currentSchedule'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#GetSchedule()">
+            <Messages>
+             <Message TypeName="UsePropertiesWhereAppropriate" Category="Microsoft.Design" CheckId="CA1024" Created="2010-03-27 21:48:43Z">
+              <Issue>
+               <Item>'ScheduleControl.GetSchedule()'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#subscribed">
+            <Messages>
+             <Message TypeName="DoNotDeclareVisibleInstanceFields" Category="Microsoft.Design" CheckId="CA1051" Created="2010-03-27 21:48:43Z">
+              <Issue>
+               <Item>'ScheduleControl.subscribed'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#UnSubscribeEvents()">
+            <Messages>
+             <Message Id="Un" TypeName="IdentifiersShouldBeCasedCorrectly" Category="Microsoft.Naming" CheckId="CA1709" Created="2010-03-27 21:48:43Z">
+              <Issue Name="Member">
+               <Item>Un</Item>
+               <Item>'ScheduleControl.UnSubscribeEvents()'</Item>
+               <Item>UN</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#Changed" Kind="Event">
+            <Messages>
+             <Message TypeName="DeclareEventHandlersCorrectly" Category="Microsoft.Design" CheckId="CA1009" Created="2010-03-27 21:48:43Z">
+              <Issue Name="First">
+               <Item>'Action&lt;Schedule&gt;'</Item>
+              </Issue>
+              <Issue Name="Second">
+               <Item>'Action&lt;Schedule&gt;'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+          </Members>
+         </Type>
+         <Type Name="SchedulesListControl">
+          <Members>
+           <Member Name="#.ctor()">
+            <Messages>
+             <Message TypeName="DoNotInitializeUnnecessarily" Category="Microsoft.Performance" CheckId="CA1805" Created="2010-03-27 21:48:43Z">
+              <Issue>
+               <Item>'SchedulesListControl.SchedulesListControl()'</Item>
+               <Item>'SchedulesListControl.changeDelayTimer'</Item>
+               <Item>'Timer'</Item>
+               <Item>null</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#Finalize()">
+            <Messages>
+             <Message TypeName="ImplementIDisposableCorrectly" Category="Microsoft.Design" CheckId="CA1063" Created="2010-03-27 21:48:43Z">
+              <Issue Name="FinalizeImplementation">
+               <Item>'SchedulesListControl.~SchedulesListControl()'</Item>
+              </Issue>
+              <Issue Name="FinalizeOverride">
+               <Item>'SchedulesListControl'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#GetAllSchedules()">
+            <Messages>
+             <Message TypeName="DoNotExposeGenericLists" Category="Microsoft.Design" CheckId="CA1002" Created="2010-06-08 20:50:45Z">
+              <Issue>
+               <Item>'List&lt;Schedule&gt;'</Item>
+               <Item>'SchedulesListControl.GetAllSchedules()'</Item>
+              </Issue>
+             </Message>
+             <Message TypeName="UsePropertiesWhereAppropriate" Category="Microsoft.Design" CheckId="CA1024" Created="2010-06-08 20:50:45Z">
+              <Issue Certainty="50">
+               <Item>'SchedulesListControl.GetAllSchedules()'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#listView_SelectedIndexChanged(System.Object,System.EventArgs)">
+            <Messages>
+             <Message TypeName="DoNotUseTimersThatPreventPowerStateChanges" Category="Microsoft.Mobility" CheckId="CA1601" Created="2010-03-27 21:48:43Z">
+              <Issue>
+               <Item>'Timer.Interval.set(int)'</Item>
+               <Item>'SchedulesListControl.listView_SelectedIndexChanged(object, EventArgs)'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#SetSchedules(System.Collections.Generic.List`1&lt;WomenCalendar.Schedule&gt;)">
+            <Messages>
+             <Message TypeName="DoNotExposeGenericLists" Category="Microsoft.Design" CheckId="CA1002" Created="2010-03-27 21:48:43Z">
+              <Issue>
+               <Item>'List&lt;Schedule&gt;'</Item>
+               <Item>'SchedulesListControl.SetSchedules(List&lt;Schedule&gt;)'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#toolTip1">
+            <Messages>
+             <Message TypeName="AvoidUnusedPrivateFields" Category="Microsoft.Performance" CheckId="CA1823" Created="2010-03-27 21:48:43Z">
+              <Issue>
+               <Item>'SchedulesListControl.toolTip1'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#SelectedScheduleChanged" Kind="Event">
+            <Messages>
+             <Message TypeName="DeclareEventHandlersCorrectly" Category="Microsoft.Design" CheckId="CA1009" Created="2010-03-27 21:48:43Z">
+              <Issue Name="First">
+               <Item>'Action&lt;List&lt;Schedule&gt;&gt;'</Item>
+              </Issue>
+              <Issue Name="Second">
+               <Item>'Action&lt;List&lt;Schedule&gt;&gt;'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+          </Members>
+         </Type>
+        </Types>
+       </Namespace>
+       <Namespace Name="WomenCalendar.Forms">
+        <Types>
+         <Type Name="ErrorForm">
+          <Members>
+           <Member Name="#ReReadTranslations()">
+            <Messages>
+             <Message TypeName="DoNotCatchGeneralExceptionTypes" Category="Microsoft.Design" CheckId="CA1031" Created="2010-03-27 21:48:43Z">
+              <Issue>
+               <Item>'ErrorForm.ReReadTranslations()'</Item>
+               <Item>'object'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+          </Members>
+         </Type>
+        </Types>
+       </Namespace>
+      </Namespaces>
+     </Module>
+    </Modules>
+   </Target>
+  </Targets>
+  <Rules>
+   <Rule TypeName="AbstractTypesShouldNotHaveConstructors" Category="Microsoft.Design" CheckId="CA1012">
+    <Resolution Name="Default">Change the accessibility of all public constructors in {0} to protected.</Resolution>
+   </Rule>
+   <Rule TypeName="AssembliesShouldHaveValidStrongNames" Category="Microsoft.Design" CheckId="CA2210">
+    <Resolution Name="NoStrongName">Sign {0} with a strong name key.</Resolution>
+   </Rule>
+   <Rule TypeName="AvoidUncalledPrivateCode" Category="Microsoft.Performance" CheckId="CA1811">
+    <Resolution Name="Default">{0} appears to have no upstream public or protected callers.</Resolution>
+   </Rule>
+   <Rule TypeName="AvoidUnusedPrivateFields" Category="Microsoft.Performance" CheckId="CA1823">
+    <Resolution Name="Default">It appears that field {0} is never used or is only ever assigned to. Use this field or remove it.</Resolution>
+   </Rule>
+   <Rule TypeName="CallGCSuppressFinalizeCorrectly" Category="Microsoft.Usage" CheckId="CA1816">
+    <Resolution Name="NotCalled">Change {0} to call {1}. This will prevent unnecessary finalization of the object once it has been disposed and it has fallen out of scope.</Resolution>
+   </Rule>
+   <Rule TypeName="CollectionPropertiesShouldBeReadOnly" Category="Microsoft.Usage" CheckId="CA2227">
+    <Resolution Name="Default">Change {0} to be read-only by removing the property setter.</Resolution>
+   </Rule>
+   <Rule TypeName="ConsiderPassingBaseTypesAsParameters" Category="Microsoft.Design" CheckId="CA1011">
+    <Resolution Name="Default">Consider changing the type of parameter {0} in {1} from {2} to its base type {3}. This method appears to only require base class members in its implementation. Suppress this violation if there is a compelling reason to require the more derived type in the method signature.</Resolution>
+   </Rule>
+   <Rule TypeName="DeclareEventHandlersCorrectly" Category="Microsoft.Design" CheckId="CA1009">
+    <Resolution Name="First">Declare the first parameter of {0} as an object named 'sender'.</Resolution>
+    <Resolution Name="Second">Declare the second parameter of {0} as an EventArgs, or an instance of a type that extends EventArgs, named 'e'.</Resolution>
+   </Rule>
+   <Rule TypeName="DisposableFieldsShouldBeDisposed" Category="Microsoft.Usage" CheckId="CA2213">
+    <Resolution Name="Default">{0} contains field {1} that is of IDisposable type: {2}. Change the Dispose method on {0} to call Dispose or Close on this field.</Resolution>
+   </Rule>
+   <Rule TypeName="DoNotCallOverridableMethodsInConstructors" Category="Microsoft.Usage" CheckId="CA2214">
+    <Resolution Name="Default">{0} contains a call chain that results in a call to a virtual method defined by the class. Review the following call stack for unintended consequences: {1}</Resolution>
+   </Rule>
+   <Rule TypeName="DoNotCastUnnecessarily" Category="Microsoft.Performance" CheckId="CA1800">
+    <Resolution Name="Parameter">{0}, a parameter, is cast to type {1} multiple times in method {2}. Cache the result of the 'as' operator or direct cast in order to eliminate the redundant {3} instruction.</Resolution>
+   </Rule>
+   <Rule TypeName="DoNotCatchGeneralExceptionTypes" Category="Microsoft.Design" CheckId="CA1031">
+    <Resolution Name="Default">Modify {0} to catch a more specific exception than {1} or rethrow the exception.</Resolution>
+   </Rule>
+   <Rule TypeName="DoNotDeclareVisibleInstanceFields" Category="Microsoft.Design" CheckId="CA1051">
+    <Resolution Name="Default">Because field {0} is visible outside of its declaring type, change its accessibility to private and add a property, with the same accessibility as the field has currently, to provide access to it.</Resolution>
+   </Rule>
+   <Rule TypeName="DoNotDecreaseInheritedMemberVisibility" Category="Microsoft.Usage" CheckId="CA2222">
+    <Resolution Name="Default">Make {0} non-private, mark it as final, or seal its declaring type. This method was originally defined in base class {1}.</Resolution>
+   </Rule>
+   <Rule TypeName="DoNotExposeGenericLists" Category="Microsoft.Design" CheckId="CA1002">
+    <Resolution Name="Default">Change {0} in {1} to use Collection&lt;T&gt;, ReadOnlyCollection&lt;T&gt; or KeyedCollection&lt;K,V&gt;</Resolution>
+   </Rule>
+   <Rule TypeName="DoNotIndirectlyExposeMethodsWithLinkDemands" Category="Microsoft.Security" CheckId="CA2122">
+    <Resolution Name="Default">{0} calls into {1} which has a LinkDemand. By making this call, {1} is indirectly exposed to user code. Review the following call stack that might expose a way to circumvent security protection: {2}</Resolution>
+   </Rule>
+   <Rule TypeName="DoNotInitializeUnnecessarily" Category="Microsoft.Performance" CheckId="CA1805">
+    <Resolution Name="Default">{0} initializes field {1} of type {2} to {3}. Remove this initialization because it will be done automatically by the runtime.</Resolution>
+   </Rule>
+   <Rule TypeName="DoNotRaiseReservedExceptionTypes" Category="Microsoft.Usage" CheckId="CA2201">
+    <Resolution Name="TooGeneric">{0} creates an exception of type {1}, an exception type that is not sufficiently specific and should never be raised by user code. If this exception instance might be thrown, use a different exception type.</Resolution>
+   </Rule>
+   <Rule TypeName="DoNotUseTimersThatPreventPowerStateChanges" Category="Microsoft.Mobility" CheckId="CA1601">
+    <Resolution Name="Default">Modify the call to {0} in method {1} to set the timer interval to a value that's greater than or equal to one second.</Resolution>
+   </Rule>
+   <Rule TypeName="EnumsShouldHaveZeroValue" Category="Microsoft.Design" CheckId="CA1008">
+    <Resolution Name="NotFlagsNoZeroValue">Add a member to {0} that has a value of zero with a suggested name of 'None'.</Resolution>
+   </Rule>
+   <Rule TypeName="IdentifiersShouldBeCasedCorrectly" Category="Microsoft.Naming" CheckId="CA1709">
+    <Resolution Name="Member">Correct the casing of '{0}' in member name {1} by changing it to '{2}'.</Resolution>
+    <Resolution Name="MemberParameter">In member {0}, correct the casing of '{1}' in parameter name {2} by changing it to '{3}'.</Resolution>
+    <Resolution Name="MemberParameterAbbreviation">In member {0}, correct the casing of '{1}' in parameter name {2} by changing it to '{3}'. '{3}' is an abbreviation and therefore is not subject to acronym casing guidelines.</Resolution>
+    <Resolution Name="Type">Correct the casing of '{0}' in type name {1} by changing it to '{2}'.</Resolution>
+   </Rule>
+   <Rule TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704">
+    <Resolution Name="MemberMoreMeaningfulName">Consider providing a more meaningful name than member name {0}.</Resolution>
+    <Resolution Name="MemberParameterMoreMeaningfulName">In method {0}, consider providing a more meaningful name than parameter name {1}.</Resolution>
+   </Rule>
+   <Rule TypeName="IdentifiersShouldDifferByMoreThanCase" Category="Microsoft.Naming" CheckId="CA1708">
+    <Resolution Name="Member">Change member names {0} and '{1}' so that they differ by more than case.</Resolution>
+   </Rule>
+   <Rule TypeName="IdentifiersShouldHaveCorrectPrefix" Category="Microsoft.Naming" CheckId="CA1715">
+    <Resolution Name="TypeTypeParameter">On type {0}, prefix generic type parameter name {1} with 'T'.</Resolution>
+   </Rule>
+   <Rule TypeName="IdentifiersShouldNotContainUnderscores" Category="Microsoft.Naming" CheckId="CA1707">
+    <Resolution Name="Member">Remove the underscores from member name {0}.</Resolution>
+   </Rule>
+   <Rule TypeName="IdentifiersShouldNotMatchKeywords" Category="Microsoft.Naming" CheckId="CA1716">
+    <Resolution Name="Member">Rename virtual/interface member {0} so that it no longer conflicts with the reserved language keyword '{1}'. Using a reserved keyword as the name of a virtual/interface member makes it harder for consumers in other languages to override/implement the member.</Resolution>
+   </Rule>
+   <Rule TypeName="ImplementIDisposableCorrectly" Category="Microsoft.Design" CheckId="CA1063">
+    <Resolution Name="DisposeImplementation">Modify {0} so that it calls Dispose(true), then calls GC.SuppressFinalize on the current object instance ('this' or 'Me' in Visual Basic), and then returns.</Resolution>
+    <Resolution Name="DisposeSignature">Ensure that {0} is declared as public and sealed.</Resolution>
+    <Resolution Name="FinalizeImplementation">Modify {0} so that it calls Dispose(false) and then returns.</Resolution>
+    <Resolution Name="FinalizeOverride">Remove the finalizer from type {0}, override Dispose(bool disposing), and put the finalization logic in the code path where 'disposing' is false.</Resolution>
+   </Rule>
+   <Rule TypeName="ImplementStandardExceptionConstructors" Category="Microsoft.Design" CheckId="CA1032">
+    <Resolution Name="MissingConstructor">Add the following constructor to {0}: {1}.</Resolution>
+   </Rule>
+   <Rule TypeName="InstantiateArgumentExceptionsCorrectly" Category="Microsoft.Usage" CheckId="CA2208">
+    <Resolution Name="IncorrectMessage">Method {0} passes parameter name '{1}' as the {2} argument to a {3} constructor. Replace this argument with a descriptive message and pass the parameter name in the correct position.</Resolution>
+    <Resolution Name="IncorrectParameterName">Method {0} passes '{1}' as the {2} argument to a {3} constructor. Replace this argument with one of the method's parameter names. Note that the provided parameter name should have the exact casing as declared on the method.</Resolution>
+   </Rule>
+   <Rule TypeName="MarkAssembliesWithClsCompliant" Category="Microsoft.Design" CheckId="CA1014">
+    <Resolution Name="Default">Mark {0} with CLSCompliant(true) because it exposes externally visible types.</Resolution>
+   </Rule>
+   <Rule TypeName="MarkAssembliesWithNeutralResourcesLanguage" Category="Microsoft.Performance" CheckId="CA1824">
+    <Resolution Name="Default">Because assembly {0} contains a ResX-based resource file, mark it with the NeutralResourcesLanguage attribute, specifying the language of the resources within the assembly. This could improve lookup performance the first time a resource is retrieved.</Resolution>
+   </Rule>
+   <Rule TypeName="MarkISerializableTypesWithSerializable" Category="Microsoft.Usage" CheckId="CA2237">
+    <Resolution Name="Default">Add [Serializable] to {0} as this type implements ISerializable.</Resolution>
+   </Rule>
+   <Rule TypeName="MarkMembersAsStatic" Category="Microsoft.Performance" CheckId="CA1822">
+    <Resolution Name="Default">The 'this' parameter (or 'Me' in Visual Basic) of {0} is never used. Mark the member as static (or Shared in Visual Basic) or use 'this'/'Me' in the method body or at least one property accessor, if appropriate.</Resolution>
+   </Rule>
+   <Rule TypeName="NestedTypesShouldNotBeVisible" Category="Microsoft.Design" CheckId="CA1034">
+    <Resolution Name="Default">Do not nest type {0}. Alternatively, change its accessibility so that it is not externally visible.</Resolution>
+   </Rule>
+   <Rule TypeName="NonConstantFieldsShouldNotBeVisible" Category="Microsoft.Usage" CheckId="CA2211">
+    <Resolution Name="Default">Consider making {0} non-public or a constant.</Resolution>
+   </Rule>
+   <Rule TypeName="OperationsShouldNotOverflow" Category="Microsoft.Usage" CheckId="CA2233">
+    <Resolution Name="Default">Correct the potential overflow in the operation '{0}' in {1}.</Resolution>
+   </Rule>
+   <Rule TypeName="OverrideLinkDemandsShouldBeIdenticalToBase" Category="Microsoft.Security" CheckId="CA2123">
+    <Resolution Name="BaseOnly">Add the following security attribute to {0} in order to match a LinkDemand on base method {1}:  {2}.</Resolution>
+   </Rule>
+   <Rule TypeName="ParameterNamesShouldMatchBaseDeclaration" Category="Microsoft.Naming" CheckId="CA1725">
+    <Resolution Name="Default">In member {0}, change parameter name {1} to {2} in order to match the identifier as it has been declared in {3}.</Resolution>
+   </Rule>
+   <Rule TypeName="ParameterNamesShouldNotMatchMemberNames" Category="Microsoft.Naming" CheckId="CA1719">
+    <Resolution Name="Default">Change either member or parameter name {0} so that one differs from the other.</Resolution>
+   </Rule>
+   <Rule TypeName="PreferJaggedArraysOverMultidimensional" Category="Microsoft.Performance" CheckId="CA1814">
+    <Resolution Name="Default">{0} is a multidimensional array. Replace it with a jagged array if possible.</Resolution>
+   </Rule>
+   <Rule TypeName="RemoveUnusedLocals" Category="Microsoft.Performance" CheckId="CA1804">
+    <Resolution Name="Default">{0} declares a variable, {1}, of type {2}, which is never used or is only assigned to. Use this variable or remove it.</Resolution>
+   </Rule>
+   <Rule TypeName="ReviewUnusedParameters" Category="Microsoft.Usage" CheckId="CA1801">
+    <Resolution Name="Default">Parameter {0} of {1} is never used. Remove the parameter or use it in the method body.</Resolution>
+   </Rule>
+   <Rule TypeName="ReviewVisibleEventHandlers" Category="Microsoft.Security" CheckId="CA2109">
+    <Resolution Name="Default">Consider making {0} not externally visible.</Resolution>
+   </Rule>
+   <Rule TypeName="SpecifyCultureInfo" Category="Microsoft.Globalization" CheckId="CA1304">
+    <Resolution Name="Default">Because the behavior of {0} could vary based on the current user's locale settings, replace this call in {1} with a call to {2}. If the result of {2} will be displayed to the user, specify 'CultureInfo.CurrentCulture' as the 'CultureInfo' parameter. Otherwise, if the result will be stored and accessed by software, such as when it is persisted to disk or to a database, specify 'CultureInfo.InvariantCulture'.</Resolution>
+   </Rule>
+   <Rule TypeName="SpecifyIFormatProvider" Category="Microsoft.Globalization" CheckId="CA1305">
+    <Resolution Name="Default">Because the behavior of {0} could vary based on the current user's locale settings, replace this call in {1} with a call to {2}. If the result of {2} will be displayed to the user, specify 'CultureInfo.CurrentCulture' as the 'IFormatProvider' parameter. Otherwise, if the result will be stored and accessed by software, such as when it is persisted to disk or to a database, specify 'CultureInfo.InvariantCulture'.</Resolution>
+   </Rule>
+   <Rule TypeName="SpecifyMessageBoxOptions" Category="Microsoft.Globalization" CheckId="CA1300">
+    <Resolution Name="Default">Change {0} to call the MessageBox.Show overload that specifies MessageBoxOptions, and make sure to set MessageBoxOptions.RightAlign and MessageBoxOptions.RtlReading if RightToLeft is set to RightToLeft.Yes on the parent control.</Resolution>
+   </Rule>
+   <Rule TypeName="SpecifyStringComparison" Category="Microsoft.Globalization" CheckId="CA1307">
+    <Resolution Name="Default">{0} makes a call to {1} that does not explicitly provide a StringComparison. This should be replaced with a call to {2}.</Resolution>
+   </Rule>
+   <Rule TypeName="StaticHolderTypesShouldNotHaveConstructors" Category="Microsoft.Design" CheckId="CA1053">
+    <Resolution Name="Default">Remove the public constructors from {0}.</Resolution>
+   </Rule>
+   <Rule TypeName="TypeNamesShouldNotMatchNamespaces" Category="Microsoft.Naming" CheckId="CA1724">
+    <Resolution Name="System">The type name {0} conflicts in whole or in part with the namespace name '{1}' defined in the .NET Framework. Rename the type to eliminate the conflict.</Resolution>
+   </Rule>
+   <Rule TypeName="UseGenericEventHandlerInstances" Category="Microsoft.Design" CheckId="CA1003">
+    <Resolution Name="Default">Remove {0} and replace its usage with EventHandler&lt;T&gt;</Resolution>
+   </Rule>
+   <Rule TypeName="UseIntegralOrStringArgumentForIndexers" Category="Microsoft.Design" CheckId="CA1043">
+    <Resolution Name="Default">Use an integral value or string as the parameter to indexer {0}.</Resolution>
+   </Rule>
+   <Rule TypeName="UseLiteralsWhereAppropriate" Category="Microsoft.Performance" CheckId="CA1802">
+    <Resolution Name="Default">Field {0} is declared as 'static readonly' but is initialized with a constant value '{1}'. Mark this field as 'const' instead.</Resolution>
+   </Rule>
+   <Rule TypeName="UsePreferredTerms" Category="Microsoft.Naming" CheckId="CA1726">
+    <Resolution Name="Type">Replace the term '{0}' in type name {1} with the preferred alternate '{2}'.</Resolution>
+   </Rule>
+   <Rule TypeName="UsePropertiesWhereAppropriate" Category="Microsoft.Design" CheckId="CA1024">
+    <Resolution Name="Default">Change {0} to a property if appropriate.</Resolution>
+   </Rule>
+  </Rules>
+ </FxCopReport>
+</FxCopProject>

@@ -1,6 +1,6 @@
 This is the quick guide on how to work with the solution.
 
-How to code same style as the current code?
+How to easily code using same style as the current code?
 1) Download and install StyleCop from the Microsoft site.
 2) Right click on any file/folder/project in Solution Explorer and select "Run StyleCop".
 3) Follow the warning instructions if any and change the code accordingly.
@@ -23,3 +23,9 @@ How to add one more translation?
 
 How to make sure all text of all lang files are translated?
 1) Run unit test named AllTextIsTranslated.
+
+How to run FxCop?
+1) Install FxCop.
+2) Double click 'ovulyashki.FxCop' file near the solution file.
+3) Click 'Analyze'.
+4) See the problems and solve them.
