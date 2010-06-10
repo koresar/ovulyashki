@@ -417,10 +417,9 @@ namespace WomenCalendar
             {
                 if (date > DateTime.Today)
                 {
-                    if (MessageBox.Show(
+                    if (!MsgBox.YesNo(
                         TEXT.Get["Future_pregnancy_day"] + TEXT.Get["Are_you_sure_capital"],
-                        TEXT.Get["What_a_situation"], 
-                        MessageBoxButtons.YesNo) != DialogResult.Yes)
+                        TEXT.Get["What_a_situation"]))
                     {
                         return false;
                     }
@@ -429,7 +428,7 @@ namespace WomenCalendar
                 ConceptionPeriod concPeriod = this.Conceptions.GetConceptionAfterDate(date);
                 if (concPeriod != null && (concPeriod.StartDay - date).Days <= ConceptionPeriod.StandardLength)
                 {
-                    MessageBox.Show(
+                    MsgBox.YesNo(
                         TEXT.Get.Format("Already_pregnant_after", (concPeriod.StartDay - date).Days.ToString()), 
                         TEXT.Get["No_no_no"]);
                     return false;
@@ -438,10 +437,9 @@ namespace WomenCalendar
                 MenstruationPeriod nextMenses = this.Menstruations.GetClosestPeriodAfterDay(date);
                 if (nextMenses != null)
                 {
-                    if (MessageBox.Show(
+                    if (!MsgBox.YesNo(
                         TEXT.Get["Have_menses_after_pregn"] + TEXT.Get["Are_you_sure_capital"],
-                        TEXT.Get["What_a_situation"], 
-                        MessageBoxButtons.YesNo) != DialogResult.Yes)
+                        TEXT.Get["What_a_situation"]))
                     {
                         return false;
                     }
@@ -450,10 +448,9 @@ namespace WomenCalendar
                 MenstruationPeriod prevMenses = this.Menstruations.GetPeriodByDate(date);
                 if (prevMenses != null)
                 {
-                    if (MessageBox.Show(
+                    if (!MsgBox.YesNo(
                         TEXT.Get["Pregn_on_menses"] + TEXT.Get["Are_you_sure_capital"],
-                        TEXT.Get["What_a_situation"], 
-                        MessageBoxButtons.YesNo) != DialogResult.Yes)
+                        TEXT.Get["What_a_situation"]))
                     {
                         return false;
                     }

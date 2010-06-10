@@ -50,10 +50,9 @@ namespace WomenCalendar
             MenstruationPeriod closestPeriod = this.GetClosestPeriodAfterDay(date);
             if (closestPeriod != null)
             {
-                if (MessageBox.Show(
+                if (!MsgBox.YesNo(
                     TEXT.Get["Menstr_after_day"] + TEXT.Get["Are_you_sure_capital"], 
-                    TEXT.Get["Are_you_crazy"], 
-                    MessageBoxButtons.YesNo) != DialogResult.Yes)
+                    TEXT.Get["Are_you_crazy"]))
                 {
                     return false;
                 }
@@ -94,11 +93,10 @@ namespace WomenCalendar
                     askMessage += "\n" + TEXT.Get["Future_day_question"];
                 }
 
-                if (!string.IsNullOrEmpty(askMessage) && 
-                    MessageBox.Show(
+                if (!string.IsNullOrEmpty(askMessage) &&
+                    !MsgBox.YesNo(
                         askMessage + TEXT.Get["Are_you_sure_capital"],
-                        TEXT.Get["What_a_situation"], 
-                        MessageBoxButtons.YesNo) != DialogResult.Yes)
+                        TEXT.Get["What_a_situation"]))
                 {
                     return false;
                 }

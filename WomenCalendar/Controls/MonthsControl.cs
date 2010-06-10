@@ -429,8 +429,8 @@ namespace WomenCalendar
             var period = Program.CurrentWoman.Conceptions.GetConceptionByDate(FocusDate);
             if (period != null)
             {
-                if (MessageBox.Show(TEXT.Get["Shorten_pregn_question"], 
-                    TEXT.Get["Are_you_sure"], MessageBoxButtons.YesNo) == DialogResult.Yes)
+                if (MsgBox.YesNo(TEXT.Get["Shorten_pregn_question"], 
+                    TEXT.Get["Are_you_sure"]))
                 {
                     period.LastDay = FocusDate;
                     Redraw();

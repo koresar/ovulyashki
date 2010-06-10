@@ -234,10 +234,9 @@ namespace WomenCalendar
             if (Program.CurrentWoman.ManualPeriodLength <= MenstruationPeriod.NormalMaximalPeriod && 
                 newValue > MenstruationPeriod.NormalMaximalPeriod)
             {
-                if (MessageBox.Show(this,
+                if (!MsgBox.YesNo(
                     TEXT.Get.Format("Cycle_more_than", MenstruationPeriod.NormalMaximalPeriod),
-                    TEXT.Get["What_a_cycle"],
-                    MessageBoxButtons.YesNo, MessageBoxIcon.Question) != DialogResult.Yes)
+                    TEXT.Get["What_a_cycle"]))
                 {
                     numMenstruationPeriod.Value = Program.CurrentWoman.ManualPeriodLength;
                     lblMyCycle2.Text = TEXT.GetDaysString(Program.CurrentWoman.ManualPeriodLength);

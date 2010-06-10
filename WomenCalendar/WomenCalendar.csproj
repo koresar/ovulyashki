@@ -78,6 +78,7 @@
     <Compile Include="BusinessLogic\ApplicationSettings.cs" />
     <Compile Include="BusinessLogic\AppUpdater.cs" />
     <Compile Include="BusinessLogic\MonthAppearance.cs" />
+    <Compile Include="BusinessLogic\MsgBox.cs" />
     <Compile Include="BusinessLogic\TranslationException.cs" />
     <Compile Include="BusinessLogic\Report\CsvWriter.cs" />
     <Compile Include="BusinessLogic\HoroscopeDatePair.cs" />

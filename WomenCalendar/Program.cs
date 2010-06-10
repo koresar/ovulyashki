@@ -117,11 +117,29 @@ namespace WomenCalendar
         }
 
         /// <summary>
-        /// Saves current woman to the given file path.
+        /// Saves current woman to the given file path. Synch all necessary 'current' static variables.
         /// </summary>
         /// <param name="path">Path to the new/overwritten file.</param>
         /// <returns>True if file successfully saved.</returns>
         public static bool SaveCurrentWomanTo(string path)
+        {
+            if (SaveWomanTo(currentWoman, path))
+            {
+                currentWoman.AssociatedFile = path;
+                currentWomanClone = currentWoman.Clone() as Woman;
+                return true;
+            }
+
+            return false;
+        }
+
+        /// <summary>
+        /// Saves a woman to the given path.
+        /// </summary>
+        /// <param name="w">Woamn to save.</param>
+        /// <param name="path"><Path to the new/overwritten file./param>
+        /// <returns>True if file successfully saved.</returns>
+        public static bool SaveWomanTo(Woman w, string path)
         {
             BZip2OutputStream stream;
             try
@@ -130,16 +148,12 @@ namespace WomenCalendar
             }
             catch (IOException ex)
             {
-                MessageBox.Show(TEXT.Get["Unable_to_save_file"] + ex.Message, TEXT.Get["Error"]);
+                MsgBox.Error(TEXT.Get["Unable_to_save_file"] + ex.Message, TEXT.Get["Error"]);
                 return false;
             }
 
-            new XmlSerializer(currentWoman.GetType()).Serialize(stream, currentWoman);
+            new XmlSerializer(w.GetType()).Serialize(stream, w);
             stream.Close();
-
-            currentWoman.AssociatedFile = path;
-
-            currentWomanClone = currentWoman.Clone() as Woman;
 
             return true;
         }
@@ -270,7 +284,7 @@ namespace WomenCalendar
 
                 if (form.Password != woman.Password)
                 {
-                    if (MessageBox.Show(TEXT.Get["Wrong_password_question"], TEXT.Get["Error"], MessageBoxButtons.YesNo) != DialogResult.Yes)
+                    if (!MsgBox.YesNo(TEXT.Get["Wrong_password_question"], TEXT.Get["Error"]))
                     {
                         break;
                     }
@@ -339,7 +353,7 @@ namespace WomenCalendar
             if (!fileName.EndsWith(".csv", StringComparison.OrdinalIgnoreCase) && 
                 !fileName.EndsWith(".xls", StringComparison.OrdinalIgnoreCase))
             {
-                MessageBox.Show(TEXT.Get["File_ext_must_to_be"], TEXT.Get["Error"]);
+                MsgBox.Show(TEXT.Get["File_ext_must_to_be"], TEXT.Get["Error"]);
                 return false;
             }
 
@@ -357,7 +371,7 @@ namespace WomenCalendar
             }
             catch (Exception ex)
             {
-                MessageBox.Show(TEXT.Get["Cant_export"] + "\n" + ex.Message, TEXT.Get["Error"]);
+                MsgBox.Error(TEXT.Get["Cant_export"] + "\n" + ex.Message, TEXT.Get["Error"]);
                 return false;
             }
 

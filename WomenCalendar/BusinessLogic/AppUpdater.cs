@@ -59,7 +59,7 @@ namespace WomenCalendar
                     bool updateUs = false;
                     Program.ApplicationForm.Invoke(new MethodInvoker(() =>
                     {
-                        updateUs = MessageBox.Show(release.GetFormattedText(), TEXT.Get["Ovulyashki"], MessageBoxButtons.YesNo) == DialogResult.Yes;
+                        updateUs = MsgBox.YesNo(release.GetFormattedText(), TEXT.Get["Ovulyashki"]);
                     }));
                     if (updateUs)
                     {
@@ -70,7 +70,7 @@ namespace WomenCalendar
                 {
                     Program.ApplicationForm.BeginInvoke(new MethodInvoker(() =>
                     {
-                        MessageBox.Show(TEXT.Get["Latest_application"], TEXT.Get["Ovulyashki"]);
+                        MsgBox.Show(TEXT.Get["Latest_application"], TEXT.Get["Ovulyashki"]);
                     }));
                 }
             }
@@ -78,7 +78,7 @@ namespace WomenCalendar
             {
                 Program.ApplicationForm.BeginInvoke(new MethodInvoker(() =>
                 {
-                    MessageBox.Show(TEXT.Get.Format("Unable_to_update", ex.Message), TEXT.Get["Error"]);
+                    MsgBox.Error(TEXT.Get.Format("Unable_to_update", ex.Message), TEXT.Get["Error"]);
                 }));
             }
         }

@@ -267,7 +267,7 @@ namespace WomenCalendar
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Unable to load language file " + fileToLoad + " due to:\n" + ex.Message);
+                MsgBox.Error("Unable to load language file " + fileToLoad + " due to:\n" + ex.Message, TEXT.Get["Error"]);
                 texts = null;
                 return false;
             }
