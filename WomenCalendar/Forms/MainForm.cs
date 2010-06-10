@@ -359,6 +359,9 @@ namespace WomenCalendar
         private void dayLegendMenstruations_Click(object sender, EventArgs e)
         {
             var dialog = new ColorDialog();
+            dialog.AllowFullOpen = true;
+            dialog.CustomColors= Program.Settings.DayCellAppearance.ReintArr();
+            dialog.Color=(sender as DayCellControl).BackColor;
             if (dialog.ShowDialog(this) == DialogResult.OK)
             {
                 var colorID = (sender as DayCellControl).BackColorIdAppearance;

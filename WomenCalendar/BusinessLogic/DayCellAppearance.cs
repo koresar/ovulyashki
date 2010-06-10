@@ -341,5 +341,35 @@ namespace WomenCalendar
 
             return false;
         }
+        /// <summary>
+        /// Метод преобразует цвет из формата Color в int
+        /// </summary>
+        /// <param name="col"></param>
+        /// <returns></returns>
+        private int Convert_Color_BGR(Color col)
+        {
+            return (col.B << 16) + (col.G << 8) + col.R;
+        }
+        /// <summary>
+        /// Метод возврошает 13 цветов в виде масива
+        /// </summary>
+        public int[] ReintArr()
+        {
+            int[] mm = new int[12];
+            mm[0] = Convert_Color_BGR(BackMenstruationDay);
+            mm[1] = Convert_Color_BGR(BackSafeSex);
+            mm[2] = Convert_Color_BGR(BackPredictedMenstruationDay);
+            mm[3] = Convert_Color_BGR(BackOvulationDay);
+            mm[4] = Convert_Color_BGR(BackPregnancyDay);
+            mm[5] = Convert_Color_BGR(BackConceptionDay);
+            mm[6] = Convert_Color_BGR(BackPregnancyDay);
+            mm[7] = Convert_Color_BGR(BackEmpty);
+            mm[8] = Convert_Color_BGR(BackHaveNote);
+            mm[9] = Convert_Color_BGR(BackHadSex);
+            mm[10] = Convert_Color_BGR(BackBoyDay);
+            mm[11] =Convert_Color_BGR(BackGirlDay);
+            return mm;
+
+        }
     }
 }
