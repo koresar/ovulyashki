@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Windows.Forms;
 using System.Xml.Serialization;
@@ -23,26 +24,37 @@ namespace WomenCalendar
         private static Brush hadSexBrush = Brushes.Red;
 
         [XmlIgnore]
+        [ColorInfo(Type = "CustomColors")]
         private Color backConceptionDay = Color.DeepSkyBlue;
         [XmlIgnore]
+        [ColorInfo(Type = "CustomColors")]
         private Color backPregnancyDay = Color.LightCyan;
         [XmlIgnore]
+        [ColorInfo(Type = "CustomColors")]
         private Color backMenstruationDay = Color.LightPink;
         [XmlIgnore]
+        [ColorInfo(Type = "CustomColors")]
         private Color backPredictedMenstruationDay = ControlPaint.LightLight(Color.LightPink);
         [XmlIgnore]
+        [ColorInfo(Type = "CustomColors")]
         private Color backOvulationDay = Color.Gold;
         [XmlIgnore]
+        [ColorInfo(Type = "CustomColors")]
         private Color backSafeSex = Color.LightGreen;
         [XmlIgnore]
+        [ColorInfo(Type = "CustomColors")]
         private Color backEmpty = Color.White;
         [XmlIgnore]
+        [ColorInfo(Type = "CustomColors")]
         private Color backHadSex = Color.White;
         [XmlIgnore]
+        [ColorInfo(Type = "CustomColors")]
         private Color backHaveNote = Color.White;
         [XmlIgnore]
+        [ColorInfo(Type = "CustomColors")]
         private Color backBoyDay = Color.White;
         [XmlIgnore]
+        [ColorInfo(Type = "CustomColors")]
         private Color backGirlDay = Color.White;
 
         /// <summary>
@@ -341,35 +353,65 @@ namespace WomenCalendar
 
             return false;
         }
+        
         /// <summary>
-        /// Метод преобразует цвет из формата Color в int
+        /// Метод возвращает целочисленный массив, в котором содержаться предопределенные цвета. 
+        /// Целочисленный массив специально преобразован для записи в поле ColorDialog.CustomColors 
         /// </summary>
-        /// <param name="col"></param>
-        /// <returns></returns>
-        private int Convert_Color_BGR(Color col)
+        /// <returns>int[] - в котором содержаться предопределенные цвета </returns>
+        public int[] GetAllCurrentColorsAsArgb()
         {
-            return (col.B << 16) + (col.G << 8) + col.R;
-        }
-        /// <summary>
-        /// Метод возврошает 13 цветов в виде масива
-        /// </summary>
-        public int[] ReintArr()
-        {
-            int[] mm = new int[12];
-            mm[0] = Convert_Color_BGR(BackMenstruationDay);
-            mm[1] = Convert_Color_BGR(BackSafeSex);
-            mm[2] = Convert_Color_BGR(BackPredictedMenstruationDay);
-            mm[3] = Convert_Color_BGR(BackOvulationDay);
-            mm[4] = Convert_Color_BGR(BackPregnancyDay);
-            mm[5] = Convert_Color_BGR(BackConceptionDay);
-            mm[6] = Convert_Color_BGR(BackPregnancyDay);
-            mm[7] = Convert_Color_BGR(BackEmpty);
-            mm[8] = Convert_Color_BGR(BackHaveNote);
-            mm[9] = Convert_Color_BGR(BackHadSex);
-            mm[10] = Convert_Color_BGR(BackBoyDay);
-            mm[11] =Convert_Color_BGR(BackGirlDay);
-            return mm;
+            int[] mm = new int[this.SizeColor()];
+            int i = 0;
+            foreach (var prop in this.GetType().GetFields(BindingFlags.NonPublic | BindingFlags.Instance))
+            {
+                var attribute = prop.GetCustomAttributes(typeof(ColorInfoAttribute), false).FirstOrDefault() as ColorInfoAttribute;
+                if (attribute != null && attribute.Type == "CustomColors")
+                {
+                    Color col = (Color)prop.GetValue(this);
+                    mm[i] = (col.B << 16) + (col.G << 8) + col.R;
+                    i++;
+                }
+            }
 
+            return mm;
+        }
+        
+        /// <summary>
+        /// Метод подсчитывает количество переменных цвета.
+        /// </summary>
+        /// <returns>количество переменных цвета</returns>
+        private int SizeColor()
+        {
+            int i = 0;
+            foreach (var prop in this.GetType().GetFields(BindingFlags.NonPublic | BindingFlags.Instance))
+            {
+                var attribute = prop.GetCustomAttributes(typeof(ColorInfoAttribute), false).FirstOrDefault() as ColorInfoAttribute;
+
+                if (attribute != null && attribute.Type == "CustomColors")
+                {
+                    i++;
+                }
+            }
+
+            return i;
+        }
+
+        /// <summary>
+        /// Тип атрибут, нужен для обозначения переменных используемых как предопределенные цвета.
+        /// </summary>
+        private sealed class ColorInfoAttribute : System.Attribute
+        {
+            private string collorType;
+
+            /// <summary>
+            /// Тип атрибута
+            /// </summary>
+            public string Type
+            {
+                get { return this.collorType; }
+                set { this.collorType = value; }
+            }
         }
     }
 }

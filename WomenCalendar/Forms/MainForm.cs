@@ -359,8 +359,8 @@ namespace WomenCalendar
         {
             var dialog = new ColorDialog();
             dialog.AllowFullOpen = true;
-            dialog.CustomColors= Program.Settings.DayCellAppearance.ReintArr();
-            dialog.Color=(sender as DayCellControl).BackColor;
+            dialog.CustomColors = Program.Settings.DayCellAppearance.GetAllCurrentColorsAsArgb();
+            dialog.Color = (sender as DayCellControl).BackColor;
             if (dialog.ShowDialog(this) == DialogResult.OK)
             {
                 var colorID = (sender as DayCellControl).BackColorIdAppearance;
