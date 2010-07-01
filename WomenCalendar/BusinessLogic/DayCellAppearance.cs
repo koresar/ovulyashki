@@ -24,37 +24,37 @@ namespace WomenCalendar
         private static Brush hadSexBrush = Brushes.Red;
 
         [XmlIgnore]
-        [ColorInfo(Type = "CustomColors")]
+        [UserCustomizableColor]
         private Color backConceptionDay = Color.DeepSkyBlue;
         [XmlIgnore]
-        [ColorInfo(Type = "CustomColors")]
+        [UserCustomizableColor]
         private Color backPregnancyDay = Color.LightCyan;
         [XmlIgnore]
-        [ColorInfo(Type = "CustomColors")]
+        [UserCustomizableColor]
         private Color backMenstruationDay = Color.LightPink;
         [XmlIgnore]
-        [ColorInfo(Type = "CustomColors")]
+        [UserCustomizableColor]
         private Color backPredictedMenstruationDay = ControlPaint.LightLight(Color.LightPink);
         [XmlIgnore]
-        [ColorInfo(Type = "CustomColors")]
+        [UserCustomizableColor]
         private Color backOvulationDay = Color.Gold;
         [XmlIgnore]
-        [ColorInfo(Type = "CustomColors")]
+        [UserCustomizableColor]
         private Color backSafeSex = Color.LightGreen;
         [XmlIgnore]
-        [ColorInfo(Type = "CustomColors")]
+        [UserCustomizableColor]
         private Color backEmpty = Color.White;
         [XmlIgnore]
-        [ColorInfo(Type = "CustomColors")]
+        [UserCustomizableColor]
         private Color backHadSex = Color.White;
         [XmlIgnore]
-        [ColorInfo(Type = "CustomColors")]
+        [UserCustomizableColor]
         private Color backHaveNote = Color.White;
         [XmlIgnore]
-        [ColorInfo(Type = "CustomColors")]
+        [UserCustomizableColor]
         private Color backBoyDay = Color.White;
         [XmlIgnore]
-        [ColorInfo(Type = "CustomColors")]
+        [UserCustomizableColor]
         private Color backGirlDay = Color.White;
 
         /// <summary>
@@ -361,57 +361,25 @@ namespace WomenCalendar
         /// <returns>int[] - в котором содержаться предопределенные цвета </returns>
         public int[] GetAllCurrentColorsAsArgb()
         {
-            int[] mm = new int[this.SizeColor()];
-            int i = 0;
+            List<int> userCostomizableColors = new List<int>();
             foreach (var prop in this.GetType().GetFields(BindingFlags.NonPublic | BindingFlags.Instance))
             {
-                var attribute = prop.GetCustomAttributes(typeof(ColorInfoAttribute), false).FirstOrDefault() as ColorInfoAttribute;
-                if (attribute != null && attribute.Type == "CustomColors")
+                var attribute = prop.GetCustomAttributes(typeof(UserCustomizableColorAttribute), false).FirstOrDefault() as UserCustomizableColorAttribute;
+                if (attribute != null)
                 {
                     Color col = (Color)prop.GetValue(this);
-                    mm[i] = (col.B << 16) + (col.G << 8) + col.R;
-                    i++;
+                    userCostomizableColors.Add((col.B << 16) + (col.G << 8) + col.R);
                 }
             }
 
-            return mm;
+            return userCostomizableColors.ToArray();
         }
         
         /// <summary>
-        /// Метод подсчитывает количество переменных цвета.
-        /// </summary>
-        /// <returns>количество переменных цвета</returns>
-        private int SizeColor()
-        {
-            int i = 0;
-            foreach (var prop in this.GetType().GetFields(BindingFlags.NonPublic | BindingFlags.Instance))
-            {
-                var attribute = prop.GetCustomAttributes(typeof(ColorInfoAttribute), false).FirstOrDefault() as ColorInfoAttribute;
-
-                if (attribute != null && attribute.Type == "CustomColors")
-                {
-                    i++;
-                }
-            }
-
-            return i;
-        }
-
-        /// <summary>
         /// Тип атрибут, нужен для обозначения переменных используемых как предопределенные цвета.
         /// </summary>
-        private sealed class ColorInfoAttribute : System.Attribute
+        private sealed class UserCustomizableColorAttribute : System.Attribute
         {
-            private string collorType;
-
-            /// <summary>
-            /// Тип атрибута
-            /// </summary>
-            public string Type
-            {
-                get { return this.collorType; }
-                set { this.collorType = value; }
-            }
         }
     }
 }
