@@ -65,7 +65,7 @@ namespace WomenCalendar.UnitTests
         [TestMethod()]
         public void GetAllCurrentColorsAsArgbTest()
         {
-            DayCellAppearance target = new DayCellAppearance(); // TODO: инициализация подходящего значения
+            DayCellAppearance target = new DayCellAppearance();
             target.BackConceptionDay = Color.DeepSkyBlue;
             target.BackPregnancyDay = Color.LightCyan;
             target.BackMenstruationDay = Color.LightPink;
@@ -77,7 +77,7 @@ namespace WomenCalendar.UnitTests
             target.BackHaveNote = Color.White;
             target.BackBoyDay = Color.White;
             target.BackGirlDay = Color.White;
-            int[] expected = new int[11]; // TODO: инициализация подходящего значения
+            int[] expected = new int[11]; 
             expected[0] = 16760576;    
             expected[1] = 16777184;
             expected[2] = 12695295;    
