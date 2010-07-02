@@ -364,7 +364,8 @@ namespace WomenCalendar
             List<int> userCostomizableColors = new List<int>();
             foreach (var prop in this.GetType().GetFields(BindingFlags.NonPublic | BindingFlags.Instance))
             {
-                var attribute = prop.GetCustomAttributes(typeof(UserCustomizableColorAttribute), false).FirstOrDefault() as UserCustomizableColorAttribute;
+                var attribute = prop.GetCustomAttributes(typeof(UserCustomizableColorAttribute), false).
+                    FirstOrDefault() as UserCustomizableColorAttribute;
                 if (attribute != null)
                 {
                     Color col = (Color)prop.GetValue(this);
