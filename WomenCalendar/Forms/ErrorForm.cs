@@ -14,8 +14,10 @@ namespace WomenCalendar.Forms
     /// </summary>
     public partial class ErrorForm : Form, ITranslatable
     {
+        public static bool DoNotShow { get; set; }
+
         /// <summary>
-        /// DEfault window constructor.
+        /// Default window constructor.
         /// </summary>
         public ErrorForm()
         {
@@ -32,6 +34,11 @@ namespace WomenCalendar.Forms
         /// <param name="ex">The exception to show.</param>
         public static void Show(Exception ex)
         {
+            if (DoNotShow)
+            {
+                throw ex;
+            }
+
             var form = new ErrorForm();
             form.txtError.Text = Assembly.GetEntryAssembly().GetName().Version.ToString() + Environment.NewLine + 
                 ex.Message + Environment.NewLine + 

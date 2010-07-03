@@ -217,7 +217,7 @@ namespace WomenCalendar
         }
 
         /// <summary>
-        /// Check if ше is more probable to bleed that day.
+        /// Check if it is more probable to bleed that day.
         /// </summary>
         /// <param name="date">Day to check.</param>
         /// <returns>True if predicted as bleeding day; otherwise - false.</returns>

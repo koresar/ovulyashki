@@ -7,7 +7,7 @@ using System.Xml.Serialization;
 namespace WomenCalendar
 {
     /// <summary>
-    /// The serializable egestas collection.
+    /// The serializable egestas (amount of bleeding) collection.
     /// </summary>
     [XmlRoot("Egestas")]
     public class EgestasCollection : SerializableEventsCollection<int>

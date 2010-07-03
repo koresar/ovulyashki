@@ -60,7 +60,7 @@ namespace WomenCalendar
         public DateTime StartDay { get; set; }
 
         /// <summary>
-        /// The egesta values collection.
+        /// The egesta (amount of bleeding) values collection.
         /// </summary>
         public EgestasCollection Egestas { get; set; }
 
