@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="utf-8" ?>
 <translation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <item id="Ovulyashki">Авуляшкi</item>
   <item id="Ovulyashki_of">Авуляшкi прыгажуні па імі {0}</item>
@@ -26,7 +26,7 @@
   <item id="Possible_menst">Верагодныя менструашки</item>
   <item id="Estimated_ovulation_day">Гэта прыкладны дзень авуляцыi</item>
   <item id="Boy_conception_day">Больш верагодна зачацце хлопчыка</item>
-  <item id="Girl_conception_day"></item>
+  <item id="Girl_conception_day">Больш верагодна зачацце дзяўчынкі</item>
   <item id="If_conceive_info">Калі ты ў гэты дзень зачала дзіцяці,
 то ён народзіцца прыкладна {0}.
 Знак задыяка будзе {1}.</item>
@@ -170,7 +170,7 @@
   <item id="Legend_pregn_week">Нумар тыдня цяжарнасці</item>
   <item id="Legend_conception_day">Дзень зачацця</item>
   <item id="Legend_pregnancy">Цяжарнасць</item>
-  <item id="Legend_ovulation_day">Дзень овуляцыi</item>
+  <item id="Legend_ovulation_day">Дзень авуляцыi</item>
   <item id="Legend_future_menses">Дзень будучых менструацый</item>
   <item id="Legend_min_conception_probapility">Дні з найменшай верагоднасцю зачацця</item>
   <item id="Legend_menses">Менструацыi</item>
