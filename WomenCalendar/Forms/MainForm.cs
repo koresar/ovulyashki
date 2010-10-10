@@ -189,7 +189,6 @@ namespace WomenCalendar
             e.Cancel = !Program.AskAndSaveCurrentWoman();
             if (!e.Cancel)
             {
-
                 // Beginning the part where we collect all application settings
                 if (chbDefaultWoman.Checked)
                 {
@@ -197,12 +196,6 @@ namespace WomenCalendar
                 }
                 // End of the settings collectioning part.
 
-                /*Program.Settings.DefaultWindowIsMaximized = (WindowState == FormWindowState.Maximized);
-                if (!Program.Settings.DefaultWindowIsMaximized)
-                {
-                    Program.Settings.DefaultWindowPosition = Location;
-                    Program.Settings.DefaultWindowSize = Size;
-                }*/
                 Program.SaveSettings();
             }
         }

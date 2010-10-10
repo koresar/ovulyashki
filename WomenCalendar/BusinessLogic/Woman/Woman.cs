@@ -160,39 +160,31 @@ namespace WomenCalendar
         /// <returns>Newly loaded woman object.</returns>
         public static Woman ReadFrom(string path)
         {
+            Woman w = null;
+            var fs = new FileStream(path, FileMode.Open);
             try
             {
-                Woman w = null;
-                var fs = new FileStream(path, FileMode.Open);
-                try
-                {
-                    var s = new BZip2InputStream(fs);
-                    w = (Woman)new XmlSerializer(typeof(Woman)).Deserialize(s);
-                    s.Close();
-                }
-                catch (BZip2Exception)
-                { // old file type support
-                    fs.Seek(0, SeekOrigin.Begin);
-                    w = (Woman)new XmlSerializer(typeof(Woman)).Deserialize(fs);
-                }
-                finally
-                {
-                    fs.Close();
-                }
-
-                if (w == null)
-                {
-                    return null;
-                }
-
-                w.AssociatedFile = path;
-                return w;
+                var s = new BZip2InputStream(fs);
+                w = (Woman)new XmlSerializer(typeof(Woman)).Deserialize(s);
+                s.Close();
             }
-            catch (Exception ex)
+            catch (BZip2Exception)
+            { // old file type support
+                fs.Seek(0, SeekOrigin.Begin);
+                w = (Woman)new XmlSerializer(typeof(Woman)).Deserialize(fs);
+            }
+            finally
             {
-                ErrorForm.Show(ex);
+                fs.Close();
+            }
+
+            if (w == null)
+            {
                 return null;
             }
+
+            w.AssociatedFile = path;
+            return w;
         }
 
         /// <summary>

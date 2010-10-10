@@ -141,19 +141,47 @@ namespace WomenCalendar
         /// <returns>True if file successfully saved.</returns>
         public static bool SaveWomanTo(Woman w, string path)
         {
-            BZip2OutputStream stream;
             try
             {
-                stream = new BZip2OutputStream(new FileStream(path, FileMode.Create), 9);
+                // Serialize to memory stream to make sure data is serializable.
+                var saveMemoryStream = new MemoryStream();
+                var testSaveDataStream = new BZip2OutputStream(saveMemoryStream, 9);
+
+                // Make sure serialization goes well.
+                new XmlSerializer(w.GetType()).Serialize(testSaveDataStream, w);
+                testSaveDataStream.Close();
+                var data = saveMemoryStream.ToArray();
+
+                testSaveDataStream.Close();
+
+                // Dispose resources.
+                saveMemoryStream.Dispose();
+                testSaveDataStream.Dispose();
+
+                // Prepare to read the saved data.
+                var loadMemoryStream = new MemoryStream(data);
+                var testLoadDataStream = new BZip2InputStream(loadMemoryStream);
+                
+                // Make sure we can read it back.
+                new XmlSerializer(typeof(Woman)).Deserialize(testLoadDataStream);
+                testLoadDataStream.Close();
+
+                // Dispose resources.
+                loadMemoryStream.Dispose();
+                testLoadDataStream.Dispose();
+                
+                // Make sure we have access to the file system.
+                var filestream = new FileStream(path, FileMode.Create);
+
+                // Save to file.
+                filestream.Write(data, 0, data.Length);
+                filestream.Close();
             }
-            catch (IOException ex)
+            catch (Exception ex)
             {
                 MsgBox.Error(TEXT.Get["Unable_to_save_file"] + ex.Message, TEXT.Get["Error"]);
                 return false;
             }
-
-            new XmlSerializer(w.GetType()).Serialize(stream, w);
-            stream.Close();
 
             return true;
         }
