@@ -168,12 +168,18 @@ namespace WomenCalendar
 
         private void btnPrevPeriod_Click(object sender, EventArgs e)
         {
-            cmbPeriods.SelectedIndex = cmbPeriods.SelectedIndex - 1;
+            if (cmbPeriods.Items.Count > 0)
+            {
+                cmbPeriods.SelectedIndex = cmbPeriods.SelectedIndex - 1;
+            }
         }
 
         private void btnNextPeriod_Click(object sender, EventArgs e)
         {
-            cmbPeriods.SelectedIndex = cmbPeriods.SelectedIndex + 1;
+            if (cmbPeriods.Items.Count > 0)
+            {
+                cmbPeriods.SelectedIndex = cmbPeriods.SelectedIndex + 1;
+            }
         }
 
         private void cmbPeriods_SelectedIndexChanged(object sender, EventArgs e)
