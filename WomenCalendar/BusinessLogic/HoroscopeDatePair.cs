@@ -50,7 +50,7 @@ namespace WomenCalendar
         /// <returns>Translated zodiac sign name.</returns>
         public static string GetZodiacSignName(DateTime date)
         {
-            return zodiacSigns.First(sign => sign.IsInRange(date)).name;
+            return TEXT.Get[zodiacSigns.First(sign => sign.IsInRange(date)).name];
         }
 
         private bool IsInRange(DateTime date)
