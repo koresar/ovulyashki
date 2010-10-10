@@ -218,4 +218,5 @@ Would you like to download it now?</item>
   <item id="Click_to_edit_color">Click to edit color...</item>
   <item id="Ovulation">Ovulation</item>
   <item id="Unable_to_save_file">Unable to save file. The reason: </item>
+  <item id="Unable_to_start_browser">Unable to start browser for the url: </item>
 </translation>

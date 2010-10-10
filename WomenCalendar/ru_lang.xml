@@ -219,4 +219,5 @@
   <item id="Click_to_edit_color">Кликни мышкой, чтобы изменить цвет...</item>
   <item id="Ovulation">Овуляция</item>
   <item id="Unable_to_save_file">Не могу сохранить файл. Причина: </item>
+  <item id="Unable_to_start_browser">Не могу запустить браузер для этой страницы: </item>
 </translation>

@@ -181,7 +181,18 @@ namespace WomenCalendar
         {
             var dic = ((sender as ToolStripDropDownItem).Tag as Dictionary<int, string>);
             var week = Program.CurrentWoman.Conceptions.GetPregnancyWeekNumber(FocusDate);
-            if (dic.ContainsKey(week)) Process.Start(dic[week]);
+            if (dic.ContainsKey(week))
+            {
+                var url = dic[week];
+                try
+                {
+                    Process.Start(url);
+                }
+                catch
+                {
+                    MsgBox.Error(TEXT.Get["Unable_to_start_browser"] + url, TEXT.Get["Error"]);
+                }
+            }
         }
 
         public bool IsDateVisible(DateTime date)
