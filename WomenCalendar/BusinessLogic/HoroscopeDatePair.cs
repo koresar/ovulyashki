@@ -10,18 +10,18 @@ namespace WomenCalendar
     {
         private static HoroscopDatePair[] zodiacSigns = new HoroscopDatePair[]
         {
-            new HoroscopDatePair(3, 21, 4, 19, "Aries"),
-            new HoroscopDatePair(4, 20, 5, 20, "Taurus"),
-            new HoroscopDatePair(5, 21, 6, 20, "Gemini"),
-            new HoroscopDatePair(6, 21, 7, 22, "Cancer"),
-            new HoroscopDatePair(7, 23, 8, 22, "Leo"),
-            new HoroscopDatePair(8, 23, 9, 22, "Virgo"),
-            new HoroscopDatePair(9, 23, 10, 22, "Libra"),
-            new HoroscopDatePair(10, 23, 11, 21, "Scorpio"),
-            new HoroscopDatePair(11, 22, 12, 21, "Sagittarius"),
-            new HoroscopDatePair(12, 22, 13, 19, "Capricorn"),
-            new HoroscopDatePair(1, 20, 2, 19, "Aquarius"),
-            new HoroscopDatePair(2, 20, 3, 20, "Pisces")
+            new HoroscopDatePair(3, 21, 4, 20, "Aries"), // Овен
+            new HoroscopDatePair(4, 21, 5, 21, "Taurus"), // Телец
+            new HoroscopDatePair(5, 22, 6, 21, "Gemini"), // Близнецы
+            new HoroscopDatePair(6, 22, 7, 22, "Cancer"), // Рак
+            new HoroscopDatePair(7, 23, 8, 23, "Leo"), // Лев
+            new HoroscopDatePair(8, 24, 9, 23, "Virgo"), // Дева
+            new HoroscopDatePair(9, 24, 10, 23, "Libra"), // Весы
+            new HoroscopDatePair(10, 24, 11, 22, "Scorpio"), // Скорпион
+            new HoroscopDatePair(11, 23, 12, 21, "Sagittarius"), // Стрелец
+            new HoroscopDatePair(12, 22, 13, 20, "Capricorn"), // Козерог
+            new HoroscopDatePair(1, 21, 2, 18, "Aquarius"), // Водолей
+            new HoroscopDatePair(2, 19, 3, 20, "Pisces") // Рыбы
         };
 
         private DateTime from = DateTime.MinValue;

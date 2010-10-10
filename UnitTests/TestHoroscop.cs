@@ -69,8 +69,8 @@ namespace WomenCalendar.UnitTests
             Assert.AreEqual(HoroscopDatePair.GetZodiacSignName(new DateTime(2011, 1, 5)), "Capricorn");
             Assert.AreEqual(HoroscopDatePair.GetZodiacSignName(new DateTime(2011, 2, 5)), "Aquarius");
             Assert.AreEqual(HoroscopDatePair.GetZodiacSignName(new DateTime(2011, 3, 5)), "Pisces");
-            Assert.AreEqual(HoroscopDatePair.GetZodiacSignName(new DateTime(2011, 4, 5)), "Aries");
-            Assert.AreEqual(HoroscopDatePair.GetZodiacSignName(new DateTime(2011, 5, 5)), "Taurus");
+            Assert.AreEqual(HoroscopDatePair.GetZodiacSignName(new DateTime(2011, 4, 20)), "Aries");
+            Assert.AreEqual(HoroscopDatePair.GetZodiacSignName(new DateTime(2011, 4, 21)), "Taurus");
             Assert.AreEqual(HoroscopDatePair.GetZodiacSignName(new DateTime(2011, 6, 5)), "Gemini");
             Assert.AreEqual(HoroscopDatePair.GetZodiacSignName(new DateTime(2011, 7, 5)), "Cancer");
             Assert.AreEqual(HoroscopDatePair.GetZodiacSignName(new DateTime(2011, 8, 5)), "Leo");
