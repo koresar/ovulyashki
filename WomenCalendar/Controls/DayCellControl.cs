@@ -370,10 +370,7 @@ namespace WomenCalendar
                 pe.Graphics.DrawString("?", Font, DayCellAppearance.MenstruationPredictionBrush, 0, 18);
             }
 
-            if (this.IsHadSex)
-            {
-                pe.Graphics.DrawString("S", Font, DayCellAppearance.HadSexBrush, 22, 19);
-            }
+            this.lblHadSex.Visible = this.IsHadSex;
 
             if (this.IsAScheduleFired)
             {

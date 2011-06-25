@@ -137,6 +137,7 @@ namespace WomenCalendar
         public void RedrawCalendar()
         {
             monthControl.Redraw();
+            this.saveToolStripButton.Enabled = Program.IsCurrentWomanWasChanged;
         }
 
         private void prevStripButton_Click(object sender, EventArgs e)
@@ -159,14 +160,17 @@ namespace WomenCalendar
             if (Program.NewWoman())
             {
                 chbDefaultWoman.Checked = false;
-                monthControl.Redraw();
+                RedrawCalendar();
                 UpdateDayInformationIfFocused(monthControl.FocusDate);
             }
         }
 
         private void saveToolStripButton_Click(object sender, EventArgs e)
         {
-            Program.SaveCurrentWoman();
+            if (Program.SaveCurrentWoman())
+            {
+                this.saveToolStripButton.Enabled = false;
+            }
         }
 
         private void openToolStripButton_Click(object sender, EventArgs e)
@@ -174,7 +178,7 @@ namespace WomenCalendar
             if (Program.OpenWoman())
             {
                 chbDefaultWoman.Checked = (Program.Settings.DefaultWomanPath == Program.CurrentWoman.AssociatedFile);
-                monthControl.Redraw();
+                RedrawCalendar();
             }
         }
 
@@ -203,7 +207,7 @@ namespace WomenCalendar
         private void MainForm_Load(object sender, EventArgs e)
         {
             monthControl.CreateAndAdjustMonthsAmount(true);
-            //monthControl.Redraw();
+            //RedrawCalendar()
 
             monthControl.FocusDate = DateTime.Today;
             chbDefaultWoman.Checked = !string.IsNullOrEmpty(Program.Settings.DefaultWomanPath);
@@ -239,7 +243,7 @@ namespace WomenCalendar
 
             Program.CurrentWoman.ManualPeriodLength = newValue;
             lblMyCycle2.Text = TEXT.GetDaysString(newValue);
-            monthControl.Redraw();
+            RedrawCalendar();
         }
 
         private void MainForm_MouseLeave(object sender, EventArgs e)
@@ -259,6 +263,7 @@ namespace WomenCalendar
         private void chbAskPassword_CheckedChanged(object sender, EventArgs e)
         {
             Program.CurrentWoman.AllwaysAskPassword = chbAskPassword.Checked;
+            this.RedrawCalendar();
         }
 
         private void MainForm_SizeChanged(object sender, EventArgs e)
@@ -275,7 +280,7 @@ namespace WomenCalendar
         {
             if (Program.EditWoman())
             {
-                monthControl.Redraw();
+                RedrawCalendar();
             }
         }
 
@@ -339,7 +344,7 @@ namespace WomenCalendar
                 this.ReReadTranslations();
                 UpdateDayInformationIfFocused(monthControl.FocusDate);
                 monthControl.ReReadTranslations();
-                monthControl.Redraw();
+                RedrawCalendar();
             }
         }
 

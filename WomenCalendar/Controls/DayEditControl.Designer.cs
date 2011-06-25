@@ -123,7 +123,7 @@
             this.rbtCF2.TabIndex = 10014;
             this.rbtCF2.TabStop = true;
             this.rbtCF2.Tag = "";
-            this.rbtCF2.Text = "S";
+            this.rbtCF2.Text = "♥";
             this.rbtCF2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.rbtCF2.UseVisualStyleBackColor = true;
             this.rbtCF2.Click += new System.EventHandler(this.rbtCF_Click);

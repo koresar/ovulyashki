@@ -101,7 +101,7 @@
             this.lblHadSex.Name = "lblHadSex";
             this.lblHadSex.Size = new System.Drawing.Size(13, 11);
             this.lblHadSex.TabIndex = 5;
-            this.lblHadSex.Text = "S";
+            this.lblHadSex.Text = "♥";
             this.lblHadSex.MouseLeave += new System.EventHandler(this.HadSex_MouseLeave);
             this.lblHadSex.DoubleClick += new System.EventHandler(this.HadSex_DoubleClick);
             this.lblHadSex.MouseClick += new System.Windows.Forms.MouseEventHandler(this.HadSex_MouseClick);

@@ -233,15 +233,23 @@ namespace WomenCalendar
 
             return false;
         }
-        
+
+        public static bool IsCurrentWomanWasChanged
+        {
+            get
+            {
+                return !currentWoman.Equals(currentWomanClone);
+            }
+        }
+
         /// <summary>
         /// Make an attempt to save the current woman. Ask the user the file placement if necessary.
         /// </summary>
         /// <returns>True if file was successfully saved.</returns>
         public static bool AskAndSaveCurrentWoman()
         {
-            if (currentWoman.Equals(currentWomanClone))
-            { // no changes were done to current woman, thus just allow procceding.
+            if (!IsCurrentWomanWasChanged)
+            { // no changes were done to current woman, thus just allow proceeding.
                 return true;
             }
 
