@@ -68,7 +68,7 @@
   <item id="Date">Дата</item>
   <item id="Menses">Менструации</item>
   <item id="Intensity">Интенсивность</item>
-  <item id="Had_sex">Был секс</item>
+  <item id="Had_sex">Была Любовь</item>
   <item id="BBT">БTT</item>
   <item id="Wellbeing_1_10">Самочувствие (0-10)</item>
   <item id="Note">Заметка</item>
@@ -81,8 +81,8 @@
   <item id="Egesta_amount_4">Много менструашек</item>
   <item id="Amount_of_bleeding">Количество менструашек</item>
   <item id="Sex">Секс</item>
-  <item id="Sex_was">А в этот день у меня был секс!</item>
-  <item id="Sex_was_not">В этот день у меня не было секса.</item>
+  <item id="Sex_was">А в этот день у меня была любовь!</item>
+  <item id="Sex_was_not">В этот день у меня не было любви.</item>
   <item id="Wellbeing">Самочувствие</item>
   <item id="N_of_10">{0} из 10</item>
   <item id="BBT_full">Базальная температура тела</item>
@@ -174,7 +174,7 @@
   <item id="Legend_menses">Менструации</item>
   <item id="Legend_conceive_girl_day">Вероятно зачатие девочки</item>
   <item id="Legend_conceive_boy_day">Вероятно зачатие мальчика</item>
-  <item id="Legend_had_sex">День секса</item>
+  <item id="Legend_had_sex">День любви</item>
   <item id="Legend_note">Заметка</item>
   <item id="Legend_selected_day">Выбраный день (в фокусе)</item>
   <item id="Ledend_today_day">Сегодняшний день</item>

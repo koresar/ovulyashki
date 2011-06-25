@@ -68,7 +68,7 @@ ARE YOU SURE ABOUT THIS?</item>
   <item id="Date">Date</item>
   <item id="Menses">Red tides</item>
   <item id="Intensity">Intensity</item>
-  <item id="Had_sex">Had sex</item>
+  <item id="Had_sex">Day of Love</item>
   <item id="BBT">BBT</item>
   <item id="Wellbeing_1_10">Wellbeing (1-10)</item>
   <item id="Note">Note</item>
@@ -81,8 +81,8 @@ ARE YOU SURE ABOUT THIS?</item>
   <item id="Egesta_amount_4">A lot of excretion</item>
   <item id="Amount_of_bleeding">Amount of bleeding</item>
   <item id="Sex">Sex</item>
-  <item id="Sex_was">I had sex that day!</item>
-  <item id="Sex_was_not">There was no sex that day.</item>
+  <item id="Sex_was">I made love that day!</item>
+  <item id="Sex_was_not">The day without love.</item>
   <item id="Wellbeing">Wellbeing</item>
   <item id="N_of_10">{0} of 10</item>
   <item id="BBT_full">Basal Body Temperature</item>
@@ -174,7 +174,7 @@ Thanks to Mike Krueger, John Reilly for SharpZipLib: http://icsharpcode.net/
   <item id="Legend_menses">Red tide</item>
   <item id="Legend_conceive_girl_day">Better chances to conceive a girl</item>
   <item id="Legend_conceive_boy_day">Better chances to conceive a boy</item>
-  <item id="Legend_had_sex">Had sex that day</item>
+  <item id="Legend_had_sex">Made love that day</item>
   <item id="Legend_note">There is note</item>
   <item id="Legend_selected_day">Selected (focused) day</item>
   <item id="Ledend_today_day">Today</item>
