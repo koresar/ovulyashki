@@ -21,13 +21,25 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_0C06CE93789D4F8DD730A12DDD730026"
+        "OwnerKey" = "8:_9C763F4F87CE4EB8AEB574D0A518B8A2"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_1CF11E2436332E9CC29CC2AE75D28FB7"
+        "OwnerKey" = "8:_9C763F4F87CE4EB8AEB574D0A518B8A2"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_276E84E4C91F48F89D8B8CEFEDAB23EE"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_33744DD0FB7E1FD26FB8D2EB565E44E8"
+        "MsmKey" = "8:_54B606B54413B548774CE5021F42F70A"
         "OwnerKey" = "8:_9C763F4F87CE4EB8AEB574D0A518B8A2"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -39,20 +51,14 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_63368D27CE984644F49CD7E2A7A643AE"
-        "OwnerKey" = "8:_9C763F4F87CE4EB8AEB574D0A518B8A2"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_7ABB837E9766E528E5C8C7B5096FFE79"
-        "OwnerKey" = "8:_9C763F4F87CE4EB8AEB574D0A518B8A2"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_87A086062F01418491F20A8F8E7B8A31"
         "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_887EAB934B1323850386BDDB0C338DD1"
+        "OwnerKey" = "8:_9C763F4F87CE4EB8AEB574D0A518B8A2"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -75,38 +81,8 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_F9427C259BDC6520234FAC6AFEB4BD1D"
-        "OwnerKey" = "8:_9C763F4F87CE4EB8AEB574D0A518B8A2"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_9C763F4F87CE4EB8AEB574D0A518B8A2"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_7ABB837E9766E528E5C8C7B5096FFE79"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_F9427C259BDC6520234FAC6AFEB4BD1D"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_33744DD0FB7E1FD26FB8D2EB565E44E8"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_63368D27CE984644F49CD7E2A7A643AE"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -207,7 +183,7 @@
                 {
                 "Name" = "8:.NET Framework"
                 "Message" = "8:[VSDNETMSG]"
-                "Version" = "8:2.0.50727"
+                "FrameworkVersion" = "8:2.0.50727"
                 "AllowLaterVersions" = "11:FALSE"
                 "InstallUrl" = "8:http://www.microsoft.com/downloads/details.aspx?familyid=0856EACB-4362-4B0D-8EDD-AAB15C5E04F5"
                 }
@@ -235,37 +211,6 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_33744DD0FB7E1FD26FB8D2EB565E44E8"
-            {
-            "AssemblyRegister" = "3:1"
-            "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:ICSharpCode.SharpZipLib, Version=0.85.5.452, Culture=neutral, PublicKeyToken=1b03e6acf1164f73, processorArchitecture=MSIL"
-                "ScatterAssemblies"
-                {
-                    "_33744DD0FB7E1FD26FB8D2EB565E44E8"
-                    {
-                    "Name" = "8:ICSharpCode.SharpZipLib.dll"
-                    "Attributes" = "3:512"
-                    }
-                }
-            "SourcePath" = "8:ICSharpCode.SharpZipLib.dll"
-            "TargetName" = "8:"
-            "Tag" = "8:"
-            "Folder" = "8:_0C363D3A242941509ED0851336DD9D80"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:TRUE"
-            "IsolateTo" = "8:"
-            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_5D3457C50E0B46958AA7DD0BB1BE2C56"
             {
             "SourcePath" = "8:..\\WomenCalendar\\en_lang.xml"
@@ -284,68 +229,6 @@
             "Register" = "3:1"
             "Exclude" = "11:FALSE"
             "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_63368D27CE984644F49CD7E2A7A643AE"
-            {
-            "AssemblyRegister" = "3:1"
-            "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:CarlosAg.ExcelXmlWriter, Version=1.0.0.6, Culture=neutral"
-                "ScatterAssemblies"
-                {
-                    "_63368D27CE984644F49CD7E2A7A643AE"
-                    {
-                    "Name" = "8:CarlosAg.ExcelXmlWriter.dll"
-                    "Attributes" = "3:512"
-                    }
-                }
-            "SourcePath" = "8:CarlosAg.ExcelXmlWriter.dll"
-            "TargetName" = "8:"
-            "Tag" = "8:"
-            "Folder" = "8:_0C363D3A242941509ED0851336DD9D80"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:TRUE"
-            "IsolateTo" = "8:"
-            }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_7ABB837E9766E528E5C8C7B5096FFE79"
-            {
-            "AssemblyRegister" = "3:1"
-            "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:ZedGraph, Version=5.1.4.0, Culture=neutral, processorArchitecture=MSIL"
-                "ScatterAssemblies"
-                {
-                    "_7ABB837E9766E528E5C8C7B5096FFE79"
-                    {
-                    "Name" = "8:ZedGraph.dll"
-                    "Attributes" = "3:512"
-                    }
-                }
-            "SourcePath" = "8:ZedGraph.dll"
-            "TargetName" = "8:"
-            "Tag" = "8:"
-            "Folder" = "8:_0C363D3A242941509ED0851336DD9D80"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_87A086062F01418491F20A8F8E7B8A31"
@@ -406,37 +289,6 @@
             "Register" = "3:1"
             "Exclude" = "11:FALSE"
             "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_F9427C259BDC6520234FAC6AFEB4BD1D"
-            {
-            "AssemblyRegister" = "3:1"
-            "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:XPanderControl, Version=1.2.0.0, Culture=neutral"
-                "ScatterAssemblies"
-                {
-                    "_F9427C259BDC6520234FAC6AFEB4BD1D"
-                    {
-                    "Name" = "8:XPanderControl.dll"
-                    "Attributes" = "3:512"
-                    }
-                }
-            "SourcePath" = "8:XPanderControl.dll"
-            "TargetName" = "8:"
-            "Tag" = "8:"
-            "Folder" = "8:_0C363D3A242941509ED0851336DD9D80"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
         }
@@ -529,14 +381,15 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:Ovulyashki"
-        "ProductCode" = "8:{A51E1A12-88F6-4E2B-8135-967722026D3D}"
-        "PackageCode" = "8:{F370AE30-4D5D-4FA6-AA10-1179F6E29BAA}"
+        "ProductCode" = "8:{C2E8AF96-D030-4E71-BC7E-E00B65F8372A}"
+        "PackageCode" = "8:{1F75247D-3150-46B3-B409-D2EBE4BC05C9}"
         "UpgradeCode" = "8:{482BFF03-47BE-4DA1-AA44-E102C604F5DC}"
+        "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:FALSE"
         "InstallAllUsers" = "11:TRUE"
-        "ProductVersion" = "8:1.6.6"
+        "ProductVersion" = "8:1.6.7"
         "Manufacturer" = "8:RulezDev"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:http://ovulyashki.dp.ua/"
@@ -1186,7 +1039,7 @@
         {
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_276E84E4C91F48F89D8B8CEFEDAB23EE"
             {
-            "SourcePath" = "8:..\\Uninstall\\obj\\Debug\\Uninstall.exe"
+            "SourcePath" = "8:..\\Uninstall\\obj\\Release\\Uninstall.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_0C363D3A242941509ED0851336DD9D80"
@@ -1214,7 +1067,7 @@
             }
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_9C763F4F87CE4EB8AEB574D0A518B8A2"
             {
-            "SourcePath" = "8:..\\WomenCalendar\\obj\\Debug\\WomenCalendar.exe"
+            "SourcePath" = "8:..\\WomenCalendar\\obj\\Release\\WomenCalendar.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_0C363D3A242941509ED0851336DD9D80"

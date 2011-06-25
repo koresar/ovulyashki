@@ -256,7 +256,10 @@ namespace WomenCalendar
 
         private void DayCellControl_MouseEnter(object sender, EventArgs e)
         {
-            this.OwnerOneMonthControl.OwnerMonthsControl.CellPopupControl.ShowAbove(this);
+            if (this.OwnerOneMonthControl != null)
+            {
+                this.OwnerOneMonthControl.OwnerMonthsControl.CellPopupControl.ShowAbove(this);
+            }
         }
 
         private Brush GetMainBrush(Color color)
