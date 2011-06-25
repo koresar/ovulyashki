@@ -261,10 +261,7 @@ namespace WomenCalendar
                 return true;
             }
 
-            DialogResult res = MessageBox.Show(
-                TEXT.Get["Save_woman_question"], 
-                ApplicationForm.Text,
-                MessageBoxButtons.YesNoCancel);
+            DialogResult res = MsgBox.YesNoCancel(TEXT.Get["Save_woman_question"], ApplicationForm.Text);
             switch (res)
             {
                 case DialogResult.Yes:

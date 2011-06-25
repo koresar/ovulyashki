@@ -150,6 +150,7 @@
             // 
             // editScheduleControl
             // 
+            this.editScheduleControl.InitialDate = new System.DateTime(((long)(0)));
             this.editScheduleControl.Location = new System.Drawing.Point(0, 0);
             this.editScheduleControl.Margin = new System.Windows.Forms.Padding(0);
             this.editScheduleControl.Name = "editScheduleControl";
@@ -171,6 +172,7 @@
             this.chkSchedules.Text = ">>          >>";
             this.chkSchedules.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.chkSchedules.UseVisualStyleBackColor = true;
+            this.chkSchedules.Visible = false;
             this.chkSchedules.CheckedChanged += new System.EventHandler(this.chkSchedules_CheckedChanged);
             // 
             // tableLayoutPanel

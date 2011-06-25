@@ -37,6 +37,7 @@ namespace WomenCalendar
         /// </summary>
         public DayCellControl()
         {
+            this.InitializeComponent();
         }
 
         /// <summary>

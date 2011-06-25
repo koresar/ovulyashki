@@ -72,6 +72,17 @@ namespace WomenCalendar
             return MessageBox.Show(text, caption, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes;
         }
 
+        public static DialogResult YesNoCancel(string text, string caption)
+        {
+            if (AlwaysAnswer != Answer.None)
+            {
+                AutoAnswersCount++;
+                return DialogResult.Yes;
+            }
+
+            return MessageBox.Show(text, caption, MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+        }
+
         /// <summary>
         /// Show 'OK' message box with error icon.
         /// </summary>
