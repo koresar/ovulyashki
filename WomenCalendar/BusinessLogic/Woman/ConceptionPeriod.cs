@@ -12,7 +12,7 @@ namespace WomenCalendar
         /// <summary>
         /// The default length of the pregnancy.
         /// </summary>
-        public const int StandardLength = 40 * 7;
+        public const int StandardLength = 43 * 7;
 
         /// <summary>
         /// The pregnancy start day.

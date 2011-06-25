@@ -1,14 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
+using System.Diagnostics;
 using System.Drawing;
-using System.Data;
+using System.IO;
+using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using WomenCalendar.Properties;
 using System.Xml;
-using System.IO;
-using System.Diagnostics;
+using WomenCalendar.Properties;
 
 namespace WomenCalendar
 {
@@ -467,6 +466,16 @@ namespace WomenCalendar
         {
             base.OnPaint(e);
             CellPopupControl.Forbidden = false;
+        }
+
+        private void dayContextMenu_Opening(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            var week = Program.CurrentWoman.Conceptions.GetPregnancyWeekNumber(FocusDate);
+            foreach (var menuItem in this.calendarMenu.DropDownItems.Cast<ToolStripItem>())
+            {
+                var dic = menuItem.Tag as Dictionary<int, string>;
+                menuItem.Visible = dic.ContainsKey(week);
+            }
         }
     }
 }

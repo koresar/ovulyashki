@@ -62,7 +62,8 @@
             this.toolStripSeparator3,
             this.ediDayToolStripMenuItem});
             this.dayContextMenu.Name = "contextMenu";
-            this.dayContextMenu.Size = new System.Drawing.Size(283, 192);
+            this.dayContextMenu.Size = new System.Drawing.Size(283, 214);
+            this.dayContextMenu.Opening += new System.ComponentModel.CancelEventHandler(this.dayContextMenu_Opening);
             // 
             // setAsMenstruationDay
             // 
@@ -175,9 +176,9 @@
             this.DoubleBuffered = true;
             this.Name = "MonthsControl";
             this.Size = new System.Drawing.Size(501, 440);
-            this.MouseLeave += new System.EventHandler(this.MonthsControl_MouseLeave);
             this.SizeChanged += new System.EventHandler(this.MonthControl_SizeChanged);
             this.MouseEnter += new System.EventHandler(this.MonthsControl_MouseEnter);
+            this.MouseLeave += new System.EventHandler(this.MonthsControl_MouseLeave);
             this.dayContextMenu.ResumeLayout(false);
             this.monthMenu.ResumeLayout(false);
             this.ResumeLayout(false);
