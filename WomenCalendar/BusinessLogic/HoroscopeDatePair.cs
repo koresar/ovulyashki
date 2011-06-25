@@ -26,6 +26,7 @@ namespace WomenCalendar
 
         private DateTime from = DateTime.MinValue;
         private DateTime to = DateTime.MinValue;
+        private int minValueYear = 4;
         private string name;
 
         /// <summary>
@@ -38,8 +39,8 @@ namespace WomenCalendar
         /// <param name="name">The sign string ID (name).</param>
         private HoroscopDatePair(int fromMonth, int fromDay, int toMonth, int toDay, string name)
         {
-            this.from = new DateTime(DateTime.MinValue.Year, fromMonth, fromDay);
-            this.to = new DateTime(DateTime.MinValue.Year + ((toMonth - 1) / 12), ((toMonth - 1) % 12) + 1, toDay);
+            this.from = new DateTime(this.minValueYear, fromMonth, fromDay);
+            this.to = new DateTime(this.minValueYear + ((toMonth - 1) / 12), ((toMonth - 1) % 12) + 1, toDay);
             this.name = name;
         }
 
@@ -55,8 +56,8 @@ namespace WomenCalendar
 
         private bool IsInRange(DateTime date)
         {
-            DateTime d = new DateTime(DateTime.MinValue.Year, date.Month, date.Day);
-            if (d.Month == 1 && d.Day < 20)
+            DateTime d = new DateTime(this.minValueYear, date.Month, date.Day);
+            if (d.Month == 1 && d.Day < 21)
             {
                 d = d.AddYears(1);
             }

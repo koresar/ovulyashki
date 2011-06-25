@@ -78,6 +78,19 @@ namespace WomenCalendar.UnitTests
             Assert.AreEqual(HoroscopDatePair.GetZodiacSignName(new DateTime(2011, 10, 5)), "Libra");
             Assert.AreEqual(HoroscopDatePair.GetZodiacSignName(new DateTime(2011, 11, 5)), "Scorpio");
             Assert.AreEqual(HoroscopDatePair.GetZodiacSignName(new DateTime(2011, 12, 5)), "Sagittarius");
+
+            for (DateTime date = new DateTime(2000, 1, 1); date.Year != 2030; date = date.AddDays(1))
+            {
+                try
+                {
+                    // Make sure this does not crash.
+                    HoroscopDatePair.GetZodiacSignName(date);
+                }
+                catch (Exception ex)
+                {
+                    Assert.Fail("Unable to take horoscope sign of the day " + date.ToShortDateString());
+                }
+            }
         }
     }
 }
