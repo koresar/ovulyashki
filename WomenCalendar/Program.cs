@@ -60,6 +60,10 @@ namespace WomenCalendar
                     currentWoman.Menstruations.CollectionChanged -= ApplicationForm.UpdateWomanInformation;
                     currentWoman.Menstruations.CollectionChanged -= ApplicationForm.RedrawCalendar;
                     currentWoman.Conceptions.CollectionChanged -= ApplicationForm.RedrawCalendar;
+                    currentWoman.Health.CollectionChanged -= (a, b) => ApplicationForm.EnableDisableToolButtons();
+                    currentWoman.Health.PropertyChanged -= (a, b) => ApplicationForm.EnableDisableToolButtons();
+                    currentWoman.Menstruations.ForEach(m => m.Egestas.CollectionChanged -= (a, b) => ApplicationForm.EnableDisableToolButtons());
+                    currentWoman.Menstruations.ForEach(m => m.Egestas.PropertyChanged -= (a, b) => ApplicationForm.EnableDisableToolButtons());
                 }
 
                 currentWoman = value;
@@ -70,6 +74,10 @@ namespace WomenCalendar
                     currentWoman.Menstruations.CollectionChanged += ApplicationForm.UpdateWomanInformation;
                     currentWoman.Menstruations.CollectionChanged += ApplicationForm.RedrawCalendar;
                     currentWoman.Conceptions.CollectionChanged += ApplicationForm.RedrawCalendar;
+                    currentWoman.Health.CollectionChanged += (a, b) => ApplicationForm.EnableDisableToolButtons();
+                    currentWoman.Health.PropertyChanged += (a, b) => ApplicationForm.EnableDisableToolButtons();
+                    currentWoman.Menstruations.ForEach(m => m.Egestas.CollectionChanged += (a, b) => ApplicationForm.EnableDisableToolButtons());
+                    currentWoman.Menstruations.ForEach(m => m.Egestas.PropertyChanged += (a, b) => ApplicationForm.EnableDisableToolButtons());
                 }
 
                 ApplicationForm.UpdateWomanInformation();
@@ -136,7 +144,7 @@ namespace WomenCalendar
         /// <summary>
         /// Saves a woman to the given path.
         /// </summary>
-        /// <param name="w">Woamn to save.</param>
+        /// <param name="w">Woman to save.</param>
         /// <param name="path"><Path to the new/overwritten file./param>
         /// <returns>True if file successfully saved.</returns>
         public static bool SaveWomanTo(Woman w, string path)
@@ -438,6 +446,7 @@ namespace WomenCalendar
                 InitializeEnvironmentStuff();
 
                 ApplicationForm = new MainForm();
+                CurrentWoman = currentWoman; // quick and dirty fix of initialization bug. weird anyway...
 
                 // command line
                 if (args.Length == 0 || !File.Exists(args[0]) || !LoadWoman(args[0]))

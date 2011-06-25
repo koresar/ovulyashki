@@ -74,6 +74,7 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
     <Reference Include="XPanderControl, Version=1.2.0.0, Culture=neutral">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\libs\XPanderControl.dll</HintPath>
@@ -85,6 +86,8 @@
     <Compile Include="BusinessLogic\AppUpdater.cs" />
     <Compile Include="BusinessLogic\MonthAppearance.cs" />
     <Compile Include="BusinessLogic\MsgBox.cs" />
+    <Compile Include="BusinessLogic\ObservableDictionary\ObservableDictionary.cs" />
+    <Compile Include="BusinessLogic\ObservableDictionary\ObservableSortedDictionary.cs" />
     <Compile Include="BusinessLogic\TranslationException.cs" />
     <Compile Include="BusinessLogic\Report\CsvWriter.cs" />
     <Compile Include="BusinessLogic\HoroscopeDatePair.cs" />

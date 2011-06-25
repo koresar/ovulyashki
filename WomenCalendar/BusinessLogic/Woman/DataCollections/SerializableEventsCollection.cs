@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Xml.Serialization;
+using DrWPF.Windows.Data;
+using System.Collections.Specialized;
 
 namespace WomenCalendar
 {
@@ -11,7 +13,7 @@ namespace WomenCalendar
     /// It can (de-)serialize to xml and clone itself.
     /// </summary>
     /// <typeparam name="DataT">The type we are going to store in the collection.</typeparam>
-    public abstract class SerializableEventsCollection<DataT> : Dictionary<DateTime, DataT>, IXmlSerializable, ICloneable
+    public abstract class SerializableEventsCollection<DataT> : ObservableDictionary<DateTime, DataT>, IXmlSerializable, ICloneable
     {
         /// <summary>
         /// This is the single node name. Used for nice looking name in xml file.

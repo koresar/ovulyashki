@@ -373,7 +373,7 @@ namespace WomenCalendar
             {
                 ((MainForm)ParentForm).UpdateWomanInformation();
                 ((MainForm)ParentForm).UpdateDayInformation(FocusDate);
-                Redraw();
+                ((MainForm)ParentForm).RedrawCalendar();
                 new DayEditForm(FocusDay.Date, DayEditFocus.Length).ShowDialog(this);
             }
         }
@@ -384,7 +384,7 @@ namespace WomenCalendar
             {
                 ((MainForm)ParentForm).UpdateWomanInformation();
                 ((MainForm)ParentForm).UpdateDayInformation(FocusDate);
-                Redraw();
+                ((MainForm)ParentForm).RedrawCalendar();
             }
         }
 
@@ -415,7 +415,7 @@ namespace WomenCalendar
             if (Program.CurrentWoman.AddConceptionDay(FocusDate))
             {
                 ((MainForm)ParentForm).UpdateDayInformation(FocusDate);
-                Redraw();
+                ((MainForm)ParentForm).RedrawCalendar();
             }
         }
 
@@ -424,7 +424,7 @@ namespace WomenCalendar
             if (Program.CurrentWoman.RemovePregnancy(FocusDate))
             {
                 ((MainForm)ParentForm).UpdateDayInformation(FocusDate);
-                Redraw();
+                ((MainForm)ParentForm).RedrawCalendar();
             }
         }
 
@@ -443,7 +443,7 @@ namespace WomenCalendar
                     TEXT.Get["Are_you_sure"]))
                 {
                     period.LastDay = FocusDate;
-                    Redraw();
+                    ((MainForm)ParentForm).RedrawCalendar();
                 }
             }
         }

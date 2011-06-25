@@ -74,6 +74,7 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.XML" />
+    <Reference Include="WindowsBase" />
     <Reference Include="XPanderControl, Version=1.2.0.0, Culture=neutral">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\libs\XPanderControl.dll</HintPath>

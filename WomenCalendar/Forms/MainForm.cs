@@ -137,6 +137,11 @@ namespace WomenCalendar
         public void RedrawCalendar()
         {
             monthControl.Redraw();
+            this.EnableDisableToolButtons();
+        }
+
+        public void EnableDisableToolButtons()
+        {
             this.saveToolStripButton.Enabled = Program.IsCurrentWomanWasChanged;
         }
 
@@ -263,7 +268,7 @@ namespace WomenCalendar
         private void chbAskPassword_CheckedChanged(object sender, EventArgs e)
         {
             Program.CurrentWoman.AllwaysAskPassword = chbAskPassword.Checked;
-            this.RedrawCalendar();
+            this.EnableDisableToolButtons();
         }
 
         private void MainForm_SizeChanged(object sender, EventArgs e)
